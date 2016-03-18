@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		013250CB1C9C838700ECB783 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013250C71C9C838700ECB783 /* Constants.swift */; };
+		013250CC1C9C838700ECB783 /* VimeoRequestSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013250C81C9C838700ECB783 /* VimeoRequestSerializer.swift */; };
+		013250CD1C9C838700ECB783 /* VimeoResponseSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013250C91C9C838700ECB783 /* VimeoResponseSerializer.swift */; };
+		013250CE1C9C838700ECB783 /* VimeoSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013250CA1C9C838700ECB783 /* VimeoSessionManager.swift */; };
 		018B9F9A1C9B34050054650E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B9F991C9B34050054650E /* AppDelegate.swift */; };
 		018B9F9C1C9B34050054650E /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B9F9B1C9B34050054650E /* MasterViewController.swift */; };
 		018B9F9E1C9B34050054650E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B9F9D1C9B34050054650E /* DetailViewController.swift */; };
@@ -36,6 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		013250C71C9C838700ECB783 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		013250C81C9C838700ECB783 /* VimeoRequestSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VimeoRequestSerializer.swift; sourceTree = "<group>"; };
+		013250C91C9C838700ECB783 /* VimeoResponseSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VimeoResponseSerializer.swift; sourceTree = "<group>"; };
+		013250CA1C9C838700ECB783 /* VimeoSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VimeoSessionManager.swift; sourceTree = "<group>"; };
 		018B9F961C9B34050054650E /* VimeoNetworkingExample-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VimeoNetworkingExample-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		018B9F991C9B34050054650E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		018B9F9B1C9B34050054650E /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +143,10 @@
 			isa = PBXGroup;
 			children = (
 				018B9FD41C9B37380054650E /* VimeoNetworking.swift */,
+				013250C71C9C838700ECB783 /* Constants.swift */,
+				013250C81C9C838700ECB783 /* VimeoRequestSerializer.swift */,
+				013250C91C9C838700ECB783 /* VimeoResponseSerializer.swift */,
+				013250CA1C9C838700ECB783 /* VimeoSessionManager.swift */,
 			);
 			name = VimeoNetworking;
 			path = ../VimeoNetworking;
@@ -271,6 +283,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				013250CC1C9C838700ECB783 /* VimeoRequestSerializer.swift in Sources */,
+				013250CD1C9C838700ECB783 /* VimeoResponseSerializer.swift in Sources */,
+				013250CB1C9C838700ECB783 /* Constants.swift in Sources */,
+				013250CE1C9C838700ECB783 /* VimeoSessionManager.swift in Sources */,
 				018B9FD51C9B37380054650E /* VimeoNetworking.swift in Sources */,
 				018B9F9E1C9B34050054650E /* DetailViewController.swift in Sources */,
 				018B9F9C1C9B34050054650E /* MasterViewController.swift in Sources */,
@@ -501,6 +517,7 @@
 				018B9FC21C9B34050054650E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		018B9FC31C9B34050054650E /* Build configuration list for PBXNativeTarget "VimeoNetworkingExample-iOSTests" */ = {
 			isa = XCConfigurationList;
@@ -509,6 +526,7 @@
 				018B9FC51C9B34050054650E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		018B9FC61C9B34050054650E /* Build configuration list for PBXNativeTarget "VimeoNetworkingExample-iOSUITests" */ = {
 			isa = XCConfigurationList;
@@ -517,6 +535,7 @@
 				018B9FC81C9B34050054650E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
