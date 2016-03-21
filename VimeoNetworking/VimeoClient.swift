@@ -11,6 +11,8 @@ import Foundation
 protocol VIMModelObjectProtocol
 {
     static var mappingClass: AnyClass? { get }
+    
+    static var modelKeyPath: String? { get }
 }
 
 extension VIMModelObject: VIMModelObjectProtocol
@@ -19,23 +21,35 @@ extension VIMModelObject: VIMModelObjectProtocol
     {
         return self
     }
-}
-
-extension Array: VIMModelObjectProtocol
-{
-    // The default implementation for all arrays will return no mapping class
-    static var mappingClass: AnyClass?
+    
+    static var modelKeyPath: String?
     {
         return nil
     }
 }
 
-extension Array where Element: VIMModelObjectProtocol
+extension Array: VIMModelObjectProtocol
 {
+    // The default implementation for all arrays will return no mapping class
     // Only if Element itself conforms to VIMModelObjectProtocol will the mapping class be returned
     static var mappingClass: AnyClass?
     {
-        return Element.self as? AnyClass
+        if Element.self is VIMModelObject.Type
+        {
+            return (Element.self as! AnyClass)
+        }
+        
+        return nil
+    }
+    
+    static var modelKeyPath: String?
+    {
+        if Element.self is VIMModelObject.Type
+        {
+            return "data"
+        }
+        
+        return nil
     }
 }
 
@@ -137,10 +151,11 @@ class VimeoClient
         }
         
         let objectMapper = VIMObjectMapper()
-        objectMapper.addMappingClass(mappingClass, forKeypath: request.modelKeyPath ?? "")
+        let modelKeyPath = request.modelKeyPath ?? ModelType.modelKeyPath
+        objectMapper.addMappingClass(mappingClass, forKeypath: modelKeyPath ?? "")
         var mappedObject = objectMapper.applyMappingToJSON(responseDictionary)
         
-        if let modelKeyPath = request.modelKeyPath
+        if let modelKeyPath = modelKeyPath
         {
             mappedObject = (mappedObject as? [String: AnyObject])?[modelKeyPath]
         }

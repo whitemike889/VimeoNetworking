@@ -32,7 +32,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             {
             case .Success(let user):
                 print("successfully retrieved user: \(user)")
-                print("user bio \(user.bio ?? "NOONE")")
+                print("user bio \(user.bio ?? "🤔")")
+            case .Failure(let error):
+                print("request error: \(error)")
+            }
+        }
+        
+        let followingRequest = Request<[VIMUser]>(method: .GET, path: "/me/following")
+        
+        client.request(followingRequest) { (result) in
+            switch result
+            {
+            case .Success(let users):
+                print("successfully retrieved users: \(users)")
+                print("user bio \(users.first?.bio ?? "🤔")")
             case .Failure(let error):
                 print("request error: \(error)")
             }
