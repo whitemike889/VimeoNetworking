@@ -1,9 +1,9 @@
 //
-//  Constants.swift
-//  VimeoUpload
+//  VIMAccountCredential.h
+//  VIMNetworking
 //
-//  Created by Alfred Hanssen on 10/18/15.
-//  Copyright © 2015 Vimeo. All rights reserved.
+//  Created by Kashif Muhammad on 10/29/13.
+//  Copyright (c) 2014-2015 Vimeo (https://vimeo.com)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,9 +24,14 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
+#import <Foundation/Foundation.h>
 
-typealias RequestParameters = [String: String]
+@interface VIMAccountCredential: NSObject
 
-let VimeoBaseURLString = NSURL(string: "https://api.vimeo.com")
-let VimeoDefaultAPIVersionString = "3.2"
+@property (nonatomic, copy, nullable) NSString *accessToken;
+@property (nonatomic, copy, nullable) NSString *tokenType;
+@property (nonatomic, copy, nullable) NSString *refreshToken;
+@property (nonatomic, copy, nullable) NSDate *expirationDate;
+@property (nonatomic, copy, nullable) NSString *grantType;
+
+@end
