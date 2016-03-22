@@ -79,13 +79,34 @@ enum Method
 
 struct Request<ModelType where ModelType: Mappable>
 {
+    init(method: Method = .GET, path: String = "/", parameters: RequestParameters? = nil, modelKeyPath: String? = nil)
+    {
+        self.method = method
+        self.path = path
+        self.parameters = parameters
+        self.modelKeyPath = modelKeyPath
+    }
+    
     let method: Method
     
     let path: String
     
-    let parameters: RequestParameters? = nil
+    let parameters: RequestParameters?
     
-    let modelKeyPath: String? = nil
+    let modelKeyPath: String?
+}
+
+extension Request
+{
+    static func meRequest() -> Request
+    {
+        return Request(path: "/me")
+    }
+
+    static func meFollowingRequest() -> Request
+    {
+        return Request(path: "/me/following")
+    }
 }
 
 class VimeoClient
