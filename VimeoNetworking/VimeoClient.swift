@@ -35,6 +35,11 @@ class VimeoClient
     
     typealias RequestParameters = [String: String]
     
+    static let ErrorDomain = "VimeoClientErrorDomain"
+    static let ErrorInvalidDictionary = 1001
+    static let ErrorNoMappingClass = 1002
+    static let ErrorMappingFailed = 1003
+    
     // MARK: -
     
     let sessionManager: VimeoSessionManager
@@ -79,9 +84,11 @@ class VimeoClient
         guard let responseDictionary = responseObject as? [String: AnyObject]
         else
         {
-            assertionFailure("requestSuccess returned invalid/absent dictionary")
+            let description = "VimeoClient requestSuccess returned invalid/absent dictionary"
             
-            let error = NSError(domain: "", code: 0, userInfo: nil) // TODO: fill out error [RH] (3/21/16)
+            assertionFailure(description)
+            
+            let error = NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorInvalidDictionary, userInfo: [NSLocalizedDescriptionKey: description])
             
             self.requestFailure(request: request, task: task, error: error, completion: completion)
             
@@ -93,9 +100,11 @@ class VimeoClient
         guard let mappingClass = ModelType.mappingClass
         else
         {
-            assertionFailure("no mapping class found")
+            let description = "VimeoClient no mapping class found"
             
-            let error = NSError(domain: "", code: 0, userInfo: nil) // TODO: fill out error [RH] (3/21/16)
+            assertionFailure(description)
+            
+            let error = NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorNoMappingClass, userInfo: [NSLocalizedDescriptionKey: description])
             
             self.requestFailure(request: request, task: task, error: error, completion: completion)
             
@@ -115,9 +124,11 @@ class VimeoClient
         guard let modelObject = mappedObject as? ModelType
         else
         {
-            assertionFailure("couldn't map")
+            let description = "VimeoClient couldn't map to ModelType"
             
-            let error = NSError(domain: "", code: 0, userInfo: nil) // TODO: fill out error [RH] (3/21/16)
+            assertionFailure(description)
+            
+            let error = NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorMappingFailed, userInfo: [NSLocalizedDescriptionKey: description])
             
             self.requestFailure(request: request, task: task, error: error, completion: completion)
             
