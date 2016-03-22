@@ -8,14 +8,14 @@
 
 import Foundation
 
-protocol VIMModelObjectProtocol
+protocol Mappable
 {
     static var mappingClass: AnyClass? { get }
     
     static var modelKeyPath: String? { get }
 }
 
-extension VIMModelObject: VIMModelObjectProtocol
+extension VIMModelObject: Mappable
 {
     static var mappingClass: AnyClass?
     {
@@ -28,10 +28,13 @@ extension VIMModelObject: VIMModelObjectProtocol
     }
 }
 
-extension Array: VIMModelObjectProtocol
+extension Array: Mappable
 {
-    // The default implementation for all arrays will return no mapping class
-    // Only if Element itself conforms to VIMModelObjectProtocol will the mapping class be returned
+    // The default implementation for all arrays will return no mapping class or model key path
+    // Only if Element itself is a VIMModelObject will the values be returned
+    // This is because we can't restrict the generic type if we're 
+    // extending a type with generics to conform to a protocol [RH]
+    
     static var mappingClass: AnyClass?
     {
         if Element.self is VIMModelObject.Type
@@ -53,14 +56,14 @@ extension Array: VIMModelObjectProtocol
     }
 }
 
-enum Result<ModelType where ModelType: VIMModelObjectProtocol>
+enum Result<ModelType where ModelType: Mappable>
 {
     case Success(result: ModelType)
     case Failure(error: NSError)
 }
 
 /// This dummy enum acts as a generic typealias
-enum RequestCompletion<ModelType where ModelType: VIMModelObjectProtocol>
+enum RequestCompletion<ModelType where ModelType: Mappable>
 {
     typealias T = (result: Result<ModelType>) -> Void
 }
@@ -74,7 +77,7 @@ enum Method
     case DELETE
 }
 
-struct Request<ModelType where ModelType: VIMModelObjectProtocol>
+struct Request<ModelType where ModelType: Mappable>
 {
     let method: Method
     
@@ -94,7 +97,7 @@ class VimeoClient
         self.sessionManager = sessionManager
     }
     
-    func request<ModelType where ModelType: VIMModelObjectProtocol>(request: Request<ModelType>, completion: RequestCompletion<ModelType>.T)
+    func request<ModelType where ModelType: Mappable>(request: Request<ModelType>, completion: RequestCompletion<ModelType>.T)
     {
         let urlString = request.path
         let parameters = request.parameters
@@ -122,7 +125,7 @@ class VimeoClient
         }
     }
     
-    private func requestSuccess<ModelType where ModelType: VIMModelObjectProtocol>(request request: Request<ModelType>, task: NSURLSessionDataTask, responseObject: AnyObject?, completion: RequestCompletion<ModelType>.T)
+    private func requestSuccess<ModelType where ModelType: Mappable>(request request: Request<ModelType>, task: NSURLSessionDataTask, responseObject: AnyObject?, completion: RequestCompletion<ModelType>.T)
     {
         guard let responseDictionary = responseObject as? [String: AnyObject]
         else
@@ -175,8 +178,10 @@ class VimeoClient
         completion(result: .Success(result: modelObject))
     }
     
-    private func requestFailure<ModelType where ModelType: VIMModelObjectProtocol>(request request: Request<ModelType>, task: NSURLSessionDataTask?, error: NSError, completion: RequestCompletion<ModelType>.T)
+    private func requestFailure<ModelType where ModelType: Mappable>(request request: Request<ModelType>, task: NSURLSessionDataTask?, error: NSError, completion: RequestCompletion<ModelType>.T)
     {
+        
+        
         completion(result: .Failure(error: error))
     }
 }
