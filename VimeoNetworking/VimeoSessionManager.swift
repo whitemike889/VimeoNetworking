@@ -69,11 +69,25 @@ class VimeoSessionManager: AFHTTPSessionManager
         })
     }
     
-    init(sessionConfiguration: NSURLSessionConfiguration, authTokenBlock: VimeoRequestSerializer.AuthTokenBlock)
+    convenience init(sessionConfiguration: NSURLSessionConfiguration, authenticationConfiguration: AuthenticationConfiguration)
+    {
+        let requestSerializer = VimeoRequestSerializer(authenticationConfiguration: authenticationConfiguration)
+        
+        self.init(sessionConfiguration: sessionConfiguration, requestSerializer: requestSerializer)
+    }
+    
+    convenience init(sessionConfiguration: NSURLSessionConfiguration, authTokenBlock: VimeoRequestSerializer.AuthTokenBlock)
+    {
+        let requestSerializer = VimeoRequestSerializer(authTokenBlock: authTokenBlock)
+        
+        self.init(sessionConfiguration: sessionConfiguration, requestSerializer: requestSerializer)
+    }
+    
+    init(sessionConfiguration: NSURLSessionConfiguration, requestSerializer: VimeoRequestSerializer)
     {        
         super.init(baseURL: VimeoBaseURLString, sessionConfiguration: sessionConfiguration)
         
-        self.requestSerializer = VimeoRequestSerializer(authTokenBlock: authTokenBlock)
+        self.requestSerializer = requestSerializer
         self.responseSerializer = VimeoResponseSerializer()
     }
     

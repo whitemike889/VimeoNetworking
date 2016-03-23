@@ -13,7 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         let splitViewController = self.window!.rootViewController as! UISplitViewController
@@ -21,33 +20,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
         splitViewController.delegate = self
         
-        let sessionManager = VimeoSessionManager(sessionConfiguration: NSURLSessionConfiguration.defaultSessionConfiguration(), authToken: "6f80bbebdeb537d0adc8d415526ecf66")
+        // TODO: remove these [RH] (3/23/16)
+        // TODO: scrub all tokens from the git history before open sourcing [RH] (3/23/16)
+        let authenticationConfiguration = AuthenticationConfiguration(clientKey: "141b94e08884ff39ef7d76256e4a7e3a03f6e865", clientSecret: "d17b26db6d8b0f27ceda882c6d0ba84b3b2e3a9e", scopes: [.Public, .Private])
+        
+        let sessionManager = VimeoSessionManager(sessionConfiguration: NSURLSessionConfiguration.defaultSessionConfiguration(), authenticationConfiguration: authenticationConfiguration)
         
         let client = VimeoClient(sessionManager: sessionManager)
         
-        let request = UserRequest.meRequest()
+        let authenticationController = AuthenticationController(configuration: authenticationConfiguration, client: client)
         
-        client.request(request) { result in
+        authenticationController.clientCredentialsGrant { result in
             switch result
             {
-            case .Success(let user):
-                print("successfully retrieved user: \(user)")
-                print("user bio \(user.bio ?? "🤔")")
+            case .Success(let account):
+                print("authenticated successfully: \(account)")
+                
+                let userURI = "/users/10895030"
+                
+                let request = UserRequest.user(userURI: userURI)
+                
+                client.request(request) { result in
+                    switch result
+                    {
+                    case .Success(let user):
+                        print("successfully retrieved user: \(user)")
+                        print("user bio \(user.bio ?? "🤔")")
+                    case .Failure(let error):
+                        print("request error: \(error)")
+                    }
+                }
+                
+                let followingRequest = UserListRequest.userFollowing(userURI: userURI)
+                
+                client.request(followingRequest) { (result) in
+                    switch result
+                    {
+                    case .Success(let users):
+                        print("successfully retrieved users: \(users)")
+                        print("user bio \(users.first?.bio ?? "🤔")")
+                    case .Failure(let error):
+                        print("request error: \(error)")
+                    }
+                }
+                
             case .Failure(let error):
-                print("request error: \(error)")
-            }
-        }
-        
-        let followingRequest = UserListRequest.meFollowingRequest()
-        
-        client.request(followingRequest) { (result) in
-            switch result
-            {
-            case .Success(let users):
-                print("successfully retrieved users: \(users)")
-                print("user bio \(users.first?.bio ?? "🤔")")
-            case .Failure(let error):
-                print("request error: \(error)")
+                print("failure authenticating: \(error)")
             }
         }
         

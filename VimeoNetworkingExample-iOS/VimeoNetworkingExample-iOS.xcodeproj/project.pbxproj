@@ -28,7 +28,7 @@
 		018B9FBC1C9B34050054650E /* VimeoNetworkingExample_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B9FBB1C9B34050054650E /* VimeoNetworkingExample_iOSUITests.swift */; };
 		018B9FD51C9B37380054650E /* VimeoNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B9FD41C9B37380054650E /* VimeoNetworking.swift */; };
 		0197B6B81CA1E0F8000A2901 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0197B6B71CA1E0F8000A2901 /* Request.swift */; };
-		0197B6BA1CA1E10E000A2901 /* Request+Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0197B6B91CA1E10E000A2901 /* Request+Me.swift */; };
+		0197B6BA1CA1E10E000A2901 /* Request+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0197B6B91CA1E10E000A2901 /* Request+User.swift */; };
 		0197B6BF1CA1E329000A2901 /* Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0197B6BE1CA1E329000A2901 /* Mappable.swift */; };
 		45F242743B87891F1E6BCB7D /* libPods-VimeoNetworkingExample-iOSUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36C9864F4173C8CDA21F4D13 /* libPods-VimeoNetworkingExample-iOSUITests.a */; };
 		5AB4C5B219AE98C1BEDDB67D /* libPods-VimeoNetworkingExample-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A14B0BA3B8B7BAC0DF30E3 /* libPods-VimeoNetworkingExample-iOS.a */; };
@@ -82,7 +82,7 @@
 		018B9FBD1C9B34050054650E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		018B9FD41C9B37380054650E /* VimeoNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VimeoNetworking.swift; sourceTree = "<group>"; };
 		0197B6B71CA1E0F8000A2901 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
-		0197B6B91CA1E10E000A2901 /* Request+Me.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Request+Me.swift"; sourceTree = "<group>"; };
+		0197B6B91CA1E10E000A2901 /* Request+User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Request+User.swift"; sourceTree = "<group>"; };
 		0197B6BE1CA1E329000A2901 /* Mappable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mappable.swift; sourceTree = "<group>"; };
 		097D1643FEAE7486DB0CB7D6 /* Pods-VimeoNetworkingExample-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworkingExample-iOSTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-VimeoNetworkingExample-iOSTests/Pods-VimeoNetworkingExample-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		128A8B3EE78B0F2F924E5E24 /* Pods-VimeoNetworkingExample-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworkingExample-iOS.release.xcconfig"; path = "../Pods/Target Support Files/Pods-VimeoNetworkingExample-iOS/Pods-VimeoNetworkingExample-iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -225,8 +225,8 @@
 				013250D31C9C916500ECB783 /* Resources */,
 				013250D51C9C917800ECB783 /* Networking */,
 				0197B6B61CA1E0B6000A2901 /* Requests */,
-				0197B6BD1CA1E317000A2901 /* Protocols */,
 				013250D61CA05FF400ECB783 /* Authentication */,
+				0197B6BD1CA1E317000A2901 /* Protocols */,
 				013250D41C9C917100ECB783 /* Utilities */,
 			);
 			name = VimeoNetworking;
@@ -237,7 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				0197B6B71CA1E0F8000A2901 /* Request.swift */,
-				0197B6B91CA1E10E000A2901 /* Request+Me.swift */,
+				0197B6B91CA1E10E000A2901 /* Request+User.swift */,
 				0140F9371CA2F0FD007FF547 /* Request+Authentication.swift */,
 			);
 			name = Requests;
@@ -550,7 +550,7 @@
 				018B9F9E1C9B34050054650E /* DetailViewController.swift in Sources */,
 				013250DA1CA0724900ECB783 /* AuthenticationController.swift in Sources */,
 				0197B6B81CA1E0F8000A2901 /* Request.swift in Sources */,
-				0197B6BA1CA1E10E000A2901 /* Request+Me.swift in Sources */,
+				0197B6BA1CA1E10E000A2901 /* Request+User.swift in Sources */,
 				0140F93C1CA30A20007FF547 /* Result.swift in Sources */,
 				018B9F9C1C9B34050054650E /* MasterViewController.swift in Sources */,
 				018B9F9A1C9B34050054650E /* AppDelegate.swift in Sources */,

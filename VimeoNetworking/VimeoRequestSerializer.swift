@@ -26,7 +26,7 @@
 
 import Foundation
 
-class VimeoRequestSerializer: AFJSONRequestSerializer
+class VimeoRequestSerializer: AFHTTPRequestSerializer
 {
     private static let AcceptHeaderKey = "Accept"
     private static let AuthorizationHeaderKey = "Authorization"
@@ -106,7 +106,7 @@ class VimeoRequestSerializer: AFJSONRequestSerializer
     private func setup(version version: String)
     {
         self.setValue("application/vnd.vimeo.*+json; version=\(version)", forHTTPHeaderField: self.dynamicType.AcceptHeaderKey)
-        self.writingOptions = .PrettyPrinted
+//        self.writingOptions = .PrettyPrinted
     }
 
     private func setAuthorizationHeader(request request: NSMutableURLRequest) -> NSMutableURLRequest
@@ -127,7 +127,7 @@ class VimeoRequestSerializer: AFJSONRequestSerializer
             
             if let base64String = base64String
             {
-                let headerValue = "Basic \(base64String)"
+                let headerValue = "basic \(base64String)"
                 request.setValue(headerValue, forHTTPHeaderField: self.dynamicType.AuthorizationHeaderKey)
             }
         }

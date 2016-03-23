@@ -17,9 +17,6 @@ struct AuthenticationConfiguration
 
 class AuthenticationController
 {
-    private static let ClientCredentialsPath = "oauth/authorize/client"
-    private static let ClientCredentialsGrantType = "client_credentials"
-    
     private static let ErrorDomain = "AuthenticationControllerErrorDomain"
     
     private static let ErrorAuthToken = 1004 // TODO: Make this an enum to ensure uniqueness [RH] (3/23/16)
@@ -35,11 +32,40 @@ class AuthenticationController
         self.client = client
     }
     
-    func authenticateWithClientCredentialsGrant(completion: AuthenticationCompletion)
+    func clientCredentialsGrant(completion: AuthenticationCompletion)
     {
         let request = AuthenticationRequest.clientCredentialsGrantRequest(scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
+    }
+    
+    func codeGrant()
+    {
+        // TODO:  [RH] (3/23/16)
+    }
+    
+    func login(username username: String, password: String, completion: AuthenticationCompletion)
+    {
+        let request = AuthenticationRequest.loginRequest(username: username, password: password, scopes: self.configuration.scopes)
+        
+        self.authenticate(request: request, completion: completion)
+    }
+    
+    func join(name name: String, email: String, password: String, completion: AuthenticationCompletion)
+    {
+        let request = AuthenticationRequest.joinRequest(name: name, email: email, password: password, scopes: self.configuration.scopes)
+        
+        self.authenticate(request: request, completion: completion)
+    }
+    
+    func facebookLogin()
+    {
+        // TODO:  [RH] (3/23/16)
+    }
+    
+    func facebookJoin()
+    {
+        // TODO:  [RH] (3/23/16)
     }
     
     private func authenticate(request request: Request<VIMAccountNew>, completion: AuthenticationCompletion)
