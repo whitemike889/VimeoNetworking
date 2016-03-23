@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         
         let client = VimeoClient(sessionManager: sessionManager)
         
-        let request = Request<VIMUser>.meRequest()
+        let request = UserRequest.meRequest()
         
         client.request(request) { result in
             switch result
@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             }
         }
         
-        let followingRequest = Request<[VIMUser]>.meFollowingRequest()
+        let followingRequest = UserListRequest.meFollowingRequest()
         
         client.request(followingRequest) { (result) in
             switch result

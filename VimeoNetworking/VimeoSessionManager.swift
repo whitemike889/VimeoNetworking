@@ -26,8 +26,6 @@
 
 import Foundation
 
-typealias AuthTokenBlock = Void -> String?
-
 class VimeoSessionManager: AFHTTPSessionManager
 {    
     // MARK: - Default Session Initialization
@@ -39,7 +37,7 @@ class VimeoSessionManager: AFHTTPSessionManager
         return VimeoSessionManager(sessionConfiguration: sessionConfiguration, authToken: authToken)
     }
 
-    static func defaultSessionManager(authTokenBlock authTokenBlock: AuthTokenBlock) -> VimeoSessionManager
+    static func defaultSessionManager(authTokenBlock authTokenBlock: VimeoRequestSerializer.AuthTokenBlock) -> VimeoSessionManager
     {
         let sessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()
         
@@ -55,7 +53,7 @@ class VimeoSessionManager: AFHTTPSessionManager
         return VimeoSessionManager(sessionConfiguration: sessionConfiguration, authToken: authToken)
     }
 
-    static func backgroundSessionManager(identifier identifier: String, authTokenBlock: AuthTokenBlock) -> VimeoSessionManager
+    static func backgroundSessionManager(identifier identifier: String, authTokenBlock: VimeoRequestSerializer.AuthTokenBlock) -> VimeoSessionManager
     {
         let sessionConfiguration = VimeoSessionManager.backgroundSessionConfiguration(identifier: identifier)
         
@@ -71,7 +69,7 @@ class VimeoSessionManager: AFHTTPSessionManager
         })
     }
     
-    init(sessionConfiguration: NSURLSessionConfiguration, authTokenBlock: AuthTokenBlock)
+    init(sessionConfiguration: NSURLSessionConfiguration, authTokenBlock: VimeoRequestSerializer.AuthTokenBlock)
     {        
         super.init(baseURL: VimeoBaseURLString, sessionConfiguration: sessionConfiguration)
         

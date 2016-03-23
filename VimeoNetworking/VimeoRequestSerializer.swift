@@ -31,20 +31,36 @@ class VimeoRequestSerializer: AFJSONRequestSerializer
     private static let AcceptHeaderKey = "Accept"
     private static let AuthorizationHeaderKey = "Authorization"
     
+    typealias AuthTokenBlock = Void -> String?
+    
     // MARK: 
     
-    private var authTokenBlock: AuthTokenBlock
+    // for authenticated requests
+    private let authTokenBlock: AuthTokenBlock?
+    
+    // for unauthenticated requests
+    private let authenticationConfiguration: AuthenticationConfiguration?
     
     // MARK: - Initialization
     
     init(authTokenBlock: AuthTokenBlock, version: String = VimeoDefaultAPIVersionString)
     {
         self.authTokenBlock = authTokenBlock
+        self.authenticationConfiguration = nil
         
         super.init()
 
-        self.setValue("application/vnd.vimeo.*+json; version=\(version)", forHTTPHeaderField: self.dynamicType.AcceptHeaderKey)
-        self.writingOptions = .PrettyPrinted
+        self.setup(version: version)
+    }
+    
+    init(authenticationConfiguration: AuthenticationConfiguration, version: String = VimeoDefaultAPIVersionString)
+    {
+        self.authTokenBlock = nil
+        self.authenticationConfiguration = authenticationConfiguration
+        
+        super.init()
+        
+        self.setup(version: version)
     }
     
     required init?(coder aDecoder: NSCoder)
@@ -86,13 +102,34 @@ class VimeoRequestSerializer: AFJSONRequestSerializer
     }
     
     // MARK: Private API
+    
+    private func setup(version version: String)
+    {
+        self.setValue("application/vnd.vimeo.*+json; version=\(version)", forHTTPHeaderField: self.dynamicType.AcceptHeaderKey)
+        self.writingOptions = .PrettyPrinted
+    }
 
     private func setAuthorizationHeader(request request: NSMutableURLRequest) -> NSMutableURLRequest
     {
-        if let token = self.authTokenBlock()
+        if let token = self.authTokenBlock?()
         {
             let value = "Bearer \(token)"
             request.setValue(value, forHTTPHeaderField: self.dynamicType.AuthorizationHeaderKey)
+        }
+        else if let authenticationConfiguration = self.authenticationConfiguration
+        {
+            let clientID = authenticationConfiguration.clientKey
+            let clientSecret = authenticationConfiguration.clientSecret
+            
+            let authString = "\(clientID):\(clientSecret)"
+            let authData = authString.dataUsingEncoding(NSUTF8StringEncoding)
+            let base64String = authData?.base64EncodedStringWithOptions([])
+            
+            if let base64String = base64String
+            {
+                let headerValue = "Basic \(base64String)"
+                request.setValue(headerValue, forHTTPHeaderField: self.dynamicType.AuthorizationHeaderKey)
+            }
         }
         
         return request

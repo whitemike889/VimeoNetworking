@@ -8,6 +8,9 @@
 
 import Foundation
 
+typealias UserRequest = Request<VIMUser>
+typealias UserListRequest = Request<[VIMUser]>
+
 extension Request
 {
     static func meRequest() -> Request

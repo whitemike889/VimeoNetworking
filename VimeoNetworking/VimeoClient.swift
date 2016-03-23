@@ -8,18 +8,6 @@
 
 import Foundation
 
-enum Result<ModelType where ModelType: Mappable>
-{
-    case Success(result: ModelType)
-    case Failure(error: NSError)
-}
-
-/// This dummy enum acts as a generic typealias
-enum RequestCompletion<ModelType where ModelType: Mappable>
-{
-    typealias T = (result: Result<ModelType>) -> Void
-}
-
 class VimeoClient
 {
     // MARK: - 
@@ -51,7 +39,7 @@ class VimeoClient
     
     // MARK: -
     
-    func request<ModelType where ModelType: Mappable>(request: Request<ModelType>, completion: RequestCompletion<ModelType>.T)
+    func request<ModelType where ModelType: Mappable>(request: Request<ModelType>, completion: ResultCompletion<ModelType>.T)
     {
         let urlString = request.path
         let parameters = request.parameters
@@ -79,7 +67,7 @@ class VimeoClient
         }
     }
     
-    private func requestSuccess<ModelType where ModelType: Mappable>(request request: Request<ModelType>, task: NSURLSessionDataTask, responseObject: AnyObject?, completion: RequestCompletion<ModelType>.T)
+    private func requestSuccess<ModelType where ModelType: Mappable>(request request: Request<ModelType>, task: NSURLSessionDataTask, responseObject: AnyObject?, completion: ResultCompletion<ModelType>.T)
     {
         guard let responseDictionary = responseObject as? [String: AnyObject]
         else
@@ -138,7 +126,7 @@ class VimeoClient
         completion(result: .Success(result: modelObject))
     }
     
-    private func requestFailure<ModelType where ModelType: Mappable>(request request: Request<ModelType>, task: NSURLSessionDataTask?, error: NSError, completion: RequestCompletion<ModelType>.T)
+    private func requestFailure<ModelType where ModelType: Mappable>(request request: Request<ModelType>, task: NSURLSessionDataTask?, error: NSError, completion: ResultCompletion<ModelType>.T)
     {
         completion(result: .Failure(error: error))
     }
