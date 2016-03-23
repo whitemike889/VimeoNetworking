@@ -68,7 +68,7 @@ class AuthenticationController
         // TODO:  [RH] (3/23/16)
     }
     
-    private func authenticate(request request: Request<VIMAccountNew>, completion: AuthenticationCompletion)
+    private func authenticate(request request: AuthenticationRequest, completion: AuthenticationCompletion)
     {
         self.client.request(request) { result in
             
