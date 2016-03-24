@@ -8,7 +8,7 @@
 
 import Foundation
 
-class VimeoClient
+final class VimeoClient
 {
     // MARK: - 
     

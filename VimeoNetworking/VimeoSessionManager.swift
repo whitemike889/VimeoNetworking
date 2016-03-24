@@ -26,7 +26,7 @@
 
 import Foundation
 
-class VimeoSessionManager: AFHTTPSessionManager
+final class VimeoSessionManager: AFHTTPSessionManager
 {    
     // MARK: - Default Session Initialization
     

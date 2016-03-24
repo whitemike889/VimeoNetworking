@@ -15,7 +15,7 @@ struct AuthenticationConfiguration
     let scopes: [Scope]
 }
 
-class AuthenticationController
+final class AuthenticationController
 {
     private static let ErrorDomain = "AuthenticationControllerErrorDomain"
     

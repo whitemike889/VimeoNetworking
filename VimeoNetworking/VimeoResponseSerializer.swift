@@ -26,7 +26,7 @@
 
 import Foundation
 
-class VimeoResponseSerializer: AFJSONResponseSerializer
+final class VimeoResponseSerializer: AFJSONResponseSerializer
 {
     private static let ErrorDomain = "VimeoResponseSerializerErrorDomain"
     
