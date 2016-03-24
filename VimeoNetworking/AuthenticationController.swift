@@ -13,6 +13,9 @@ struct AuthenticationConfiguration
     let clientKey: String
     let clientSecret: String
     let scopes: [Scope]
+    
+    // let keychainService: String
+    // let keychainAccessGroup: String
 }
 
 final class AuthenticationController
@@ -25,6 +28,8 @@ final class AuthenticationController
     
     let configuration: AuthenticationConfiguration
     let client: VimeoClient
+    
+    let accountStore = AccountStore()
     
     init(configuration: AuthenticationConfiguration, client: VimeoClient)
     {
@@ -102,12 +107,12 @@ final class AuthenticationController
         
         self.client.sessionManager.requestSerializer = VimeoRequestSerializer(authTokenBlock: { authToken })
         
-        // TODO: Save account [RH] (3/23/16)
-//        try AccountStore.saveAccount(account)
-//        catch let error
-//        {
-//            return .Failure(error: error)
-//        }
+        let accountType: AccountStore.AccountType = (account.user != nil) ? .User : .ClientCredentials
+        do { try self.accountStore.saveAccount(account, type: accountType) }
+        catch let error
+        {
+            return .Failure(error: error as NSError)
+        }
         
         return result
     }

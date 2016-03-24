@@ -19,6 +19,7 @@
 		0140F93A1CA2FAD1007FF547 /* Scope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0140F9391CA2FAD1007FF547 /* Scope.swift */; };
 		0140F93C1CA30A20007FF547 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0140F93B1CA30A20007FF547 /* Result.swift */; };
 		0141C54E1CA444C600B60639 /* AccountStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0141C54D1CA444C600B60639 /* AccountStore.swift */; };
+		0141C5501CA45ECC00B60639 /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0141C54F1CA45ECC00B60639 /* KeychainStore.swift */; };
 		018B9F9A1C9B34050054650E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B9F991C9B34050054650E /* AppDelegate.swift */; };
 		018B9F9C1C9B34050054650E /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B9F9B1C9B34050054650E /* MasterViewController.swift */; };
 		018B9F9E1C9B34050054650E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B9F9D1C9B34050054650E /* DetailViewController.swift */; };
@@ -68,6 +69,7 @@
 		0140F9391CA2FAD1007FF547 /* Scope.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scope.swift; sourceTree = "<group>"; };
 		0140F93B1CA30A20007FF547 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		0141C54D1CA444C600B60639 /* AccountStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountStore.swift; sourceTree = "<group>"; };
+		0141C54F1CA45ECC00B60639 /* KeychainStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
 		018B9F961C9B34050054650E /* VimeoNetworkingExample-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VimeoNetworkingExample-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		018B9F991C9B34050054650E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		018B9F9B1C9B34050054650E /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				013250D91CA0724900ECB783 /* AuthenticationController.swift */,
 				0140F9391CA2FAD1007FF547 /* Scope.swift */,
 				0141C54D1CA444C600B60639 /* AccountStore.swift */,
+				0141C54F1CA45ECC00B60639 /* KeychainStore.swift */,
 			);
 			name = Authentication;
 			sourceTree = "<group>";
@@ -554,6 +557,7 @@
 				013250DA1CA0724900ECB783 /* AuthenticationController.swift in Sources */,
 				0197B6B81CA1E0F8000A2901 /* Request.swift in Sources */,
 				0197B6BA1CA1E10E000A2901 /* Request+User.swift in Sources */,
+				0141C5501CA45ECC00B60639 /* KeychainStore.swift in Sources */,
 				0140F93C1CA30A20007FF547 /* Result.swift in Sources */,
 				0141C54E1CA444C600B60639 /* AccountStore.swift in Sources */,
 				018B9F9C1C9B34050054650E /* MasterViewController.swift in Sources */,

@@ -25,9 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let authenticationConfiguration = AuthenticationConfiguration(clientKey: "141b94e08884ff39ef7d76256e4a7e3a03f6e865", clientSecret: "d17b26db6d8b0f27ceda882c6d0ba84b3b2e3a9e", scopes: [.Public, .Private, .Create, .Edit, .Delete, .Interact, .Upload])
         
         let sessionManager = VimeoSessionManager(sessionConfiguration: NSURLSessionConfiguration.defaultSessionConfiguration(), authenticationConfiguration: authenticationConfiguration)
-        
         let client = VimeoClient(sessionManager: sessionManager)
-        
         let authenticationController = AuthenticationController(configuration: authenticationConfiguration, client: client)
         
 //        authenticationController.join(name: "salkdjflkasdfklms", email: "slkflskfjlskjdf@slkdfjslk.ksl", password: "lksjdfklsdlfksjdlfkj") { result in
