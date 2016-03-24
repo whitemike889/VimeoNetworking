@@ -34,7 +34,7 @@ final class AuthenticationController
     
     func clientCredentialsGrant(completion: AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.clientCredentialsGrantRequest(scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.postClientCredentialsGrant(scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
     }
@@ -46,14 +46,14 @@ final class AuthenticationController
     
     func login(username username: String, password: String, completion: AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.loginRequest(username: username, password: password, scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.postLogin(username: username, password: password, scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
     }
     
     func join(name name: String, email: String, password: String, completion: AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.joinRequest(name: name, email: email, password: password, scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.postJoin(name: name, email: email, password: password, scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
     }

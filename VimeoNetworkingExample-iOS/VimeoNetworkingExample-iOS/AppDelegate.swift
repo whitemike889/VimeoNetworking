@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                 
                 let userURI = "/users/10895030"
                 
-                let request = UserRequest.user(userURI: userURI)
+                let request = UserRequest.getUser(userURI: userURI)
                 
                 client.request(request) { result in
                     switch result
@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                     }
                 }
                 
-                let followingRequest = UserListRequest.userFollowing(userURI: userURI)
+                let followingRequest = UserListRequest.getUserFollowing(userURI: userURI)
                 
                 client.request(followingRequest) { (result) in
                     switch result
@@ -66,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                     }
                 }
                 
-                let meRequest = UserRequest.me()
+                let meRequest = UserRequest.getMe()
                 
                 client.request(meRequest) { result in
                     switch result
