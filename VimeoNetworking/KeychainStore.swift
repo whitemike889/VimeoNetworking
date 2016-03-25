@@ -54,9 +54,23 @@ final class ArchiveStore: SecureDataStore
     {
         let filePath = self.filePath(key: key)
         
-        try self.fileManager.createDirectoryAtPath(filePath, withIntermediateDirectories: true, attributes: nil)
+        if let documentsDirectoryURL = self.documentsDirectoryURL()
+        {
+            try self.fileManager.createDirectoryAtURL(documentsDirectoryURL, withIntermediateDirectories: true, attributes: nil)
+        }
         
-        try data.writeToFile(filePath, options: [])
+        if self.fileManager.fileExistsAtPath(filePath)
+        {
+            try self.fileManager.removeItemAtPath(filePath)
+        }
+        
+        let success = self.fileManager.createFileAtPath(filePath, contents: data, attributes: nil)
+        
+        if !success
+        {
+            let error = NSError(domain: "ArchiveStoreDomain", code: 2093, userInfo: [NSLocalizedDescriptionKey: "create file failed"])
+            throw error
+        }
     }
     
     func dataForKey(key: String) throws -> NSData?
@@ -71,17 +85,25 @@ final class ArchiveStore: SecureDataStore
         try self.fileManager.removeItemAtPath(self.filePath(key: key))
     }
     
+    private func documentsDirectoryURL() -> NSURL?
+    {
+        if let directory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first
+        {
+            return NSURL(fileURLWithPath: directory)
+        }
+        
+        return nil
+    }
+    
     private func filePath(key key: String) -> String
     {
-        let directoryURLs = self.fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        
-        guard let directoryURL = directoryURLs.first
+        guard let directoryURL = self.documentsDirectoryURL()
         else
         {
             fatalError("no documents directories found")
         }
         
-        let fileURL = directoryURL.URLByAppendingPathComponent("dontlookatthis-\(key)")
+        let fileURL = directoryURL.URLByAppendingPathComponent("dontlookatthis-\(key).plist")
         
         return fileURL.absoluteString
     }
