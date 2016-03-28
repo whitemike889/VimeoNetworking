@@ -52,7 +52,14 @@ final class ArchiveStore: SecureDataStore
     
     func setData(data: NSData, forKey key: String) throws
     {
-        let filePath = self.filePath(key: key)
+        let fileURL = self.fileURLForKey(key: key)
+        
+        guard let filePath = fileURL.path
+        else
+        {
+            let error = NSError(domain: "ArchiveStoreDomain", code: 0, userInfo: [NSLocalizedDescriptionKey: "no path"])
+            throw error
+        }
         
         if let documentsDirectoryURL = self.documentsDirectoryURL()
         {
@@ -68,21 +75,21 @@ final class ArchiveStore: SecureDataStore
         
         if !success
         {
-            let error = NSError(domain: "ArchiveStoreDomain", code: 2093, userInfo: [NSLocalizedDescriptionKey: "create file failed"])
+            let error = NSError(domain: "ArchiveStoreDomain", code: 0, userInfo: [NSLocalizedDescriptionKey: "create file failed"])
             throw error
         }
     }
     
     func dataForKey(key: String) throws -> NSData?
     {
-        let data = try NSData(contentsOfFile: self.filePath(key: key), options: [])
+        let data = NSData(contentsOfURL: self.fileURLForKey(key: key))
         
         return data
     }
     
     func deleteDataForKey(key: String) throws
     {
-        try self.fileManager.removeItemAtPath(self.filePath(key: key))
+        try self.fileManager.removeItemAtURL(self.fileURLForKey(key: key))
     }
     
     private func documentsDirectoryURL() -> NSURL?
@@ -95,7 +102,7 @@ final class ArchiveStore: SecureDataStore
         return nil
     }
     
-    private func filePath(key key: String) -> String
+    private func fileURLForKey(key key: String) -> NSURL
     {
         guard let directoryURL = self.documentsDirectoryURL()
         else
@@ -105,6 +112,6 @@ final class ArchiveStore: SecureDataStore
         
         let fileURL = directoryURL.URLByAppendingPathComponent("dontlookatthis-\(key).plist")
         
-        return fileURL.absoluteString
+        return fileURL
     }
 }
