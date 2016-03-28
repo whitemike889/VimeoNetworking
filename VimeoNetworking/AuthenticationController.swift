@@ -27,6 +27,44 @@ final class AuthenticationController
         self.client = client
     }
     
+    // MARK: - 
+    
+    /// This method will:
+    /// 1. check for a user authenticated account, then 
+    /// 2. check for a client credentials authenticated account, then finally
+    /// 3. attempt to authenticate with client credentials
+    func initialAuthentication(completion: AuthenticationCompletion)
+    {
+        let userAccount: VIMAccountNew?
+        let clientCredentialsAccount: VIMAccountNew?
+        
+        // check saved accounts
+        do
+        {
+            userAccount = try self.accountStore.loadAccount(.User)
+            clientCredentialsAccount = try self.accountStore.loadAccount(.ClientCredentials)
+            
+            if let account = userAccount ?? clientCredentialsAccount
+            {
+                try self.setupRequestSerializer(account: account)
+                
+                completion(result: .Success(result: account))
+                
+                return
+            }
+        }
+        catch let error
+        {
+            completion(result: .Failure(error: error as NSError))
+        }
+        
+        // if necessary, make a request for client credentials
+        
+        self.clientCredentialsGrant(completion)
+    }
+    
+    // MARK: -
+    
     func clientCredentialsGrant(completion: AuthenticationCompletion)
     {
         let request = AuthenticationRequest.postClientCredentialsGrant(scopes: self.configuration.scopes)
@@ -83,8 +121,25 @@ final class AuthenticationController
             return result
         }
         
+        do
+        {
+            try self.setupRequestSerializer(account: account)
+            
+            let accountType: AccountStore.AccountType = (account.user != nil) ? .User : .ClientCredentials
+            try self.accountStore.saveAccount(account, type: accountType)
+        }
+        catch let error
+        {
+            return .Failure(error: error as NSError)
+        }
+        
+        return result
+    }
+    
+    private func setupRequestSerializer(account account: VIMAccountNew) throws
+    {
         guard let authToken = account.accessToken
-        else
+            else
         {
             let errorDescription = "AuthenticationController did not recieve an access token with account response"
             
@@ -92,18 +147,11 @@ final class AuthenticationController
             
             let error = NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorAuthToken, userInfo: [NSLocalizedDescriptionKey: errorDescription])
             
-            return .Failure(error: error)
+            throw error
         }
         
+        // TODO: can we do this better? [RH] (3/28/16)
+        // like maybe notifications? delegate? account update block?
         self.client.sessionManager.requestSerializer = VimeoRequestSerializer(authTokenBlock: { authToken })
-        
-        let accountType: AccountStore.AccountType = (account.user != nil) ? .User : .ClientCredentials
-        do { try self.accountStore.saveAccount(account, type: accountType) }
-        catch let error
-        {
-            return .Failure(error: error as NSError)
-        }
-        
-        return result
     }
 }

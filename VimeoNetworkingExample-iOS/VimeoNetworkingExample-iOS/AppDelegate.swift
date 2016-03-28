@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         
 //        authenticationController.join(name: "salkdjflkasdfklms", email: "slkflskfjlskjdf@slkdfjslk.ksl", password: "lksjdfklsdlfksjdlfkj") { result in
 //        authenticationController.login(username: "robh@vimeo.com", password: "password") { result in
-        authenticationController.clientCredentialsGrant { result in
+        authenticationController.initialAuthentication { result in
             switch result
             {
             case .Success(let account):
