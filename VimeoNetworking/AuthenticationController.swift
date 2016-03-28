@@ -96,7 +96,14 @@ final class AuthenticationController
                           "state": self.dynamicType.state]
         
         var error: NSError?
-        let urlRequest = self.client.sessionManager.requestSerializer.requestWithMethod("GET", URLString: "", parameters: parameters, error: &error)
+        guard let urlString = self.client.sessionManager.baseURL?.URLByAppendingPathComponent("oauth/authorize").absoluteString
+        else
+        {
+            fatalError("Could not make code grant auth URL")
+        }
+        
+        let urlRequest = self.client.sessionManager.requestSerializer.requestWithMethod("GET", URLString: urlString, parameters: parameters, error: &error)
+        
         guard let url = urlRequest.URL where error == nil
         else
         {
