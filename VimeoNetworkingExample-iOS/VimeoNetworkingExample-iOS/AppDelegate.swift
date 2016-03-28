@@ -26,11 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         
         // TODO: remove these [RH] (3/23/16)
         // TODO: scrub all tokens from the git history before open sourcing [RH] (3/23/16)
-        let authenticationConfiguration = AuthenticationConfiguration(clientKey: "141b94e08884ff39ef7d76256e4a7e3a03f6e865", clientSecret: "d17b26db6d8b0f27ceda882c6d0ba84b3b2e3a9e", scopes: [.Public, .Private, .Create, .Edit, .Delete, .Interact, .Upload])
+        let appConfiguration = AppConfiguration(clientKey: "141b94e08884ff39ef7d76256e4a7e3a03f6e865", clientSecret: "d17b26db6d8b0f27ceda882c6d0ba84b3b2e3a9e", scopes: [.Public, .Private, .Create, .Edit, .Delete, .Interact, .Upload])
         
-        let sessionManager = VimeoSessionManager(sessionConfiguration: NSURLSessionConfiguration.defaultSessionConfiguration(), authenticationConfiguration: authenticationConfiguration)
+        let sessionManager = VimeoSessionManager(sessionConfiguration: NSURLSessionConfiguration.defaultSessionConfiguration(), appConfiguration: appConfiguration)
         let client = VimeoClient(sessionManager: sessionManager)
-        let authenticationController = AuthenticationController(configuration: authenticationConfiguration, client: client)
+        let authenticationController = AuthenticationController(configuration: appConfiguration, client: client)
         
 //        authenticationController.join(name: "salkdjflkasdfklms", email: "slkflskfjlskjdf@slkdfjslk.ksl", password: "lksjdfklsdlfksjdlfkj") { result in
 //        authenticationController.login(username: "robh@vimeo.com", password: "password") { result in

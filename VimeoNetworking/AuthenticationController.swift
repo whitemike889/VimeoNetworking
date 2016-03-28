@@ -8,16 +8,6 @@
 
 import Foundation
 
-struct AuthenticationConfiguration
-{
-    let clientKey: String
-    let clientSecret: String
-    let scopes: [Scope]
-    
-    // let keychainService: String
-    // let keychainAccessGroup: String
-}
-
 final class AuthenticationController
 {
     private static let ErrorDomain = "AuthenticationControllerErrorDomain"
@@ -26,12 +16,12 @@ final class AuthenticationController
     
     typealias AuthenticationCompletion = ResultCompletion<VIMAccountNew>.T
     
-    let configuration: AuthenticationConfiguration
+    let configuration: AppConfiguration
     let client: VimeoClient
     
     let accountStore = AccountStore()
     
-    init(configuration: AuthenticationConfiguration, client: VimeoClient)
+    init(configuration: AppConfiguration, client: VimeoClient)
     {
         self.configuration = configuration
         self.client = client

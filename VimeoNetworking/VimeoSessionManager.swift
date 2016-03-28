@@ -69,9 +69,9 @@ final class VimeoSessionManager: AFHTTPSessionManager
         })
     }
     
-    convenience init(sessionConfiguration: NSURLSessionConfiguration, authenticationConfiguration: AuthenticationConfiguration)
+    convenience init(sessionConfiguration: NSURLSessionConfiguration, appConfiguration: AppConfiguration)
     {
-        let requestSerializer = VimeoRequestSerializer(authenticationConfiguration: authenticationConfiguration)
+        let requestSerializer = VimeoRequestSerializer(appConfiguration: appConfiguration)
         
         self.init(sessionConfiguration: sessionConfiguration, requestSerializer: requestSerializer)
     }

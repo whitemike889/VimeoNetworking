@@ -39,24 +39,24 @@ final class VimeoRequestSerializer: AFHTTPRequestSerializer
     private let authTokenBlock: AuthTokenBlock?
     
     // for unauthenticated requests
-    private let authenticationConfiguration: AuthenticationConfiguration?
+    private let appConfiguration: AppConfiguration?
     
     // MARK: - Initialization
     
     init(authTokenBlock: AuthTokenBlock, version: String = VimeoDefaultAPIVersionString)
     {
         self.authTokenBlock = authTokenBlock
-        self.authenticationConfiguration = nil
+        self.appConfiguration = nil
         
         super.init()
 
         self.setup(version: version)
     }
     
-    init(authenticationConfiguration: AuthenticationConfiguration, version: String = VimeoDefaultAPIVersionString)
+    init(appConfiguration: AppConfiguration, version: String = VimeoDefaultAPIVersionString)
     {
         self.authTokenBlock = nil
-        self.authenticationConfiguration = authenticationConfiguration
+        self.appConfiguration = appConfiguration
         
         super.init()
         
@@ -116,10 +116,10 @@ final class VimeoRequestSerializer: AFHTTPRequestSerializer
             let value = "Bearer \(token)"
             request.setValue(value, forHTTPHeaderField: self.dynamicType.AuthorizationHeaderKey)
         }
-        else if let authenticationConfiguration = self.authenticationConfiguration
+        else if let appConfiguration = self.appConfiguration
         {
-            let clientID = authenticationConfiguration.clientKey
-            let clientSecret = authenticationConfiguration.clientSecret
+            let clientID = appConfiguration.clientKey
+            let clientSecret = appConfiguration.clientSecret
             
             let authString = "\(clientID):\(clientSecret)"
             let authData = authString.dataUsingEncoding(NSUTF8StringEncoding)
