@@ -27,7 +27,7 @@ final class AuthenticationController
         self.client = client
     }
     
-    // MARK: - 
+    // MARK: - Launch
     
     /// This method will:
     /// 1. check for a user authenticated account, then 
@@ -63,7 +63,7 @@ final class AuthenticationController
         self.clientCredentialsGrant(completion)
     }
     
-    // MARK: -
+    // MARK: - Public Authentication
     
     func clientCredentialsGrant(completion: AuthenticationCompletion)
     {
@@ -72,10 +72,14 @@ final class AuthenticationController
         self.authenticate(request: request, completion: completion)
     }
     
-    func codeGrant()
+    func codeGrant(code code: String, redirectURI: String, completion: AuthenticationCompletion)
     {
-        // TODO:  [RH] (3/23/16)
+        let request = AuthenticationRequest.postCodeGrant(code: code, redirectURI: redirectURI)
+        
+        self.authenticate(request: request, completion: completion)
     }
+    
+    // MARK: - Private Authentication
     
     func login(username username: String, password: String, completion: AuthenticationCompletion)
     {
@@ -91,15 +95,21 @@ final class AuthenticationController
         self.authenticate(request: request, completion: completion)
     }
     
-    func facebookLogin()
+    func facebookLogin(facebookToken facebookToken: String, completion: AuthenticationCompletion)
     {
-        // TODO:  [RH] (3/23/16)
+        let request = AuthenticationRequest.postLoginFacebook(facebookToken: facebookToken, scopes: self.configuration.scopes)
+        
+        self.authenticate(request: request, completion: completion)
     }
     
-    func facebookJoin()
+    func facebookJoin(facebookToken facebookToken: String, completion: AuthenticationCompletion)
     {
-        // TODO:  [RH] (3/23/16)
+        let request = AuthenticationRequest.postJoinFacebook(facebookToken: facebookToken, scopes: self.configuration.scopes)
+        
+        self.authenticate(request: request, completion: completion)
     }
+    
+    // MARK: - Private
     
     private func authenticate(request request: AuthenticationRequest, completion: AuthenticationCompletion)
     {
