@@ -127,7 +127,7 @@ final class VimeoRequestSerializer: AFHTTPRequestSerializer
             
             if let base64String = base64String
             {
-                let headerValue = "basic \(base64String)"
+                let headerValue = "Basic \(base64String)"
                 request.setValue(headerValue, forHTTPHeaderField: self.dynamicType.AuthorizationHeaderKey)
             }
         }
