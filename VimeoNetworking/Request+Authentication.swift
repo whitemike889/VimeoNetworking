@@ -10,6 +10,13 @@ import Foundation
 
 private let GrantTypeKey = "grant_type"
 private let ScopeKey = "scope"
+private let CodeKey = "code"
+private let RedirectURIKey = "redirect_uri"
+private let UsernameKey = "username"
+private let PasswordKey = "password"
+private let DisplayNameKey = "display_name"
+private let EmailKey = "email"
+private let TokenKey = "token"
 
 private let GrantTypeClientCredentials = "client_credentials"
 private let GrantTypeAuthorizationCode = "authorization_code"
@@ -37,8 +44,8 @@ extension Request
     static func postCodeGrant(code code: String, redirectURI: String) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [GrantTypeKey: GrantTypeAuthorizationCode,
-                                                         "code": code,
-                                                         "redirect_uri": redirectURI]
+                                                         CodeKey: code,
+                                                         RedirectURIKey: redirectURI]
         
         return Request(method: .POST, path: AuthenticationPathCodeGrant, parameters: parameters)
     }
@@ -47,8 +54,8 @@ extension Request
     {
         let parameters: VimeoClient.RequestParameters = [GrantTypeKey: GrantTypePassword,
                                                          ScopeKey: Scope.combine(scopes),
-                                                         "username": username,
-                                                         "password": password]
+                                                         UsernameKey: username,
+                                                         PasswordKey: password]
         
         return Request(method: .POST, path: AuthenticationPathAccessToken, parameters: parameters)
     }
@@ -56,9 +63,9 @@ extension Request
     static func postJoin(name name: String, email: String, password: String, scopes: [Scope]) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [ScopeKey: Scope.combine(scopes),
-                                                         "display_name": name,
-                                                         "email": email,
-                                                         "password": password]
+                                                         DisplayNameKey: name,
+                                                         EmailKey: email,
+                                                         PasswordKey: password]
         
         return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters)
     }
@@ -67,7 +74,7 @@ extension Request
     {
         let parameters: VimeoClient.RequestParameters = [GrantTypeKey: GrantTypeFacebook,
                                                          ScopeKey: Scope.combine(scopes),
-                                                         "token": facebookToken]
+                                                         TokenKey: facebookToken]
         
         return Request(method: .POST, path: AuthenticationPathFacebookToken, parameters: parameters)
     }
@@ -75,7 +82,7 @@ extension Request
     static func postJoinFacebook(facebookToken facebookToken: String, scopes: [Scope]) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [ScopeKey: Scope.combine(scopes),
-                                                         "token": facebookToken]
+                                                         TokenKey: facebookToken]
         
         return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters)
     }

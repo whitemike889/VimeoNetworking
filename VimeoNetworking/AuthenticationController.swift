@@ -10,11 +10,16 @@ import Foundation
 
 final class AuthenticationController
 {
-    private static let ErrorDomain = "AuthenticationControllerErrorDomain"
+    static let ErrorDomain = "AuthenticationControllerErrorDomain"
     
-    private static let ErrorAuthToken = 1004 // TODO: Make this an enum to ensure uniqueness [RH] (3/23/16)
+    static let ErrorAuthToken = 1004 // TODO: Make this an enum to ensure uniqueness [RH] (3/23/16)
+    static let ErrorCodeGrant = 1005
+    static let ErrorCodeGrantState = 1006
     
     typealias AuthenticationCompletion = ResultCompletion<VIMAccountNew>.T
+    
+    /// State is tracked for the code grant request/response cycle, to avoid 
+    static let state = NSProcessInfo.processInfo().globallyUniqueString
     
     let configuration: AppConfiguration
     let client: VimeoClient
@@ -33,6 +38,7 @@ final class AuthenticationController
     /// 1. check for a user authenticated account, then 
     /// 2. check for a client credentials authenticated account, then finally
     /// 3. attempt to authenticate with client credentials
+    
     func initialAuthentication(completion: AuthenticationCompletion)
     {
         let userAccount: VIMAccountNew?
@@ -72,9 +78,68 @@ final class AuthenticationController
         self.authenticate(request: request, completion: completion)
     }
     
-    func codeGrant(code code: String, redirectURI: String, completion: AuthenticationCompletion)
+    var codeGrantRedirectURI: String
     {
-        let request = AuthenticationRequest.postCodeGrant(code: code, redirectURI: redirectURI)
+        let scheme = "vimeo\(self.configuration.clientKey)"
+        let path = "auth"
+        let URI = "\(scheme)://\(path)"
+        
+        return URI
+    }
+    
+    func codeGrantAuthorizationURL() -> NSURL
+    {
+        let parameters = ["response_type": "code",
+                          "client_id": self.configuration.clientKey,
+                          "redirect_uri": self.codeGrantRedirectURI,
+                          "scope": Scope.combine(self.configuration.scopes),
+                          "state": self.dynamicType.state]
+        
+        var error: NSError?
+        let urlRequest = self.client.sessionManager.requestSerializer.requestWithMethod("GET", URLString: "", parameters: parameters, error: &error)
+        guard let url = urlRequest.URL where error == nil
+        else
+        {
+            fatalError("Could not make code grant auth URL")
+        }
+        
+        return url
+        
+    }
+    
+    func codeGrant(responseURL responseURL: NSURL, completion: AuthenticationCompletion)
+    {
+        guard let queryString = responseURL.query,
+            let parameters = self.parametersFromQueryString(queryString),
+            let code = parameters["code"],
+            let state = parameters["state"]
+        else
+        {
+            let errorDescription = "Could not retrieve parameters from code grant response"
+            
+            assertionFailure(errorDescription)
+            
+            let error = NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorCodeGrant, userInfo: [NSLocalizedDescriptionKey: errorDescription])
+            
+            completion(result: .Failure(error: error))
+            
+            return
+        }
+        
+        if state != self.dynamicType.state
+        {
+            let errorDescription = "Code grant returned state did not match existing state"
+            
+            assertionFailure(errorDescription)
+            
+            let error = NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorCodeGrantState, userInfo: [NSLocalizedDescriptionKey: errorDescription])
+            
+            completion(result: .Failure(error: error))
+            
+            return
+        }
+        
+        let request = AuthenticationRequest.postCodeGrant(code: code, redirectURI: self.codeGrantRedirectURI)
         
         self.authenticate(request: request, completion: completion)
     }
@@ -163,5 +228,34 @@ final class AuthenticationController
         // TODO: can we do this better? [RH] (3/28/16)
         // like maybe notifications? delegate? account update block?
         self.client.sessionManager.requestSerializer = VimeoRequestSerializer(authTokenBlock: { authToken })
+    }
+    
+    // MARK: - Private: Utility
+    
+    private func parametersFromQueryString(queryString: String) -> [String: String]?
+    {
+        var parameters: [String: String] = [:]
+        
+        let scanner = NSScanner(string: queryString)
+        while !scanner.atEnd
+        {
+            var name: NSString?
+            let equals = "="
+            scanner.scanUpToString(equals, intoString: &name)
+            scanner.scanString(equals, intoString: nil)
+            
+            var value: NSString?
+            let ampersand = "&"
+            scanner.scanUpToString(ampersand, intoString: &value)
+            scanner.scanString(ampersand, intoString: nil)
+            
+            if let name = name?.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding),
+                let value = value?.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
+            {
+                parameters[name] = value
+            }
+        }
+        
+        return parameters.count > 0 ? parameters : nil
     }
 }
