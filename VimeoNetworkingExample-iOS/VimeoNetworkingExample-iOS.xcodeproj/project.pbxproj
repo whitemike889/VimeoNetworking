@@ -35,6 +35,7 @@
 		01BAE9291CA98507004CB214 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BAE9281CA98507004CB214 /* AppConfiguration.swift */; };
 		01BAE92B1CAADA6F004CB214 /* VimeoSessionManager+Constructors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BAE92A1CAADA6F004CB214 /* VimeoSessionManager+Constructors.swift */; };
 		01BAE92D1CAB00CB004CB214 /* String+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BAE92C1CAB00CB004CB214 /* String+Utilities.swift */; };
+		01BAE9301CAB13CC004CB214 /* ResponseCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BAE92F1CAB13CC004CB214 /* ResponseCache.swift */; };
 		45F242743B87891F1E6BCB7D /* libPods-VimeoNetworkingExample-iOSUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36C9864F4173C8CDA21F4D13 /* libPods-VimeoNetworkingExample-iOSUITests.a */; };
 		5AB4C5B219AE98C1BEDDB67D /* libPods-VimeoNetworkingExample-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A14B0BA3B8B7BAC0DF30E3 /* libPods-VimeoNetworkingExample-iOS.a */; };
 		95603D88824C1D08A241E0D3 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
@@ -94,6 +95,7 @@
 		01BAE9281CA98507004CB214 /* AppConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		01BAE92A1CAADA6F004CB214 /* VimeoSessionManager+Constructors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VimeoSessionManager+Constructors.swift"; sourceTree = "<group>"; };
 		01BAE92C1CAB00CB004CB214 /* String+Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Utilities.swift"; sourceTree = "<group>"; };
+		01BAE92F1CAB13CC004CB214 /* ResponseCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseCache.swift; sourceTree = "<group>"; };
 		097D1643FEAE7486DB0CB7D6 /* Pods-VimeoNetworkingExample-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworkingExample-iOSTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-VimeoNetworkingExample-iOSTests/Pods-VimeoNetworkingExample-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		128A8B3EE78B0F2F924E5E24 /* Pods-VimeoNetworkingExample-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworkingExample-iOS.release.xcconfig"; path = "../Pods/Target Support Files/Pods-VimeoNetworkingExample-iOS/Pods-VimeoNetworkingExample-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		36C9864F4173C8CDA21F4D13 /* libPods-VimeoNetworkingExample-iOSUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VimeoNetworkingExample-iOSUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -241,6 +243,7 @@
 				013250D51C9C917800ECB783 /* Networking */,
 				0197B6B61CA1E0B6000A2901 /* Requests */,
 				013250D61CA05FF400ECB783 /* Authentication */,
+				01BAE92E1CAB13B5004CB214 /* Cache */,
 				0197B6BD1CA1E317000A2901 /* Protocols */,
 				013250D41C9C917100ECB783 /* Utilities */,
 			);
@@ -264,6 +267,14 @@
 				0197B6BE1CA1E329000A2901 /* Mappable.swift */,
 			);
 			name = Protocols;
+			sourceTree = "<group>";
+		};
+		01BAE92E1CAB13B5004CB214 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				01BAE92F1CAB13CC004CB214 /* ResponseCache.swift */,
+			);
+			name = Cache;
 			sourceTree = "<group>";
 		};
 		902392C1CE34A5CDD3AB5229 /* Frameworks */ = {
@@ -553,6 +564,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0140F93A1CA2FAD1007FF547 /* Scope.swift in Sources */,
+				01BAE9301CAB13CC004CB214 /* ResponseCache.swift in Sources */,
 				01BAE92B1CAADA6F004CB214 /* VimeoSessionManager+Constructors.swift in Sources */,
 				013250D01C9C8D6A00ECB783 /* NSError+Extensions.swift in Sources */,
 				0197B6BF1CA1E329000A2901 /* Mappable.swift in Sources */,

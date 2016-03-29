@@ -22,6 +22,7 @@ final class VimeoClient
     }
     
     typealias RequestParameters = [String: String]
+    typealias ResponseDictionary = [String: AnyObject]
     
     static let ErrorDomain = "VimeoClientErrorDomain"
     static let ErrorInvalidDictionary = 1001
@@ -93,7 +94,7 @@ final class VimeoClient
     
     private func handleRequestSuccess<ModelType where ModelType: Mappable>(request request: Request<ModelType>, task: NSURLSessionDataTask, responseObject: AnyObject?, completion: ResultCompletion<ModelType>.T)
     {
-        guard let responseDictionary = responseObject as? [String: AnyObject]
+        guard let responseDictionary = responseObject as? ResponseDictionary
         else
         {
             let description = "VimeoClient requestSuccess returned invalid/absent dictionary"
@@ -130,7 +131,7 @@ final class VimeoClient
         
         if let modelKeyPath = modelKeyPath
         {
-            mappedObject = (mappedObject as? [String: AnyObject])?[modelKeyPath]
+            mappedObject = (mappedObject as? ResponseDictionary)?[modelKeyPath]
         }
         
         guard let modelObject = mappedObject as? ModelType
