@@ -127,7 +127,7 @@ final class AuthenticationController
     func codeGrant(responseURL responseURL: NSURL, completion: AuthenticationCompletion)
     {
         guard let queryString = responseURL.query,
-            let parameters = self.parametersFromQueryString(queryString),
+            let parameters = queryString.parametersFromQueryString(),
             let code = parameters[self.dynamicType.CodeKey],
             let state = parameters[self.dynamicType.StateKey]
         else
@@ -243,34 +243,5 @@ final class AuthenticationController
         }
         
         self.client.authenticate(account: account)
-    }
-    
-    // MARK: - Private: Utility
-    
-    private func parametersFromQueryString(queryString: String) -> [String: String]?
-    {
-        var parameters: [String: String] = [:]
-        
-        let scanner = NSScanner(string: queryString)
-        while !scanner.atEnd
-        {
-            var name: NSString?
-            let equals = "="
-            scanner.scanUpToString(equals, intoString: &name)
-            scanner.scanString(equals, intoString: nil)
-            
-            var value: NSString?
-            let ampersand = "&"
-            scanner.scanUpToString(ampersand, intoString: &value)
-            scanner.scanString(ampersand, intoString: nil)
-            
-            if let name = name?.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding),
-                let value = value?.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
-            {
-                parameters[name] = value
-            }
-        }
-        
-        return parameters.count > 0 ? parameters : nil
     }
 }
