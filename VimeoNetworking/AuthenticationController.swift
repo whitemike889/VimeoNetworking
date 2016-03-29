@@ -96,13 +96,13 @@ final class AuthenticationController
                           "state": self.dynamicType.state]
         
         var error: NSError?
-        guard let urlString = self.client.sessionManager.baseURL?.URLByAppendingPathComponent("oauth/authorize").absoluteString
+        guard let urlString = VimeoBaseURLString?.URLByAppendingPathComponent("oauth/authorize").absoluteString
         else
         {
             fatalError("Could not make code grant auth URL")
         }
         
-        let urlRequest = self.client.sessionManager.requestSerializer.requestWithMethod("GET", URLString: urlString, parameters: parameters, error: &error)
+        let urlRequest = VimeoRequestSerializer(appConfiguration: self.configuration).requestWithMethod("GET", URLString: urlString, parameters: parameters, error: &error)
         
         guard let url = urlRequest.URL where error == nil
         else
@@ -234,7 +234,7 @@ final class AuthenticationController
         
         // TODO: can we do this better? [RH] (3/28/16)
         // like maybe notifications? delegate? account update block?
-        self.client.sessionManager.requestSerializer = VimeoRequestSerializer(authTokenBlock: { authToken })
+        self.client.authenticate(account: account)
     }
     
     // MARK: - Private: Utility

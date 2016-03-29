@@ -33,6 +33,7 @@
 		0197B6BA1CA1E10E000A2901 /* Request+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0197B6B91CA1E10E000A2901 /* Request+User.swift */; };
 		0197B6BF1CA1E329000A2901 /* Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0197B6BE1CA1E329000A2901 /* Mappable.swift */; };
 		01BAE9291CA98507004CB214 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BAE9281CA98507004CB214 /* AppConfiguration.swift */; };
+		01BAE92B1CAADA6F004CB214 /* VimeoSessionManager+Constructors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BAE92A1CAADA6F004CB214 /* VimeoSessionManager+Constructors.swift */; };
 		45F242743B87891F1E6BCB7D /* libPods-VimeoNetworkingExample-iOSUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36C9864F4173C8CDA21F4D13 /* libPods-VimeoNetworkingExample-iOSUITests.a */; };
 		5AB4C5B219AE98C1BEDDB67D /* libPods-VimeoNetworkingExample-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A14B0BA3B8B7BAC0DF30E3 /* libPods-VimeoNetworkingExample-iOS.a */; };
 		95603D88824C1D08A241E0D3 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
@@ -90,6 +91,7 @@
 		0197B6B91CA1E10E000A2901 /* Request+User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Request+User.swift"; sourceTree = "<group>"; };
 		0197B6BE1CA1E329000A2901 /* Mappable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mappable.swift; sourceTree = "<group>"; };
 		01BAE9281CA98507004CB214 /* AppConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+		01BAE92A1CAADA6F004CB214 /* VimeoSessionManager+Constructors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VimeoSessionManager+Constructors.swift"; sourceTree = "<group>"; };
 		097D1643FEAE7486DB0CB7D6 /* Pods-VimeoNetworkingExample-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworkingExample-iOSTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-VimeoNetworkingExample-iOSTests/Pods-VimeoNetworkingExample-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		128A8B3EE78B0F2F924E5E24 /* Pods-VimeoNetworkingExample-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworkingExample-iOS.release.xcconfig"; path = "../Pods/Target Support Files/Pods-VimeoNetworkingExample-iOS/Pods-VimeoNetworkingExample-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		36C9864F4173C8CDA21F4D13 /* libPods-VimeoNetworkingExample-iOSUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VimeoNetworkingExample-iOSUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,6 +157,7 @@
 				013250C91C9C838700ECB783 /* VimeoResponseSerializer.swift */,
 				013250CA1C9C838700ECB783 /* VimeoSessionManager.swift */,
 				013250DB1CA07EE800ECB783 /* VimeoClient.swift */,
+				01BAE92A1CAADA6F004CB214 /* VimeoSessionManager+Constructors.swift */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -547,6 +550,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0140F93A1CA2FAD1007FF547 /* Scope.swift in Sources */,
+				01BAE92B1CAADA6F004CB214 /* VimeoSessionManager+Constructors.swift in Sources */,
 				013250D01C9C8D6A00ECB783 /* NSError+Extensions.swift in Sources */,
 				0197B6BF1CA1E329000A2901 /* Mappable.swift in Sources */,
 				013250CC1C9C838700ECB783 /* VimeoRequestSerializer.swift in Sources */,

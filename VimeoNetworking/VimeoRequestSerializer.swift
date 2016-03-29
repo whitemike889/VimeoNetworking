@@ -31,21 +31,21 @@ final class VimeoRequestSerializer: AFHTTPRequestSerializer
     private static let AcceptHeaderKey = "Accept"
     private static let AuthorizationHeaderKey = "Authorization"
     
-    typealias AuthTokenBlock = Void -> String?
+    typealias AccessTokenProvider = Void -> String?
     
     // MARK: 
     
     // for authenticated requests
-    private let authTokenBlock: AuthTokenBlock?
+    private let accessTokenProvider: AccessTokenProvider?
     
     // for unauthenticated requests
     private let appConfiguration: AppConfiguration?
     
     // MARK: - Initialization
     
-    init(authTokenBlock: AuthTokenBlock, version: String = VimeoDefaultAPIVersionString)
+    init(accessTokenProvider: AccessTokenProvider, version: String = VimeoDefaultAPIVersionString)
     {
-        self.authTokenBlock = authTokenBlock
+        self.accessTokenProvider = accessTokenProvider
         self.appConfiguration = nil
         
         super.init()
@@ -55,7 +55,7 @@ final class VimeoRequestSerializer: AFHTTPRequestSerializer
     
     init(appConfiguration: AppConfiguration, version: String = VimeoDefaultAPIVersionString)
     {
-        self.authTokenBlock = nil
+        self.accessTokenProvider = nil
         self.appConfiguration = appConfiguration
         
         super.init()
@@ -111,7 +111,7 @@ final class VimeoRequestSerializer: AFHTTPRequestSerializer
 
     private func setAuthorizationHeader(request request: NSMutableURLRequest) -> NSMutableURLRequest
     {
-        if let token = self.authTokenBlock?()
+        if let token = self.accessTokenProvider?()
         {
             let value = "Bearer \(token)"
             request.setValue(value, forHTTPHeaderField: self.dynamicType.AuthorizationHeaderKey)

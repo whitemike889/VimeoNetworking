@@ -30,14 +30,38 @@ final class VimeoClient
     
     // MARK: -
     
-    let sessionManager: VimeoSessionManager
+    private let sessionManager: VimeoSessionManager
     
     init(sessionManager: VimeoSessionManager)
     {
         self.sessionManager = sessionManager
     }
     
-    // MARK: -
+    // MARK: - Authentication
+    
+    var authenticatedUser: VIMUser?
+    {
+        return self.sessionManager.authenticatedUser
+    }
+    var isAuthenticated: Bool
+    {
+        return self.sessionManager.isAuthenticated
+    }
+    var isAuthenticatedWithUser: Bool
+    {
+        return self.sessionManager.isAuthenticatedWithUser
+    }
+    var isAuthenticatedWithClientCredentials: Bool
+    {
+        return self.sessionManager.isAuthenticatedWithClientCredentials
+    }
+    
+    func authenticate(account account: VIMAccountNew)
+    {
+        self.sessionManager.authenticate(account: account)
+    }
+    
+    // MARK: - Request
     
     func request<ModelType where ModelType: Mappable>(request: Request<ModelType>, completion: ResultCompletion<ModelType>.T)
     {

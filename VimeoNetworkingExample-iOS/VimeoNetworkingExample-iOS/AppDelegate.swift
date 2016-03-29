@@ -18,21 +18,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     let appConfiguration = AppConfiguration(clientKey: "141b94e08884ff39ef7d76256e4a7e3a03f6e865", clientSecret: "d17b26db6d8b0f27ceda882c6d0ba84b3b2e3a9e", scopes: [.Public, .Private, .Create, .Edit, .Delete, .Interact, .Upload])
     
     var authenticationController: AuthenticationController?
+    var client: VimeoClient?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
         // Override point for customization after application launch.
         let splitViewController = self.window!.rootViewController as! UISplitViewController
+        splitViewController.delegate = self
         let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
-        if #available(iOS 8.0, *) {
+        if #available(iOS 8.0, *)
+        {
             navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
-        } else {
+        }
+        else
+        {
             // Fallback on earlier versions
         }
-        splitViewController.delegate = self
         
-        let sessionManager = VimeoSessionManager(sessionConfiguration: NSURLSessionConfiguration.defaultSessionConfiguration(), appConfiguration: self.appConfiguration)
+        let sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: self.appConfiguration)
         let client = VimeoClient(sessionManager: sessionManager)
+        self.client = client
         let authenticationController = AuthenticationController(configuration: self.appConfiguration, client: client)
         self.authenticationController = authenticationController
         
@@ -109,6 +114,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        if let client = self.client,
+            let url = self.authenticationController?.codeGrantAuthorizationURL()
+//            where !client.isAuthenticated
+        {
+            application.openURL(url)
+        }
     }
 
     func applicationWillTerminate(application: UIApplication) {
