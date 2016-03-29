@@ -33,7 +33,7 @@ final class AuthenticationController
     let configuration: AppConfiguration
     let client: VimeoClient
     
-    let accountStore = AccountStore()
+    private let accountStore = AccountStore()
     
     init(configuration: AppConfiguration, client: VimeoClient)
     {
@@ -41,28 +41,14 @@ final class AuthenticationController
         self.client = client
     }
     
-    // MARK: - Launch
+    // MARK: - Saved Accounts
     
-    /// This method will:
-    /// 1. check for a user authenticated account, then 
-    /// 2. check for a client credentials authenticated account, then finally
-    /// 3. attempt to authenticate with client credentials
-    
-    func initialAuthentication(completion: AuthenticationCompletion)
+    func loadAccountAndAuthenticate(completion: AuthenticationCompletion)
     {
-        let userAccount: VIMAccountNew?
-        let clientCredentialsAccount: VIMAccountNew?
-        
-        // check saved accounts
         do
         {
-            userAccount = try self.accountStore.loadAccount(.User)
-            clientCredentialsAccount = try self.accountStore.loadAccount(.ClientCredentials)
-            
-            if let account = userAccount ?? clientCredentialsAccount
+            if let account = try self.loadSavedAccount()
             {
-                try self.authenticateClient(account: account)
-                
                 completion(result: .Success(result: account))
                 
                 return
@@ -70,12 +56,27 @@ final class AuthenticationController
         }
         catch let error
         {
-            completion(result: .Failure(error: error as NSError))
+            assertionFailure("could not load account: \(error)")
         }
         
-        // if necessary, make a request for client credentials
-        
         self.clientCredentialsGrant(completion)
+    }
+    
+    func loadSavedAccount() throws -> VIMAccountNew?
+    {
+        var loadedAccount = try self.accountStore.loadAccount(.User)
+        
+        if loadedAccount == nil
+        {
+            loadedAccount = try self.accountStore.loadAccount(.ClientCredentials)
+        }
+        
+        if let loadedAccount = loadedAccount
+        {
+            try self.authenticateClient(account: loadedAccount)
+        }
+        
+        return loadedAccount
     }
     
     // MARK: - Public Authentication
@@ -208,7 +209,6 @@ final class AuthenticationController
         else
         {
             // An error was returned from the API, there's nothing to handle [RH]
-            
             return result
         }
         
@@ -217,6 +217,7 @@ final class AuthenticationController
             try self.authenticateClient(account: account)
             
             let accountType: AccountStore.AccountType = (account.user != nil) ? .User : .ClientCredentials
+            
             try self.accountStore.saveAccount(account, type: accountType)
         }
         catch let error

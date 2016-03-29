@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let authenticationController = AuthenticationController(configuration: self.appConfiguration, client: client)
         self.authenticationController = authenticationController
         
-        authenticationController.initialAuthentication { result in
+        authenticationController.loadAccountAndAuthenticate { result in
             
             switch result
             {
