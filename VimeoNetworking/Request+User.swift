@@ -13,14 +13,17 @@ typealias UserListRequest = Request<[VIMUser]>
 
 extension Request
 {
+    private static var MeUserURI: String { return "/me" }
+    private static var FollowingPathFormat: String { return "%@/following" }
+    
     static func getMe() -> Request
     {
-        return self.getUser(userURI: "/me")
+        return self.getUser(userURI: self.MeUserURI)
     }
     
     static func getMeFollowing() -> Request
     {
-        return self.getUserFollowing(userURI: "/me")
+        return self.getUserFollowing(userURI: self.MeUserURI)
     }
     
     static func getUser(userURI userURI: String) -> Request
@@ -30,6 +33,6 @@ extension Request
     
     static func getUserFollowing(userURI userURI: String) -> Request
     {
-        return Request(path: "\(userURI)/following")
+        return Request(path: String(format: self.FollowingPathFormat, userURI))
     }
 }
