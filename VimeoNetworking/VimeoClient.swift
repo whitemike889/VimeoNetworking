@@ -69,11 +69,11 @@ final class VimeoClient
         let parameters = request.parameters
         
         let success: (NSURLSessionDataTask, AnyObject?) -> Void = { (task, responseObject) in
-            self.requestSuccess(request: request, task: task, responseObject: responseObject, completion: completion)
+            self.handleRequestSuccess(request: request, task: task, responseObject: responseObject, completion: completion)
         }
         
         let failure: (NSURLSessionDataTask?, NSError) -> Void = { (task, error) in
-            self.requestFailure(request: request, task: task, error: error, completion: completion)
+            self.handleRequestFailure(request: request, task: task, error: error, completion: completion)
         }
         
         switch request.method
@@ -91,7 +91,7 @@ final class VimeoClient
         }
     }
     
-    private func requestSuccess<ModelType where ModelType: Mappable>(request request: Request<ModelType>, task: NSURLSessionDataTask, responseObject: AnyObject?, completion: ResultCompletion<ModelType>.T)
+    private func handleRequestSuccess<ModelType where ModelType: Mappable>(request request: Request<ModelType>, task: NSURLSessionDataTask, responseObject: AnyObject?, completion: ResultCompletion<ModelType>.T)
     {
         guard let responseDictionary = responseObject as? [String: AnyObject]
         else
@@ -102,7 +102,7 @@ final class VimeoClient
             
             let error = NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorInvalidDictionary, userInfo: [NSLocalizedDescriptionKey: description])
             
-            self.requestFailure(request: request, task: task, error: error, completion: completion)
+            self.handleRequestFailure(request: request, task: task, error: error, completion: completion)
             
             return
         }
@@ -118,7 +118,7 @@ final class VimeoClient
             
             let error = NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorNoMappingClass, userInfo: [NSLocalizedDescriptionKey: description])
             
-            self.requestFailure(request: request, task: task, error: error, completion: completion)
+            self.handleRequestFailure(request: request, task: task, error: error, completion: completion)
             
             return
         }
@@ -142,7 +142,7 @@ final class VimeoClient
             
             let error = NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorMappingFailed, userInfo: [NSLocalizedDescriptionKey: description])
             
-            self.requestFailure(request: request, task: task, error: error, completion: completion)
+            self.handleRequestFailure(request: request, task: task, error: error, completion: completion)
             
             return
         }
@@ -150,8 +150,10 @@ final class VimeoClient
         completion(result: .Success(result: modelObject))
     }
     
-    private func requestFailure<ModelType where ModelType: Mappable>(request request: Request<ModelType>, task: NSURLSessionDataTask?, error: NSError, completion: ResultCompletion<ModelType>.T)
+    private func handleRequestFailure<ModelType where ModelType: Mappable>(request request: Request<ModelType>, task: NSURLSessionDataTask?, error: NSError, completion: ResultCompletion<ModelType>.T)
     {
+        // TODO: Intercept errors globally [RH] (3/29/16)
+        
         completion(result: .Failure(error: error))
     }
 }
