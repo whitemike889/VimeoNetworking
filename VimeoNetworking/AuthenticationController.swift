@@ -16,6 +16,15 @@ final class AuthenticationController
     static let ErrorCodeGrant = 1005
     static let ErrorCodeGrantState = 1006
     
+    private static let ResponseTypeKey = "response_type"
+    private static let CodeKey = "code"
+    private static let ClientIDKey = "client_id"
+    private static let RedirectURIKey = "redirect_uri"
+    private static let ScopeKey = "scope"
+    private static let StateKey = "state"
+    
+    private static let CodeGrantAuthorizationPath = "oauth/authorize"
+    
     typealias AuthenticationCompletion = ResultCompletion<VIMAccountNew>.T
     
     /// State is tracked for the code grant request/response cycle, to avoid 
@@ -89,14 +98,14 @@ final class AuthenticationController
     
     func codeGrantAuthorizationURL() -> NSURL
     {
-        let parameters = ["response_type": "code",
-                          "client_id": self.configuration.clientKey,
-                          "redirect_uri": self.codeGrantRedirectURI,
-                          "scope": Scope.combine(self.configuration.scopes),
-                          "state": self.dynamicType.state]
+        let parameters = [self.dynamicType.ResponseTypeKey: self.dynamicType.CodeKey,
+                          self.dynamicType.ClientIDKey: self.configuration.clientKey,
+                          self.dynamicType.RedirectURIKey: self.codeGrantRedirectURI,
+                          self.dynamicType.ScopeKey: Scope.combine(self.configuration.scopes),
+                          self.dynamicType.StateKey: self.dynamicType.state]
         
         var error: NSError?
-        guard let urlString = VimeoBaseURLString?.URLByAppendingPathComponent("oauth/authorize").absoluteString
+        guard let urlString = VimeoBaseURLString?.URLByAppendingPathComponent(self.dynamicType.CodeGrantAuthorizationPath).absoluteString
         else
         {
             fatalError("Could not make code grant auth URL")
@@ -118,8 +127,8 @@ final class AuthenticationController
     {
         guard let queryString = responseURL.query,
             let parameters = self.parametersFromQueryString(queryString),
-            let code = parameters["code"],
-            let state = parameters["state"]
+            let code = parameters[self.dynamicType.CodeKey],
+            let state = parameters[self.dynamicType.StateKey]
         else
         {
             let errorDescription = "Could not retrieve parameters from code grant response"
@@ -220,7 +229,7 @@ final class AuthenticationController
     
     private func setupRequestSerializer(account account: VIMAccountNew) throws
     {
-        guard let authToken = account.accessToken
+        guard account.accessToken != nil
             else
         {
             let errorDescription = "AuthenticationController did not recieve an access token with account response"
@@ -232,8 +241,6 @@ final class AuthenticationController
             throw error
         }
         
-        // TODO: can we do this better? [RH] (3/28/16)
-        // like maybe notifications? delegate? account update block?
         self.client.authenticate(account: account)
     }
     
