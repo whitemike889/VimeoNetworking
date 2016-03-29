@@ -27,7 +27,7 @@ final class AuthenticationController
     
     typealias AuthenticationCompletion = ResultCompletion<VIMAccountNew>.T
     
-    /// State is tracked for the code grant request/response cycle, to avoid 
+    /// State is tracked for the code grant request/response cycle, to avoid interception
     static let state = NSProcessInfo.processInfo().globallyUniqueString
     
     let configuration: AppConfiguration
@@ -61,7 +61,7 @@ final class AuthenticationController
             
             if let account = userAccount ?? clientCredentialsAccount
             {
-                try self.setupRequestSerializer(account: account)
+                try self.authenticateClient(account: account)
                 
                 completion(result: .Success(result: account))
                 
@@ -214,7 +214,7 @@ final class AuthenticationController
         
         do
         {
-            try self.setupRequestSerializer(account: account)
+            try self.authenticateClient(account: account)
             
             let accountType: AccountStore.AccountType = (account.user != nil) ? .User : .ClientCredentials
             try self.accountStore.saveAccount(account, type: accountType)
@@ -227,7 +227,7 @@ final class AuthenticationController
         return result
     }
     
-    private func setupRequestSerializer(account account: VIMAccountNew) throws
+    private func authenticateClient(account account: VIMAccountNew) throws
     {
         guard account.accessToken != nil
             else
