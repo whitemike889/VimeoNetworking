@@ -63,7 +63,7 @@ final class VimeoClient
     
     // MARK: - Request
     
-    func request<ModelType where ModelType: Mappable>(request: Request<ModelType>, completion: ResultCompletion<ModelType>.T)
+    func request<ModelType where ModelType: MappableResponse>(request: Request<ModelType>, completion: ResultCompletion<ModelType>.T)
     {
         let urlString = request.path
         let parameters = request.parameters
@@ -91,7 +91,7 @@ final class VimeoClient
         }
     }
     
-    private func handleRequestSuccess<ModelType where ModelType: Mappable>(request request: Request<ModelType>, task: NSURLSessionDataTask, responseObject: AnyObject?, completion: ResultCompletion<ModelType>.T)
+    private func handleRequestSuccess<ModelType where ModelType: MappableResponse>(request request: Request<ModelType>, task: NSURLSessionDataTask, responseObject: AnyObject?, completion: ResultCompletion<ModelType>.T)
     {
         guard let responseDictionary = responseObject as? [String: AnyObject]
         else
@@ -150,7 +150,7 @@ final class VimeoClient
         completion(result: .Success(result: modelObject))
     }
     
-    private func handleRequestFailure<ModelType where ModelType: Mappable>(request request: Request<ModelType>, task: NSURLSessionDataTask?, error: NSError, completion: ResultCompletion<ModelType>.T)
+    private func handleRequestFailure<ModelType where ModelType: MappableResponse>(request request: Request<ModelType>, task: NSURLSessionDataTask?, error: NSError, completion: ResultCompletion<ModelType>.T)
     {
         // TODO: Intercept errors globally [RH] (3/29/16)
         
