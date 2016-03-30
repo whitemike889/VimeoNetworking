@@ -112,7 +112,7 @@ final class AuthenticationController
             fatalError("Could not make code grant auth URL")
         }
         
-        let urlRequest = VimeoRequestSerializer(appConfiguration: self.configuration).requestWithMethod("GET", URLString: urlString, parameters: parameters, error: &error)
+        let urlRequest = VimeoRequestSerializer(appConfiguration: self.configuration).requestWithMethod(VimeoClient.Method.GET.rawValue, URLString: urlString, parameters: parameters, error: &error)
         
         guard let url = urlRequest.URL where error == nil
         else
@@ -121,7 +121,6 @@ final class AuthenticationController
         }
         
         return url
-        
     }
     
     func codeGrant(responseURL responseURL: NSURL, completion: AuthenticationCompletion)
@@ -231,7 +230,7 @@ final class AuthenticationController
     private func authenticateClient(account account: VIMAccountNew) throws
     {
         guard account.accessToken != nil
-            else
+        else
         {
             let errorDescription = "AuthenticationController did not recieve an access token with account response"
             

@@ -12,7 +12,7 @@ final class VimeoClient
 {
     // MARK: - 
     
-    enum Method
+    enum Method: String
     {
         case GET
         case POST
