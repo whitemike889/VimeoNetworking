@@ -24,6 +24,7 @@ final class VimeoClient
     typealias RequestParameters = [String: String]
     
     static let ErrorDomain = "VimeoClientErrorDomain"
+    // TODO: make these an enum [RH] (3/30/16)
     static let ErrorInvalidDictionary = 1001
     static let ErrorNoMappingClass = 1002
     static let ErrorMappingFailed = 1003
@@ -63,6 +64,7 @@ final class VimeoClient
     
     // MARK: - Request
     
+    // TODO: specify completion queue [RH] (3/30/16)
     func request<ModelType where ModelType: MappableResponse>(request: Request<ModelType>, completion: ResultCompletion<ModelType>.T)
     {
         let urlString = request.path
@@ -93,6 +95,7 @@ final class VimeoClient
     
     private func handleRequestSuccess<ModelType where ModelType: MappableResponse>(request request: Request<ModelType>, task: NSURLSessionDataTask, responseObject: AnyObject?, completion: ResultCompletion<ModelType>.T)
     {
+        // TODO: How do we handle responses where a nil 200 response is fine and expected, like watchlater? [RH] (3/30/16)
         guard let responseDictionary = responseObject as? [String: AnyObject]
         else
         {
@@ -107,7 +110,7 @@ final class VimeoClient
             return
         }
         
-        // Serialize the dictionary into a model object
+        // Deserialize the dictionary into a model object
         
         guard let mappingClass = ModelType.mappingClass
         else
