@@ -36,7 +36,7 @@ final class VimeoRequestSerializer: AFHTTPRequestSerializer
     // MARK: 
     
     // for authenticated requests
-    private let accessTokenProvider: AccessTokenProvider?
+    var accessTokenProvider: AccessTokenProvider?
     
     // for unauthenticated requests
     private let appConfiguration: AppConfiguration?

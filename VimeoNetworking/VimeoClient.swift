@@ -24,6 +24,7 @@ final class VimeoClient
     typealias RequestParameters = [String: String]
     
     static let ErrorDomain = "VimeoClientErrorDomain"
+    
     // TODO: make these an enum [RH] (3/30/16)
     static let ErrorInvalidDictionary = 1001
     static let ErrorNoMappingClass = 1002
@@ -40,26 +41,36 @@ final class VimeoClient
     
     // MARK: - Authentication
     
+    var authenticatedAccount: VIMAccountNew?
+    {
+        didSet
+        {
+            if let authenticatedAccount = self.authenticatedAccount
+            {
+                self.sessionManager.clientDidAuthenticateWithAccount(authenticatedAccount)
+            }
+            else
+            {
+                self.sessionManager.clientDidClearAccount()
+            }
+        }
+    }
+    
     var authenticatedUser: VIMUser?
     {
-        return self.sessionManager.authenticatedUser
+        return self.authenticatedAccount?.user
     }
     var isAuthenticated: Bool
     {
-        return self.sessionManager.isAuthenticated
+        return self.authenticatedAccount?.isAuthenticated() ?? false
     }
     var isAuthenticatedWithUser: Bool
     {
-        return self.sessionManager.isAuthenticatedWithUser
+        return self.authenticatedAccount?.isAuthenticatedWithUser() ?? false
     }
     var isAuthenticatedWithClientCredentials: Bool
     {
-        return self.sessionManager.isAuthenticatedWithClientCredentials
-    }
-    
-    func authenticate(account account: VIMAccountNew)
-    {
-        self.sessionManager.authenticate(account: account)
+        return self.authenticatedAccount?.isAuthenticatedWithClientCredentials() ?? false
     }
     
     // MARK: - Request

@@ -74,6 +74,12 @@ final class AuthenticationController
         if let loadedAccount = loadedAccount
         {
             try self.authenticateClient(account: loadedAccount)
+            
+            print("loaded account \(loadedAccount)")
+        }
+        else
+        {
+            print("no account loaded")
         }
         
         return loadedAccount
@@ -241,6 +247,6 @@ final class AuthenticationController
             throw error
         }
         
-        self.client.authenticate(account: account)
+        self.client.authenticatedAccount = account
     }
 }
