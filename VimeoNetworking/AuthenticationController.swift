@@ -43,25 +43,6 @@ final class AuthenticationController
     
     // MARK: - Saved Accounts
     
-    func loadAccountAndAuthenticate(completion: AuthenticationCompletion)
-    {
-        do
-        {
-            if let account = try self.loadSavedAccount()
-            {
-                completion(result: .Success(result: account))
-                
-                return
-            }
-        }
-        catch let error
-        {
-            assertionFailure("could not load account: \(error)")
-        }
-        
-        self.clientCredentialsGrant(completion)
-    }
-    
     func loadSavedAccount() throws -> VIMAccountNew?
     {
         var loadedAccount = try self.accountStore.loadAccount(.User)

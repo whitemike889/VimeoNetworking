@@ -34,9 +34,9 @@ final class VimeoClient
     
     private let sessionManager: VimeoSessionManager
     
-    init(sessionManager: VimeoSessionManager)
+    init(appConfiguration: AppConfiguration)
     {
-        self.sessionManager = sessionManager
+        self.sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: appConfiguration)
     }
     
     // MARK: - Authentication
