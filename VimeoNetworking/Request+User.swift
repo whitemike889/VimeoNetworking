@@ -16,22 +16,22 @@ extension Request
     private static var MeUserURI: String { return "/me" }
     private static var FollowingPathFormat: String { return "%@/following" }
     
-    static func getMe() -> Request
+    static func getMeRequest() -> Request
     {
-        return self.getUser(userURI: self.MeUserURI)
+        return self.getUserRequest(userURI: self.MeUserURI)
     }
     
-    static func getMeFollowing() -> Request
+    static func getMeFollowingRequest() -> Request
     {
-        return self.getUserFollowing(userURI: self.MeUserURI)
+        return self.getUserFollowingRequest(userURI: self.MeUserURI)
     }
     
-    static func getUser(userURI userURI: String) -> Request
+    static func getUserRequest(userURI userURI: String) -> Request
     {
         return Request(path: userURI)
     }
     
-    static func getUserFollowing(userURI userURI: String) -> Request
+    static func getUserFollowingRequest(userURI userURI: String) -> Request
     {
         return Request(path: String(format: self.FollowingPathFormat, userURI))
     }
