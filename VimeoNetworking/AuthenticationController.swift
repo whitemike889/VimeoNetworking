@@ -92,13 +92,13 @@ final class AuthenticationController
                           self.dynamicType.ScopeKey: Scope.combine(self.configuration.scopes),
                           self.dynamicType.StateKey: self.dynamicType.state]
         
-        var error: NSError?
         guard let urlString = VimeoBaseURLString?.URLByAppendingPathComponent(self.dynamicType.CodeGrantAuthorizationPath).absoluteString
         else
         {
             fatalError("Could not make code grant auth URL")
         }
         
+        var error: NSError?
         let urlRequest = VimeoRequestSerializer(appConfiguration: self.configuration).requestWithMethod(VimeoClient.Method.GET.rawValue, URLString: urlString, parameters: parameters, error: &error)
         
         guard let url = urlRequest.URL where error == nil
@@ -149,9 +149,9 @@ final class AuthenticationController
     
     // MARK: - Private Authentication
     
-    func login(username username: String, password: String, completion: AuthenticationCompletion)
+    func login(email email: String, password: String, completion: AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.postLoginRequest(username: username, password: password, scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.postLoginRequest(email: email, password: password, scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
     }

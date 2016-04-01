@@ -50,11 +50,11 @@ extension Request
         return Request(method: .POST, path: AuthenticationPathCodeGrant, parameters: parameters)
     }
     
-    static func postLoginRequest(username username: String, password: String, scopes: [Scope]) -> Request
+    static func postLoginRequest(email email: String, password: String, scopes: [Scope]) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [GrantTypeKey: GrantTypePassword,
                                                          ScopeKey: Scope.combine(scopes),
-                                                         UsernameKey: username,
+                                                         UsernameKey: email,
                                                          PasswordKey: password]
         
         return Request(method: .POST, path: AuthenticationPathAccessToken, parameters: parameters)
