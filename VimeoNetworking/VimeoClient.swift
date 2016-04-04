@@ -21,6 +21,16 @@ final class VimeoClient
         case DELETE
     }
     
+    struct RequestToken
+    {
+        private let task: NSURLSessionDataTask
+        
+        func cancel()
+        {
+            self.task.cancel()
+        }
+    }
+    
     typealias RequestParameters = [String: String]
     typealias ResponseDictionary = [String: AnyObject]
     
@@ -28,6 +38,7 @@ final class VimeoClient
     static let ErrorInvalidDictionary = 1001
     static let ErrorNoMappingClass = 1002
     static let ErrorMappingFailed = 1003
+    static let ErrorRequestMalformed = 1004
     
     // MARK: -
     
@@ -64,7 +75,7 @@ final class VimeoClient
     
     // MARK: - Request
     
-    func request<ModelType where ModelType: Mappable>(request: Request<ModelType>, completion: ResultCompletion<ModelType>.T)
+    func request<ModelType where ModelType: Mappable>(request: Request<ModelType>, completion: ResultCompletion<ModelType>.T) -> RequestToken?
     {
         let urlString = request.path
         let parameters = request.parameters
@@ -77,19 +88,37 @@ final class VimeoClient
             self.handleRequestFailure(request: request, task: task, error: error, completion: completion)
         }
         
+        let task: NSURLSessionDataTask?
+        
         switch request.method
         {
         case .GET:
-            self.sessionManager.GET(urlString, parameters: parameters, success: success, failure: failure)
+            task = self.sessionManager.GET(urlString, parameters: parameters, success: success, failure: failure)
         case .POST:
-            self.sessionManager.POST(urlString, parameters: parameters, success: success, failure: failure)
+            task = self.sessionManager.POST(urlString, parameters: parameters, success: success, failure: failure)
         case .PUT:
-            self.sessionManager.PUT(urlString, parameters: parameters, success: success, failure: failure)
+            task = self.sessionManager.PUT(urlString, parameters: parameters, success: success, failure: failure)
         case .PATCH:
-            self.sessionManager.PATCH(urlString, parameters: parameters, success: success, failure: failure)
+            task = self.sessionManager.PATCH(urlString, parameters: parameters, success: success, failure: failure)
         case .DELETE:
-            self.sessionManager.DELETE(urlString, parameters: parameters, success: success, failure: failure)
+            task = self.sessionManager.DELETE(urlString, parameters: parameters, success: success, failure: failure)
         }
+        
+        guard let requestTask = task
+        else
+        {
+            let description = "VimeoClient requestSuccess returned invalid/absent dictionary"
+            
+            assertionFailure(description)
+            
+            let error = NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorRequestMalformed, userInfo: [NSLocalizedDescriptionKey: description])
+            
+            self.handleRequestFailure(request: request, task: task, error: error, completion: completion)
+            
+            return nil
+        }
+        
+        return RequestToken(task: requestTask)
     }
     
     private func handleRequestSuccess<ModelType where ModelType: Mappable>(request request: Request<ModelType>, task: NSURLSessionDataTask, responseObject: AnyObject?, completion: ResultCompletion<ModelType>.T)
