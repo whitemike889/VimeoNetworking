@@ -13,7 +13,7 @@ enum CacheFetchPolicy
     static let DefaultPolicy: CacheFetchPolicy = .LocalThenNetwork
     
     case LocalOnly
-    case LocalThenNetwork // Default
+    case LocalThenNetwork
     case NetworkOnly
     case TryNetworkThenLocal
 }
@@ -39,7 +39,7 @@ struct Request<ModelType: MappableResponse>
     
     let retryPolicy: RetryPolicy
     
-    // MARK: - init
+    // MARK: -
     
     init(method: VimeoClient.Method = .GET,
          path: String,

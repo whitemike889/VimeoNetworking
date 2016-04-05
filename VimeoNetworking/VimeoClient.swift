@@ -120,7 +120,7 @@ final class VimeoClient
         guard let requestTask = task
         else
         {
-            let description = "VimeoClient requestSuccess returned invalid/absent dictionary"
+            let description = "Session manager did not return a task"
             
             assertionFailure(description)
             
