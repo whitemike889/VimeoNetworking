@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0131B5201CB44BC90082812A /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0131B51F1CB44BC90082812A /* Response.swift */; };
 		013250CB1C9C838700ECB783 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013250C71C9C838700ECB783 /* Constants.swift */; };
 		013250CC1C9C838700ECB783 /* VimeoRequestSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013250C81C9C838700ECB783 /* VimeoRequestSerializer.swift */; };
 		013250CD1C9C838700ECB783 /* VimeoResponseSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013250C91C9C838700ECB783 /* VimeoResponseSerializer.swift */; };
@@ -61,6 +62,7 @@
 
 /* Begin PBXFileReference section */
 		01043B811CA09E3000E7112E /* VimeoNetworking-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VimeoNetworking-Bridging-Header.h"; sourceTree = "<group>"; };
+		0131B51F1CB44BC90082812A /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		013250C71C9C838700ECB783 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		013250C81C9C838700ECB783 /* VimeoRequestSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VimeoRequestSerializer.swift; sourceTree = "<group>"; };
 		013250C91C9C838700ECB783 /* VimeoResponseSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VimeoResponseSerializer.swift; sourceTree = "<group>"; };
@@ -136,6 +138,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0131B51E1CB44BB30082812A /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				0131B51F1CB44BC90082812A /* Response.swift */,
+			);
+			name = Response;
+			sourceTree = "<group>";
+		};
 		013250D31C9C916500ECB783 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -241,7 +251,8 @@
 				013250C71C9C838700ECB783 /* Constants.swift */,
 				013250D31C9C916500ECB783 /* Resources */,
 				013250D51C9C917800ECB783 /* Networking */,
-				0197B6B61CA1E0B6000A2901 /* Requests */,
+				0197B6B61CA1E0B6000A2901 /* Request */,
+				0131B51E1CB44BB30082812A /* Response */,
 				013250D61CA05FF400ECB783 /* Authentication */,
 				01BAE92E1CAB13B5004CB214 /* Cache */,
 				0197B6BD1CA1E317000A2901 /* Protocols */,
@@ -251,14 +262,14 @@
 			path = ../VimeoNetworking;
 			sourceTree = "<group>";
 		};
-		0197B6B61CA1E0B6000A2901 /* Requests */ = {
+		0197B6B61CA1E0B6000A2901 /* Request */ = {
 			isa = PBXGroup;
 			children = (
 				0197B6B71CA1E0F8000A2901 /* Request.swift */,
 				0197B6B91CA1E10E000A2901 /* Request+User.swift */,
 				0140F9371CA2F0FD007FF547 /* Request+Authentication.swift */,
 			);
-			name = Requests;
+			name = Request;
 			sourceTree = "<group>";
 		};
 		0197B6BD1CA1E317000A2901 /* Protocols */ = {
@@ -579,6 +590,7 @@
 				018B9FD51C9B37380054650E /* VimeoNetworking.swift in Sources */,
 				018B9F9E1C9B34050054650E /* DetailViewController.swift in Sources */,
 				013250DA1CA0724900ECB783 /* AuthenticationController.swift in Sources */,
+				0131B5201CB44BC90082812A /* Response.swift in Sources */,
 				0197B6B81CA1E0F8000A2901 /* Request.swift in Sources */,
 				0197B6BA1CA1E10E000A2901 /* Request+User.swift in Sources */,
 				0141C5501CA45ECC00B60639 /* KeychainStore.swift in Sources */,

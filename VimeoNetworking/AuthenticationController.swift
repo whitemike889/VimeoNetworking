@@ -15,6 +15,7 @@ final class AuthenticationController
     static let ErrorAuthToken = 1004 // TODO: Make this an enum to ensure uniqueness [RH] (3/23/16)
     static let ErrorCodeGrant = 1005
     static let ErrorCodeGrantState = 1006
+    static let ErrorNoResponse = 1007
     
     private static let ResponseTypeKey = "response_type"
     private static let CodeKey = "code"
@@ -203,14 +204,29 @@ final class AuthenticationController
         }
     }
     
-    private func handleAuthenticationResult(result: Result<VIMAccountNew>) -> Result<VIMAccountNew>
+    private func handleAuthenticationResult(result: Result<Response<VIMAccountNew>>) -> Result<VIMAccountNew>
     {
-        guard case .Success(let account) = result
+        guard case .Success(let accountResponse) = result
         else
         {
-            // An error was returned from the API, there's nothing to handle [RH]
-            return result
+            let resultError: NSError
+            if case .Failure(let error) = result
+            {
+                resultError = error
+            }
+            else
+            {
+                let errorDescription = "Authentication result malformed"
+                
+                assertionFailure(errorDescription)
+                
+                resultError = NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorNoResponse, userInfo: [NSLocalizedDescriptionKey: errorDescription])
+            }
+            
+            return .Failure(error: resultError)
         }
+        
+        let account = accountResponse.model
         
         do
         {
@@ -225,7 +241,7 @@ final class AuthenticationController
             return .Failure(error: error as NSError)
         }
         
-        return result
+        return .Success(result: account)
     }
     
     private func authenticateClient(account account: VIMAccountNew) throws

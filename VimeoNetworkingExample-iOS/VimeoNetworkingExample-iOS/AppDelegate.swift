@@ -55,7 +55,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                 let requestToken = client.request(request) { result in
                     switch result
                     {
-                    case .Success(let user):
+                    case .Success(let response):
+                        let user = response.model
                         print("successfully retrieved user: \(user)")
                         print("user bio \(user.bio ?? "🤔")")
                     case .Failure(let error):
@@ -69,7 +70,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                 client.request(followingRequest) { (result) in
                     switch result
                     {
-                    case .Success(let users):
+                    case .Success(let response):
+                        let users = response.model
                         print("successfully retrieved users: \(users)")
                         print("user bio \(users.first?.bio ?? "🤔")")
                     case .Failure(let error):
@@ -82,7 +84,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                 client.request(meRequest) { result in
                     switch result
                     {
-                    case .Success(let user):
+                    case .Success(let response):
+                        let user = response.model
                         print("successfully retrieved me: \(user)")
                         print("user name \(user.name ?? "🤔")")
                     case .Failure(let error):
@@ -158,7 +161,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                 let requestToken = client.request(request) { result in
                     switch result
                     {
-                    case .Success(let user):
+                    case .Success(let response):
+                        let user = response.model
                         print("successfully retrieved user: \(user)")
                         print("user bio \(user.bio ?? "🤔")")
                     case .Failure(let error):
@@ -172,7 +176,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                 client.request(followingRequest) { (result) in
                     switch result
                     {
-                    case .Success(let users):
+                    case .Success(let response):
+                        let users = response.model
                         print("successfully retrieved users: \(users)")
                         print("user bio \(users.first?.bio ?? "🤔")")
                     case .Failure(let error):
@@ -185,7 +190,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                 client.request(meRequest) { result in
                     switch result
                     {
-                    case .Success(let user):
+                    case .Success(let response):
+                        let user = response.model
                         print("successfully retrieved me: \(user)")
                         print("user name \(user.name ?? "🤔")")
                     case .Failure(let error):

@@ -75,7 +75,7 @@ final class VimeoClient
     
     // MARK: - Request
     
-    func request<ModelType where ModelType: Mappable>(request: Request<ModelType>, completion: ResultCompletion<ModelType>.T) -> RequestToken?
+    func request<ModelType where ModelType: Mappable>(request: Request<ModelType>, completion: ResultCompletion<Response<ModelType>>.T) -> RequestToken?
     {
         let urlString = request.path
         let parameters = request.parameters
@@ -121,7 +121,7 @@ final class VimeoClient
         return RequestToken(task: requestTask)
     }
     
-    private func handleRequestSuccess<ModelType where ModelType: Mappable>(request request: Request<ModelType>, task: NSURLSessionDataTask, responseObject: AnyObject?, completion: ResultCompletion<ModelType>.T)
+    private func handleRequestSuccess<ModelType where ModelType: Mappable>(request request: Request<ModelType>, task: NSURLSessionDataTask, responseObject: AnyObject?, completion: ResultCompletion<Response<ModelType>>.T)
     {
         guard let responseDictionary = responseObject as? ResponseDictionary
         else
@@ -177,10 +177,10 @@ final class VimeoClient
             return
         }
         
-        completion(result: .Success(result: modelObject))
+        completion(result: .Success(result: Response<ModelType>(model: modelObject)))
     }
     
-    private func handleRequestFailure<ModelType where ModelType: Mappable>(request request: Request<ModelType>, task: NSURLSessionDataTask?, error: NSError, completion: ResultCompletion<ModelType>.T)
+    private func handleRequestFailure<ModelType where ModelType: Mappable>(request request: Request<ModelType>, task: NSURLSessionDataTask?, error: NSError, completion: ResultCompletion<Response<ModelType>>.T)
     {
         if error.code == NSURLErrorCancelled
         {
