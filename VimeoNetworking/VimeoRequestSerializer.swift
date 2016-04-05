@@ -36,31 +36,31 @@ final class VimeoRequestSerializer: AFHTTPRequestSerializer
     // MARK: 
     
     // for authenticated requests
-    private let accessTokenProvider: AccessTokenProvider?
+    var accessTokenProvider: AccessTokenProvider?
     
     // for unauthenticated requests
     private let appConfiguration: AppConfiguration?
     
     // MARK: - Initialization
     
-    init(accessTokenProvider: AccessTokenProvider, version: String = VimeoDefaultAPIVersionString)
+    init(accessTokenProvider: AccessTokenProvider, apiVersion: String = VimeoDefaultAPIVersionString)
     {
         self.accessTokenProvider = accessTokenProvider
         self.appConfiguration = nil
         
         super.init()
 
-        self.setup(version: version)
+        self.setup(apiVersion: apiVersion)
     }
     
-    init(appConfiguration: AppConfiguration, version: String = VimeoDefaultAPIVersionString)
+    init(appConfiguration: AppConfiguration)
     {
         self.accessTokenProvider = nil
         self.appConfiguration = appConfiguration
         
         super.init()
         
-        self.setup(version: version)
+        self.setup(apiVersion: appConfiguration.apiVersion)
     }
     
     required init?(coder aDecoder: NSCoder)
@@ -103,9 +103,9 @@ final class VimeoRequestSerializer: AFHTTPRequestSerializer
     
     // MARK: Private API
     
-    private func setup(version version: String)
+    private func setup(apiVersion apiVersion: String)
     {
-        self.setValue("application/vnd.vimeo.*+json; version=\(version)", forHTTPHeaderField: self.dynamicType.AcceptHeaderKey)
+        self.setValue("application/vnd.vimeo.*+json; version=\(apiVersion)", forHTTPHeaderField: self.dynamicType.AcceptHeaderKey)
 //        self.writingOptions = .PrettyPrinted
     }
 

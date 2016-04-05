@@ -26,8 +26,21 @@ enum RetryPolicy
     case MultipleAttempts(attemptCount: Int)
 }
 
-struct Request<ModelType: Mappable>
+struct Request<ModelType: MappableResponse>
 {
+    let method: VimeoClient.Method
+    let path: String
+    let parameters: VimeoClient.RequestParameters?
+    
+    let modelKeyPath: String?
+    
+    let cacheFetchPolicy: CacheFetchPolicy
+    let shouldCacheResponse: Bool
+    
+    let retryPolicy: RetryPolicy
+    
+    // MARK: - init
+    
     init(method: VimeoClient.Method = .GET,
          path: String,
          parameters: VimeoClient.RequestParameters? = nil,
@@ -44,15 +57,4 @@ struct Request<ModelType: Mappable>
         self.shouldCacheResponse = shouldCacheResponse
         self.retryPolicy = retryPolicy
     }
-    
-    let method: VimeoClient.Method
-    let path: String
-    let parameters: VimeoClient.RequestParameters?
-    
-    let modelKeyPath: String?
-    
-    let cacheFetchPolicy: CacheFetchPolicy
-    let shouldCacheResponse: Bool
-    
-    let retryPolicy: RetryPolicy
 }

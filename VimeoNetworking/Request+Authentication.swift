@@ -33,7 +33,7 @@ typealias AuthenticationRequest = Request<VIMAccountNew>
 
 extension Request
 {
-    static func postClientCredentialsGrant(scopes scopes: [Scope]) -> Request
+    static func postClientCredentialsGrantRequest(scopes scopes: [Scope]) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [GrantTypeKey: GrantTypeClientCredentials,
                                                          ScopeKey: Scope.combine(scopes)]
@@ -41,7 +41,7 @@ extension Request
         return Request(method: .POST, path: AuthenticationPathClientCredentials, parameters: parameters)
     }
     
-    static func postCodeGrant(code code: String, redirectURI: String) -> Request
+    static func postCodeGrantRequest(code code: String, redirectURI: String) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [GrantTypeKey: GrantTypeAuthorizationCode,
                                                          CodeKey: code,
@@ -50,17 +50,17 @@ extension Request
         return Request(method: .POST, path: AuthenticationPathCodeGrant, parameters: parameters)
     }
     
-    static func postLogin(username username: String, password: String, scopes: [Scope]) -> Request
+    static func postLoginRequest(email email: String, password: String, scopes: [Scope]) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [GrantTypeKey: GrantTypePassword,
                                                          ScopeKey: Scope.combine(scopes),
-                                                         UsernameKey: username,
+                                                         UsernameKey: email,
                                                          PasswordKey: password]
         
         return Request(method: .POST, path: AuthenticationPathAccessToken, parameters: parameters)
     }
     
-    static func postJoin(name name: String, email: String, password: String, scopes: [Scope]) -> Request
+    static func postJoinRequest(name name: String, email: String, password: String, scopes: [Scope]) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [ScopeKey: Scope.combine(scopes),
                                                          DisplayNameKey: name,
@@ -70,7 +70,7 @@ extension Request
         return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters)
     }
     
-    static func postLoginFacebook(facebookToken facebookToken: String, scopes: [Scope]) -> Request
+    static func postLoginFacebookRequest(facebookToken facebookToken: String, scopes: [Scope]) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [GrantTypeKey: GrantTypeFacebook,
                                                          ScopeKey: Scope.combine(scopes),
@@ -79,7 +79,7 @@ extension Request
         return Request(method: .POST, path: AuthenticationPathFacebookToken, parameters: parameters)
     }
     
-    static func postJoinFacebook(facebookToken facebookToken: String, scopes: [Scope]) -> Request
+    static func postJoinFacebookRequest(facebookToken facebookToken: String, scopes: [Scope]) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [ScopeKey: Scope.combine(scopes),
                                                          TokenKey: facebookToken]

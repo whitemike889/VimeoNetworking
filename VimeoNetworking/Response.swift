@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Response<ModelType: Mappable>
+struct Response<ModelType: MappableResponse>
 {
     let model: ModelType
     

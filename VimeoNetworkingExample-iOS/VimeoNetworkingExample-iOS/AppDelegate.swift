@@ -35,68 +35,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             // Fallback on earlier versions
         }
         
-        let sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: self.appConfiguration)
-        let client = VimeoClient(sessionManager: sessionManager)
+        let client = VimeoClient(appConfiguration: self.appConfiguration)
         self.client = client
+        
         let authenticationController = AuthenticationController(configuration: self.appConfiguration, client: client)
         self.authenticationController = authenticationController
         
-        authenticationController.loadAccountAndAuthenticate { result in
-            
-            switch result
-            {
-            case .Success(let account):
-                print("authenticated successfully: \(account)")
+        let loadedAccount: VIMAccountNew?
+        do
+        {
+            loadedAccount = try authenticationController.loadSavedAccount()
+        }
+        catch let error
+        {
+            loadedAccount = nil
+            print("error loading account \(error)")
+        }
+        
+        if loadedAccount != nil
+        {
+            self.testEndpoints()
+        }
+        else
+        {
+            authenticationController.clientCredentialsGrant { result in
                 
-                let userURI = "/users/10895030"
-                
-                let request = UserRequest.getUser(userURI: userURI)
-                
-                let requestToken = client.request(request) { result in
-                    switch result
-                    {
-                    case .Success(let response):
-                        let user = response.model
-                        print("successfully retrieved user: \(user)")
-                        print("user bio \(user.bio ?? "🤔")")
-                    case .Failure(let error):
-                        print("request error: \(error)")
-                    }
-                }
-                requestToken?.cancel()
-                
-                let followingRequest = UserListRequest.getUserFollowing(userURI: userURI)
-                
-                client.request(followingRequest) { (result) in
-                    switch result
-                    {
-                    case .Success(let response):
-                        let users = response.model
-                        print("successfully retrieved users: \(users)")
-                        print("user bio \(users.first?.bio ?? "🤔")")
-                    case .Failure(let error):
-                        print("request error: \(error)")
-                    }
+                switch result
+                {
+                case .Success(let account):
+                    print("authenticated successfully: \(account)")
+                    self.testEndpoints()
+                case .Failure(let error):
+                    print("failure authenticating: \(error)")
                 }
                 
-                let meRequest = UserRequest.getMe()
-                
-                client.request(meRequest) { result in
-                    switch result
-                    {
-                    case .Success(let response):
-                        let user = response.model
-                        print("successfully retrieved me: \(user)")
-                        print("user name \(user.name ?? "🤔")")
-                    case .Failure(let error):
-                        print("request error: \(error)")
-                    }
-                }
-                
-            case .Failure(let error):
-                print("failure authenticating: \(error)")
             }
-
         }
         
         return true
@@ -143,62 +116,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     {
         self.authenticationController?.codeGrant(responseURL: url, completion: { (result) in
             
-            guard let client = self.authenticationController?.client
-            else
-            {
-                fatalError("No client")
-            }
-            
             switch result
             {
             case .Success(let account):
                 print("authenticated successfully: \(account)")
-                
-                let userURI = "/users/10895030"
-                
-                let request = UserRequest.getUser(userURI: userURI)
-                
-                let requestToken = client.request(request) { result in
-                    switch result
-                    {
-                    case .Success(let response):
-                        let user = response.model
-                        print("successfully retrieved user: \(user)")
-                        print("user bio \(user.bio ?? "🤔")")
-                    case .Failure(let error):
-                        print("request error: \(error)")
-                    }
-                }
-                requestToken?.cancel()
-                
-                let followingRequest = UserListRequest.getUserFollowing(userURI: userURI)
-                
-                client.request(followingRequest) { (result) in
-                    switch result
-                    {
-                    case .Success(let response):
-                        let users = response.model
-                        print("successfully retrieved users: \(users)")
-                        print("user bio \(users.first?.bio ?? "🤔")")
-                    case .Failure(let error):
-                        print("request error: \(error)")
-                    }
-                }
-                
-                let meRequest = UserRequest.getMe()
-                
-                client.request(meRequest) { result in
-                    switch result
-                    {
-                    case .Success(let response):
-                        let user = response.model
-                        print("successfully retrieved me: \(user)")
-                        print("user name \(user.name ?? "🤔")")
-                    case .Failure(let error):
-                        print("request error: \(error)")
-                    }
-                }
-                
+                self.testEndpoints()
             case .Failure(let error):
                 print("failure authenticating: \(error)")
             }
@@ -218,6 +140,63 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             return true
         }
         return false
+    }
+    
+    // MARK: - Private
+    
+    
+    private func testEndpoints()
+    {
+        guard let client = self.client
+            else
+        {
+            fatalError("No client")
+        }
+        
+        let userURI = "/users/10895030"
+        
+        let request = UserRequest.getUserRequest(userURI: userURI)
+        
+        client.request(request) { result in
+            switch result
+            {
+            case .Success(let response):
+                let user = response.model
+                print("successfully retrieved user: \(user)")
+                print("user bio \(user.bio ?? "🤔")")
+            case .Failure(let error):
+                print("request error: \(error)")
+            }
+        }
+        
+        let followingRequest = UserListRequest.getUserFollowingRequest(userURI: userURI)
+        
+        client.request(followingRequest) { (result) in
+            switch result
+            {
+            case .Success(let response):
+                let users = response.model
+                print("successfully retrieved users: \(users)")
+                print("user bio \(users.first?.bio ?? "🤔")")
+            case .Failure(let error):
+                print("request error: \(error)")
+            }
+        }
+        
+        let meRequest = UserRequest.getMeRequest()
+        
+        client.request(meRequest) { result in
+            switch result
+            {
+            case .Success(let response):
+                let user = response.model
+                print("successfully retrieved me: \(user)")
+                print("user name \(user.name ?? "🤔")")
+            case .Failure(let error):
+                print("request error: \(error)")
+            }
+        }
+        
     }
 
 }

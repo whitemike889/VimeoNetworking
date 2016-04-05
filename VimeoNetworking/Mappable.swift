@@ -1,5 +1,5 @@
 //
-//  Mappable.swift
+//  MappableResponse.swift
 //  VimeoNetworkingExample-iOS
 //
 //  Created by Huebner, Rob on 3/22/16.
@@ -10,14 +10,14 @@ import Foundation
 
 private let DefaultModelKeyPath = "data"
 
-protocol Mappable
+protocol MappableResponse
 {
     static var mappingClass: AnyClass? { get }
     
     static var modelKeyPath: String? { get }
 }
 
-extension VIMModelObject: Mappable
+extension VIMModelObject: MappableResponse
 {
     static var mappingClass: AnyClass?
     {
@@ -30,7 +30,7 @@ extension VIMModelObject: Mappable
     }
 }
 
-extension Array: Mappable
+extension Array: MappableResponse
 {
     // The default implementation for all arrays will return no mapping class or model key path
     // Only if Element itself is a VIMModelObject will the values be returned

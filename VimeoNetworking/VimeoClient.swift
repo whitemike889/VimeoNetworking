@@ -12,7 +12,7 @@ final class VimeoClient
 {
     // MARK: - 
     
-    enum Method
+    enum Method: String
     {
         case GET
         case POST
@@ -35,6 +35,8 @@ final class VimeoClient
     typealias ResponseDictionary = [String: AnyObject]
     
     static let ErrorDomain = "VimeoClientErrorDomain"
+    
+    // TODO: make these an enum [RH] (3/30/16)
     static let ErrorInvalidDictionary = 1001
     static let ErrorNoMappingClass = 1002
     static let ErrorMappingFailed = 1003
@@ -44,38 +46,49 @@ final class VimeoClient
     
     private let sessionManager: VimeoSessionManager
     
-    init(sessionManager: VimeoSessionManager)
+    init(appConfiguration: AppConfiguration)
     {
-        self.sessionManager = sessionManager
+        self.sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: appConfiguration)
     }
     
     // MARK: - Authentication
     
+    var authenticatedAccount: VIMAccountNew?
+    {
+        didSet
+        {
+            if let authenticatedAccount = self.authenticatedAccount
+            {
+                self.sessionManager.clientDidAuthenticateWithAccount(authenticatedAccount)
+            }
+            else
+            {
+                self.sessionManager.clientDidClearAccount()
+            }
+        }
+    }
+    
     var authenticatedUser: VIMUser?
     {
-        return self.sessionManager.authenticatedUser
+        return self.authenticatedAccount?.user
     }
     var isAuthenticated: Bool
     {
-        return self.sessionManager.isAuthenticated
+        return self.authenticatedAccount?.isAuthenticated() ?? false
     }
     var isAuthenticatedWithUser: Bool
     {
-        return self.sessionManager.isAuthenticatedWithUser
+        return self.authenticatedAccount?.isAuthenticatedWithUser() ?? false
     }
     var isAuthenticatedWithClientCredentials: Bool
     {
-        return self.sessionManager.isAuthenticatedWithClientCredentials
-    }
-    
-    func authenticate(account account: VIMAccountNew)
-    {
-        self.sessionManager.authenticate(account: account)
+        return self.authenticatedAccount?.isAuthenticatedWithClientCredentials() ?? false
     }
     
     // MARK: - Request
     
-    func request<ModelType where ModelType: Mappable>(request: Request<ModelType>, completion: ResultCompletion<Response<ModelType>>.T) -> RequestToken?
+    // TODO: specify completion queue [RH] (3/30/16)
+    func request<ModelType: MappableResponse>(request: Request<ModelType>, completion: ResultCompletion<Response<ModelType>>.T) -> RequestToken?
     {
         let urlString = request.path
         let parameters = request.parameters
@@ -121,8 +134,9 @@ final class VimeoClient
         return RequestToken(task: requestTask)
     }
     
-    private func handleRequestSuccess<ModelType where ModelType: Mappable>(request request: Request<ModelType>, task: NSURLSessionDataTask, responseObject: AnyObject?, completion: ResultCompletion<Response<ModelType>>.T)
+    private func handleRequestSuccess<ModelType: MappableResponse>(request request: Request<ModelType>, task: NSURLSessionDataTask, responseObject: AnyObject?, completion: ResultCompletion<Response<ModelType>>.T)
     {
+        // TODO: How do we handle responses where a nil 200 response is fine and expected, like watchlater? [RH] (3/30/16)
         guard let responseDictionary = responseObject as? ResponseDictionary
         else
         {
@@ -137,7 +151,7 @@ final class VimeoClient
             return
         }
         
-        // Serialize the dictionary into a model object
+        // Deserialize the dictionary into a model object
         
         guard let mappingClass = ModelType.mappingClass
         else
@@ -180,7 +194,7 @@ final class VimeoClient
         completion(result: .Success(result: Response<ModelType>(model: modelObject)))
     }
     
-    private func handleRequestFailure<ModelType where ModelType: Mappable>(request request: Request<ModelType>, task: NSURLSessionDataTask?, error: NSError, completion: ResultCompletion<Response<ModelType>>.T)
+    private func handleRequestFailure<ModelType: MappableResponse>(request request: Request<ModelType>, task: NSURLSessionDataTask?, error: NSError, completion: ResultCompletion<Response<ModelType>>.T)
     {
         if error.code == NSURLErrorCancelled
         {
