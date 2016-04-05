@@ -8,15 +8,33 @@
 
 import Foundation
 
-struct Request<ModelType where ModelType: Mappable>
+enum CacheFetchPolicy
+{
+    static let DefaultPolicy: CacheFetchPolicy = .LocalThenNetwork
+    
+    case LocalOnly
+    case LocalThenNetwork // Default
+    case NetworkOnly
+    case TryNetworkThenLocal
+}
+
+enum RetryPolicy
+{
+    static let DefaultPolicy: RetryPolicy = .SingleAttempt
+    
+    case SingleAttempt
+    case MultipleAttempts(attemptCount: Int)
+}
+
+struct Request<ModelType: Mappable>
 {
     init(method: VimeoClient.Method = .GET,
          path: String,
          parameters: VimeoClient.RequestParameters? = nil,
          modelKeyPath: String? = nil,
-         cacheFetchPolicy: CacheFetchPolicy = .LocalThenNetwork,
+         cacheFetchPolicy: CacheFetchPolicy = .DefaultPolicy,
          shouldCacheResponse: Bool = true,
-         retryPolicy: RetryPolicy = .SingleAttempt)
+         retryPolicy: RetryPolicy = .DefaultPolicy)
     {
         self.method = method
         self.path = path
@@ -37,19 +55,4 @@ struct Request<ModelType where ModelType: Mappable>
     let shouldCacheResponse: Bool
     
     let retryPolicy: RetryPolicy
-}
-
-// TODO: Should we move these out of this file? [RH] (3/29/16)
-
-enum CacheFetchPolicy
-{
-    case LocalOnly
-    case LocalThenNetwork
-    case NetworkOnly
-}
-
-enum RetryPolicy
-{
-    case SingleAttempt
-    case MultipleAttempts(attemptCount: Int)
 }

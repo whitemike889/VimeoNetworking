@@ -182,6 +182,11 @@ final class VimeoClient
     
     private func handleRequestFailure<ModelType where ModelType: Mappable>(request request: Request<ModelType>, task: NSURLSessionDataTask?, error: NSError, completion: ResultCompletion<ModelType>.T)
     {
+        if error.code == NSURLErrorCancelled
+        {
+            return
+        }
+        
         // TODO: Intercept errors globally [RH] (3/29/16)
         
         completion(result: .Failure(error: error))

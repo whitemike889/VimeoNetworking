@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                 
                 let request = UserRequest.getUser(userURI: userURI)
                 
-                client.request(request) { result in
+                let requestToken = client.request(request) { result in
                     switch result
                     {
                     case .Success(let user):
@@ -62,6 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                         print("request error: \(error)")
                     }
                 }
+                requestToken?.cancel()
                 
                 let followingRequest = UserListRequest.getUserFollowing(userURI: userURI)
                 
@@ -154,7 +155,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                 
                 let request = UserRequest.getUser(userURI: userURI)
                 
-                client.request(request) { result in
+                let requestToken = client.request(request) { result in
                     switch result
                     {
                     case .Success(let user):
@@ -164,6 +165,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                         print("request error: \(error)")
                     }
                 }
+                requestToken?.cancel()
                 
                 let followingRequest = UserListRequest.getUserFollowing(userURI: userURI)
                 
