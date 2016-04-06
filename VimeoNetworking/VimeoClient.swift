@@ -134,19 +134,38 @@ final class VimeoClient
         return RequestToken(task: requestTask)
     }
     
+//    private func handleRequestSuccess<ModelType where ModelType: VIMNullResponse>(request request: Request<ModelType>, task: NSURLSessionDataTask, responseObject: AnyObject?, completion: ResultCompletion<Response<ModelType>>.T)
+//    {
+//        
+////        let nullResponseObject = VIMNullResponse()
+////        let response = Response<VIMNullResponse>(model: nullResponseObject) //as Response<ModelType>
+////        
+////        completion(result: .Success(result: response))
+//    }
+    
     private func handleRequestSuccess<ModelType: MappableResponse>(request request: Request<ModelType>, task: NSURLSessionDataTask, responseObject: AnyObject?, completion: ResultCompletion<Response<ModelType>>.T)
     {
         // TODO: How do we handle responses where a nil 200 response is fine and expected, like watchlater? [RH] (3/30/16)
         guard let responseDictionary = responseObject as? ResponseDictionary
         else
         {
-            let description = "VimeoClient requestSuccess returned invalid/absent dictionary"
-            
-            assertionFailure(description)
-            
-            let error = NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorInvalidDictionary, userInfo: [NSLocalizedDescriptionKey: description])
-            
-            self.handleRequestFailure(request: request, task: task, error: error, completion: completion)
+            if ModelType.self == VIMNullResponse.self
+            {
+                let nullResponseObject = VIMNullResponse()
+                let response = Response(model: nullResponseObject) as! Response<ModelType>
+
+                completion(result: .Success(result: response as Response<ModelType>))
+            }
+            else
+            {
+                let description = "VimeoClient requestSuccess returned invalid/absent dictionary"
+                
+                assertionFailure(description)
+                
+                let error = NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorInvalidDictionary, userInfo: [NSLocalizedDescriptionKey: description])
+                
+                self.handleRequestFailure(request: request, task: task, error: error, completion: completion)
+            }
             
             return
         }

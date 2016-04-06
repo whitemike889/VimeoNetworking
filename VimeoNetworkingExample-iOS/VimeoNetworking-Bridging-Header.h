@@ -14,5 +14,6 @@
 #import "VIMObjectMapper.h"
 #import "VIMUser.h"
 #import "VIMAccountNew.h"
+#import "VIMVideo.h"
 
 #endif /* VimeoNetworking_Bridging_Header_h */

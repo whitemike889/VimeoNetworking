@@ -97,12 +97,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         
         // This is to test code grant auth
-//        if let client = self.client,
-//            let url = self.authenticationController?.codeGrantAuthorizationURL()
-//            where !client.isAuthenticated
-//        {
-//            application.openURL(url)
-//        }
+        if let client = self.client,
+            let url = self.authenticationController?.codeGrantAuthorizationURL()
+            where !client.isAuthenticated
+        {
+            application.openURL(url)
+        }
     }
 
     func applicationWillTerminate(application: UIApplication)
@@ -192,6 +192,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                 let user = response.model
                 print("successfully retrieved me: \(user)")
                 print("user name \(user.name ?? "🤔")")
+                
+                let wlRequest = ToggleRequest.watchLaterRequest(videoURI: "")
+                
+                client.request(wlRequest) { result in
+                    
+                    switch result
+                    {
+                    case .Success(let response):
+                        print("watch later response: \(response)")
+                    case .Failure(let error):
+                        print("watch later error: \(error)")
+                    }
+                    
+                }
+                
             case .Failure(let error):
                 print("request error: \(error)")
             }
