@@ -22,28 +22,47 @@ final class ResponseCache
     {
         let key = request.cacheKey
         
-        self.memoryCache.responseDictionaryForKey(key) { responseDictionary in
-            
-            if let responseDictionary = responseDictionary
+        if let responseDictionary = self.memoryCache.responseDictionaryForKey(key)
+        {
+            do
             {
-                // TODO: parse [RH] (4/12/16)
+                let modelObject: ModelType = try VIMObjectMapper.mapObject(responseDictionary, modelKeyPath: request.modelKeyPath)
+                let response = Response(model: modelObject)
                 
-                completion(result: .Success(result: nil))
+                completion(result: .Success(result: response))
             }
             else
+            catch let error
             {
-                self.diskCache.responseDictionaryForKey(key) { responseDictionary in
-                    
-                    if let responseDictionary = responseDictionary
+                self.memoryCache.removeResponseDictionaryForKey(key)
+                self.diskCache.removeResponseDictionaryForKey(key)
+                
+                completion(result: .Failure(error: error as NSError))
+            }
+        }
+        else
+        {
+            self.diskCache.responseDictionaryForKey(key) { responseDictionary in
+                
+                if let responseDictionary = responseDictionary
+                {
+                    do
                     {
-                        // TODO: parse [RH] (4/12/16)
+                        let modelObject: ModelType = try VIMObjectMapper.mapObject(responseDictionary, modelKeyPath: request.modelKeyPath)
+                        let response = Response(model: modelObject)
                         
-                        completion(result: .Success(result: nil))
+                        completion(result: .Success(result: response))
                     }
-                    else
+                    catch let error
                     {
-                        completion(result: .Success(result: nil))
+                        self.diskCache.removeResponseDictionaryForKey(key)
+                        
+                        completion(result: .Failure(error: error as NSError))
                     }
+                }
+                else
+                {
+                    completion(result: .Success(result: nil))
                 }
             }
         }
@@ -55,14 +74,23 @@ final class ResponseCache
     
     private class ResponseMemoryCache
     {
-        func setResponseDictionary(object: VimeoClient.ResponseDictionary, forKey key: String)
+        private let cache = NSCache()
+        
+        func setResponseDictionary(responseDictionary: VimeoClient.ResponseDictionary, forKey key: String)
         {
-            
+            self.cache.setObject(responseDictionary, forKey: key)
         }
         
-        func responseDictionaryForKey(key: String, completion: (VimeoClient.ResponseDictionary? -> Void))
+        func responseDictionaryForKey(key: String) -> VimeoClient.ResponseDictionary?
         {
+            let object = self.cache.objectForKey(key) as? VimeoClient.ResponseDictionary
             
+            return object
+        }
+        
+        func removeResponseDictionaryForKey(key: String)
+        {
+            self.cache.removeObjectForKey(key)
         }
     }
     
@@ -72,12 +100,17 @@ final class ResponseCache
     
     private class ResponseDiskCache
     {
-        func setResponseDictionary(object: VimeoClient.ResponseDictionary, forKey key: String)
+        func setResponseDictionary(responseDictionary: VimeoClient.ResponseDictionary, forKey key: String)
         {
             
         }
         
         func responseDictionaryForKey(key: String, completion: (VimeoClient.ResponseDictionary? -> Void))
+        {
+            
+        }
+        
+        func removeResponseDictionaryForKey(key: String)
         {
             
         }

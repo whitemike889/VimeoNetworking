@@ -167,7 +167,7 @@ final class VimeoClient
         
         do
         {
-            let modelObject: ModelType = try VIMObjectMapper.mapObject(responseDictionary)
+            let modelObject: ModelType = try VIMObjectMapper.mapObject(responseDictionary, modelKeyPath: request.modelKeyPath)
             
             completion(result: .Success(result: Response<ModelType>(model: modelObject)))
         }
