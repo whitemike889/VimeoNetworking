@@ -16,4 +16,6 @@ struct AppConfiguration
     
     // let keychainService: String
     // let keychainAccessGroup: String
+    
+    let apiVersion = VimeoDefaultAPIVersionString
 }

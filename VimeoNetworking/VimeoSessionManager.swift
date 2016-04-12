@@ -45,31 +45,28 @@ final class VimeoSessionManager: AFHTTPSessionManager
     
     // MARK: - Authentication
     
-    private var account: VIMAccountNew?
-    
-    var authenticatedUser: VIMUser?
+    func clientDidAuthenticateWithAccount(account: VIMAccountNew)
     {
-        return self.account?.user
-    }
-    var isAuthenticated: Bool
-    {
-        return self.account?.isAuthenticated() ?? false
-    }
-    var isAuthenticatedWithUser: Bool
-    {
-        return self.account?.isAuthenticatedWithUser() ?? false
-    }
-    var isAuthenticatedWithClientCredentials: Bool
-    {
-        return self.account?.isAuthenticatedWithClientCredentials() ?? false
-    }
-    
-    func authenticate(account account: VIMAccountNew)
-    {
-        self.account = account
+        guard let requestSerializer = self.requestSerializer as? VimeoRequestSerializer
+        else
+        {
+            return
+        }
         
-        self.requestSerializer = VimeoRequestSerializer(accessTokenProvider: { [weak self] in
-            return self?.account?.accessToken
-        })
+        let accessToken = account.accessToken
+        requestSerializer.accessTokenProvider = {
+            return accessToken
+        }
+    }
+    
+    func clientDidClearAccount()
+    {
+        guard let requestSerializer = self.requestSerializer as? VimeoRequestSerializer
+            else
+        {
+            return
+        }
+        
+        requestSerializer.accessTokenProvider = nil
     }
 }

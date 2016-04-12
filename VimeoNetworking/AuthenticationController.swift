@@ -43,25 +43,6 @@ final class AuthenticationController
     
     // MARK: - Saved Accounts
     
-    func loadAccountAndAuthenticate(completion: AuthenticationCompletion)
-    {
-        do
-        {
-            if let account = try self.loadSavedAccount()
-            {
-                completion(result: .Success(result: account))
-                
-                return
-            }
-        }
-        catch let error
-        {
-            assertionFailure("could not load account: \(error)")
-        }
-        
-        self.clientCredentialsGrant(completion)
-    }
-    
     func loadSavedAccount() throws -> VIMAccountNew?
     {
         var loadedAccount = try self.accountStore.loadAccount(.User)
@@ -74,6 +55,12 @@ final class AuthenticationController
         if let loadedAccount = loadedAccount
         {
             try self.authenticateClient(account: loadedAccount)
+            
+            print("loaded account \(loadedAccount)")
+        }
+        else
+        {
+            print("no account loaded")
         }
         
         return loadedAccount
@@ -83,7 +70,7 @@ final class AuthenticationController
     
     func clientCredentialsGrant(completion: AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.postClientCredentialsGrant(scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.postClientCredentialsGrantRequest(scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
     }
@@ -105,13 +92,13 @@ final class AuthenticationController
                           self.dynamicType.ScopeKey: Scope.combine(self.configuration.scopes),
                           self.dynamicType.StateKey: self.dynamicType.state]
         
-        var error: NSError?
         guard let urlString = VimeoBaseURLString?.URLByAppendingPathComponent(self.dynamicType.CodeGrantAuthorizationPath).absoluteString
         else
         {
             fatalError("Could not make code grant auth URL")
         }
         
+        var error: NSError?
         let urlRequest = VimeoRequestSerializer(appConfiguration: self.configuration).requestWithMethod(VimeoClient.Method.GET.rawValue, URLString: urlString, parameters: parameters, error: &error)
         
         guard let url = urlRequest.URL where error == nil
@@ -155,37 +142,37 @@ final class AuthenticationController
             return
         }
         
-        let request = AuthenticationRequest.postCodeGrant(code: code, redirectURI: self.codeGrantRedirectURI)
+        let request = AuthenticationRequest.postCodeGrantRequest(code: code, redirectURI: self.codeGrantRedirectURI)
         
         self.authenticate(request: request, completion: completion)
     }
     
     // MARK: - Private Authentication
     
-    func login(username username: String, password: String, completion: AuthenticationCompletion)
+    func login(email email: String, password: String, completion: AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.postLogin(username: username, password: password, scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.postLoginRequest(email: email, password: password, scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
     }
     
     func join(name name: String, email: String, password: String, completion: AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.postJoin(name: name, email: email, password: password, scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.postJoinRequest(name: name, email: email, password: password, scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
     }
     
     func facebookLogin(facebookToken facebookToken: String, completion: AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.postLoginFacebook(facebookToken: facebookToken, scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.postLoginFacebookRequest(facebookToken: facebookToken, scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
     }
     
     func facebookJoin(facebookToken facebookToken: String, completion: AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.postJoinFacebook(facebookToken: facebookToken, scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.postJoinFacebookRequest(facebookToken: facebookToken, scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
     }
@@ -241,6 +228,6 @@ final class AuthenticationController
             throw error
         }
         
-        self.client.authenticate(account: account)
+        self.client.authenticatedAccount = account
     }
 }

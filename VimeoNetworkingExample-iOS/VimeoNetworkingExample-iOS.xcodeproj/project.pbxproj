@@ -146,7 +146,6 @@
 			isa = PBXGroup;
 			children = (
 				01BAE92C1CAB00CB004CB214 /* String+Utilities.swift */,
-				01BAE9281CA98507004CB214 /* AppConfiguration.swift */,
 				0140F93B1CA30A20007FF547 /* Result.swift */,
 				013250CF1C9C8D6A00ECB783 /* NSError+Extensions.swift */,
 			);
@@ -156,6 +155,7 @@
 		013250D51C9C917800ECB783 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				01BAE9281CA98507004CB214 /* AppConfiguration.swift */,
 				013250C81C9C838700ECB783 /* VimeoRequestSerializer.swift */,
 				013250C91C9C838700ECB783 /* VimeoResponseSerializer.swift */,
 				013250CA1C9C838700ECB783 /* VimeoSessionManager.swift */,
