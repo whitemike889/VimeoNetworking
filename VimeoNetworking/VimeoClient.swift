@@ -134,15 +134,6 @@ final class VimeoClient
         return RequestToken(task: requestTask)
     }
     
-//    private func handleRequestSuccess<ModelType where ModelType: VIMNullResponse>(request request: Request<ModelType>, task: NSURLSessionDataTask, responseObject: AnyObject?, completion: ResultCompletion<Response<ModelType>>.T)
-//    {
-//        
-////        let nullResponseObject = VIMNullResponse()
-////        let response = Response<VIMNullResponse>(model: nullResponseObject) //as Response<ModelType>
-////        
-////        completion(result: .Success(result: response))
-//    }
-    
     private func handleRequestSuccess<ModelType: MappableResponse>(request request: Request<ModelType>, task: NSURLSessionDataTask, responseObject: AnyObject?, completion: ResultCompletion<Response<ModelType>>.T)
     {
         // TODO: How do we handle responses where a nil 200 response is fine and expected, like watchlater? [RH] (3/30/16)
@@ -152,6 +143,8 @@ final class VimeoClient
             if ModelType.self == VIMNullResponse.self
             {
                 let nullResponseObject = VIMNullResponse()
+                
+                // Swift complains that this cast always fails, but it doesn't seem to ever actually fail (oddly), and it's required to call completion with this response [RH] (4/12/2016)
                 let response = Response(model: nullResponseObject) as! Response<ModelType>
 
                 completion(result: .Success(result: response as Response<ModelType>))
