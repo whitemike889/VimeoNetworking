@@ -72,14 +72,17 @@ final class VimeoClient
     {
         return self.authenticatedAccount?.user
     }
+    
     var isAuthenticated: Bool
     {
         return self.authenticatedAccount?.isAuthenticated() ?? false
     }
+    
     var isAuthenticatedWithUser: Bool
     {
         return self.authenticatedAccount?.isAuthenticatedWithUser() ?? false
     }
+    
     var isAuthenticatedWithClientCredentials: Bool
     {
         return self.authenticatedAccount?.isAuthenticatedWithClientCredentials() ?? false
