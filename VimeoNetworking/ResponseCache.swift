@@ -31,7 +31,6 @@ final class ResponseCache
                 
                 completion(result: .Success(result: response))
             }
-            else
             catch let error
             {
                 self.memoryCache.removeResponseDictionaryForKey(key)
