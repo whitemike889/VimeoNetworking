@@ -38,9 +38,8 @@ final class VimeoClient
     
     // TODO: make these an enum [RH] (3/30/16)
     static let ErrorInvalidDictionary = 1001
-    static let ErrorNoMappingClass = 1002
-    static let ErrorMappingFailed = 1003
     static let ErrorRequestMalformed = 1004
+    static let ErrorUndefined = 1004
     
     // MARK: -
     
@@ -166,51 +165,22 @@ final class VimeoClient
             return
         }
         
-        // Deserialize the dictionary into a model object
-        
-        guard let mappingClass = ModelType.mappingClass
-        else
+        do
         {
-            let description = "VimeoClient no mapping class found"
+            let modelObject: ModelType = try VIMObjectMapper.mapObject(responseDictionary)
             
-            assertionFailure(description)
-            
-            let error = NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorNoMappingClass, userInfo: [NSLocalizedDescriptionKey: description])
-            
-            self.handleRequestFailure(request: request, task: task, error: error, completion: completion)
-            
-            return
+            completion(result: .Success(result: Response<ModelType>(model: modelObject)))
         }
-        
-        let objectMapper = VIMObjectMapper()
-        let modelKeyPath = request.modelKeyPath ?? ModelType.modelKeyPath
-        objectMapper.addMappingClass(mappingClass, forKeypath: modelKeyPath ?? "")
-        var mappedObject = objectMapper.applyMappingToJSON(responseDictionary)
-        
-        if let modelKeyPath = modelKeyPath
+        catch let error
         {
-            mappedObject = (mappedObject as? ResponseDictionary)?[modelKeyPath]
+            self.handleRequestFailure(request: request, task: task, error: error as? NSError, completion: completion)
         }
-        
-        guard let modelObject = mappedObject as? ModelType
-        else
-        {
-            let description = "VimeoClient couldn't map to ModelType"
-            
-            assertionFailure(description)
-            
-            let error = NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorMappingFailed, userInfo: [NSLocalizedDescriptionKey: description])
-            
-            self.handleRequestFailure(request: request, task: task, error: error, completion: completion)
-            
-            return
-        }
-        
-        completion(result: .Success(result: Response<ModelType>(model: modelObject)))
     }
     
-    private func handleRequestFailure<ModelType: MappableResponse>(request request: Request<ModelType>, task: NSURLSessionDataTask?, error: NSError, completion: ResultCompletion<Response<ModelType>>.T)
+    private func handleRequestFailure<ModelType: MappableResponse>(request request: Request<ModelType>, task: NSURLSessionDataTask?, error: NSError?, completion: ResultCompletion<Response<ModelType>>.T)
     {
+        let error = error ?? NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorUndefined, userInfo: [NSLocalizedDescriptionKey: "Undefined error"])
+        
         if error.code == NSURLErrorCancelled
         {
             return
@@ -221,3 +191,4 @@ final class VimeoClient
         completion(result: .Failure(error: error))
     }
 }
+

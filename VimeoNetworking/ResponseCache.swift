@@ -8,29 +8,80 @@
 
 import Foundation
 
-class ResponseCache
+final class ResponseCache
 {
-    typealias CacheCompletion = (response: VimeoClient.ResponseDictionary?) -> Void
-    
-    func setResponse<ModelType>(response: VimeoClient.ResponseDictionary, forRequest request: Request<ModelType>)
+    func setResponse<ModelType>(responseDictionary: VimeoClient.ResponseDictionary, forRequest request: Request<ModelType>)
     {
-        // TODO: [RH] (3/29/16)
+        let key = request.cacheKey
+        
+        self.memoryCache.setResponseDictionary(responseDictionary, forKey: key)
+        self.diskCache.setResponseDictionary(responseDictionary, forKey: key)
     }
     
-    func responseForRequest<ModelType>(request: Request<ModelType>, completion: CacheCompletion)
+    func responseForRequest<ModelType>(request: Request<ModelType>, completion: ResultCompletion<Response<ModelType>?>.T)
     {
-        // TODO: [RH] (3/29/16)
+        let key = request.cacheKey
         
-        completion(response: nil)
+        self.memoryCache.responseDictionaryForKey(key) { responseDictionary in
+            
+            if let responseDictionary = responseDictionary
+            {
+                // TODO: parse [RH] (4/12/16)
+                
+                completion(result: .Success(result: nil))
+            }
+            else
+            {
+                self.diskCache.responseDictionaryForKey(key) { responseDictionary in
+                    
+                    if let responseDictionary = responseDictionary
+                    {
+                        // TODO: parse [RH] (4/12/16)
+                        
+                        completion(result: .Success(result: nil))
+                    }
+                    else
+                    {
+                        completion(result: .Success(result: nil))
+                    }
+                }
+            }
+        }
     }
     
     // MARK: - Memory Cache
     
-    // TODO:  [RH] (3/29/16)
+    private let memoryCache = ResponseMemoryCache()
+    
+    private class ResponseMemoryCache
+    {
+        func setResponseDictionary(object: VimeoClient.ResponseDictionary, forKey key: String)
+        {
+            
+        }
+        
+        func responseDictionaryForKey(key: String, completion: (VimeoClient.ResponseDictionary? -> Void))
+        {
+            
+        }
+    }
     
     // MARK: - Disk Cache
     
-    // TODO:  [RH] (3/29/16)
+    private let diskCache = ResponseDiskCache()
+    
+    private class ResponseDiskCache
+    {
+        func setResponseDictionary(object: VimeoClient.ResponseDictionary, forKey key: String)
+        {
+            
+        }
+        
+        func responseDictionaryForKey(key: String, completion: (VimeoClient.ResponseDictionary? -> Void))
+        {
+            
+        }
+    }
 }
 
 extension Request
