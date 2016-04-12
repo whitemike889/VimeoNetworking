@@ -99,19 +99,171 @@ final class ResponseCache
     
     private class ResponseDiskCache
     {
+        private let queue = dispatch_queue_create("com.vimeo.VIMCache.diskQueue", DISPATCH_QUEUE_CONCURRENT)
+        
         func setResponseDictionary(responseDictionary: VimeoClient.ResponseDictionary, forKey key: String)
         {
+            let data = NSKeyedArchiver.archivedDataWithRootObject(responseDictionary)
             
+            dispatch_barrier_async(self.queue) { 
+                
+                let fileManager = NSFileManager()
+                
+                let directoryURL = self.documentsDirectoryURL()
+                let fileURL = self.fileURLForKey(key: key)
+                
+                guard let directoryPath = directoryURL.path,
+                    let filePath = fileURL.path
+                else
+                {
+                    assertionFailure("no cache path found: \(fileURL)")
+                    
+                    return
+                }
+                
+                do
+                {
+                    if !fileManager.fileExistsAtPath(directoryPath)
+                    {
+                        try fileManager.createDirectoryAtPath(directoryPath, withIntermediateDirectories: true, attributes: nil)
+                    }
+                    
+                    let success = fileManager.createFileAtPath(filePath, contents: data, attributes: nil)
+                    
+                    if !success
+                    {
+                        print("ResponseDiskCache could not store object")
+                    }
+                }
+                catch let error
+                {
+                    print("ResponseDiskCache error: \(error)")
+                }
+            }
         }
         
         func responseDictionaryForKey(key: String, completion: (VimeoClient.ResponseDictionary? -> Void))
         {
-            
+            dispatch_async(self.queue) {
+                
+                let fileURL = self.fileURLForKey(key: key)
+                
+                guard let filePath = fileURL.path
+                    else
+                {
+                    assertionFailure("no cache path found: \(fileURL)")
+                    
+                    return
+                }
+                
+                guard let data = NSData(contentsOfFile: filePath)
+                else
+                {
+                    completion(nil)
+                    
+                    return
+                }
+                
+                if let responseDictionary = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? VimeoClient.ResponseDictionary
+                {
+                    completion(responseDictionary)
+                }
+                else
+                {
+                    completion(nil)
+                }
+            }
         }
         
         func removeResponseDictionaryForKey(key: String)
         {
+            dispatch_async(self.queue) {
+                
+                let fileManager = NSFileManager()
+                
+                let fileURL = self.fileURLForKey(key: key)
+                
+                guard let filePath = fileURL.path
+                    else
+                {
+                    assertionFailure("no cache path found: \(fileURL)")
+                    
+                    return
+                }
+                
+                do
+                {
+                    try fileManager.removeItemAtPath(filePath)
+                }
+                catch
+                {
+                    print("could not remove disk cache for \(key)")
+                }
+            }
+        }
+        
+        // MARK: - copied from ArchiveStore
+        
+//        func setData(data: NSData, forKey key: String) throws
+//        {
+//            let fileURL = self.fileURLForKey(key: key)
+//            
+//            guard let filePath = fileURL.path
+//                else
+//            {
+//                let error = NSError(domain: "ArchiveStoreDomain", code: 0, userInfo: [NSLocalizedDescriptionKey: "no path"])
+//                throw error
+//            }
+//            
+//            if let documentsDirectoryURL = self.documentsDirectoryURL()
+//            {
+//                try self.fileManager.createDirectoryAtURL(documentsDirectoryURL, withIntermediateDirectories: true, attributes: nil)
+//            }
+//            
+//            if self.fileManager.fileExistsAtPath(filePath)
+//            {
+//                try self.fileManager.removeItemAtPath(filePath)
+//            }
+//            
+//            let success = self.fileManager.createFileAtPath(filePath, contents: data, attributes: nil)
+//            
+//            if !success
+//            {
+//                let error = NSError(domain: "ArchiveStoreDomain", code: 0, userInfo: [NSLocalizedDescriptionKey: "create file failed"])
+//                throw error
+//            }
+//        }
+//        
+//        func dataForKey(key: String) throws -> NSData?
+//        {
+//            let data = NSData(contentsOfURL: self.fileURLForKey(key: key))
+//            
+//            return data
+//        }
+//        
+//        func deleteDataForKey(key: String) throws
+//        {
+//            try self.fileManager.removeItemAtURL(self.fileURLForKey(key: key))
+//        }
+        
+        private func documentsDirectoryURL() -> NSURL
+        {
+            guard let directory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first
+            else
+            {
+                fatalError("no documents directories found")
+            }
             
+            return NSURL(fileURLWithPath: directory)
+        }
+        
+        private func fileURLForKey(key key: String) -> NSURL
+        {
+            let directoryURL = self.documentsDirectoryURL()
+            
+            let fileURL = directoryURL.URLByAppendingPathComponent(key)
+            
+            return fileURL
         }
     }
 }

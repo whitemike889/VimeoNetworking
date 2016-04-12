@@ -146,7 +146,7 @@ final class VimeoClient
             {
                 let nullResponseObject = VIMNullResponse()
                 
-                // Swift complains that this cast always fails, but it doesn't seem to ever actually fail (oddly), and it's required to call completion with this response [RH] (4/12/2016)
+                // Swift complains that this cast always fails, but it doesn't seem to ever actually fail, and it's required to call completion with this response [RH] (4/12/2016)
                 let response = Response(model: nullResponseObject) as! Response<ModelType>
 
                 completion(result: .Success(result: response as Response<ModelType>))
