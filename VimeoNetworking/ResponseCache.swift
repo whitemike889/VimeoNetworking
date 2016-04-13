@@ -241,9 +241,7 @@ extension Request
             }
         }
         
-        cacheKey = cacheKey.stringByReplacingOccurrencesOfString("/", withString: "")
-        
-        // TODO: MD5 this jank [RH] (3/29/16)
+        cacheKey = cacheKey.md5
         
         return cacheKey
     }
