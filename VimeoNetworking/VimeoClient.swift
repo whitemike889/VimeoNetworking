@@ -39,7 +39,7 @@ final class VimeoClient
     // TODO: make these an enum [RH] (3/30/16)
     static let ErrorInvalidDictionary = 1001
     static let ErrorRequestMalformed = 1004
-    static let ErrorUndefined = 1004
+    static let ErrorUndefined = 1009
     
     // MARK: -
     
@@ -89,18 +89,17 @@ final class VimeoClient
     
     // MARK: - Request
     
-    // TODO: specify completion queue [RH] (3/30/16)
-    func request<ModelType: MappableResponse>(request: Request<ModelType>, completion: ResultCompletion<Response<ModelType>>.T) -> RequestToken?
+    func request<ModelType: MappableResponse>(request: Request<ModelType>, completionQueue: dispatch_queue_t = dispatch_get_main_queue(), completion: ResultCompletion<Response<ModelType>>.T) -> RequestToken?
     {
         let urlString = request.path
         let parameters = request.parameters
         
         let success: (NSURLSessionDataTask, AnyObject?) -> Void = { (task, responseObject) in
-            self.handleRequestSuccess(request: request, task: task, responseObject: responseObject, completion: completion)
+            self.handleRequestSuccess(request: request, task: task, responseObject: responseObject, completionQueue: completionQueue, completion: completion)
         }
         
         let failure: (NSURLSessionDataTask?, NSError) -> Void = { (task, error) in
-            self.handleRequestFailure(request: request, task: task, error: error, completion: completion)
+            self.handleRequestFailure(request: request, task: task, error: error, completionQueue: completionQueue, completion: completion)
         }
         
         let task: NSURLSessionDataTask?
@@ -128,7 +127,7 @@ final class VimeoClient
             
             let error = NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorRequestMalformed, userInfo: [NSLocalizedDescriptionKey: description])
             
-            self.handleRequestFailure(request: request, task: task, error: error, completion: completion)
+            self.handleRequestFailure(request: request, task: task, error: error, completionQueue: completionQueue, completion: completion)
             
             return nil
         }
@@ -136,9 +135,8 @@ final class VimeoClient
         return RequestToken(task: requestTask)
     }
     
-    private func handleRequestSuccess<ModelType: MappableResponse>(request request: Request<ModelType>, task: NSURLSessionDataTask, responseObject: AnyObject?, completion: ResultCompletion<Response<ModelType>>.T)
+    private func handleRequestSuccess<ModelType: MappableResponse>(request request: Request<ModelType>, task: NSURLSessionDataTask, responseObject: AnyObject?, completionQueue: dispatch_queue_t, completion: ResultCompletion<Response<ModelType>>.T)
     {
-        // TODO: How do we handle responses where a nil 200 response is fine and expected, like watchlater? [RH] (3/30/16)
         guard let responseDictionary = responseObject as? ResponseDictionary
         else
         {
@@ -149,7 +147,10 @@ final class VimeoClient
                 // Swift complains that this cast always fails, but it doesn't seem to ever actually fail, and it's required to call completion with this response [RH] (4/12/2016)
                 let response = Response(model: nullResponseObject) as! Response<ModelType>
 
-                completion(result: .Success(result: response as Response<ModelType>))
+                dispatch_async(completionQueue)
+                {
+                    completion(result: .Success(result: response as Response<ModelType>))
+                }
             }
             else
             {
@@ -159,7 +160,7 @@ final class VimeoClient
                 
                 let error = NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorInvalidDictionary, userInfo: [NSLocalizedDescriptionKey: description])
                 
-                self.handleRequestFailure(request: request, task: task, error: error, completion: completion)
+                self.handleRequestFailure(request: request, task: task, error: error, completionQueue: completionQueue, completion: completion)
             }
             
             return
@@ -169,15 +170,18 @@ final class VimeoClient
         {
             let modelObject: ModelType = try VIMObjectMapper.mapObject(responseDictionary, modelKeyPath: request.modelKeyPath)
             
-            completion(result: .Success(result: Response<ModelType>(model: modelObject)))
+            dispatch_async(completionQueue)
+            {
+                completion(result: .Success(result: Response<ModelType>(model: modelObject)))
+            }
         }
         catch let error
         {
-            self.handleRequestFailure(request: request, task: task, error: error as? NSError, completion: completion)
+            self.handleRequestFailure(request: request, task: task, error: error as? NSError, completionQueue: completionQueue, completion: completion)
         }
     }
     
-    private func handleRequestFailure<ModelType: MappableResponse>(request request: Request<ModelType>, task: NSURLSessionDataTask?, error: NSError?, completion: ResultCompletion<Response<ModelType>>.T)
+    private func handleRequestFailure<ModelType: MappableResponse>(request request: Request<ModelType>, task: NSURLSessionDataTask?, error: NSError?, completionQueue: dispatch_queue_t, completion: ResultCompletion<Response<ModelType>>.T)
     {
         let error = error ?? NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorUndefined, userInfo: [NSLocalizedDescriptionKey: "Undefined error"])
         
@@ -188,7 +192,10 @@ final class VimeoClient
         
         // TODO: Intercept errors globally [RH] (3/29/16)
         
-        completion(result: .Failure(error: error))
+        dispatch_async(completionQueue)
+        {
+            completion(result: .Failure(error: error))
+        }
     }
 }
 
