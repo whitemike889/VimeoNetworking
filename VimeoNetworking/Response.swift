@@ -12,9 +12,25 @@ struct Response<ModelType: MappableResponse>
 {
     let model: ModelType
     
-    let nextPagePath: String? = nil // TODO:  [RH] (4/5/16)
+    var isCachedResponse: Bool
+    var isFinalResponse: Bool
+    
+    let nextPagePath: String? // TODO: implement [RH] (4/5/16)
     var nextPageRequest: Request<ModelType>?
     {
         return nil // TODO: computed from nextPagePath [RH] (4/5/16)
+    }
+    
+    // MARK: - 
+    
+    init(model: ModelType,
+         isCachedResponse: Bool = false,
+         isFinalResponse: Bool = true,
+         nextPagePath: String? = nil)
+    {
+        self.model = model
+        self.isCachedResponse = isCachedResponse
+        self.isFinalResponse = isFinalResponse
+        self.nextPagePath = nextPagePath
     }
 }

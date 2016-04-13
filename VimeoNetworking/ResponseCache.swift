@@ -27,7 +27,7 @@ final class ResponseCache
             do
             {
                 let modelObject: ModelType = try VIMObjectMapper.mapObject(responseDictionary, modelKeyPath: request.modelKeyPath)
-                let response = Response(model: modelObject)
+                let response = Response(model: modelObject, isCachedResponse: true, isFinalResponse: request.cacheFetchPolicy == .CacheOnly)
                 
                 completion(result: .Success(result: response))
             }
@@ -48,7 +48,7 @@ final class ResponseCache
                     do
                     {
                         let modelObject: ModelType = try VIMObjectMapper.mapObject(responseDictionary, modelKeyPath: request.modelKeyPath)
-                        let response = Response(model: modelObject)
+                        let response = Response(model: modelObject, isCachedResponse: true, isFinalResponse: request.cacheFetchPolicy == .CacheOnly)
                         
                         completion(result: .Success(result: response))
                     }
@@ -109,7 +109,7 @@ final class ResponseCache
                 
                 let fileManager = NSFileManager()
                 
-                let directoryURL = self.documentsDirectoryURL()
+                let directoryURL = self.cachesDirectoryURL()
                 let fileURL = self.fileURLForKey(key: key)
                 
                 guard let directoryPath = directoryURL.path,
@@ -202,53 +202,11 @@ final class ResponseCache
             }
         }
         
-        // MARK: - copied from ArchiveStore
+        // MARK: - directories
         
-//        func setData(data: NSData, forKey key: String) throws
-//        {
-//            let fileURL = self.fileURLForKey(key: key)
-//            
-//            guard let filePath = fileURL.path
-//                else
-//            {
-//                let error = NSError(domain: "ArchiveStoreDomain", code: 0, userInfo: [NSLocalizedDescriptionKey: "no path"])
-//                throw error
-//            }
-//            
-//            if let documentsDirectoryURL = self.documentsDirectoryURL()
-//            {
-//                try self.fileManager.createDirectoryAtURL(documentsDirectoryURL, withIntermediateDirectories: true, attributes: nil)
-//            }
-//            
-//            if self.fileManager.fileExistsAtPath(filePath)
-//            {
-//                try self.fileManager.removeItemAtPath(filePath)
-//            }
-//            
-//            let success = self.fileManager.createFileAtPath(filePath, contents: data, attributes: nil)
-//            
-//            if !success
-//            {
-//                let error = NSError(domain: "ArchiveStoreDomain", code: 0, userInfo: [NSLocalizedDescriptionKey: "create file failed"])
-//                throw error
-//            }
-//        }
-//        
-//        func dataForKey(key: String) throws -> NSData?
-//        {
-//            let data = NSData(contentsOfURL: self.fileURLForKey(key: key))
-//            
-//            return data
-//        }
-//        
-//        func deleteDataForKey(key: String) throws
-//        {
-//            try self.fileManager.removeItemAtURL(self.fileURLForKey(key: key))
-//        }
-        
-        private func documentsDirectoryURL() -> NSURL
+        private func cachesDirectoryURL() -> NSURL
         {
-            guard let directory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first
+            guard let directory = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true).first
             else
             {
                 fatalError("no documents directories found")
@@ -259,7 +217,7 @@ final class ResponseCache
         
         private func fileURLForKey(key key: String) -> NSURL
         {
-            let directoryURL = self.documentsDirectoryURL()
+            let directoryURL = self.cachesDirectoryURL()
             
             let fileURL = directoryURL.URLByAppendingPathComponent(key)
             
@@ -282,6 +240,8 @@ extension Request
                 cacheKey += value
             }
         }
+        
+        cacheKey = cacheKey.stringByReplacingOccurrencesOfString("/", withString: "")
         
         // TODO: MD5 this jank [RH] (3/29/16)
         

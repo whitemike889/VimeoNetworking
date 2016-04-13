@@ -171,7 +171,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         
         let followingRequest = UserListRequest.getUserFollowingRequest(userURI: userURI)
         
-        client.request(followingRequest) { (result) in
+        client.request(followingRequest) { result in
             switch result
             {
             case .Success(let response):

@@ -38,7 +38,7 @@ extension Request
         let parameters: VimeoClient.RequestParameters = [GrantTypeKey: GrantTypeClientCredentials,
                                                          ScopeKey: Scope.combine(scopes)]
         
-        return Request(method: .POST, path: AuthenticationPathClientCredentials, parameters: parameters)
+        return Request(method: .POST, path: AuthenticationPathClientCredentials, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
     
     static func postCodeGrantRequest(code code: String, redirectURI: String) -> Request
@@ -47,7 +47,7 @@ extension Request
                                                          CodeKey: code,
                                                          RedirectURIKey: redirectURI]
         
-        return Request(method: .POST, path: AuthenticationPathCodeGrant, parameters: parameters)
+        return Request(method: .POST, path: AuthenticationPathCodeGrant, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
     
     static func postLoginRequest(email email: String, password: String, scopes: [Scope]) -> Request
@@ -57,7 +57,7 @@ extension Request
                                                          UsernameKey: email,
                                                          PasswordKey: password]
         
-        return Request(method: .POST, path: AuthenticationPathAccessToken, parameters: parameters)
+        return Request(method: .POST, path: AuthenticationPathAccessToken, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
     
     static func postJoinRequest(name name: String, email: String, password: String, scopes: [Scope]) -> Request
@@ -67,7 +67,7 @@ extension Request
                                                          EmailKey: email,
                                                          PasswordKey: password]
         
-        return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters)
+        return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
     
     static func postLoginFacebookRequest(facebookToken facebookToken: String, scopes: [Scope]) -> Request
@@ -76,7 +76,7 @@ extension Request
                                                          ScopeKey: Scope.combine(scopes),
                                                          TokenKey: facebookToken]
         
-        return Request(method: .POST, path: AuthenticationPathFacebookToken, parameters: parameters)
+        return Request(method: .POST, path: AuthenticationPathFacebookToken, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
     
     static func postJoinFacebookRequest(facebookToken facebookToken: String, scopes: [Scope]) -> Request
@@ -84,6 +84,6 @@ extension Request
         let parameters: VimeoClient.RequestParameters = [ScopeKey: Scope.combine(scopes),
                                                          TokenKey: facebookToken]
         
-        return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters)
+        return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
 }

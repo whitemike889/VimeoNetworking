@@ -10,12 +10,12 @@ import Foundation
 
 enum CacheFetchPolicy
 {
-    static let DefaultPolicy: CacheFetchPolicy = .LocalThenNetwork
+    static let DefaultPolicy: CacheFetchPolicy = .CacheThenNetwork
     
-    case LocalOnly
-    case LocalThenNetwork
+    case CacheOnly
+    case CacheThenNetwork
     case NetworkOnly
-    case TryNetworkThenLocal
+    case TryNetworkThenCache
 }
 
 enum RetryPolicy
@@ -34,7 +34,7 @@ struct Request<ModelType: MappableResponse>
     
     let modelKeyPath: String?
     
-    let cacheFetchPolicy: CacheFetchPolicy
+    var cacheFetchPolicy: CacheFetchPolicy
     let shouldCacheResponse: Bool
     
     let retryPolicy: RetryPolicy
