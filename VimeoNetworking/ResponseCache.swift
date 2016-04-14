@@ -66,6 +66,20 @@ final class ResponseCache
             }
         }
     }
+
+    func removeResponseForRequest<ModelType>(request: Request<ModelType>)
+    {
+        let key = request.cacheKey
+        
+        self.memoryCache.removeResponseDictionaryForKey(key)
+        self.diskCache.removeResponseDictionaryForKey(key)
+    }
+    
+    func clear()
+    {
+        self.memoryCache.removeAllResponses()
+        self.diskCache.removeAllResponses()
+    }
     
     // MARK: - Memory Cache
     
@@ -90,6 +104,11 @@ final class ResponseCache
         func removeResponseDictionaryForKey(key: String)
         {
             self.cache.removeObjectForKey(key)
+        }
+        
+        func removeAllResponses()
+        {
+            self.cache.removeAllObjects()
         }
     }
     
@@ -202,6 +221,31 @@ final class ResponseCache
             }
         }
         
+        func removeAllResponses()
+        {
+            dispatch_barrier_async(self.queue) {
+                
+                let fileManager = NSFileManager()
+                
+                guard let directoryPath = self.cachesDirectoryURL().path
+                else
+                {
+                    assertionFailure("no cache directory")
+                    
+                    return
+                }
+                
+                do
+                {
+                    try fileManager.removeItemAtPath(directoryPath)
+                }
+                catch
+                {
+                    print("could not clear disk cache")
+                }
+            }
+        }
+        
         // MARK: - directories
         
         private func cachesDirectoryURL() -> NSURL
@@ -223,26 +267,5 @@ final class ResponseCache
             
             return fileURL
         }
-    }
-}
-
-extension Request
-{
-    var cacheKey: String
-    {
-        var cacheKey = self.path
-        
-        if let parameters = self.parameters
-        {
-            for (key, value) in parameters
-            {
-                cacheKey += key
-                cacheKey += value
-            }
-        }
-        
-        cacheKey = cacheKey.md5
-        
-        return cacheKey
     }
 }
