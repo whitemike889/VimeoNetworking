@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   # s.exclude_files = "Classes/Exclude"
   # s.resources = "Resources/*.png"
 
-  s.frameworks = "Foundation"
+  s.frameworks = ["Foundation"]
 
   s.requires_arc = true
 

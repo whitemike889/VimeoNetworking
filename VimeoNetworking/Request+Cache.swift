@@ -23,8 +23,6 @@ extension Request
             }
         }
         
-        cacheKey = cacheKey.md5
-        
         return cacheKey
     }
 }
