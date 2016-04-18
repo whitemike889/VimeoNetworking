@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Request
+public extension Request
 {
     var cacheKey: String
     {

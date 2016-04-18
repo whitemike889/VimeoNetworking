@@ -26,7 +26,7 @@
 
 import Foundation
 
-final class VimeoSessionManager: AFHTTPSessionManager
+final public class VimeoSessionManager: AFHTTPSessionManager
 {
     // MARK: Initialization
     
@@ -38,7 +38,7 @@ final class VimeoSessionManager: AFHTTPSessionManager
         self.responseSerializer = VimeoResponseSerializer()
     }
     
-    required init?(coder aDecoder: NSCoder)
+    required public init?(coder aDecoder: NSCoder)
     {
         fatalError("init(coder:) has not been implemented")
     }

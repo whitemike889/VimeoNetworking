@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class AuthenticationController
+final public class AuthenticationController
 {
     static let ErrorDomain = "AuthenticationControllerErrorDomain"
     

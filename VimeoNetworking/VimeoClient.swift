@@ -8,11 +8,11 @@
 
 import Foundation
 
-final class VimeoClient
+final public class VimeoClient
 {
     // MARK: - 
     
-    enum Method: String
+    public enum Method: String
     {
         case GET
         case POST
@@ -21,7 +21,7 @@ final class VimeoClient
         case DELETE
     }
     
-    struct RequestToken
+    public struct RequestToken
     {
         private let task: NSURLSessionDataTask
         
@@ -31,8 +31,8 @@ final class VimeoClient
         }
     }
     
-    typealias RequestParameters = [String: String]
-    typealias ResponseDictionary = [String: AnyObject]
+    public typealias RequestParameters = [String: String]
+    public typealias ResponseDictionary = [String: AnyObject]
     
     static let ErrorDomain = "VimeoClientErrorDomain"
     
@@ -47,14 +47,14 @@ final class VimeoClient
     private let sessionManager: VimeoSessionManager
     private let responseCache = ResponseCache()
     
-    init(appConfiguration: AppConfiguration)
+    public init(appConfiguration: AppConfiguration)
     {
         self.sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: appConfiguration)
     }
     
     // MARK: - Authentication
     
-    var authenticatedAccount: VIMAccountNew?
+    public var authenticatedAccount: VIMAccountNew?
     {
         didSet
         {
@@ -69,29 +69,29 @@ final class VimeoClient
         }
     }
     
-    var authenticatedUser: VIMUser?
+    public var authenticatedUser: VIMUser?
     {
         return self.authenticatedAccount?.user
     }
     
-    var isAuthenticated: Bool
+    public var isAuthenticated: Bool
     {
         return self.authenticatedAccount?.isAuthenticated() ?? false
     }
     
-    var isAuthenticatedWithUser: Bool
+    public var isAuthenticatedWithUser: Bool
     {
         return self.authenticatedAccount?.isAuthenticatedWithUser() ?? false
     }
     
-    var isAuthenticatedWithClientCredentials: Bool
+    public var isAuthenticatedWithClientCredentials: Bool
     {
         return self.authenticatedAccount?.isAuthenticatedWithClientCredentials() ?? false
     }
     
     // MARK: - Request
     
-    func request<ModelType: MappableResponse>(request: Request<ModelType>, completionQueue: dispatch_queue_t = dispatch_get_main_queue(), completion: ResultCompletion<Response<ModelType>>.T) -> RequestToken?
+    public func request<ModelType: MappableResponse>(request: Request<ModelType>, completionQueue: dispatch_queue_t = dispatch_get_main_queue(), completion: ResultCompletion<Response<ModelType>>.T) -> RequestToken?
     {
         switch request.cacheFetchPolicy
         {

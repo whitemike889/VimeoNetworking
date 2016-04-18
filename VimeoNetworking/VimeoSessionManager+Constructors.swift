@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension VimeoSessionManager
+public extension VimeoSessionManager
 {
     // MARK: - Default Session Initialization
     
