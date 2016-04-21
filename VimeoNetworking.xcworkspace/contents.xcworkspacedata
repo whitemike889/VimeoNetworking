@@ -5,6 +5,9 @@
       location = "group:VimeoNetworkingExample-iOS/VimeoNetworkingExample-iOS.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:VimeoNetworking/VimeoNetworking.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>

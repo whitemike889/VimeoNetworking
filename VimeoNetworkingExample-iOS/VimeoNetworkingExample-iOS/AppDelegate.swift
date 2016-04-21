@@ -8,6 +8,8 @@
 
 import UIKit
 
+import VimeoNetworking
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate
 {

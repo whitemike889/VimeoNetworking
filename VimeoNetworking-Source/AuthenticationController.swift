@@ -36,7 +36,7 @@ final public class AuthenticationController
     
     private let accountStore = AccountStore()
     
-    init(configuration: AppConfiguration, client: VimeoClient)
+    public init(configuration: AppConfiguration, client: VimeoClient)
     {
         self.configuration = configuration
         self.client = client

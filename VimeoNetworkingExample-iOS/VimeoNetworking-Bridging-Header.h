@@ -20,5 +20,6 @@
 
 @import AFNetworking;
 @import VIMObjectMapper;
+@import VimeoNetworking;
 
 #endif /* VimeoNetworking_Bridging_Header_h */
