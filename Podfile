@@ -19,11 +19,13 @@ target 'VimeoNetworkingExample-iOS' do
 	shared_pods
 end
 
-# target 'VimeoNetworkingExample-iOSTests' do
-# 	shared_pods
-# end
+target 'VimeoNetworkingExample-iOSTests' do
+	xcodeproj 'VimeoNetworkingExample-iOS/VimeoNetworkingExample-iOS.xcodeproj'
+	shared_pods
+end
 
-# target 'VimeoNetworkingExample-iOSUITests' do
-# 	shared_pods
-# end
+target 'VimeoNetworkingExample-iOSUITests' do
+	xcodeproj 'VimeoNetworkingExample-iOS/VimeoNetworkingExample-iOS.xcodeproj'
+	shared_pods
+end
 
