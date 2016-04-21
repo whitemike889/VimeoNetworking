@@ -70,7 +70,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                 case .Failure(let error):
                     print("failure authenticating: \(error)")
                 }
-                
             }
         }
         
