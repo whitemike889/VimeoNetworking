@@ -8,30 +8,30 @@
 
 import Foundation
 
-typealias UserRequest = Request<VIMUser>
-typealias UserListRequest = Request<[VIMUser]>
+public typealias UserRequest = Request<VIMUser>
+public typealias UserListRequest = Request<[VIMUser]>
 
 public extension Request
 {
     private static var MeUserURI: String { return "/me" }
     private static var FollowingPathFormat: String { return "%@/following" }
     
-    static func getMeRequest() -> Request
+    public static func getMeRequest() -> Request
     {
         return self.getUserRequest(userURI: self.MeUserURI)
     }
     
-    static func getMeFollowingRequest() -> Request
+    public static func getMeFollowingRequest() -> Request
     {
         return self.getUserFollowingRequest(userURI: self.MeUserURI)
     }
     
-    static func getUserRequest(userURI userURI: String) -> Request
+    public static func getUserRequest(userURI userURI: String) -> Request
     {
         return Request(path: userURI)
     }
     
-    static func getUserFollowingRequest(userURI userURI: String) -> Request
+    public static func getUserFollowingRequest(userURI userURI: String) -> Request
     {
         return Request(path: String(format: self.FollowingPathFormat, userURI))
     }
