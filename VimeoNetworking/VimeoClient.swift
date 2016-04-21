@@ -49,8 +49,13 @@ final public class VimeoClient
     
     public init(appConfiguration: AppConfiguration)
     {
+        self.configuration = appConfiguration
         self.sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: appConfiguration)
     }
+    
+    // MARK: - Configuration
+    
+    public private(set) var configuration: AppConfiguration
     
     // MARK: - Authentication
     
