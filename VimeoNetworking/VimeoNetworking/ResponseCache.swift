@@ -122,9 +122,9 @@ final internal class ResponseCache
         
         func setResponseDictionary(responseDictionary: VimeoClient.ResponseDictionary, forKey key: String)
         {
-            let data = NSKeyedArchiver.archivedDataWithRootObject(responseDictionary)
-            
-            dispatch_barrier_async(self.queue) { 
+            dispatch_barrier_async(self.queue) {
+                
+                let data = NSKeyedArchiver.archivedDataWithRootObject(responseDictionary)
                 
                 let fileManager = NSFileManager()
                 
@@ -196,7 +196,7 @@ final internal class ResponseCache
         
         func removeResponseDictionaryForKey(key: String)
         {
-            dispatch_async(self.queue) {
+            dispatch_barrier_async(self.queue) {
                 
                 let fileManager = NSFileManager()
                 
@@ -253,7 +253,7 @@ final internal class ResponseCache
             guard let directory = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true).first
             else
             {
-                fatalError("no documents directories found")
+                fatalError("no cache directories found")
             }
             
             return NSURL(fileURLWithPath: directory)

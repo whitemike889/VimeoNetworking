@@ -98,11 +98,21 @@ final public class VimeoClient
     
     public func request<ModelType: MappableResponse>(request: Request<ModelType>, completionQueue: dispatch_queue_t = dispatch_get_main_queue(), completion: ResultCompletion<Response<ModelType>>.T) -> RequestToken?
     {
+        var networkRequestCompleted = false
+        
         switch request.cacheFetchPolicy
         {
         case .CacheOnly, .CacheThenNetwork:
             
             self.responseCache.responseForRequest(request) { result in
+                
+                if networkRequestCompleted
+                {
+                    // If the network request somehow completes before the cache, abort any cache action [RH] (4/21/16)
+                    
+                    return
+                }
+                
                 switch result
                 {
                 case .Success(let response):
@@ -164,10 +174,12 @@ final public class VimeoClient
         let parameters = request.parameters
         
         let success: (NSURLSessionDataTask, AnyObject?) -> Void = { (task, responseObject) in
+            networkRequestCompleted = true
             self.handleTaskSuccess(request: request, task: task, responseObject: responseObject, completionQueue: completionQueue, completion: completion)
         }
         
         let failure: (NSURLSessionDataTask?, NSError) -> Void = { (task, error) in
+            networkRequestCompleted = true
             self.handleTaskFailure(request: request, task: task, error: error, completionQueue: completionQueue, completion: completion)
         }
         
@@ -195,6 +207,8 @@ final public class VimeoClient
             assertionFailure(description)
             
             let error = NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorRequestMalformed, userInfo: [NSLocalizedDescriptionKey: description])
+            
+            networkRequestCompleted = true
             
             self.handleTaskFailure(request: request, task: task, error: error, completionQueue: completionQueue, completion: completion)
             
