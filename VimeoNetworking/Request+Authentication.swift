@@ -31,7 +31,7 @@ private let AuthenticationPathCodeGrant = "oauth/access_token"
 
 typealias AuthenticationRequest = Request<VIMAccountNew>
 
-extension Request
+public extension Request
 {
     static func postClientCredentialsGrantRequest(scopes scopes: [Scope]) -> Request
     {

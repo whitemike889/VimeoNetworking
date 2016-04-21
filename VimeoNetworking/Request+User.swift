@@ -11,7 +11,7 @@ import Foundation
 typealias UserRequest = Request<VIMUser>
 typealias UserListRequest = Request<[VIMUser]>
 
-extension Request
+public extension Request
 {
     private static var MeUserURI: String { return "/me" }
     private static var FollowingPathFormat: String { return "%@/following" }

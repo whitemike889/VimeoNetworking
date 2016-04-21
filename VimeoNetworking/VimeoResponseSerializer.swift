@@ -26,7 +26,7 @@
 
 import Foundation
 
-final class VimeoResponseSerializer: AFJSONResponseSerializer
+final public class VimeoResponseSerializer: AFJSONResponseSerializer
 {
     private static let ErrorDomain = "VimeoResponseSerializerErrorDomain"
     
@@ -38,7 +38,7 @@ final class VimeoResponseSerializer: AFJSONResponseSerializer
         self.readingOptions = .AllowFragments
     }
 
-    required init?(coder aDecoder: NSCoder)
+    required public init?(coder aDecoder: NSCoder)
     {
         fatalError("init(coder:) has not been implemented")
     }

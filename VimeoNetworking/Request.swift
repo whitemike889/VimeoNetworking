@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum CacheFetchPolicy
+public enum CacheFetchPolicy
 {
     static let DefaultPolicy: CacheFetchPolicy = .CacheThenNetwork
     
@@ -18,7 +18,7 @@ enum CacheFetchPolicy
     case TryNetworkThenCache
 }
 
-enum RetryPolicy
+public enum RetryPolicy
 {
     static let DefaultPolicy: RetryPolicy = .SingleAttempt
     
@@ -26,7 +26,7 @@ enum RetryPolicy
     case MultipleAttempts(attemptCount: Int)
 }
 
-struct Request<ModelType: MappableResponse>
+public struct Request<ModelType: MappableResponse>
 {
     let method: VimeoClient.Method
     let path: String

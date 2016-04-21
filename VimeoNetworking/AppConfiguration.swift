@@ -8,8 +8,9 @@
 
 import Foundation
 
-struct AppConfiguration
+public struct AppConfiguration
 {
+    
     let clientKey: String
     let clientSecret: String
     let scopes: [Scope]
@@ -17,5 +18,16 @@ struct AppConfiguration
     // let keychainService: String
     // let keychainAccessGroup: String
     
-    let apiVersion = VimeoDefaultAPIVersionString
+    let apiVersion: String
+    
+    public init(clientKey: String,
+                clientSecret: String,
+                scopes: [Scope],
+                apiVersion: String = VimeoDefaultAPIVersionString)
+    {
+        self.clientKey = clientKey
+        self.clientSecret = clientSecret
+        self.scopes = scopes
+        self.apiVersion = apiVersion
+    }
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class ResponseCache
+final internal class ResponseCache
 {
     func setResponse<ModelType>(responseDictionary: VimeoClient.ResponseDictionary, forRequest request: Request<ModelType>)
     {
