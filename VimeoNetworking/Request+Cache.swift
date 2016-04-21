@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Request
+public extension Request
 {
     var cacheKey: String
     {
@@ -22,8 +22,6 @@ extension Request
                 cacheKey += value
             }
         }
-        
-        cacheKey = cacheKey.md5
         
         return cacheKey
     }

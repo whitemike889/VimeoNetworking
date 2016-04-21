@@ -10,7 +10,7 @@ import Foundation
 
 typealias ToggleRequest = Request<VIMNullResponse>
 
-extension Request
+public extension Request
 {
     static func watchLaterRequest(videoURI videoURI: String) -> Request
     {

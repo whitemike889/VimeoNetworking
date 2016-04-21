@@ -26,12 +26,12 @@
 
 import Foundation
 
-final class VimeoRequestSerializer: AFHTTPRequestSerializer
+final public class VimeoRequestSerializer: AFHTTPRequestSerializer
 {
     private static let AcceptHeaderKey = "Accept"
     private static let AuthorizationHeaderKey = "Authorization"
     
-    typealias AccessTokenProvider = Void -> String?
+    public typealias AccessTokenProvider = Void -> String?
     
     // MARK: 
     
@@ -63,14 +63,14 @@ final class VimeoRequestSerializer: AFHTTPRequestSerializer
         self.setup(apiVersion: appConfiguration.apiVersion)
     }
     
-    required init?(coder aDecoder: NSCoder)
+    required public init?(coder aDecoder: NSCoder)
     {
         fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: Overrides
     
-    override func requestWithMethod(method: String, URLString: String, parameters: AnyObject?, error: NSErrorPointer) -> NSMutableURLRequest
+    override public func requestWithMethod(method: String, URLString: String, parameters: AnyObject?, error: NSErrorPointer) -> NSMutableURLRequest
     {
         var request = super.requestWithMethod(method, URLString: URLString, parameters: parameters, error: error)
        
@@ -79,7 +79,7 @@ final class VimeoRequestSerializer: AFHTTPRequestSerializer
         return request
     }
     
-    override func requestBySerializingRequest(request: NSURLRequest, withParameters parameters: AnyObject?, error: NSErrorPointer) -> NSURLRequest?
+    override public func requestBySerializingRequest(request: NSURLRequest, withParameters parameters: AnyObject?, error: NSErrorPointer) -> NSURLRequest?
     {
         if let request = super.requestBySerializingRequest(request, withParameters: parameters, error: error)
         {
@@ -92,7 +92,7 @@ final class VimeoRequestSerializer: AFHTTPRequestSerializer
         return nil
     }
     
-    override func requestWithMultipartFormRequest(request: NSURLRequest, writingStreamContentsToFile fileURL: NSURL, completionHandler handler: ((NSError?) -> Void)?) -> NSMutableURLRequest
+    override public func requestWithMultipartFormRequest(request: NSURLRequest, writingStreamContentsToFile fileURL: NSURL, completionHandler handler: ((NSError?) -> Void)?) -> NSMutableURLRequest
     {
         var request = super.requestWithMultipartFormRequest(request, writingStreamContentsToFile: fileURL, completionHandler: handler)
     

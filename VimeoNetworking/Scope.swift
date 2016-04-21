@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Scope: String
+public enum Scope: String
 {
     case Public = "public"       // View public videos
     case Private = "private"     // View private videos

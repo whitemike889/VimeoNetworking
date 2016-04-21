@@ -9,13 +9,16 @@
 #ifndef VimeoNetworking_Bridging_Header_h
 #define VimeoNetworking_Bridging_Header_h
 
-#import <AFNetworking/AFNetworking.h>
+//#import <AFNetworking/AFNetworking.h>
 
-#import "VIMObjectMapper.h"
+//#import "VIMObjectMapper.h"
 #import "VIMUser.h"
 #import "VIMAccountNew.h"
 #import "VIMVideo.h"
 
 #import <CommonCrypto/CommonCrypto.h>
+
+@import AFNetworking;
+@import VIMObjectMapper;
 
 #endif /* VimeoNetworking_Bridging_Header_h */

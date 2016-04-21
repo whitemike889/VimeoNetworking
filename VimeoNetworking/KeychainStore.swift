@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SecureDataStore
+internal protocol SecureDataStore
 {
     func setData(data: NSData, forKey key: String) throws
     
@@ -17,7 +17,7 @@ protocol SecureDataStore
     func deleteDataForKey(key: String) throws
 }
 
-final class KeychainStore: SecureDataStore
+final internal class KeychainStore: SecureDataStore
 {
     // TODO:  [RH] (3/24/16)
     

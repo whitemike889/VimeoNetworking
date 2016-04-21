@@ -10,7 +10,7 @@ import Foundation
 
 private let DefaultModelKeyPath = "data"
 
-protocol MappableResponse
+public protocol MappableResponse
 {
     static var mappingClass: AnyClass? { get }
     
@@ -19,12 +19,12 @@ protocol MappableResponse
 
 extension VIMModelObject: MappableResponse
 {
-    static var mappingClass: AnyClass?
+    public static var mappingClass: AnyClass?
     {
         return self
     }
     
-    static var modelKeyPath: String?
+    public static var modelKeyPath: String?
     {
         return nil
     }
@@ -37,7 +37,7 @@ extension Array: MappableResponse
     // This is because we can't restrict the generic type if we're
     // extending a type with generics to conform to a protocol [RH]
     
-    static var mappingClass: AnyClass?
+    public static var mappingClass: AnyClass?
     {
         if Element.self is VIMModelObject.Type
         {
@@ -47,7 +47,7 @@ extension Array: MappableResponse
         return nil
     }
     
-    static var modelKeyPath: String?
+    public static var modelKeyPath: String?
     {
         if Element.self is VIMModelObject.Type
         {
@@ -58,14 +58,14 @@ extension Array: MappableResponse
     }
 }
 
-class VIMNullResponse: MappableResponse
+public class VIMNullResponse: MappableResponse
 {
-    static var mappingClass: AnyClass?
+    public static var mappingClass: AnyClass?
     {
         return self
     }
     
-    static var modelKeyPath: String?
+    public static var modelKeyPath: String?
     {
         return nil
     }

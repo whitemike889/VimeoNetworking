@@ -8,14 +8,14 @@
 
 import Foundation
 
-enum Result<ResultType>
+public enum Result<ResultType>
 {
     case Success(result: ResultType)
     case Failure(error: NSError)
 }
 
 /// This dummy enum acts as a generic typealias
-enum ResultCompletion<ResultType>
+public enum ResultCompletion<ResultType>
 {
-    typealias T = (result: Result<ResultType>) -> Void
+    public typealias T = (result: Result<ResultType>) -> Void
 }

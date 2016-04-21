@@ -25,13 +25,13 @@ Pod::Spec.new do |s|
   # s.exclude_files = "Classes/Exclude"
   # s.resources = "Resources/*.png"
 
-  s.frameworks = "Foundation"
+  s.frameworks = ["Foundation"]
 
   s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # s.dependency "JSONKit", "~> 1.4"
 
-  s.dependency 'VIMObjectMapper', '6.0.0'
-  s.dependency 'AFNetworking', '2.6.3'
+  s.dependency 'VIMObjectMapper'
+  s.dependency 'AFNetworking'
 end

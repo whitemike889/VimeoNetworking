@@ -26,13 +26,13 @@
 
 import Foundation
 
-enum VimeoErrorKey: String
+public enum VimeoErrorKey: String
 {
     case VimeoErrorCode = "VimeoLocalErrorCode" // Wish this could just be VimeoErrorCode but it conflicts with server-side key [AH] 2/5/2016
     case VimeoErrorDomain = "VimeoErrorDomain"
 }
 
-extension NSError
+public extension NSError
 {
     func isNetworkTaskCancellationError() -> Bool
     {
