@@ -41,7 +41,7 @@ public struct Request<ModelType: MappableResponse>
     
     // MARK: -
     
-    init(method: VimeoClient.Method = .GET,
+    public init(method: VimeoClient.Method = .GET,
          path: String,
          parameters: VimeoClient.RequestParameters? = nil,
          modelKeyPath: String? = nil,
