@@ -26,7 +26,7 @@ final public class AuthenticationController
     
     private static let CodeGrantAuthorizationPath = "oauth/authorize"
     
-    typealias AuthenticationCompletion = ResultCompletion<VIMAccountNew>.T
+    public typealias AuthenticationCompletion = ResultCompletion<VIMAccountNew>.T
     
     /// State is tracked for the code grant request/response cycle, to avoid interception
     static let state = NSProcessInfo.processInfo().globallyUniqueString
@@ -36,6 +36,12 @@ final public class AuthenticationController
     
     private let accountStore = AccountStore()
     
+    public init(client: VimeoClient)
+    {
+        self.configuration = client.configuration
+        self.client = client
+    }
+    
     public init(configuration: AppConfiguration, client: VimeoClient)
     {
         self.configuration = configuration
@@ -44,7 +50,7 @@ final public class AuthenticationController
     
     // MARK: - Saved Accounts
     
-    func loadSavedAccount() throws -> VIMAccountNew?
+    public func loadSavedAccount() throws -> VIMAccountNew?
     {
         var loadedAccount = try self.accountStore.loadAccount(.User)
         
@@ -69,14 +75,14 @@ final public class AuthenticationController
     
     // MARK: - Public Authentication
     
-    func clientCredentialsGrant(completion: AuthenticationCompletion)
+    public func clientCredentialsGrant(completion: AuthenticationCompletion)
     {
         let request = AuthenticationRequest.postClientCredentialsGrantRequest(scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
     }
     
-    var codeGrantRedirectURI: String
+    public var codeGrantRedirectURI: String
     {
         let scheme = "vimeo\(self.configuration.clientKey)"
         let path = "auth"
@@ -85,7 +91,7 @@ final public class AuthenticationController
         return URI
     }
     
-    func codeGrantAuthorizationURL() -> NSURL
+    public func codeGrantAuthorizationURL() -> NSURL
     {
         let parameters = [self.dynamicType.ResponseTypeKey: self.dynamicType.CodeKey,
                           self.dynamicType.ClientIDKey: self.configuration.clientKey,
@@ -111,7 +117,7 @@ final public class AuthenticationController
         return url
     }
     
-    func codeGrant(responseURL responseURL: NSURL, completion: AuthenticationCompletion)
+    public func codeGrant(responseURL responseURL: NSURL, completion: AuthenticationCompletion)
     {
         guard let queryString = responseURL.query,
             let parameters = queryString.parametersFromQueryString(),
@@ -150,28 +156,28 @@ final public class AuthenticationController
     
     // MARK: - Private Authentication
     
-    func login(email email: String, password: String, completion: AuthenticationCompletion)
+    public func login(email email: String, password: String, completion: AuthenticationCompletion)
     {
         let request = AuthenticationRequest.postLoginRequest(email: email, password: password, scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
     }
     
-    func join(name name: String, email: String, password: String, completion: AuthenticationCompletion)
+    public func join(name name: String, email: String, password: String, completion: AuthenticationCompletion)
     {
         let request = AuthenticationRequest.postJoinRequest(name: name, email: email, password: password, scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
     }
     
-    func facebookLogin(facebookToken facebookToken: String, completion: AuthenticationCompletion)
+    public func facebookLogin(facebookToken facebookToken: String, completion: AuthenticationCompletion)
     {
         let request = AuthenticationRequest.postLoginFacebookRequest(facebookToken: facebookToken, scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
     }
     
-    func facebookJoin(facebookToken facebookToken: String, completion: AuthenticationCompletion)
+    public func facebookJoin(facebookToken facebookToken: String, completion: AuthenticationCompletion)
     {
         let request = AuthenticationRequest.postJoinFacebookRequest(facebookToken: facebookToken, scopes: self.configuration.scopes)
         
