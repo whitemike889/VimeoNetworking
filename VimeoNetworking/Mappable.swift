@@ -57,3 +57,16 @@ extension Array: MappableResponse
         return nil
     }
 }
+
+class VIMNullResponse: MappableResponse
+{
+    static var mappingClass: AnyClass?
+    {
+        return self
+    }
+    
+    static var modelKeyPath: String?
+    {
+        return nil
+    }
+}

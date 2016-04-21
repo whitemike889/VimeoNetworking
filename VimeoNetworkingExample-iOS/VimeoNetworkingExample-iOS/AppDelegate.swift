@@ -75,33 +75,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         return true
     }
 
-    func applicationWillResignActive(application: UIApplication) {
+    func applicationWillResignActive(application: UIApplication)
+    {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
 
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidEnterBackground(application: UIApplication)
+    {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
 
-    func applicationWillEnterForeground(application: UIApplication) {
+    func applicationWillEnterForeground(application: UIApplication)
+    {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
 
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(application: UIApplication)
+    {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         
         // This is to test code grant auth
-//        if let client = self.client,
-//            let url = self.authenticationController?.codeGrantAuthorizationURL()
-//            where !client.isAuthenticated
-//        {
-//            application.openURL(url)
-//        }
+        if let client = self.client,
+            let url = self.authenticationController?.codeGrantAuthorizationURL()
+            where !client.isAuthenticated
+        {
+            application.openURL(url)
+        }
     }
 
-    func applicationWillTerminate(application: UIApplication) {
+    func applicationWillTerminate(application: UIApplication)
+    {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
@@ -109,7 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     
     func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool
     {
-        self.authenticationController?.codeGrant(responseURL: url, completion: { (result) in
+        self.authenticationController?.codeGrant(responseURL: url, completion: { result in
             
             switch result
             {
@@ -126,7 +131,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     // MARK: - Split view
 
-    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController, ontoPrimaryViewController primaryViewController:UIViewController) -> Bool {
+    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController, ontoPrimaryViewController primaryViewController: UIViewController) -> Bool
+    {
         guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
         guard let topAsDetailController = secondaryAsNavController.topViewController as? DetailViewController else { return false }
         if topAsDetailController.detailItem == nil {
@@ -149,12 +155,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         
         let userURI = "/users/10895030"
         
-        let request = UserRequest.getUserRequest(userURI: userURI)
-        
+        var request = UserRequest.getUserRequest(userURI: userURI)
+        request.cacheFetchPolicy = .CacheOnly
+    
         client.request(request) { result in
             switch result
             {
-            case .Success(let user):
+            case .Success(let response):
+                let user = response.model
                 print("successfully retrieved user: \(user)")
                 print("user bio \(user.bio ?? "🤔")")
             case .Failure(let error):
@@ -162,12 +170,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             }
         }
         
-        let followingRequest = UserListRequest.getUserFollowingRequest(userURI: userURI)
+        var followingRequest = UserListRequest.getUserFollowingRequest(userURI: userURI)
+        followingRequest.cacheFetchPolicy = .CacheOnly
         
-        client.request(followingRequest) { (result) in
+        client.request(followingRequest) { result in
             switch result
             {
-            case .Success(let users):
+            case .Success(let response):
+                let users = response.model
                 print("successfully retrieved users: \(users)")
                 print("user bio \(users.first?.bio ?? "🤔")")
             case .Failure(let error):
@@ -175,14 +185,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             }
         }
         
-        let meRequest = UserRequest.getMeRequest()
+        var meRequest = UserRequest.getMeRequest()
+        meRequest.cacheFetchPolicy = .CacheOnly
         
         client.request(meRequest) { result in
             switch result
             {
-            case .Success(let user):
+            case .Success(let response):
+                let user = response.model
                 print("successfully retrieved me: \(user)")
                 print("user name \(user.name ?? "🤔")")
+                
+                let wlRequest = ToggleRequest.watchLaterRequest(videoURI: "")
+                
+                client.request(wlRequest) { result in
+                    
+                    switch result
+                    {
+                    case .Success(let response):
+                        print("watch later response: \(response)")
+                    case .Failure(let error):
+                        print("watch later error: \(error)")
+                    }
+                    
+                }
+                
             case .Failure(let error):
                 print("request error: \(error)")
             }
