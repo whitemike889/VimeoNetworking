@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
 
   s.source = { :git => "https://github.com/vimeo/VimeoNetworking", :tag => s.version.to_s }
 
-  s.source_files  = "VimeoNetworking"
+  s.source_files  = "VimeoNetworking/VimeoNetworking"
 
   # s.exclude_files = "Classes/Exclude"
   # s.resources = "Resources/*.png"
