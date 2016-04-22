@@ -1,25 +1,31 @@
 use_frameworks!
 
-xcodeproj 'VimeoNetworkingExample-iOS/VimeoNetworkingExample-iOS.xcodeproj'
-
 workspace 'VimeoNetworking'
+xcodeproj 'VimeoNetworking/VimeoNetworking.xcodeproj'
+xcodeproj 'VimeoNetworkingExample-iOS/VimeoNetworkingExample-iOS.xcodeproj'
 
 def shared_pods
     pod 'VIMObjectMapper'
-    pod 'AFNetworking'
+    pod 'AFNetworking', '~> 3.0'
+end
+
+target 'VimeoNetworking' do
+	xcodeproj 'VimeoNetworking/VimeoNetworking.xcodeproj'
+	shared_pods
 end
 
 target 'VimeoNetworkingExample-iOS' do
-	shared_pods
-
 	xcodeproj 'VimeoNetworkingExample-iOS/VimeoNetworkingExample-iOS.xcodeproj'
+	shared_pods
 end
 
 target 'VimeoNetworkingExample-iOSTests' do
+	xcodeproj 'VimeoNetworkingExample-iOS/VimeoNetworkingExample-iOS.xcodeproj'
 	shared_pods
 end
 
 target 'VimeoNetworkingExample-iOSUITests' do
+	xcodeproj 'VimeoNetworkingExample-iOS/VimeoNetworkingExample-iOS.xcodeproj'
 	shared_pods
 end
 

@@ -10,13 +10,13 @@ import Foundation
 
 public struct Response<ModelType: MappableResponse>
 {
-    let model: ModelType
+    public let model: ModelType
     
-    var isCachedResponse: Bool
-    var isFinalResponse: Bool
+    public var isCachedResponse: Bool
+    public var isFinalResponse: Bool
     
-    let nextPagePath: String? // TODO: implement [RH] (4/5/16)
-    var nextPageRequest: Request<ModelType>?
+    public let nextPagePath: String? // TODO: implement [RH] (4/5/16)
+    public var nextPageRequest: Request<ModelType>?
     {
         return nil // TODO: computed from nextPagePath [RH] (4/5/16)
     }

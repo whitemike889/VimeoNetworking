@@ -26,6 +26,8 @@
 
 import Foundation
 
+import AFNetworking
+
 final public class VimeoRequestSerializer: AFHTTPRequestSerializer
 {
     private static let AcceptHeaderKey = "Accept"

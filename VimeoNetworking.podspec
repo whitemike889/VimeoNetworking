@@ -20,10 +20,8 @@ Pod::Spec.new do |s|
 
   s.source = { :git => "https://github.com/vimeo/VimeoNetworking", :tag => s.version.to_s }
 
-  s.source_files  = "VimeoNetworking"
-
-  # s.exclude_files = "Classes/Exclude"
-  # s.resources = "Resources/*.png"
+  s.source_files  = "VimeoNetworking/VimeoNetworking"
+  s.exclude_files = "VimeoNetworking/VimeoNetworking/VimeoNetworking.h"
 
   s.frameworks = ["Foundation"]
 
@@ -33,5 +31,5 @@ Pod::Spec.new do |s|
   # s.dependency "JSONKit", "~> 1.4"
 
   s.dependency 'VIMObjectMapper'
-  s.dependency 'AFNetworking'
+  s.dependency 'AFNetworking', '~> 3.0'
 end

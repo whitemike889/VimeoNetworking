@@ -8,6 +8,8 @@
 
 import UIKit
 
+import VimeoNetworking
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate
 {
@@ -68,7 +70,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                 case .Failure(let error):
                     print("failure authenticating: \(error)")
                 }
-                
             }
         }
         
@@ -156,7 +157,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let userURI = "/users/10895030"
         
         var request = UserRequest.getUserRequest(userURI: userURI)
-        request.cacheFetchPolicy = .CacheOnly
+//        request.cacheFetchPolicy = .CacheOnly
     
         client.request(request) { result in
             switch result
@@ -171,7 +172,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         }
         
         var followingRequest = UserListRequest.getUserFollowingRequest(userURI: userURI)
-        followingRequest.cacheFetchPolicy = .CacheOnly
+//        followingRequest.cacheFetchPolicy = .CacheOnly
         
         client.request(followingRequest) { result in
             switch result
@@ -186,7 +187,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         }
         
         var meRequest = UserRequest.getMeRequest()
-        meRequest.cacheFetchPolicy = .CacheOnly
+//        meRequest.cacheFetchPolicy = .CacheOnly
         
         client.request(meRequest) { result in
             switch result

@@ -28,20 +28,20 @@ public enum RetryPolicy
 
 public struct Request<ModelType: MappableResponse>
 {
-    let method: VimeoClient.Method
-    let path: String
-    let parameters: VimeoClient.RequestParameters?
+    public let method: VimeoClient.Method
+    public let path: String
+    public let parameters: VimeoClient.RequestParameters?
     
-    let modelKeyPath: String?
+    public let modelKeyPath: String?
     
-    var cacheFetchPolicy: CacheFetchPolicy
-    let shouldCacheResponse: Bool
+    public var cacheFetchPolicy: CacheFetchPolicy
+    public let shouldCacheResponse: Bool
     
-    let retryPolicy: RetryPolicy
+    public let retryPolicy: RetryPolicy
     
     // MARK: -
     
-    init(method: VimeoClient.Method = .GET,
+    public init(method: VimeoClient.Method = .GET,
          path: String,
          parameters: VimeoClient.RequestParameters? = nil,
          modelKeyPath: String? = nil,

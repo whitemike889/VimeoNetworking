@@ -8,6 +8,8 @@
 
 import Foundation
 
+import VIMObjectMapper
+
 private let DefaultModelKeyPath = "data"
 
 public protocol MappableResponse
