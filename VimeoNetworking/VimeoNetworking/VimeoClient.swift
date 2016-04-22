@@ -305,6 +305,8 @@ final public class VimeoClient
     private func handleError<ModelType: MappableResponse>(error: NSError, request: Request<ModelType>)
     {
         // TODO: global error handling code goes here [RH] (4/13/16)
+        
+        
     }
 }
 
