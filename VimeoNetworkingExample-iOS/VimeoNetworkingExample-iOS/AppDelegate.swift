@@ -115,7 +115,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     
     func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool
     {
-        self.authenticationController?.codeGrant(responseURL: url, completion: { result in
+        self.authenticationController?.codeGrant(responseURL: url) { result in
             
             switch result
             {
@@ -125,7 +125,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             case .Failure(let error):
                 print("failure authenticating: \(error)")
             }
-        })
+        }
         
         return true
     }

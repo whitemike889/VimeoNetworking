@@ -27,8 +27,11 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
 
-  # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  # s.dependency "JSONKit", "~> 1.4"
+  s.subspec 'Model' do |ss|
+    ss.source_files = 'VimeoNetworking/VimeoNetworking/Models'
+    ss.frameworks = 'Foundation', 'CoreGraphics', 'AVFoundation'
+    ss.dependency 'VIMObjectMapper'
+  end
 
   s.dependency 'VIMObjectMapper'
   s.dependency 'AFNetworking', '~> 3.0'
