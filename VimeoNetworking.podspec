@@ -34,5 +34,5 @@ Pod::Spec.new do |s|
   end
 
   s.dependency 'VIMObjectMapper'
-  s.dependency 'AFNetworking', '~> 3.0'
+  s.dependency 'AFNetworking', '3.1.0'
 end

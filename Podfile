@@ -6,7 +6,7 @@ xcodeproj 'VimeoNetworkingExample-iOS/VimeoNetworkingExample-iOS.xcodeproj'
 
 def shared_pods
     pod 'VIMObjectMapper'
-    pod 'AFNetworking', '~> 3.0'
+    pod 'AFNetworking', '3.1.0'
 end
 
 target 'VimeoNetworking' do
