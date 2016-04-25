@@ -47,7 +47,7 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
         
     // MARK: Public API
 
-    func responseObjectFromDownloadTaskResponse(response response: NSURLResponse?, url: NSURL?, error: NSError?) throws -> [String: AnyObject]?
+    public func responseObjectFromDownloadTaskResponse(response response: NSURLResponse?, url: NSURL?, error: NSError?) throws -> [String: AnyObject]?
     {
         var responseObject: [String: AnyObject]? = nil
         var serializationError: NSError? = nil
@@ -70,7 +70,7 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
         return responseObject
     }
     
-    func checkDataResponseForError(response response: NSURLResponse?, responseObject: AnyObject?, error: NSError?) throws
+    public func checkDataResponseForError(response response: NSURLResponse?, responseObject: AnyObject?, error: NSError?) throws
     {
         // TODO: If error is nil and errorInfo is non-nil, we should throw an error [AH] 2/5/2016
         
@@ -84,7 +84,7 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
         try self.checkStatusCodeValidity(response: response)
     }
 
-    func checkStatusCodeValidity(response response: NSURLResponse?) throws
+    public func checkStatusCodeValidity(response response: NSURLResponse?) throws
     {
         if let httpResponse = response as? NSHTTPURLResponse where httpResponse.statusCode < 200 || httpResponse.statusCode > 299
         {
@@ -93,7 +93,7 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
         }
     }
     
-    func dictionaryFromDownloadTaskResponse(url url: NSURL?) throws -> [String: AnyObject]
+    public func dictionaryFromDownloadTaskResponse(url url: NSURL?) throws -> [String: AnyObject]
     {
         guard let url = url else
         {
