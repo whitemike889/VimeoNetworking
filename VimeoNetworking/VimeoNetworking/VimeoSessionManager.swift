@@ -30,6 +30,33 @@ import AFNetworking
 
 final public class VimeoSessionManager: AFHTTPSessionManager
 {
+    // MARK: - Default Session Initialization
+    
+    public static func defaultSessionManager(requestSerializer: VimeoRequestSerializer) -> VimeoSessionManager
+    {
+        let sessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        
+        return VimeoSessionManager(sessionConfiguration: sessionConfiguration, requestSerializer: requestSerializer)
+    }
+    
+    // MARK: - Background Session Initialization
+    
+    public static func backgroundSessionManager(identifier identifier: String, requestSerializer: VimeoRequestSerializer) -> VimeoSessionManager
+    {
+        let sessionConfiguration: NSURLSessionConfiguration
+                
+        if #available(iOS 8.0, OSX 10.10, *)
+        {
+            sessionConfiguration = NSURLSessionConfiguration.backgroundSessionConfigurationWithIdentifier(identifier)
+        }
+        else
+        {
+            sessionConfiguration = NSURLSessionConfiguration.backgroundSessionConfiguration(identifier)
+        }
+        
+        return VimeoSessionManager(sessionConfiguration: sessionConfiguration, requestSerializer: requestSerializer)
+    }
+    
     // MARK: Initialization
     
     init(sessionConfiguration: NSURLSessionConfiguration, requestSerializer: VimeoRequestSerializer)
