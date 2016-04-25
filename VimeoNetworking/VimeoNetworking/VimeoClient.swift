@@ -65,6 +65,8 @@ final public class VimeoClient
             {
                 self.sessionManager.clientDidClearAccount()
             }
+            
+            Notification.AuthenticatedAccountDidChange.post(object: self.authenticatedAccount)
         }
     }
     

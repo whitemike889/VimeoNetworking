@@ -10,14 +10,17 @@ import Foundation
 
 public enum VimeoErrorCode: Int
 {
+    // Upload
     case UploadStorageQuotaExceeded = 4101
     case UploadDailyQuotaExceeded = 4102
     
     case InvalidRequestInput = 2204 // root error code for all invalid parameters errors below
     
+    // Password-protected video playback
     case VideoPasswordIncorrect = 2222
     case NoVideoPasswordProvided = 2223
     
+    // Authentication
     case EmailTooLong = 2216
     case PasswordTooShort = 2210
     case PasswordTooSimple = 2211

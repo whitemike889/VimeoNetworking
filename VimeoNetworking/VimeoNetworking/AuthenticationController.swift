@@ -59,6 +59,10 @@ final public class AuthenticationController
             try self.authenticateClient(account: loadedAccount)
             
             print("loaded account \(loadedAccount)")
+            
+            // TODO: refresh user [RH] (4/25/16)
+            
+            // TODO: after refreshing user, send notification [RH] (4/25/16)
         }
         else
         {
