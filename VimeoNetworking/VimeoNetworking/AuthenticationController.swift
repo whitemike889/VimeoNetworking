@@ -12,11 +12,6 @@ final public class AuthenticationController
 {
     static let ErrorDomain = "AuthenticationControllerErrorDomain"
     
-    static let ErrorAuthToken = 1004 // TODO: Make this an enum to ensure uniqueness [RH] (3/23/16)
-    static let ErrorCodeGrant = 1005
-    static let ErrorCodeGrantState = 1006
-    static let ErrorNoResponse = 1007
-    
     private static let ResponseTypeKey = "response_type"
     private static let CodeKey = "code"
     private static let ClientIDKey = "client_id"
@@ -129,7 +124,7 @@ final public class AuthenticationController
             
             assertionFailure(errorDescription)
             
-            let error = NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorCodeGrant, userInfo: [NSLocalizedDescriptionKey: errorDescription])
+            let error = NSError(domain: self.dynamicType.ErrorDomain, code: LocalErrorCode.CodeGrant.rawValue, userInfo: [NSLocalizedDescriptionKey: errorDescription])
             
             completion(result: .Failure(error: error))
             
@@ -142,7 +137,7 @@ final public class AuthenticationController
             
             assertionFailure(errorDescription)
             
-            let error = NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorCodeGrantState, userInfo: [NSLocalizedDescriptionKey: errorDescription])
+            let error = NSError(domain: self.dynamicType.ErrorDomain, code: LocalErrorCode.CodeGrantState.rawValue, userInfo: [NSLocalizedDescriptionKey: errorDescription])
             
             completion(result: .Failure(error: error))
             
@@ -212,7 +207,7 @@ final public class AuthenticationController
                 
                 assertionFailure(errorDescription)
                 
-                resultError = NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorNoResponse, userInfo: [NSLocalizedDescriptionKey: errorDescription])
+                resultError = NSError(domain: self.dynamicType.ErrorDomain, code: LocalErrorCode.NoResponse.rawValue, userInfo: [NSLocalizedDescriptionKey: errorDescription])
             }
             
             return .Failure(error: resultError)
@@ -245,7 +240,7 @@ final public class AuthenticationController
             
             assertionFailure(errorDescription)
             
-            let error = NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorAuthToken, userInfo: [NSLocalizedDescriptionKey: errorDescription])
+            let error = NSError(domain: self.dynamicType.ErrorDomain, code: LocalErrorCode.AuthToken.rawValue, userInfo: [NSLocalizedDescriptionKey: errorDescription])
             
             throw error
         }

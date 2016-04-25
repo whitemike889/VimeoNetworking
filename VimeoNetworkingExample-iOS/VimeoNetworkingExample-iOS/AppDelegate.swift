@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     
     var authenticationController: AuthenticationController?
     var client: VimeoClient?
+    
+    var observationToken: ObservationToken?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
@@ -73,7 +75,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             }
         }
         
+        self.observationToken = Notification.AuthenticatedAccountDidChange.observe { notification in
+            print("authenticated account changed")
+        }
+        
+        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(timer), userInfo: nil, repeats: true)
+        
         return true
+    }
+    
+    func timer()
+    {
+        Notification.ClientDidReceiveInvalidTokenError.post(object: nil)
     }
 
     func applicationWillResignActive(application: UIApplication)

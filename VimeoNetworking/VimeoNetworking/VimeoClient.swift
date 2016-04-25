@@ -36,12 +36,6 @@ final public class VimeoClient
     
     static let ErrorDomain = "VimeoClientErrorDomain"
     
-    // TODO: make these an enum [RH] (3/30/16)
-    static let ErrorInvalidDictionary = 1001
-    static let ErrorRequestMalformed = 1004
-    static let ErrorUndefined = 1009
-    static let ErrorCachedResponseNotFound = 1010
-    
     // MARK: -
     
     private let sessionManager: VimeoSessionManager
@@ -127,7 +121,7 @@ final public class VimeoClient
                     else if request.cacheFetchPolicy == .CacheOnly
                     {
                         let description = "Cached response not found"
-                        let error = NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorCachedResponseNotFound, userInfo: [NSLocalizedDescriptionKey: description])
+                        let error = NSError(domain: self.dynamicType.ErrorDomain, code: LocalErrorCode.CachedResponseNotFound.rawValue, userInfo: [NSLocalizedDescriptionKey: description])
                         
                         self.handleError(error, request: request)
                         
@@ -206,7 +200,7 @@ final public class VimeoClient
             
             assertionFailure(description)
             
-            let error = NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorRequestMalformed, userInfo: [NSLocalizedDescriptionKey: description])
+            let error = NSError(domain: self.dynamicType.ErrorDomain, code: LocalErrorCode.RequestMalformed.rawValue, userInfo: [NSLocalizedDescriptionKey: description])
             
             networkRequestCompleted = true
             
@@ -244,7 +238,7 @@ final public class VimeoClient
                 
                 assertionFailure(description)
                 
-                let error = NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorInvalidDictionary, userInfo: [NSLocalizedDescriptionKey: description])
+                let error = NSError(domain: self.dynamicType.ErrorDomain, code: LocalErrorCode.InvalidResponseDictionary.rawValue, userInfo: [NSLocalizedDescriptionKey: description])
                 
                 self.handleTaskFailure(request: request, task: task, error: error, completionQueue: completionQueue, completion: completion)
             }
@@ -275,7 +269,7 @@ final public class VimeoClient
     
     private func handleTaskFailure<ModelType: MappableResponse>(request request: Request<ModelType>, task: NSURLSessionDataTask?, error: NSError?, completionQueue: dispatch_queue_t, completion: ResultCompletion<Response<ModelType>>.T)
     {
-        let error = error ?? NSError(domain: self.dynamicType.ErrorDomain, code: self.dynamicType.ErrorUndefined, userInfo: [NSLocalizedDescriptionKey: "Undefined error"])
+        let error = error ?? NSError(domain: self.dynamicType.ErrorDomain, code: LocalErrorCode.Undefined.rawValue, userInfo: [NSLocalizedDescriptionKey: "Undefined error"])
         
         if error.code == NSURLErrorCancelled
         {
@@ -304,9 +298,14 @@ final public class VimeoClient
     
     private func handleError<ModelType: MappableResponse>(error: NSError, request: Request<ModelType>)
     {
-        // TODO: global error handling code goes here [RH] (4/13/16)
-        
-        
+        if error.isServiceUnavailableError
+        {
+            Notification.ClientDidReceiveServiceUnavailableError.post(object: nil)
+        }
+        else if error.isInvalidTokenError
+        {
+            Notification.ClientDidReceiveInvalidTokenError.post(object: nil)
+        }
     }
 }
 

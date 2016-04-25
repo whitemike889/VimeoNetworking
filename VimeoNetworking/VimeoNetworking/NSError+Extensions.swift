@@ -35,6 +35,26 @@ public enum VimeoErrorKey: String
 
 public extension NSError
 {
+    public var isServiceUnavailableError: Bool
+    {
+        return self.statusCode == HTTPStatusCode.ServiceUnavailable.rawValue
+    }
+    
+    public var isInvalidTokenError: Bool
+    {
+        if let urlResponse = self.userInfo[AFNetworkingOperationFailingURLResponseErrorKey] as? NSHTTPURLResponse
+            where urlResponse.statusCode == HTTPStatusCode.Unauthorized.rawValue
+        {
+            if let header = urlResponse.allHeaderFields["WWW-Authenticate"] as? String
+                where header == "Bearer error=\"invalid_token\""
+            {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
     func isNetworkTaskCancellationError() -> Bool
     {
         return self.domain == NSURLErrorDomain && self.code == NSURLErrorCancelled
@@ -104,26 +124,7 @@ public extension NSError
         return NSError(domain: self.domain, code: self.code, userInfo: augmentedInfo as [NSObject: AnyObject])
     }
     
-    // MARK: - 
-    
-    // Some params from NSError+VIMNetworking
-    
-//    // A numeric error code that provides direction as to why the error occurred,
-//    // We hope that in the future these can be sunset in favor of using only VimeoErrorCodeKey (see below)
-//    NSString * const VimeoErrorCodeHeaderKey = @"Vimeo-Error-Code";
-//    NSString * const VimeoErrorCodeKeyLegacy = @"VimeoErrorCode";
-//    
-//    // A numeric error code that provides direction as to why the error occurred
-//    NSString * const VimeoErrorCodeKey = @"error_code";
-//    
-//    // A list of numeric error codes that indicate which parameters are causing the request to fail
-//    NSString * const VimeoInvalidParametersKey = @"invalid_parameters";
-//    
-//    // A developer-facing message
-//    NSString * const VimeoDeveloperMessageKey = @"developer_message";
-//    
-//    // A user-facing message
-//    NSString * const VimeoUserMessageKey = @"error";
+    // MARK: -
     
     private static let VimeoErrorCodeHeaderKey = "Vimeo-Error-Code"
     private static let VimeoErrorCodeKeyLegacy = "VimeoErrorCode"
@@ -141,54 +142,43 @@ public extension NSError
     
     public var vimeoServerErrorCode: Int?
     {
-//        NSNumber *errorCodeNumber = self.userInfo[VimeoErrorCodeKeyLegacy];
-//        if (errorCodeNumber)
-//        {
-//            NSInteger errorCode = [errorCodeNumber integerValue];
-//            
-//            return errorCode;
-//        }
-//        
-//        NSHTTPURLResponse *response = self.userInfo[AFNetworkingOperationFailingURLResponseErrorKey];
-//        if (response)
-//        {
-//            NSDictionary *headers = [response allHeaderFields];
-//            NSString *vimeoError = headers[VimeoErrorCodeHeaderKey];
-//            
-//            if (vimeoError)
-//            {
-//                return [vimeoError integerValue];
-//            }
-//        }
-//        
-//        NSDictionary *json = [self errorResponseBodyJSON];
-//        errorCodeNumber = [json objectForKey:VimeoErrorCodeKey];
-//        if (errorCodeNumber)
-//        {
-//            return [errorCodeNumber integerValue];
-//        }
-//        
-//        return NSNotFound;
+        if let errorCode = (self.userInfo[self.dynamicType.VimeoErrorCodeKeyLegacy] as? NSNumber)?.integerValue
+        {
+            return errorCode
+        }
+        
+        if let response = self.userInfo[AFNetworkingOperationFailingURLResponseErrorKey],
+            let headers = response.allHeaderFields,
+            let vimeoErrorCode = (headers[self.dynamicType.VimeoErrorCodeHeaderKey] as? NSNumber)?.integerValue
+        {
+            return vimeoErrorCode
+        }
+        
+        if let json = self.errorResponseBodyJSON,
+            let errorCode = (json[self.dynamicType.VimeoErrorCodeKey] as? NSNumber)?.integerValue
+        {
+            return errorCode
+        }
         
         return nil
     }
     
     public var errorResponseBodyJSON: [String: AnyObject]?
     {
-//        NSData *data = self.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
-//        if (data)
-//        {
-//            NSError *error = nil;
-//            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-//            
-//            if (json && !error)
-//            {
-//                return json;
-//            }
-//        }
-//        
-//        return nil;
-//        
+        if let data = self.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] as? NSData
+        {
+            do
+            {
+                let json = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? [String: AnyObject]
+                
+                return json
+            }
+            catch
+            {
+                return nil
+            }
+        }
+        
         return nil
     }
 }
