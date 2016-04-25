@@ -9,11 +9,28 @@
 import Foundation
 
 public typealias ToggleRequest = Request<VIMNullResponse>
+public typealias VideoRequest = Request<VIMVideo>
 
 public extension Request
 {
-    public static func watchLaterRequest(videoURI videoURI: String) -> Request
+    public static func getVideoRequest(videoURI videoURI: String) -> Request
     {
-        return Request(method: .PUT, path: "/users/10895030/likes/7235817")
+        return Request(path: videoURI)
+    }
+    
+    // MARK: - Search
+    
+    // TODO: search with query [RH] (4/25/16)
+    
+    // MARK: - Toggle
+    
+    public static func watchLaterRequest(videoURI videoURI: String, newValue: Bool) -> Request
+    {
+        return Request(method: newValue ? .PUT : .DELETE, path: "") // TODO:  [RH] (4/25/16)
+    }
+    
+    public static func likeRequest(videoURI videoURI: String, newValue: Bool) -> Request
+    {
+        return Request(method: newValue ? .PUT : .DELETE, path: "") // TODO:  [RH] (4/25/16)
     }
 }
