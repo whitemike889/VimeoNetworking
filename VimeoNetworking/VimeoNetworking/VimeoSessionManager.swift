@@ -29,7 +29,7 @@ import Foundation
 import AFNetworking
 
 final public class VimeoSessionManager: AFHTTPSessionManager
-{
+{    
     // MARK: Initialization
     
     init(sessionConfiguration: NSURLSessionConfiguration, requestSerializer: VimeoRequestSerializer)
