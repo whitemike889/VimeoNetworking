@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		016259C11CD017170004D4AF /* Request+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016259BF1CD017170004D4AF /* Request+Category.swift */; };
+		016259C21CD017170004D4AF /* Request+Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016259C01CD017170004D4AF /* Request+Channel.swift */; };
 		01B061DF1CCE8BBB00F515E6 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B061DE1CCE8BBB00F515E6 /* Notification.swift */; };
 		01B061E11CCE992D00F515E6 /* ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B061E01CCE992D00F515E6 /* ErrorCode.swift */; };
-		01B061E31CCEB47300F515E6 /* Request+Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B061E21CCEB47300F515E6 /* Request+Channel.swift */; };
-		01B061E51CCEB48300F515E6 /* Request+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B061E41CCEB48300F515E6 /* Request+Category.swift */; };
 		01B061E71CCFBBB000F515E6 /* Request+Toggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B061E61CCFBBB000F515E6 /* Request+Toggle.swift */; };
 		01B5C8681CC826D800694F4A /* VimeoNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 01B5C8671CC826D800694F4A /* VimeoNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		01B5C86F1CC826D800694F4A /* VimeoNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B5C8641CC826D800694F4A /* VimeoNetworking.framework */; };
@@ -107,10 +107,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		016259BF1CD017170004D4AF /* Request+Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Request+Category.swift"; path = "VimeoNetworking/Request+Category.swift"; sourceTree = "<group>"; };
+		016259C01CD017170004D4AF /* Request+Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Request+Channel.swift"; path = "VimeoNetworking/Request+Channel.swift"; sourceTree = "<group>"; };
 		01B061DE1CCE8BBB00F515E6 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Notification.swift; path = VimeoNetworking/Notification.swift; sourceTree = "<group>"; };
 		01B061E01CCE992D00F515E6 /* ErrorCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorCode.swift; path = VimeoNetworking/ErrorCode.swift; sourceTree = "<group>"; };
-		01B061E21CCEB47300F515E6 /* Request+Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Request+Channel.swift"; sourceTree = "<group>"; };
-		01B061E41CCEB48300F515E6 /* Request+Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Request+Category.swift"; sourceTree = "<group>"; };
 		01B061E61CCFBBB000F515E6 /* Request+Toggle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Request+Toggle.swift"; path = "VimeoNetworking/Request+Toggle.swift"; sourceTree = "<group>"; };
 		01B5C8641CC826D800694F4A /* VimeoNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VimeoNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		01B5C8671CC826D800694F4A /* VimeoNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VimeoNetworking.h; path = ../VimeoNetworking/VimeoNetworking/VimeoNetworking.h; sourceTree = "<group>"; };
@@ -292,10 +292,10 @@
 		01B061DB1CCAC27000F515E6 /* Request Constructors */ = {
 			isa = PBXGroup;
 			children = (
-				01FD38B41CC948F200326408 /* Request+User.swift */,
 				01FD38B51CC948F200326408 /* Request+Video.swift */,
-				01B061E21CCEB47300F515E6 /* Request+Channel.swift */,
-				01B061E41CCEB48300F515E6 /* Request+Category.swift */,
+				01FD38B41CC948F200326408 /* Request+User.swift */,
+				016259BF1CD017170004D4AF /* Request+Category.swift */,
+				016259C01CD017170004D4AF /* Request+Channel.swift */,
 				01B061E61CCFBBB000F515E6 /* Request+Toggle.swift */,
 			);
 			name = "Request Constructors";
@@ -305,7 +305,6 @@
 			isa = PBXGroup;
 			children = (
 				01B5C8D71CC8271A00694F4A /* VimeoNetworking */,
-				01B5C8661CC826D800694F4A /* VimeoNetworking */,
 				01B5C8721CC826D800694F4A /* VimeoNetworkingTests */,
 				01B5C8651CC826D800694F4A /* Products */,
 				B032718DC2309E311A8CADCF /* Pods */,
@@ -320,13 +319,6 @@
 				01B5C86E1CC826D800694F4A /* VimeoNetworkingTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		01B5C8661CC826D800694F4A /* VimeoNetworking */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = VimeoNetworking;
 			sourceTree = "<group>";
 		};
 		01B5C8721CC826D800694F4A /* VimeoNetworkingTests */ = {
@@ -631,8 +623,8 @@
 				01FD390E1CC948F200326408 /* VIMAccountCredential.m in Sources */,
 				01FD39321CC948F300326408 /* VIMQuantityQuota.m in Sources */,
 				01FD39051CC948F200326408 /* Request+Video.swift in Sources */,
-				01B061E31CCEB47300F515E6 /* Request+Channel.swift in Sources */,
-				01B061E51CCEB48300F515E6 /* Request+Category.swift in Sources */,
+				016259C11CD017170004D4AF /* Request+Category.swift in Sources */,
+				016259C21CD017170004D4AF /* Request+Channel.swift in Sources */,
 				01FD39081CC948F200326408 /* Result.swift in Sources */,
 				01FD39141CC948F300326408 /* VIMAppeal.m in Sources */,
 				01FD39061CC948F200326408 /* Response.swift in Sources */,
