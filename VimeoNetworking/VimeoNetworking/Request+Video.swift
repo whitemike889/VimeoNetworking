@@ -9,6 +9,7 @@
 import Foundation
 
 public typealias VideoRequest = Request<VIMVideo>
+public typealias VideoListRequest = Request<[VIMVideo]>
 
 public extension Request
 {

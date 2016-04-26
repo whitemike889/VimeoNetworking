@@ -9,6 +9,7 @@
 import Foundation
 
 public typealias ChannelRequest = Request<VIMChannel>
+public typealias ChannelListRequest = Request<[VIMChannel]>
 
 public extension Request
 {
