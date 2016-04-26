@@ -8,18 +8,18 @@
 
 import Foundation
 
-typealias SoundtrackListRequest = Request<[VIMSoundtrack]>
+public typealias SoundtrackListRequest = Request<[VIMSoundtrack]>
 
 public extension Request
 {
     private static var SoundtracksURI: String { return "/songs" }
     
-    static func getSoundtrackListRequest() -> Request
+    public static func getSoundtrackListRequest() -> Request
     {
         return self.getSoundtrackListRequest(soundtracksURI: self.SoundtracksURI)
     }
     
-    static func getSoundtrackListRequest(soundtracksURI soundtracksURI: String) -> Request
+    public static func getSoundtrackListRequest(soundtracksURI soundtracksURI: String) -> Request
     {
         return Request(path: soundtracksURI)
     }
