@@ -351,8 +351,7 @@
 				01B5C8671CC826D800694F4A /* VimeoNetworking.h */,
 			);
 			name = VimeoNetworking;
-			path = /Users/huebnerr/Repos/VimeoNetworking/VimeoNetworking;
-			sourceTree = "<absolute>";
+			sourceTree = SOURCE_ROOT;
 		};
 		01FD394D1CC9508200326408 /* Models */ = {
 			isa = PBXGroup;
