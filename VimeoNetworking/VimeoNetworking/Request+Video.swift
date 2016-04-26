@@ -8,11 +8,17 @@
 
 import Foundation
 
-public typealias ToggleRequest = Request<VIMNullResponse>
 public typealias VideoRequest = Request<VIMVideo>
 
 public extension Request
 {
+    public static var TitleKey: String { return "name" }
+    public static var DescriptionKey: String { return "description" }
+    public static var ViewKey: String { return "view" }
+    public static var PrivacyKey: String { return "privacy" }
+    
+    // MARK: - 
+    
     public static func getVideoRequest(videoURI videoURI: String) -> Request
     {
         return Request(path: videoURI)
@@ -22,15 +28,27 @@ public extension Request
     
     // TODO: search with query [RH] (4/25/16)
     
-    // MARK: - Toggle
+    // MARK: - Edit Video
     
-    public static func watchLaterRequest(videoURI videoURI: String, newValue: Bool) -> Request
+    public static func patchVideoRequest(videoURI videoURI: String, newTitle: String?, newDescription: String?, newPrivacy: String?) -> Request
     {
-        return Request(method: newValue ? .PUT : .DELETE, path: "") // TODO:  [RH] (4/25/16)
-    }
-    
-    public static func likeRequest(videoURI videoURI: String, newValue: Bool) -> Request
-    {
-        return Request(method: newValue ? .PUT : .DELETE, path: "") // TODO:  [RH] (4/25/16)
+        var parameters = VimeoClient.RequestParameters()
+        
+        if let newTitle = newTitle
+        {
+            parameters[self.TitleKey] = newTitle
+        }
+        
+        if let newDescription = newDescription
+        {
+            parameters[self.DescriptionKey] = newDescription
+        }
+        
+        if let newPrivacy = newPrivacy
+        {
+            parameters[self.PrivacyKey] = [self.ViewKey: newPrivacy]
+        }
+        
+        return Request(method: .PATCH, path: videoURI, parameters: parameters)
     }
 }

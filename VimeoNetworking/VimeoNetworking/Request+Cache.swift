@@ -19,7 +19,7 @@ public extension Request
             for (key, value) in parameters
             {
                 cacheKey += key
-                cacheKey += value
+                cacheKey += value.description
             }
         }
         
