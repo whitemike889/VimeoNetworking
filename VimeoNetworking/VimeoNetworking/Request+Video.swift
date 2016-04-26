@@ -12,10 +12,13 @@ public typealias VideoRequest = Request<VIMVideo>
 
 public extension Request
 {
-    public static var TitleKey: String { return "name" }
-    public static var DescriptionKey: String { return "description" }
-    public static var ViewKey: String { return "view" }
-    public static var PrivacyKey: String { return "privacy" }
+    private static var TitleKey: String { return "name" }
+    private static var DescriptionKey: String { return "description" }
+    private static var ViewKey: String { return "view" }
+    private static var PrivacyKey: String { return "privacy" }
+    private static var QueryKey: String { return "query" }
+    
+    private static var VideosPath: String { return "/videos" }
     
     // MARK: - 
     
@@ -26,7 +29,14 @@ public extension Request
     
     // MARK: - Search
     
-    // TODO: search with query [RH] (4/25/16)
+    public static func queryVideos(query query: String, refinements: VimeoClient.RequestParameters? = nil) -> Request
+    {
+        var parameters = refinements ?? [:]
+        
+        parameters[self.QueryKey] = query
+        
+        return Request(path: self.VideosPath, parameters: parameters)
+    }
     
     // MARK: - Edit Video
     

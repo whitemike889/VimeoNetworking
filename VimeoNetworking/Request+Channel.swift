@@ -12,13 +12,21 @@ public typealias ChannelRequest = Request<VIMChannel>
 
 public extension Request
 {
+    private static var QueryKey: String { return "query" }
+    
+    private static var ChannelsPath: String { return "/channels" }
+    
     public static func getChannelRequest(channelURI channelURI: String) -> Request
     {
         return Request(path: channelURI)
     }
     
-    public static func getChannelSearchRequest(query query: String, extraParameters: [String: String]? = nil) -> Request
+    public static func queryChannels(query query: String, refinements: VimeoClient.RequestParameters? = nil) -> Request
     {
-        return Request(path: "/channels", parameters: extraParameters)
+        var parameters = refinements ?? [:]
+        
+        parameters[self.QueryKey] = query
+        
+        return Request(path: self.ChannelsPath, parameters: parameters)
     }
 }

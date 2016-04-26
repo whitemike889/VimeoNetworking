@@ -16,10 +16,12 @@ public extension Request
     private static var MeUserURI: String { return "/me" }
     private static var FollowingPathFormat: String { return "%@/following" }
     private static var FollowersPathFormat: String { return "%@/followers" }
+    private static var UsersPath: String { return "/users" }
     
     private static var NameKey: String { return "name" }
     private static var LocationKey: String { return "location" }
     private static var BioKey: String { return "bio" }
+    private static var QueryKey: String { return "query" }
     
     public static func getMeRequest() -> Request
     {
@@ -51,7 +53,20 @@ public extension Request
         return Request(path: String(format: self.FollowersPathFormat, userURI))
     }
     
-    // MARK: -
+    // MARK: - Search
+    
+    
+    
+    public static func queryUsers(query query: String, refinements: VimeoClient.RequestParameters? = nil) -> Request
+    {
+        var parameters = refinements ?? [:]
+        
+        parameters[self.QueryKey] = query
+        
+        return Request(path: self.UsersPath, parameters: parameters)
+    }
+    
+    // MARK: - Edit User
     
     public static func patchUser(userURI userURI: String, newName: String?, newLocation: String?, newBio: String?) -> Request
     {
