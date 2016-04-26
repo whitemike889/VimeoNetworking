@@ -167,7 +167,8 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
             "application/vnd.vimeo.error+json",
             "application/vnd.vimeo.trigger+json",
             "application/vnd.vimeo.category+json",
-            "application/vnd.vimeo.channel+json"]
+            "application/vnd.vimeo.channel+json",
+            "application/vnd.vimeo.song+json"]
         )
     }
 }
