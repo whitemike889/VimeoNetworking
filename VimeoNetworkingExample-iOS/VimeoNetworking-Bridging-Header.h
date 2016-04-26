@@ -13,7 +13,7 @@
 
 //#import "VIMObjectMapper.h"
 #import "VIMUser.h"
-#import "VIMAccountNew.h"
+#import "VIMAccount.h"
 #import "VIMVideo.h"
 
 #import <CommonCrypto/CommonCrypto.h>

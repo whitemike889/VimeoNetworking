@@ -23,6 +23,8 @@ public extension Request
             }
         }
         
+        cacheKey = cacheKey.stringByReplacingOccurrencesOfString("/", withString: ".")
+        
         return cacheKey
     }
 }

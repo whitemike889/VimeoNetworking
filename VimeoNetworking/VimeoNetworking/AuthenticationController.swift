@@ -21,7 +21,7 @@ final public class AuthenticationController
     
     private static let CodeGrantAuthorizationPath = "oauth/authorize"
     
-    public typealias AuthenticationCompletion = ResultCompletion<VIMAccountNew>.T
+    public typealias AuthenticationCompletion = ResultCompletion<VIMAccount>.T
     
     /// State is tracked for the code grant request/response cycle, to avoid interception
     static let state = NSProcessInfo.processInfo().globallyUniqueString
@@ -45,7 +45,7 @@ final public class AuthenticationController
     
     // MARK: - Saved Accounts
     
-    public func loadSavedAccount() throws -> VIMAccountNew?
+    public func loadSavedAccount() throws -> VIMAccount?
     {
         var loadedAccount = try self.accountStore.loadAccount(.User)
         
@@ -183,6 +183,32 @@ final public class AuthenticationController
         self.authenticate(request: request, completion: completion)
     }
     
+    // MARK: - Log out
+    
+    public func logOut() throws
+    {
+        guard self.client.isAuthenticatedWithUser == true
+        else
+        {
+            return
+        }
+        
+        self.client.authenticatedAccount = nil
+        
+        try self.accountStore.removeAccount(.User)
+        
+        let deleteTokensRequest = Request<VIMNullResponse>.deleteTokensRequest()
+        self.client.request(deleteTokensRequest) { (result) in
+            switch result
+            {
+            case .Success:
+                break
+            case .Failure(let error):
+                print("could not delete tokens: \(error)")
+            }
+        }
+    }
+    
     // MARK: - Private
     
     private func authenticate(request request: AuthenticationRequest, completion: AuthenticationCompletion)
@@ -195,7 +221,7 @@ final public class AuthenticationController
         }
     }
     
-    private func handleAuthenticationResult(result: Result<Response<VIMAccountNew>>) -> Result<VIMAccountNew>
+    private func handleAuthenticationResult(result: Result<Response<VIMAccount>>) -> Result<VIMAccount>
     {
         guard case .Success(let accountResponse) = result
         else
@@ -219,6 +245,11 @@ final public class AuthenticationController
         
         let account = accountResponse.model
         
+        if let userJSON = accountResponse.json["user"] as? VimeoClient.ResponseDictionary
+        {
+            account.userJSON = userJSON
+        }
+        
         do
         {
             try self.authenticateClient(account: account)
@@ -235,7 +266,7 @@ final public class AuthenticationController
         return .Success(result: account)
     }
     
-    private func authenticateClient(account account: VIMAccountNew) throws
+    private func authenticateClient(account account: VIMAccount) throws
     {
         guard account.accessToken != nil
         else

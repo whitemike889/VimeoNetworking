@@ -53,7 +53,7 @@ final public class VimeoClient
     
     // MARK: - Authentication
     
-    public var authenticatedAccount: VIMAccountNew?
+    public var authenticatedAccount: VIMAccount?
     {
         didSet
         {
@@ -227,7 +227,7 @@ final public class VimeoClient
                 
                 // Swift complains that this cast always fails, but it doesn't seem to ever actually fail, and it's required to call completion with this response [RH] (4/12/2016)
                 // It's also worth noting that (as of writing) there's no way to direct the compiler to ignore specific instances of warnings in Swift :S [RH] (4/13/16)
-                let response = Response(model: nullResponseObject) as! Response<ModelType>
+                let response = Response(model: nullResponseObject, json: [:]) as! Response<ModelType>
 
                 dispatch_async(completionQueue)
                 {
@@ -260,7 +260,7 @@ final public class VimeoClient
             
             dispatch_async(completionQueue)
             {
-                completion(result: .Success(result: Response<ModelType>(model: modelObject)))
+                completion(result: .Success(result: Response<ModelType>(model: modelObject, json: responseDictionary)))
             }
         }
         catch let error
@@ -280,7 +280,19 @@ final public class VimeoClient
         
         self.handleError(error, request: request)
         
-        if request.cacheFetchPolicy == .TryNetworkThenCache
+        if case .MultipleAttempts(let attemptCount, let attemptDelay) = request.retryPolicy
+            where attemptCount > 1
+        {
+            var retryRequest = request
+            retryRequest.retryPolicy = .MultipleAttempts(attemptCount: attemptCount - 1, attemptDelay: attemptDelay * 2)
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(attemptDelay * Double(NSEC_PER_SEC))), dispatch_get_main_queue())
+            {
+                self.request(retryRequest, completionQueue: completionQueue, completion: completion)
+            }
+        }
+        
+        else if request.cacheFetchPolicy == .TryNetworkThenCache
         {
             var cacheRequest = request
             cacheRequest.cacheFetchPolicy = .CacheOnly

@@ -23,7 +23,7 @@ public enum RetryPolicy
     static let DefaultPolicy: RetryPolicy = .SingleAttempt
     
     case SingleAttempt
-    case MultipleAttempts(attemptCount: Int)
+    case MultipleAttempts(attemptCount: Int, attemptDelay: NSTimeInterval)
 }
 
 public struct Request<ModelType: MappableResponse>
@@ -37,7 +37,7 @@ public struct Request<ModelType: MappableResponse>
     public var cacheFetchPolicy: CacheFetchPolicy
     public let shouldCacheResponse: Bool
     
-    public let retryPolicy: RetryPolicy
+    public var retryPolicy: RetryPolicy
     
     // MARK: -
     
