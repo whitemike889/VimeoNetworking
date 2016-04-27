@@ -60,26 +60,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         {
             self.testEndpoints()
         }
-        else
-        {
-            authenticationController.clientCredentialsGrant { result in
-                
-                switch result
-                {
-                case .Success(let account):
-                    print("authenticated successfully: \(account)")
-                    self.testEndpoints()
-                case .Failure(let error):
-                    print("failure authenticating: \(error)")
-                }
-            }
-        }
+//        else
+//        {
+//            authenticationController.clientCredentialsGrant { result in
+//                
+//                switch result
+//                {
+//                case .Success(let account):
+//                    print("authenticated successfully: \(account)")
+//                    self.testEndpoints()
+//                case .Failure(let error):
+//                    print("failure authenticating: \(error)")
+//                }
+//            }
+//        }
+//
+//        self.observationToken = Notification.AuthenticatedAccountDidChange.observe { notification in
+//            print("authenticated account changed")
+//        }
+//        
+//        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(timer), userInfo: nil, repeats: true)
         
-        self.observationToken = Notification.AuthenticatedAccountDidChange.observe { notification in
-            print("authenticated account changed")
-        }
-        
-        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(timer), userInfo: nil, repeats: true)
+        // This is to test code grant auth
+//        if let client = self.client,
+//            let url = self.authenticationController?.codeGrantAuthorizationURL()
+//            where !client.isAuthenticatedWithUser
+//        {
+//            application.openURL(url)
+//        }
         
         return true
     }
@@ -109,14 +117,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     func applicationDidBecomeActive(application: UIApplication)
     {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        
-        // This is to test code grant auth
-        if let client = self.client,
-            let url = self.authenticationController?.codeGrantAuthorizationURL()
-            where !client.isAuthenticated
-        {
-            application.openURL(url)
-        }
     }
 
     func applicationWillTerminate(application: UIApplication)
