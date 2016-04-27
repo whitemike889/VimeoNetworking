@@ -8,26 +8,32 @@
 
 import Foundation
 
+public let KeychainServiceVimeo = "Vimeo"
+public let KeychainServiceCameo = "Cameo"
+
 public struct AppConfiguration
 {
-    
     let clientKey: String
     let clientSecret: String
     let scopes: [Scope]
     
-    // let keychainService: String
-    // let keychainAccessGroup: String
+    let keychainService: String
+    let keychainAccessGroup: String?
     
     let apiVersion: String
     
     public init(clientKey: String,
                 clientSecret: String,
                 scopes: [Scope],
+                keychainService: String = KeychainServiceVimeo,
+                keychainAccessGroup: String? = nil,
                 apiVersion: String = VimeoDefaultAPIVersionString)
     {
         self.clientKey = clientKey
         self.clientSecret = clientSecret
         self.scopes = scopes
+        self.keychainService = keychainService
+        self.keychainAccessGroup = keychainAccessGroup
         self.apiVersion = apiVersion
     }
 }
