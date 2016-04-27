@@ -18,7 +18,14 @@ final internal class AccountStore
     
     // MARK: - 
     
-    private let dataStore: SecureDataStore = ArchiveStore() // TODO: Replace this with keychain store [RH] (3/24/16)
+    private let dataStore: SecureDataStore
+    
+    // MARK: -
+    
+    init(configuration: AppConfiguration)
+    {
+        self.dataStore = KeychainStore(service: configuration.keychainService, accessGroup: configuration.keychainAccessGroup)
+    }
     
     // MARK: -
     

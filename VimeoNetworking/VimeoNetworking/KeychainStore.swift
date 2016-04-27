@@ -9,7 +9,7 @@
 import Foundation
 import Security
 
-internal protocol SecureDataStore
+protocol SecureDataStore
 {
     func setData(data: NSData, forKey key: String) throws
     
@@ -18,7 +18,7 @@ internal protocol SecureDataStore
     func deleteDataForKey(key: String) throws
 }
 
-final internal class KeychainStore: SecureDataStore
+final class KeychainStore: SecureDataStore
 {
     let service: String
     let accessGroup: String?
@@ -57,7 +57,7 @@ final internal class KeychainStore: SecureDataStore
         let status = SecItemCopyMatching(query, &attributes)
         let data = attributes as? NSData
         
-        if status != errSecSuccess
+        if status != errSecSuccess && status != errSecItemNotFound
         {
             throw self.errorForStatus(status)
         }
@@ -71,7 +71,7 @@ final internal class KeychainStore: SecureDataStore
         
         let status = SecItemDelete(query)
         
-        if status != errSecSuccess
+        if status != errSecSuccess && status != errSecItemNotFound
         {
             throw self.errorForStatus(status)
         }
