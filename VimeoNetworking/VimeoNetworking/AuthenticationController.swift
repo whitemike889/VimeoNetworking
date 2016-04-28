@@ -190,7 +190,8 @@ final public class AuthenticationController
         self.authenticate(request: request, completion: completion)
     }
     
-    public func pinCode(pinCodeTicketHandler: (pinCode: String, activateLink: String) -> Void, completion: AuthenticationCompletion)
+    /// Pin code authentication, for devices like Apple TV.
+    public func pinCode(infoHandler infoHandler: (pinCode: String, activateLink: String) -> Void, completion: AuthenticationCompletion)
     {
         func doPinCodeAuthorization(userCode userCode: String, deviceCode: String)
         {
@@ -201,25 +202,20 @@ final public class AuthenticationController
                 switch result
                 {
                 case .Success:
-                    print("pin code check: succ")
                     completion(result: result)
-                case .Failure(let error):
-                    print("pin code check: fail")
-                    print(error.localizedDescription)
                     
-                    if error.statusCode == HTTPStatusCode.BadRequest.rawValue
+                case .Failure(let error):
+                    if error.statusCode == HTTPStatusCode.BadRequest.rawValue // 400: Bad Request implies the code hasn't been activated yet, so try again.
                     {
                         if !self.cancelPinCodeRequest
                         {
-                            print("pin code check: retrying")
-                            
                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(self.dynamicType.PinCodeRequestInterval * NSTimeInterval(NSEC_PER_SEC))), dispatch_get_main_queue())
                             {
                                 doPinCodeAuthorization(userCode: userCode, deviceCode: deviceCode)
                             }
                         }
                     }
-                    else
+                    else // Any other error is an actual error, and should get reported back.
                     {
                         completion(result: result)
                     }
@@ -250,7 +246,7 @@ final public class AuthenticationController
                     return
                 }
                 
-                pinCodeTicketHandler(pinCode: userCode, activateLink: activateLink)
+                infoHandler(pinCode: userCode, activateLink: activateLink)
                 
                 self.cancelPinCodeRequest = false
                 doPinCodeAuthorization(userCode: userCode, deviceCode: deviceCode)

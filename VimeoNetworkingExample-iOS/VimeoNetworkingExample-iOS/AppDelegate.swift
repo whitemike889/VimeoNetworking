@@ -89,13 +89,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 //            application.openURL(url)
 //        }
         
-        authenticationController.pinCode({ (pinCode, activateLink) in
+        authenticationController.pinCode(infoHandler: { pinCode, activateLink in
             
             print("pin code response rec'd")
             print(pinCode)
             print(activateLink)
             
-        }) { (result) in
+        }) { result in
             
             switch result
             {
