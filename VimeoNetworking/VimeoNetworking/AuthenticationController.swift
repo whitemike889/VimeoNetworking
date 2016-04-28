@@ -31,6 +31,9 @@ final public class AuthenticationController
     
     private let accountStore: AccountStore
     
+    /// Set to true to stop the refresh cycle for pin code auth
+    private var cancelPinCodeRequest: Bool = false
+    
     public init(client: VimeoClient)
     {
         self.configuration = client.configuration
@@ -183,6 +186,81 @@ final public class AuthenticationController
         let request = AuthenticationRequest.joinFacebookRequest(facebookToken: facebookToken, scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
+    }
+    
+    public func pinCode(pinCodeTicketHandler: (pinCode: String, activateLink: String) -> Void, completion: AuthenticationCompletion)
+    {
+        func doPinCodeAuthorization(userCode userCode: String, deviceCode: String)
+        {
+            let authorizationRequest = AuthenticationRequest.authorizePinCodeRequest(userCode: userCode, deviceCode: deviceCode)
+            
+            self.authenticate(request: authorizationRequest) { result in
+                
+                switch result
+                {
+                case .Success:
+                    print("pin code check: succ")
+                    completion(result: result)
+                case .Failure(let error):
+                    print("pin code check: fail")
+                    print(error.localizedDescription)
+                    if true // TODO: determine if error is final or to continue trying [RH] (4/28/16)
+                    {
+                        if !self.cancelPinCodeRequest
+                        {
+                            print("pin code check: retrying")
+                            
+                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * Int64(NSEC_PER_SEC)), dispatch_get_main_queue())
+                            {
+                                doPinCodeAuthorization(userCode: userCode, deviceCode: deviceCode)
+                            }
+                        }
+                    }
+                    else
+                    {
+                        completion(result: result)
+                    }
+                }
+            }
+        }
+        
+        let infoRequest = PinCodeRequest.getPinCodeRequest(scopes: self.configuration.scopes)
+        
+        self.client.request(infoRequest) { result in
+            switch result
+            {
+            case .Success(let result):
+                
+                let info = result.model
+                
+                guard let userCode = info.userCode, let deviceCode = info.deviceCode, let activateLink = info.activateLink
+                else
+                {
+                    let errorDescription = "Malformed pin code info returned"
+                    
+                    assertionFailure(errorDescription)
+                    
+                    let error = NSError(domain: self.dynamicType.ErrorDomain, code: LocalErrorCode.PinCodeInfo.rawValue, userInfo: [NSLocalizedDescriptionKey: errorDescription])
+                    
+                    completion(result: .Failure(error: error))
+                    
+                    return
+                }
+                
+                pinCodeTicketHandler(pinCode: userCode, activateLink: activateLink)
+                
+                self.cancelPinCodeRequest = false
+                doPinCodeAuthorization(userCode: userCode, deviceCode: deviceCode)
+                
+            case .Failure(let error):
+                completion(result: .Failure(error: error))
+            }
+        }
+    }
+    
+    public func cancelPinCode()
+    {
+        self.cancelPinCodeRequest = true
     }
     
     // MARK: - Private

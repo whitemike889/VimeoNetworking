@@ -238,7 +238,7 @@ final public class VimeoClient
             {
                 let description = "VimeoClient requestSuccess returned invalid/absent dictionary"
                 
-                assertionFailure(description)
+//                assertionFailure(description)
                 
                 let error = NSError(domain: self.dynamicType.ErrorDomain, code: LocalErrorCode.InvalidResponseDictionary.rawValue, userInfo: [NSLocalizedDescriptionKey: description])
                 

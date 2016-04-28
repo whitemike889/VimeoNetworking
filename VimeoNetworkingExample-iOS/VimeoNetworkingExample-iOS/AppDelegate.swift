@@ -44,22 +44,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         
         let authenticationController = AuthenticationController(configuration: self.appConfiguration, client: client)
         self.authenticationController = authenticationController
-        
-        let loadedAccount: VIMAccountNew?
-        do
-        {
-            loadedAccount = try authenticationController.loadSavedAccount()
-        }
-        catch let error
-        {
-            loadedAccount = nil
-            print("error loading account \(error)")
-        }
-        
-        if loadedAccount != nil
-        {
-            self.testEndpoints()
-        }
+//        
+//        let loadedAccount: VIMAccountNew?
+//        do
+//        {
+//            loadedAccount = try authenticationController.loadSavedAccount()
+//        }
+//        catch let error
+//        {
+//            loadedAccount = nil
+//            print("error loading account \(error)")
+//        }
+//        
+//        if loadedAccount != nil
+//        {
+//            self.testEndpoints()
+//        }
 //        else
 //        {
 //            authenticationController.clientCredentialsGrant { result in
@@ -88,6 +88,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 //        {
 //            application.openURL(url)
 //        }
+        
+        authenticationController.pinCode({ (pinCode, activateLink) in
+            
+            print("pin code response rec'd")
+            print(pinCode)
+            print(activateLink)
+            
+        }) { (result) in
+            
+            switch result
+            {
+            case .Success(let account):
+                print("authenticated successfully: \(account)")
+                self.testEndpoints()
+            case .Failure(let error):
+                print("failure authenticating: \(error)")
+            }
+        }
         
         return true
     }

@@ -78,4 +78,5 @@ public enum LocalErrorCode: Int
     case CodeGrant = 9005
     case CodeGrantState = 9006
     case NoResponse = 9007
+    case PinCodeInfo = 9008
 }

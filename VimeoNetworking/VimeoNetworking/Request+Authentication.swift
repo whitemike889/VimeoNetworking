@@ -17,6 +17,8 @@ private let PasswordKey = "password"
 private let DisplayNameKey = "display_name"
 private let EmailKey = "email"
 private let TokenKey = "token"
+private let PinCodeKey = "auth_code"
+private let DeviceCodeKey = "device_code"
 
 private let GrantTypeClientCredentials = "client_credentials"
 private let GrantTypeAuthorizationCode = "authorization_code"
@@ -94,15 +96,18 @@ public extension Request where ModelType: VIMAccountNew
     
     public static func authorizePinCodeRequest(userCode userCode: String, deviceCode: String) -> Request
     {
-        return Request(path: "")
+        let parameters: VimeoClient.RequestParameters = [PinCodeKey: userCode,
+                                                         DeviceCodeKey: deviceCode]
+        
+        return Request(method: .POST, path: AuthenticationPathPinCodeAuthorize, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
 }
 
 // MARK: -
 
-public typealias PinCodeRequest = Request<PinCodeAuthenticationTicket>
+public typealias PinCodeRequest = Request<PinCodeInfo>
 
-public class PinCodeAuthenticationTicket: VIMModelObject
+public class PinCodeInfo: VIMModelObject
 {
     public var deviceCode: String?
     public var userCode: String?
@@ -112,7 +117,7 @@ public class PinCodeAuthenticationTicket: VIMModelObject
     public var interval: Int?
 }
 
-public extension Request where ModelType: PinCodeAuthenticationTicket
+public extension Request where ModelType: PinCodeInfo
 {
     public static func getPinCodeRequest(scopes scopes: [Scope]) -> Request
     {
