@@ -33,7 +33,7 @@ public typealias AuthenticationRequest = Request<VIMAccountNew>
 
 public extension Request
 {
-    public static func postClientCredentialsGrantRequest(scopes scopes: [Scope]) -> Request
+    public static func clientCredentialsGrantRequest(scopes scopes: [Scope]) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [GrantTypeKey: GrantTypeClientCredentials,
                                                          ScopeKey: Scope.combine(scopes)]
@@ -41,7 +41,7 @@ public extension Request
         return Request(method: .POST, path: AuthenticationPathClientCredentials, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
     
-    public static func postCodeGrantRequest(code code: String, redirectURI: String) -> Request
+    public static func codeGrantRequest(code code: String, redirectURI: String) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [GrantTypeKey: GrantTypeAuthorizationCode,
                                                          CodeKey: code,
@@ -50,7 +50,7 @@ public extension Request
         return Request(method: .POST, path: AuthenticationPathCodeGrant, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
     
-    public static func postLoginRequest(email email: String, password: String, scopes: [Scope]) -> Request
+    public static func loginRequest(email email: String, password: String, scopes: [Scope]) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [GrantTypeKey: GrantTypePassword,
                                                          ScopeKey: Scope.combine(scopes),
@@ -60,7 +60,7 @@ public extension Request
         return Request(method: .POST, path: AuthenticationPathAccessToken, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
     
-    public static func postJoinRequest(name name: String, email: String, password: String, scopes: [Scope]) -> Request
+    public static func joinRequest(name name: String, email: String, password: String, scopes: [Scope]) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [ScopeKey: Scope.combine(scopes),
                                                          DisplayNameKey: name,
@@ -70,7 +70,7 @@ public extension Request
         return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
     
-    public static func postLoginFacebookRequest(facebookToken facebookToken: String, scopes: [Scope]) -> Request
+    public static func loginFacebookRequest(facebookToken facebookToken: String, scopes: [Scope]) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [GrantTypeKey: GrantTypeFacebook,
                                                          ScopeKey: Scope.combine(scopes),
@@ -79,11 +79,21 @@ public extension Request
         return Request(method: .POST, path: AuthenticationPathFacebookToken, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
     
-    public static func postJoinFacebookRequest(facebookToken facebookToken: String, scopes: [Scope]) -> Request
+    public static func joinFacebookRequest(facebookToken facebookToken: String, scopes: [Scope]) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [ScopeKey: Scope.combine(scopes),
                                                          TokenKey: facebookToken]
         
         return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
+    }
+    
+    public static func getPinCodeRequest() -> Request
+    {
+        return Request(path: "")
+    }
+    
+    public static func authorizePinCodeRequest() -> Request
+    {
+        return Request(path: "")
     }
 }

@@ -78,7 +78,7 @@ final public class AuthenticationController
     
     public func clientCredentialsGrant(completion: AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.postClientCredentialsGrantRequest(scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.clientCredentialsGrantRequest(scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
     }
@@ -150,7 +150,7 @@ final public class AuthenticationController
             return
         }
         
-        let request = AuthenticationRequest.postCodeGrantRequest(code: code, redirectURI: self.codeGrantRedirectURI)
+        let request = AuthenticationRequest.codeGrantRequest(code: code, redirectURI: self.codeGrantRedirectURI)
         
         self.authenticate(request: request, completion: completion)
     }
@@ -159,28 +159,28 @@ final public class AuthenticationController
     
     public func login(email email: String, password: String, completion: AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.postLoginRequest(email: email, password: password, scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.loginRequest(email: email, password: password, scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
     }
     
     public func join(name name: String, email: String, password: String, completion: AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.postJoinRequest(name: name, email: email, password: password, scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.joinRequest(name: name, email: email, password: password, scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
     }
     
     public func facebookLogin(facebookToken facebookToken: String, completion: AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.postLoginFacebookRequest(facebookToken: facebookToken, scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.loginFacebookRequest(facebookToken: facebookToken, scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
     }
     
     public func facebookJoin(facebookToken facebookToken: String, completion: AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.postJoinFacebookRequest(facebookToken: facebookToken, scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.joinFacebookRequest(facebookToken: facebookToken, scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
     }
