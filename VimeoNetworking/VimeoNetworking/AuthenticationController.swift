@@ -33,8 +33,8 @@ final public class AuthenticationController
     
     private let accountStore: AccountStore
     
-    /// Set to true to stop the refresh cycle for pin code auth
-    private var cancelPinCodeRequest: Bool = false
+    /// Set to false to stop the refresh cycle for pin code auth
+    private var continuePinCodeAuthorizationRefreshCycle: Bool = true
     
     public init(client: VimeoClient)
     {
@@ -193,11 +193,24 @@ final public class AuthenticationController
     /// Pin code authentication, for devices like Apple TV.
     public func pinCode(infoHandler infoHandler: (pinCode: String, activateLink: String) -> Void, completion: AuthenticationCompletion)
     {
+        weak var weakSelf = self
         func doPinCodeAuthorization(userCode userCode: String, deviceCode: String)
         {
+            guard let strongSelf = weakSelf
+                else
+            {
+                return
+            }
+            
             let authorizationRequest = AuthenticationRequest.authorizePinCodeRequest(userCode: userCode, deviceCode: deviceCode)
             
-            self.authenticate(request: authorizationRequest) { result in
+            strongSelf.authenticate(request: authorizationRequest) { result in
+                
+                guard let strongSelf = weakSelf
+                else
+                {
+                    return
+                }
                 
                 switch result
                 {
@@ -207,9 +220,9 @@ final public class AuthenticationController
                 case .Failure(let error):
                     if error.statusCode == HTTPStatusCode.BadRequest.rawValue // 400: Bad Request implies the code hasn't been activated yet, so try again.
                     {
-                        if !self.cancelPinCodeRequest
+                        if strongSelf.continuePinCodeAuthorizationRefreshCycle
                         {
-                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(self.dynamicType.PinCodeRequestInterval * NSTimeInterval(NSEC_PER_SEC))), dispatch_get_main_queue())
+                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(strongSelf.dynamicType.PinCodeRequestInterval * NSTimeInterval(NSEC_PER_SEC))), dispatch_get_main_queue())
                             {
                                 doPinCodeAuthorization(userCode: userCode, deviceCode: deviceCode)
                             }
@@ -248,7 +261,7 @@ final public class AuthenticationController
                 
                 infoHandler(pinCode: userCode, activateLink: activateLink)
                 
-                self.cancelPinCodeRequest = false
+                self.continuePinCodeAuthorizationRefreshCycle = true
                 doPinCodeAuthorization(userCode: userCode, deviceCode: deviceCode)
                 
             case .Failure(let error):
@@ -259,7 +272,7 @@ final public class AuthenticationController
     
     public func cancelPinCode()
     {
-        self.cancelPinCodeRequest = true
+        self.continuePinCodeAuthorizationRefreshCycle = false
     }
     
     // MARK: - Private
