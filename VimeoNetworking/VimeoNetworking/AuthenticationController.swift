@@ -193,49 +193,6 @@ final public class AuthenticationController
     /// Pin code authentication, for devices like Apple TV.
     public func pinCode(infoHandler infoHandler: (pinCode: String, activateLink: String) -> Void, completion: AuthenticationCompletion)
     {
-        weak var weakSelf = self
-        func doPinCodeAuthorization(userCode userCode: String, deviceCode: String)
-        {
-            guard let strongSelf = weakSelf
-                else
-            {
-                return
-            }
-            
-            let authorizationRequest = AuthenticationRequest.authorizePinCodeRequest(userCode: userCode, deviceCode: deviceCode)
-            
-            strongSelf.authenticate(request: authorizationRequest) { result in
-                
-                guard let strongSelf = weakSelf
-                else
-                {
-                    return
-                }
-                
-                switch result
-                {
-                case .Success:
-                    completion(result: result)
-                    
-                case .Failure(let error):
-                    if error.statusCode == HTTPStatusCode.BadRequest.rawValue // 400: Bad Request implies the code hasn't been activated yet, so try again.
-                    {
-                        if strongSelf.continuePinCodeAuthorizationRefreshCycle
-                        {
-                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(strongSelf.dynamicType.PinCodeRequestInterval * NSTimeInterval(NSEC_PER_SEC))), dispatch_get_main_queue())
-                            {
-                                doPinCodeAuthorization(userCode: userCode, deviceCode: deviceCode)
-                            }
-                        }
-                    }
-                    else // Any other error is an actual error, and should get reported back.
-                    {
-                        completion(result: result)
-                    }
-                }
-            }
-        }
-        
         let infoRequest = PinCodeRequest.getPinCodeRequest(scopes: self.configuration.scopes)
         
         self.client.request(infoRequest) { result in
@@ -262,10 +219,46 @@ final public class AuthenticationController
                 infoHandler(pinCode: userCode, activateLink: activateLink)
                 
                 self.continuePinCodeAuthorizationRefreshCycle = true
-                doPinCodeAuthorization(userCode: userCode, deviceCode: deviceCode)
+                self.doPinCodeAuthorization(userCode: userCode, deviceCode: deviceCode, completion: completion)
                 
             case .Failure(let error):
                 completion(result: .Failure(error: error))
+            }
+        }
+    }
+    
+    private func doPinCodeAuthorization(userCode userCode: String, deviceCode: String, completion: AuthenticationCompletion)
+    {
+        let authorizationRequest = AuthenticationRequest.authorizePinCodeRequest(userCode: userCode, deviceCode: deviceCode)
+        
+        self.authenticate(request: authorizationRequest) { [weak self] result in
+            
+            switch result
+            {
+            case .Success:
+                completion(result: result)
+                
+            case .Failure(let error):
+                if error.statusCode == HTTPStatusCode.BadRequest.rawValue // 400: Bad Request implies the code hasn't been activated yet, so try again.
+                {
+                    guard let strongSelf = self
+                        else
+                    {
+                        return
+                    }
+                    
+                    if strongSelf.continuePinCodeAuthorizationRefreshCycle
+                    {
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(strongSelf.dynamicType.PinCodeRequestInterval * NSTimeInterval(NSEC_PER_SEC))), dispatch_get_main_queue()) { [weak self] in
+                            
+                            self?.doPinCodeAuthorization(userCode: userCode, deviceCode: deviceCode, completion: completion)
+                        }
+                    }
+                }
+                else // Any other error is an actual error, and should get reported back.
+                {
+                    completion(result: result)
+                }
             }
         }
     }
