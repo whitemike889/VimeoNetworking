@@ -61,6 +61,7 @@ public enum VimeoErrorCode: Int
 public enum HTTPStatusCode: Int
 {
     case ServiceUnavailable = 503
+    case BadRequest = 400
     case Unauthorized = 401
     case Forbidden = 403
 }

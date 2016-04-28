@@ -17,7 +17,7 @@ private let PasswordKey = "password"
 private let DisplayNameKey = "display_name"
 private let EmailKey = "email"
 private let TokenKey = "token"
-private let PinCodeKey = "auth_code"
+private let PinCodeKey = "user_code"
 private let DeviceCodeKey = "device_code"
 
 private let GrantTypeClientCredentials = "client_credentials"

@@ -21,6 +21,8 @@ final public class AuthenticationController
     
     private static let CodeGrantAuthorizationPath = "oauth/authorize"
     
+    private static let PinCodeRequestInterval: NSTimeInterval = 5
+    
     public typealias AuthenticationCompletion = ResultCompletion<VIMAccountNew>.T
     
     /// State is tracked for the code grant request/response cycle, to avoid interception
@@ -204,13 +206,14 @@ final public class AuthenticationController
                 case .Failure(let error):
                     print("pin code check: fail")
                     print(error.localizedDescription)
-                    if true // TODO: determine if error is final or to continue trying [RH] (4/28/16)
+                    
+                    if error.statusCode == HTTPStatusCode.BadRequest.rawValue
                     {
                         if !self.cancelPinCodeRequest
                         {
                             print("pin code check: retrying")
                             
-                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * Int64(NSEC_PER_SEC)), dispatch_get_main_queue())
+                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(self.dynamicType.PinCodeRequestInterval * NSTimeInterval(NSEC_PER_SEC))), dispatch_get_main_queue())
                             {
                                 doPinCodeAuthorization(userCode: userCode, deviceCode: deviceCode)
                             }
