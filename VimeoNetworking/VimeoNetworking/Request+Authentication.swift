@@ -22,16 +22,21 @@ private let GrantTypeClientCredentials = "client_credentials"
 private let GrantTypeAuthorizationCode = "authorization_code"
 private let GrantTypePassword = "password"
 private let GrantTypeFacebook = "facebook"
+private let GrantTypePinCode = "device_grant"
 
-private let AuthenticationPathClientCredentials = "/oauth/authorize/client"
+private let AuthenticationPathClientCredentials = "oauth/authorize/client"
 private let AuthenticationPathAccessToken = "oauth/authorize/password"
 private let AuthenticationPathUsers = "users"
 private let AuthenticationPathFacebookToken = "oauth/authorize/facebook"
 private let AuthenticationPathCodeGrant = "oauth/access_token"
+private let AuthenticationPathPinCode = "oauth/device"
+private let AuthenticationPathPinCodeAuthorize = "oauth/device/authorize"
+
+// MARK: -
 
 public typealias AuthenticationRequest = Request<VIMAccountNew>
 
-public extension Request
+public extension Request where ModelType: VIMAccountNew
 {
     public static func clientCredentialsGrantRequest(scopes scopes: [Scope]) -> Request
     {
@@ -87,13 +92,33 @@ public extension Request
         return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
     
-    public static func getPinCodeRequest() -> Request
+    public static func authorizePinCodeRequest(userCode userCode: String, deviceCode: String) -> Request
     {
         return Request(path: "")
     }
-    
-    public static func authorizePinCodeRequest() -> Request
+}
+
+// MARK: -
+
+public typealias PinCodeRequest = Request<PinCodeAuthenticationTicket>
+
+public class PinCodeAuthenticationTicket: VIMModelObject
+{
+    public var deviceCode: String?
+    public var userCode: String?
+    public var authorizeLink: String?
+    public var activateLink: String?
+    public var expiresIn: Int?
+    public var interval: Int?
+}
+
+public extension Request where ModelType: PinCodeAuthenticationTicket
+{
+    public static func getPinCodeRequest(scopes scopes: [Scope]) -> Request
     {
-        return Request(path: "")
+        let parameters: VimeoClient.RequestParameters = [GrantTypeKey: GrantTypePinCode,
+                                                         ScopeKey: Scope.combine(scopes)]
+        
+        return Request(method: .POST, path: AuthenticationPathPinCode, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
 }
