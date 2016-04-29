@@ -29,18 +29,20 @@ final public class AuthenticationController
     let configuration: AppConfiguration
     let client: VimeoClient
     
-    private let accountStore = AccountStore()
+    private let accountStore: AccountStore
     
     public init(client: VimeoClient)
     {
         self.configuration = client.configuration
         self.client = client
+        self.accountStore = AccountStore(configuration: client.configuration)
     }
     
     public init(configuration: AppConfiguration, client: VimeoClient)
     {
         self.configuration = configuration
         self.client = client
+        self.accountStore = AccountStore(configuration: configuration)
     }
     
     // MARK: - Saved Accounts

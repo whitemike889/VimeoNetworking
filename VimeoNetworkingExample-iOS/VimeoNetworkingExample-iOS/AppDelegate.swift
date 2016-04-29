@@ -62,8 +62,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             
 //            try? authenticationController.logOut()
         }
-        else
-        {
+//        else
+//        {
 //            authenticationController.clientCredentialsGrant { result in
 //                
 //                switch result
@@ -75,20 +75,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 //                    print("failure authenticating: \(error)")
 //                }
 //            }
-        }
-        
+//        }
+//
+
 //        self.observationToken = Notification.AuthenticatedAccountDidChange.observe { notification in
 //            print("authenticated account changed")
 //        }
 //        
 //        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(timer), userInfo: nil, repeats: true)
-        
-        if let client = self.client,
-            let url = self.authenticationController?.codeGrantAuthorizationURL()
-            where !client.isAuthenticatedWithUser
-        {
-            application.openURL(url)
-        }
+
+        // This is to test code grant auth
+//        if let client = self.client,
+//            let url = self.authenticationController?.codeGrantAuthorizationURL()
+//            where !client.isAuthenticatedWithUser
+//        {
+//            application.openURL(url)
+//        }
         
         return true
     }
