@@ -62,20 +62,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             
 //            try? authenticationController.logOut()
         }
-//        else
-//        {
-//            authenticationController.clientCredentialsGrant { result in
-//                
-//                switch result
-//                {
-//                case .Success(let account):
-//                    print("authenticated successfully: \(account)")
-//                    self.testEndpoints()
-//                case .Failure(let error):
-//                    print("failure authenticating: \(error)")
-//                }
-//            }
-//        }
+        else
+        {
+            authenticationController.clientCredentialsGrant { result in
+                
+                switch result
+                {
+                case .Success(let account):
+                    print("authenticated successfully: \(account)")
+                    self.testEndpoints()
+                case .Failure(let error):
+                    print("failure authenticating: \(error)")
+                }
+            }
+        }
 //
 
 //        self.observationToken = Notification.AuthenticatedAccountDidChange.observe { notification in
