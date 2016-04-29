@@ -31,6 +31,9 @@ final public class AuthenticationController
     let configuration: AppConfiguration
     let client: VimeoClient
     
+    /// We need to use a separate client to make the actual auth requests, to ensure it's unauthenticated
+    private let authenticatorClient: VimeoClient
+    
     private let accountStore: AccountStore
     
     /// Set to false to stop the refresh cycle for pin code auth
@@ -41,6 +44,8 @@ final public class AuthenticationController
         self.configuration = client.configuration
         self.client = client
         self.accountStore = AccountStore(configuration: client.configuration)
+        
+        self.authenticatorClient = VimeoClient(appConfiguration: client.configuration)
     }
     
     public init(configuration: AppConfiguration, client: VimeoClient)
@@ -48,6 +53,8 @@ final public class AuthenticationController
         self.configuration = configuration
         self.client = client
         self.accountStore = AccountStore(configuration: configuration)
+        
+        self.authenticatorClient = VimeoClient(appConfiguration: configuration)
     }
     
     // MARK: - Saved Accounts
@@ -195,7 +202,7 @@ final public class AuthenticationController
     {
         let infoRequest = PinCodeRequest.getPinCodeRequest(scopes: self.configuration.scopes)
         
-        self.client.request(infoRequest) { result in
+        self.authenticatorClient.request(infoRequest) { result in
             switch result
             {
             case .Success(let result):
@@ -272,7 +279,7 @@ final public class AuthenticationController
     
     private func authenticate(request request: AuthenticationRequest, completion: AuthenticationCompletion)
     {
-        self.client.request(request) { result in
+        self.authenticatorClient.request(request) { result in
             
             let handledResult = self.handleAuthenticationResult(result)
             
