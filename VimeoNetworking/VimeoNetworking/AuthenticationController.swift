@@ -193,10 +193,6 @@ final public class AuthenticationController
             return
         }
         
-        self.client.authenticatedAccount = nil
-        
-        try self.accountStore.removeAccount(.User)
-        
         let deleteTokensRequest = Request<VIMNullResponse>.deleteTokensRequest()
         self.client.request(deleteTokensRequest) { (result) in
             switch result
@@ -207,6 +203,10 @@ final public class AuthenticationController
                 print("could not delete tokens: \(error)")
             }
         }
+        
+        self.client.authenticatedAccount = nil
+        
+        try self.accountStore.removeAccount(.User)
     }
     
     // MARK: - Private

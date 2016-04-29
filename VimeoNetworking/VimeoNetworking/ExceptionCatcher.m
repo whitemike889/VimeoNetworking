@@ -14,7 +14,10 @@
 {
     @try
     {
-        unsafeBlock();
+        if (unsafeBlock)
+        {
+            unsafeBlock();
+        }
     }
     @catch (NSException *exception)
     {

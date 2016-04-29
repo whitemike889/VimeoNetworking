@@ -93,6 +93,6 @@ public extension Request
     
     public static func deleteTokensRequest() -> Request
     {
-        return Request(method: .DELETE, path: AuthenticationPathTokens, retryPolicy: .MultipleAttempts(attemptCount: 3, attemptDelay: 1.0))
+        return Request(method: .DELETE, path: AuthenticationPathTokens, retryPolicy: .TryThreeTimes)
     }
 }

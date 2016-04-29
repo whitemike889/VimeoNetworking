@@ -280,13 +280,13 @@ final public class VimeoClient
         
         self.handleError(error, request: request)
         
-        if case .MultipleAttempts(let attemptCount, let attemptDelay) = request.retryPolicy
+        if case .MultipleAttempts(let attemptCount, let initialDelay) = request.retryPolicy
             where attemptCount > 1
         {
             var retryRequest = request
-            retryRequest.retryPolicy = .MultipleAttempts(attemptCount: attemptCount - 1, attemptDelay: attemptDelay * 2)
+            retryRequest.retryPolicy = .MultipleAttempts(attemptCount: attemptCount - 1, initialDelay: initialDelay * 2)
             
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(attemptDelay * Double(NSEC_PER_SEC))), dispatch_get_main_queue())
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(initialDelay * Double(NSEC_PER_SEC))), dispatch_get_main_queue())
             {
                 self.request(retryRequest, completionQueue: completionQueue, completion: completion)
             }
