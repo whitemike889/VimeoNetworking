@@ -11,6 +11,7 @@ import Foundation
 public struct Response<ModelType: MappableResponse>
 {
     public let model: ModelType
+    public let json: VimeoClient.ResponseDictionary
     
     public var isCachedResponse: Bool
     public var isFinalResponse: Bool
@@ -24,11 +25,13 @@ public struct Response<ModelType: MappableResponse>
     // MARK: - 
     
     init(model: ModelType,
+         json: VimeoClient.ResponseDictionary,
          isCachedResponse: Bool = false,
          isFinalResponse: Bool = true,
          nextPagePath: String? = nil)
     {
         self.model = model
+        self.json = json
         self.isCachedResponse = isCachedResponse
         self.isFinalResponse = isFinalResponse
         self.nextPagePath = nextPagePath

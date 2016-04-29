@@ -36,9 +36,11 @@ private let AuthenticationPathPinCodeAuthorize = "oauth/device/authorize"
 
 // MARK: -
 
-public typealias AuthenticationRequest = Request<VIMAccountNew>
+private let AuthenticationPathTokens = "/tokens"
 
-public extension Request where ModelType: VIMAccountNew
+public typealias AuthenticationRequest = Request<VIMAccount>
+
+public extension Request where ModelType: VIMAccount
 {
     public static func clientCredentialsGrantRequest(scopes scopes: [Scope]) -> Request
     {
@@ -100,6 +102,14 @@ public extension Request where ModelType: VIMAccountNew
                                                          DeviceCodeKey: deviceCode]
         
         return Request(method: .POST, path: AuthenticationPathPinCodeAuthorize, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
+    }
+}
+
+extension Request where ModelType: VIMNullResponse
+{
+    public static func deleteTokensRequest() -> Request
+    {
+        return Request(method: .DELETE, path: AuthenticationPathTokens, retryPolicy: .TryThreeTimes)
     }
 }
 
