@@ -29,7 +29,9 @@ private let AuthenticationPathUsers = "users"
 private let AuthenticationPathFacebookToken = "oauth/authorize/facebook"
 private let AuthenticationPathCodeGrant = "oauth/access_token"
 
-public typealias AuthenticationRequest = Request<VIMAccountNew>
+private let AuthenticationPathTokens = "/tokens"
+
+public typealias AuthenticationRequest = Request<VIMAccount>
 
 public extension Request
 {
@@ -85,5 +87,12 @@ public extension Request
                                                          TokenKey: facebookToken]
         
         return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
+    }
+    
+    // MARK: - 
+    
+    public static func deleteTokensRequest() -> Request
+    {
+        return Request(method: .DELETE, path: AuthenticationPathTokens, retryPolicy: .TryThreeTimes)
     }
 }

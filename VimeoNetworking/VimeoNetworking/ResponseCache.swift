@@ -27,7 +27,7 @@ final internal class ResponseCache
             do
             {
                 let modelObject: ModelType = try VIMObjectMapper.mapObject(responseDictionary, modelKeyPath: request.modelKeyPath)
-                let response = Response(model: modelObject, isCachedResponse: true, isFinalResponse: request.cacheFetchPolicy == .CacheOnly)
+                let response = Response(model: modelObject, json: responseDictionary, isCachedResponse: true, isFinalResponse: request.cacheFetchPolicy == .CacheOnly)
                 
                 completion(result: .Success(result: response))
             }
@@ -48,7 +48,7 @@ final internal class ResponseCache
                     do
                     {
                         let modelObject: ModelType = try VIMObjectMapper.mapObject(responseDictionary, modelKeyPath: request.modelKeyPath)
-                        let response = Response(model: modelObject, isCachedResponse: true, isFinalResponse: request.cacheFetchPolicy == .CacheOnly)
+                        let response = Response(model: modelObject, json: responseDictionary, isCachedResponse: true, isFinalResponse: request.cacheFetchPolicy == .CacheOnly)
                         
                         completion(result: .Success(result: response))
                     }
@@ -183,14 +183,21 @@ final internal class ResponseCache
                     return
                 }
                 
-                if let responseDictionary = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? VimeoClient.ResponseDictionary
+                var responseDictionary: VimeoClient.ResponseDictionary? = nil
+                
+                do
                 {
-                    completion(responseDictionary)
+                    try ExceptionCatcher.doUnsafe
+                    {
+                        responseDictionary = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? VimeoClient.ResponseDictionary
+                    }
                 }
-                else
+                catch let error
                 {
-                    completion(nil)
+                    print("error decoding response dictionary: \(error)")
                 }
+                
+                completion(responseDictionary)
             }
         }
         

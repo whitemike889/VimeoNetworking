@@ -16,9 +16,7 @@ FOUNDATION_EXPORT const unsigned char VimeoNetworkingVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <VimeoNetworking/PublicHeader.h>
 
-#import <VimeoNetworking/VIMAccountNew.h>
 #import <VimeoNetworking/VIMAccount.h>
-#import <VimeoNetworking/VIMAccountCredential.h>
 #import <VimeoNetworking/VIMActivity.h>
 #import <VimeoNetworking/VIMAppeal.h>
 #import <VimeoNetworking/VIMCategory.h>
@@ -44,3 +42,5 @@ FOUNDATION_EXPORT const unsigned char VimeoNetworkingVersionString[];
 #import <VimeoNetworking/VIMVideoPreference.h>
 #import <VimeoNetworking/VIMVideoUtils.h>
 #import <VimeoNetworking/VIMSoundtrack.h>
+
+#import <VimeoNetworking/ExceptionCatcher.h>

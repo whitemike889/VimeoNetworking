@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let authenticationController = AuthenticationController(configuration: self.appConfiguration, client: client)
         self.authenticationController = authenticationController
         
-        let loadedAccount: VIMAccountNew?
+        let loadedAccount: VIMAccount?
         do
         {
             loadedAccount = try authenticationController.loadSavedAccount()
@@ -59,28 +59,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         if loadedAccount != nil
         {
             self.testEndpoints()
+            
+//            try? authenticationController.logOut()
         }
-//        else
-//        {
-//            authenticationController.clientCredentialsGrant { result in
-//                
-//                switch result
-//                {
-//                case .Success(let account):
-//                    print("authenticated successfully: \(account)")
-//                    self.testEndpoints()
-//                case .Failure(let error):
-//                    print("failure authenticating: \(error)")
-//                }
-//            }
-//        }
+        else
+        {
+            authenticationController.clientCredentialsGrant { result in
+                
+                switch result
+                {
+                case .Success(let account):
+                    print("authenticated successfully: \(account)")
+                    self.testEndpoints()
+                case .Failure(let error):
+                    print("failure authenticating: \(error)")
+                }
+            }
+        }
 //
+
 //        self.observationToken = Notification.AuthenticatedAccountDidChange.observe { notification in
 //            print("authenticated account changed")
 //        }
 //        
 //        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(timer), userInfo: nil, repeats: true)
-        
+
         // This is to test code grant auth
 //        if let client = self.client,
 //            let url = self.authenticationController?.codeGrantAuthorizationURL()
