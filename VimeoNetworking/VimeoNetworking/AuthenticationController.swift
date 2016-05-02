@@ -209,7 +209,10 @@ final public class AuthenticationController
                 
                 let info = result.model
                 
-                guard let userCode = info.userCode, let deviceCode = info.deviceCode, let activateLink = info.activateLink
+                guard let userCode = info.userCode,
+                    let deviceCode = info.deviceCode,
+                    let activateLink = info.activateLink
+                    where info.expiresIn > 0
                 else
                 {
                     let errorDescription = "Malformed pin code info returned"
@@ -225,8 +228,10 @@ final public class AuthenticationController
                 
                 infoHandler(pinCode: userCode, activateLink: activateLink)
                 
+                let expirationDate = NSDate(timeIntervalSinceNow: NSTimeInterval(info.expiresIn))
+                
                 self.continuePinCodeAuthorizationRefreshCycle = true
-                self.doPinCodeAuthorization(userCode: userCode, deviceCode: deviceCode, completion: completion)
+                self.doPinCodeAuthorization(userCode: userCode, deviceCode: deviceCode, expirationDate: expirationDate, completion: completion)
                 
             case .Failure(let error):
                 completion(result: .Failure(error: error))
@@ -234,8 +239,20 @@ final public class AuthenticationController
         }
     }
     
-    private func doPinCodeAuthorization(userCode userCode: String, deviceCode: String, completion: AuthenticationCompletion)
+    private func doPinCodeAuthorization(userCode userCode: String, deviceCode: String, expirationDate: NSDate, completion: AuthenticationCompletion)
     {
+        guard NSDate().compare(expirationDate) == .OrderedAscending
+        else
+        {
+            let description = "Pin code expired"
+            
+            let error = NSError(domain: self.dynamicType.ErrorDomain, code: LocalErrorCode.PinCodeExpired.rawValue, userInfo: [NSLocalizedDescriptionKey: description])
+            
+            completion(result: .Failure(error: error))
+            
+            return
+        }
+        
         let authorizationRequest = AuthenticationRequest.authorizePinCodeRequest(userCode: userCode, deviceCode: deviceCode)
         
         self.authenticate(request: authorizationRequest) { [weak self] result in
@@ -258,7 +275,7 @@ final public class AuthenticationController
                     {
                         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(strongSelf.dynamicType.PinCodeRequestInterval * NSTimeInterval(NSEC_PER_SEC))), dispatch_get_main_queue()) { [weak self] in
                             
-                            self?.doPinCodeAuthorization(userCode: userCode, deviceCode: deviceCode, completion: completion)
+                            self?.doPinCodeAuthorization(userCode: userCode, deviceCode: deviceCode, expirationDate: expirationDate, completion: completion)
                         }
                     }
                 }

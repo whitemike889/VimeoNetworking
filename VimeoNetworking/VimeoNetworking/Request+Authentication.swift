@@ -119,12 +119,16 @@ public typealias PinCodeRequest = Request<PinCodeInfo>
 
 public class PinCodeInfo: VIMModelObject
 {
-    public var deviceCode: String?
-    public var userCode: String?
-    public var authorizeLink: String?
-    public var activateLink: String?
-    public var expiresIn: Int?
-    public var interval: Int?
+    dynamic public var deviceCode: String?
+    dynamic public var userCode: String?
+    dynamic public var authorizeLink: String?
+    dynamic public var activateLink: String?
+    
+    // These are non-optional Ints with -1 invalid sentinel values because 
+    // an optional Int can't be represented in Objective-C and can't be marked 
+    // dynamic, which leads to it not getting parsed by VIMObjectMapper [RH]
+    dynamic public var expiresIn: Int = -1
+    dynamic public var interval: Int = -1
 }
 
 public extension Request where ModelType: PinCodeInfo
