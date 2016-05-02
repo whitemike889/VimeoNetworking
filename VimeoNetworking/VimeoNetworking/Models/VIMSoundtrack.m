@@ -15,8 +15,7 @@
 - (NSDictionary *)getObjectMapping
 {
     return @{
-             @"hash" : @"soundtrack_hash",
-             @"description" : @"soundtrack_description"
+             @"description" : @"soundtrackDescription"
             };
 }
 
