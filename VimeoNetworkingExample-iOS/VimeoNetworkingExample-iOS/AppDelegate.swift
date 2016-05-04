@@ -15,9 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 {
     var window: UIWindow?
     
-    // TODO: remove these [RH] (3/23/16)
-    // TODO: scrub all tokens from the git history before open sourcing [RH] (3/23/16)
-    let appConfiguration = AppConfiguration(clientKey: "141b94e08884ff39ef7d76256e4a7e3a03f6e865", clientSecret: "d17b26db6d8b0f27ceda882c6d0ba84b3b2e3a9e", scopes: [.Public, .Private, .Create, .Edit, .Delete, .Interact, .Upload])
+    let appConfiguration = AppConfiguration(clientKey: "YOUR_CLIENT_KEY_HERE", clientSecret: "YOUR_CLIENT_SECRET_HERE", scopes: [.Public, .Private, .Create, .Edit, .Delete, .Interact, .Upload])
     
     var authenticationController: AuthenticationController?
     var client: VimeoClient?
