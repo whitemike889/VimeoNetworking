@@ -1,7 +1,7 @@
 # VimeoNetworking
 The Vimeo iOS SDK
 
-### NOTE: This library is under active and rapid development. Code changes, an official release, and documentation are all to follow, stay tuned!
+##### NOTE: This library is under active and rapid development. Code changes, an official release, and documentation are all to follow, stay tuned!
 
 ## Found an Issue?
 
