@@ -1,14 +1,14 @@
 //
-//  ExceptionCatcher.m
+//  ObjC_ExceptionCatcher.m
 //  VimeoNetworking
 //
 //  Created by Huebner, Rob on 4/26/16.
 //  Copyright © 2016 Vimeo. All rights reserved.
 //
 
-#import "ExceptionCatcher.h"
+#import "ObjC_ExceptionCatcher.h"
 
-@implementation ExceptionCatcher
+@implementation ObjC_ExceptionCatcher
 
 + (nullable NSError *)_doUnsafe:(nonnull void(^)(void))unsafeBlock
 {

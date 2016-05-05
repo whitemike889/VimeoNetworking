@@ -1,5 +1,5 @@
 //
-//  ExceptionCatcher.h
+//  ObjC_ExceptionCatcher.h
 //  VimeoNetworking
 //
 //  Created by Huebner, Rob on 4/26/16.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ExceptionCatcher : NSObject
+@interface ObjC_ExceptionCatcher : NSObject
 
 /**
  *  This class helps us use exception-throwing code in Swift, which can't handle catching said exceptions.
