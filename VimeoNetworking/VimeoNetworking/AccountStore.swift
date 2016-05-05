@@ -51,7 +51,7 @@ final internal class AccountStore
         
         var account: VIMAccount? = nil
         
-        try ExceptionCatcherSwift.doUnsafe
+        try ExceptionCatcher.doUnsafe
         {
             account = unarchiver.decodeObject() as? VIMAccount
         }

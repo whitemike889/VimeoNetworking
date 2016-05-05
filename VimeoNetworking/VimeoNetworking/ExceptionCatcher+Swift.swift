@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ExceptionCatcherSwift: ExceptionCatcher
+class ExceptionCatcher: ObjC_ExceptionCatcher
 {
     @nonobjc public static func doUnsafe(unsafeBlock: (Void -> Void)) throws
     {
