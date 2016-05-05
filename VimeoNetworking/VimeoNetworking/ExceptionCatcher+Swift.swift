@@ -8,9 +8,9 @@
 
 import Foundation
 
-extension ExceptionCatcher
+class ExceptionCatcherSwift: ExceptionCatcher
 {
-    public static func doUnsafe(unsafeBlock: (Void -> Void)) throws
+    @nonobjc public static func doUnsafe(unsafeBlock: (Void -> Void)) throws
     {
         if let error = self._doUnsafe(unsafeBlock)
         {

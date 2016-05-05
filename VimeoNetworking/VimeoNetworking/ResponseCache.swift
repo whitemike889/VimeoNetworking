@@ -187,7 +187,7 @@ final internal class ResponseCache
                 
                 do
                 {
-                    try ExceptionCatcher.doUnsafe
+                    try ExceptionCatcherSwift.doUnsafe
                     {
                         responseDictionary = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? VimeoClient.ResponseDictionary
                     }
