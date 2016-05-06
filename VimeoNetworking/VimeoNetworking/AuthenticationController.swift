@@ -37,7 +37,7 @@ final public class AuthenticationController
     private let accountStore: AccountStore
     
     /// Set to false to stop the refresh cycle for pin code auth
-    private var continuePinCodeAuthorizationRefreshCycle: Bool = true
+    private var continuePinCodeAuthorizationRefreshCycle = true
     
     public init(client: VimeoClient)
     {
@@ -46,15 +46,6 @@ final public class AuthenticationController
         self.accountStore = AccountStore(configuration: client.configuration)
         
         self.authenticatorClient = VimeoClient(appConfiguration: client.configuration)
-    }
-    
-    public init(configuration: AppConfiguration, client: VimeoClient)
-    {
-        self.configuration = configuration
-        self.client = client
-        self.accountStore = AccountStore(configuration: configuration)
-        
-        self.authenticatorClient = VimeoClient(appConfiguration: configuration)
     }
     
     // MARK: - Saved Accounts

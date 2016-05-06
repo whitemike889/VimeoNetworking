@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let client = VimeoClient(appConfiguration: self.appConfiguration)
         self.client = client
         
-        let authenticationController = AuthenticationController(configuration: self.appConfiguration, client: client)
+        let authenticationController = AuthenticationController(client: client)
         self.authenticationController = authenticationController
         
         
