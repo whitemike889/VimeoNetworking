@@ -40,8 +40,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let client = VimeoClient(appConfiguration: self.appConfiguration)
         self.client = client
         
-        let authenticationController = AuthenticationController(configuration: self.appConfiguration, client: client)
+        let authenticationController = AuthenticationController(client: client)
         self.authenticationController = authenticationController
+        
         
         let loadedAccount: VIMAccount?
         do
@@ -88,6 +89,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 //            where !client.isAuthenticatedWithUser
 //        {
 //            application.openURL(url)
+//        }
+//        
+//        self.authenticationController?.pinCode(infoHandler: { pinCode, activateLink in
+//            
+//            print("pin code response rec'd")
+//            print(pinCode)
+//            print(activateLink)
+//            
+//        }) { result in
+//            
+//            switch result
+//            {
+//            case .Success(let account):
+//                print("authenticated successfully: \(account)")
+//                self.testEndpoints()
+//            case .Failure(let error):
+//                print("failure authenticating: \(error)")
+//            }
 //        }
         
         return true

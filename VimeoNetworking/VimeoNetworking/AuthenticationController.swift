@@ -21,6 +21,8 @@ final public class AuthenticationController
     
     private static let CodeGrantAuthorizationPath = "oauth/authorize"
     
+    private static let PinCodeRequestInterval: NSTimeInterval = 5
+    
     public typealias AuthenticationCompletion = ResultCompletion<VIMAccount>.T
     
     /// State is tracked for the code grant request/response cycle, to avoid interception
@@ -29,20 +31,21 @@ final public class AuthenticationController
     let configuration: AppConfiguration
     let client: VimeoClient
     
+    /// We need to use a separate client to make the actual auth requests, to ensure it's unauthenticated
+    private let authenticatorClient: VimeoClient
+    
     private let accountStore: AccountStore
+    
+    /// Set to false to stop the refresh cycle for pin code auth
+    private var continuePinCodeAuthorizationRefreshCycle = true
     
     public init(client: VimeoClient)
     {
         self.configuration = client.configuration
         self.client = client
         self.accountStore = AccountStore(configuration: client.configuration)
-    }
-    
-    public init(configuration: AppConfiguration, client: VimeoClient)
-    {
-        self.configuration = configuration
-        self.client = client
-        self.accountStore = AccountStore(configuration: configuration)
+        
+        self.authenticatorClient = VimeoClient(appConfiguration: client.configuration)
     }
     
     // MARK: - Saved Accounts
@@ -78,7 +81,7 @@ final public class AuthenticationController
     
     public func clientCredentialsGrant(completion: AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.postClientCredentialsGrantRequest(scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.clientCredentialsGrantRequest(scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
     }
@@ -150,39 +153,137 @@ final public class AuthenticationController
             return
         }
         
-        let request = AuthenticationRequest.postCodeGrantRequest(code: code, redirectURI: self.codeGrantRedirectURI)
+        let request = AuthenticationRequest.codeGrantRequest(code: code, redirectURI: self.codeGrantRedirectURI)
         
         self.authenticate(request: request, completion: completion)
     }
     
     // MARK: - Private Authentication
     
-    public func login(email email: String, password: String, completion: AuthenticationCompletion)
+    public func logIn(email email: String, password: String, completion: AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.postLoginRequest(email: email, password: password, scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.logInRequest(email: email, password: password, scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
     }
     
     public func join(name name: String, email: String, password: String, completion: AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.postJoinRequest(name: name, email: email, password: password, scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.joinRequest(name: name, email: email, password: password, scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
     }
     
-    public func facebookLogin(facebookToken facebookToken: String, completion: AuthenticationCompletion)
+    public func facebookLogIn(facebookToken facebookToken: String, completion: AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.postLoginFacebookRequest(facebookToken: facebookToken, scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.logInFacebookRequest(facebookToken: facebookToken, scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
     }
     
     public func facebookJoin(facebookToken facebookToken: String, completion: AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.postJoinFacebookRequest(facebookToken: facebookToken, scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.joinFacebookRequest(facebookToken: facebookToken, scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
+    }
+    
+    /// Pin code authentication, for devices like Apple TV.
+    
+    public typealias PinCodeInfoHander = (pinCode: String, activateLink: String) -> Void
+    
+    public func pinCode(infoHandler infoHandler: PinCodeInfoHander, completion: AuthenticationCompletion)
+    {
+        let infoRequest = PinCodeRequest.getPinCodeRequest(scopes: self.configuration.scopes)
+        
+        self.authenticatorClient.request(infoRequest) { result in
+            switch result
+            {
+            case .Success(let result):
+                
+                let info = result.model
+                
+                guard let userCode = info.userCode,
+                    let deviceCode = info.deviceCode,
+                    let activateLink = info.activateLink
+                    where info.expiresIn > 0
+                else
+                {
+                    let errorDescription = "Malformed pin code info returned"
+                    
+                    assertionFailure(errorDescription)
+                    
+                    let error = NSError(domain: self.dynamicType.ErrorDomain, code: LocalErrorCode.PinCodeInfo.rawValue, userInfo: [NSLocalizedDescriptionKey: errorDescription])
+                    
+                    completion(result: .Failure(error: error))
+                    
+                    return
+                }
+                
+                infoHandler(pinCode: userCode, activateLink: activateLink)
+                
+                let expirationDate = NSDate(timeIntervalSinceNow: NSTimeInterval(info.expiresIn))
+                
+                self.continuePinCodeAuthorizationRefreshCycle = true
+                self.doPinCodeAuthorization(userCode: userCode, deviceCode: deviceCode, expirationDate: expirationDate, completion: completion)
+                
+            case .Failure(let error):
+                completion(result: .Failure(error: error))
+            }
+        }
+    }
+    
+    private func doPinCodeAuthorization(userCode userCode: String, deviceCode: String, expirationDate: NSDate, completion: AuthenticationCompletion)
+    {
+        guard NSDate().compare(expirationDate) == .OrderedAscending
+        else
+        {
+            let description = "Pin code expired"
+            
+            let error = NSError(domain: self.dynamicType.ErrorDomain, code: LocalErrorCode.PinCodeExpired.rawValue, userInfo: [NSLocalizedDescriptionKey: description])
+            
+            completion(result: .Failure(error: error))
+            
+            return
+        }
+        
+        let authorizationRequest = AuthenticationRequest.authorizePinCodeRequest(userCode: userCode, deviceCode: deviceCode)
+        
+        self.authenticate(request: authorizationRequest) { [weak self] result in
+            
+            switch result
+            {
+            case .Success:
+                completion(result: result)
+                
+            case .Failure(let error):
+                if error.statusCode == HTTPStatusCode.BadRequest.rawValue // 400: Bad Request implies the code hasn't been activated yet, so try again.
+                {
+                    guard let strongSelf = self
+                        else
+                    {
+                        return
+                    }
+                    
+                    if strongSelf.continuePinCodeAuthorizationRefreshCycle
+                    {
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(strongSelf.dynamicType.PinCodeRequestInterval * NSTimeInterval(NSEC_PER_SEC))), dispatch_get_main_queue()) { [weak self] in
+                            
+                            self?.doPinCodeAuthorization(userCode: userCode, deviceCode: deviceCode, expirationDate: expirationDate, completion: completion)
+                        }
+                    }
+                }
+                else // Any other error is an actual error, and should get reported back.
+                {
+                    completion(result: result)
+                }
+            }
+        }
+    }
+    
+    public func cancelPinCode()
+    {
+        self.continuePinCodeAuthorizationRefreshCycle = false
     }
     
     // MARK: - Log out
@@ -215,7 +316,7 @@ final public class AuthenticationController
     
     private func authenticate(request request: AuthenticationRequest, completion: AuthenticationCompletion)
     {
-        self.client.request(request) { result in
+        self.authenticatorClient.request(request) { result in
             
             let handledResult = self.handleAuthenticationResult(result)
             

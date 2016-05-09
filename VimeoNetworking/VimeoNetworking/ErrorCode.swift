@@ -38,11 +38,11 @@ public enum VimeoErrorCode: Int
     case FacebookJoinMalformedToken = 2305
     case FacebookJoinDecryptFail = 2307
     case FacebookJoinTokenTooLong = 2308
-    case FacebookLoginNoToken = 2312
-    case FacebookLoginMissingProperty = 2310
-    case FacebookLoginMalformedToken = 2311
-    case FacebookLoginDecryptFail = 2313
-    case FacebookLoginTokenTooLong = 2314
+    case FacebookLogInNoToken = 2312
+    case FacebookLogInMissingProperty = 2310
+    case FacebookLogInMalformedToken = 2311
+    case FacebookLogInDecryptFail = 2313
+    case FacebookLogInTokenTooLong = 2314
     case FacebookInvalidInputGrantType = 2221
     case FacebookJoinValidateTokenFail = 2315
     case FacebookInvalidNoInput = 2207
@@ -61,6 +61,7 @@ public enum VimeoErrorCode: Int
 public enum HTTPStatusCode: Int
 {
     case ServiceUnavailable = 503
+    case BadRequest = 400
     case Unauthorized = 401
     case Forbidden = 403
 }
@@ -78,4 +79,6 @@ public enum LocalErrorCode: Int
     case CodeGrant = 9005
     case CodeGrantState = 9006
     case NoResponse = 9007
+    case PinCodeInfo = 9008
+    case PinCodeExpired = 9009
 }
