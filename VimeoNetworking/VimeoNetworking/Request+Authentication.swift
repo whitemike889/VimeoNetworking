@@ -59,7 +59,7 @@ public extension Request where ModelType: VIMAccount
         return Request(method: .POST, path: AuthenticationPathCodeGrant, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
     
-    public static func loginRequest(email email: String, password: String, scopes: [Scope]) -> Request
+    public static func logInRequest(email email: String, password: String, scopes: [Scope]) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [GrantTypeKey: GrantTypePassword,
                                                          ScopeKey: Scope.combine(scopes),
@@ -79,7 +79,7 @@ public extension Request where ModelType: VIMAccount
         return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
     
-    public static func loginFacebookRequest(facebookToken facebookToken: String, scopes: [Scope]) -> Request
+    public static func logInFacebookRequest(facebookToken facebookToken: String, scopes: [Scope]) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [GrantTypeKey: GrantTypeFacebook,
                                                          ScopeKey: Scope.combine(scopes),
@@ -116,20 +116,6 @@ extension Request where ModelType: VIMNullResponse
 // MARK: -
 
 public typealias PinCodeRequest = Request<PinCodeInfo>
-
-public class PinCodeInfo: VIMModelObject
-{
-    dynamic public var deviceCode: String?
-    dynamic public var userCode: String?
-    dynamic public var authorizeLink: String?
-    dynamic public var activateLink: String?
-    
-    // These are non-optional Ints with -1 invalid sentinel values because 
-    // an optional Int can't be represented in Objective-C and can't be marked 
-    // dynamic, which leads to it not getting parsed by VIMObjectMapper [RH]
-    dynamic public var expiresIn: Int = -1
-    dynamic public var interval: Int = -1
-}
 
 public extension Request where ModelType: PinCodeInfo
 {

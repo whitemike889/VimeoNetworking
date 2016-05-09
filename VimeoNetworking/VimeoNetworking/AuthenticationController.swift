@@ -160,9 +160,9 @@ final public class AuthenticationController
     
     // MARK: - Private Authentication
     
-    public func login(email email: String, password: String, completion: AuthenticationCompletion)
+    public func logIn(email email: String, password: String, completion: AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.loginRequest(email: email, password: password, scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.logInRequest(email: email, password: password, scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
     }
@@ -174,9 +174,9 @@ final public class AuthenticationController
         self.authenticate(request: request, completion: completion)
     }
     
-    public func facebookLogin(facebookToken facebookToken: String, completion: AuthenticationCompletion)
+    public func facebookLogIn(facebookToken facebookToken: String, completion: AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.loginFacebookRequest(facebookToken: facebookToken, scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.logInFacebookRequest(facebookToken: facebookToken, scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
     }
@@ -189,7 +189,10 @@ final public class AuthenticationController
     }
     
     /// Pin code authentication, for devices like Apple TV.
-    public func pinCode(infoHandler infoHandler: (pinCode: String, activateLink: String) -> Void, completion: AuthenticationCompletion)
+    
+    public typealias PinCodeInfoHander = (pinCode: String, activateLink: String) -> Void
+    
+    public func pinCode(infoHandler infoHandler: PinCodeInfoHander, completion: AuthenticationCompletion)
     {
         let infoRequest = PinCodeRequest.getPinCodeRequest(scopes: self.configuration.scopes)
         
