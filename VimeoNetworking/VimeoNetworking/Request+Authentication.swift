@@ -38,6 +38,8 @@ private let AuthenticationPathPinCodeAuthorize = "oauth/device/authorize"
 
 private let AuthenticationPathTokens = "/tokens"
 
+// TODO: Should these request methods be documented? They should only ever be used by AuthenticationController [RH] (5/11/16)
+
 typealias AuthenticationRequest = Request<VIMAccount>
 
 extension Request where ModelType: VIMAccount
