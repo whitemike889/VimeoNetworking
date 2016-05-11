@@ -13,7 +13,10 @@ import Foundation
  */
 public struct AppConfiguration
 {
+        /// Keychain identifier for the Vimeo application
     public static let KeychainServiceVimeo = "Vimeo"
+    
+        /// Keychain identifier for the Cameo application
     public static let KeychainServiceCameo = "Cameo"
     
     let clientKey: String

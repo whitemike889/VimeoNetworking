@@ -10,6 +10,11 @@ import Foundation
 
 public extension String
 {
+    /**
+     Construct a dictionary of parameters from the current string
+     
+     - returns: a dictionary of parameters if parsing succeeded
+     */
     func parametersFromQueryString() -> [String: String]?
     {
         var parameters: [String: String] = [:]

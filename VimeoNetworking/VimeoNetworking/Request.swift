@@ -11,22 +11,38 @@ import Foundation
 /// Describes how a request should query the cache
 public enum CacheFetchPolicy
 {
-    static let DefaultPolicy: CacheFetchPolicy = .CacheThenNetwork
-    
+        /// Only request cached responses.  No network request is made.
     case CacheOnly
+    
+        /// **(Default)** Try to load from both cache and network, note that two results may be returned when using this method (cached, then network)
     case CacheThenNetwork
+    
+        /// Only try to load the request from network.  The cache is not queried
     case NetworkOnly
+    
+        /// First try the network request, then fallback to cache if it fails
     case TryNetworkThenCache
 }
 
 /// Describes how a request should handle retrying after failure
 public enum RetryPolicy
 {
-    static let DefaultPolicy: RetryPolicy = .SingleAttempt
-    static let TryThreeTimes: RetryPolicy = .MultipleAttempts(attemptCount: 3, initialDelay: 2.0)
-    
+        /// **(Default)** Only one attempt is made, no retry behavior
     case SingleAttempt
+    
+    /**
+      Retry a request a specified number of times, starting with a specified delay
+     
+     - parameter attemptCount: maximum number of times this request should be retried
+     - parameter initialDelay: the delay (in seconds) until first retry. The next delay is doubled with each retry to provide `back-off` behavior, which tends to lead to a greater probability of recovery
+     */
     case MultipleAttempts(attemptCount: Int, initialDelay: NSTimeInterval)
+}
+
+extension RetryPolicy
+{
+    /// Convenience `RetryPolicy` constructor that provides a standard multiple attempt policy
+    static let TryThreeTimes: RetryPolicy = .MultipleAttempts(attemptCount: 3, initialDelay: 2.0)
 }
 
 /**
@@ -36,25 +52,25 @@ public enum RetryPolicy
  */
 public struct Request<ModelType: MappableResponse>
 {
-        /// <#Description#>
+        /// HTTP method (e.g. `.GET`, `.POST`)
     public let method: VimeoClient.Method
     
-        /// <#Description#>
+        /// request url path (e.g. `/me`, `/videos/123456`)
     public let path: String
     
-        /// <#Description#>
+        /// any parameters to include with the request
     public let parameters: VimeoClient.RequestParameters?
     
-        /// <#Description#>
+        /// query a nested JSON key path for the response model object to be returned
     public let modelKeyPath: String?
     
-        /// <#Description#>
+        /// describes how this request should query for cached responses
     public var cacheFetchPolicy: CacheFetchPolicy
     
-        /// <#Description#>
+        /// whether a successful response to this request should be stored in cache
     public let shouldCacheResponse: Bool
     
-        /// <#Description#>
+        /// describes how the request should handle retrying after failure
     public var retryPolicy: RetryPolicy
     
     // MARK: -
@@ -65,10 +81,10 @@ public struct Request<ModelType: MappableResponse>
      - parameter method:              the HTTP method (e.g. `.GET`, `.POST`), defaults to `.GET`
      - parameter path:                url path for this request
      - parameter parameters:          any optional parameters for this request, defaults to `nil`
-     - parameter modelKeyPath:        optionally query a nested key path for the response model object, defaults to `nil`
-     - parameter cacheFetchPolicy:    how the request should query the cache, defaults to `.CacheThenNetwork`
+     - parameter modelKeyPath:        optionally query a nested JSON key path for the response model object to be returned, defaults to `nil`
+     - parameter cacheFetchPolicy:    describes how this request should query for cached responses, defaults to `.CacheThenNetwork`
      - parameter shouldCacheResponse: whether the response should be stored in cache, defaults to `true`
-     - parameter retryPolicy:         how the request should handle retrying after failure, defaults to `.SingleAttempt`
+     - parameter retryPolicy:         describes how the request should handle retrying after failure, defaults to `.SingleAttempt`
      
      - returns: an initialized `Request`
      */
@@ -76,9 +92,9 @@ public struct Request<ModelType: MappableResponse>
          path: String,
          parameters: VimeoClient.RequestParameters? = nil,
          modelKeyPath: String? = nil,
-         cacheFetchPolicy: CacheFetchPolicy = .DefaultPolicy,
+         cacheFetchPolicy: CacheFetchPolicy = .CacheThenNetwork,
          shouldCacheResponse: Bool = true,
-         retryPolicy: RetryPolicy = .DefaultPolicy)
+         retryPolicy: RetryPolicy = .SingleAttempt)
     {
         self.method = method
         self.path = path

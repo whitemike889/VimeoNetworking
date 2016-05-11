@@ -41,13 +41,13 @@ public enum Notification: String
         /// Sent when any response returns an invalid token error
     case ClientDidReceiveInvalidTokenError
     
-        /// Sent when the online/offline status of the current device changes
+        /// **(Not yet implemented)** Sent when the online/offline status of the current device changes
     case ReachabilityDidChange
     
         /// Sent when the stored authenticated account is changed
     case AuthenticatedAccountDidChange
     
-        /// Sent when the user stored with the authenticated account is refreshed
+        /// **(Not yet implemented)** Sent when the user stored with the authenticated account is refreshed
     case AuthenticatedAccountDidRefresh
     
     // MARK: -
