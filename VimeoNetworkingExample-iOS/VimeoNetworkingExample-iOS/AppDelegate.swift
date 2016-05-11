@@ -91,23 +91,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 //            application.openURL(url)
 //        }
 //        
-//        self.authenticationController?.pinCode(infoHandler: { pinCode, activateLink in
-//            
-//            print("pin code response rec'd")
-//            print(pinCode)
-//            print(activateLink)
-//            
-//        }) { result in
-//            
-//            switch result
-//            {
-//            case .Success(let account):
-//                print("authenticated successfully: \(account)")
-//                self.testEndpoints()
-//            case .Failure(let error):
-//                print("failure authenticating: \(error)")
-//            }
-//        }
+        self.authenticationController?.pinCode(infoHandler: { pinCode, activateLink in
+            
+            print("pin code response rec'd")
+            print(pinCode)
+            print(activateLink)
+            
+        }) { result in
+            
+            switch result
+            {
+            case .Success(let account):
+                print("authenticated successfully: \(account)")
+                self.testEndpoints()
+            case .Failure(let error):
+                print("failure authenticating: \(error)")
+            }
+        }
         
         return true
     }

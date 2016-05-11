@@ -8,7 +8,7 @@
 
 import Foundation
 
-final internal class AccountStore
+final class AccountStore
 {
     enum AccountType: String
     {
