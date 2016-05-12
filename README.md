@@ -2,7 +2,7 @@
 
 **VimeoNetworking** is the authoritative Swift networking library for the Vimeo API.  Fully designed and implemented with Swift in mind, **VimeoNetworking** is type-safe, well `enum`erated, and never, ever, *ever* force-unwrapped. 
 
-##### Hey Creator, if you're primarily interested in uploading videos to Vimeo, you should check out [VimeoUpload](https://github.com/vimeo/VimeoUpload) too.
+##### Hey Creator, if you're primarily interested in uploading videos to Vimeo, you should also check out [VimeoUpload](https://github.com/vimeo/VimeoUpload).
 
 ## Installing with CocoaPods
 
