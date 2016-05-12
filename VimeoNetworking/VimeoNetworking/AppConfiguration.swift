@@ -13,7 +13,7 @@ public let KeychainServiceCameo = "Cameo"
 
 public struct AppConfiguration
 {
-    let clientKey: String
+    let clientIdentifier: String
     let clientSecret: String
     let scopes: [Scope]
     
@@ -29,7 +29,7 @@ public struct AppConfiguration
                 keychainAccessGroup: String? = nil,
                 apiVersion: String = VimeoDefaultAPIVersionString)
     {
-        self.clientKey = clientKey
+        self.clientIdentifier = clientKey
         self.clientSecret = clientSecret
         self.scopes = scopes
         self.keychainService = keychainService
