@@ -114,7 +114,7 @@ catch let error {
 
 ## Interacting with Vimeo
 
-You're initialized, you're configured, you're authenticated.  Now you're ready to rock!  Let's start hitting some endpoints. 🤘🤘
+You're initialized, you're configured, you're authenticated.  Now you're ready to rock!  Let's start hitting some endpoints. 🤘
 
 ### Making Requests
 
