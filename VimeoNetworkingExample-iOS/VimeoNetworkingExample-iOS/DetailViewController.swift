@@ -12,9 +12,6 @@ class DetailViewController: UIViewController {
 
     @IBOutlet weak var detailDescriptionLabel: UILabel!
 
-    
-    var observationToken: ObservationToken?
-
     var detailItem: AnyObject? {
         didSet {
             // Update the view.
@@ -35,23 +32,6 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.configureView()
-        
-        self.observationToken = Notification.ClientDidReceiveInvalidTokenError.observe { (notification) in
-            print("invalid token error!")
-        }
     }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        self.observationToken?.stopObserving()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
 
