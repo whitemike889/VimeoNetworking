@@ -82,6 +82,9 @@ final public class VimeoRequestSerializer: AFHTTPRequestSerializer
         self.setup(apiVersion: appConfiguration.apiVersion)
     }
     
+    /**
+     **NOT SUPPORTED**
+     */
     required public init?(coder aDecoder: NSCoder)
     {
         fatalError("init(coder:) has not been implemented")

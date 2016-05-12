@@ -38,12 +38,17 @@ private let AuthenticationPathPinCodeAuthorize = "oauth/device/authorize"
 
 private let AuthenticationPathTokens = "/tokens"
 
-// TODO: Should these request methods be documented? They should only ever be used by AuthenticationController [RH] (5/11/16)
-
 typealias AuthenticationRequest = Request<VIMAccount>
 
 extension Request where ModelType: VIMAccount
 {
+    /**
+     Construct a `Request` for client credentials grant authentication
+     
+     - parameter scopes: an array of `Scope` values representing permissions your app requests
+     
+     - returns: a new `Request`
+     */
     static func clientCredentialsGrantRequest(scopes scopes: [Scope]) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [GrantTypeKey: GrantTypeClientCredentials,
@@ -52,6 +57,14 @@ extension Request where ModelType: VIMAccount
         return Request(method: .POST, path: AuthenticationPathClientCredentials, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
     
+    /**
+     Construct a `Request` for code grant (redirect) authentication
+     
+     - parameter code:        the authorization code returned by the API
+     - parameter redirectURI: the URI used to relaunch your application
+     
+     - returns: a new `Request`
+     */
     static func codeGrantRequest(code code: String, redirectURI: String) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [GrantTypeKey: GrantTypeAuthorizationCode,
@@ -61,6 +74,15 @@ extension Request where ModelType: VIMAccount
         return Request(method: .POST, path: AuthenticationPathCodeGrant, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
     
+    /**
+     Construct a `Request` for logging in with an email and password (Vimeo internal use only)
+     
+     - parameter email:    the user email
+     - parameter password: the user password
+     - parameter scopes:   an array of `Scope` values representing permissions your app requests
+     
+     - returns: a new `Request`
+     */
     static func logInRequest(email email: String, password: String, scopes: [Scope]) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [GrantTypeKey: GrantTypePassword,
@@ -71,6 +93,16 @@ extension Request where ModelType: VIMAccount
         return Request(method: .POST, path: AuthenticationPathAccessToken, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
     
+    /**
+     Construct a `Request` for joining with a name, email, and password (Vimeo internal use only)
+     
+     - parameter name:     the new user name
+     - parameter email:    the new user email
+     - parameter password: the new user password
+     - parameter scopes:   an array of `Scope` values representing permissions your app requests
+     
+     - returns: a new `Request`
+     */
     static func joinRequest(name name: String, email: String, password: String, scopes: [Scope]) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [ScopeKey: Scope.combine(scopes),
@@ -81,6 +113,14 @@ extension Request where ModelType: VIMAccount
         return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
     
+    /**
+     Construct a `Request` for logging in with Facebook (Vimeo internal use only)
+     
+     - parameter facebookToken: the token returned by the Facebook SDK
+     - parameter scopes:        an array of `Scope` values representing permissions your app requests
+     
+     - returns: a new `Request`
+     */
     static func logInFacebookRequest(facebookToken facebookToken: String, scopes: [Scope]) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [GrantTypeKey: GrantTypeFacebook,
@@ -90,6 +130,14 @@ extension Request where ModelType: VIMAccount
         return Request(method: .POST, path: AuthenticationPathFacebookToken, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
     
+    /**
+     Construct a `Request` for joining with Facebook (Vimeo internal use only)
+     
+     - parameter facebookToken: the token returned by the Facebook SDK
+     - parameter scopes:        an array of `Scope` values representing permissions your app requests
+     
+     - returns: a new `Request`
+     */
     static func joinFacebookRequest(facebookToken facebookToken: String, scopes: [Scope]) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [ScopeKey: Scope.combine(scopes),
@@ -98,6 +146,14 @@ extension Request where ModelType: VIMAccount
         return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
     
+    /**
+     Construct a `Request` for completing authentication on a connected device with a pin code (Vimeo internal use only)
+     
+     - parameter userCode:   the pin code presented to the user
+     - parameter deviceCode: the device code returned by the api in the initial pin code request
+     
+     - returns: a new `Request`
+     */
     static func authorizePinCodeRequest(userCode userCode: String, deviceCode: String) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [PinCodeKey: userCode,
@@ -109,6 +165,11 @@ extension Request where ModelType: VIMAccount
 
 extension Request where ModelType: VIMNullResponse
 {
+    /**
+     Construct a `Request` for deleting the current token
+     
+     - returns: a new `Request`
+     */
     public static func deleteTokensRequest() -> Request
     {
         return Request(method: .DELETE, path: AuthenticationPathTokens, retryPolicy: .TryThreeTimes)
@@ -121,6 +182,13 @@ typealias PinCodeRequest = Request<PinCodeInfo>
 
 extension Request where ModelType: PinCodeInfo
 {
+    /**
+     Construct a `Request` for initiating authentication on a connected device with a pin code (Vimeo internal use only)
+     
+     - parameter scopes: an array of `Scope` values representing permissions your app requests
+     
+     - returns: a new `Request`
+     */
     static func getPinCodeRequest(scopes scopes: [Scope]) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [GrantTypeKey: GrantTypePinCode,

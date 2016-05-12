@@ -7,7 +7,6 @@
 //
 
 import Foundation
-
 import VIMObjectMapper
 
 extension VIMObjectMapper
