@@ -39,15 +39,13 @@ To interact with the Vimeo API, we use a `VimeoClient` instance.  The client is 
 let vimeoClient = VimeoClient(configuration: appConfiguration)
 ```
 
-But before we can actually start getting data from the API, there's one last step. All calls to the Vimeo API must be authenticated, but `VimeoNetworking` makes that simple too, read on:
-
 ## Authenticating
 
-`AuthenticationController` handles the process of authenticating with the Vimeo API.  It uses the configuration of an associated `VimeoClient` to make requests. On successful authentication, it passes the new Vimeo account back to this client, and that client can then make requests to API endpoints.
+Before we can actually start getting meaningful data from the API, there's one last step: authentication. `AuthenticationController` handles and simplifies this process.  It uses the configuration of an associated `VimeoClient` to make requests. On successful authentication, it passes the new Vimeo account back to this client, and that client can then make requests to API endpoints.
 
 ### Client Credentials
 
-Client credentials allow you to see everything that's publicly available on Vimeo.  This is essentially equivalent to visiting Vimeo.com without signing up for an account or logging in.  This is the simplest authentication method to implement.
+Client credentials allow you to see everything that's publicly available on Vimeo.  This is essentially equivalent to visiting Vimeo.com without signing up for an account or logging in.  This is the simplest authentication method to implement, just one function completes the grant.
 
 ```Swift 
 let authenticationController = AuthenticationController(client: vimeoClient)
@@ -64,9 +62,11 @@ authenticationController.clientCredentialsGrant { result in
 
 ### Code Grant
 
-If you want to log in as a user, the Vimeo API provides a process called Code Grant authentication.  Your app launches a specific URL in Safari, the user signs up or logs in on Vimeo.com, then control is redirected back to your application where authentication completes.
+If you want to log in as a user, the Vimeo API provides a process called Code Grant authentication.  This is a bit more involved than a client credentials grant, but it gives your application the benefit of making requests on behalf of a Vimeo user, and viewing their personal content.  
 
-To prepare your application to receive this redirect, navigate to your app target settings > Info > URL Types.  Add a new URL Type, and under url scheme enter `vimeo` followed by your client identifier (for example, if your client identifier is `1234`, enter `vimeo1234`).  This allows Vimeo to redirect back into your app after authorization.  You also need to add this redirect URL to your app on the Vimeo API site.  Under “App Callback URL”, add `vimeo{CLIENT_KEY}://auth` (for the example above, `vimeo1234://auth`).
+To authenticate via code grant, your app launches a specific URL in Safari.  The user signs up or logs in on Vimeo.com, and chooses which permissions to grant.  Then, control is redirected back to your application where authentication completes.
+
+To prepare your application to receive this redirect, navigate to your app target settings > Info > URL Types.  Add a new URL Type, and under url scheme enter `vimeo` followed by your client identifier (for example, if your client identifier is `1234`, enter `vimeo1234`).  You also need to add this redirect URL to your app on the Vimeo API site.  Under “App Callback URL”, add `vimeo{CLIENT_KEY}://auth` (for the example above, `vimeo1234://auth`).
 
 Now, in an appropriate place in your app, open the code grant authorization URL in Safari:
 
@@ -77,7 +77,7 @@ let URL = authenticationController.codeGrantAuthorizationURL()
 UIApplication.sharedApplication.openURL(URL)
 ```
 
-The user will prompted to grant permissions to your application.  When they accept, your redirect URL will be opened, which will reopen your application.  Handle this event in your application delegate:
+The user will prompted to log in and grant permissions to your application.  When they accept, your redirect URL will be opened, which will reopen your application.  Handle this event in your application delegate:
 
 ```Swift
 func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool
@@ -97,7 +97,7 @@ func application(app: UIApplication, openURL url: NSURL, options: [String : AnyO
 
 ### Saved Accounts
 
-`AuthenticationController` saves the accounts it authenticates in the Keychain.  The next time your application opens, you should first attempt to load a previously authenticated account before prompting the user to authenticate again.
+`AuthenticationController` saves the accounts it successfully authenticates in the Keychain.  The next time your application opens, you should first attempt to load a previously authenticated account before prompting the user to authenticate.
 
 ```Swift
 do {
@@ -114,7 +114,7 @@ catch let error {
 
 ## Interacting with Vimeo
 
-You're initialized, you're configured, you're authenticated.  Now  you're ready to rock!  Awesome, let's actually start hitting some endpoints. 🤘🤘
+You're initialized, you're configured, you're authenticated.  Now you're ready to rock!  Let's start hitting some endpoints. 🤘🤘
 
 ### Making Requests
 
@@ -170,7 +170,7 @@ vimeoClient.request(staffPickedVideosRequest) { result in
 
 ## Last remarks
 
-With *all that* said, you now have a pretty solid picture of what **VimeoNetworking** can do.  There's always more to explore, and we encourage you to play with the sample project, or dive right into the code and try it out yourself.  Most of our classes and functions are decently documented in the source files, so more detail on any topic can be found there.  If you still have questions or you're running into trouble, feel free to [file an issue](https://github.com/vimeo/VimeoNetworking/issues).  Better yet, if you fixed an issue or you have an improvement you'd like to share, send us a [pull request](https://github.com/vimeo/VimeoNetworking/pulls).  
+With *all that* said, you now have a pretty solid understanding of what **VimeoNetworking** can do.  There's always more to explore, and we encourage you to play with the sample project, or dive right into the code and try it out yourself.  Most of our classes and functions are decently documented in the source files, so more detail on any topic can be found there.  If you still have questions or you're running into trouble, feel free to [file an issue](https://github.com/vimeo/VimeoNetworking/issues).  Better yet, if you fixed an issue or you have an improvement you'd like to share, send us a [pull request](https://github.com/vimeo/VimeoNetworking/pulls).  
 
 **VimeoNetworking** is available under the MIT license, see the LICENSE file for more info.
 
