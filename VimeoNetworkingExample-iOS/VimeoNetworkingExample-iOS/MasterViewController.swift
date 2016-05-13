@@ -20,6 +20,7 @@ class MasterViewController: UITableViewController
     }
     
     private var accountObservationToken: ObservationToken?
+    private var authenticationButton: UIBarButtonItem?
     
     // MARK: - View Controller
 
@@ -34,6 +35,10 @@ class MasterViewController: UITableViewController
         }
         
         self.setupAccountObservation()
+        
+        self.authenticationButton = UIBarButtonItem(title: nil, style: .Plain, target: self, action: #selector(didTapAuthenticationButton))
+        self.updateAuthenticationButton()
+        self.navigationItem.rightBarButtonItem = self.authenticationButton
     }
 
     override func viewWillAppear(animated: Bool)
@@ -48,6 +53,8 @@ class MasterViewController: UITableViewController
     private func setupAccountObservation()
     {
         self.accountObservationToken = Notification.AuthenticatedAccountDidChange.observe { [weak self] notification in
+            
+            guard let strongSelf = self else { return }
             
             let request: Request<[VIMVideo]>
             if VimeoClient.defaultClient.isAuthenticatedWithUser
@@ -64,18 +71,61 @@ class MasterViewController: UITableViewController
                 switch result
                 {
                 case .Success(let response):
-                    self?.videos = response.model
+                    strongSelf.videos = response.model
                 case .Failure(let error):
                     let title = "Video Request Failed"
                     let message = "\(request.path) could not be loaded: \(error.localizedDescription)"
                     let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
                     let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
                     alert.addAction(action)
-                    self?.presentViewController(alert, animated: true, completion: nil)
+                    strongSelf.presentViewController(alert, animated: true, completion: nil)
                 }
             }
             
-            self?.navigationItem.title = request.path
+            strongSelf.navigationItem.title = request.path
+            strongSelf.updateAuthenticationButton()
+        }
+    }
+    
+    private func updateAuthenticationButton()
+    {
+        if VimeoClient.defaultClient.isAuthenticatedWithUser
+        {
+            self.authenticationButton?.title = "Log Out"
+        }
+        else
+        {
+            self.authenticationButton?.title = "Log In"
+        }
+    }
+    
+    // MARK: - Actions
+    
+    @objc private func didTapAuthenticationButton()
+    {
+        let authenticationController = AuthenticationController(client: VimeoClient.defaultClient)
+        if VimeoClient.defaultClient.isAuthenticatedWithUser
+        {
+            do
+            {
+                try authenticationController.logOut()
+            }
+            catch let error as NSError
+            {
+                
+                let title = "Couldn't Log Out"
+                let message = "Logging out failed: \(error.localizedDescription)"
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+                let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alert.addAction(action)
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+        }
+        else
+        {
+            let URL = authenticationController.codeGrantAuthorizationURL()
+            
+            UIApplication.sharedApplication().openURL(URL)
         }
     }
 

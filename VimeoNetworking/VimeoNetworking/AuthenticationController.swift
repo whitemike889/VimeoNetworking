@@ -288,7 +288,7 @@ final public class AuthenticationController
     
     // MARK: - Log out
     
-    public func logOut() throws
+    public func logOut(loadClientCredentials loadClientCredentials: Bool = true) throws
     {
         guard self.client.isAuthenticatedWithUser == true
         else
@@ -307,7 +307,14 @@ final public class AuthenticationController
             }
         }
         
-        self.client.authenticatedAccount = nil
+        if loadClientCredentials
+        {
+            self.client.authenticatedAccount = (try? self.accountStore.loadAccount(.ClientCredentials)) ?? nil
+        }
+        else
+        {
+            self.client.authenticatedAccount = nil
+        }
         
         try self.accountStore.removeAccount(.User)
     }
