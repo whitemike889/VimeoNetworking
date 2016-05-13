@@ -7,18 +7,12 @@
 //
 
 import UIKit
-
 import VimeoNetworking
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate
 {
     var window: UIWindow?
-    
-    let appConfiguration = AppConfiguration(clientKey: "YOUR_CLIENT_KEY_HERE", clientSecret: "YOUR_CLIENT_SECRET_HERE", scopes: [.Public, .Private, .Create, .Edit, .Delete, .Interact, .Upload])
-    
-    var authenticationController: AuthenticationController?
-    var client: VimeoClient?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
@@ -29,13 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
         
         
-        
-        let client = VimeoClient(appConfiguration: self.appConfiguration)
-        self.client = client
-        
-        let authenticationController = AuthenticationController(client: client)
-        self.authenticationController = authenticationController
-        
+        let authenticationController = AuthenticationController(client: VimeoClient.defaultClient)
         let loadedAccount: VIMAccount?
         do
         {
@@ -57,6 +45,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                     print("authenticated successfully: \(account)")
                 case .Failure(let error):
                     print("failure authenticating: \(error)")
+                    
+                    let title = "Client Credentials Authentication Failed"
+                    let message = "Make sure that your client identifier and client secret are set correctly in VimeoClient+Shared.swift"
+                    
+                    let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+                    splitViewController.presentViewController(alert, animated: true, completion: nil)
+                    print(title + ": " + message)
                 }
             }
         }
@@ -68,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     
     func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool
     {
-        self.authenticationController?.codeGrant(responseURL: url) { result in
+        AuthenticationController(client: VimeoClient.defaultClient).codeGrant(responseURL: url) { result in
             
             switch result
             {
@@ -76,6 +71,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                 print("authenticated successfully: \(account)")
             case .Failure(let error):
                 print("failure authenticating: \(error)")
+                
+                let title = "Code Grant Authentication Failed"
+                let message = "Make sure that your redirect URI is added to the dev portal"
+                
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+                let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alert.addAction(action)
+                self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+                print(title + ": " + message)
             }
         }
         

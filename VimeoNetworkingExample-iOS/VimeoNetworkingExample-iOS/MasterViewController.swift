@@ -8,95 +8,115 @@
 
 import UIKit
 
-class MasterViewController: UITableViewController {
-
+class MasterViewController: UITableViewController
+{
     var detailViewController: DetailViewController? = nil
-    var objects = [AnyObject]()
+    var videos: [VIMVideo] = []
+    {
+        didSet
+        {
+            self.tableView.reloadData()
+        }
+    }
+    
+    private var accountObservationToken: ObservationToken?
+    
+    // MARK: - View Controller
 
-
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        self.navigationItem.leftBarButtonItem = self.editButtonItem()
-
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(insertNewObject))
-        self.navigationItem.rightBarButtonItem = addButton
-        if let split = self.splitViewController {
+        
+        if let split = self.splitViewController
+        {
             let controllers = split.viewControllers
             self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
+        
+        self.setupAccountObservation()
     }
 
-    override func viewWillAppear(animated: Bool) {
-        if #available(iOS 8.0, *) {
-            self.clearsSelectionOnViewWillAppear = self.splitViewController!.collapsed
-        } else {
-            // Fallback on earlier versions
-        }
+    override func viewWillAppear(animated: Bool)
+    {
+        self.clearsSelectionOnViewWillAppear = self.splitViewController!.collapsed
+
         super.viewWillAppear(animated)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    func insertNewObject(sender: AnyObject) {
-        objects.insert(NSDate(), atIndex: 0)
-        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+    
+    // MARK: - Setup
+    
+    private func setupAccountObservation()
+    {
+        self.accountObservationToken = Notification.AuthenticatedAccountDidChange.observe { [weak self] notification in
+            
+            let request: Request<[VIMVideo]>
+            if VimeoClient.defaultClient.isAuthenticatedWithUser
+            {
+                request = Request<[VIMVideo]>(path: "/me/videos")
+            }
+            else
+            {
+                request = Request<[VIMVideo]>(path: "/channels/staffpicks/videos")
+            }
+            
+            VimeoClient.defaultClient.request(request) { (result) in
+                
+                switch result
+                {
+                case .Success(let response):
+                    self?.videos = response.model
+                case .Failure(let error):
+                    let title = "Video Request Failed"
+                    let message = "\(request.path) could not be loaded: \(error.localizedDescription)"
+                    let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+                    let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                    alert.addAction(action)
+                    self?.presentViewController(alert, animated: true, completion: nil)
+                }
+            }
+            
+            self?.navigationItem.title = request.path
+        }
     }
 
     // MARK: - Segues
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showDetail" {
-            if let indexPath = self.tableView.indexPathForSelectedRow {
-                let object = objects[indexPath.row] as! NSDate
-                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
-                controller.detailItem = object
-                if #available(iOS 8.0, *) {
-                    controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
-                } else {
-                    // Fallback on earlier versions
-                }
-                controller.navigationItem.leftItemsSupplementBackButton = true
-            }
-        }
-    }
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+//    {
+//        if segue.identifier == "showDetail"
+//        {
+//            if let indexPath = self.tableView.indexPathForSelectedRow
+//            {
+//                let object = videos[indexPath.row] as! NSDate
+//                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
+//                controller.detailItem = object
+//                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+//                controller.navigationItem.leftItemsSupplementBackButton = true
+//            }
+//        }
+//    }
 
     // MARK: - Table View
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objects.count
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return self.videos.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
 
-        let object = objects[indexPath.row] as! NSDate
-        cell.textLabel!.text = object.description
+        let video = self.videos[indexPath.row]
+        
+        cell.textLabel!.text = video.name
+        
         return cell
     }
-
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            objects.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-        }
-    }
-
-
 }
 
