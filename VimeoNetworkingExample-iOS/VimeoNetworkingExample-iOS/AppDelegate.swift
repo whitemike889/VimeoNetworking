@@ -24,6 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         
         
         let authenticationController = AuthenticationController(client: VimeoClient.defaultClient)
+        
+        /// First, we try to load a preexisting account
+        
         let loadedAccount: VIMAccount?
         do
         {
@@ -34,6 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             loadedAccount = nil
             print("error loading account \(error)")
         }
+        
+        // If we didn't find an account to load or loading failed, we'll authenticate using client credentials
         
         if loadedAccount == nil
         {
@@ -61,8 +66,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     
     // MARK: - URLs
     
+    
     func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool
     {
+        
+        // This handles the redirect URL opened by Vimeo when you complete code grant authentication.
+        // If your app isn't opening after you accept permissions on Vimeo, check that your app has the correct URL scheme registered.
+        // See the README for more information.
+        
         AuthenticationController(client: VimeoClient.defaultClient).codeGrant(responseURL: url) { result in
             
             switch result
