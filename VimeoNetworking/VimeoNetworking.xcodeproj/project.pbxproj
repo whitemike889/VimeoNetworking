@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		016259BB1CD0034D0004D4AF /* ExceptionCatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 016259B91CD0034D0004D4AF /* ExceptionCatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		016259BC1CD0034D0004D4AF /* ExceptionCatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 016259BA1CD0034D0004D4AF /* ExceptionCatcher.m */; };
 		016259BE1CD006EF0004D4AF /* ExceptionCatcher+Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016259BD1CD006EF0004D4AF /* ExceptionCatcher+Swift.swift */; };
 		018483881CE0D9E2008305A4 /* PinCodeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018483871CE0D9E2008305A4 /* PinCodeInfo.swift */; };
 		01B061DF1CCE8BBB00F515E6 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B061DE1CCE8BBB00F515E6 /* Notification.swift */; };
@@ -93,6 +91,8 @@
 		3C91DA341CCFEBF200DCF8BD /* VIMSoundtrack.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C91DA321CCFEBF200DCF8BD /* VIMSoundtrack.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C91DA351CCFEBF200DCF8BD /* VIMSoundtrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C91DA331CCFEBF200DCF8BD /* VIMSoundtrack.m */; };
 		3C91DA3A1CCFF27900DCF8BD /* Request+Soundtrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C91DA371CCFEFB300DCF8BD /* Request+Soundtrack.swift */; };
+		50222B9B1CE39323009E5B63 /* Objc_ExceptionCatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 50222B991CE39323009E5B63 /* Objc_ExceptionCatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		50222B9C1CE39323009E5B63 /* Objc_ExceptionCatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 50222B9A1CE39323009E5B63 /* Objc_ExceptionCatcher.m */; };
 		B59A9DE6C5CBD60F8F0FA02A /* Pods_VimeoNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF246275B609406583D4109 /* Pods_VimeoNetworking.framework */; };
 /* End PBXBuildFile section */
 
@@ -107,8 +107,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		016259B91CD0034D0004D4AF /* ExceptionCatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExceptionCatcher.h; path = VimeoNetworking/ExceptionCatcher.h; sourceTree = "<group>"; };
-		016259BA1CD0034D0004D4AF /* ExceptionCatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExceptionCatcher.m; path = VimeoNetworking/ExceptionCatcher.m; sourceTree = "<group>"; };
 		016259BD1CD006EF0004D4AF /* ExceptionCatcher+Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ExceptionCatcher+Swift.swift"; path = "VimeoNetworking/ExceptionCatcher+Swift.swift"; sourceTree = "<group>"; };
 		018483871CE0D9E2008305A4 /* PinCodeInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PinCodeInfo.swift; path = VimeoNetworking/Models/PinCodeInfo.swift; sourceTree = "<group>"; };
 		01B061DE1CCE8BBB00F515E6 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Notification.swift; path = VimeoNetworking/Notification.swift; sourceTree = "<group>"; };
@@ -197,6 +195,8 @@
 		3C91DA321CCFEBF200DCF8BD /* VIMSoundtrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VIMSoundtrack.h; path = VimeoNetworking/Models/VIMSoundtrack.h; sourceTree = "<group>"; };
 		3C91DA331CCFEBF200DCF8BD /* VIMSoundtrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VIMSoundtrack.m; path = VimeoNetworking/Models/VIMSoundtrack.m; sourceTree = "<group>"; };
 		3C91DA371CCFEFB300DCF8BD /* Request+Soundtrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Request+Soundtrack.swift"; path = "VimeoNetworking/Request+Soundtrack.swift"; sourceTree = "<group>"; };
+		50222B991CE39323009E5B63 /* Objc_ExceptionCatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Objc_ExceptionCatcher.h; path = VimeoNetworking/Objc_ExceptionCatcher.h; sourceTree = "<group>"; };
+		50222B9A1CE39323009E5B63 /* Objc_ExceptionCatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Objc_ExceptionCatcher.m; path = VimeoNetworking/Objc_ExceptionCatcher.m; sourceTree = "<group>"; };
 		93F914B1FADB01FAF61EF363 /* Pods-VimeoNetworking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking.release.xcconfig"; path = "../Pods/Target Support Files/Pods-VimeoNetworking/Pods-VimeoNetworking.release.xcconfig"; sourceTree = "<group>"; };
 		B4D33B98CE4A2315048D6766 /* Pods-VimeoNetworking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-VimeoNetworking/Pods-VimeoNetworking.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -224,8 +224,8 @@
 		016259B81CD0030B0004D4AF /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				016259B91CD0034D0004D4AF /* ExceptionCatcher.h */,
-				016259BA1CD0034D0004D4AF /* ExceptionCatcher.m */,
+				50222B991CE39323009E5B63 /* Objc_ExceptionCatcher.h */,
+				50222B9A1CE39323009E5B63 /* Objc_ExceptionCatcher.m */,
 				016259BD1CD006EF0004D4AF /* ExceptionCatcher+Swift.swift */,
 			);
 			name = Utilities;
@@ -457,12 +457,12 @@
 				01FD39171CC948F300326408 /* VIMChannel.h in Headers */,
 				3C91DA341CCFEBF200DCF8BD /* VIMSoundtrack.h in Headers */,
 				01FD39351CC948F300326408 /* VIMTag.h in Headers */,
+				50222B9B1CE39323009E5B63 /* Objc_ExceptionCatcher.h in Headers */,
 				01FD39331CC948F300326408 /* VIMSizeQuota.h in Headers */,
 				01FD39451CC948F300326408 /* VIMVideoPreference.h in Headers */,
 				01FD39261CC948F300326408 /* VIMInteraction.h in Headers */,
 				01FD393B1CC948F300326408 /* VIMUploadTicket.h in Headers */,
 				01FD393D1CC948F300326408 /* VIMUser.h in Headers */,
-				016259BB1CD0034D0004D4AF /* ExceptionCatcher.h in Headers */,
 				01FD391B1CC948F300326408 /* VIMConnection.h in Headers */,
 				01B5C8681CC826D800694F4A /* VimeoNetworking.h in Headers */,
 				01FD39241CC948F300326408 /* VIMGroup.h in Headers */,
@@ -619,6 +619,7 @@
 				01FD39301CC948F300326408 /* VIMPrivacy.m in Sources */,
 				01FD394C1CC9497900326408 /* VIMUploadQuota.m in Sources */,
 				01FD39341CC948F300326408 /* VIMSizeQuota.m in Sources */,
+				50222B9C1CE39323009E5B63 /* Objc_ExceptionCatcher.m in Sources */,
 				01FD39461CC948F300326408 /* VIMVideoPreference.m in Sources */,
 				01FD38FF1CC948F200326408 /* Mappable.swift in Sources */,
 				01FD393E1CC948F300326408 /* VIMUser.m in Sources */,
@@ -648,7 +649,6 @@
 				01FD39441CC948F300326408 /* VIMVideoLog.m in Sources */,
 				01FD39001CC948F200326408 /* NSError+Extensions.swift in Sources */,
 				016259BE1CD006EF0004D4AF /* ExceptionCatcher+Swift.swift in Sources */,
-				016259BC1CD0034D0004D4AF /* ExceptionCatcher.m in Sources */,
 				01FD39101CC948F300326408 /* VIMAccount.m in Sources */,
 				01FD393C1CC948F300326408 /* VIMUploadTicket.m in Sources */,
 				01FD391A1CC948F300326408 /* VIMComment.m in Sources */,
