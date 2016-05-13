@@ -52,6 +52,9 @@ class MasterViewController: UITableViewController
     
     private func setupAccountObservation()
     {
+        
+        // This allows us to fetch a new list of items whenever the current account changes (on log in or log out events)
+        
         self.accountObservationToken = Notification.AuthenticatedAccountDidChange.observe { [weak self] notification in
             
             guard let strongSelf = self else { return }
@@ -103,6 +106,10 @@ class MasterViewController: UITableViewController
     
     @objc private func didTapAuthenticationButton()
     {
+        
+        // If the user is logged in, the button logs them out.
+        // If the user is logged out, the button launches the code grant authorization page.
+        
         let authenticationController = AuthenticationController(client: VimeoClient.defaultClient)
         if VimeoClient.defaultClient.isAuthenticatedWithUser
         {
