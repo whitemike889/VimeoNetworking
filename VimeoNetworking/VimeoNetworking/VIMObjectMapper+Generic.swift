@@ -8,8 +8,6 @@
 
 import Foundation
 
-import VIMObjectMapper
-
 extension VIMObjectMapper
 {
     static var ErrorDomain: String { return "ObjectMapperErrorDomain" }
@@ -53,6 +51,8 @@ extension VIMObjectMapper
             
             throw error
         }
+        
+        try modelObject.validateModel()
         
         return modelObject
     }

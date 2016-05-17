@@ -1,9 +1,9 @@
 //
-//  VIMVideoFile.h
-//  VIMNetworking
+//  VIMModelObject.h
+//  VIMObjectMapper
 //
-//  Created by Kashif Mohammad on 4/13/13.
-//  Copyright (c) 2014-2015 Vimeo (https://vimeo.com)
+//  Created by Kashif Mohammad on 6/5/13.
+//  Copyright (c) 2014-2016 Vimeo (https://vimeo.com)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,29 +24,27 @@
 //  THE SOFTWARE.
 //
 
-#import "VIMModelObject.h"
+@import Foundation;
 
-@class VIMVideoLog;
+#import "VIMMappable.h"
 
-extern NSString *const __nonnull VIMVideoFileQualityHLS;
-extern NSString *const __nonnull VIMVideoFileQualityHD;
-extern NSString *const __nonnull VIMVideoFileQualitySD;
-extern NSString *const __nonnull VIMVideoFileQualityMobile;
+extern const NSString *VIMModelObjectErrorDomain;
+extern NSInteger const VIMModelObjectValidationErrorCode;
 
-@interface VIMVideoFile : VIMModelObject
+@interface VIMModelObject : NSObject <NSCopying, NSSecureCoding, VIMMappable>
 
-@property (nonatomic, strong, nullable) NSDate *expirationDate;
-@property (nonatomic, strong, nullable) NSNumber *width;
-@property (nonatomic, strong, nullable) NSNumber *height;
-@property (nonatomic, strong, nullable) NSNumber *size;
-@property (nonatomic, copy, nullable) NSString *link;
-@property (nonatomic, copy, nullable) NSString *quality;
-@property (nonatomic, copy, nullable) NSString *type;
-@property (nonatomic, strong, nullable) VIMVideoLog *log;
+@property (nonatomic, copy) NSString *objectID;
 
-- (BOOL)isSupportedMimeType;
-- (BOOL)isDownloadable;
-- (BOOL)isStreamable;
-- (BOOL)isExpired;
++ (NSUInteger)modelVersion;
++ (NSDateFormatter *)dateFormatter;
++ (NSSet *)propertyKeys;
+
+- (instancetype)initWithKeyValueDictionary:(NSDictionary *)dictionary;
+
+- (NSDictionary *)keyValueDictionary;
+
+- (void)upgradeFromModelVersion:(NSUInteger)fromVersion toModelVersion:(NSUInteger)toVersion;
+
+- (void)validateModel:(NSError **)error;
 
 @end

@@ -101,6 +101,35 @@
     [self formatModifiedTime];
 }
 
+#pragma mark - Model Validation
+
+- (void)validateModel:(NSError *__autoreleasing *)error
+{
+    [super validateModel:error];
+    
+    if (*error)
+    {
+        return;
+    }
+    
+    if (self.uri == nil)
+    {
+        NSString *description = @"VIMUser failed validation: uri cannot be nil";
+        *error = [NSError errorWithDomain:VIMModelObjectErrorDomain code:VIMModelObjectValidationErrorCode userInfo:@{NSLocalizedDescriptionKey: description}];
+        
+        return;
+    }
+    
+    // TODO: Uncomment this when user objects get resource keys [RH] (5/17/16)
+//    if (self.resourceKey == nil)
+//    {
+//        NSString *description = @"VIMUser failed validation: resourceKey cannot be nil";
+//        *error = [NSError errorWithDomain:VIMModelObjectErrorDomain code:VIMModelObjectValidationErrorCode userInfo:@{NSLocalizedDescriptionKey: description}];
+//        
+//        return;
+//    }
+}
+
 #pragma mark - Parsing Helpers
 
 - (void)parseConnections

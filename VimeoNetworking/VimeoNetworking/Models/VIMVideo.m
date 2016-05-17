@@ -83,10 +83,10 @@ NSString *VIMContentRating_Safe = @"safe";
     if([key isEqualToString:@"files"])
         return [VIMVideoFile class];
     
-    if ([key isEqualToString:@"tags"])
+    if([key isEqualToString:@"tags"])
         return [VIMTag class];
     
-    if ([key isEqualToString:@"categories"])
+    if([key isEqualToString:@"categories"])
         return [VIMCategory class];
     
 	return nil;
@@ -94,7 +94,7 @@ NSString *VIMContentRating_Safe = @"safe";
 
 - (Class)getClassForObjectKey:(NSString *)key
 {
-    if( [key isEqualToString:@"pictures"] )
+    if([key isEqualToString:@"pictures"])
         return [VIMPictureCollection class];
 
     if([key isEqualToString:@"user"])
@@ -109,7 +109,7 @@ NSString *VIMContentRating_Safe = @"safe";
     if([key isEqualToString:@"appeal"])
         return [VIMAppeal class];
     
-    if( [key isEqualToString:@"log"] )
+    if([key isEqualToString:@"log"])
         return [VIMVideoLog class];
 
     return nil;
@@ -137,6 +137,34 @@ NSString *VIMContentRating_Safe = @"safe";
     }
     
     [self setVideoStatus];
+}
+
+#pragma mark - Model Validation
+
+- (void)validateModel:(NSError *__autoreleasing *)error
+{
+    [super validateModel:error];
+    
+    if (*error)
+    {
+        return;
+    }
+    
+    if (self.uri == nil)
+    {
+        NSString *description = @"VIMVideo failed validation: uri cannot be nil";
+        *error = [NSError errorWithDomain:VIMModelObjectErrorDomain code:VIMModelObjectValidationErrorCode userInfo:@{NSLocalizedDescriptionKey: description}];
+        
+        return;
+    }
+    
+    if (self.resourceKey == nil)
+    {
+        NSString *description = @"VIMVideo failed validation: resourceKey cannot be nil";
+        *error = [NSError errorWithDomain:VIMModelObjectErrorDomain code:VIMModelObjectValidationErrorCode userInfo:@{NSLocalizedDescriptionKey: description}];
+        
+        return;
+    }
 }
 
 #pragma mark - Model Versioning

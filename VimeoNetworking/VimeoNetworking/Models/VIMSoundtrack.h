@@ -6,7 +6,7 @@
 //  Copyright © 2016 Vimeo. All rights reserved.
 //
 
-@import VIMObjectMapper;
+#import "VIMModelObject.h"
 
 @interface VIMSoundtrack : VIMModelObject
 

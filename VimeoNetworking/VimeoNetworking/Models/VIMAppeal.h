@@ -24,7 +24,7 @@
 //  THE SOFTWARE.
 //
 
-@import VIMObjectMapper;
+#import "VIMModelObject.h"
 
 typedef NS_ENUM(NSInteger, VIMCopyrightMatchStatus)
 {

@@ -8,8 +8,6 @@
 
 import Foundation
 
-import VIMObjectMapper
-
 private let DefaultModelKeyPath = "data"
 
 public protocol MappableResponse
@@ -17,6 +15,8 @@ public protocol MappableResponse
     static var mappingClass: AnyClass? { get }
     
     static var modelKeyPath: String? { get }
+    
+    func validateModel() throws
 }
 
 extension VIMModelObject: MappableResponse
@@ -29,6 +29,18 @@ extension VIMModelObject: MappableResponse
     public static var modelKeyPath: String?
     {
         return nil
+    }
+    
+    public func validateModel() throws
+    {
+        var error: NSError? = nil
+        
+        self.validateModel(&error)
+        
+        if let error = error
+        {
+            throw error
+        }
     }
 }
 
@@ -58,6 +70,30 @@ extension Array: MappableResponse
         
         return nil
     }
+    
+    public func validateModel() throws
+    {
+        for model in self
+        {
+            guard let model = model as? VIMModelObject
+            else
+            {
+                let description = "Mappable array does not have an element type inheriting from VIMModelObject"
+                let error = NSError(domain: VIMModelObjectErrorDomain, code: VIMModelObjectValidationErrorCode, userInfo: [NSLocalizedDescriptionKey: description])
+                
+                throw error
+            }
+            
+            var error: NSError? = nil
+            
+            model.validateModel(&error)
+            
+            if let error = error
+            {
+                throw error
+            }
+        }
+    }
 }
 
 public class VIMNullResponse: MappableResponse
@@ -70,5 +106,10 @@ public class VIMNullResponse: MappableResponse
     public static var modelKeyPath: String?
     {
         return nil
+    }
+    
+    public func validateModel() throws
+    {
+        // NO-OP: a null response object is always valid
     }
 }
