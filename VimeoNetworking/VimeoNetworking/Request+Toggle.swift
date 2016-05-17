@@ -8,10 +8,19 @@
 
 import Foundation
 
+/// `Request` that returns no object on success
 public typealias ToggleRequest = Request<VIMNullResponse>
 
 public extension Request
 {
+    /**
+     Create a request to toggle a given uri (like, watchlater, follow, etc.)
+     
+     - parameter URI:      the toggleable URI
+     - parameter newValue: new value to set the toggle to
+     
+     - returns: a new `Request`
+     */
     public static func toggle(URI URI: String, newValue: Bool) -> Request
     {
         return Request(method: newValue ? .PUT : .DELETE, path: URI)

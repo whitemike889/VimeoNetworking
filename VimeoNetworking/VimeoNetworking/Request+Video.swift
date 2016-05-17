@@ -8,7 +8,10 @@
 
 import Foundation
 
+/// `Request` returning a single `VIMVideo`
 public typealias VideoRequest = Request<VIMVideo>
+
+/// `Request` returning an array of `VIMVideo`
 public typealias VideoListRequest = Request<[VIMVideo]>
 
 public extension Request
@@ -23,6 +26,13 @@ public extension Request
     
     // MARK: - 
     
+    /**
+     Create a `Request` to get a specific video
+     
+     - parameter videoURI: the video's URI
+     
+     - returns: a new `Request`
+     */
     public static func getVideoRequest(videoURI videoURI: String) -> Request
     {
         return Request(path: videoURI)
@@ -30,6 +40,14 @@ public extension Request
     
     // MARK: - Search
     
+    /**
+     Create a `Request` to search for videos
+     
+     - parameter query:       the string query to use for the search
+     - parameter refinements: optionally, refinement parameters to add to the search
+     
+     - returns: a new `Request`
+     */
     public static func queryVideos(query query: String, refinements: VimeoClient.RequestParameters? = nil) -> Request
     {
         var parameters = refinements ?? [:]
@@ -41,6 +59,16 @@ public extension Request
     
     // MARK: - Edit Video
     
+    /**
+     Create a `Request` to update a video's metadata
+     
+     - parameter videoURI:       the URI of the video to update
+     - parameter newTitle:       a new title, unchanged if nil
+     - parameter newDescription: a new description, unchanged if nil
+     - parameter newPrivacy:     a new privacy, unchanged if nil
+     
+     - returns: a new `Request`
+     */
     public static func patchVideoRequest(videoURI videoURI: String, newTitle: String?, newDescription: String?, newPrivacy: String?) -> Request
     {
         var parameters = VimeoClient.RequestParameters()
