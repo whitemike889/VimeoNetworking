@@ -31,7 +31,7 @@ final public class VimeoClient
         }
     }
     
-    public typealias RequestParameters = [String: String]
+    public typealias RequestParameters = [String: AnyObject]
     public typealias ResponseDictionary = [String: AnyObject]
     
     static let ErrorDomain = "VimeoClientErrorDomain"

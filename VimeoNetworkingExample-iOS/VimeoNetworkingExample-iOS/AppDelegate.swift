@@ -230,20 +230,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                 print("successfully retrieved me: \(user)")
                 print("user name \(user.name ?? "🤔")")
                 
-                let wlRequest = ToggleRequest.watchLaterRequest(videoURI: "")
-                
-                client.request(wlRequest) { result in
-                    
-                    switch result
-                    {
-                    case .Success(let response):
-                        print("watch later response: \(response)")
-                    case .Failure(let error):
-                        print("watch later error: \(error)")
-                    }
-                    
-                }
-                
             case .Failure(let error):
                 print("request error: \(error)")
             }
