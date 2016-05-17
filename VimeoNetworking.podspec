@@ -30,9 +30,7 @@ Pod::Spec.new do |s|
   s.subspec 'Model' do |ss|
     ss.source_files = 'VimeoNetworking/VimeoNetworking/Models'
     ss.frameworks = 'Foundation', 'CoreGraphics', 'AVFoundation'
-    ss.dependency 'VIMObjectMapper'
   end
 
-  s.dependency 'VIMObjectMapper'
   s.dependency 'AFNetworking', '3.1.0'
 end
