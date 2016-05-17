@@ -18,11 +18,18 @@ final internal class AccountStore
     
     // MARK: - 
     
-    private let dataStore: SecureDataStore = ArchiveStore() // TODO: Replace this with keychain store [RH] (3/24/16)
+    private let dataStore: SecureDataStore
     
     // MARK: -
     
-    func saveAccount(account: VIMAccountNew, type: AccountType) throws
+    init(configuration: AppConfiguration)
+    {
+        self.dataStore = KeychainStore(service: configuration.keychainService, accessGroup: configuration.keychainAccessGroup)
+    }
+    
+    // MARK: -
+    
+    func saveAccount(account: VIMAccount, type: AccountType) throws
     {
         let data = NSMutableData()
         let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
@@ -32,7 +39,7 @@ final internal class AccountStore
         try self.dataStore.setData(data, forKey: type.rawValue)
     }
     
-    func loadAccount(type: AccountType) throws -> VIMAccountNew?
+    func loadAccount(type: AccountType) throws -> VIMAccount?
     {
         guard let data = try self.dataStore.dataForKey(type.rawValue)
         else
@@ -41,8 +48,25 @@ final internal class AccountStore
         }
         
         let unarchiver = NSKeyedUnarchiver(forReadingWithData: data)
-        let account = unarchiver.decodeObject() as? VIMAccountNew
+        
+        var account: VIMAccount? = nil
+        
+        try ExceptionCatcher.doUnsafe
+        {
+            account = unarchiver.decodeObject() as? VIMAccount
+        }
+        
+        if let account = account,
+            let userJSON = account.userJSON as? VimeoClient.ResponseDictionary
+        {
+            try account.user = VIMObjectMapper.mapObject(userJSON) as VIMUser
+        }
         
         return account
+    }
+    
+    func removeAccount(type: AccountType) throws
+    {
+        try self.dataStore.deleteDataForKey(type.rawValue)
     }
 }

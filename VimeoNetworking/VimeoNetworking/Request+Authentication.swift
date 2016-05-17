@@ -17,23 +17,32 @@ private let PasswordKey = "password"
 private let DisplayNameKey = "display_name"
 private let EmailKey = "email"
 private let TokenKey = "token"
+private let PinCodeKey = "user_code"
+private let DeviceCodeKey = "device_code"
 
 private let GrantTypeClientCredentials = "client_credentials"
 private let GrantTypeAuthorizationCode = "authorization_code"
 private let GrantTypePassword = "password"
 private let GrantTypeFacebook = "facebook"
+private let GrantTypePinCode = "device_grant"
 
-private let AuthenticationPathClientCredentials = "/oauth/authorize/client"
+private let AuthenticationPathClientCredentials = "oauth/authorize/client"
 private let AuthenticationPathAccessToken = "oauth/authorize/password"
 private let AuthenticationPathUsers = "users"
 private let AuthenticationPathFacebookToken = "oauth/authorize/facebook"
 private let AuthenticationPathCodeGrant = "oauth/access_token"
+private let AuthenticationPathPinCode = "oauth/device"
+private let AuthenticationPathPinCodeAuthorize = "oauth/device/authorize"
 
-public typealias AuthenticationRequest = Request<VIMAccountNew>
+// MARK: -
 
-public extension Request
+private let AuthenticationPathTokens = "/tokens"
+
+public typealias AuthenticationRequest = Request<VIMAccount>
+
+public extension Request where ModelType: VIMAccount
 {
-    public static func postClientCredentialsGrantRequest(scopes scopes: [Scope]) -> Request
+    public static func clientCredentialsGrantRequest(scopes scopes: [Scope]) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [GrantTypeKey: GrantTypeClientCredentials,
                                                          ScopeKey: Scope.combine(scopes)]
@@ -41,7 +50,7 @@ public extension Request
         return Request(method: .POST, path: AuthenticationPathClientCredentials, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
     
-    public static func postCodeGrantRequest(code code: String, redirectURI: String) -> Request
+    public static func codeGrantRequest(code code: String, redirectURI: String) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [GrantTypeKey: GrantTypeAuthorizationCode,
                                                          CodeKey: code,
@@ -50,7 +59,7 @@ public extension Request
         return Request(method: .POST, path: AuthenticationPathCodeGrant, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
     
-    public static func postLoginRequest(email email: String, password: String, scopes: [Scope]) -> Request
+    public static func logInRequest(email email: String, password: String, scopes: [Scope]) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [GrantTypeKey: GrantTypePassword,
                                                          ScopeKey: Scope.combine(scopes),
@@ -60,7 +69,7 @@ public extension Request
         return Request(method: .POST, path: AuthenticationPathAccessToken, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
     
-    public static func postJoinRequest(name name: String, email: String, password: String, scopes: [Scope]) -> Request
+    public static func joinRequest(name name: String, email: String, password: String, scopes: [Scope]) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [ScopeKey: Scope.combine(scopes),
                                                          DisplayNameKey: name,
@@ -70,7 +79,7 @@ public extension Request
         return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
     
-    public static func postLoginFacebookRequest(facebookToken facebookToken: String, scopes: [Scope]) -> Request
+    public static func logInFacebookRequest(facebookToken facebookToken: String, scopes: [Scope]) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [GrantTypeKey: GrantTypeFacebook,
                                                          ScopeKey: Scope.combine(scopes),
@@ -79,11 +88,42 @@ public extension Request
         return Request(method: .POST, path: AuthenticationPathFacebookToken, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
     
-    public static func postJoinFacebookRequest(facebookToken facebookToken: String, scopes: [Scope]) -> Request
+    public static func joinFacebookRequest(facebookToken facebookToken: String, scopes: [Scope]) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [ScopeKey: Scope.combine(scopes),
                                                          TokenKey: facebookToken]
         
         return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
+    }
+    
+    public static func authorizePinCodeRequest(userCode userCode: String, deviceCode: String) -> Request
+    {
+        let parameters: VimeoClient.RequestParameters = [PinCodeKey: userCode,
+                                                         DeviceCodeKey: deviceCode]
+        
+        return Request(method: .POST, path: AuthenticationPathPinCodeAuthorize, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
+    }
+}
+
+extension Request where ModelType: VIMNullResponse
+{
+    public static func deleteTokensRequest() -> Request
+    {
+        return Request(method: .DELETE, path: AuthenticationPathTokens, retryPolicy: .TryThreeTimes)
+    }
+}
+
+// MARK: -
+
+public typealias PinCodeRequest = Request<PinCodeInfo>
+
+public extension Request where ModelType: PinCodeInfo
+{
+    public static func getPinCodeRequest(scopes scopes: [Scope]) -> Request
+    {
+        let parameters: VimeoClient.RequestParameters = [GrantTypeKey: GrantTypePinCode,
+                                                         ScopeKey: Scope.combine(scopes)]
+        
+        return Request(method: .POST, path: AuthenticationPathPinCode, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
 }

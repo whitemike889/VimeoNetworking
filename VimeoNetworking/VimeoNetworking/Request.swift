@@ -30,7 +30,7 @@ public enum CacheFetchPolicy
 public enum RetryPolicy
 {
     case SingleAttempt
-    case MultipleAttempts(attemptCount: Int)
+    case MultipleAttempts(attemptCount: Int, initialDelay: NSTimeInterval)
     
     static func defaultPolicyForMethod(method: VimeoClient.Method) -> RetryPolicy
     {
@@ -40,6 +40,8 @@ public enum RetryPolicy
             return .SingleAttempt
         }
     }
+    
+    static let TryThreeTimes: RetryPolicy = .MultipleAttempts(attemptCount: 3, initialDelay: 2.0)
 }
 
 public struct Request<ModelType: MappableResponse>
@@ -53,7 +55,7 @@ public struct Request<ModelType: MappableResponse>
     public var cacheFetchPolicy: CacheFetchPolicy
     public let shouldCacheResponse: Bool
     
-    public let retryPolicy: RetryPolicy
+    public var retryPolicy: RetryPolicy
     
     // MARK: -
     

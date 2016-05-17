@@ -15,9 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 {
     var window: UIWindow?
     
-    // TODO: remove these [RH] (3/23/16)
-    // TODO: scrub all tokens from the git history before open sourcing [RH] (3/23/16)
-    let appConfiguration = AppConfiguration(clientKey: "141b94e08884ff39ef7d76256e4a7e3a03f6e865", clientSecret: "d17b26db6d8b0f27ceda882c6d0ba84b3b2e3a9e", scopes: [.Public, .Private, .Create, .Edit, .Delete, .Interact, .Upload])
+    let appConfiguration = AppConfiguration(clientKey: "YOUR_CLIENT_KEY_HERE", clientSecret: "YOUR_CLIENT_SECRET_HERE", scopes: [.Public, .Private, .Create, .Edit, .Delete, .Interact, .Upload])
     
     var authenticationController: AuthenticationController?
     var client: VimeoClient?
@@ -42,10 +40,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let client = VimeoClient(appConfiguration: self.appConfiguration)
         self.client = client
         
-        let authenticationController = AuthenticationController(configuration: self.appConfiguration, client: client)
+        let authenticationController = AuthenticationController(client: client)
         self.authenticationController = authenticationController
         
-        let loadedAccount: VIMAccountNew?
+        
+        let loadedAccount: VIMAccount?
         do
         {
             loadedAccount = try authenticationController.loadSavedAccount()
@@ -59,6 +58,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         if loadedAccount != nil
         {
             self.testEndpoints()
+            
+//            try? authenticationController.logOut()
         }
         else
         {
@@ -74,12 +75,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                 }
             }
         }
-        
-        self.observationToken = Notification.AuthenticatedAccountDidChange.observe { notification in
-            print("authenticated account changed")
-        }
-        
-        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(timer), userInfo: nil, repeats: true)
+//
+
+//        self.observationToken = Notification.AuthenticatedAccountDidChange.observe { notification in
+//            print("authenticated account changed")
+//        }
+//        
+//        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(timer), userInfo: nil, repeats: true)
+
+        // This is to test code grant auth
+//        if let client = self.client,
+//            let url = self.authenticationController?.codeGrantAuthorizationURL()
+//            where !client.isAuthenticatedWithUser
+//        {
+//            application.openURL(url)
+//        }
+//        
+//        self.authenticationController?.pinCode(infoHandler: { pinCode, activateLink in
+//            
+//            print("pin code response rec'd")
+//            print(pinCode)
+//            print(activateLink)
+//            
+//        }) { result in
+//            
+//            switch result
+//            {
+//            case .Success(let account):
+//                print("authenticated successfully: \(account)")
+//                self.testEndpoints()
+//            case .Failure(let error):
+//                print("failure authenticating: \(error)")
+//            }
+//        }
         
         return true
     }
@@ -109,14 +137,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     func applicationDidBecomeActive(application: UIApplication)
     {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        
-        // This is to test code grant auth
-        if let client = self.client,
-            let url = self.authenticationController?.codeGrantAuthorizationURL()
-            where !client.isAuthenticated
-        {
-            application.openURL(url)
-        }
     }
 
     func applicationWillTerminate(application: UIApplication)

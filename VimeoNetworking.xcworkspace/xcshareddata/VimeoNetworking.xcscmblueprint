@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "C3D71035A96924D900556ABAF7AF12CFE47E2A44",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "48C22B04BB999A9CD61DFB7B4E6A670AFD7B992C" : 0,
+    "C3D71035A96924D900556ABAF7AF12CFE47E2A44" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "374E6CA2-652B-4ED4-9AC6-D5132BD4E78D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "48C22B04BB999A9CD61DFB7B4E6A670AFD7B992C" : "..",
+    "C3D71035A96924D900556ABAF7AF12CFE47E2A44" : "VimeoNetworking\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "VimeoNetworking",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "VimeoNetworking.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.vimeows.com:MobileApps\/Cameo-iOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "48C22B04BB999A9CD61DFB7B4E6A670AFD7B992C"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:vimeo\/VimeoNetworking.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C3D71035A96924D900556ABAF7AF12CFE47E2A44"
+    }
+  ]
+}
