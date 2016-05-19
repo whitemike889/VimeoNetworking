@@ -23,6 +23,13 @@ public enum CacheFetchPolicy
         /// First try the network request, then fallback to cache if it fails
     case TryNetworkThenCache
     
+    /**
+     Construct the default cache fetch policy for a given `Method`
+     
+     - parameter method: the request `Method`
+     
+     - returns: the default cache policy for the provided `Method`
+     */
     static func defaultPolicyForMethod(method: VimeoClient.Method) -> CacheFetchPolicy
     {
         switch method
@@ -49,6 +56,13 @@ public enum RetryPolicy
      */
     case MultipleAttempts(attemptCount: Int, initialDelay: NSTimeInterval)
     
+    /**
+     Construct the default retry policy for a given `Method`
+     
+     - parameter method: the request `Method`
+     
+     - returns: the default retry policy for the given `Method`
+     */
     static func defaultPolicyForMethod(method: VimeoClient.Method) -> RetryPolicy
     {
         switch method
