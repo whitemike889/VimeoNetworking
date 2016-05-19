@@ -28,6 +28,8 @@ import Foundation
 
 import AFNetworking
 
+/** `VimeoResponseSerializer` is an `AFJSONResponseSerializer` that defines our accept header, as well as parses out some Vimeo-specific error information.
+ */
 final public class VimeoResponseSerializer: AFJSONResponseSerializer
 {
     private static let ErrorDomain = "VimeoResponseSerializerErrorDomain"
@@ -47,6 +49,17 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
         
     // MARK: Public API
 
+    /**
+     Generate a response dictionary from a completed download task
+     
+     - parameter response: the completed URL response
+     - parameter url:      the file URL of the completed data
+     - parameter error:    an error the task returned
+     
+     - throws: an error if the response could not be serialized
+     
+     - returns: the serialized JSON dictionary
+     */
     public func responseObjectFromDownloadTaskResponse(response response: NSURLResponse?, url: NSURL?, error: NSError?) throws -> [String: AnyObject]?
     {
         var responseObject: [String: AnyObject]? = nil
@@ -70,6 +83,15 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
         return responseObject
     }
     
+    /**
+     Checks a download task response for error information
+     
+     - parameter response:       the completed download response
+     - parameter responseObject: the download response object
+     - parameter error:          an error the task returned
+     
+     - throws: an error if the data response contains an error
+     */
     public func checkDataResponseForError(response response: NSURLResponse?, responseObject: AnyObject?, error: NSError?) throws
     {
         // TODO: If error is nil and errorInfo is non-nil, we should throw an error [AH] 2/5/2016
@@ -84,6 +106,13 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
         try self.checkStatusCodeValidity(response: response)
     }
 
+    /**
+     Check that a download task response has a valid status code
+     
+     - parameter response: the completed task response
+     
+     - throws: an error if the status code is invalid
+     */
     public func checkStatusCodeValidity(response response: NSURLResponse?) throws
     {
         if let httpResponse = response as? NSHTTPURLResponse where httpResponse.statusCode < 200 || httpResponse.statusCode > 299
@@ -93,6 +122,15 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
         }
     }
     
+    /**
+     Generate a response dictionary from a completed download task file URL
+     
+     - parameter url: the file URL of the downloaded data
+     
+     - throws: an error if the serialization failed
+     
+     - returns: downloaded data serialized into JSON dictionary
+     */
     public func dictionaryFromDownloadTaskResponse(url url: NSURL?) throws -> [String: AnyObject]
     {
         guard let url = url else
