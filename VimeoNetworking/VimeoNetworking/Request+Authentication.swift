@@ -164,7 +164,14 @@ extension Request where ModelType: VIMAccount
         return Request(method: .POST, path: AuthenticationPathPinCodeAuthorize, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
     
-    public static func appTokenExchangeRequest(accessToken accessToken: String) -> Request
+    /**
+     Construct a `Request` to exchange an app token granted to another Vimeo application for a new token granted to the calling application (Vimeo internal use only)
+     
+     - parameter accessToken: the app token that needs to be exchanged
+     
+     - returns: a new `Request`
+     */
+    static func appTokenExchangeRequest(accessToken accessToken: String) -> Request
     {
         let parameters: VimeoClient.RequestParameters = [AccessTokenKey: accessToken]
         
