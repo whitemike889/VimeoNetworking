@@ -103,11 +103,11 @@ public extension NSError
     }
     
     /**
-     Adds a domain to a preexisting error
+     Generates a new error with an added domain
      
      - parameter domain: New domain for the error
      
-     - returns: The error with additional information in the user info dictionary
+     - returns: An error with additional information in the user info dictionary
      */
     func errorByAddingDomain(domain: String) -> NSError
     {
@@ -115,11 +115,11 @@ public extension NSError
     }
     
     /**
-     Adds user info to a preexisting error
+     Generates a new error with added user info
      
      - parameter userInfo: the user info dictionary to append to the existing user info
     
-     - returns: The error with additional user info
+     - returns: An error with additional user info
      */
     func errorByAddingUserInfo(userInfo: [String: AnyObject]) -> NSError
     {
@@ -127,11 +127,11 @@ public extension NSError
     }
     
     /**
-     Adds an error code to a preexisting error
+     Generates a new error with an added error code
      
      - parameter code: the new error code for the error
      
-     - returns: The error with additional information in the user info dictionary
+     - returns: An error with additional information in the user info dictionary
      */
     func errorByAddingCode(code: Int) -> NSError
     {
@@ -139,13 +139,13 @@ public extension NSError
     }
     
     /**
-     Adds information to a preexisting error
+     Generates a new error with added information
      
      - parameter domain:   New domain for the error
      - parameter code:     the new error code for the error
      - parameter userInfo: the user info dictionary to append to the existing user info
      
-     - returns: The error with additional information in the user info dictionary
+     - returns: An error with additional information in the user info dictionary
      */
     func errorByAddingDomain(domain: String?, code: Int?, userInfo: [String: AnyObject]?) -> NSError
     {
