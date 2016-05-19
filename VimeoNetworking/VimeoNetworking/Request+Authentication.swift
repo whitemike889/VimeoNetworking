@@ -19,6 +19,7 @@ private let EmailKey = "email"
 private let TokenKey = "token"
 private let PinCodeKey = "user_code"
 private let DeviceCodeKey = "device_code"
+private let AccessTokenKey = "access_token"
 
 private let GrantTypeClientCredentials = "client_credentials"
 private let GrantTypeAuthorizationCode = "authorization_code"
@@ -33,6 +34,7 @@ private let AuthenticationPathFacebookToken = "oauth/authorize/facebook"
 private let AuthenticationPathCodeGrant = "oauth/access_token"
 private let AuthenticationPathPinCode = "oauth/device"
 private let AuthenticationPathPinCodeAuthorize = "oauth/device/authorize"
+private let AuthenticationPathAppTokenExchange = "oauth/appexchange"
 
 // MARK: -
 
@@ -102,6 +104,13 @@ public extension Request where ModelType: VIMAccount
                                                          DeviceCodeKey: deviceCode]
         
         return Request(method: .POST, path: AuthenticationPathPinCodeAuthorize, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
+    }
+    
+    public static func appTokenExchangeRequest(accessToken accessToken: String) -> Request
+    {
+        let parameters: VimeoClient.RequestParameters = [AccessTokenKey: accessToken]
+        
+        return Request(method: .POST, path: AuthenticationPathAppTokenExchange, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
 }
 

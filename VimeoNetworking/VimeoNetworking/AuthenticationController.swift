@@ -211,6 +211,13 @@ final public class AuthenticationController
         self.authenticate(request: request, completion: completion)
     }
     
+    public func appTokenExchange(accessToken accessToken: String, completion: AuthenticationCompletion)
+    {
+        let request = AuthenticationRequest.appTokenExchangeRequest(accessToken: accessToken)
+        
+        self.authenticate(request: request, completion: completion)
+    }
+    
     /// Pin code authentication, for devices like Apple TV.
     
     public typealias PinCodeInfoHander = (pinCode: String, activateLink: String) -> Void
