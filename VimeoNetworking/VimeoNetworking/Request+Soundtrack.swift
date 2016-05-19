@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Request that returns an array of `VIMSoundtrack`
+/// Request that returns an array of `VIMSoundtrack` objects
 public typealias SoundtrackListRequest = Request<[VIMSoundtrack]>
 
 public extension Request
@@ -16,9 +16,9 @@ public extension Request
     private static var SoundtracksURI: String { return "/songs" }
     
     /**
-     Create a `Request` to get all soundtracks
+     GET request to retrieve the root list of soundtracks
      
-     - returns: the new `Request`
+     - returns: a constructed `Request`
      */
     public static func getSoundtrackListRequest() -> Request
     {
@@ -26,11 +26,11 @@ public extension Request
     }
     
     /**
-     Create a `Request` to get all soundtracks at a specific URI
+     GET request to request a list of soundtracks
      
-     - parameter soundtracksURI: the soundtrack URI
+     - parameter soundtracksURI: the URI of the soundtracks list
      
-     - returns: the new `Request`
+     - returns: a constructed `Request`
      */
     public static func getSoundtrackListRequest(soundtracksURI soundtracksURI: String) -> Request
     {

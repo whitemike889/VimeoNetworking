@@ -9,26 +9,70 @@
 import Foundation
 import Security
 
+/**
+ *  `SecureDataStore` represents an abstract object capable of securely storing, retrieving, and removing data.
+ */
 protocol SecureDataStore
 {
+    /**
+     Save data for a given key
+     
+     - parameter data: data to save
+     - parameter key:  identifier for the saved data
+     
+     - throws: an error if saving failed
+     */
     func setData(data: NSData, forKey key: String) throws
     
+    /**
+     Load data for a given key
+     
+     - parameter key: identifier for the saved data
+     
+     - throws: an error if loading failed
+     
+     - returns: data, if found
+     */
     func dataForKey(key: String) throws -> NSData?
     
+    /**
+     Delete data for a given key
+     
+     - parameter key: identifier for the saved data
+     
+     - throws: an error if deleting failed
+     */
     func deleteDataForKey(key: String) throws
 }
 
+/// `KeychainStore` saves data securely in the Keychain
 final class KeychainStore: SecureDataStore
 {
-    let service: String
-    let accessGroup: String?
+    private let service: String
+    private let accessGroup: String?
     
+    /**
+     Create a new `KeychainStore`
+     
+     - parameter service:     the keychain service which identifies your application
+     - parameter accessGroup: the access group the keychain should use for your application
+     
+     - returns: an initialized `KeychainStore`
+     */
     init(service: String, accessGroup: String?)
     {
         self.service = service
         self.accessGroup = accessGroup
     }
     
+    /**
+     Save data for a given key
+     
+     - parameter data: data to save
+     - parameter key:  identifier for the saved data
+     
+     - throws: an error if saving failed
+     */
     func setData(data: NSData, forKey key: String) throws
     {
         try self.deleteDataForKey(key)
@@ -46,6 +90,15 @@ final class KeychainStore: SecureDataStore
         }
     }
     
+    /**
+     Load data for a given key
+     
+     - parameter key: identifier for the saved data
+     
+     - throws: an error if loading failed
+     
+     - returns: data, if found
+     */
     func dataForKey(key: String) throws -> NSData?
     {
         var query = self.queryForKey(key)
@@ -65,6 +118,13 @@ final class KeychainStore: SecureDataStore
         return data
     }
     
+    /**
+     Delete data for a given key
+     
+     - parameter key: identifier for the saved data
+     
+     - throws: an error if the data exists but deleting failed
+     */
     func deleteDataForKey(key: String) throws
     {
         let query = self.queryForKey(key)
@@ -128,77 +188,5 @@ final class KeychainStore: SecureDataStore
         let error = NSError(domain: "KeychainErrorDomain", code: Int(status), userInfo: [NSLocalizedDescriptionKey: errorMessage])
         
         return error
-    }
-}
-
-/// Using this rly dumb dummy store until we finish keychain support [RH]
-
-final class ArchiveStore: SecureDataStore
-{
-    private let fileManager = NSFileManager.defaultManager()
-    
-    func setData(data: NSData, forKey key: String) throws
-    {
-        let fileURL = self.fileURLForKey(key: key)
-        
-        guard let filePath = fileURL.path
-        else
-        {
-            let error = NSError(domain: "ArchiveStoreDomain", code: 0, userInfo: [NSLocalizedDescriptionKey: "no path"])
-            throw error
-        }
-        
-        if let documentsDirectoryURL = self.documentsDirectoryURL()
-        {
-            try self.fileManager.createDirectoryAtURL(documentsDirectoryURL, withIntermediateDirectories: true, attributes: nil)
-        }
-        
-        if self.fileManager.fileExistsAtPath(filePath)
-        {
-            try self.fileManager.removeItemAtPath(filePath)
-        }
-        
-        let success = self.fileManager.createFileAtPath(filePath, contents: data, attributes: nil)
-        
-        if !success
-        {
-            let error = NSError(domain: "ArchiveStoreDomain", code: 0, userInfo: [NSLocalizedDescriptionKey: "create file failed"])
-            throw error
-        }
-    }
-    
-    func dataForKey(key: String) throws -> NSData?
-    {
-        let data = NSData(contentsOfURL: self.fileURLForKey(key: key))
-        
-        return data
-    }
-    
-    func deleteDataForKey(key: String) throws
-    {
-        try self.fileManager.removeItemAtURL(self.fileURLForKey(key: key))
-    }
-    
-    private func documentsDirectoryURL() -> NSURL?
-    {
-        if let directory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first
-        {
-            return NSURL(fileURLWithPath: directory)
-        }
-        
-        return nil
-    }
-    
-    private func fileURLForKey(key key: String) -> NSURL
-    {
-        guard let directoryURL = self.documentsDirectoryURL()
-        else
-        {
-            fatalError("no documents directories found")
-        }
-        
-        let fileURL = directoryURL.URLByAppendingPathComponent("dontlookatthis-\(key).plist")
-        
-        return fileURL
     }
 }
