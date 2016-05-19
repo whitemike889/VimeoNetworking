@@ -19,13 +19,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         // Override point for customization after application launch.
         let splitViewController = self.window!.rootViewController as! UISplitViewController
         splitViewController.delegate = self
-        let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
+        let navigationController = splitViewController.viewControllers.last as! UINavigationController
         navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
         
+        // Starting the authentication process
         
         let authenticationController = AuthenticationController(client: VimeoClient.defaultClient)
         
-        /// First, we try to load a preexisting account
+        // First, we try to load a preexisting account
         
         let loadedAccount: VIMAccount?
         do
@@ -66,10 +67,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     
     // MARK: - URLs
     
-    
     func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool
     {
-        
         // This handles the redirect URL opened by Vimeo when you complete code grant authentication.
         // If your app isn't opening after you accept permissions on Vimeo, check that your app has the correct URL scheme registered.
         // See the README for more information.

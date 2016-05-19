@@ -43,7 +43,7 @@ class MasterViewController: UITableViewController
 
     override func viewWillAppear(animated: Bool)
     {
-        self.clearsSelectionOnViewWillAppear = self.splitViewController!.collapsed
+        self.clearsSelectionOnViewWillAppear = self.splitViewController?.collapsed ?? true
 
         super.viewWillAppear(animated)
     }
@@ -52,7 +52,6 @@ class MasterViewController: UITableViewController
     
     private func setupAccountObservation()
     {
-        
         // This allows us to fetch a new list of items whenever the current account changes (on log in or log out events)
         
         self.accountObservationToken = Notification.AuthenticatedAccountDidChange.observe { [weak self] notification in
@@ -106,7 +105,6 @@ class MasterViewController: UITableViewController
     
     @objc private func didTapAuthenticationButton()
     {
-        
         // If the user is logged in, the button logs them out.
         // If the user is logged out, the button launches the code grant authorization page.
         
@@ -119,7 +117,6 @@ class MasterViewController: UITableViewController
             }
             catch let error as NSError
             {
-                
                 let title = "Couldn't Log Out"
                 let message = "Logging out failed: \(error.localizedDescription)"
                 let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
@@ -138,22 +135,22 @@ class MasterViewController: UITableViewController
 
     // MARK: - Segues
 
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
-//    {
-//        if segue.identifier == "showDetail"
-//        {
-//            if let indexPath = self.tableView.indexPathForSelectedRow
-//            {
-//                let object = videos[indexPath.row] as! NSDate
-//                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
-//                controller.detailItem = object
-//                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
-//                controller.navigationItem.leftItemsSupplementBackButton = true
-//            }
-//        }
-//    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if segue.identifier == "showDetail"
+        {
+            if let indexPath = self.tableView.indexPathForSelectedRow
+            {
+                let object = videos[indexPath.row]
+                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
+                controller.detailItem = object
+                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+                controller.navigationItem.leftItemsSupplementBackButton = true
+            }
+        }
+    }
 
-    // MARK: - Table View
+    // MARK: - UITableViewDataSource
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {

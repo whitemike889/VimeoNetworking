@@ -81,4 +81,7 @@ public enum LocalErrorCode: Int
     case NoResponse = 9007
     case PinCodeInfo = 9008
     case PinCodeExpired = 9009
+    
+    // AccountStore
+    case AccountCorrupted = 9010
 }
