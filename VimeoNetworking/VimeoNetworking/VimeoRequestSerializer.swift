@@ -28,6 +28,8 @@ import Foundation
 
 import AFNetworking
 
+/** `VimeoRequestSerializer` is an `AFHTTPRequestSerializer` that primarily handles adding Vimeo-specific authorization headers to outbound requests.  It can be initialized with either a dynamic `AccessTokenProvider` or a static `AppConfiguration`.
+ */
 final public class VimeoRequestSerializer: AFHTTPRequestSerializer
 {
     private static let AcceptHeaderKey = "Accept"
@@ -45,6 +47,14 @@ final public class VimeoRequestSerializer: AFHTTPRequestSerializer
     
     // MARK: - Initialization
     
+    /**
+     Create a request serializer with an access token provider
+     
+     - parameter accessTokenProvider: when called, returns an authenticated access token
+     - parameter apiVersion:          version of the API this application's requests should use
+     
+     - returns: an initialized `VimeoRequestSerializer`
+     */
     init(accessTokenProvider: AccessTokenProvider, apiVersion: String = VimeoDefaultAPIVersionString)
     {
         self.accessTokenProvider = accessTokenProvider
@@ -55,6 +65,13 @@ final public class VimeoRequestSerializer: AFHTTPRequestSerializer
         self.setup(apiVersion: apiVersion)
     }
     
+    /**
+     Create a request serializer with an application configuration
+     
+     - parameter appConfiguration: your application's configuration
+     
+     - returns: an initialized `VimeoRequestSerializer`
+     */
     init(appConfiguration: AppConfiguration)
     {
         self.accessTokenProvider = nil
@@ -65,6 +82,9 @@ final public class VimeoRequestSerializer: AFHTTPRequestSerializer
         self.setup(apiVersion: appConfiguration.apiVersion)
     }
     
+    /**
+     **NOT SUPPORTED**
+     */
     required public init?(coder aDecoder: NSCoder)
     {
         fatalError("init(coder:) has not been implemented")

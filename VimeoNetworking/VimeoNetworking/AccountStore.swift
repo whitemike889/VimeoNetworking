@@ -8,11 +8,16 @@
 
 import Foundation
 
-final internal class AccountStore
+/// `AccountStore` handles saving and loading authenticated accounts securely using the keychain
+final class AccountStore
 {
+    /// `AccountType` categorizes an account based on its level of access
     enum AccountType: String
     {
+        /// Client credentials accounts can access only public resources
         case ClientCredentials
+        
+        /// User accounts have an authenticated user and can act on the user's behalf
         case User
     }
     
@@ -26,6 +31,13 @@ final internal class AccountStore
     
     // MARK: -
     
+    /**
+     Create a new account store
+     
+     - parameter configuration: your application's configuration
+     
+     - returns: an initialized `AccountStore`
+     */
     init(configuration: AppConfiguration)
     {
         self.dataStore = KeychainStore(service: configuration.keychainService, accessGroup: configuration.keychainAccessGroup)
@@ -33,6 +45,14 @@ final internal class AccountStore
     
     // MARK: -
     
+    /**
+     Save an account
+     
+     - parameter account: the account to save
+     - parameter type:    the type of the account
+     
+     - throws: an error if the data could not be saved
+     */
     func saveAccount(account: VIMAccount, type: AccountType) throws
     {
         let data = NSMutableData()
@@ -43,6 +63,15 @@ final internal class AccountStore
         try self.dataStore.setData(data, forKey: type.rawValue)
     }
     
+    /**
+     Load an account
+     
+     - parameter type: type of account requested
+     
+     - throws: an error if data could not be loaded
+     
+     - returns: an account of the specified type, if one was found
+     */
     func loadAccount(type: AccountType) throws -> VIMAccount?
     {
         do
@@ -84,6 +113,13 @@ final internal class AccountStore
         }
     }
     
+    /**
+     Removes a saved account
+     
+     - parameter type: type of account to remove
+     
+     - throws: an error if the data exists but could not be removed
+     */
     func removeAccount(type: AccountType) throws
     {
         try self.dataStore.deleteDataForKey(type.rawValue)
