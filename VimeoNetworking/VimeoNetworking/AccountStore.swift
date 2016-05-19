@@ -18,6 +18,10 @@ final internal class AccountStore
     
     // MARK: - 
     
+    private static let ErrorDomain = "AccountStoreErrorDomain"
+    
+    // MARK: - 
+    
     private let dataStore: SecureDataStore
     
     // MARK: -
@@ -41,28 +45,43 @@ final internal class AccountStore
     
     func loadAccount(type: AccountType) throws -> VIMAccount?
     {
-        guard let data = try self.dataStore.dataForKey(type.rawValue)
-        else
+        do
         {
-            return nil
+            guard let data = try self.dataStore.dataForKey(type.rawValue)
+            else
+            {
+                return nil
+            }
+            
+            let unarchiver = NSKeyedUnarchiver(forReadingWithData: data)
+            var decodedAccount: VIMAccount? = nil
+            try ExceptionCatcher.doUnsafe
+            {
+                decodedAccount = unarchiver.decodeObject() as? VIMAccount
+            }
+            
+            guard let account = decodedAccount
+            else
+            {
+                let description = "Received corrupted VIMAccount data from keychain"
+                let error = NSError(domain: self.dynamicType.ErrorDomain, code: LocalErrorCode.AccountCorrupted.rawValue, userInfo: [NSLocalizedDescriptionKey: description])
+                
+                throw error
+            }
+            
+            if let userJSON = account.userJSON as? VimeoClient.ResponseDictionary
+            {
+                try account.user = VIMObjectMapper.mapObject(userJSON) as VIMUser
+            }
+            
+            return account
         }
-        
-        let unarchiver = NSKeyedUnarchiver(forReadingWithData: data)
-        
-        var account: VIMAccount? = nil
-        
-        try ExceptionCatcher.doUnsafe
+        catch let error
         {
-            account = unarchiver.decodeObject() as? VIMAccount
+            _ = try? self.removeAccount(type)
+            
+            throw error
         }
-        
-        if let account = account,
-            let userJSON = account.userJSON as? VimeoClient.ResponseDictionary
-        {
-            try account.user = VIMObjectMapper.mapObject(userJSON) as VIMUser
-        }
-        
-        return account
     }
     
     func removeAccount(type: AccountType) throws
