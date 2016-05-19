@@ -70,8 +70,19 @@ final public class AuthenticationController
         self.authenticatorClient = VimeoClient(appConfiguration: client.configuration)
     }
     
-    // MARK: - Saved Accounts
+    // MARK: - Public Saved Accounts
     
+    public func loadClientCredentialsAccount() throws -> VIMAccount?
+    {
+        return try self.loadAccount(.ClientCredentials)
+    }
+
+    public func loadUserAccount() throws -> VIMAccount?
+    {
+        return try self.loadAccount(.User)
+    }
+    
+    @available(*, deprecated, message="Use loadUserAccount or loadClientCredentialsAccount instead.")
     /**
      Load a saved User or Client credentials account from the `AccountStore`
      
@@ -81,31 +92,43 @@ final public class AuthenticationController
      */
     public func loadSavedAccount() throws -> VIMAccount?
     {
-        var loadedAccount = try self.accountStore.loadAccount(.User)
+        var loadedAccount = try self.loadUserAccount()
         
         if loadedAccount == nil
         {
-            loadedAccount = try self.accountStore.loadAccount(.ClientCredentials)
+            loadedAccount = try self.loadClientCredentialsAccount()
         }
         
         if let loadedAccount = loadedAccount
         {
-            try self.authenticateClient(account: loadedAccount)
-            
-            print("loaded account \(loadedAccount)")
-            
             // TODO: refresh user [RH] (4/25/16)
             
             // TODO: after refreshing user, send notification [RH] (4/25/16)
-        }
-        else
-        {
-            print("no account loaded")
         }
         
         return loadedAccount
     }
     
+    // MARK: - Private Saved Accounts
+    
+    private func loadAccount(accountType: AccountStore.AccountType) throws -> VIMAccount?
+    {
+        let loadedAccount = try self.accountStore.loadAccount(accountType)
+        
+        if let loadedAccount = loadedAccount
+        {
+            print("Loaded \(accountType) account \(loadedAccount)")
+
+            try self.authenticateClient(account: loadedAccount)
+        }
+        else
+        {
+            print("Failed to load \(accountType) account")
+        }
+        
+        return loadedAccount
+    }
+
     // MARK: - Public Authentication
     
     /**

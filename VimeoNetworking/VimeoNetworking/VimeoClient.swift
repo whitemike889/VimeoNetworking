@@ -52,7 +52,7 @@ final public class VimeoClient
     }
     
         /// Dictionary containing URL parameters for a request
-    public typealias RequestParameters = [String: String]
+    public typealias RequestParameters = [String: AnyObject]
     
         /// Dictionary containing a JSON response
     public typealias ResponseDictionary = [String: AnyObject]

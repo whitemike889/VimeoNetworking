@@ -14,7 +14,7 @@ public enum CacheFetchPolicy
         /// Only request cached responses.  No network request is made.
     case CacheOnly
     
-        /// **(Default)** Try to load from both cache and network, note that two results may be returned when using this method (cached, then network)
+        /// Try to load from both cache and network, note that two results may be returned when using this method (cached, then network)
     case CacheThenNetwork
     
         /// Only try to load the request from network.  The cache is not queried
@@ -22,12 +22,23 @@ public enum CacheFetchPolicy
     
         /// First try the network request, then fallback to cache if it fails
     case TryNetworkThenCache
+    
+    static func defaultPolicyForMethod(method: VimeoClient.Method) -> CacheFetchPolicy
+    {
+        switch method
+        {
+        case .GET:
+            return .CacheThenNetwork
+        case .DELETE, .PATCH, .POST, .PUT:
+            return .NetworkOnly
+        }
+    }
 }
 
 /// Describes how a request should handle retrying after failure
 public enum RetryPolicy
 {
-        /// **(Default)** Only one attempt is made, no retry behavior
+        /// Only one attempt is made, no retry behavior
     case SingleAttempt
     
     /**
@@ -37,6 +48,15 @@ public enum RetryPolicy
      - parameter initialDelay: the delay (in seconds) until first retry. The next delay is doubled with each retry to provide `back-off` behavior, which tends to lead to a greater probability of recovery
      */
     case MultipleAttempts(attemptCount: Int, initialDelay: NSTimeInterval)
+    
+    static func defaultPolicyForMethod(method: VimeoClient.Method) -> RetryPolicy
+    {
+        switch method
+        {
+        case .GET, .DELETE, .PATCH, .POST, .PUT:
+            return .SingleAttempt
+        }
+    }
 }
 
 extension RetryPolicy
@@ -92,16 +112,16 @@ public struct Request<ModelType: MappableResponse>
          path: String,
          parameters: VimeoClient.RequestParameters? = nil,
          modelKeyPath: String? = nil,
-         cacheFetchPolicy: CacheFetchPolicy = .CacheThenNetwork,
-         shouldCacheResponse: Bool = true,
-         retryPolicy: RetryPolicy = .SingleAttempt)
+         cacheFetchPolicy: CacheFetchPolicy? = nil,
+         shouldCacheResponse: Bool? = nil,
+         retryPolicy: RetryPolicy? = nil)
     {
         self.method = method
         self.path = path
         self.parameters = parameters
         self.modelKeyPath = modelKeyPath
-        self.cacheFetchPolicy = cacheFetchPolicy
-        self.shouldCacheResponse = shouldCacheResponse
-        self.retryPolicy = retryPolicy
+        self.cacheFetchPolicy = cacheFetchPolicy ?? CacheFetchPolicy.defaultPolicyForMethod(method)
+        self.shouldCacheResponse = shouldCacheResponse ?? (method == .GET)
+        self.retryPolicy = retryPolicy ?? RetryPolicy.defaultPolicyForMethod(method)
     }
 }
