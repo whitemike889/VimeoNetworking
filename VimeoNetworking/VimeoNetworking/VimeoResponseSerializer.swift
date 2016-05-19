@@ -107,7 +107,7 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
     }
 
     /**
-     Check a that a download task response has a valid status code
+     Check that a download task response has a valid status code
      
      - parameter response: the completed task response
      

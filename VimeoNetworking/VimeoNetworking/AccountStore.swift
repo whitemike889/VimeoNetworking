@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// `AccountStore` handles saving and loading authenticated accounts in a secure location
+/// `AccountStore` handles saving and loading authenticated accounts securely using the keychain
 final class AccountStore
 {
     /// `AccountType` categorizes an account based on its level of access
@@ -42,7 +42,7 @@ final class AccountStore
     // MARK: -
     
     /**
-     Securely save an account
+     Save an account
      
      - parameter account: the account to save
      - parameter type:    the type of the account
@@ -60,7 +60,7 @@ final class AccountStore
     }
     
     /**
-     Securely load an account
+     Load an account
      
      - parameter type: type of account requested
      
@@ -99,7 +99,7 @@ final class AccountStore
      
      - parameter type: type of account to remove
      
-     - throws: an error if the data could not be removed
+     - throws: an error if the data exists but could not be removed
      */
     func removeAccount(type: AccountType) throws
     {

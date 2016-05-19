@@ -123,7 +123,7 @@ final class KeychainStore: SecureDataStore
      
      - parameter key: identifier for the saved data
      
-     - throws: an error if deleting failed
+     - throws: an error if the data exists but deleting failed
      */
     func deleteDataForKey(key: String) throws
     {
