@@ -19,6 +19,7 @@ private let EmailKey = "email"
 private let TokenKey = "token"
 private let PinCodeKey = "user_code"
 private let DeviceCodeKey = "device_code"
+private let AccessTokenKey = "access_token"
 
 private let GrantTypeClientCredentials = "client_credentials"
 private let GrantTypeAuthorizationCode = "authorization_code"
@@ -33,6 +34,7 @@ private let AuthenticationPathFacebookToken = "oauth/authorize/facebook"
 private let AuthenticationPathCodeGrant = "oauth/access_token"
 private let AuthenticationPathPinCode = "oauth/device"
 private let AuthenticationPathPinCodeAuthorize = "oauth/device/authorize"
+private let AuthenticationPathAppTokenExchange = "oauth/appexchange"
 
 // MARK: -
 
@@ -160,6 +162,20 @@ extension Request where ModelType: VIMAccount
                                                          DeviceCodeKey: deviceCode]
         
         return Request(method: .POST, path: AuthenticationPathPinCodeAuthorize, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
+    }
+    
+    /**
+     Construct a `Request` to exchange an app token granted to another Vimeo application for a new token granted to the calling application (Vimeo internal use only)
+     
+     - parameter accessToken: the app token that needs to be exchanged
+     
+     - returns: a new `Request`
+     */
+    static func appTokenExchangeRequest(accessToken accessToken: String) -> Request
+    {
+        let parameters: VimeoClient.RequestParameters = [AccessTokenKey: accessToken]
+        
+        return Request(method: .POST, path: AuthenticationPathAppTokenExchange, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
 }
 

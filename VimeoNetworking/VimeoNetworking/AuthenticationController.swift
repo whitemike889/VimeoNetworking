@@ -288,6 +288,21 @@ final public class AuthenticationController
         self.authenticate(request: request, completion: completion)
     }
     
+    /**
+     **(PRIVATE: Vimeo Use Only, will not work for third-party applications)**
+     Exchange a saved access token granted to another application for a new token granted to the calling application.  This method will allow an application to re-use credentials from another Vimeo application.  Client credentials must be granted before using this method. 
+     
+     - parameter accessToken: access token granted to the other application
+     - parameter completion:  handler for authentication success or failure
+     */
+    public func appTokenExchange(accessToken accessToken: String, completion: AuthenticationCompletion)
+    {
+        let request = AuthenticationRequest.appTokenExchangeRequest(accessToken: accessToken)
+        
+        self.authenticate(request: request, completion: completion)
+    }
+    
+    
         /// **(PRIVATE: Vimeo Use Only)** Handles the initial information to present to the user for pin code auth
     public typealias PinCodeInfoHander = (pinCode: String, activateLink: String) -> Void
     
