@@ -400,10 +400,12 @@ final public class AuthenticationController
     
     /**
      Log out the account of the client
+
+     - parameter loadClientCredentials: if true, tries to load a client credentials account from the keychain after logging out
      
      - throws: an error if the account could not be deleted from the keychain
      */
-    public func logOut() throws
+    public func logOut(loadClientCredentials loadClientCredentials: Bool = true) throws
     {
         guard self.client.isAuthenticatedWithUser == true
         else
@@ -422,7 +424,14 @@ final public class AuthenticationController
             }
         }
         
-        self.client.currentAccount = nil
+        if loadClientCredentials
+        {
+            self.client.currentAccount = (try? self.accountStore.loadAccount(.ClientCredentials)) ?? nil
+        }
+        else
+        {
+            self.client.currentAccount = nil
+        }
         
         try self.accountStore.removeAccount(.User)
     }

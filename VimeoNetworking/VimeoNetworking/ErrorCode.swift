@@ -112,4 +112,9 @@ public enum LocalErrorCode: Int
     
     /// The currently active pin code has expired
     case PinCodeExpired = 9009
+    
+    // MARK: AccountStore
+    
+    /// An account object could not be decoded from keychain data
+    case AccountCorrupted = 9012
 }
