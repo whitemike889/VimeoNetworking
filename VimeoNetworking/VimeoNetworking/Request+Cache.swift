@@ -15,13 +15,10 @@ public extension Request
     {
         var cacheKey = self.path
         
-        if let parameters = self.parameters
+        for (key, value) in self.parameters
         {
-            for (key, value) in parameters
-            {
-                cacheKey += key
-                cacheKey += value.description
-            }
+            cacheKey += key
+            cacheKey += value.description
         }
         
         cacheKey = cacheKey.stringByReplacingOccurrencesOfString("/", withString: ".")
