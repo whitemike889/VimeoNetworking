@@ -140,7 +140,7 @@ final public class VimeoRequestSerializer: AFHTTPRequestSerializer
         }
         else if let appConfiguration = self.appConfiguration
         {
-            let clientID = appConfiguration.clientKey
+            let clientID = appConfiguration.clientIdentifier
             let clientSecret = appConfiguration.clientSecret
             
             let authString = "\(clientID):\(clientSecret)"

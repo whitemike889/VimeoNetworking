@@ -146,7 +146,7 @@ final public class AuthenticationController
         /// Returns the redirect URI used to launch this application after code grant authorization
     public var codeGrantRedirectURI: String
     {
-        let scheme = "vimeo\(self.configuration.clientKey)"
+        let scheme = "vimeo\(self.configuration.clientIdentifier)"
         let path = "auth"
         let URI = "\(scheme)://\(path)"
         
@@ -161,7 +161,7 @@ final public class AuthenticationController
     public func codeGrantAuthorizationURL() -> NSURL
     {
         let parameters = [self.dynamicType.ResponseTypeKey: self.dynamicType.CodeKey,
-                          self.dynamicType.ClientIDKey: self.configuration.clientKey,
+                          self.dynamicType.ClientIDKey: self.configuration.clientIdentifier,
                           self.dynamicType.RedirectURIKey: self.codeGrantRedirectURI,
                           self.dynamicType.ScopeKey: Scope.combine(self.configuration.scopes),
                           self.dynamicType.StateKey: self.dynamicType.state]
