@@ -4,6 +4,11 @@
 
 ##### Hey Creator, if you're primarily interested in uploading videos to Vimeo, you should also check out [VimeoUpload](https://github.com/vimeo/VimeoUpload).
 
+## Supported Platforms
+
+- iOS (8.0+)
+- tvOS
+
 ## Installing with CocoaPods
 
 To get started integrating `VimeoNetworking`, add the following lines to your `Podfile` and run `pod install`:
@@ -22,13 +27,13 @@ The first step towards using the Vimeo API is registering a new application on t
 
 ### App Configuration
 
-Once you have a new app setup, click into its authentication settings and make note of the "Client Identifier" and "Client Secret" fields.  Next, determine which `Scope` permissions your application requires from the available options listed here: [Supported Scopes](https://developer.vimeo.com/api/authentication#scopes).  Use this information to instantiate a new `AppConfiguration` value:
+Once you have a new app set up, click into its authentication settings and make note of the "Client Identifier" and "Client Secret" fields.  Next, determine which `Scope` permissions your application requires from the available options listed here: [Supported Scopes](https://developer.vimeo.com/api/authentication#scopes).  Use this information to instantiate a new `AppConfiguration` value:
 
 ```Swift
 let appConfiguration = AppConfiguration(
 		clientIdentifier: "Your client identifier goes here",
 		clientSecret: "Your client secret goes here",
-		scope: [.Public, .Private, .Interact])
+		scope: [.Public, .Private, .Interact] //replace with your scopes)
 ```
 
 ### Client
@@ -41,7 +46,7 @@ let vimeoClient = VimeoClient(configuration: appConfiguration)
 
 ## Authenticating
 
-Before we can actually start getting meaningful data from the API, there's one last step: authentication. `AuthenticationController` handles and simplifies this process.  It uses the configuration of an associated `VimeoClient` to make requests. On successful authentication, it passes the new Vimeo account back to this client, and that client can then make requests to API endpoints.
+Before we can actually start getting meaningful data from the API, there's one last step: authentication. `AuthenticationController` handles and simplifies this process.  It uses the configuration of an associated `VimeoClient` to make requests. On successful authentication, it passes the new Vimeo account back to this client, and that client can then make requests to API endpoints.  There are two ways to authenticate: *Client Credentials grant* and *Code grant*, detailed below:
 
 ### Client Credentials
 
@@ -66,7 +71,7 @@ If you want to log in as a user, the Vimeo API provides a process called Code Gr
 
 To authenticate via code grant, your app launches a specific URL in Safari.  The user signs up or logs in on Vimeo.com, and chooses which permissions to grant.  Then, control is redirected back to your application where authentication completes.
 
-To prepare your application to receive this redirect, navigate to your app target settings > Info > URL Types.  Add a new URL Type, and under url scheme enter `vimeo` followed by your client identifier (for example, if your client identifier is `1234`, enter `vimeo1234`).  You also need to add this redirect URL to your app on the Vimeo API site.  Under “App Callback URL”, add `vimeo{CLIENT_KEY}://auth` (for the example above, `vimeo1234://auth`).
+To prepare your application to receive this redirect, navigate to your app's target's settings > Info > URL Types.  Add a new URL Type, and under url scheme enter `vimeo` followed by your client identifier (for example, if your client identifier is `1234`, enter `vimeo1234`).  You also need to add this redirect URL to your app on the [Vimeo API](https://developer.vimeo.com/apps) site.  Under “App Callback URL”, add `vimeo{CLIENT_IDENTIFIER}://auth` (for the example above, `vimeo1234://auth`).
 
 Now, in an appropriate place in your app, open the code grant authorization URL in Safari:
 
@@ -77,13 +82,14 @@ let URL = authenticationController.codeGrantAuthorizationURL()
 UIApplication.sharedApplication.openURL(URL)
 ```
 
-The user will prompted to log in and grant permissions to your application.  When they accept, your redirect URL will be opened, which will reopen your application.  Handle this event in your application delegate:
+The user will be prompted to log in and grant permissions to your application.  When they accept, your redirect URL will be opened, which will reopen your application.  Handle this event in your application delegate:
 
 ```Swift
 func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool
     {
         authenticationController.codeGrant(responseURL: url) { result in
-            switch result {
+            switch result 
+            {
             case .Success(let account):
                 print("authenticated successfully: \(account)")
             case .Failure(let error):
@@ -97,17 +103,22 @@ func application(app: UIApplication, openURL url: NSURL, options: [String : AnyO
 
 ### Saved Accounts
 
-`AuthenticationController` saves the accounts it successfully authenticates in the Keychain.  The next time your application opens, you should first attempt to load a previously authenticated account before prompting the user to authenticate.
+`AuthenticationController` saves the accounts it successfully authenticates in the Keychain.  The next time your application launches, you should first attempt to load a previously authenticated account before prompting the user to authenticate.
 
 ```Swift
-do {
-	if let account = try authenticationController.loadSavedAccount() {
+do 
+{
+	if let account = try authenticationController.loadSavedAccount() 
+	{
 		print("account loaded successfully: \(account)"
-	} else {
+	} 
+	else 
+	{
 		print("no saved account found, authenticate...")
 	}
 }
-catch let error {
+catch let error 
+{
 	print("error loading account: \(error)")
 }
 ```
@@ -116,23 +127,23 @@ catch let error {
 
 You're initialized, you're configured, you're authenticated.  Now you're ready to rock!  Let's start hitting some endpoints. 🤘
 
-### Making Requests
+### Constructing Requests
 
-We represent each interaction with the Vimeo API as an instance of `Request`.  Each one holds its own understanding of HTTP method, URL path, parameters (if any), expected model object type, caching behavior, and (if desired) retry-after-failure behavior.  That's a lot to grasp up front, so let's step back and look at the simplest request we can make:
+We represent each interaction with the Vimeo API as an instance of `Request`.  Each one holds its own understanding of HTTP method, URL path, parameters (if any), expected model object type, caching behavior, and (if desired) retry-after-failure behavior.  That's a lot to grasp up front, so let's step back and look at the simplest request we can make, a single video:
 
 ```Swift
 let videoRequest = Request<VIMVideo>(path: "/videos/45196609")
 ```
 
 There are two critical takeaways here:
-- `<VIMVideo>`: the generic type of the model object.  This is what request will return in the `Response` if it's successful.
+- `<VIMVideo>`: the generic type of the model object.  This is what the request will return in the `Response` if it's successful.
 - `path: "..."`: the API endpoint we want to call, you can see a whole host of other options at [Vimeo API Endpoints](https://developer.vimeo.com/api/endpoints)
 
-By declaring the expected model object type, we can ensure that the both the request and the parsing of the JSON is successful, and we can guarantee that our `Response` precisely matches this expectation.  All potential Vimeo models are already implemented in **VimeoNetworking**, and they're available for use in your own implementation.  Model classes are all named with the `VIM` suffix: `VIMUser`, `VIMChannel`, `VIMCategory`, and so on.
+By declaring the expected model object type, we can ensure that both the request and the parsing of the JSON is successful, and we can guarantee that our `Response` precisely matches this expectation.  All potential Vimeo models are already implemented in **VimeoNetworking**, and they're available for use in your own implementation.  Model classes are all named with the `VIM` prefix: `VIMUser`, `VIMChannel`, `VIMCategory`, and so on.
 
-### Handling Responses
+### Sending Requests and Handling Responses
 
-After we send that response, we'll get a `Result` enum back.  This could be either a `.Success` or a `.Failure` value.  `.Success` will contain a `Response` object, while `.Failure` will contain an `NSError`.  Switch between these two cases to handle whichever is encountered:
+After we send that request, we'll get a `Result` enum back.  This could be either a `.Success` or a `.Failure` value.  `.Success` will contain a `Response` object, while `.Failure` will contain an `NSError`.  Switch between these two cases to handle whichever is encountered:
 
 ```Swift
 vimeoClient.request(videoRequest) { result in 
@@ -149,16 +160,18 @@ vimeoClient.request(videoRequest) { result in
 
 ### Collections
 
-One neat **ProTip**: arrays of model objects are also valid generic types of `Request`.  In this case, the `model` property of your `Response` will be an array of parsed models of the expected type.
+One neat **ProTip**: Your `Request` model type doesn't just have to be a single model object, you can also specify an array with a model object element type, like `[VIMVideo]`.  When you do so, the `model` property of your `Response` will be an array of the same type.  Note that API requests that return multiple objects like this are often paginated, see documentation on the `Response` class for tips on how to request additional pages of content.
 
 ```Swift
 let staffPickedVideosRequest = Request<[VIMVideo]>(path: "/channels/staffpicks/videos")
 
 vimeoClient.request(staffPickedVideosRequest) { result in 
-	switch result {
+	switch result 
+	{
 	case .Success(let response: Response):
 		let videos: [VIMVideo] = response.model
-		for video in videos {
+		for video in videos 
+		{
 			print("retrieved video: \(video)")
 		}
 	case .Failure(let error: NSError):
@@ -176,3 +189,6 @@ With *all that* said, you now have a pretty solid understanding of what **VimeoN
 
 ###### Thanks for reading, Happy Swifting!
 
+## Questions?
+
+Tweet at us here: [@vimeoapi](https://twitter.com/vimeoapi).  Post on [Stackoverflow](http://stackoverflow.com/questions/tagged/vimeo-ios) with the tag `vimeo-ios`.  Get in touch [here](https://vimeo.com/help/contact).  Interested in working at Vimeo? We're [hiring](https://vimeo.com/jobs)!
