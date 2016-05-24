@@ -31,7 +31,7 @@ public struct AppConfiguration
     /**
      Create a new `AppConfiguration`
      
-     - parameter clientKey:           The client key designated by the api for your application
+     - parameter clientIdentifier:           The client key designated by the api for your application
      - parameter clientSecret:        The client secret designated by the api for your application
      - parameter scopes:              An array of `Scope`s that your application requests
      - parameter keychainService:     Identifes your application to the system keychain, defaults to `KeychainServiceVimeo`
@@ -40,14 +40,14 @@ public struct AppConfiguration
      
      - returns: an initialized AppConfiguration
      */
-    public init(clientKey: String,
+    public init(clientIdentifier: String,
                 clientSecret: String,
                 scopes: [Scope],
                 keychainService: String = KeychainServiceVimeo,
                 keychainAccessGroup: String? = nil,
                 apiVersion: String = VimeoDefaultAPIVersionString)
     {
-        self.clientIdentifier = clientKey
+        self.clientIdentifier = clientIdentifier
         self.clientSecret = clientSecret
         self.scopes = scopes
         self.keychainService = keychainService
