@@ -28,11 +28,21 @@ import Foundation
 
 import AFNetworking
 
+/** `VimeoSessionManager` handles networking and serialization for raw HTTP requests.  It is a direct subclass of `AFHTTPSessionManager` and it's designed to be used internally by `VimeoClient`.  For the majority of purposes, it would be better to use `VimeoClient` and a `Request` object to better encapsulate this logic, since the latter provides richer functionality overall.
+ */
 final public class VimeoSessionManager: AFHTTPSessionManager
 {    
     // MARK: Initialization
     
-    init(sessionConfiguration: NSURLSessionConfiguration, requestSerializer: VimeoRequestSerializer)
+    /**
+     Creates a new session manager
+     
+     - parameter sessionConfiguration: Object describing the URL session policies for this session manager
+     - parameter requestSerializer:    Serializer to use for all requests handled by this session manager
+     
+     - returns: an initialized `VimeoSessionManager`
+     */
+    required public init(sessionConfiguration: NSURLSessionConfiguration, requestSerializer: VimeoRequestSerializer)
     {        
         super.init(baseURL: VimeoBaseURLString, sessionConfiguration: sessionConfiguration)
         
@@ -47,6 +57,11 @@ final public class VimeoSessionManager: AFHTTPSessionManager
     
     // MARK: - Authentication
     
+    /**
+     Called when authentication completes successfully to update the session manager with the new access token
+     
+     - parameter account: the new account
+     */
     func clientDidAuthenticateWithAccount(account: VIMAccount)
     {
         guard let requestSerializer = self.requestSerializer as? VimeoRequestSerializer
@@ -61,6 +76,9 @@ final public class VimeoSessionManager: AFHTTPSessionManager
         }
     }
     
+    /**
+     Called when a client is logged out and the current account should be cleared from the session manager
+     */
     func clientDidClearAccount()
     {
         guard let requestSerializer = self.requestSerializer as? VimeoRequestSerializer

@@ -27,19 +27,23 @@
 import Foundation
 import AFNetworking
 
+/// Stores string constants used to look up Vimeo-api-specific error information
 public enum VimeoErrorKey: String
 {
     case VimeoErrorCode = "VimeoLocalErrorCode" // Wish this could just be VimeoErrorCode but it conflicts with server-side key [AH] 2/5/2016
     case VimeoErrorDomain = "VimeoErrorDomain"
 }
 
+/// Convenience methods used to parse `NSError`s returned by Vimeo api responses
 public extension NSError
 {
+        /// Returns true if the error is a 503 Service Unavailable error
     public var isServiceUnavailableError: Bool
     {
         return self.statusCode == HTTPStatusCode.ServiceUnavailable.rawValue
     }
     
+        /// Returns true if the error is due to an invalid access token
     public var isInvalidTokenError: Bool
     {
         if let urlResponse = self.userInfo[AFNetworkingOperationFailingURLResponseErrorKey] as? NSHTTPURLResponse
@@ -55,11 +59,13 @@ public extension NSError
         return false
     }
     
+        /// Returns true if the error is due to the cancellation of a network task
     func isNetworkTaskCancellationError() -> Bool
     {
         return self.domain == NSURLErrorDomain && self.code == NSURLErrorCancelled
     }
     
+        /// Returns true if the error is a url connection error
     func isConnectionError() -> Bool
     {
         return [NSURLErrorTimedOut,
@@ -70,6 +76,15 @@ public extension NSError
             NSURLErrorNetworkConnectionLost].contains(self.code)
     }
     
+    /**
+     Generates a new `NSError`
+     
+     - parameter domain:      The domain in which the error was generated
+     - parameter code:        A unique code identifying the error
+     - parameter description: A developer-readable description of the error
+     
+     - returns: a new `NSError`
+     */
     class func errorWithDomain(domain: String?, code: Int?, description: String?) -> NSError
     {
         var error = NSError(domain: VimeoErrorKey.VimeoErrorDomain.rawValue, code: 0, userInfo: nil)
@@ -86,22 +101,52 @@ public extension NSError
         
         return error
     }
-
+    
+    /**
+     Generates a new error with an added domain
+     
+     - parameter domain: New domain for the error
+     
+     - returns: An error with additional information in the user info dictionary
+     */
     func errorByAddingDomain(domain: String) -> NSError
     {
         return self.errorByAddingDomain(domain, code: nil, userInfo: nil)
     }
     
+    /**
+     Generates a new error with added user info
+     
+     - parameter userInfo: the user info dictionary to append to the existing user info
+    
+     - returns: An error with additional user info
+     */
     func errorByAddingUserInfo(userInfo: [String: AnyObject]) -> NSError
     {
         return self.errorByAddingDomain(nil, code: nil, userInfo: userInfo)
     }
     
+    /**
+     Generates a new error with an added error code
+     
+     - parameter code: the new error code for the error
+     
+     - returns: An error with additional information in the user info dictionary
+     */
     func errorByAddingCode(code: Int) -> NSError
     {
         return self.errorByAddingDomain(nil, code: code, userInfo: nil)
     }
     
+    /**
+     Generates a new error with added information
+     
+     - parameter domain:   New domain for the error
+     - parameter code:     the new error code for the error
+     - parameter userInfo: the user info dictionary to append to the existing user info
+     
+     - returns: An error with additional information in the user info dictionary
+     */
     func errorByAddingDomain(domain: String?, code: Int?, userInfo: [String: AnyObject]?) -> NSError
     {
         let augmentedInfo = NSMutableDictionary(dictionary: self.userInfo)
@@ -130,6 +175,7 @@ public extension NSError
     private static let VimeoErrorCodeKeyLegacy = "VimeoErrorCode"
     private static let VimeoErrorCodeKey = "error_code"
     
+        /// Returns the status code of the failing response, if available
     public var statusCode: Int?
     {
         if let response = self.userInfo[AFNetworkingOperationFailingURLResponseErrorKey]
@@ -140,6 +186,7 @@ public extension NSError
         return nil
     }
     
+        /// Returns the api error code of the failing response, if available
     public var vimeoServerErrorCode: Int?
     {
         if let errorCode = (self.userInfo[self.dynamicType.VimeoErrorCodeKeyLegacy] as? NSNumber)?.integerValue
@@ -163,6 +210,7 @@ public extension NSError
         return nil
     }
     
+        /// Returns the api error JSON dictionary, if available
     public var errorResponseBodyJSON: [String: AnyObject]?
     {
         if let data = self.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] as? NSData

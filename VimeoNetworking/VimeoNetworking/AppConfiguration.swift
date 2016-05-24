@@ -8,11 +8,17 @@
 
 import Foundation
 
-public let KeychainServiceVimeo = "Vimeo"
-public let KeychainServiceCameo = "Cameo"
-
+/**
+ *  Stores all static information relevant to a client application
+ */
 public struct AppConfiguration
 {
+        /// Keychain identifier for the Vimeo application
+    public static let KeychainServiceVimeo = "Vimeo"
+    
+        /// Keychain identifier for the Cameo application
+    public static let KeychainServiceCameo = "Cameo"
+    
     let clientIdentifier: String
     let clientSecret: String
     let scopes: [Scope]
@@ -22,6 +28,18 @@ public struct AppConfiguration
     
     let apiVersion: String
     
+    /**
+     Create a new `AppConfiguration`
+     
+     - parameter clientKey:           The client key designated by the api for your application
+     - parameter clientSecret:        The client secret designated by the api for your application
+     - parameter scopes:              An array of `Scope`s that your application requests
+     - parameter keychainService:     Identifes your application to the system keychain, defaults to `KeychainServiceVimeo`
+     - parameter keychainAccessGroup: Access group your application should use for the system keychain, defaults to nil
+     - parameter apiVersion:          API version your requests should use, defaults to `VimeoDefaultAPIVersionString`
+     
+     - returns: an initialized AppConfiguration
+     */
     public init(clientKey: String,
                 clientSecret: String,
                 scopes: [Scope],

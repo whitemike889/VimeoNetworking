@@ -10,6 +10,7 @@ import Foundation
 
 public extension Request
 {
+        /// Generates a unique cache key for a request, taking into account endpoint and parameters
     var cacheKey: String
     {
         var cacheKey = self.path
@@ -19,7 +20,7 @@ public extension Request
             for (key, value) in parameters
             {
                 cacheKey += key
-                cacheKey += value
+                cacheKey += value.description
             }
         }
         

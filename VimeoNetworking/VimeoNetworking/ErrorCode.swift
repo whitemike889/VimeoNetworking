@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// `VimeoErrorCode` contains all api error codes that are currently recognized by our client applications
 public enum VimeoErrorCode: Int
 {
     // Upload
@@ -58,6 +59,7 @@ public enum VimeoErrorCode: Int
     case TokenNotGenerated = 5001
 }
 
+/// `HTTPStatusCode` contains HTTP status code constants used to inspect response status
 public enum HTTPStatusCode: Int
 {
     case ServiceUnavailable = 503
@@ -66,19 +68,53 @@ public enum HTTPStatusCode: Int
     case Forbidden = 403
 }
 
+/// `LocalErrorCode` contains codes for all error conditions that can be generated from within the library
 public enum LocalErrorCode: Int
 {
-    // VimeoClient
+    // MARK: VimeoClient
+    
+    /// A response failed but returned no error object
     case Undefined = 9000
+    
+    /// A response returned successfully, but the response dictionary was not valid
     case InvalidResponseDictionary = 9001
+    
+    /// A request was not able to be initiated with the specified values
     case RequestMalformed = 9002
+    
+    /// A cache-only request found no cached response
     case CachedResponseNotFound = 9003
     
-    // AuthenticationController
+    // MARK: VIMObjectMapper
+    
+    /// No model object class was specified for deserialization
+    case NoMappingClass = 9010
+    
+    /// Model object mapping was not successful
+    case MappingFailed = 9011
+    
+    // MARK: AuthenticationController
+    
+    /// No access token was returned with a successful authentication response
     case AuthToken = 9004
+    
+    /// Could not retrieve parameters from code grant response
     case CodeGrant = 9005
+    
+    /// Code grant returned state did not match existing state
     case CodeGrantState = 9006
+    
+    /// No response was returned for an authenticationo request
     case NoResponse = 9007
+    
+    /// Pin code authentication did not return an activate link or pin code
     case PinCodeInfo = 9008
+    
+    /// The currently active pin code has expired
     case PinCodeExpired = 9009
+    
+    // MARK: AccountStore
+    
+    /// An account object could not be decoded from keychain data
+    case AccountCorrupted = 9012
 }
