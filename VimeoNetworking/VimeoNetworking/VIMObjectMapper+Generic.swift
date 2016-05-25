@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import VIMObjectMapper
 
 extension VIMObjectMapper
 {
@@ -59,6 +58,8 @@ extension VIMObjectMapper
             
             throw error
         }
+        
+        try modelObject.validateModel()
         
         return modelObject
     }

@@ -19,6 +19,11 @@
 		01B5C8681CC826D800694F4A /* VimeoNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 01B5C8671CC826D800694F4A /* VimeoNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		01B5C86F1CC826D800694F4A /* VimeoNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B5C8641CC826D800694F4A /* VimeoNetworking.framework */; };
 		01B5C8741CC826D800694F4A /* VimeoNetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B5C8731CC826D800694F4A /* VimeoNetworkingTests.swift */; };
+		01CDBEFE1CEBA2030093DDF4 /* VIMMappable.h in Headers */ = {isa = PBXBuildFile; fileRef = 01CDBEF91CEBA2030093DDF4 /* VIMMappable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		01CDBEFF1CEBA2030093DDF4 /* VIMModelObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 01CDBEFA1CEBA2030093DDF4 /* VIMModelObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		01CDBF001CEBA2030093DDF4 /* VIMModelObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CDBEFB1CEBA2030093DDF4 /* VIMModelObject.m */; };
+		01CDBF011CEBA2030093DDF4 /* VIMObjectMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 01CDBEFC1CEBA2030093DDF4 /* VIMObjectMapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		01CDBF021CEBA2030093DDF4 /* VIMObjectMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CDBEFD1CEBA2030093DDF4 /* VIMObjectMapper.m */; };
 		01FD38F91CC948F200326408 /* AccountStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FD38A91CC948F200326408 /* AccountStore.swift */; };
 		01FD38FA1CC948F200326408 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FD38AA1CC948F200326408 /* AppConfiguration.swift */; };
 		01FD38FB1CC948F200326408 /* AuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FD38AB1CC948F200326408 /* AuthenticationController.swift */; };
@@ -127,6 +132,11 @@
 		01B5C86E1CC826D800694F4A /* VimeoNetworkingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VimeoNetworkingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01B5C8731CC826D800694F4A /* VimeoNetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VimeoNetworkingTests.swift; sourceTree = "<group>"; };
 		01B5C8751CC826D800694F4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01CDBEF91CEBA2030093DDF4 /* VIMMappable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VIMMappable.h; path = VimeoNetworking/Models/VIMMappable.h; sourceTree = "<group>"; };
+		01CDBEFA1CEBA2030093DDF4 /* VIMModelObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VIMModelObject.h; path = VimeoNetworking/Models/VIMModelObject.h; sourceTree = "<group>"; };
+		01CDBEFB1CEBA2030093DDF4 /* VIMModelObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VIMModelObject.m; path = VimeoNetworking/Models/VIMModelObject.m; sourceTree = "<group>"; };
+		01CDBEFC1CEBA2030093DDF4 /* VIMObjectMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VIMObjectMapper.h; path = VimeoNetworking/Models/VIMObjectMapper.h; sourceTree = "<group>"; };
+		01CDBEFD1CEBA2030093DDF4 /* VIMObjectMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VIMObjectMapper.m; path = VimeoNetworking/Models/VIMObjectMapper.m; sourceTree = "<group>"; };
 		01FD38A91CC948F200326408 /* AccountStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = AccountStore.swift; path = VimeoNetworking/AccountStore.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		01FD38AA1CC948F200326408 /* AppConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppConfiguration.swift; path = VimeoNetworking/AppConfiguration.swift; sourceTree = "<group>"; };
 		01FD38AB1CC948F200326408 /* AuthenticationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = AuthenticationController.swift; path = VimeoNetworking/AuthenticationController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -358,6 +368,7 @@
 				01B061D81CCAC1E100F515E6 /* Client */,
 				01B061D71CCAC1B300F515E6 /* Authentication */,
 				01FD394D1CC9508200326408 /* Models */,
+				01CDBEF81CEBA1F10093DDF4 /* Object Mapping */,
 				01B061D51CCAC17C00F515E6 /* Types */,
 				01B061D61CCAC19100F515E6 /* Extensions */,
 				016259B81CD0030B0004D4AF /* Utilities */,
@@ -367,6 +378,18 @@
 			);
 			name = VimeoNetworking;
 			sourceTree = SOURCE_ROOT;
+		};
+		01CDBEF81CEBA1F10093DDF4 /* Object Mapping */ = {
+			isa = PBXGroup;
+			children = (
+				01CDBEF91CEBA2030093DDF4 /* VIMMappable.h */,
+				01CDBEFA1CEBA2030093DDF4 /* VIMModelObject.h */,
+				01CDBEFB1CEBA2030093DDF4 /* VIMModelObject.m */,
+				01CDBEFC1CEBA2030093DDF4 /* VIMObjectMapper.h */,
+				01CDBEFD1CEBA2030093DDF4 /* VIMObjectMapper.m */,
+			);
+			name = "Object Mapping";
+			sourceTree = "<group>";
 		};
 		01FD394D1CC9508200326408 /* Models */ = {
 			isa = PBXGroup;
@@ -456,8 +479,10 @@
 				01FD393F1CC948F300326408 /* VIMVideo.h in Headers */,
 				01FD392B1CC948F300326408 /* VIMPictureCollection.h in Headers */,
 				01FD39191CC948F300326408 /* VIMComment.h in Headers */,
+				01CDBF011CEBA2030093DDF4 /* VIMObjectMapper.h in Headers */,
 				01FD394B1CC9497900326408 /* VIMUploadQuota.h in Headers */,
 				01FD392D1CC948F300326408 /* VIMPreference.h in Headers */,
+				01CDBEFE1CEBA2030093DDF4 /* VIMMappable.h in Headers */,
 				01FD39131CC948F300326408 /* VIMAppeal.h in Headers */,
 				01FD39411CC948F300326408 /* VIMVideoFile.h in Headers */,
 				01FD39291CC948F300326408 /* VIMPicture.h in Headers */,
@@ -479,6 +504,7 @@
 				01FD393D1CC948F300326408 /* VIMUser.h in Headers */,
 				01FD391B1CC948F300326408 /* VIMConnection.h in Headers */,
 				01B5C8681CC826D800694F4A /* VimeoNetworking.h in Headers */,
+				01CDBEFF1CEBA2030093DDF4 /* VIMModelObject.h in Headers */,
 				01FD39241CC948F300326408 /* VIMGroup.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -616,6 +642,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01CDBF021CEBA2030093DDF4 /* VIMObjectMapper.m in Sources */,
 				018483881CE0D9E2008305A4 /* PinCodeInfo.swift in Sources */,
 				01FD39091CC948F200326408 /* Scope.swift in Sources */,
 				01FD39271CC948F300326408 /* VIMInteraction.m in Sources */,
@@ -632,6 +659,7 @@
 				01FD39181CC948F300326408 /* VIMChannel.m in Sources */,
 				01FD39421CC948F300326408 /* VIMVideoFile.m in Sources */,
 				01FD39301CC948F300326408 /* VIMPrivacy.m in Sources */,
+				01CDBF001CEBA2030093DDF4 /* VIMModelObject.m in Sources */,
 				01FD394C1CC9497900326408 /* VIMUploadQuota.m in Sources */,
 				01FD39341CC948F300326408 /* VIMSizeQuota.m in Sources */,
 				014A1E071CE26C4F00EC4681 /* Objc_ExceptionCatcher.m in Sources */,
