@@ -173,14 +173,19 @@ public struct Request<ModelType: MappableResponse>
         self.shouldCacheResponse = shouldCacheResponse ?? (method == .GET)
         self.retryPolicy = retryPolicy ?? RetryPolicy.defaultPolicyForMethod(method)
     }
-}
-
-extension Request
-{
-    public var isCollectionRequest: Bool
+    
+    // MARK: Copying requests
+    
+    internal func associatedPageRequest(newPath newPath: String) -> Request<ModelType>
     {
-        let isArray = (ModelType.self is Array<Any>)
-        
-        return isArray
+        return Request(method: self.method,
+                       path: newPath,
+                       parameters: self.parameters,
+                       page: nil, // already included in the new path from the API [RH]
+                       itemsPerPage: nil, // already included in the new path from the API [RH]
+                       modelKeyPath: self.modelKeyPath,
+                       cacheFetchPolicy: self.cacheFetchPolicy,
+                       shouldCacheResponse: self.shouldCacheResponse,
+                       retryPolicy: self.retryPolicy)
     }
 }
