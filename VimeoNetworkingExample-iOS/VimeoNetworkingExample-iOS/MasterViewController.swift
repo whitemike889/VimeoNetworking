@@ -56,7 +56,11 @@ class MasterViewController: UITableViewController
         
         self.accountObservationToken = Notification.AuthenticatedAccountDidChange.observe { [weak self] notification in
             
-            guard let strongSelf = self else { return }
+            guard let strongSelf = self
+            else
+            {
+                return
+            }
             
             let request: Request<[VIMVideo]>
             if VimeoClient.defaultClient.isAuthenticatedWithUser
@@ -68,12 +72,40 @@ class MasterViewController: UITableViewController
                 request = Request<[VIMVideo]>(path: "/channels/staffpicks/videos")
             }
             
-            VimeoClient.defaultClient.request(request) { (result) in
+            VimeoClient.defaultClient.request(request) { [weak self] result in
+                
+                guard let strongSelf = self
+                else
+                {
+                    return
+                }
                 
                 switch result
                 {
                 case .Success(let response):
+                    
                     strongSelf.videos = response.model
+                    
+                    if let nextPageRequest = response.nextPageRequest
+                    {
+                        print("starting next page request")
+                        
+                        VimeoClient.defaultClient.request(nextPageRequest) { [weak self] result in
+                            
+                            guard let strongSelf = self
+                            else
+                            {
+                                return
+                            }
+                            
+                            if case .Success(let response) = result
+                            {
+                                print("next page request completed!")
+                                strongSelf.videos.appendContentsOf(response.model)
+                                strongSelf.tableView.reloadData()
+                            }
+                        }
+                    }
                 case .Failure(let error):
                     let title = "Video Request Failed"
                     let message = "\(request.path) could not be loaded: \(error.localizedDescription)"
