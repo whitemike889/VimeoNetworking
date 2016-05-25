@@ -178,11 +178,17 @@ public struct Request<ModelType: MappableResponse>
     
     internal func associatedPageRequest(newPath newPath: String) -> Request<ModelType>
     {
+        let (path, query) = newPath.splitLinkString()
+        
+        let queryParameters = query?.parametersFromQueryString()
+        let page = Int((queryParameters?[self.PageKey]) ?? "")
+        let itemsPerPage = Int((queryParameters?[self.PerPageKey]) ?? "")
+        
         return Request(method: self.method,
-                       path: newPath,
-                       parameters: self.parameters,
-                       page: nil, // already included in the new path from the API [RH]
-                       itemsPerPage: nil, // already included in the new path from the API [RH]
+                       path: path,
+                       parameters: self.additionalParameters,
+                       page: page,
+                       itemsPerPage: itemsPerPage,
                        modelKeyPath: self.modelKeyPath,
                        cacheFetchPolicy: self.cacheFetchPolicy,
                        shouldCacheResponse: self.shouldCacheResponse,
