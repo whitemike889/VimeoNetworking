@@ -11,21 +11,28 @@ import Foundation
 extension VIMObjectMapper
 {
     static var ErrorDomain: String { return "ObjectMapperErrorDomain" }
-    static var ErrorNoMappingClass: Int { return 1002 }
-    static var ErrorMappingFailed: Int { return 1003 }
     
+    /**
+     Deserializes a response dictionary into a model object
+     
+     - parameter ModelType:          The type of the model object to map `responseDictionary` onto
+     - parameter responseDictionary: The JSON dictionary response to deserialize
+     - parameter modelKeyPath:       optionally, a nested JSON key path at which to originate parsing
+     
+     - throws: An NSError if parsing fails or the mapping class is invalid
+     
+     - returns: A deserialized object of type `ModelType`
+     */
     static func mapObject<ModelType: MappableResponse>(responseDictionary: VimeoClient.ResponseDictionary, modelKeyPath: String? = nil) throws -> ModelType
     {
-        // Deserialize the dictionary into a model object
-        
         guard let mappingClass = ModelType.mappingClass
-            else
+        else
         {
             let description = "no mapping class found"
             
             assertionFailure(description)
             
-            let error = NSError(domain: self.ErrorDomain, code: self.ErrorNoMappingClass, userInfo: [NSLocalizedDescriptionKey: description])
+            let error = NSError(domain: self.ErrorDomain, code: LocalErrorCode.NoMappingClass.rawValue, userInfo: [NSLocalizedDescriptionKey: description])
             
             throw error
         }
@@ -41,13 +48,13 @@ extension VIMObjectMapper
         }
         
         guard let modelObject = mappedObject as? ModelType
-            else
+        else
         {
             let description = "couldn't map to ModelType"
             
             assertionFailure(description)
             
-            let error = NSError(domain: self.ErrorDomain, code: self.ErrorMappingFailed, userInfo: [NSLocalizedDescriptionKey: description])
+            let error = NSError(domain: self.ErrorDomain, code: LocalErrorCode.MappingFailed.rawValue, userInfo: [NSLocalizedDescriptionKey: description])
             
             throw error
         }

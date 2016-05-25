@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		014A1E111CE6241900EC4681 /* VimeoClient+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014A1E101CE6241900EC4681 /* VimeoClient+Shared.swift */; };
 		018B9F9A1C9B34050054650E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B9F991C9B34050054650E /* AppDelegate.swift */; };
 		018B9F9C1C9B34050054650E /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B9F9B1C9B34050054650E /* MasterViewController.swift */; };
 		018B9F9E1C9B34050054650E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B9F9D1C9B34050054650E /* DetailViewController.swift */; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		01043B811CA09E3000E7112E /* VimeoNetworking-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "VimeoNetworking-Bridging-Header.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		014A1E101CE6241900EC4681 /* VimeoClient+Shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VimeoClient+Shared.swift"; sourceTree = "<group>"; };
 		018B9F961C9B34050054650E /* VimeoNetworkingExample-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VimeoNetworkingExample-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		018B9F991C9B34050054650E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		018B9F9B1C9B34050054650E /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				018B9F991C9B34050054650E /* AppDelegate.swift */,
+				014A1E101CE6241900EC4681 /* VimeoClient+Shared.swift */,
 				018B9F9B1C9B34050054650E /* MasterViewController.swift */,
 				018B9F9D1C9B34050054650E /* DetailViewController.swift */,
 				018B9F9F1C9B34050054650E /* Main.storyboard */,
@@ -442,6 +445,7 @@
 			files = (
 				018B9F9E1C9B34050054650E /* DetailViewController.swift in Sources */,
 				018B9F9C1C9B34050054650E /* MasterViewController.swift in Sources */,
+				014A1E111CE6241900EC4681 /* VimeoClient+Shared.swift in Sources */,
 				018B9F9A1C9B34050054650E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
