@@ -89,7 +89,7 @@ final public class VimeoClient
     // MARK: - Authentication
     
         /// Stores the current account, if one exists
-    public internal(set) var currentAccount: VIMAccount?
+    public var currentAccount: VIMAccount?
     {
         didSet
         {
