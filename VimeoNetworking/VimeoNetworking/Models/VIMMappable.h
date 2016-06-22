@@ -1,9 +1,9 @@
 //
-//  VIMVideoFile.h
-//  VIMNetworking
+//  VIMMappable.h
+//  VIMObjectMapper
 //
-//  Created by Kashif Mohammad on 4/13/13.
-//  Copyright (c) 2014-2015 Vimeo (https://vimeo.com)
+//  Created by Kashif Mohammad on 3/25/13.
+//  Copyright (c) 2014-2016 Vimeo (https://vimeo.com)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,29 +24,15 @@
 //  THE SOFTWARE.
 //
 
-#import "VIMModelObject.h"
+@import Foundation;
 
-@class VIMVideoLog;
+@protocol VIMMappable <NSObject>
 
-extern NSString *const __nonnull VIMVideoFileQualityHLS;
-extern NSString *const __nonnull VIMVideoFileQualityHD;
-extern NSString *const __nonnull VIMVideoFileQualitySD;
-extern NSString *const __nonnull VIMVideoFileQualityMobile;
+@optional
 
-@interface VIMVideoFile : VIMModelObject
-
-@property (nonatomic, strong, nullable) NSDate *expirationDate;
-@property (nonatomic, strong, nullable) NSNumber *width;
-@property (nonatomic, strong, nullable) NSNumber *height;
-@property (nonatomic, strong, nullable) NSNumber *size;
-@property (nonatomic, copy, nullable) NSString *link;
-@property (nonatomic, copy, nullable) NSString *quality;
-@property (nonatomic, copy, nullable) NSString *type;
-@property (nonatomic, strong, nullable) VIMVideoLog *log;
-
-- (BOOL)isSupportedMimeType;
-- (BOOL)isDownloadable;
-- (BOOL)isStreamable;
-- (BOOL)isExpired;
+- (id)getObjectMapping;
+- (Class)getClassForCollectionKey:(NSString *)key;
+- (Class)getClassForObjectKey:(NSString *)key;
+- (void)didFinishMapping;
 
 @end
