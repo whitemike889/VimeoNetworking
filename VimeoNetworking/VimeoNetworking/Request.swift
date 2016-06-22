@@ -86,14 +86,43 @@ extension RetryPolicy
  */
 public struct Request<ModelType: MappableResponse>
 {
+    // TODO: Make these static when Swift supports it [RH] (5/24/16)
+    private let PageKey = "page"
+    private let PerPageKey = "per_page"
+    
+    // MARK: -
+    
         /// HTTP method (e.g. `.GET`, `.POST`)
     public let method: VimeoClient.Method
     
         /// request url path (e.g. `/me`, `/videos/123456`)
     public let path: String
     
-        /// any parameters to include with the request
-    public let parameters: VimeoClient.RequestParameters?
+        /// any parameters to include with the request, this is calculated from the raw parameters provided at request initialization plus any specified `page` or `itemsPerPage` values on the request itself
+    public var parameters: VimeoClient.RequestParameters
+    {
+        var parameters = self.additionalParameters
+        
+        if let page = self.page
+        {
+            parameters[self.PageKey] = page
+        }
+        
+        if let itemsPerPage = self.itemsPerPage
+        {
+            parameters[self.PerPageKey] = itemsPerPage
+        }
+        
+        return parameters
+    }
+    
+    private let additionalParameters: VimeoClient.RequestParameters
+    
+        /// for collection requests, the page number to request, nil will specify no page number and fetch the first page, defaults to nil
+    public let page: Int?
+    
+        /// for collection requests, the number of items that should be returned per page, nil uses the api standard of 25, defaults to nil
+    public let itemsPerPage: Int?
     
         /// query a nested JSON key path for the response model object to be returned
     public let modelKeyPath: String?
@@ -114,7 +143,9 @@ public struct Request<ModelType: MappableResponse>
      
      - parameter method:              the HTTP method (e.g. `.GET`, `.POST`), defaults to `.GET`
      - parameter path:                url path for this request
-     - parameter parameters:          any optional parameters for this request, defaults to `nil`
+     - parameter parameters:          any additional parameters for this request, defaults to `nil`
+     - parameter page:                for collection requests, the page number to request, nil will specify no page number and fetch the first page, defaults to nil
+     - parameter itemsPerPage:        for collection requests, the number of items that should be returned per page, nil uses the api standard of 25, defaults to nil
      - parameter modelKeyPath:        optionally query a nested JSON key path for the response model object to be returned, defaults to `nil`
      - parameter cacheFetchPolicy:    describes how this request should query for cached responses, defaults to `.CacheThenNetwork`
      - parameter shouldCacheResponse: whether the response should be stored in cache, defaults to `true`
@@ -125,6 +156,8 @@ public struct Request<ModelType: MappableResponse>
     public init(method: VimeoClient.Method = .GET,
          path: String,
          parameters: VimeoClient.RequestParameters? = nil,
+         page: Int? = nil,
+         itemsPerPage: Int? = nil,
          modelKeyPath: String? = nil,
          cacheFetchPolicy: CacheFetchPolicy? = nil,
          shouldCacheResponse: Bool? = nil,
@@ -132,10 +165,33 @@ public struct Request<ModelType: MappableResponse>
     {
         self.method = method
         self.path = path
-        self.parameters = parameters
+        self.additionalParameters = parameters ?? [:]
+        self.page = page
+        self.itemsPerPage = itemsPerPage
         self.modelKeyPath = modelKeyPath
         self.cacheFetchPolicy = cacheFetchPolicy ?? CacheFetchPolicy.defaultPolicyForMethod(method)
         self.shouldCacheResponse = shouldCacheResponse ?? (method == .GET)
         self.retryPolicy = retryPolicy ?? RetryPolicy.defaultPolicyForMethod(method)
+    }
+    
+    // MARK: Copying requests
+    
+    internal func associatedPageRequest(newPath newPath: String) -> Request<ModelType>
+    {
+        let (path, query) = newPath.splitLinkString()
+        
+        let queryParameters = query?.parametersFromQueryString()
+        let page = Int((queryParameters?[self.PageKey]) ?? "")
+        let itemsPerPage = Int((queryParameters?[self.PerPageKey]) ?? "")
+        
+        return Request(method: self.method,
+                       path: path,
+                       parameters: self.additionalParameters,
+                       page: page,
+                       itemsPerPage: itemsPerPage,
+                       modelKeyPath: self.modelKeyPath,
+                       cacheFetchPolicy: self.cacheFetchPolicy,
+                       shouldCacheResponse: self.shouldCacheResponse,
+                       retryPolicy: self.retryPolicy)
     }
 }

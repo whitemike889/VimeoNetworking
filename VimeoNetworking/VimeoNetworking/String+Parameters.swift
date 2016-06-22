@@ -41,4 +41,23 @@ public extension String
         
         return parameters.count > 0 ? parameters : nil
     }
+    
+    /**
+     Splits a link string into a path and a query
+     
+     - returns: a tuple containing: the path with any query string removed, and the query string if found
+     */
+    func splitLinkString() -> (path: String, query: String?)
+    {
+        let components = self.componentsSeparatedByString("?")
+        
+        if components.count == 2
+        {
+            return (path: components[0], query: components[1])
+        }
+        else
+        {
+            return (path: self, query: nil)
+        }
+    }
 }

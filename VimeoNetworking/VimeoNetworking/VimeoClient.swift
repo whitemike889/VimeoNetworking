@@ -62,6 +62,17 @@ final public class VimeoClient
     
     // MARK: -
     
+    private static let PagingKey = "paging"
+    private static let TotalKey = "total"
+    private static let PageKey = "page"
+    private static let PerPageKey = "per_page"
+    private static let NextKey = "next"
+    private static let PreviousKey = "previous"
+    private static let FirstKey = "first"
+    private static let LastKey = "last"
+    
+    // MARK: -
+    
         /// Session manager handles the http session data tasks and request/response serialization
     private let sessionManager: VimeoSessionManager
     
@@ -301,6 +312,54 @@ final public class VimeoClient
         {
             let modelObject: ModelType = try VIMObjectMapper.mapObject(responseDictionary, modelKeyPath: request.modelKeyPath)
             
+            var response: Response<ModelType>
+            
+            if let pagingDictionary = responseDictionary[self.dynamicType.PagingKey] as? ResponseDictionary
+            {
+                let totalCount = responseDictionary[self.dynamicType.TotalKey]?.longValue
+                let currentPage = responseDictionary[self.dynamicType.PageKey]?.longValue
+                let itemsPerPage = responseDictionary[self.dynamicType.PerPageKey]?.longValue
+                
+                var nextPageRequest: Request<ModelType>? = nil
+                var previousPageRequest: Request<ModelType>? = nil
+                var firstPageRequest: Request<ModelType>? = nil
+                var lastPageRequest: Request<ModelType>? = nil
+                
+                if let nextPageLink = pagingDictionary[self.dynamicType.NextKey] as? String
+                {
+                    nextPageRequest = request.associatedPageRequest(newPath: nextPageLink)
+                }
+                
+                if let previousPageLink = pagingDictionary[self.dynamicType.PreviousKey] as? String
+                {
+                    previousPageRequest = request.associatedPageRequest(newPath: previousPageLink)
+                }
+                
+                if let firstPageLink = pagingDictionary[self.dynamicType.FirstKey] as? String
+                {
+                    firstPageRequest = request.associatedPageRequest(newPath: firstPageLink)
+                }
+                
+                if let lastPageLink = pagingDictionary[self.dynamicType.LastKey] as? String
+                {
+                    lastPageRequest = request.associatedPageRequest(newPath: lastPageLink)
+                }
+                
+                response = Response<ModelType>(model: modelObject,
+                                               json: responseDictionary,
+                                               totalCount: totalCount,
+                                               page: currentPage,
+                                               itemsPerPage: itemsPerPage,
+                                               nextPageRequest: nextPageRequest,
+                                               previousPageRequest: previousPageRequest,
+                                               firstPageRequest: firstPageRequest,
+                                               lastPageRequest: lastPageRequest)
+            }
+            else
+            {
+                response = Response<ModelType>(model: modelObject, json: responseDictionary)
+            }
+            
             // To avoid a poisoned cache, explicitly wait until model object parsing is successful to store responseDictionary [RH]
             if request.shouldCacheResponse
             {
@@ -309,7 +368,7 @@ final public class VimeoClient
             
             dispatch_async(completionQueue)
             {
-                completion(result: .Success(result: Response<ModelType>(model: modelObject, json: responseDictionary)))
+                completion(result: .Success(result: response))
             }
         }
         catch let error
