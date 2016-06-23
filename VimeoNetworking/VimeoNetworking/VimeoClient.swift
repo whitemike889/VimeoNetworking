@@ -75,10 +75,15 @@ final public class VimeoClient
      
      - returns: an initialized `VimeoClient`
      */
-    public init(appConfiguration: AppConfiguration)
+    convenience public init(appConfiguration: AppConfiguration)
+    {
+        self.init(appConfiguration: appConfiguration, sessionManager: VimeoSessionManager.defaultSessionManager(appConfiguration: appConfiguration))
+    }
+    
+    public init(appConfiguration: AppConfiguration, sessionManager: VimeoSessionManager)
     {
         self.configuration = appConfiguration
-        self.sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: appConfiguration)
+        self.sessionManager = sessionManager
     }
     
     // MARK: - Configuration
@@ -89,7 +94,7 @@ final public class VimeoClient
     // MARK: - Authentication
     
         /// Stores the current account, if one exists
-    public var currentAccount: VIMAccount?
+    public internal(set) var currentAccount: VIMAccount?
     {
         didSet
         {
