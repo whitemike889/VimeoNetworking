@@ -86,10 +86,15 @@ final public class VimeoClient
      
      - returns: an initialized `VimeoClient`
      */
-    public init(appConfiguration: AppConfiguration)
+    convenience public init(appConfiguration: AppConfiguration)
+    {
+        self.init(appConfiguration: appConfiguration, sessionManager: VimeoSessionManager.defaultSessionManager(appConfiguration: appConfiguration))
+    }
+    
+    public init(appConfiguration: AppConfiguration, sessionManager: VimeoSessionManager)
     {
         self.configuration = appConfiguration
-        self.sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: appConfiguration)
+        self.sessionManager = sessionManager
     }
     
     // MARK: - Configuration

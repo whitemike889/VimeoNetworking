@@ -227,6 +227,21 @@ final public class AuthenticationController
         self.authenticate(request: request, completion: completion)
     }
     
+    /**
+     Execute a constant token grant request. This type of authentication allows access to public and personnal content on Vimeo. Constant token are usually generated for API apps see https://developer.vimeo.com/apps
+     
+     - parameter token: a constant token generated for your api's app
+     - parameter completion: handles authentication success or failure
+     */
+    public func accessToken(token: String, completion: AuthenticationCompletion)
+    {
+        let customSessionManager =  VimeoSessionManager.defaultSessionManager(accessTokenProvider: {token})
+        let adhocClient = VimeoClient(appConfiguration: self.configuration, sessionManager: customSessionManager)
+        let request = AuthenticationRequest.verifyAccessTokenRequest()
+
+        self.authenticate(adhocClient, request: request, completion: completion)
+    }
+    
     // MARK: - Private Authentication
     
     /**
@@ -455,13 +470,19 @@ final public class AuthenticationController
     
     private func authenticate(request request: AuthenticationRequest, completion: AuthenticationCompletion)
     {
-        self.authenticatorClient.request(request) { result in
+        self.authenticate(self.authenticatorClient, request: request, completion: completion)
+    }
+    
+    private func authenticate(client: VimeoClient, request request: AuthenticationRequest, completion: AuthenticationCompletion)
+    {
+        client.request(request) { result in
             
             let handledResult = self.handleAuthenticationResult(result)
             
             completion(result: handledResult)
         }
     }
+    
     
     private func handleAuthenticationResult(result: Result<Response<VIMAccount>>) -> Result<VIMAccount>
     {

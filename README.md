@@ -101,6 +101,23 @@ func application(app: UIApplication, openURL url: NSURL, options: [String : AnyO
     }
 ```
 
+### Lightweight Use
+
+If you want to use your own OAuth token, for example a contant token generated for your [API's application](https://developer.vimeo.com/apps), you can circumvent code grant authorization mechanisms and use the ```accessToken``` function of ```AuthenticationController```.
+
+```Swift
+let authenticationController = AuthenticationController(client: vimeoClient)
+authenticationController.accessToken("your_access_tocken") { result in
+    switch result
+    {
+        case .Success(let account):
+            print("authenticated successfully: \(account)")
+        case .Failure(let error):
+           print("failure authenticating: \(error)")
+    }
+}
+```
+
 ### Saved Accounts
 
 `AuthenticationController` saves the accounts it successfully authenticates in the Keychain.  The next time your application launches, you should first attempt to load a previously authenticated account before prompting the user to authenticate.
