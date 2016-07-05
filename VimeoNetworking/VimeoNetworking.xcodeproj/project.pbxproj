@@ -514,12 +514,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 01B5C8781CC826D800694F4A /* Build configuration list for PBXNativeTarget "VimeoNetworking" */;
 			buildPhases = (
-				9BAF027AEFF249724BEB30E5 /* Check Pods Manifest.lock */,
+				9BAF027AEFF249724BEB30E5 /* [CP] Check Pods Manifest.lock */,
 				01B5C85F1CC826D800694F4A /* Sources */,
 				01B5C8601CC826D800694F4A /* Frameworks */,
 				01B5C8611CC826D800694F4A /* Headers */,
 				01B5C8621CC826D800694F4A /* Resources */,
-				8CD5A884E73963056273598C /* Copy Pods Resources */,
+				8CD5A884E73963056273598C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -603,14 +603,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		8CD5A884E73963056273598C /* Copy Pods Resources */ = {
+		8CD5A884E73963056273598C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -618,14 +618,14 @@
 			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-VimeoNetworking/Pods-VimeoNetworking-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9BAF027AEFF249724BEB30E5 /* Check Pods Manifest.lock */ = {
+		9BAF027AEFF249724BEB30E5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
