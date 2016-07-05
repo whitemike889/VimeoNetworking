@@ -247,11 +247,8 @@ public extension NSError
         }
         
         for errorJSON in invalidParameters {
-            if let errorCode = errorJSON[self.dynamicType.VimeoErrorCodeKey] as? String {
-                
-                if let errorCodeInt = Int(errorCode) {
-                    errorCodes.append(errorCodeInt)
-                }
+            if let errorCode = errorJSON[self.dynamicType.VimeoErrorCodeKey] as? Int {
+                errorCodes.append(errorCode)
             }
         }
         
@@ -262,6 +259,17 @@ public extension NSError
     public var vimeoInvalidParametersFirstErrorCode: Int
     {
         return self.vimeoInvalidParametersErrorCodes.first ?? NSNotFound
+    }
+    
+    public var vimeoInvalidParametersFirstVimeoUserMessage: String? {
+        
+        guard let json = self.errorResponseBodyJSON,
+            invalidParameters = json[self.dynamicType.VimeoInvalidParametersKey] as? NSArray else {
+            return nil
+        }
+        
+        let errorJSON = invalidParameters.firstObject
+        return errorJSON?[self.dynamicType.VimeoUserMessageKey] as? String
     }
     
         /// Returns an underscore separated string of all the error codes in the the api error JSON dictionary if any exist, otherwise returns nil
