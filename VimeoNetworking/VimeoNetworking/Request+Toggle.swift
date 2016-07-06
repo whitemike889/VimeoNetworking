@@ -21,8 +21,8 @@ public extension Request
      
      - returns: a new `Request`
      */
-    public static func toggle(URI URI: String, newValue: Bool) -> Request
+    public static func toggle(uri uri: String, newValue: Bool) -> Request
     {
-        return Request(method: newValue ? .PUT : .DELETE, path: URI)
+        return Request(method: newValue ? .PUT : .DELETE, path: uri)
     }
 }
