@@ -199,9 +199,9 @@ public extension NSError
         
         if let response = self.userInfo[AFNetworkingOperationFailingURLResponseErrorKey],
             let headers = response.allHeaderFields,
-            let vimeoErrorCode = (headers[self.dynamicType.VimeoErrorCodeHeaderKey] as? NSNumber)?.integerValue
+            let vimeoErrorCode = headers[self.dynamicType.VimeoErrorCodeHeaderKey] as? String
         {
-            return vimeoErrorCode
+            return Int(vimeoErrorCode)
         }
         
         if let json = self.errorResponseBodyJSON,
