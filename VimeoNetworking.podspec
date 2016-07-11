@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   s.source = { :git => "https://github.com/vimeo/VimeoNetworking", :tag => s.version.to_s }
 
   s.source_files  = "VimeoNetworking/VimeoNetworking/*.{h,m,swift,cer}"
-  # s.exclude_files = "VimeoNetworking/VimeoNetworking/VimeoNetworking.h"
+  s.exclude_files = "VimeoNetworking/VimeoNetworking/VimeoNetworking.h"
 
   s.frameworks = ["Foundation"]
 
