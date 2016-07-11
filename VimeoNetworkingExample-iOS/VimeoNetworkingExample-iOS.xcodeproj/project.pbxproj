@@ -187,12 +187,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 018B9FC01C9B34050054650E /* Build configuration list for PBXNativeTarget "VimeoNetworkingExample-iOS" */;
 			buildPhases = (
-				13C1F651C572424FF37A05C8 /* Check Pods Manifest.lock */,
+				13C1F651C572424FF37A05C8 /* [CP] Check Pods Manifest.lock */,
 				018B9F921C9B34050054650E /* Sources */,
 				018B9F931C9B34050054650E /* Frameworks */,
 				018B9F941C9B34050054650E /* Resources */,
-				CA6E2119DFC5EFCAF0C431FA /* Embed Pods Frameworks */,
-				C3C638DB439B296F24C0C11D /* Copy Pods Resources */,
+				CA6E2119DFC5EFCAF0C431FA /* [CP] Embed Pods Frameworks */,
+				C3C638DB439B296F24C0C11D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -207,12 +207,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 018B9FC31C9B34050054650E /* Build configuration list for PBXNativeTarget "VimeoNetworkingExample-iOSTests" */;
 			buildPhases = (
-				A6FE6BD20258845A82DA36E1 /* Check Pods Manifest.lock */,
+				A6FE6BD20258845A82DA36E1 /* [CP] Check Pods Manifest.lock */,
 				018B9FA81C9B34050054650E /* Sources */,
 				018B9FA91C9B34050054650E /* Frameworks */,
 				018B9FAA1C9B34050054650E /* Resources */,
-				173AE94535CA59D7E231FAF0 /* Embed Pods Frameworks */,
-				08221E46F165CE439ED37F5E /* Copy Pods Resources */,
+				173AE94535CA59D7E231FAF0 /* [CP] Embed Pods Frameworks */,
+				08221E46F165CE439ED37F5E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -228,11 +228,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 018B9FC61C9B34050054650E /* Build configuration list for PBXNativeTarget "VimeoNetworkingExample-iOSUITests" */;
 			buildPhases = (
-				DC7C7B0F08A816A819896461 /* Check Pods Manifest.lock */,
+				DC7C7B0F08A816A819896461 /* [CP] Check Pods Manifest.lock */,
 				018B9FB31C9B34050054650E /* Sources */,
 				018B9FB41C9B34050054650E /* Frameworks */,
 				018B9FB51C9B34050054650E /* Resources */,
-				A328E6A320595DD557DD3A62 /* Copy Pods Resources */,
+				A328E6A320595DD557DD3A62 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -316,14 +316,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		08221E46F165CE439ED37F5E /* Copy Pods Resources */ = {
+		08221E46F165CE439ED37F5E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -331,14 +331,14 @@
 			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-VimeoNetworkingExample-iOSTests/Pods-VimeoNetworkingExample-iOSTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		13C1F651C572424FF37A05C8 /* Check Pods Manifest.lock */ = {
+		13C1F651C572424FF37A05C8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -346,14 +346,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		173AE94535CA59D7E231FAF0 /* Embed Pods Frameworks */ = {
+		173AE94535CA59D7E231FAF0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -361,14 +361,14 @@
 			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-VimeoNetworkingExample-iOSTests/Pods-VimeoNetworkingExample-iOSTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A328E6A320595DD557DD3A62 /* Copy Pods Resources */ = {
+		A328E6A320595DD557DD3A62 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -376,14 +376,14 @@
 			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-VimeoNetworkingExample-iOSUITests/Pods-VimeoNetworkingExample-iOSUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A6FE6BD20258845A82DA36E1 /* Check Pods Manifest.lock */ = {
+		A6FE6BD20258845A82DA36E1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -391,14 +391,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		C3C638DB439B296F24C0C11D /* Copy Pods Resources */ = {
+		C3C638DB439B296F24C0C11D /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -406,14 +406,14 @@
 			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-VimeoNetworkingExample-iOS/Pods-VimeoNetworkingExample-iOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CA6E2119DFC5EFCAF0C431FA /* Embed Pods Frameworks */ = {
+		CA6E2119DFC5EFCAF0C431FA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -421,14 +421,14 @@
 			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-VimeoNetworkingExample-iOS/Pods-VimeoNetworkingExample-iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DC7C7B0F08A816A819896461 /* Check Pods Manifest.lock */ = {
+		DC7C7B0F08A816A819896461 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
