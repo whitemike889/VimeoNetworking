@@ -15,6 +15,8 @@ private let DefaultModelKeyPath = "data"
  */
 public protocol MappableResponse
 {
+    associatedtype Element
+    
         /// Returns the class type used by `VIMObjectMapper` to deserialize the response
     static var mappingClass: AnyClass? { get }
     
@@ -22,6 +24,8 @@ public protocol MappableResponse
     static var modelKeyPath: String? { get }
     
     func validateModel() throws
+    
+    func arrayValue() -> [Element]
 }
 
 /**
@@ -29,6 +33,8 @@ public protocol MappableResponse
  */
 extension VIMModelObject: MappableResponse
 {
+    public typealias Element = VIMModelObject
+    
     public static var mappingClass: AnyClass?
     {
         return self
@@ -49,6 +55,11 @@ extension VIMModelObject: MappableResponse
         {
             throw error
         }
+    }
+    
+    public func arrayValue() -> [Element]
+    {
+        return [self]
     }
 }
 
@@ -105,6 +116,11 @@ extension Array: MappableResponse
             }
         }
     }
+    
+    public func arrayValue() -> [Element]
+    {
+        return self
+    }
 }
 
 /**
@@ -112,6 +128,8 @@ extension Array: MappableResponse
  */
 public class VIMNullResponse: MappableResponse
 {
+    public typealias Element = VIMNullResponse
+    
     public static var mappingClass: AnyClass?
     {
         return self
@@ -125,5 +143,10 @@ public class VIMNullResponse: MappableResponse
     public func validateModel() throws
     {
         // NO-OP: a null response object is always valid
+    }
+    
+    public func arrayValue() -> [Element]
+    {
+        return [self]
     }
 }
