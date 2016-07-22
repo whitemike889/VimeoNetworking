@@ -279,7 +279,12 @@ final public class VimeoClient
         return RequestToken(task: requestTask)
     }
     
-    public func removeCachedResponse<ModelType: MappableResponse>(request request: Request<ModelType>)
+    /**
+     Removes any cached responses for a given `Request`
+     
+     - parameter request: the `Request` for which to remove all cached responses
+     */
+    public func removeCachedResponse<ModelType: MappableResponse>(for request: Request<ModelType>)
     {
         self.responseCache.removeResponseForRequest(request)
     }
