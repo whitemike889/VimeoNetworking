@@ -15,17 +15,21 @@ private let DefaultModelKeyPath = "data"
  */
 public protocol MappableResponse
 {
+    /// The base class of the mapped response, used for restricting generic parameters to the base model class
     associatedtype Element
     
-        /// Returns the class type used by `VIMObjectMapper` to deserialize the response
+    /// Returns the class type used by `VIMObjectMapper` to deserialize the response
     static var mappingClass: AnyClass? { get }
     
-        /// Optionally returns a nested JSON key to reference for mapping
+    /// Optionally returns a nested JSON key to reference for mapping
     static var modelKeyPath: String? { get }
     
+    /**
+     Implemented by model objects to ensure that their own values are valid for use, called as a step in model object parsing, parsing will fail if this throws an error
+     
+     - throws: An error if a model object's values are somehow invalid.
+     */
     func validateModel() throws
-    
-    func arrayValue() -> [Element]
 }
 
 /**
@@ -55,11 +59,6 @@ extension VIMModelObject: MappableResponse
         {
             throw error
         }
-    }
-    
-    public func arrayValue() -> [Element]
-    {
-        return [self]
     }
 }
 
@@ -116,11 +115,6 @@ extension Array: MappableResponse
             }
         }
     }
-    
-    public func arrayValue() -> [Element]
-    {
-        return self
-    }
 }
 
 /**
@@ -143,10 +137,5 @@ public class VIMNullResponse: MappableResponse
     public func validateModel() throws
     {
         // NO-OP: a null response object is always valid
-    }
-    
-    public func arrayValue() -> [Element]
-    {
-        return [self]
     }
 }
