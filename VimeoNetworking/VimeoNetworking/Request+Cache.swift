@@ -13,10 +13,16 @@ public extension Request
         /// Generates a unique cache key for a request, taking into account endpoint and parameters
     var cacheKey: String
     {
-        var cacheKey = self.path
+        var cacheKey = "cached" + self.path
         
         for (key, value) in self.parameters
         {
+            if key == "fields"
+            {
+                // avoiding the field filtering key due to excessive length
+                continue
+            }
+            
             cacheKey += key
             cacheKey += value.description
         }
