@@ -26,31 +26,18 @@ final internal class ResponseCache
     }
     
     /**
-     Attempts to retrieve a response for a request
+     Attempts to retrieve a response dictionary for a request
      
      - parameter request:    the request for which the cache should be queried
-     - parameter completion: returns `.Success(Response)`, if found in cache, or `.Success(nil)` for a cache miss.  Returns `.Failure(NSError)` if an error occurred.
+     - parameter completion: returns `.Success(ResponseDictionary)`, if found in cache, or `.Success(nil)` for a cache miss.  Returns `.Failure(NSError)` if an error occurred.
      */
-    func responseForRequest<ModelType>(request: Request<ModelType>, completion: ResultCompletion<Response<ModelType>?>.T)
+    func responseForRequest<ModelType>(request: Request<ModelType>, completion: ResultCompletion<VimeoClient.ResponseDictionary?>.T)
     {
         let key = request.cacheKey
         
         if let responseDictionary = self.memoryCache.responseDictionaryForKey(key)
         {
-            do
-            {
-                let modelObject: ModelType = try VIMObjectMapper.mapObject(responseDictionary, modelKeyPath: request.modelKeyPath)
-                let response = Response(model: modelObject, json: responseDictionary, isCachedResponse: true, isFinalResponse: request.cacheFetchPolicy == .CacheOnly)
-                
-                completion(result: .Success(result: response))
-            }
-            catch let error
-            {
-                self.memoryCache.removeResponseDictionaryForKey(key)
-                self.diskCache.removeResponseDictionaryForKey(key)
-                
-                completion(result: .Failure(error: error as NSError))
-            }
+            completion(result: .Success(result: responseDictionary))
         }
         else
         {
@@ -58,19 +45,7 @@ final internal class ResponseCache
                 
                 if let responseDictionary = responseDictionary
                 {
-                    do
-                    {
-                        let modelObject: ModelType = try VIMObjectMapper.mapObject(responseDictionary, modelKeyPath: request.modelKeyPath)
-                        let response = Response(model: modelObject, json: responseDictionary, isCachedResponse: true, isFinalResponse: request.cacheFetchPolicy == .CacheOnly)
-                        
-                        completion(result: .Success(result: response))
-                    }
-                    catch let error
-                    {
-                        self.diskCache.removeResponseDictionaryForKey(key)
-                        
-                        completion(result: .Failure(error: error as NSError))
-                    }
+                    completion(result: .Success(result: responseDictionary))
                 }
                 else
                 {
