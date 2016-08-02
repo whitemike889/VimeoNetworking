@@ -176,14 +176,11 @@ final public class VimeoClient
                 
                 switch result
                 {
-                case .Success(let response):
+                case .Success(let responseDictionary):
                     
-                    if let response = response
+                    if let responseDictionary = responseDictionary
                     {
-                        dispatch_async(completionQueue)
-                        {
-                            completion(result: .Success(result: response))
-                        }
+                        self.handleTaskSuccess(request: request, task: nil, responseObject: responseDictionary, isCachedResponse: true, isFinalResponse: request.cacheFetchPolicy == .CacheOnly, completionQueue: completionQueue, completion: completion)
                     }
                     else if request.cacheFetchPolicy == .CacheOnly
                     {
@@ -291,7 +288,7 @@ final public class VimeoClient
     
     // MARK: - Private task completion handlers
     
-    private func handleTaskSuccess<ModelType: MappableResponse>(request request: Request<ModelType>, task: NSURLSessionDataTask, responseObject: AnyObject?, completionQueue: dispatch_queue_t, completion: ResultCompletion<Response<ModelType>>.T)
+    private func handleTaskSuccess<ModelType: MappableResponse>(request request: Request<ModelType>, task: NSURLSessionDataTask?, responseObject: AnyObject?, isCachedResponse: Bool = false, isFinalResponse: Bool = true, completionQueue: dispatch_queue_t, completion: ResultCompletion<Response<ModelType>>.T)
     {
         guard let responseDictionary = responseObject as? ResponseDictionary
         else
@@ -362,6 +359,8 @@ final public class VimeoClient
                 
                 response = Response<ModelType>(model: modelObject,
                                                json: responseDictionary,
+                                               isCachedResponse: isCachedResponse,
+                                               isFinalResponse: isFinalResponse,
                                                totalCount: totalCount,
                                                page: currentPage,
                                                itemsPerPage: itemsPerPage,
@@ -372,7 +371,7 @@ final public class VimeoClient
             }
             else
             {
-                response = Response<ModelType>(model: modelObject, json: responseDictionary)
+                response = Response<ModelType>(model: modelObject, json: responseDictionary, isCachedResponse: isCachedResponse, isFinalResponse: isFinalResponse)
             }
             
             // To avoid a poisoned cache, explicitly wait until model object parsing is successful to store responseDictionary [RH]
@@ -388,6 +387,8 @@ final public class VimeoClient
         }
         catch let error
         {
+            self.responseCache.removeResponseForRequest(request)
+            
             self.handleTaskFailure(request: request, task: task, error: error as? NSError, completionQueue: completionQueue, completion: completion)
         }
     }
