@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AFNetworking
 
 /// Describes how a request should query the cache
 public enum CacheFetchPolicy
@@ -164,31 +165,69 @@ public struct Request<ModelType: MappableResponse>
          retryPolicy: RetryPolicy? = nil)
     {
         self.method = method
+        
+        let (path, query) = path.splitLinkString()
         self.path = path
-        self.additionalParameters = parameters ?? [:]
-        self.page = page
-        self.itemsPerPage = itemsPerPage
+        
+        if let query = query,
+            let queryParameters = query.parametersFromQueryString()
+        {
+            var page = page
+            if let pageValue = queryParameters[self.PageKey]
+            {
+                page = page ?? Int(pageValue)
+            }
+            self.page = page
+            
+            var itemsPerPage = itemsPerPage
+            if let itemsPerPageValue = queryParameters[self.PerPageKey]
+            {
+                itemsPerPage = itemsPerPage ?? Int(itemsPerPageValue)
+            }
+            self.itemsPerPage = itemsPerPage
+            
+            var additionalParameters: VimeoClient.RequestParameters = queryParameters
+            parameters?.forEach { (key, object) in
+                additionalParameters[key] = object
+            }
+            self.additionalParameters = additionalParameters
+        }
+        else
+        {
+            self.additionalParameters = parameters ?? [:]
+            self.page = page
+            self.itemsPerPage = itemsPerPage
+        }
+        
         self.modelKeyPath = modelKeyPath
         self.cacheFetchPolicy = cacheFetchPolicy ?? CacheFetchPolicy.defaultPolicyForMethod(method)
         self.shouldCacheResponse = shouldCacheResponse ?? (method == .GET)
         self.retryPolicy = retryPolicy ?? RetryPolicy.defaultPolicyForMethod(method)
     }
     
+        /// Returns a fully-formed URI comprised of the path plus a query string of any parameters
+    public var URI: String
+    {
+        var URI = self.path
+        
+        let queryString = AFQueryStringFromParameters(self.parameters)
+        if queryString.characters.count > 0
+        {
+            URI += "?" + queryString
+        }
+        
+        return URI
+    }
+    
     // MARK: Copying requests
     
     internal func associatedPageRequest(newPath newPath: String) -> Request<ModelType>
     {
-        let (path, query) = newPath.splitLinkString()
-        
-        let queryParameters = query?.parametersFromQueryString()
-        let page = Int((queryParameters?[self.PageKey]) ?? "")
-        let itemsPerPage = Int((queryParameters?[self.PerPageKey]) ?? "")
-        
         return Request(method: self.method,
-                       path: path,
+                       path: newPath,
                        parameters: self.additionalParameters,
-                       page: page,
-                       itemsPerPage: itemsPerPage,
+                       page: nil,
+                       itemsPerPage: nil,
                        modelKeyPath: self.modelKeyPath,
                        cacheFetchPolicy: self.cacheFetchPolicy,
                        shouldCacheResponse: self.shouldCacheResponse,
