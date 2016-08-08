@@ -186,8 +186,8 @@ public struct Request<ModelType: MappableResponse>
             }
             self.itemsPerPage = itemsPerPage
             
-            var additionalParameters: VimeoClient.RequestParameters = queryParameters
-            parameters?.forEach { (key, object) in
+            var additionalParameters = parameters ?? [:]
+            queryParameters.forEach { (key, object) in
                 additionalParameters[key] = object
             }
             self.additionalParameters = additionalParameters
