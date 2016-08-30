@@ -1,9 +1,9 @@
 //
-//  VIMVideoLog.h
-//  VIMNetworking
+//  VIMVideoPlayFile.h
+//  Vimeo
 //
-//  Created by Hanssen, Alfie on 11/19/14.
-//  Copyright (c) 2014-2015 Vimeo (https://vimeo.com)
+//  Created by Lehrer, Nicole on 5/12/16.
+//  Copyright © 2016 Vimeo. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,14 +24,18 @@
 //  THE SOFTWARE.
 //
 
+@import Foundation;
+
 #import "VIMModelObject.h"
 
-@interface VIMVideoLog : VIMModelObject
+@class VIMVideoLog;
 
-@property (nonatomic, copy, readonly, nullable) NSString *playURLString;
-@property (nonatomic, copy, readonly, nullable) NSString *loadURLString;
-@property (nonatomic, copy, readonly, nullable) NSString *exitURLString;
-@property (nonatomic, copy, readonly, nullable) NSString *likeURLString;
-@property (nonatomic, copy, readonly, nullable) NSString *watchLaterURLString;
+@interface VIMVideoPlayFile : VIMModelObject
+
+@property (nonatomic, copy, nullable) NSString *link;
+@property (nonatomic, strong, nullable) VIMVideoLog *log;
+@property (nonatomic, strong, nullable) NSDate *expirationDate;
+
+- (BOOL)isExpired;
 
 @end

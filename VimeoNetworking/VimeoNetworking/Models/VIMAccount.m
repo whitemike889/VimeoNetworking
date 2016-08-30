@@ -27,9 +27,6 @@
 #import "VIMAccount.h"
 #import "VIMUser.h"
 
-static NSString *BearerKey = @"bearer";
-static NSString *UserKey = @"user";
-
 @interface VIMAccount () <NSCoding, NSSecureCoding>
 
 @end
@@ -40,7 +37,7 @@ static NSString *UserKey = @"user";
 
 - (BOOL)isAuthenticated
 {
-    return [self.accessToken length] > 0 && [[self.tokenType lowercaseString] isEqualToString:BearerKey];
+    return [self.accessToken length] > 0 && [[self.tokenType lowercaseString] isEqualToString:@"bearer"];
 }
 
 - (BOOL)isAuthenticatedWithUser
@@ -57,7 +54,7 @@ static NSString *UserKey = @"user";
 
 - (Class)getClassForObjectKey:(NSString *)key
 {
-    if ([key isEqualToString:UserKey])
+    if ([key isEqualToString:@"user"])
     {
         return [VIMUser class];
     }
@@ -79,10 +76,10 @@ static NSString *UserKey = @"user";
     self = [super init];
     if(self)
     {
-        self.accessToken = [aDecoder decodeObjectOfClass:[NSString class] forKey:NSStringFromSelector(@selector(accessToken))];
-        self.tokenType = [aDecoder decodeObjectOfClass:[NSString class] forKey:NSStringFromSelector(@selector(tokenType))];
-        self.scope = [aDecoder decodeObjectOfClass:[NSString class] forKey:NSStringFromSelector(@selector(scope))];
-        self.userJSON = [aDecoder decodeObjectOfClass:[NSDictionary class] forKey:NSStringFromSelector(@selector(userJSON))];
+        self.accessToken = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"accessToken"];
+        self.tokenType = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"tokenType"];
+        self.scope = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"scope"];
+        self.userJSON = [aDecoder decodeObjectOfClass:[NSDictionary class] forKey:@"userJSON"];
         
         // Intentionally not persisting the VIMUser object [AH]
         // Intentionally not persisting the fact that a token is invalid, the next request will just re-set the flag [AH]
@@ -94,9 +91,9 @@ static NSString *UserKey = @"user";
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
     [aCoder encodeObject:self.accessToken forKey:NSStringFromSelector(@selector(accessToken))];
-    [aCoder encodeObject:self.tokenType forKey:NSStringFromSelector(@selector(tokenType))];
-    [aCoder encodeObject:self.scope forKey:NSStringFromSelector(@selector(scope))];
-    [aCoder encodeObject:self.userJSON forKey:NSStringFromSelector(@selector(userJSON))];
+    [aCoder encodeObject:self.tokenType forKey:@"tokenType"];
+    [aCoder encodeObject:self.scope forKey:@"scope"];
+    [aCoder encodeObject:self.userJSON forKey:@"userJSON"];
 
     // Intentionally not persisting the VIMUser object [AH]
     // Intentionally not persisting the fact that a token is invalid, the next request will just re-set the flag [AH]

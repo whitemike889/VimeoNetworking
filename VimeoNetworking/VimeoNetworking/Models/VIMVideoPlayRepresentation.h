@@ -1,9 +1,9 @@
 //
-//  VIMVideoLog.h
-//  VIMNetworking
+//  VIMVideoPlayRepresentation.h
+//  Vimeo
 //
-//  Created by Hanssen, Alfie on 11/19/14.
-//  Copyright (c) 2014-2015 Vimeo (https://vimeo.com)
+//  Created by Lehrer, Nicole on 5/11/16.
+//  Copyright © 2016 Vimeo. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,12 +26,24 @@
 
 #import "VIMModelObject.h"
 
-@interface VIMVideoLog : VIMModelObject
+@class VIMVideoHLSFile;
+@class VIMVideoDASHFile;
+@class VIMVideoDRMFiles;
+@class VIMVideoProgressiveFile;
 
-@property (nonatomic, copy, readonly, nullable) NSString *playURLString;
-@property (nonatomic, copy, readonly, nullable) NSString *loadURLString;
-@property (nonatomic, copy, readonly, nullable) NSString *exitURLString;
-@property (nonatomic, copy, readonly, nullable) NSString *likeURLString;
-@property (nonatomic, copy, readonly, nullable) NSString *watchLaterURLString;
+typedef NS_ENUM(NSUInteger, VIMVideoPlayabilityStatus) {
+    VIMVideoPlayabilityStatusUnavailable,           // Not finished transcoding
+    VIMVideoPlayabilityStatusPlayable,              // Can be played
+    VIMVideoPlayabilityStatusPurchaseRequired,      // On demand video that is not purchased
+    VIMVideoPlayabilityStatusRestricted             // User's region cannot play or purchase
+};
+
+@interface VIMVideoPlayRepresentation : VIMModelObject
+
+@property (nonatomic, strong, nullable) VIMVideoHLSFile *hlsFile;
+@property (nonatomic, strong, nullable) VIMVideoDASHFile *dashFile;
+@property (nonatomic, strong, nullable) VIMVideoDRMFiles *drmFiles;
+@property (nonatomic, strong, nullable) NSArray<VIMVideoProgressiveFile *> *progressiveFiles;
+@property (nonatomic, assign) VIMVideoPlayabilityStatus playabilityStatus;
 
 @end
