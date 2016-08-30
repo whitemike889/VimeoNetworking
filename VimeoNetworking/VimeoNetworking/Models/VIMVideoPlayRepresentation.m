@@ -43,6 +43,7 @@
 #pragma mark - VIMMappable
 
 - (void)didFinishMapping
+{
     [self setPlayabilityStatus];
 }
 
