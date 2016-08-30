@@ -30,8 +30,8 @@
 
 static NSUInteger const VIMModelObjectVersion = 3;
 
-const NSString *VIMModelObjectErrorDomain = @"VIMModelObjectErrorDomain";
-extern NSInteger const VIMModelObjectValidationErrorCode = 10101;
+NSString *const VIMModelObjectErrorDomain = @"VIMModelObjectErrorDomain";
+NSInteger const VIMModelObjectValidationErrorCode = 10101;
 
 @implementation VIMModelObject
 
