@@ -286,6 +286,14 @@ final public class VimeoClient
         self.responseCache.removeResponseForRequest(request)
     }
     
+    /**
+     Clears a client's cache of all stored responses
+     */
+    public func removeAllCachedResponses()
+    {
+        self.responseCache.clear()
+    }
+    
     // MARK: - Private task completion handlers
     
     private func handleTaskSuccess<ModelType: MappableResponse>(request request: Request<ModelType>, task: NSURLSessionDataTask?, responseObject: AnyObject?, isCachedResponse: Bool = false, isFinalResponse: Bool = true, completionQueue: dispatch_queue_t, completion: ResultCompletion<Response<ModelType>>.T)
