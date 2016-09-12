@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "VimeoNetworking"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "Library for interacting with the Vimeo API"
   s.description  = <<-DESC
                       An iOS/tvOS library for interacting with the Vimeo API.
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = "8.0"
   s.tvos.deployment_target = "9.0"
 
-  s.source = { :git => "https://github.com/vimeo/VimeoNetworking", :tag => s.version.to_s }
+  s.source = { :git => "https://github.com/vimeo/VimeoNetworking.git", :tag => s.version.to_s }
 
   s.source_files  = "VimeoNetworking/VimeoNetworking/*.{h,m,swift,cer}"
 
