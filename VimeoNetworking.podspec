@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
                       An iOS/tvOS library for interacting with the Vimeo API.
                    DESC
   s.homepage     = "https://github.com/vimeo/VimeoNetworking"
-  s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
+  s.license      = { :type => "MIT", :file => "LICENSE" }
 
   s.authors            = { "Alfie Hanssen" => "alfiehanssen@gmail.com",
                             "Rob Huebner" => "robh@vimeo.com",
