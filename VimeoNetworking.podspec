@@ -26,10 +26,10 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
 
-  s.subspec 'Model' do |ss|
-    ss.source_files = 'VimeoNetworking/VimeoNetworking/Models'
-    ss.frameworks = 'Foundation', 'CoreGraphics', 'AVFoundation'
-  end
+  # s.subspec 'Model' do |ss|
+  #   ss.source_files = 'VimeoNetworking/VimeoNetworking/Models'
+  #   ss.frameworks = 'Foundation', 'CoreGraphics', 'AVFoundation'
+  # end
 
   s.dependency 'AFNetworking', '3.1.0'
 end
