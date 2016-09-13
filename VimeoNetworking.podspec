@@ -31,5 +31,5 @@ Pod::Spec.new do |s|
     ss.frameworks = 'Foundation', 'CoreGraphics', 'AVFoundation'
   end
 
-  s.dependency 'AFNetworking', '3.1.0'
+  s.dependency 'AFNetworking', '2.6.3'
 end

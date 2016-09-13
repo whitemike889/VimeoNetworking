@@ -210,11 +210,11 @@ public struct Request<ModelType: MappableResponse>
     {
         var URI = self.path
         
-        let queryString = AFQueryStringFromParameters(self.parameters)
-        if queryString.characters.count > 0
-        {
-            URI += "?" + queryString
-        }
+//        let queryString = AFQueryStringFromParameters(self.parameters)
+//        if queryString.characters.count > 0
+//        {
+//            URI += "?" + queryString
+//        }
         
         return URI
     }
