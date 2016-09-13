@@ -119,7 +119,7 @@ final public class AuthenticationController
         {
             print("Loaded \(accountType) account \(loadedAccount)")
 
-            try self.authenticateClient(account: loadedAccount)
+            try self.setClientAccount(with: loadedAccount)
         }
         else
         {
@@ -456,11 +456,12 @@ final public class AuthenticationController
         
         if loadClientCredentials
         {
-            self.client.currentAccount = (try? self.accountStore.loadAccount(.ClientCredentials)) ?? nil
+            let loadedClientCredentialsAccount = (try? self.accountStore.loadAccount(.ClientCredentials)) ?? nil
+            try self.setClientAccount(with: loadedClientCredentialsAccount, shouldClearCache: true)
         }
         else
         {
-            self.client.currentAccount = nil
+            try self.setClientAccount(with: nil, shouldClearCache: true)
         }
         
         try self.accountStore.removeAccount(.User)
@@ -515,7 +516,7 @@ final public class AuthenticationController
         
         do
         {
-            try self.authenticateClient(account: account)
+            try self.setClientAccount(with: account, shouldClearCache: true)
             
             let accountType: AccountStore.AccountType = (account.user != nil) ? .User : .ClientCredentials
             
@@ -529,18 +530,24 @@ final public class AuthenticationController
         return .Success(result: account)
     }
     
-    private func authenticateClient(account account: VIMAccount) throws
+    private func setClientAccount(with account: VIMAccount?, shouldClearCache: Bool = false) throws
     {
-        guard account.accessToken != nil
+        // Account can be nil (to log out) but if it's non-nil, it needs an access token or it's malformed [RH]
+        guard account == nil || account?.accessToken != nil
         else
         {
-            let errorDescription = "AuthenticationController did not recieve an access token with account response"
+            let errorDescription = "AuthenticationController tried to set a client account with no access token"
             
             assertionFailure(errorDescription)
             
             let error = NSError(domain: self.dynamicType.ErrorDomain, code: LocalErrorCode.AuthToken.rawValue, userInfo: [NSLocalizedDescriptionKey: errorDescription])
             
             throw error
+        }
+        
+        if shouldClearCache
+        {
+            self.client.removeAllCachedResponses()
         }
         
         self.client.currentAccount = account
