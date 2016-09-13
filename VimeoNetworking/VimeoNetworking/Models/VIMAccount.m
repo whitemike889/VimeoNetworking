@@ -97,7 +97,7 @@ static NSString *UserKey = @"user";
     [aCoder encodeObject:self.tokenType forKey:NSStringFromSelector(@selector(tokenType))];
     [aCoder encodeObject:self.scope forKey:NSStringFromSelector(@selector(scope))];
     [aCoder encodeObject:self.userJSON forKey:NSStringFromSelector(@selector(userJSON))];
-
+    
     // Intentionally not persisting the VIMUser object [AH]
     // Intentionally not persisting the fact that a token is invalid, the next request will just re-set the flag [AH]
 }
