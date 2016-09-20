@@ -210,6 +210,8 @@ public struct Request<ModelType: MappableResponse>
     {
         var URI = self.path
         
+        // TODO: DO NOT MERGE
+        
 //        let queryString = AFQueryStringFromParameters(self.parameters)
 //        if queryString.characters.count > 0
 //        {
