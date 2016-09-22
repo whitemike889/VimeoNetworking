@@ -35,6 +35,7 @@
 @class VIMAppeal;
 @class VIMVideoLog;
 @class VIMVideoPlayRepresentation;
+@class VIMBadge;
 
 extern NSString * __nonnull VIMContentRating_Language;
 extern NSString * __nonnull VIMContentRating_Drugs;
@@ -82,6 +83,7 @@ typedef NS_ENUM(NSUInteger, VIMVideoProcessingStatus) {
 @property (nonatomic, strong, nullable) NSNumber *numPlays;
 @property (nonatomic, strong, nullable) NSArray *categories;
 @property (nonatomic, copy, nullable) NSString *password;
+@property (nonatomic, strong, nullable) VIMBadge *badge;
 
 @property (nonatomic, assign) VIMVideoProcessingStatus videoStatus;
 
