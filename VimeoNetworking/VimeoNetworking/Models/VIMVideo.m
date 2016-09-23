@@ -41,7 +41,9 @@
 #import "VIMVideoPlayRepresentation.h"
 #import "VIMVideoDRMFiles.h"
 
-#import <VimeoNetworking/VimeoNetworking-Swift.h>
+#if TARGET_OS_TV
+    #import <VimeoNetworking/VimeoNetworking-Swift.h>
+#endif
 
 NSString *VIMContentRating_Language = @"language";
 NSString *VIMContentRating_Drugs = @"drugs";
