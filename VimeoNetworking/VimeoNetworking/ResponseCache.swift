@@ -153,10 +153,10 @@ final internal class ResponseCache
                 let fileURL = self.fileURLForKey(key: key)
                 
                 guard let directoryPath = directoryURL.path,
-                    let filePath = fileURL.path
+                    let filePath = self.fileURLForKey(key: key)?.path
                 else
                 {
-                    assertionFailure("no cache path found: \(fileURL)")
+                    assertionFailure("no cache path found")
                     
                     return
                 }
@@ -186,12 +186,10 @@ final internal class ResponseCache
         {
             dispatch_async(self.queue) {
                 
-                let fileURL = self.fileURLForKey(key: key)
-                
-                guard let filePath = fileURL.path
+                guard let filePath = self.fileURLForKey(key: key)?.path
                     else
                 {
-                    assertionFailure("no cache path found: \(fileURL)")
+                    assertionFailure("no cache path found")
                     
                     return
                 }
@@ -228,12 +226,10 @@ final internal class ResponseCache
                 
                 let fileManager = NSFileManager()
                 
-                let fileURL = self.fileURLForKey(key: key)
-                
-                guard let filePath = fileURL.path
+                guard let filePath = self.fileURLForKey(key: key)?.path
                     else
                 {
-                    assertionFailure("no cache path found: \(fileURL)")
+                    assertionFailure("no cache path found")
                     
                     return
                 }
@@ -287,13 +283,16 @@ final internal class ResponseCache
             return NSURL(fileURLWithPath: directory)
         }
         
-        private func fileURLForKey(key key: String) -> NSURL
+        private func fileURLForKey(key key: String) -> NSURL?
         {
-            let directoryURL = self.cachesDirectoryURL()
+            guard let fileURL = self.cachesDirectoryURL().URLByAppendingPathComponent(key) else
+            {
+                assertionFailure("Unable to create cache file URL.")
+                
+                return nil
+            }
             
-            let fileURL = directoryURL.URLByAppendingPathComponent(key)
-            
-            return fileURL!
+            return fileURL
         }
     }
 }
