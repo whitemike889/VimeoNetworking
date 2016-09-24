@@ -51,6 +51,8 @@ NSString *const VIMConnectionNameWatchlater = @"watchlater";
 NSString *const VIMConnectionNameViolations = @"violations";
 NSString *const VIMConnectionNameVODItem = @"ondemand";
 NSString *const VIMConnectionNameVODTrailer = @"trailer";
+NSString *const VIMConnectionNameRecommendedChannels = @"recommended_channels";
+NSString *const VIMConnectionNameRecommendedUsers = @"recommended_users";
 
 @interface VIMConnection()
 @property (nonatomic, strong, nullable) NSNumber *extra_total;
