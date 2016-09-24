@@ -41,6 +41,7 @@
 #import "VIMVideoPlayRepresentation.h"
 #import "VIMVideoDRMFiles.h"
 
+// This is tempoaray to make VIMBadgeModel.swift visible for the TV-OS project [NL] 09/23/2016
 #if TARGET_OS_TV
     #import <VimeoNetworking/VimeoNetworking-Swift.h>
 #endif
