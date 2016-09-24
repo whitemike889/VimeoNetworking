@@ -24,7 +24,7 @@
 //  THE SOFTWARE.
 //
 
-@import UIKit;
+@import Foundation;
 #import "VIMVideoPlayFile.h"
 
 @interface VIMVideoProgressiveFile : VIMVideoPlayFile

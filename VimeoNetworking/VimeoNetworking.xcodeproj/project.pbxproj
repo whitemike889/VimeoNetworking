@@ -24,26 +24,6 @@
 		01CDBF001CEBA2030093DDF4 /* VIMModelObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CDBEFB1CEBA2030093DDF4 /* VIMModelObject.m */; };
 		01CDBF011CEBA2030093DDF4 /* VIMObjectMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 01CDBEFC1CEBA2030093DDF4 /* VIMObjectMapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		01CDBF021CEBA2030093DDF4 /* VIMObjectMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CDBEFD1CEBA2030093DDF4 /* VIMObjectMapper.m */; };
-		01D11F781D871DDB00AECC2C /* VIMUserBadge.h in Headers */ = {isa = PBXBuildFile; fileRef = 01D11F641D871DDB00AECC2C /* VIMUserBadge.h */; };
-		01D11F791D871DDB00AECC2C /* VIMUserBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D11F651D871DDB00AECC2C /* VIMUserBadge.m */; };
-		01D11F7A1D871DDB00AECC2C /* VIMVideo+VOD.h in Headers */ = {isa = PBXBuildFile; fileRef = 01D11F661D871DDB00AECC2C /* VIMVideo+VOD.h */; };
-		01D11F7B1D871DDB00AECC2C /* VIMVideo+VOD.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D11F671D871DDB00AECC2C /* VIMVideo+VOD.m */; };
-		01D11F8A1D871DDB00AECC2C /* VIMVODItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 01D11F761D871DDB00AECC2C /* VIMVODItem.h */; };
-		01D11F8B1D871DDB00AECC2C /* VIMVODItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D11F771D871DDB00AECC2C /* VIMVODItem.m */; };
-		01D11F9A1D871E5700AECC2C /* VIMVideoDASHFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 01D11F8C1D871E5700AECC2C /* VIMVideoDASHFile.h */; };
-		01D11F9B1D871E5700AECC2C /* VIMVideoDASHFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D11F8D1D871E5700AECC2C /* VIMVideoDASHFile.m */; };
-		01D11F9C1D871E5700AECC2C /* VIMVideoDRMFiles.h in Headers */ = {isa = PBXBuildFile; fileRef = 01D11F8E1D871E5700AECC2C /* VIMVideoDRMFiles.h */; };
-		01D11F9D1D871E5700AECC2C /* VIMVideoDRMFiles.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D11F8F1D871E5700AECC2C /* VIMVideoDRMFiles.m */; };
-		01D11F9E1D871E5700AECC2C /* VIMVideoFairPlayFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 01D11F901D871E5700AECC2C /* VIMVideoFairPlayFile.h */; };
-		01D11F9F1D871E5700AECC2C /* VIMVideoFairPlayFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D11F911D871E5700AECC2C /* VIMVideoFairPlayFile.m */; };
-		01D11FA01D871E5700AECC2C /* VIMVideoHLSFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 01D11F921D871E5700AECC2C /* VIMVideoHLSFile.h */; };
-		01D11FA11D871E5700AECC2C /* VIMVideoHLSFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D11F931D871E5700AECC2C /* VIMVideoHLSFile.m */; };
-		01D11FA21D871E5700AECC2C /* VIMVideoPlayFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 01D11F941D871E5700AECC2C /* VIMVideoPlayFile.h */; };
-		01D11FA31D871E5700AECC2C /* VIMVideoPlayFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D11F951D871E5700AECC2C /* VIMVideoPlayFile.m */; };
-		01D11FA41D871E5700AECC2C /* VIMVideoPlayRepresentation.h in Headers */ = {isa = PBXBuildFile; fileRef = 01D11F961D871E5700AECC2C /* VIMVideoPlayRepresentation.h */; };
-		01D11FA51D871E5700AECC2C /* VIMVideoPlayRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D11F971D871E5700AECC2C /* VIMVideoPlayRepresentation.m */; };
-		01D11FA61D871E5700AECC2C /* VIMVideoProgressiveFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 01D11F981D871E5700AECC2C /* VIMVideoProgressiveFile.h */; };
-		01D11FA71D871E5700AECC2C /* VIMVideoProgressiveFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D11F991D871E5700AECC2C /* VIMVideoProgressiveFile.m */; };
 		01FD38F91CC948F200326408 /* AccountStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FD38A91CC948F200326408 /* AccountStore.swift */; };
 		01FD38FA1CC948F200326408 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FD38AA1CC948F200326408 /* AppConfiguration.swift */; };
 		01FD38FB1CC948F200326408 /* AuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FD38AB1CC948F200326408 /* AuthenticationController.swift */; };
@@ -156,26 +136,6 @@
 		01CDBEFB1CEBA2030093DDF4 /* VIMModelObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VIMModelObject.m; path = VimeoNetworking/Models/VIMModelObject.m; sourceTree = "<group>"; };
 		01CDBEFC1CEBA2030093DDF4 /* VIMObjectMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VIMObjectMapper.h; path = VimeoNetworking/Models/VIMObjectMapper.h; sourceTree = "<group>"; };
 		01CDBEFD1CEBA2030093DDF4 /* VIMObjectMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VIMObjectMapper.m; path = VimeoNetworking/Models/VIMObjectMapper.m; sourceTree = "<group>"; };
-		01D11F641D871DDB00AECC2C /* VIMUserBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VIMUserBadge.h; path = VimeoNetworking/Models/VIMUserBadge.h; sourceTree = "<group>"; };
-		01D11F651D871DDB00AECC2C /* VIMUserBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VIMUserBadge.m; path = VimeoNetworking/Models/VIMUserBadge.m; sourceTree = "<group>"; };
-		01D11F661D871DDB00AECC2C /* VIMVideo+VOD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VIMVideo+VOD.h"; path = "VimeoNetworking/Models/VIMVideo+VOD.h"; sourceTree = "<group>"; };
-		01D11F671D871DDB00AECC2C /* VIMVideo+VOD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "VIMVideo+VOD.m"; path = "VimeoNetworking/Models/VIMVideo+VOD.m"; sourceTree = "<group>"; };
-		01D11F761D871DDB00AECC2C /* VIMVODItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VIMVODItem.h; path = VimeoNetworking/Models/VIMVODItem.h; sourceTree = "<group>"; };
-		01D11F771D871DDB00AECC2C /* VIMVODItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VIMVODItem.m; path = VimeoNetworking/Models/VIMVODItem.m; sourceTree = "<group>"; };
-		01D11F8C1D871E5700AECC2C /* VIMVideoDASHFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VIMVideoDASHFile.h; path = VimeoNetworking/Models/VIMVideoDASHFile.h; sourceTree = "<group>"; };
-		01D11F8D1D871E5700AECC2C /* VIMVideoDASHFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VIMVideoDASHFile.m; path = VimeoNetworking/Models/VIMVideoDASHFile.m; sourceTree = "<group>"; };
-		01D11F8E1D871E5700AECC2C /* VIMVideoDRMFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VIMVideoDRMFiles.h; path = VimeoNetworking/Models/VIMVideoDRMFiles.h; sourceTree = "<group>"; };
-		01D11F8F1D871E5700AECC2C /* VIMVideoDRMFiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VIMVideoDRMFiles.m; path = VimeoNetworking/Models/VIMVideoDRMFiles.m; sourceTree = "<group>"; };
-		01D11F901D871E5700AECC2C /* VIMVideoFairPlayFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VIMVideoFairPlayFile.h; path = VimeoNetworking/Models/VIMVideoFairPlayFile.h; sourceTree = "<group>"; };
-		01D11F911D871E5700AECC2C /* VIMVideoFairPlayFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VIMVideoFairPlayFile.m; path = VimeoNetworking/Models/VIMVideoFairPlayFile.m; sourceTree = "<group>"; };
-		01D11F921D871E5700AECC2C /* VIMVideoHLSFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VIMVideoHLSFile.h; path = VimeoNetworking/Models/VIMVideoHLSFile.h; sourceTree = "<group>"; };
-		01D11F931D871E5700AECC2C /* VIMVideoHLSFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VIMVideoHLSFile.m; path = VimeoNetworking/Models/VIMVideoHLSFile.m; sourceTree = "<group>"; };
-		01D11F941D871E5700AECC2C /* VIMVideoPlayFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VIMVideoPlayFile.h; path = VimeoNetworking/Models/VIMVideoPlayFile.h; sourceTree = "<group>"; };
-		01D11F951D871E5700AECC2C /* VIMVideoPlayFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VIMVideoPlayFile.m; path = VimeoNetworking/Models/VIMVideoPlayFile.m; sourceTree = "<group>"; };
-		01D11F961D871E5700AECC2C /* VIMVideoPlayRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VIMVideoPlayRepresentation.h; path = VimeoNetworking/Models/VIMVideoPlayRepresentation.h; sourceTree = "<group>"; };
-		01D11F971D871E5700AECC2C /* VIMVideoPlayRepresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VIMVideoPlayRepresentation.m; path = VimeoNetworking/Models/VIMVideoPlayRepresentation.m; sourceTree = "<group>"; };
-		01D11F981D871E5700AECC2C /* VIMVideoProgressiveFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VIMVideoProgressiveFile.h; path = VimeoNetworking/Models/VIMVideoProgressiveFile.h; sourceTree = "<group>"; };
-		01D11F991D871E5700AECC2C /* VIMVideoProgressiveFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VIMVideoProgressiveFile.m; path = VimeoNetworking/Models/VIMVideoProgressiveFile.m; sourceTree = "<group>"; };
 		01FD38A91CC948F200326408 /* AccountStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = AccountStore.swift; path = VimeoNetworking/AccountStore.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		01FD38AA1CC948F200326408 /* AppConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppConfiguration.swift; path = VimeoNetworking/AppConfiguration.swift; sourceTree = "<group>"; };
 		01FD38AB1CC948F200326408 /* AuthenticationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = AuthenticationController.swift; path = VimeoNetworking/AuthenticationController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -432,26 +392,6 @@
 		01FD394D1CC9508200326408 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				01D11F8C1D871E5700AECC2C /* VIMVideoDASHFile.h */,
-				01D11F8D1D871E5700AECC2C /* VIMVideoDASHFile.m */,
-				01D11F8E1D871E5700AECC2C /* VIMVideoDRMFiles.h */,
-				01D11F8F1D871E5700AECC2C /* VIMVideoDRMFiles.m */,
-				01D11F901D871E5700AECC2C /* VIMVideoFairPlayFile.h */,
-				01D11F911D871E5700AECC2C /* VIMVideoFairPlayFile.m */,
-				01D11F921D871E5700AECC2C /* VIMVideoHLSFile.h */,
-				01D11F931D871E5700AECC2C /* VIMVideoHLSFile.m */,
-				01D11F941D871E5700AECC2C /* VIMVideoPlayFile.h */,
-				01D11F951D871E5700AECC2C /* VIMVideoPlayFile.m */,
-				01D11F961D871E5700AECC2C /* VIMVideoPlayRepresentation.h */,
-				01D11F971D871E5700AECC2C /* VIMVideoPlayRepresentation.m */,
-				01D11F981D871E5700AECC2C /* VIMVideoProgressiveFile.h */,
-				01D11F991D871E5700AECC2C /* VIMVideoProgressiveFile.m */,
-				01D11F641D871DDB00AECC2C /* VIMUserBadge.h */,
-				01D11F651D871DDB00AECC2C /* VIMUserBadge.m */,
-				01D11F661D871DDB00AECC2C /* VIMVideo+VOD.h */,
-				01D11F671D871DDB00AECC2C /* VIMVideo+VOD.m */,
-				01D11F761D871DDB00AECC2C /* VIMVODItem.h */,
-				01D11F771D871DDB00AECC2C /* VIMVODItem.m */,
 				01FD38BF1CC948F200326408 /* VIMAccount.h */,
 				01FD38C01CC948F200326408 /* VIMAccount.m */,
 				01FD38C11CC948F200326408 /* VIMActivity.h */,
@@ -534,18 +474,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				01FD39471CC948F300326408 /* VIMVideoUtils.h in Headers */,
-				01D11F7A1D871DDB00AECC2C /* VIMVideo+VOD.h in Headers */,
 				01FD393F1CC948F300326408 /* VIMVideo.h in Headers */,
-				01D11F781D871DDB00AECC2C /* VIMUserBadge.h in Headers */,
 				01FD392B1CC948F300326408 /* VIMPictureCollection.h in Headers */,
-				01D11FA61D871E5700AECC2C /* VIMVideoProgressiveFile.h in Headers */,
 				01FD39191CC948F300326408 /* VIMComment.h in Headers */,
-				01D11FA41D871E5700AECC2C /* VIMVideoPlayRepresentation.h in Headers */,
 				01CDBF011CEBA2030093DDF4 /* VIMObjectMapper.h in Headers */,
 				01FD394B1CC9497900326408 /* VIMUploadQuota.h in Headers */,
 				01FD392D1CC948F300326408 /* VIMPreference.h in Headers */,
 				01CDBEFE1CEBA2030093DDF4 /* VIMMappable.h in Headers */,
-				01D11FA21D871E5700AECC2C /* VIMVideoPlayFile.h in Headers */,
 				01FD39131CC948F300326408 /* VIMAppeal.h in Headers */,
 				01FD39411CC948F300326408 /* VIMVideoFile.h in Headers */,
 				01FD39291CC948F300326408 /* VIMPicture.h in Headers */,
@@ -553,16 +488,11 @@
 				01FD39371CC948F300326408 /* VIMTrigger.h in Headers */,
 				01FD392F1CC948F300326408 /* VIMPrivacy.h in Headers */,
 				01FD390F1CC948F300326408 /* VIMAccount.h in Headers */,
-				01D11FA01D871E5700AECC2C /* VIMVideoHLSFile.h in Headers */,
 				01FD39311CC948F300326408 /* VIMQuantityQuota.h in Headers */,
 				01FD39151CC948F300326408 /* VIMCategory.h in Headers */,
-				01D11F9A1D871E5700AECC2C /* VIMVideoDASHFile.h in Headers */,
 				01FD39431CC948F300326408 /* VIMVideoLog.h in Headers */,
-				01D11F9C1D871E5700AECC2C /* VIMVideoDRMFiles.h in Headers */,
-				01D11F9E1D871E5700AECC2C /* VIMVideoFairPlayFile.h in Headers */,
 				01FD39171CC948F300326408 /* VIMChannel.h in Headers */,
 				3C91DA341CCFEBF200DCF8BD /* VIMSoundtrack.h in Headers */,
-				01D11F8A1D871DDB00AECC2C /* VIMVODItem.h in Headers */,
 				01FD39351CC948F300326408 /* VIMTag.h in Headers */,
 				014A1E061CE26C4F00EC4681 /* Objc_ExceptionCatcher.h in Headers */,
 				01FD39331CC948F300326408 /* VIMSizeQuota.h in Headers */,
@@ -712,10 +642,7 @@
 			files = (
 				01CDBF021CEBA2030093DDF4 /* VIMObjectMapper.m in Sources */,
 				018483881CE0D9E2008305A4 /* PinCodeInfo.swift in Sources */,
-				01D11F7B1D871DDB00AECC2C /* VIMVideo+VOD.m in Sources */,
 				01FD39091CC948F200326408 /* Scope.swift in Sources */,
-				01D11F9D1D871E5700AECC2C /* VIMVideoDRMFiles.m in Sources */,
-				01D11FA31D871E5700AECC2C /* VIMVideoPlayFile.m in Sources */,
 				01FD39271CC948F300326408 /* VIMInteraction.m in Sources */,
 				01FD39251CC948F300326408 /* VIMGroup.m in Sources */,
 				01FD38FB1CC948F200326408 /* AuthenticationController.swift in Sources */,
@@ -737,7 +664,6 @@
 				01FD39461CC948F300326408 /* VIMVideoPreference.m in Sources */,
 				01FD38FF1CC948F200326408 /* Mappable.swift in Sources */,
 				01FD393E1CC948F300326408 /* VIMUser.m in Sources */,
-				01D11FA71D871E5700AECC2C /* VIMVideoProgressiveFile.m in Sources */,
 				01FD39211CC948F300326408 /* VimeoResponseSerializer.swift in Sources */,
 				01FD38FA1CC948F200326408 /* AppConfiguration.swift in Sources */,
 				01FD39361CC948F300326408 /* VIMTag.m in Sources */,
@@ -761,10 +687,7 @@
 				01FD39401CC948F300326408 /* VIMVideo.m in Sources */,
 				01FD39021CC948F200326408 /* Request+Authentication.swift in Sources */,
 				01FD39221CC948F300326408 /* VimeoSessionManager.swift in Sources */,
-				01D11F9F1D871E5700AECC2C /* VIMVideoFairPlayFile.m in Sources */,
 				01FD390A1CC948F200326408 /* String+Parameters.swift in Sources */,
-				01D11F9B1D871E5700AECC2C /* VIMVideoDASHFile.m in Sources */,
-				01D11F8B1D871DDB00AECC2C /* VIMVODItem.m in Sources */,
 				01B061E11CCE992D00F515E6 /* ErrorCode.swift in Sources */,
 				01FD391C1CC948F300326408 /* VIMConnection.m in Sources */,
 				01FD39441CC948F300326408 /* VIMVideoLog.m in Sources */,
@@ -772,15 +695,12 @@
 				016259BE1CD006EF0004D4AF /* ExceptionCatcher+Swift.swift in Sources */,
 				01FD39101CC948F300326408 /* VIMAccount.m in Sources */,
 				01FD393C1CC948F300326408 /* VIMUploadTicket.m in Sources */,
-				01D11FA51D871E5700AECC2C /* VIMVideoPlayRepresentation.m in Sources */,
 				01FD391A1CC948F300326408 /* VIMComment.m in Sources */,
 				01FD38FE1CC948F200326408 /* KeychainStore.swift in Sources */,
 				01FD39041CC948F200326408 /* Request+User.swift in Sources */,
 				01FD39121CC948F300326408 /* VIMActivity.m in Sources */,
 				01FD392A1CC948F300326408 /* VIMPicture.m in Sources */,
 				01FD392C1CC948F300326408 /* VIMPictureCollection.m in Sources */,
-				01D11FA11D871E5700AECC2C /* VIMVideoHLSFile.m in Sources */,
-				01D11F791D871DDB00AECC2C /* VIMUserBadge.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
