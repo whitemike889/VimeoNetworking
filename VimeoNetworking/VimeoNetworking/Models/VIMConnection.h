@@ -54,6 +54,7 @@ extern NSString *const __nonnull VIMConnectionNameVODItem;
 extern NSString *const __nonnull VIMConnectionNameVODTrailer;
 extern NSString *const __nonnull VIMConnectionNameRecommendedChannels;
 extern NSString *const __nonnull VIMConnectionNameRecommendedUsers;
+extern NSString *const __nonnull VIMConnectionNameModeratedChannels;
 
 @interface VIMConnection : VIMModelObject
 
