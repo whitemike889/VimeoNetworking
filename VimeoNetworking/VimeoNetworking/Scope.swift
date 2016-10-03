@@ -42,7 +42,7 @@ public enum Scope: String
      
      - returns: a string of space-separated scope strings
      */
-    static func combine(scopes: [Scope]) -> String
+    public static func combine(scopes: [Scope]) -> String
     {
         return scopes.reduce("") { $0 + " " + $1.rawValue }
     }

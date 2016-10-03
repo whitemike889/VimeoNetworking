@@ -19,14 +19,14 @@ public struct AppConfiguration
         /// Keychain identifier for the Cameo application
     public static let KeychainServiceCameo = "Cameo"
     
-    let clientIdentifier: String
-    let clientSecret: String
-    let scopes: [Scope]
+    public let clientIdentifier: String
+    public let clientSecret: String
+    public let scopes: [Scope]
     
     let keychainService: String
     let keychainAccessGroup: String?
     
-    let apiVersion: String
+    public let apiVersion: String
     
     /**
      Create a new `AppConfiguration`

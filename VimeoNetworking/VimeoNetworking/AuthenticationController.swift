@@ -437,7 +437,7 @@ final public class AuthenticationController
      */
     public func logOut(loadClientCredentials loadClientCredentials: Bool = true) throws
     {
-        guard self.client.isAuthenticatedWithUser == true
+        guard self.client.currentAccount?.isAuthenticatedWithUser() == true
         else
         {
             return

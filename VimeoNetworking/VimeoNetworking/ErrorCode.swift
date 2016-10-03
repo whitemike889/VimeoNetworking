@@ -39,11 +39,11 @@ public enum VimeoErrorCode: Int
     case FacebookJoinMalformedToken = 2305
     case FacebookJoinDecryptFail = 2307
     case FacebookJoinTokenTooLong = 2308
-    case FacebookLogInNoToken = 2312
-    case FacebookLogInMissingProperty = 2310
-    case FacebookLogInMalformedToken = 2311
-    case FacebookLogInDecryptFail = 2313
-    case FacebookLogInTokenTooLong = 2314
+    case FacebookLoginNoToken = 2312
+    case FacebookLoginMissingProperty = 2310
+    case FacebookLoginMalformedToken = 2311
+    case FacebookLoginDecryptFail = 2313
+    case FacebookLoginTokenTooLong = 2314
     case FacebookInvalidInputGrantType = 2221
     case FacebookJoinValidateTokenFail = 2315
     case FacebookInvalidNoInput = 2207
@@ -57,6 +57,8 @@ public enum VimeoErrorCode: Int
     case URLUnavailable = 2404
     case Timeout = 5000
     case TokenNotGenerated = 5001
+    case DRMStreamLimitHit = 3420
+    case DRMDeviceLimitHit = 3421
 }
 
 /// `HTTPStatusCode` contains HTTP status code constants used to inspect response status

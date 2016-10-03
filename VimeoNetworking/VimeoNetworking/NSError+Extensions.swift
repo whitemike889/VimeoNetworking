@@ -174,6 +174,7 @@ public extension NSError
     private static let VimeoErrorCodeHeaderKey = "Vimeo-Error-Code"
     private static let VimeoErrorCodeKeyLegacy = "VimeoErrorCode"
     private static let VimeoErrorCodeKey = "error_code"
+    private static let VimeoInvalidParametersKey = "invalid_parameters"
     
         /// Returns the status code of the failing response, if available
     public var statusCode: Int?
@@ -208,6 +209,25 @@ public extension NSError
         }
         
         return nil
+    }
+    
+    /// Returns the invalid parameters of the failing response, if available
+    public var vimeoInvalidParametersErrorCodes: [Int]
+    {
+        var errorCodes: [Int] = []
+        
+        if let json = self.errorResponseBodyJSON, let invalidParameters = json[self.dynamicType.VimeoInvalidParametersKey] as? [[String: AnyObject]]
+        {
+            for invalidParameter in invalidParameters
+            {
+                if let code = invalidParameter[self.dynamicType.VimeoErrorCodeKey] as? Int
+                {
+                    errorCodes.append(code)
+                }
+            }
+        }
+        
+        return errorCodes
     }
     
         /// Returns the api error JSON dictionary, if available
