@@ -74,9 +74,13 @@ public class VIMProgrammedContent: VIMModelObject
         return super.getClassForObjectKey(key)
     }
     
-    override public func didFinishMapping()
+    public override func didFinishMapping()
     {
-        super.didFinishMapping()
+        //Note: the super implementation of this method is not being called here because this method does not actually exist in the base class (VIMModelObject).  This method is declared optional in the VIMMappable protocol
+        //that VIMModelObject implements.  There seems to be a bug in swift where the compiler is seeing the optional method as a part of the base class, so it won't compile unless we include the override keyword.
+        //Calling super.didFinishMapping() will cause the app to crash because of an unknown selector, however if you attempt to test to see if the selector exists before calling it (super.respondsToSelector), the check will
+        //succeed even though the method exists in the subclass and not the super class.  [MW] 10/3/16
+        
         self.parseConnections()
     }
     
