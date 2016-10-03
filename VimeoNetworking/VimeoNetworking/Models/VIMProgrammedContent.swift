@@ -39,6 +39,8 @@ public class VIMProgrammedContent: VIMModelObject
     private struct Constants
     {
         static let ConnectionsKey = "connections"
+        static let ContentKey = "content"
+        static let MetadataKey = "metadata"
     }
     
     // MARK: Public API
@@ -50,26 +52,31 @@ public class VIMProgrammedContent: VIMModelObject
     
     override public func getClassForCollectionKey(key: String!) -> AnyClass!
     {
-        if key == "content"
+        if key == Constants.ContentKey
         {
             return VIMVideo.self
         }
         
-        return nil
+        return super.getClassForCollectionKey(key)
     }
     
     override public func getClassForObjectKey(key: String!) -> AnyClass!
     {
-        if key == "metadata"
+        if key == Constants.MetadataKey
         {
             return NSMutableDictionary.self
         }
+        else if key == Constants.ContentKey
+        {
+            return NSArray.self
+        }
         
-        return nil
+        return super.getClassForObjectKey(key)
     }
     
     override public func didFinishMapping()
     {
+        super.didFinishMapping()
         self.parseConnections()
     }
     
@@ -77,7 +84,7 @@ public class VIMProgrammedContent: VIMModelObject
     
     private func parseConnections()
     {
-        guard let dict = self.metadata?[Constants.ConnectionsKey] as? [String: AnyObject] else
+        guard let dict = self.metadata?[Constants.ConnectionsKey] as? [NSObject: AnyObject] else
         {
             return
         }
