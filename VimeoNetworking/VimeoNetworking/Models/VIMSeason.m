@@ -18,10 +18,31 @@
 
 @implementation VIMSeason
 
+#pragma mark - Public API
+
+- (VIMConnection *)connectionWithName:(NSString *)connectionName
+{
+    return [self.connections objectForKey:connectionName];
+}
+
+- (VIMInteraction *)interactionWithName:(NSString *)name
+{
+    return [self.interactions objectForKey:name];
+}
+
+#pragma mark - VIMMappable
+
 - (void)didFinishMapping
 {
     [self parseConnections];
     [self parseInteractions];
+}
+
+- (Class)getClassForObjectKey:(NSString *)key
+{
+    // TODO: Fix VIMObjectMapper bug that requires this method to be implemented to map the 'metadata' property [RH] 
+    
+    return nil;
 }
 
 #pragma mark - Parsing Helpers
