@@ -40,6 +40,9 @@ final public class VimeoClient
      */
     public struct RequestToken
     {
+        /// The path of the request
+        public let path: String?
+        
         private let task: NSURLSessionDataTask?
         
         /**
@@ -221,14 +224,14 @@ final public class VimeoClient
             
             if request.cacheFetchPolicy == .CacheOnly
             {
-                return RequestToken(task: nil)
+                return RequestToken(path: request.path, task: nil)
             }
             
         case .NetworkOnly, .TryNetworkThenCache:
             break
         }
         
-        let urlString = request.path
+        let path = request.path
         let parameters = request.parameters
         
         let success: (NSURLSessionDataTask, AnyObject?) -> Void = { (task, responseObject) in
@@ -246,15 +249,15 @@ final public class VimeoClient
         switch request.method
         {
         case .GET:
-            task = self.sessionManager.GET(urlString, parameters: parameters, success: success, failure: failure)
+            task = self.sessionManager.GET(path, parameters: parameters, success: success, failure: failure)
         case .POST:
-            task = self.sessionManager.POST(urlString, parameters: parameters, success: success, failure: failure)
+            task = self.sessionManager.POST(path, parameters: parameters, success: success, failure: failure)
         case .PUT:
-            task = self.sessionManager.PUT(urlString, parameters: parameters, success: success, failure: failure)
+            task = self.sessionManager.PUT(path, parameters: parameters, success: success, failure: failure)
         case .PATCH:
-            task = self.sessionManager.PATCH(urlString, parameters: parameters, success: success, failure: failure)
+            task = self.sessionManager.PATCH(path, parameters: parameters, success: success, failure: failure)
         case .DELETE:
-            task = self.sessionManager.DELETE(urlString, parameters: parameters, success: success, failure: failure)
+            task = self.sessionManager.DELETE(path, parameters: parameters, success: success, failure: failure)
         }
         
         guard let requestTask = task
@@ -270,10 +273,10 @@ final public class VimeoClient
             
             self.handleTaskFailure(request: request, task: task, error: error, completionQueue: completionQueue, completion: completion)
             
-            return RequestToken(task: nil)
+            return RequestToken(path: request.path, task: nil)
         }
         
-        return RequestToken(task: requestTask)
+        return RequestToken(path: request.path, task: requestTask)
     }
     
     /**
