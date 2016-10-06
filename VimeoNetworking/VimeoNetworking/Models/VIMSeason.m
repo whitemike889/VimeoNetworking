@@ -38,16 +38,6 @@
     [self parseInteractions];
 }
 
-- (Class)getClassForObjectKey:(NSString *)key
-{
-    if ([key isEqualToString:@"metadata"])
-    {
-        return [NSDictionary class];
-    }
-    
-    return nil;
-}
-
 #pragma mark - Parsing Helpers
 
 - (void)parseConnections

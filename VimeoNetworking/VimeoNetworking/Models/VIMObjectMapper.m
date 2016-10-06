@@ -142,6 +142,10 @@
                     [newObject setValue:jsonValue forKey:objectKey];
                 }
 			}
+            else
+            {
+                [newObject setValue:jsonValue forKey:objectKey];
+            }
 		}
 		else if ([jsonValue isKindOfClass:[NSArray class]])
 		{
