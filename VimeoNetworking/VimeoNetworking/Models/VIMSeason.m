@@ -40,7 +40,10 @@
 
 - (Class)getClassForObjectKey:(NSString *)key
 {
-    // TODO: Fix VIMObjectMapper bug that requires this method to be implemented to map the 'metadata' property [RH] 
+    if ([key isEqualToString:@"metadata"])
+    {
+        return [NSDictionary class];
+    }
     
     return nil;
 }
