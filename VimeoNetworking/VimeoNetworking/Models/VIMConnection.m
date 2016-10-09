@@ -54,6 +54,7 @@ NSString *const VIMConnectionNameVODItem = @"ondemand";
 NSString *const VIMConnectionNameVODTrailer = @"trailer";
 NSString *const VIMConnectionNameRecommendedChannels = @"recommended_channels";
 NSString *const VIMConnectionNameRecommendedUsers = @"recommended_users";
+NSString *const VIMConnectionNameModeratedChannels = @"moderated_channels";
 NSString *const VIMConnectionNameContents = @"contents";
 
 @interface VIMConnection()
