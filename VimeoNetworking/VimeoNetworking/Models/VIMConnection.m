@@ -52,6 +52,7 @@ NSString *const VIMConnectionNameWatchlater = @"watchlater";
 NSString *const VIMConnectionNameViolations = @"violations";
 NSString *const VIMConnectionNameVODItem = @"ondemand";
 NSString *const VIMConnectionNameVODTrailer = @"trailer";
+NSString *const VIMConnectionNameVODSeasons = @"seasons";
 NSString *const VIMConnectionNameRecommendedChannels = @"recommended_channels";
 NSString *const VIMConnectionNameRecommendedUsers = @"recommended_users";
 NSString *const VIMConnectionNameModeratedChannels = @"moderated_channels";

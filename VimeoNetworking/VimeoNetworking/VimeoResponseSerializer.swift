@@ -208,6 +208,7 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
             "application/vnd.vimeo.channel+json",
             "application/vnd.vimeo.song+json",
             "application/vnd.vimeo.ondemand.page+json",
+            "application/vnd.vimeo.ondemand.season+json",
             "application/vnd.vimeo.programmed.cinema+json"]
         )
     }

@@ -52,6 +52,7 @@ extern NSString *const __nonnull VIMConnectionNameWatchlater;
 extern NSString *const __nonnull VIMConnectionNameViolations;
 extern NSString *const __nonnull VIMConnectionNameVODItem;
 extern NSString *const __nonnull VIMConnectionNameVODTrailer;
+extern NSString *const __nonnull VIMConnectionNameVODSeasons;
 extern NSString *const __nonnull VIMConnectionNameRecommendedChannels;
 extern NSString *const __nonnull VIMConnectionNameRecommendedUsers;
 extern NSString *const __nonnull VIMConnectionNameModeratedChannels;
