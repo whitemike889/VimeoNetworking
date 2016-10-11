@@ -31,6 +31,8 @@
 static NSUInteger const VIMModelObjectVersion = 3;
 
 NSString *const VIMModelObjectErrorDomain = @"VIMModelObjectErrorDomain";
+NSString *const VIMConnectionKey = @"connections";
+NSString *const VIMInteractionKey = @"interactions";
 NSInteger const VIMModelObjectValidationErrorCode = 10101;
 
 @implementation VIMModelObject

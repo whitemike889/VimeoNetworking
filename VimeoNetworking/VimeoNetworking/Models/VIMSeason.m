@@ -44,7 +44,7 @@
 {
     NSMutableDictionary *connections = [NSMutableDictionary dictionary];
     
-    NSDictionary *dict = [self.metadata valueForKey:@"connections"];
+    NSDictionary *dict = [self.metadata valueForKey:VIMConnectionKey];
     if([dict isKindOfClass:[NSDictionary class]])
     {
         for(NSString *key in [dict allKeys])
@@ -65,7 +65,7 @@
 {
     NSMutableDictionary *interactions = [NSMutableDictionary dictionary];
     
-    NSDictionary *dict = [self.metadata valueForKey:@"interactions"];
+    NSDictionary *dict = [self.metadata valueForKey:VIMInteractionKey];
     if([dict isKindOfClass:[NSDictionary class]])
     {
         for(NSString *key in [dict allKeys])
