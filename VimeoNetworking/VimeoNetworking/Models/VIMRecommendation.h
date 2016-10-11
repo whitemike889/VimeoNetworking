@@ -1,8 +1,8 @@
 //
-//  VIMVideoProgressiveFile.h
+//  VIMRecommendation.h
 //  Vimeo
 //
-//  Created by Lehrer, Nicole on 5/12/16.
+//  Created by Lehrer, Nicole on 9/20/16.
 //  Copyright © 2016 Vimeo. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,19 +24,16 @@
 //  THE SOFTWARE.
 //
 
-@import Foundation;
-@import UIKit;
-#import "VIMVideoPlayFile.h"
+#import "VIMModelObject.h"
 
-@interface VIMVideoProgressiveFile : VIMVideoPlayFile
+@class VIMUser;
+@class VIMChannel;
 
-@property (nonatomic, assign) CGSize dimensions;
-@property (nonatomic, strong, nullable) NSDate *creationDate;
-@property (nonatomic, copy, nullable) NSString *mimeType;
-@property (nonatomic, strong, nullable) NSNumber *fps;
-@property (nonatomic, copy, nullable) NSString *md5;
-@property (nonatomic, strong, nullable) NSNumber *sizeInBytes;
+@interface VIMRecommendation : VIMModelObject
 
-- (BOOL)isSupportedMimeType;
+@property (nonatomic, copy, nullable) NSString *recommendationDescription;
+@property (nonatomic, copy, nullable) NSString *recommendationType;
+@property (nonatomic, strong, nullable) VIMUser *user;
+@property (nonatomic, strong, nullable) VIMChannel *channel;
 
 @end
