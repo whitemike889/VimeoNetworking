@@ -29,6 +29,8 @@
 #import "VIMMappable.h"
 
 extern NSString *const VIMModelObjectErrorDomain;
+extern NSString *const VIMConnectionKey;
+extern NSString *const VIMInteractionKey;
 extern NSInteger const VIMModelObjectValidationErrorCode;
 
 @interface VIMModelObject : NSObject <NSCopying, NSSecureCoding, VIMMappable>

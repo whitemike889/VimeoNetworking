@@ -25,7 +25,6 @@
 //
 
 #import "VIMVideo.h"
-
 #import "VIMObjectMapper.h"
 #import "VIMUser.h"
 #import "VIMPicture.h"
@@ -40,6 +39,7 @@
 #import "VIMCategory.h"
 #import "VIMVideoPlayRepresentation.h"
 #import "VIMVideoDRMFiles.h"
+#import <VimeoNetworking/VimeoNetworking-Swift.h>
 
 NSString *VIMContentRating_Language = @"language";
 NSString *VIMContentRating_Drugs = @"drugs";
@@ -130,6 +130,11 @@ NSString *VIMContentRating_Safe = @"safe";
     if ([key isEqualToString:@"play"])
     {
         return [VIMVideoPlayRepresentation class];
+    }
+    
+    if ([key isEqualToString:@"badge"])
+    {
+        return [VIMBadge class];
     }
     
     return nil;

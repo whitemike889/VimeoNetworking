@@ -235,13 +235,17 @@ final public class VimeoClient
         let parameters = request.parameters
         
         let success: (NSURLSessionDataTask, AnyObject?) -> Void = { (task, responseObject) in
-            networkRequestCompleted = true
-            self.handleTaskSuccess(request: request, task: task, responseObject: responseObject, completionQueue: completionQueue, completion: completion)
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+                networkRequestCompleted = true
+                self.handleTaskSuccess(request: request, task: task, responseObject: responseObject, completionQueue: completionQueue, completion: completion)
+            }
         }
         
         let failure: (NSURLSessionDataTask?, NSError) -> Void = { (task, error) in
-            networkRequestCompleted = true
-            self.handleTaskFailure(request: request, task: task, error: error, completionQueue: completionQueue, completion: completion)
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+                networkRequestCompleted = true
+                self.handleTaskFailure(request: request, task: task, error: error, completionQueue: completionQueue, completion: completion)
+            }
         }
         
         let task: NSURLSessionDataTask?
@@ -290,9 +294,9 @@ final public class VimeoClient
     }
     
     /**
-     Clears the cache
+     Clears a client's cache of all stored responses
      */
-    public func clearCache()
+    public func removeAllCachedResponses()
     {
         self.responseCache.clear()
     }
