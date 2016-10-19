@@ -26,6 +26,7 @@
 
 @import Foundation;
 @import UIKit;
+
 #import "VIMVideoPlayFile.h"
 
 @interface VIMVideoProgressiveFile : VIMVideoPlayFile
