@@ -304,6 +304,35 @@ final public class AuthenticationController
     }
     
     /**
+     **(PRIVATE: Vimeo Use Only)**
+     Log in with an account response dictionary
+     
+     - parameter accountResponseDictionary: account response dictionary
+     - parameter completion:                handler for authentication success or failure
+     */
+    public func authenticate(withAccountResponseDictionary accountResponseDictionary: VimeoClient.ResponseDictionary, completion: AuthenticationCompletion)
+    {
+        let result: Result<Response<VIMAccount>>
+        
+        do
+        {
+            let account: VIMAccount = try VIMObjectMapper.mapObject(accountResponseDictionary)
+            
+            let response = Response(model: account, json: accountResponseDictionary)
+            
+            result = Result.Success(result: response)
+        }
+        catch let error as NSError
+        {
+            result = Result.Failure(error: error)
+        }
+        
+        let handledResult = self.handleAuthenticationResult(result)
+        
+        completion(result: handledResult)
+    }
+    
+    /**
      **(PRIVATE: Vimeo Use Only, will not work for third-party applications)**
      Exchange a saved access token granted to another application for a new token granted to the calling application.  This method will allow an application to re-use credentials from another Vimeo application.  Client credentials must be granted before using this method. 
      
@@ -483,7 +512,6 @@ final public class AuthenticationController
             completion(result: handledResult)
         }
     }
-    
     
     private func handleAuthenticationResult(result: Result<Response<VIMAccount>>) -> Result<VIMAccount>
     {
