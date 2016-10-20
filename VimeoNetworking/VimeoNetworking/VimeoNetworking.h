@@ -43,6 +43,7 @@ FOUNDATION_EXPORT const unsigned char VimeoNetworkingVersionString[];
 #import <VimeoNetworking/VIMVideoUtils.h>
 #import <VimeoNetworking/VIMSoundtrack.h>
 #import <VimeoNetworking/VIMVODItem.h>
+#import <VimeoNetworking/VIMRecommendation.h>
 
 #import <VimeoNetworking/Objc_ExceptionCatcher.h>
 
