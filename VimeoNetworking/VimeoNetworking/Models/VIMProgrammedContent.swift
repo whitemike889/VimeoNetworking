@@ -50,6 +50,7 @@ public class VIMProgrammedContent: VIMModelObject
         return self.connections?[connectionName] as? VIMConnection
     }
     
+    //Note: No super call in this method, see explanation in didFinishMapping() [MW] 10/19/16
     override public func getClassForCollectionKey(key: String!) -> AnyClass!
     {
         if key == Constants.ContentKey
@@ -57,9 +58,10 @@ public class VIMProgrammedContent: VIMModelObject
             return VIMVideo.self
         }
         
-        return super.getClassForCollectionKey(key)
+        return nil
     }
     
+    //Note: No super call in this method, see explanation in didFinishMapping() [MW] 10/19/16
     override public func getClassForObjectKey(key: String!) -> AnyClass!
     {
         if key == Constants.MetadataKey
@@ -71,7 +73,7 @@ public class VIMProgrammedContent: VIMModelObject
             return NSArray.self
         }
         
-        return super.getClassForObjectKey(key)
+        return nil
     }
     
     public override func didFinishMapping()

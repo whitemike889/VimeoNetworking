@@ -266,7 +266,10 @@ final internal class ResponseCache
         {
             let directoryURL = self.cachesDirectoryURL()
             
-            let fileURL = directoryURL.URLByAppendingPathComponent(key)
+            guard let fileURL = directoryURL.URLByAppendingPathComponent(key) else
+            {
+                fatalError("failed to create file URL")
+            }
             
             return fileURL
         }
