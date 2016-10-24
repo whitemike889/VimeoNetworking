@@ -16,10 +16,6 @@ public typealias VideoListRequest = Request<[VIMVideo]>
 
 public extension Request
 {
-    private static var TitleKey: String { return "name" }
-    private static var DescriptionKey: String { return "description" }
-    private static var ViewKey: String { return "view" }
-    private static var PrivacyKey: String { return "privacy" }
     private static var QueryKey: String { return "query" }
     
     private static var VideosPath: String { return "/videos" }
