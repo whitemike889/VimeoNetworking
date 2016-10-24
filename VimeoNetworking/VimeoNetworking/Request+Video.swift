@@ -62,32 +62,25 @@ public extension Request
     /**
      Create a `Request` to update a video's metadata
      
-     - parameter videoURI:       the URI of the video to update
-     - parameter newTitle:       a new title, unchanged if nil
-     - parameter newDescription: a new description, unchanged if nil
-     - parameter newPrivacy:     a new privacy, unchanged if nil
+     - parameter videoURI:   the URI of the video to update
+     - parameter parameters: the updated parameters
      
      - returns: a new `Request`
      */
-    public static func patchVideoRequest(videoURI videoURI: String, newTitle: String?, newDescription: String?, newPrivacy: String?) -> Request
+    public static func patchVideoRequest(videoURI videoURI: String, parameters: VimeoClient.RequestParameters) -> Request
     {
-        var parameters = VimeoClient.RequestParameters()
-        
-        if let newTitle = newTitle
-        {
-            parameters[self.TitleKey] = newTitle
-        }
-        
-        if let newDescription = newDescription
-        {
-            parameters[self.DescriptionKey] = newDescription
-        }
-        
-        if let newPrivacy = newPrivacy
-        {
-            parameters[self.PrivacyKey] = [self.ViewKey: newPrivacy]
-        }
-        
-        return Request(method: .PATCH, path: videoURI, parameters: parameters)
+        return Request(method: .PATCH, path: videoURI, parameters: parameters, retryPolicy: .SingleAttempt)
+    }
+    
+    /**
+     Create a `Request` to delete a video
+     
+     - parameter videoURI: the URI of the video to update
+     
+     - returns: a new `Request`
+     */
+    public static func deleteVideoRequest(videoURI videoURI: String) -> Request
+    {
+        return Request(method: .DELETE, path: videoURI, retryPolicy: .SingleAttempt)
     }
 }
