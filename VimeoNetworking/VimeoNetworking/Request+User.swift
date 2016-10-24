@@ -20,10 +20,7 @@ public extension Request
     private static var FollowingPathFormat: String { return "%@/following" }
     private static var FollowersPathFormat: String { return "%@/followers" }
     private static var UsersPath: String { return "/users" }
-    
-    private static var NameKey: String { return "name" }
-    private static var LocationKey: String { return "location" }
-    private static var BioKey: String { return "bio" }
+
     private static var QueryKey: String { return "query" }
     
     /**
@@ -116,32 +113,13 @@ public extension Request
     /**
      Create a request to edit a user's metadata
      
-     - parameter userURI:     the URI of the user to edit
-     - parameter newName:     a new name, unchanged if nil
-     - parameter newLocation: a new location, unchanged if nil
-     - parameter newBio:      a new bio, unchanged if nil
+     - parameter userURI:    the URI of the user to edit
+     - parameter parameters: the updated parameters
      
      - returns: the new `Request`
      */
-    public static func patchUser(userURI userURI: String, newName: String?, newLocation: String?, newBio: String?) -> Request
+    public static func patchUser(userURI userURI: String, parameters: VimeoClient.RequestParameters) -> Request
     {
-        var parameters = VimeoClient.RequestParameters()
-        
-        if let newName = newName
-        {
-            parameters[self.NameKey] = newName
-        }
-        
-        if let newLocation = newLocation
-        {
-            parameters[self.LocationKey] = newLocation
-        }
-        
-        if let newBio = newBio
-        {
-            parameters[self.BioKey] = newBio
-        }
-        
         return Request(method: .PATCH, path: userURI, parameters: parameters)
     }
 }
