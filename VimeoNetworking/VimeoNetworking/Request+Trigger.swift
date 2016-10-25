@@ -79,11 +79,11 @@ extension Request
      
      - returns: a new `Request`
      */
-    public static func pushNotificationTriggers(withDeviceToken deviceToken: String) -> Request
+    public static func pushNotificationTriggers(withDeviceToken deviceToken: String, parameters: VimeoClient.RequestParameters) -> Request
     {
         let uri = self.uri(withDeviceToken: deviceToken) + self.TriggerURI
 
-        return Request(method: .GET, path: uri, modelKeyPath: "data")
+        return Request(method: .GET, path: uri, parameters: parameters, modelKeyPath: "data")
     }
     
     // MARK: Helpers
