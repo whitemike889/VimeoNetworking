@@ -132,10 +132,12 @@ NSString *VIMContentRating_Safe = @"safe";
         return [VIMVideoPlayRepresentation class];
     }
     
+    #if TARGET_OS_TV
     if ([key isEqualToString:@"badge"])
     {
         return [VIMBadge class];
     }
+    #endif
     
     return nil;
 }
