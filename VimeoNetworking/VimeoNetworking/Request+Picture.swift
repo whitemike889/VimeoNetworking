@@ -34,7 +34,7 @@ public extension Request
      */
     public static func deletePictureRequest(pictureURI pictureURI: String) -> Request
     {
-        return Request(method: .DELETE, path: pictureURI, retryPolicy: .SingleAttempt)
+        return Request(method: .DELETE, path: pictureURI)
     }
     
     /**

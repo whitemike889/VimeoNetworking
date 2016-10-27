@@ -65,7 +65,7 @@ public extension Request
      */
     public static func patchVideoRequest(videoURI videoURI: String, parameters: VimeoClient.RequestParameters) -> Request
     {
-        return Request(method: .PATCH, path: videoURI, parameters: parameters, retryPolicy: .SingleAttempt)
+        return Request(method: .PATCH, path: videoURI, parameters: parameters)
     }
     
     /**
@@ -77,6 +77,6 @@ public extension Request
      */
     public static func deleteVideoRequest(videoURI videoURI: String) -> Request
     {
-        return Request(method: .DELETE, path: videoURI, retryPolicy: .SingleAttempt)
+        return Request(method: .DELETE, path: videoURI)
     }
 }
