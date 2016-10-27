@@ -50,6 +50,9 @@ public enum Notification: String
         /// **(Not yet implemented)** Sent when the user stored with the authenticated account is refreshed
     case AuthenticatedAccountDidRefresh
     
+        /// Sent when any object has been updated with new metadata and UI should be updated
+    case ObjectDidUpdate
+    
     // MARK: -
     
     private static let NotificationCenter = NSNotificationCenter.defaultCenter()

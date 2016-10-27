@@ -24,10 +24,11 @@
 //  THE SOFTWARE.
 //
 
-@import VIMObjectMapper;
+#import "VIMModelObject.h"
 
 @interface VIMVideoPreference : VIMModelObject
 
 @property (nonatomic, copy, nullable) NSString *privacy;
+@property (nonatomic, copy, nullable) NSString *password;
 
 @end

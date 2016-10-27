@@ -24,12 +24,13 @@
 //  THE SOFTWARE.
 //
 
-@import VIMObjectMapper;
+#import "VIMModelObject.h"
 
 @interface VIMVideoLog : VIMModelObject
 
 @property (nonatomic, copy, readonly, nullable) NSString *playURLString;
 @property (nonatomic, copy, readonly, nullable) NSString *loadURLString;
+@property (nonatomic, copy, readonly, nullable) NSString *exitURLString;
 @property (nonatomic, copy, readonly, nullable) NSString *likeURLString;
 @property (nonatomic, copy, readonly, nullable) NSString *watchLaterURLString;
 

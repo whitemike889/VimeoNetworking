@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import VIMObjectMapper
 
 private let DefaultModelKeyPath = "data"
 
@@ -16,11 +15,21 @@ private let DefaultModelKeyPath = "data"
  */
 public protocol MappableResponse
 {
-        /// Returns the class type used by `VIMObjectMapper` to deserialize the response
+    /// The base class of the mapped response, used for restricting generic parameters to the base model class
+    associatedtype Element
+    
+    /// Returns the class type used by `VIMObjectMapper` to deserialize the response
     static var mappingClass: AnyClass? { get }
     
-        /// Optionally returns a nested JSON key to reference for mapping
+    /// Optionally returns a nested JSON key to reference for mapping
     static var modelKeyPath: String? { get }
+    
+    /**
+     Implemented by model objects to ensure that their own values are valid for use, called as a step in model object parsing, parsing will fail if this throws an error
+     
+     - throws: An error if a model object's values are somehow invalid.
+     */
+    func validateModel() throws
 }
 
 /**
@@ -28,6 +37,8 @@ public protocol MappableResponse
  */
 extension VIMModelObject: MappableResponse
 {
+    public typealias Element = VIMModelObject
+    
     public static var mappingClass: AnyClass?
     {
         return self
@@ -36,6 +47,18 @@ extension VIMModelObject: MappableResponse
     public static var modelKeyPath: String?
     {
         return nil
+    }
+    
+    public func validateModel() throws
+    {
+        var error: NSError? = nil
+        
+        self.validateModel(&error)
+        
+        if let error = error
+        {
+            throw error
+        }
     }
 }
 
@@ -68,6 +91,30 @@ extension Array: MappableResponse
         
         return nil
     }
+    
+    public func validateModel() throws
+    {
+        for model in self
+        {
+            guard let model = model as? VIMModelObject
+            else
+            {
+                let description = "Mappable array does not have an element type inheriting from VIMModelObject"
+                let error = NSError(domain: VIMModelObjectErrorDomain, code: VIMModelObjectValidationErrorCode, userInfo: [NSLocalizedDescriptionKey: description])
+                
+                throw error
+            }
+            
+            var error: NSError? = nil
+            
+            model.validateModel(&error)
+            
+            if let error = error
+            {
+                throw error
+            }
+        }
+    }
 }
 
 /**
@@ -75,6 +122,8 @@ extension Array: MappableResponse
  */
 public class VIMNullResponse: MappableResponse
 {
+    public typealias Element = VIMNullResponse
+    
     public static var mappingClass: AnyClass?
     {
         return self
@@ -83,5 +132,10 @@ public class VIMNullResponse: MappableResponse
     public static var modelKeyPath: String?
     {
         return nil
+    }
+    
+    public func validateModel() throws
+    {
+        // NO-OP: a null response object is always valid
     }
 }

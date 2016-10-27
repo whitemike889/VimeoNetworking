@@ -24,7 +24,7 @@
 //  THE SOFTWARE.
 //
 
-@import VIMObjectMapper;
+#import "VIMModelObject.h"
 
 @interface VIMSizeQuota : VIMModelObject
 

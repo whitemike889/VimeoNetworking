@@ -9,7 +9,7 @@
 import Foundation
 
 /// `VimeoClient` handles a rich assortment of functionality focused around interacting with the Vimeo API.  A client object tracks an authenticated account, handles the low-level execution of requests through a session manager with caching functionality, presents a high-level `Request` and `Response` interface, and notifies of globally relevant events and errors through `Notification`s
-///
+/// 
 /// To start using a client, first instantiate an `AuthenticationController` to load a stored account or authenticate a new one.  Next, create `Request` instances and pass them into the `request` function, which returns `Response`s on success.
 
 final public class VimeoClient
@@ -62,6 +62,17 @@ final public class VimeoClient
     
     // MARK: -
     
+    private static let PagingKey = "paging"
+    private static let TotalKey = "total"
+    private static let PageKey = "page"
+    private static let PerPageKey = "per_page"
+    private static let NextKey = "next"
+    private static let PreviousKey = "previous"
+    private static let FirstKey = "first"
+    private static let LastKey = "last"
+    
+    // MARK: -
+    
         /// Session manager handles the http session data tasks and request/response serialization
     private let sessionManager: VimeoSessionManager
     
@@ -75,10 +86,15 @@ final public class VimeoClient
      
      - returns: an initialized `VimeoClient`
      */
-    public init(appConfiguration: AppConfiguration)
+    convenience public init(appConfiguration: AppConfiguration)
+    {
+        self.init(appConfiguration: appConfiguration, sessionManager: VimeoSessionManager.defaultSessionManager(appConfiguration: appConfiguration))
+    }
+    
+    public init(appConfiguration: AppConfiguration, sessionManager: VimeoSessionManager)
     {
         self.configuration = appConfiguration
-        self.sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: appConfiguration)
+        self.sessionManager = sessionManager
     }
     
     // MARK: - Configuration
@@ -160,14 +176,11 @@ final public class VimeoClient
                 
                 switch result
                 {
-                case .Success(let response):
+                case .Success(let responseDictionary):
                     
-                    if let response = response
+                    if let responseDictionary = responseDictionary
                     {
-                        dispatch_async(completionQueue)
-                        {
-                            completion(result: .Success(result: response))
-                        }
+                        self.handleTaskSuccess(request: request, task: nil, responseObject: responseDictionary, isCachedResponse: true, isFinalResponse: request.cacheFetchPolicy == .CacheOnly, completionQueue: completionQueue, completion: completion)
                     }
                     else if request.cacheFetchPolicy == .CacheOnly
                     {
@@ -219,13 +232,17 @@ final public class VimeoClient
         let parameters = request.parameters
         
         let success: (NSURLSessionDataTask, AnyObject?) -> Void = { (task, responseObject) in
-            networkRequestCompleted = true
-            self.handleTaskSuccess(request: request, task: task, responseObject: responseObject, completionQueue: completionQueue, completion: completion)
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+                networkRequestCompleted = true
+                self.handleTaskSuccess(request: request, task: task, responseObject: responseObject, completionQueue: completionQueue, completion: completion)
+            }
         }
         
         let failure: (NSURLSessionDataTask?, NSError) -> Void = { (task, error) in
-            networkRequestCompleted = true
-            self.handleTaskFailure(request: request, task: task, error: error, completionQueue: completionQueue, completion: completion)
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+                networkRequestCompleted = true
+                self.handleTaskFailure(request: request, task: task, error: error, completionQueue: completionQueue, completion: completion)
+            }
         }
         
         let task: NSURLSessionDataTask?
@@ -263,9 +280,27 @@ final public class VimeoClient
         return RequestToken(task: requestTask)
     }
     
+    /**
+     Removes any cached responses for a given `Request`
+     
+     - parameter request: the `Request` for which to remove all cached responses
+     */
+    public func removeCachedResponse<ModelType: MappableResponse>(for request: Request<ModelType>)
+    {
+        self.responseCache.removeResponseForRequest(request)
+    }
+    
+    /**
+     Clears a client's cache of all stored responses
+     */
+    public func removeAllCachedResponses()
+    {
+        self.responseCache.clear()
+    }
+    
     // MARK: - Private task completion handlers
     
-    private func handleTaskSuccess<ModelType: MappableResponse>(request request: Request<ModelType>, task: NSURLSessionDataTask, responseObject: AnyObject?, completionQueue: dispatch_queue_t, completion: ResultCompletion<Response<ModelType>>.T)
+    private func handleTaskSuccess<ModelType: MappableResponse>(request request: Request<ModelType>, task: NSURLSessionDataTask?, responseObject: AnyObject?, isCachedResponse: Bool = false, isFinalResponse: Bool = true, completionQueue: dispatch_queue_t, completion: ResultCompletion<Response<ModelType>>.T)
     {
         guard let responseDictionary = responseObject as? ResponseDictionary
         else
@@ -301,6 +336,56 @@ final public class VimeoClient
         {
             let modelObject: ModelType = try VIMObjectMapper.mapObject(responseDictionary, modelKeyPath: request.modelKeyPath)
             
+            var response: Response<ModelType>
+            
+            if let pagingDictionary = responseDictionary[self.dynamicType.PagingKey] as? ResponseDictionary
+            {
+                let totalCount = responseDictionary[self.dynamicType.TotalKey]?.longValue
+                let currentPage = responseDictionary[self.dynamicType.PageKey]?.longValue
+                let itemsPerPage = responseDictionary[self.dynamicType.PerPageKey]?.longValue
+                
+                var nextPageRequest: Request<ModelType>? = nil
+                var previousPageRequest: Request<ModelType>? = nil
+                var firstPageRequest: Request<ModelType>? = nil
+                var lastPageRequest: Request<ModelType>? = nil
+                
+                if let nextPageLink = pagingDictionary[self.dynamicType.NextKey] as? String
+                {
+                    nextPageRequest = request.associatedPageRequest(newPath: nextPageLink)
+                }
+                
+                if let previousPageLink = pagingDictionary[self.dynamicType.PreviousKey] as? String
+                {
+                    previousPageRequest = request.associatedPageRequest(newPath: previousPageLink)
+                }
+                
+                if let firstPageLink = pagingDictionary[self.dynamicType.FirstKey] as? String
+                {
+                    firstPageRequest = request.associatedPageRequest(newPath: firstPageLink)
+                }
+                
+                if let lastPageLink = pagingDictionary[self.dynamicType.LastKey] as? String
+                {
+                    lastPageRequest = request.associatedPageRequest(newPath: lastPageLink)
+                }
+                
+                response = Response<ModelType>(model: modelObject,
+                                               json: responseDictionary,
+                                               isCachedResponse: isCachedResponse,
+                                               isFinalResponse: isFinalResponse,
+                                               totalCount: totalCount,
+                                               page: currentPage,
+                                               itemsPerPage: itemsPerPage,
+                                               nextPageRequest: nextPageRequest,
+                                               previousPageRequest: previousPageRequest,
+                                               firstPageRequest: firstPageRequest,
+                                               lastPageRequest: lastPageRequest)
+            }
+            else
+            {
+                response = Response<ModelType>(model: modelObject, json: responseDictionary, isCachedResponse: isCachedResponse, isFinalResponse: isFinalResponse)
+            }
+            
             // To avoid a poisoned cache, explicitly wait until model object parsing is successful to store responseDictionary [RH]
             if request.shouldCacheResponse
             {
@@ -309,11 +394,13 @@ final public class VimeoClient
             
             dispatch_async(completionQueue)
             {
-                completion(result: .Success(result: Response<ModelType>(model: modelObject, json: responseDictionary)))
+                completion(result: .Success(result: response))
             }
         }
         catch let error
         {
+            self.responseCache.removeResponseForRequest(request)
+            
             self.handleTaskFailure(request: request, task: task, error: error as? NSError, completionQueue: completionQueue, completion: completion)
         }
     }

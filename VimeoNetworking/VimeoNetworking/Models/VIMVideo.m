@@ -38,6 +38,12 @@
 #import "VIMTag.h"
 #import "VIMVideoLog.h"
 #import "VIMCategory.h"
+#import "VIMVideoPlayRepresentation.h"
+#import "VIMVideoDRMFiles.h"
+
+#if TARGET_OS_TV
+#import <VimeoNetworking/VimeoNetworking-Swift.h>
+#endif
 
 NSString *VIMContentRating_Language = @"language";
 NSString *VIMContentRating_Drugs = @"drugs";
@@ -75,7 +81,8 @@ NSString *VIMContentRating_Safe = @"safe";
 - (NSDictionary *)getObjectMapping
 {
     return @{@"description": @"videoDescription",
-             @"pictures": @"pictureCollection"};
+             @"pictures": @"pictureCollection",
+             @"play": @"playRepresentation"};
 }
 
 - (Class)getClassForCollectionKey:(NSString *)key
@@ -94,24 +101,48 @@ NSString *VIMContentRating_Safe = @"safe";
 
 - (Class)getClassForObjectKey:(NSString *)key
 {
-    if( [key isEqualToString:@"pictures"] )
+    if ([key isEqualToString:@"pictures"])
+    {
         return [VIMPictureCollection class];
+    }
 
-    if([key isEqualToString:@"user"])
+    if ([key isEqualToString:@"user"])
+    {
         return [VIMUser class];
+    }
 
-	if([key isEqualToString:@"metadata"])
+	if ([key isEqualToString:@"metadata"])
+    {
         return [NSMutableDictionary class];
+    }
 
-    if([key isEqualToString:@"privacy"])
+    if ([key isEqualToString:@"privacy"])
+    {
         return [VIMPrivacy class];
+    }
     
-    if([key isEqualToString:@"appeal"])
+    if ([key isEqualToString:@"appeal"])
+    {
         return [VIMAppeal class];
+    }
     
-    if( [key isEqualToString:@"log"] )
+    if ([key isEqualToString:@"log"])
+    {
         return [VIMVideoLog class];
-
+    }
+    
+    if ([key isEqualToString:@"play"])
+    {
+        return [VIMVideoPlayRepresentation class];
+    }
+    
+    #if TARGET_OS_TV
+    if ([key isEqualToString:@"badge"])
+    {
+        return [VIMBadge class];
+    }
+    #endif
+    
     return nil;
 }
 
@@ -128,6 +159,7 @@ NSString *VIMContentRating_Safe = @"safe";
     [self parseConnections];
     [self parseInteractions];
     [self formatCreatedTime];
+    [self formatReleaseTime];
     [self formatModifiedTime];
     
     id ob = [self.stats valueForKey:@"plays"];
@@ -137,6 +169,34 @@ NSString *VIMContentRating_Safe = @"safe";
     }
     
     [self setVideoStatus];
+}
+
+#pragma mark - Model Validation
+
+- (void)validateModel:(NSError *__autoreleasing *)error
+{
+    [super validateModel:error];
+    
+    if (*error)
+    {
+        return;
+    }
+    
+    if (self.uri == nil)
+    {
+        NSString *description = @"VIMVideo failed validation: uri cannot be nil";
+        *error = [NSError errorWithDomain:VIMModelObjectErrorDomain code:VIMModelObjectValidationErrorCode userInfo:@{NSLocalizedDescriptionKey: description}];
+        
+        return;
+    }
+    
+    if (self.resourceKey == nil)
+    {
+        NSString *description = @"VIMVideo failed validation: resourceKey cannot be nil";
+        *error = [NSError errorWithDomain:VIMModelObjectErrorDomain code:VIMModelObjectValidationErrorCode userInfo:@{NSLocalizedDescriptionKey: description}];
+        
+        return;
+    }
 }
 
 #pragma mark - Model Versioning
@@ -229,6 +289,14 @@ NSString *VIMContentRating_Safe = @"safe";
     self.interactions = interactions;
 }
 
+- (void)formatReleaseTime
+{
+    if ([self.releaseTime isKindOfClass:[NSString class]])
+    {
+        self.releaseTime = [[VIMModelObject dateFormatter] dateFromString:(NSString *)self.releaseTime];
+    }
+}
+
 - (void)formatCreatedTime
 {
     if ([self.createdTime isKindOfClass:[NSString class]])
@@ -295,12 +363,6 @@ NSString *VIMContentRating_Safe = @"safe";
 - (BOOL)canViewComments
 {
     return [self connectionWithName:VIMConnectionNameComments].uri != nil;
-}
-
-- (BOOL)isVOD
-{
-    NSString *privacy = self.privacy.view;
-    return [privacy isEqualToString:VIMPrivacy_VOD];
 }
 
 - (BOOL)isPrivate
@@ -377,6 +439,10 @@ NSString *VIMContentRating_Safe = @"safe";
     return ![contentRating isEqualToString:VIMContentRating_Unrated] && ![contentRating isEqualToString:VIMContentRating_Safe];
 }
 
+- (BOOL)isDRMProtected
+{
+    return self.playRepresentation.drmFiles.fairPlayFile != nil;
+}
 
 - (NSString *)singleContentRatingIfAvailable
 {

@@ -29,12 +29,14 @@ private let GrantTypePinCode = "device_grant"
 
 private let AuthenticationPathClientCredentials = "oauth/authorize/client"
 private let AuthenticationPathAccessToken = "oauth/authorize/password"
+private let AuthenticationPathAccessTokenVerify = "oauth/verify"
 private let AuthenticationPathUsers = "users"
 private let AuthenticationPathFacebookToken = "oauth/authorize/facebook"
 private let AuthenticationPathCodeGrant = "oauth/access_token"
 private let AuthenticationPathPinCode = "oauth/device"
 private let AuthenticationPathPinCodeAuthorize = "oauth/device/authorize"
 private let AuthenticationPathAppTokenExchange = "oauth/appexchange"
+
 
 // MARK: -
 
@@ -93,6 +95,16 @@ extension Request where ModelType: VIMAccount
                                                          PasswordKey: password]
         
         return Request(method: .POST, path: AuthenticationPathAccessToken, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
+    }
+    
+    /**
+     Construct a `Request` for verifying a given access token
+    
+     - returns: a new `Request`
+     */
+    static func verifyAccessTokenRequest() -> Request
+    {
+        return Request(method: .GET, path: AuthenticationPathAccessTokenVerify, parameters: nil, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
     
     /**

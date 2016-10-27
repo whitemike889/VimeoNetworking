@@ -119,7 +119,7 @@ final public class AuthenticationController
         {
             print("Loaded \(accountType) account \(loadedAccount)")
 
-            try self.authenticateClient(account: loadedAccount)
+            try self.setClientAccount(with: loadedAccount)
         }
         else
         {
@@ -225,6 +225,21 @@ final public class AuthenticationController
         let request = AuthenticationRequest.codeGrantRequest(code: code, redirectURI: self.codeGrantRedirectURI)
         
         self.authenticate(request: request, completion: completion)
+    }
+    
+    /**
+     Execute a constant token grant request. This type of authentication allows access to public and personnal content on Vimeo. Constant token are usually generated for API apps see https://developer.vimeo.com/apps
+     
+     - parameter token: a constant token generated for your api's app
+     - parameter completion: handles authentication success or failure
+     */
+    public func accessToken(token: String, completion: AuthenticationCompletion)
+    {
+        let customSessionManager =  VimeoSessionManager.defaultSessionManager(accessTokenProvider: {token})
+        let adhocClient = VimeoClient(appConfiguration: self.configuration, sessionManager: customSessionManager)
+        let request = AuthenticationRequest.verifyAccessTokenRequest()
+
+        self.authenticate(adhocClient, request: request, completion: completion)
     }
     
     // MARK: - Private Authentication
@@ -441,11 +456,12 @@ final public class AuthenticationController
         
         if loadClientCredentials
         {
-            self.client.currentAccount = (try? self.accountStore.loadAccount(.ClientCredentials)) ?? nil
+            let loadedClientCredentialsAccount = (try? self.accountStore.loadAccount(.ClientCredentials)) ?? nil
+            try self.setClientAccount(with: loadedClientCredentialsAccount, shouldClearCache: true)
         }
         else
         {
-            self.client.currentAccount = nil
+            try self.setClientAccount(with: nil, shouldClearCache: true)
         }
         
         try self.accountStore.removeAccount(.User)
@@ -455,13 +471,19 @@ final public class AuthenticationController
     
     private func authenticate(request request: AuthenticationRequest, completion: AuthenticationCompletion)
     {
-        self.authenticatorClient.request(request) { result in
+        self.authenticate(self.authenticatorClient, request: request, completion: completion)
+    }
+    
+    private func authenticate(client: VimeoClient, request request: AuthenticationRequest, completion: AuthenticationCompletion)
+    {
+        client.request(request) { result in
             
             let handledResult = self.handleAuthenticationResult(result)
             
             completion(result: handledResult)
         }
     }
+    
     
     private func handleAuthenticationResult(result: Result<Response<VIMAccount>>) -> Result<VIMAccount>
     {
@@ -494,7 +516,7 @@ final public class AuthenticationController
         
         do
         {
-            try self.authenticateClient(account: account)
+            try self.setClientAccount(with: account, shouldClearCache: true)
             
             let accountType: AccountStore.AccountType = (account.user != nil) ? .User : .ClientCredentials
             
@@ -508,18 +530,24 @@ final public class AuthenticationController
         return .Success(result: account)
     }
     
-    private func authenticateClient(account account: VIMAccount) throws
+    private func setClientAccount(with account: VIMAccount?, shouldClearCache: Bool = false) throws
     {
-        guard account.accessToken != nil
+        // Account can be nil (to log out) but if it's non-nil, it needs an access token or it's malformed [RH]
+        guard account == nil || account?.accessToken != nil
         else
         {
-            let errorDescription = "AuthenticationController did not recieve an access token with account response"
+            let errorDescription = "AuthenticationController tried to set a client account with no access token"
             
             assertionFailure(errorDescription)
             
             let error = NSError(domain: self.dynamicType.ErrorDomain, code: LocalErrorCode.AuthToken.rawValue, userInfo: [NSLocalizedDescriptionKey: errorDescription])
             
             throw error
+        }
+        
+        if shouldClearCache
+        {
+            self.client.removeAllCachedResponses()
         }
         
         self.client.currentAccount = account

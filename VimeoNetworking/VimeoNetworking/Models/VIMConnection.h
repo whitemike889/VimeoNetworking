@@ -24,13 +24,14 @@
 //  THE SOFTWARE.
 //
 
-@import VIMObjectMapper;
+#import "VIMModelObject.h"
 
 // Connection names
 
 extern NSString *const __nonnull VIMConnectionNameActivities;
 extern NSString *const __nonnull VIMConnectionNameAlbums;
 extern NSString *const __nonnull VIMConnectionNameChannels;
+extern NSString *const __nonnull VIMConnectionNameCategories;
 extern NSString *const __nonnull VIMConnectionNameRelated;
 extern NSString *const __nonnull VIMConnectionNameRecommendations;
 extern NSString *const __nonnull VIMConnectionNameComments;
@@ -48,13 +49,26 @@ extern NSString *const __nonnull VIMConnectionNamePortfolios;
 extern NSString *const __nonnull VIMConnectionNameShared;
 extern NSString *const __nonnull VIMConnectionNameVideos;
 extern NSString *const __nonnull VIMConnectionNameWatchlater;
+extern NSString *const __nonnull VIMConnectionNameWatchedVideos;
 extern NSString *const __nonnull VIMConnectionNameViolations;
+extern NSString *const __nonnull VIMConnectionNameVODItem;
+extern NSString *const __nonnull VIMConnectionNameVODTrailer;
+extern NSString *const __nonnull VIMConnectionNameVODSeasons;
+extern NSString *const __nonnull VIMConnectionNameRecommendedChannels;
+extern NSString *const __nonnull VIMConnectionNameRecommendedUsers;
+extern NSString *const __nonnull VIMConnectionNameModeratedChannels;
+extern NSString *const __nonnull VIMConnectionNameContents;
 
 @interface VIMConnection : VIMModelObject
 
 @property (nonatomic, copy, nullable) NSString *uri;
 @property (nonatomic, strong, nullable) NSNumber *total;
 @property (nonatomic, strong, nullable) NSArray *options;
+
+#pragma mark - VOD related only
+@property (nonatomic, strong, nullable) NSNumber *extraVideosCount;
+@property (nonatomic, strong, nullable) NSNumber *mainVideosCount;
+@property (nonatomic, strong, nullable) NSNumber *viewableVideosCount;
 
 - (BOOL)canGet;
 - (BOOL)canPost;

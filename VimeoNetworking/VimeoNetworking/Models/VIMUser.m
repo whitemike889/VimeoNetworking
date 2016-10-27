@@ -32,12 +32,14 @@
 #import "VIMPicture.h"
 #import "VIMPreference.h"
 #import "VIMUploadQuota.h"
+#import "VIMUserBadge.h"
 
 @interface VIMUser ()
 
 @property (nonatomic, strong) NSDictionary *metadata;
 @property (nonatomic, strong) NSDictionary *connections;
 @property (nonatomic, strong) NSDictionary *interactions;
+@property (nonatomic, strong, nullable) NSArray *emails;
 
 @property (nonatomic, assign, readwrite) VIMUserAccountType accountType;
 
@@ -66,6 +68,11 @@
 
 - (Class)getClassForObjectKey:(NSString *)key
 {
+    if ([key isEqualToString:@"badge"])
+    {
+        return [VIMUserBadge class];
+    }
+    
     if ([key isEqualToString:@"pictures"])
     {
         return [VIMPictureCollection class];
@@ -97,8 +104,38 @@
     [self parseConnections];
     [self parseInteractions];
     [self parseAccountType];
+    [self parseEmails];
     [self formatCreatedTime];
     [self formatModifiedTime];
+}
+
+#pragma mark - Model Validation
+
+- (void)validateModel:(NSError *__autoreleasing *)error
+{
+    [super validateModel:error];
+    
+    if (*error)
+    {
+        return;
+    }
+    
+    if (self.uri == nil)
+    {
+        NSString *description = @"VIMUser failed validation: uri cannot be nil";
+        *error = [NSError errorWithDomain:VIMModelObjectErrorDomain code:VIMModelObjectValidationErrorCode userInfo:@{NSLocalizedDescriptionKey: description}];
+        
+        return;
+    }
+    
+    // TODO: Uncomment this when user objects get resource keys [RH] (5/17/16)
+    //    if (self.resourceKey == nil)
+    //    {
+    //        NSString *description = @"VIMUser failed validation: resourceKey cannot be nil";
+    //        *error = [NSError errorWithDomain:VIMModelObjectErrorDomain code:VIMModelObjectValidationErrorCode userInfo:@{NSLocalizedDescriptionKey: description}];
+    //
+    //        return;
+    //    }
 }
 
 #pragma mark - Parsing Helpers
@@ -162,6 +199,27 @@
     {
         self.accountType = VIMUserAccountTypeBasic;
     }
+    else if ([self.account isEqualToString:@"business"])
+    {
+        self.accountType = VIMUserAccountTypeBusiness;
+    }
+}
+
+- (void)parseEmails
+{
+    NSMutableArray *parsedEmails = [[NSMutableArray alloc] init];
+    
+    for (NSDictionary *email in self.emails)
+    {
+        NSString *emailString = email[@"email"];
+        
+        if (emailString)
+        {
+            [parsedEmails addObject:emailString];
+        }
+    }
+    
+    self.userEmails = parsedEmails; 
 }
 
 - (void)formatCreatedTime
@@ -201,16 +259,12 @@
         default:
         case VIMUserAccountTypeBasic:
             return @"basic";
-            break;
         case VIMUserAccountTypePlus:
             return @"plus";
-            break;
         case VIMUserAccountTypePro:
             return @"pro";
-            break;
-        case VIMUserAccountTypeStaff:
-            return @"staff";
-            break;
+        case VIMUserAccountTypeBusiness:
+            return @"business";
     }
 }
 

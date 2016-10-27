@@ -31,6 +31,7 @@
 NSString *const VIMConnectionNameActivities = @"activities";
 NSString *const VIMConnectionNameAlbums = @"albums";
 NSString *const VIMConnectionNameChannels = @"channels";
+NSString *const VIMConnectionNameCategories = @"categories";
 NSString *const VIMConnectionNameRelated = @"related";
 NSString *const VIMConnectionNameRecommendations = @"recommendations";
 NSString *const VIMConnectionNameComments = @"comments";
@@ -48,9 +49,36 @@ NSString *const VIMConnectionNamePortfolios = @"portfolios";
 NSString *const VIMConnectionNameShared = @"shared";
 NSString *const VIMConnectionNameVideos = @"videos";
 NSString *const VIMConnectionNameWatchlater = @"watchlater";
+NSString *const VIMConnectionNameWatchedVideos = @"watched_videos";
 NSString *const VIMConnectionNameViolations = @"violations";
+NSString *const VIMConnectionNameVODItem = @"ondemand";
+NSString *const VIMConnectionNameVODTrailer = @"trailer";
+NSString *const VIMConnectionNameVODSeasons = @"seasons";
+NSString *const VIMConnectionNameRecommendedChannels = @"recommended_channels";
+NSString *const VIMConnectionNameRecommendedUsers = @"recommended_users";
+NSString *const VIMConnectionNameModeratedChannels = @"moderated_channels";
+NSString *const VIMConnectionNameContents = @"contents";
+
+@interface VIMConnection()
+@property (nonatomic, strong, nullable) NSNumber *extra_total;
+@property (nonatomic, strong, nullable) NSNumber *main_total;
+@property (nonatomic, strong, nullable) NSNumber *viewable_total;
+@end
 
 @implementation VIMConnection
+
+#pragma mark - VIMMappable
+
+- (void)didFinishMapping
+{
+    // TODO: Why not use getObjectMapping to achieve below?
+    // That method won't be called if a VIMModelObject is created with initWithKeyValueDictionary
+    // We should fix that or make this aspect of object mapping more transparent [NL] 05/21/2016
+    
+    self.extraVideosCount = self.extra_total;
+    self.mainVideosCount = self.main_total;
+    self.viewableVideosCount = self.viewable_total;
+}
 
 - (BOOL)canGet
 {

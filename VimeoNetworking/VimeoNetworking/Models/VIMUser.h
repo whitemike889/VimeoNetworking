@@ -24,25 +24,27 @@
 //  THE SOFTWARE.
 //
 
-@import VIMObjectMapper;
+#import "VIMModelObject.h"
 
 @class VIMConnection;
 @class VIMInteraction;
 @class VIMPictureCollection;
 @class VIMPreference;
 @class VIMUploadQuota;
+@class VIMUserBadge;
 
 typedef NS_ENUM(NSInteger, VIMUserAccountType)
 {
     VIMUserAccountTypeBasic = 0,
     VIMUserAccountTypePro,
     VIMUserAccountTypePlus,
-    VIMUserAccountTypeStaff
+    VIMUserAccountTypeBusiness
 };
 
 @interface VIMUser : VIMModelObject
 
 @property (nonatomic, assign, readonly) VIMUserAccountType accountType;
+@property (nonatomic, strong, nullable) VIMUserBadge *badge;
 @property (nonatomic, copy, nullable) NSString *bio;
 @property (nonatomic, copy, nullable) NSArray *contentFilter;
 @property (nonatomic, strong, nullable) NSDate *createdTime;
@@ -54,6 +56,7 @@ typedef NS_ENUM(NSInteger, VIMUserAccountType)
 @property (nonatomic, strong, nullable) id stats;
 @property (nonatomic, copy, nullable) NSString *uri;
 @property (nonatomic, strong, nullable) NSArray *websites;
+@property (nonatomic, strong, nullable) NSArray *userEmails;
 @property (nonatomic, strong, nullable) VIMPreference *preferences;
 @property (nonatomic, strong, nullable) VIMUploadQuota *uploadQuota;
 @property (nonatomic, copy, nullable) NSString *account;
