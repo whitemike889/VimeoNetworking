@@ -6,7 +6,7 @@
 //  Copyright © 2016 Vimeo. All rights reserved.
 //
 
-@import VIMObjectMapper;
+#include "VIMModelObject.h"
 
 @interface VIMThumbnailUploadTicket : VIMModelObject
 
