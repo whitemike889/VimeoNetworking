@@ -1,6 +1,6 @@
 //
 //  VIMVideoDRMFiles.h
-//  Vimeo
+//  VimeoNetworking
 //
 //  Created by King, Gavin on 7/13/16.
 //  Copyright © 2016 Vimeo. All rights reserved.

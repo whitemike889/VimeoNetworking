@@ -1,6 +1,6 @@
 //
 //  VIMVideoLog.h
-//  VIMNetworking
+//  VimeoNetworking
 //
 //  Created by Hanssen, Alfie on 11/19/14.
 //  Copyright (c) 2014-2015 Vimeo (https://vimeo.com)

@@ -1,6 +1,6 @@
 //
 //  VIMChannel.h
-//  VIMNetworking
+//  VimeoNetworking
 //
 //  Created by Hanssen, Alfie on 9/30/14.
 //  Copyright (c) 2014-2015 Vimeo (https://vimeo.com)
