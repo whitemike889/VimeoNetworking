@@ -125,30 +125,6 @@ final public class VimeoClient
         }
     }
     
-//        /// Returns the current authenticated user, if one exists
-//    public var authenticatedUser: VIMUser?
-//    {
-//        return self.currentAccount?.user
-//    }
-//    
-//        /// Returns true if the current account exists and is authenticated
-//    public var isAuthenticated: Bool
-//    {
-//        return self.currentAccount?.isAuthenticated() ?? false
-//    }
-//    
-//        /// Returns true if the current account exists, is authenticated, and is of type User
-//    public var isAuthenticatedWithUser: Bool
-//    {
-//        return self.currentAccount?.isAuthenticatedWithUser() ?? false
-//    }
-//    
-//        /// Returns true if the current account exists, is authenticated, and is of type ClientCredentials
-//    public var isAuthenticatedWithClientCredentials: Bool
-//    {
-//        return self.currentAccount?.isAuthenticatedWithClientCredentials() ?? false
-//    }
-    
     // MARK: - Request
     
     /**
