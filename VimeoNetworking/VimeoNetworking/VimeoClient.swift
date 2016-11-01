@@ -55,7 +55,10 @@ final public class VimeoClient
     }
     
         /// Dictionary containing URL parameters for a request
-    public typealias RequestParameters = [String: AnyObject]
+    public typealias RequestDictionary = [String: AnyObject]
+    
+        /// Array containing URL parameters for a request
+    public typealias RequestArray = [AnyObject]
     
         /// Dictionary containing a JSON response
     public typealias ResponseDictionary = [String: AnyObject]
@@ -65,14 +68,14 @@ final public class VimeoClient
     
     // MARK: -
     
-    private static let PagingKey = "paging"
-    private static let TotalKey = "total"
-    private static let PageKey = "page"
-    private static let PerPageKey = "per_page"
-    private static let NextKey = "next"
-    private static let PreviousKey = "previous"
-    private static let FirstKey = "first"
-    private static let LastKey = "last"
+    internal static let PagingKey = "paging"
+    internal static let TotalKey = "total"
+    internal static let PageKey = "page"
+    internal static let PerPageKey = "per_page"
+    internal static let NextKey = "next"
+    internal static let PreviousKey = "previous"
+    internal static let FirstKey = "first"
+    internal static let LastKey = "last"
     
     // MARK: -
     
@@ -207,9 +210,6 @@ final public class VimeoClient
             break
         }
         
-        let path = request.path
-        let parameters = request.parameters
-        
         let success: (NSURLSessionDataTask, AnyObject?) -> Void = { (task, responseObject) in
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
                 networkRequestCompleted = true
@@ -223,6 +223,9 @@ final public class VimeoClient
                 self.handleTaskFailure(request: request, task: task, error: error, completionQueue: completionQueue, completion: completion)
             }
         }
+
+        let path = request.path
+        let parameters = request.parameters
         
         let task: NSURLSessionDataTask?
         

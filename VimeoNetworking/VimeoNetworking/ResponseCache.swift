@@ -8,6 +8,19 @@
 
 import Foundation
 
+private typealias ResponseDictionaryClosure = (responseDictionary: VimeoClient.ResponseDictionary?) -> Void
+
+private protocol Cache
+{
+    func setResponseDictionary(responseDictionary: VimeoClient.ResponseDictionary, forKey key: String)
+    
+    func responseDictionary(forKey key: String, completion: ResponseDictionaryClosure)
+    
+    func removeResponseDictionary(forKey key: String)
+    
+    func removeAllResponseDictionaries()
+}
+
 /// Response cache handles the storage of JSON response dictionaries indexed by their associated `Request`.  It contains both memory and disk caching functionality
 final internal class ResponseCache
 {
@@ -35,22 +48,18 @@ final internal class ResponseCache
     {
         let key = request.cacheKey
         
-        if let responseDictionary = self.memoryCache.responseDictionaryForKey(key)
-        {
-            completion(result: .Success(result: responseDictionary))
-        }
-        else
-        {
-            self.diskCache.responseDictionaryForKey(key) { responseDictionary in
-                
-                if let responseDictionary = responseDictionary
-                {
+        self.memoryCache.responseDictionary(forKey: key) { (responseDictionary) in
+            
+            if let responseJSON = responseDictionary
+            {
+                completion(result: .Success(result: responseDictionary))
+            }
+            else
+            {
+                self.diskCache.responseDictionary(forKey: key, completion: { (responseDictionary) in
+                    
                     completion(result: .Success(result: responseDictionary))
-                }
-                else
-                {
-                    completion(result: .Success(result: nil))
-                }
+                })
             }
         }
     }
@@ -64,8 +73,8 @@ final internal class ResponseCache
     {
         let key = request.cacheKey
         
-        self.memoryCache.removeResponseDictionaryForKey(key)
-        self.diskCache.removeResponseDictionaryForKey(key)
+        self.memoryCache.removeResponseDictionary(forKey: key)
+        self.diskCache.removeResponseDictionary(forKey: key)
     }
     
     /**
@@ -73,15 +82,15 @@ final internal class ResponseCache
      */
     func clear()
     {
-        self.memoryCache.removeAllResponses()
-        self.diskCache.removeAllResponses()
+        self.memoryCache.removeAllResponseDictionaries()
+        self.diskCache.removeAllResponseDictionaries()
     }
-    
+
     // MARK: - Memory Cache
     
     private let memoryCache = ResponseMemoryCache()
     
-    private class ResponseMemoryCache
+    private class ResponseMemoryCache: Cache
     {
         private let cache = NSCache()
         
@@ -90,19 +99,19 @@ final internal class ResponseCache
             self.cache.setObject(responseDictionary, forKey: key)
         }
         
-        private func responseDictionaryForKey(key: String) -> VimeoClient.ResponseDictionary?
+        private func responseDictionary(forKey key: String, completion: ResponseDictionaryClosure)
         {
-            let object = self.cache.objectForKey(key) as? VimeoClient.ResponseDictionary
+            let responseDictionary = self.cache.objectForKey(key) as? VimeoClient.ResponseDictionary
             
-            return object
+            completion(responseDictionary: responseDictionary)
         }
         
-        private func removeResponseDictionaryForKey(key: String)
+        private func removeResponseDictionary(forKey key: String)
         {
             self.cache.removeObjectForKey(key)
         }
         
-        private func removeAllResponses()
+        private func removeAllResponseDictionaries()
         {
             self.cache.removeAllObjects()
         }
@@ -112,7 +121,7 @@ final internal class ResponseCache
     
     private let diskCache = ResponseDiskCache()
     
-    private class ResponseDiskCache
+    private class ResponseDiskCache: Cache
     {
         private let queue = dispatch_queue_create("com.vimeo.VIMCache.diskQueue", DISPATCH_QUEUE_CONCURRENT)
         
@@ -157,7 +166,7 @@ final internal class ResponseCache
             }
         }
         
-        private func responseDictionaryForKey(key: String, completion: (VimeoClient.ResponseDictionary? -> Void))
+        private func responseDictionary(forKey key: String, completion: ResponseDictionaryClosure)
         {
             dispatch_async(self.queue) {
                 
@@ -172,7 +181,7 @@ final internal class ResponseCache
                 guard let data = NSData(contentsOfFile: filePath)
                 else
                 {
-                    completion(nil)
+                    completion(responseDictionary: nil)
                     
                     return
                 }
@@ -191,11 +200,11 @@ final internal class ResponseCache
                     print("error decoding response dictionary: \(error)")
                 }
                 
-                completion(responseDictionary)
+                completion(responseDictionary: responseDictionary)
             }
         }
         
-        private func removeResponseDictionaryForKey(key: String)
+        private func removeResponseDictionary(forKey key: String)
         {
             dispatch_barrier_async(self.queue) {
                 
@@ -220,7 +229,7 @@ final internal class ResponseCache
             }
         }
         
-        private func removeAllResponses()
+        private func removeAllResponseDictionaries()
         {
             dispatch_barrier_async(self.queue) {
                 
