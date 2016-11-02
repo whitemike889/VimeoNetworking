@@ -8,7 +8,7 @@
 
 extension Request
 {
-    private static var TriggerURI: String { return "/triggers" }
+    private static var TriggersURI: String { return "/triggers" }
 
     /// `Request` that returns a single `VIMTrigger`
     public typealias TriggerRequest = Request<VIMTrigger>
@@ -55,7 +55,7 @@ extension Request
      */
     public static func addPushNotificationTrigger(withParameters parameters: VimeoClient.RequestDictionary) -> Request
     {
-        return Request(method: .POST, path: self.TriggerURI, parameters: parameters)
+        return Request(method: .POST, path: self.TriggersURI, parameters: parameters)
     }
     
     /**
@@ -81,9 +81,9 @@ extension Request
      */
     public static func pushNotificationTriggers(withDeviceToken deviceToken: String, parameters: VimeoClient.RequestArray) -> Request
     {
-        let uri = self.uri(withDeviceToken: deviceToken) + self.TriggerURI
+        let uri = self.uri(withDeviceToken: deviceToken) + self.TriggersURI
 
-        return Request(method: .GET, path: uri, parameters: parameters, modelKeyPath: "data")
+        return Request(method: .PUT, path: uri, parameters: parameters, modelKeyPath: "data")
     }
     
     // MARK: Helpers
