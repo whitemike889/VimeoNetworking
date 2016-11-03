@@ -213,6 +213,25 @@ public extension NSError
         return nil
     }
     
+        /// Returns the invalid parameters of the failing response, if available
+    public var vimeoInvalidParametersErrorCodes: [Int]
+    {
+        var errorCodes: [Int] = []
+        
+        if let json = self.errorResponseBodyJSON, let invalidParameters = json[self.dynamicType.VimeoInvalidParametersKey] as? [[String: AnyObject]]
+        {
+            for invalidParameter in invalidParameters
+            {
+                if let code = invalidParameter[self.dynamicType.VimeoErrorCodeKey] as? Int
+                {
+                    errorCodes.append(code)
+                }
+            }
+        }
+        
+        return errorCodes
+    }
+    
         /// Returns the api error JSON dictionary, if available
     public var errorResponseBodyJSON: [String: AnyObject]?
     {
@@ -233,43 +252,21 @@ public extension NSError
         return nil
     }
     
-        /// Returns an array of error codes from the api error JSON dictionary if any exist, otherwise returns an empty array
-    public var vimeoInvalidParametersErrorCodes: [Int] {
-        
-        var errorCodes: [Int] = []
-        
-        guard let json = self.errorResponseBodyJSON else {
-            return errorCodes
-        }
-        
-        guard let invalidParameters = json[self.dynamicType.VimeoInvalidParametersKey] as? NSArray else {
-            return errorCodes
-        }
-        
-        for errorJSON in invalidParameters {
-            if let errorCode = errorJSON[self.dynamicType.VimeoErrorCodeKey] as? Int {
-                errorCodes.append(errorCode)
-            }
-        }
-        
-        return errorCodes
-    }
-    
         /// Returns the first error code from the api error JSON dictionary if it exists, otherwise returns NSNotFound
     public var vimeoInvalidParametersFirstErrorCode: Int
     {
         return self.vimeoInvalidParametersErrorCodes.first ?? NSNotFound
     }
     
-    public var vimeoInvalidParametersFirstVimeoUserMessage: String? {
-        
-        guard let json = self.errorResponseBodyJSON,
-            invalidParameters = json[self.dynamicType.VimeoInvalidParametersKey] as? NSArray else {
+        /// Returns the user message from the api error JSON dictionary if it exists
+    public var vimeoInvalidParametersFirstVimeoUserMessage: String?
+    {
+        guard let json = self.errorResponseBodyJSON, invalidParameters = json[self.dynamicType.VimeoInvalidParametersKey] as? [AnyObject] else
+        {
             return nil
         }
         
-        let errorJSON = invalidParameters.firstObject
-        return errorJSON?[self.dynamicType.VimeoUserMessageKey] as? String
+        return invalidParameters.first?[self.dynamicType.VimeoUserMessageKey] as? String
     }
     
         /// Returns an underscore separated string of all the error codes in the the api error JSON dictionary if any exist, otherwise returns nil
@@ -277,12 +274,15 @@ public extension NSError
     {
         let errorCodes = self.vimeoInvalidParametersErrorCodes
         
-        guard errorCodes.count > 0 else {
+        guard errorCodes.count > 0 else
+        {
             return nil
         }
         
         var result = ""
-        for code in errorCodes {
+        
+        for code in errorCodes
+        {
             result += "\(code)_"
         }
         
@@ -292,7 +292,8 @@ public extension NSError
         /// Returns the "error" key from the api error JSON dictionary if it exists, otherwise returns nil
     public var vimeoUserMessage: String?
     {
-        guard let json = self.errorResponseBodyJSON else {
+        guard let json = self.errorResponseBodyJSON else
+        {
             return nil
         }
         
@@ -302,7 +303,8 @@ public extension NSError
         /// Returns the "developer_message" key from the api error JSON dictionary if it exists, otherwise returns nil
     public var vimeoDeveloperMessage: String?
     {
-        guard let json = self.errorResponseBodyJSON else {
+        guard let json = self.errorResponseBodyJSON else
+        {
             return nil
         }
         

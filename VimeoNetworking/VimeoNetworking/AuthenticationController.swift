@@ -211,9 +211,9 @@ final public class AuthenticationController
     public func codeGrant(responseURL responseURL: NSURL, completion: AuthenticationCompletion)
     {
         guard let queryString = responseURL.query,
-            let parameters = queryString.parametersFromQueryString(),
-            let code = parameters[self.dynamicType.CodeKey],
-            let state = parameters[self.dynamicType.StateKey]
+            let parametersDictionary = queryString.parametersDictionaryFromQueryString(),
+            let code = parametersDictionary[self.dynamicType.CodeKey],
+            let state = parametersDictionary[self.dynamicType.StateKey]
         else
         {
             let errorDescription = "Could not retrieve parameters from code grant response"
@@ -319,6 +319,35 @@ final public class AuthenticationController
         let request = AuthenticationRequest.joinFacebookRequest(facebookToken: facebookToken, scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
+    }
+    
+    /**
+     **(PRIVATE: Vimeo Use Only)**
+     Log in with an account response dictionary
+     
+     - parameter accountResponseDictionary: account response dictionary
+     - parameter completion:                handler for authentication success or failure
+     */
+    public func authenticate(withAccountResponseDictionary accountResponseDictionary: VimeoClient.ResponseDictionary, completion: AuthenticationCompletion)
+    {
+        let result: Result<Response<VIMAccount>>
+        
+        do
+        {
+            let account: VIMAccount = try VIMObjectMapper.mapObject(accountResponseDictionary)
+            
+            let response = Response(model: account, json: accountResponseDictionary)
+            
+            result = Result.Success(result: response)
+        }
+        catch let error as NSError
+        {
+            result = Result.Failure(error: error)
+        }
+        
+        let handledResult = self.handleAuthenticationResult(result)
+        
+        completion(result: handledResult)
     }
     
     /**
@@ -455,7 +484,7 @@ final public class AuthenticationController
      */
     public func logOut(loadClientCredentials loadClientCredentials: Bool = true) throws
     {
-        guard self.client.isAuthenticatedWithUser == true
+        guard self.client.currentAccount?.isAuthenticatedWithUser() == true
         else
         {
             return
@@ -501,7 +530,6 @@ final public class AuthenticationController
             completion(result: handledResult)
         }
     }
-    
     
     private func handleAuthenticationResult(result: Result<Response<VIMAccount>>) -> Result<VIMAccount>
     {

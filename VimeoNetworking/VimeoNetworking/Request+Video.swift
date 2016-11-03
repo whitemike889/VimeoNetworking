@@ -34,10 +34,6 @@ public typealias VideoListRequest = Request<[VIMVideo]>
 
 public extension Request
 {
-    private static var TitleKey: String { return "name" }
-    private static var DescriptionKey: String { return "description" }
-    private static var ViewKey: String { return "view" }
-    private static var PrivacyKey: String { return "privacy" }
     private static var QueryKey: String { return "query" }
     
     private static var VideosPath: String { return "/videos" }
@@ -56,6 +52,49 @@ public extension Request
         return Request(path: videoURI)
     }
     
+    /**
+     Create a `Request` to get a password protected video
+     
+     - parameter videoURI: the URI of the video
+     - parameter password: the password for the video
+     
+     - returns: a new `Request`
+     */
+    static func passwordProtectedVideoRequest(videoURI videoURI: String, password: String) -> Request
+    {
+        let parameters = ["password": password]
+        
+        return Request(path: videoURI, parameters: parameters)
+    }
+    
+    /**
+     Create a `Request` to get a specific VOD video
+     
+     - parameter vodVideoURI: the VOD video's URI
+     
+     - returns: a new `Request`
+     */
+    static func vodVideoRequest(vodVideoURI vodVideoURI: String) -> Request
+    {
+        let parameters = ["_video_override": "true"]
+        
+        return Request(path: vodVideoURI, parameters: parameters)
+    }
+    
+    /**
+     Create a `Request` to get the selected users for the vieo
+     
+     - parameter videoURI: the URI of the video
+     
+     - returns: a new `Request`
+     */
+    static func selectedUsersRequest(videoURI videoURI: String) -> Request
+    {
+        let parameters = [VimeoClient.PerPageKey: 100]
+        
+        return Request(path: videoURI, parameters: parameters)
+    }
+    
     // MARK: - Search
     
     /**
@@ -66,7 +105,7 @@ public extension Request
      
      - returns: a new `Request`
      */
-    public static func queryVideos(query query: String, refinements: VimeoClient.RequestParameters? = nil) -> Request
+    public static func queryVideos(query query: String, refinements: VimeoClient.RequestParametersDictionary? = nil) -> Request
     {
         var parameters = refinements ?? [:]
         
@@ -80,32 +119,25 @@ public extension Request
     /**
      Create a `Request` to update a video's metadata
      
-     - parameter videoURI:       the URI of the video to update
-     - parameter newTitle:       a new title, unchanged if nil
-     - parameter newDescription: a new description, unchanged if nil
-     - parameter newPrivacy:     a new privacy, unchanged if nil
+     - parameter videoURI:   the URI of the video to update
+     - parameter parameters: the updated parameters
      
      - returns: a new `Request`
      */
-    public static func patchVideoRequest(videoURI videoURI: String, newTitle: String?, newDescription: String?, newPrivacy: String?) -> Request
+    public static func patchVideoRequest(videoURI videoURI: String, parameters: VimeoClient.RequestParametersDictionary) -> Request
     {
-        var parameters = VimeoClient.RequestParameters()
-        
-        if let newTitle = newTitle
-        {
-            parameters[self.TitleKey] = newTitle
-        }
-        
-        if let newDescription = newDescription
-        {
-            parameters[self.DescriptionKey] = newDescription
-        }
-        
-        if let newPrivacy = newPrivacy
-        {
-            parameters[self.PrivacyKey] = [self.ViewKey: newPrivacy]
-        }
-        
         return Request(method: .PATCH, path: videoURI, parameters: parameters)
+    }
+    
+    /**
+     Create a `Request` to delete a video
+     
+     - parameter videoURI: the URI of the video to update
+     
+     - returns: a new `Request`
+     */
+    public static func deleteVideoRequest(videoURI videoURI: String) -> Request
+    {
+        return Request(method: .DELETE, path: videoURI)
     }
 }
