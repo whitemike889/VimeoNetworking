@@ -193,9 +193,9 @@ final public class AuthenticationController
     public func codeGrant(responseURL responseURL: NSURL, completion: AuthenticationCompletion)
     {
         guard let queryString = responseURL.query,
-            let parameters = queryString.parametersFromQueryString(),
-            let code = parameters[self.dynamicType.CodeKey],
-            let state = parameters[self.dynamicType.StateKey]
+            let parametersDictionary = queryString.parametersDictionaryFromQueryString(),
+            let code = parametersDictionary[self.dynamicType.CodeKey],
+            let state = parametersDictionary[self.dynamicType.StateKey]
         else
         {
             let errorDescription = "Could not retrieve parameters from code grant response"

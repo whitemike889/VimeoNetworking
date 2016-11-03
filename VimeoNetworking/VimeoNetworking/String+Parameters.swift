@@ -15,9 +15,9 @@ public extension String
      
      - returns: a dictionary of parameters if parsing succeeded
      */
-    func parametersFromQueryString() -> [String: String]?
+    func parametersDictionaryFromQueryString() -> [String: String]?
     {
-        var parameters: [String: String] = [:]
+        var parametersDictionary: [String: String] = [:]
         
         let scanner = NSScanner(string: self)
         while !scanner.atEnd
@@ -35,11 +35,11 @@ public extension String
             if let name = name?.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding),
                 let value = value?.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
             {
-                parameters[name] = value
+                parametersDictionary[name] = value
             }
         }
         
-        return parameters.count > 0 ? parameters : nil
+        return parametersDictionary.count > 0 ? parametersDictionary : nil
     }
     
     /**
