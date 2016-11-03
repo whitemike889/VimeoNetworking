@@ -40,7 +40,7 @@ public extension Request
      
      - returns: a new `Request`
      */
-    public static func queryChannels(query query: String, refinements: VimeoClient.RequestDictionary? = nil) -> Request
+    public static func queryChannels(query query: String, refinements: VimeoClient.RequestParametersDictionary? = nil) -> Request
     {
         var parameters = refinements ?? [:]
         
