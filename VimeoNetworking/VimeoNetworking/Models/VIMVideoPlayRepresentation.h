@@ -1,6 +1,6 @@
 //
 //  VIMVideoPlayRepresentation.h
-//  Vimeo
+//  VimeoNetworking
 //
 //  Created by Lehrer, Nicole on 5/11/16.
 //  Copyright © 2016 Vimeo. All rights reserved.

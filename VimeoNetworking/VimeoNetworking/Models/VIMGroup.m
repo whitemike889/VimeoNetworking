@@ -1,6 +1,6 @@
 //
 //  VIMGroup.m
-//  VIMNetworking
+//  VimeoNetworking
 //
 //  Created by Hanssen, Alfie on 10/9/14.
 //  Copyright (c) 2014-2015 Vimeo (https://vimeo.com)

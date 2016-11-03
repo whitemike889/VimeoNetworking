@@ -1,6 +1,6 @@
 //
 //  VIMQuantityQuota.m
-//  VIMNetworking
+//  VimeoNetworking
 //
 //  Created by Hanssen, Alfie on 11/6/15.
 //  Copyright (c) 2015 Vimeo (https://vimeo.com)

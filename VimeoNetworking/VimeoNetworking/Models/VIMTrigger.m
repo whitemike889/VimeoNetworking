@@ -1,6 +1,6 @@
 //
 //  VIMTrigger.m
-//  VIMNetworking
+//  VimeoNetworking
 //
 //  Created by Whitcomb, Andrew on 10/29/14.
 //  Copyright (c) 2014-2015 Vimeo (https://vimeo.com)

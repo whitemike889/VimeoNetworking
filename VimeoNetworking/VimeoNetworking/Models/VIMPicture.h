@@ -1,6 +1,6 @@
 //
 //  VIMPicture.h
-//  VIMNetworking
+//  VimeoNetworking
 //
 //  Created by Kashif Mohammad on 5/31/13.
 //  Copyright (c) 2014-2015 Vimeo (https://vimeo.com)

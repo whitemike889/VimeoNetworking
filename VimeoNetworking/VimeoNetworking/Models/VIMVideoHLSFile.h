@@ -1,6 +1,6 @@
 //
 //  VIMVideoHLSFile.h
-//  Vimeo
+//  VimeoNetworking
 //
 //  Created by Lehrer, Nicole on 5/12/16.
 //  Copyright © 2016 Vimeo. All rights reserved.

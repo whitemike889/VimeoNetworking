@@ -1,6 +1,6 @@
 //
 //  VIMVideo.m
-//  VIMNetworking
+//  VimeoNetworking
 //
 //  Created by Kashif Mohammad on 3/23/13.
 //  Copyright (c) 2014-2015 Vimeo (https://vimeo.com)
