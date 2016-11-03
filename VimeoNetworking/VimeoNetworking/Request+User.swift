@@ -99,7 +99,7 @@ public extension Request
      
      - returns: a new `Request`
      */
-    public static func queryUsers(query query: String, refinements: VimeoClient.RequestDictionary? = nil) -> Request
+    public static func queryUsers(query query: String, refinements: VimeoClient.RequestParametersDictionary? = nil) -> Request
     {
         var parameters = refinements ?? [:]
         
@@ -118,7 +118,7 @@ public extension Request
      
      - returns: the new `Request`
      */
-    public static func patchUser(userURI userURI: String, parameters: VimeoClient.RequestDictionary) -> Request
+    public static func patchUser(userURI userURI: String, parameters: VimeoClient.RequestParametersDictionary) -> Request
     {
         return Request(method: .PATCH, path: userURI, parameters: parameters)
     }

@@ -55,8 +55,8 @@ extension Request where ModelType: VIMAccount
      */
     static func clientCredentialsGrantRequest(scopes scopes: [Scope]) -> Request
     {
-        let parameters: VimeoClient.RequestDictionary = [GrantTypeKey: GrantTypeClientCredentials,
-                                                         ScopeKey: Scope.combine(scopes)]
+        let parameters = [GrantTypeKey: GrantTypeClientCredentials,
+                          ScopeKey: Scope.combine(scopes)]
         
         return Request(method: .POST, path: AuthenticationPathClientCredentials, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
@@ -71,9 +71,9 @@ extension Request where ModelType: VIMAccount
      */
     static func codeGrantRequest(code code: String, redirectURI: String) -> Request
     {
-        let parameters: VimeoClient.RequestDictionary = [GrantTypeKey: GrantTypeAuthorizationCode,
-                                                         CodeKey: code,
-                                                         RedirectURIKey: redirectURI]
+        let parameters = [GrantTypeKey: GrantTypeAuthorizationCode,
+                          CodeKey: code,
+                          RedirectURIKey: redirectURI]
         
         return Request(method: .POST, path: AuthenticationPathCodeGrant, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }
@@ -89,10 +89,10 @@ extension Request where ModelType: VIMAccount
      */
     static func logInRequest(email email: String, password: String, scopes: [Scope]) -> Request
     {
-        let parameters: VimeoClient.RequestDictionary = [GrantTypeKey: GrantTypePassword,
-                                                         ScopeKey: Scope.combine(scopes),
-                                                         UsernameKey: email,
-                                                         PasswordKey: password]
+        let parameters = [GrantTypeKey: GrantTypePassword,
+                          ScopeKey: Scope.combine(scopes),
+                          UsernameKey: email,
+                          PasswordKey: password]
         
         return Request(method: .POST, path: AuthenticationPathAccessToken, parameters: parameters, cacheFetchPolicy: .NetworkOnly, shouldCacheResponse: false)
     }

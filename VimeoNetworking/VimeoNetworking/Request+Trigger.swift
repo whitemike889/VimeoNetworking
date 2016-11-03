@@ -22,7 +22,7 @@ extension Request
      
      - returns: a new `Request`
      */
-    public static func registerDeviceForPushNotifications(withDeviceToken deviceToken: String, parameters: VimeoClient.RequestDictionary) -> Request
+    public static func registerDeviceForPushNotifications(withDeviceToken deviceToken: String, parameters: VimeoClient.RequestParametersDictionary) -> Request
     {
         let uri = self.uri(withDeviceToken: deviceToken)
         
@@ -38,7 +38,7 @@ extension Request
      
      - returns: a new `Request`
      */
-    public static func unregisterDeviceForPushNotifications(withDeviceToken deviceToken: String, parameters: VimeoClient.RequestDictionary) -> Request
+    public static func unregisterDeviceForPushNotifications(withDeviceToken deviceToken: String, parameters: VimeoClient.RequestParametersDictionary) -> Request
     {
         let uri = self.uri(withDeviceToken: deviceToken)
 
@@ -53,7 +53,7 @@ extension Request
      
      - returns: a new `Request`
      */
-    public static func addPushNotificationTrigger(withParameters parameters: VimeoClient.RequestDictionary) -> Request
+    public static func addPushNotificationTrigger(withParameters parameters: VimeoClient.RequestParametersDictionary) -> Request
     {
         return Request(method: .POST, path: self.TriggerURI, parameters: parameters)
     }
@@ -79,7 +79,7 @@ extension Request
      
      - returns: a new `Request`
      */
-    public static func pushNotificationTriggers(withDeviceToken deviceToken: String, parameters: VimeoClient.RequestDictionary) -> Request
+    public static func pushNotificationTriggers(withDeviceToken deviceToken: String, parameters: VimeoClient.RequestParametersDictionary) -> Request
     {
         let uri = self.uri(withDeviceToken: deviceToken) + self.TriggerURI
 

@@ -151,53 +151,46 @@ public struct Request<ModelType: MappableResponse>
     {
         var URI = self.path
         
-        if let parameters = self.parameters as? VimeoClient.RequestDictionary
+        var components = NSURLComponents(string: URI)
+
+        if let parameters = self.parameters as? VimeoClient.RequestParametersDictionary
         {
             let queryString = AFQueryStringFromParameters(parameters)
+            
             if queryString.characters.count > 0
             {
-                URI += "?" + queryString
+                components?.query = queryString
             }
         }
         
-        return URI
+        return components!.string!
     }
     
     // MARK: Copying requests
     
     internal func associatedPageRequest(newPath newPath: String) -> Request<ModelType>
     {
-        // Since page response paging paths bake the paging parameters into the path (even if we originally provide them in the body),
-        // strip any parameters now included in the path from the original body parameters.
+        // Since page response paging paths bake the paging parameters into the path,
+        // strip them out and upsert them back into the body parameters.
         
-        let parameters = self.dynamicType.parametersByRemovingQueryParameters(inPath: newPath, parameters: self.parameters)
+        let (updatedPath, query) = newPath.splitLinkString()
+        
+        var updatedParameters = (self.parameters as? VimeoClient.RequestParametersDictionary) ?? [:]
+        
+        if let queryParametersDictionary = query?.parametersDictionaryFromQueryString()
+        {
+            queryParametersDictionary.forEach { (key, value) in
+                
+                updatedParameters[key] = value
+            }
+        }
         
         return Request(method: self.method,
-                       path: newPath,
-                       parameters: parameters,
+                       path: updatedPath,
+                       parameters: updatedParameters,
                        modelKeyPath: self.modelKeyPath,
                        cacheFetchPolicy: self.cacheFetchPolicy,
                        shouldCacheResponse: self.shouldCacheResponse,
                        retryPolicy: self.retryPolicy)
-    }
-    
-    private static func parametersByRemovingQueryParameters(inPath path: String, parameters: AnyObject?) -> AnyObject?
-    {
-        guard var parametersDictionary = parameters as? VimeoClient.RequestDictionary else
-        {
-            return parameters
-        }
-
-        let (path, query) = path.splitLinkString()
-        
-        if let queryParametersDictionary = query?.parametersDictionaryFromQueryString()
-        {
-            queryParametersDictionary.forEach { (key, object) in
-                
-                parametersDictionary.removeValueForKey(key)
-            }
-        }
-        
-        return parametersDictionary
     }
 }
