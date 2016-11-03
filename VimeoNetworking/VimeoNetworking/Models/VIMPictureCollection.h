@@ -1,6 +1,6 @@
 //
 //  VIMPictureCollection.h
-//  VIMNetworking
+//  VimeoNetworking
 //
 //  Created by Whitcomb, Andrew on 9/4/14.
 //  Copyright (c) 2014-2015 Vimeo (https://vimeo.com)

@@ -1,6 +1,6 @@
 //
 //  VIMUserBadge.m
-//  Vimeo
+//  VimeoNetworking
 //
 //  Created by Jake Oliver on 8/8/16.
 //  Copyright © 2016 Vimeo. All rights reserved.

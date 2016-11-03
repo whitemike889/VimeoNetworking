@@ -1,6 +1,6 @@
 //
 //  VIMPrivacy.m
-//  VIMNetworking
+//  VimeoNetworking
 //
 //  Created by Kashif Muhammad on 9/24/14.
 //  Copyright (c) 2014-2015 Vimeo (https://vimeo.com)

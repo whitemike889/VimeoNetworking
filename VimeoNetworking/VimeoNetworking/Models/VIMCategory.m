@@ -1,6 +1,6 @@
 //
 //  VIMCategory.m
-//  VIMNetworking
+//  VimeoNetworking
 //
 //  Created by Hanssen, Alfie on 5/20/15.
 //  Copyright (c) 2015 Vimeo. All rights reserved.

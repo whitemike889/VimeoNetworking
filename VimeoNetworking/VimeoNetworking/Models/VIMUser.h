@@ -1,6 +1,6 @@
 //
 //  VIMUser.h
-//  VIMNetworking
+//  VimeoNetworking
 //
 //  Created by Kashif Mohammad on 4/4/13.
 //  Copyright (c) 2014-2015 Vimeo (https://vimeo.com)
