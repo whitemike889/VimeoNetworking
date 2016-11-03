@@ -267,9 +267,9 @@ final public class VimeoClient
      
      - parameter request: the `Request` for which to remove all cached responses
      */
-    public func removeCachedResponse<ModelType: MappableResponse>(for request: Request<ModelType>)
+    public func removeCachedResponse(forKey key: String)
     {
-        self.responseCache.removeResponseForRequest(request)
+        self.responseCache.removeResponse(forKey: key)
     }
     
     /**
@@ -381,7 +381,7 @@ final public class VimeoClient
         }
         catch let error
         {
-            self.responseCache.removeResponseForRequest(request)
+            self.responseCache.removeResponse(forKey: request.cacheKey)
             
             self.handleTaskFailure(request: request, task: task, error: error as? NSError, completionQueue: completionQueue, completion: completion)
         }

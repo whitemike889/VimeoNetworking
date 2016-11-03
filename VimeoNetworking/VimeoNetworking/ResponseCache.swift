@@ -69,10 +69,8 @@ final internal class ResponseCache
      
      - parameter request: the request for which to remove all cached responses
      */
-    func removeResponseForRequest<ModelType>(request: Request<ModelType>)
+    func removeResponse(forKey key: String)
     {
-        let key = request.cacheKey
-        
         self.memoryCache.removeResponseDictionary(forKey: key)
         self.diskCache.removeResponseDictionary(forKey: key)
     }
