@@ -119,6 +119,8 @@ final public class VimeoClient
     {
         self.configuration = appConfiguration
         self.sessionManager = sessionManager
+        
+        VimeoReachability.beginPostingReachabilityChangeNotifications()
     }
     
     // MARK: - Configuration
