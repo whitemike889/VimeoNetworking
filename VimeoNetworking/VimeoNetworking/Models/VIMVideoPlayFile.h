@@ -33,7 +33,7 @@
 @interface VIMVideoPlayFile : VIMModelObject
 
 @property (nonatomic, copy, nullable) NSString *link;
-@property (nonatomic, strong, nullable) VIMVideoLog *log;
+@property (nonatomic, copy, nullable) NSString *log;
 @property (nonatomic, strong, nullable) NSDate *expirationDate;
 
 - (BOOL)isExpired;
