@@ -61,6 +61,17 @@
     return @{@"link_expiration_time": @"expires"};
 }
 
+#if TARGET_OS_IOS
+- (Class)getClassForObjectKey:(NSString *)key
+{
+    if ([key isEqualToString:@"log"])
+    {
+        return [VIMVideoLog class];
+    }
+    return nil;
+}
+#endif
+
 #pragma mark - Instance methods
 
 - (BOOL)isExpired

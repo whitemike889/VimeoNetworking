@@ -33,8 +33,15 @@
 @interface VIMVideoPlayFile : VIMModelObject
 
 @property (nonatomic, copy, nullable) NSString *link;
-@property (nonatomic, copy, nullable) NSString *log;
 @property (nonatomic, strong, nullable) NSDate *expirationDate;
+
+// The iOS app still uses the old play logging system. Remove this conditional when the new spec is implemented.
+
+#if TARGET_OS_IOS
+@property (nonatomic, strong, nullable) VIMVideoLog *log;
+#else
+@property (nonatomic, copy, nullable) NSString *log;
+#endif
 
 - (BOOL)isExpired;
 
