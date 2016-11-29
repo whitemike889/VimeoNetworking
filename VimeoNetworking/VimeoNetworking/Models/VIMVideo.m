@@ -443,7 +443,10 @@ NSString *VIMContentRating_Safe = @"safe";
     VIMInteraction *rentInteraction = [self interactionWithName:VIMInteractionNameRent];
     BOOL isRentDRMProtected = rentInteraction.drm;
     
-    return isBuyDRMProtected || isRentDRMProtected;
+    VIMInteraction *subscribeInteraction = [self interactionWithName:VIMInteractionNameSubscribe];
+    BOOL isSubscribeDRMProtected = subscribeInteraction.drm;
+    
+    return isBuyDRMProtected || isRentDRMProtected || isSubscribeDRMProtected;
 }
 
 - (NSString *)singleContentRatingIfAvailable
