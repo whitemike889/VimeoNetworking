@@ -127,6 +127,8 @@
 		3C9F57C51CF7783E0076B296 /* NSURLSessionConfiguration+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9F57C41CF7783E0076B296 /* NSURLSessionConfiguration+Extensions.swift */; };
 		3CB75E231D22B8DD003826AE /* VIMThumbnailUploadTicket.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CB75E211D22B8DD003826AE /* VIMThumbnailUploadTicket.h */; };
 		3CB75E241D22B8DD003826AE /* VIMThumbnailUploadTicket.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB75E221D22B8DD003826AE /* VIMThumbnailUploadTicket.m */; };
+		96749EBB1DEEAE470015EB20 /* VIMSeason.h in Headers */ = {isa = PBXBuildFile; fileRef = 96749EB91DEEAE470015EB20 /* VIMSeason.h */; };
+		96749EBC1DEEAE470015EB20 /* VIMSeason.m in Sources */ = {isa = PBXBuildFile; fileRef = 96749EBA1DEEAE470015EB20 /* VIMSeason.m */; };
 		B59A9DE6C5CBD60F8F0FA02A /* Pods_VimeoNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF246275B609406583D4109 /* Pods_VimeoNetworking.framework */; };
 /* End PBXBuildFile section */
 
@@ -263,6 +265,8 @@
 		3CB75E211D22B8DD003826AE /* VIMThumbnailUploadTicket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VIMThumbnailUploadTicket.h; path = VimeoNetworking/Models/VIMThumbnailUploadTicket.h; sourceTree = "<group>"; };
 		3CB75E221D22B8DD003826AE /* VIMThumbnailUploadTicket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VIMThumbnailUploadTicket.m; path = VimeoNetworking/Models/VIMThumbnailUploadTicket.m; sourceTree = "<group>"; };
 		93F914B1FADB01FAF61EF363 /* Pods-VimeoNetworking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking.release.xcconfig"; path = "../Pods/Target Support Files/Pods-VimeoNetworking/Pods-VimeoNetworking.release.xcconfig"; sourceTree = "<group>"; };
+		96749EB91DEEAE470015EB20 /* VIMSeason.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VIMSeason.h; path = VimeoNetworking/Models/VIMSeason.h; sourceTree = "<group>"; };
+		96749EBA1DEEAE470015EB20 /* VIMSeason.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VIMSeason.m; path = VimeoNetworking/Models/VIMSeason.m; sourceTree = "<group>"; };
 		B4D33B98CE4A2315048D6766 /* Pods-VimeoNetworking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-VimeoNetworking/Pods-VimeoNetworking.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -441,6 +445,8 @@
 		01FD394D1CC9508200326408 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				96749EB91DEEAE470015EB20 /* VIMSeason.h */,
+				96749EBA1DEEAE470015EB20 /* VIMSeason.m */,
 				3C6F887A1D9980C1006A24F4 /* VIMVideoPlayFile.m */,
 				3C6F887B1D9980C1006A24F4 /* VIMVideoPlayFile.h */,
 				3C6F887C1D9980C1006A24F4 /* VIMVideoFairPlayFile.m */,
@@ -544,6 +550,7 @@
 			files = (
 				3C6F88711D99805E006A24F4 /* VIMVideoHLSFile.h in Headers */,
 				01FD39471CC948F300326408 /* VIMVideoUtils.h in Headers */,
+				96749EBB1DEEAE470015EB20 /* VIMSeason.h in Headers */,
 				01FD393F1CC948F300326408 /* VIMVideo.h in Headers */,
 				01FD392B1CC948F300326408 /* VIMPictureCollection.h in Headers */,
 				01FD39191CC948F300326408 /* VIMComment.h in Headers */,
@@ -765,6 +772,7 @@
 				01FD39141CC948F300326408 /* VIMAppeal.m in Sources */,
 				3C6F885D1D997FA3006A24F4 /* VIMBadge.swift in Sources */,
 				3C6F885B1D997C8B006A24F4 /* Request+ProgrammedContent.swift in Sources */,
+				96749EBC1DEEAE470015EB20 /* VIMSeason.m in Sources */,
 				01FD39061CC948F200326408 /* Response.swift in Sources */,
 				3C6F887E1D9980C1006A24F4 /* VIMVideoPlayFile.m in Sources */,
 				01FD392E1CC948F300326408 /* VIMPreference.m in Sources */,
