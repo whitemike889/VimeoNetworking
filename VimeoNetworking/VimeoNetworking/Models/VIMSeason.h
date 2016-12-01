@@ -18,10 +18,11 @@
 - (nullable VIMInteraction *)interactionWithName:(nonnull NSString *)name;
 
 /**
- Reports whether this season is protected by DRM.
-
- @return A BOOL indicating whether the receiver is a DRM-protected season.
+ Reports whether the episodes in this season are protected by DRM.
+ 
+ @return A BOOL indicating whether the receiver contains DRM-protected episodes.
  */
-- (BOOL)isDRMProtected;
+- (BOOL)containsDRMProtectedContent;
+
 
 @end
