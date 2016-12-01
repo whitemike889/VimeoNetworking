@@ -58,8 +58,9 @@ typedef NS_ENUM(NSInteger, VIMInteractionStreamStatus) {
 # pragma mark - DRM
 
 /**
- Indicates whether this VIMInteraction is protected by DRM, which applies to items available for rent or purchase.
+ Indicates whether this VIMInteraction (to buy, rent, or subscribe) relates to content that is protected by DRM.
+ Returns true if buying, renting, or subscribing to the related content will be governed by DRM.
  */
-@property (nonatomic, assign) BOOL drm;
+@property (nonatomic, assign, readonly) BOOL isForDRMProtectedContent;
 
 @end
