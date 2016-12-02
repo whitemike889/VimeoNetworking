@@ -31,12 +31,6 @@ import Foundation
  */
 public struct AppConfiguration
 {
-        /// Keychain identifier for the Vimeo application
-    public static let KeychainServiceVimeo = "Vimeo"
-    
-        /// Keychain identifier for the Cameo application
-    public static let KeychainServiceCameo = "Cameo"
-    
     public let clientIdentifier: String
     public let clientSecret: String
     public let scopes: [Scope]
@@ -61,7 +55,7 @@ public struct AppConfiguration
     public init(clientIdentifier: String,
                 clientSecret: String,
                 scopes: [Scope],
-                keychainService: String = KeychainServiceVimeo,
+                keychainService: String,
                 keychainAccessGroup: String? = nil,
                 apiVersion: String = VimeoDefaultAPIVersionString)
     {

@@ -27,44 +27,8 @@
 import Foundation
 import Security
 
-/**
- *  `SecureDataStore` represents an abstract object capable of securely storing, retrieving, and removing data.
- */
-protocol SecureDataStore
-{
-    /**
-     Save data for a given key
-     
-     - parameter data: data to save
-     - parameter key:  identifier for the saved data
-     
-     - throws: an error if saving failed
-     */
-    func setData(data: NSData, forKey key: String) throws
-    
-    /**
-     Load data for a given key
-     
-     - parameter key: identifier for the saved data
-     
-     - throws: an error if loading failed
-     
-     - returns: data, if found
-     */
-    func dataForKey(key: String) throws -> NSData?
-    
-    /**
-     Delete data for a given key
-     
-     - parameter key: identifier for the saved data
-     
-     - throws: an error if deleting failed
-     */
-    func deleteDataForKey(key: String) throws
-}
-
 /// `KeychainStore` saves data securely in the Keychain
-final class KeychainStore: SecureDataStore
+final class KeychainStore
 {
     private let service: String
     private let accessGroup: String?
