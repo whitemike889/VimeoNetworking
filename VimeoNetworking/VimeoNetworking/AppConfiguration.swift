@@ -56,7 +56,7 @@ public struct AppConfiguration
                 clientSecret: String,
                 scopes: [Scope],
                 keychainService: String,
-                keychainAccessGroup: String?,
+                keychainAccessGroup: String? = nil,
                 apiVersion: String = VimeoDefaultAPIVersionString)
     {
         self.clientIdentifier = clientIdentifier
