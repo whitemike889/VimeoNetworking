@@ -17,4 +17,12 @@
 - (nullable VIMConnection *)connectionWithName:(nonnull NSString *)connectionName;
 - (nullable VIMInteraction *)interactionWithName:(nonnull NSString *)name;
 
+/**
+ Reports whether the episodes in this season are protected by DRM.
+ 
+ @return A BOOL indicating whether the receiver contains DRM-protected episodes.
+ */
+- (BOOL)containsDRMProtectedContent;
+
+
 @end

@@ -85,4 +85,18 @@
     self.interactions = interactions;
 }
 
+- (BOOL)containsDRMProtectedContent
+{
+    VIMInteraction *buyInteraction = [self interactionWithName:VIMInteractionNameBuy];
+    BOOL isBuyDRMProtected = buyInteraction.isForDRMProtectedContent;
+    
+    VIMInteraction *rentInteraction = [self interactionWithName:VIMInteractionNameRent];
+    BOOL isRentDRMProtected = rentInteraction.isForDRMProtectedContent;
+    
+    VIMInteraction *subscribeInteraction = [self interactionWithName:VIMInteractionNameSubscribe];
+    BOOL isSubscribeDRMProtected = subscribeInteraction.isForDRMProtectedContent;
+    
+    return isBuyDRMProtected || isRentDRMProtected || isSubscribeDRMProtected;
+}
+
 @end

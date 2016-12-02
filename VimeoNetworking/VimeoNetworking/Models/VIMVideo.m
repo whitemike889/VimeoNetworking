@@ -437,7 +437,16 @@ NSString *VIMContentRating_Safe = @"safe";
 
 - (BOOL)isDRMProtected
 {
-    return self.playRepresentation.drmFiles.fairPlayFile != nil;
+    VIMInteraction *buyInteraction = [self interactionWithName:VIMInteractionNameBuy];
+    BOOL isBuyDRMProtected = buyInteraction.isForDRMProtectedContent;
+    
+    VIMInteraction *rentInteraction = [self interactionWithName:VIMInteractionNameRent];
+    BOOL isRentDRMProtected = rentInteraction.isForDRMProtectedContent;
+    
+    VIMInteraction *subscribeInteraction = [self interactionWithName:VIMInteractionNameSubscribe];
+    BOOL isSubscribeDRMProtected = subscribeInteraction.isForDRMProtectedContent;
+    
+    return isBuyDRMProtected || isRentDRMProtected || isSubscribeDRMProtected;
 }
 
 - (NSString *)singleContentRatingIfAvailable

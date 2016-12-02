@@ -40,6 +40,8 @@ NSString * const VIMInteractionNameSubscribe = @"subscribe";
 @property (nonatomic, copy, nullable) NSString *expires_time;
 @property (nonatomic, copy, nullable) NSString *purchase_time;
 @property (nonatomic, copy, nullable) NSString *stream;
+@property (nonatomic, assign) BOOL drm;
+@property (nonatomic, assign, readwrite) BOOL isForDRMProtectedContent;
 @end
 
 @implementation VIMInteraction
@@ -62,6 +64,8 @@ NSString * const VIMInteractionNameSubscribe = @"subscribe";
     {
         self.purchaseDate = [[VIMModelObject dateFormatter] dateFromString:self.purchase_time];
     }
+    
+    self.isForDRMProtectedContent = self.drm;
     
     // Not every interaction has a stream status, only buy, rent, subscribe [NL] 05/22/16
     if (self.stream != nil)

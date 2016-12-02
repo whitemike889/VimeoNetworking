@@ -55,4 +55,12 @@ typedef NS_ENUM(NSInteger, VIMInteractionStreamStatus) {
 @property (nonatomic, strong, nullable) NSDate *purchaseDate;
 @property (nonatomic, assign) VIMInteractionStreamStatus streamStatus;
 
+# pragma mark - DRM
+
+/**
+ Indicates whether this VIMInteraction (to buy, rent, or subscribe) relates to content that is protected by DRM.
+ Returns true if buying, renting, or subscribing to the related content will be governed by DRM.
+ */
+@property (nonatomic, assign, readonly) BOOL isForDRMProtectedContent;
+
 @end
