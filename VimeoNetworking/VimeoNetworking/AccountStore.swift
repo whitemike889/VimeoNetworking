@@ -30,13 +30,27 @@ import Foundation
 final class AccountStore
 {
     /// `AccountType` categorizes an account based on its level of access
-    enum AccountType: String
+    enum AccountType
     {
         /// Client credentials accounts can access only public resources
         case ClientCredentials
         
         /// User accounts have an authenticated user and can act on the user's behalf
         case User
+        
+        func keychainKey() -> String
+        {
+            switch self
+            {
+            case .ClientCredentials:
+                
+                return "ClientCredentialsAccountKey"
+                
+            case .User:
+                
+                return "UserAccountKey"
+            }
+        }
     }
     
     // MARK: - 
@@ -45,7 +59,7 @@ final class AccountStore
     
     // MARK: - 
     
-    private let dataStore: SecureDataStore
+    private let keychainStore: KeychainStore
     
     // MARK: -
     
@@ -58,7 +72,7 @@ final class AccountStore
      */
     init(configuration: AppConfiguration)
     {
-        self.dataStore = KeychainStore(service: configuration.keychainService, accessGroup: configuration.keychainAccessGroup)
+        self.keychainStore = KeychainStore(service: configuration.keychainService, accessGroup: configuration.keychainAccessGroup)
     }
     
     // MARK: -
@@ -78,7 +92,7 @@ final class AccountStore
         archiver.encodeObject(account)
         archiver.finishEncoding()
         
-        try self.dataStore.setData(data, forKey: type.rawValue)
+        try self.keychainStore.setData(data, forKey: type.keychainKey())
     }
     
     /**
@@ -94,7 +108,7 @@ final class AccountStore
     {
         do
         {
-            guard let data = try self.dataStore.dataForKey(type.rawValue)
+            guard let data = try self.keychainStore.dataForKey(type.keychainKey())
             else
             {
                 return nil
@@ -140,6 +154,6 @@ final class AccountStore
      */
     func removeAccount(type: AccountType) throws
     {
-        try self.dataStore.deleteDataForKey(type.rawValue)
+        try self.keychainStore.deleteDataForKey(type.keychainKey())
     }
 }
