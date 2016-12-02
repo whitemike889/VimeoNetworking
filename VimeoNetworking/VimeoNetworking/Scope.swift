@@ -62,6 +62,6 @@ public enum Scope: String
      */
     public static func combine(scopes: [Scope]) -> String
     {
-        return scopes.reduce("") { $0 + " " + $1.rawValue }
+        return scopes.map({ $0.rawValue }).joinWithSeparator(" ")
     }
 }
