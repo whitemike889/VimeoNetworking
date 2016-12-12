@@ -35,7 +35,7 @@ class ExceptionCatcher: ObjC_ExceptionCatcher
      
      - throws: an error containing any thrown exception information
      */
-    @nonobjc public static func doUnsafe(unsafeBlock: (Void -> Void)) throws
+    @nonobjc internal static func doUnsafe(unsafeBlock: (Void -> Void)) throws
     {
         if let error = self._doUnsafe(unsafeBlock)
         {
