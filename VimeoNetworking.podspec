@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
                            "Nicole Lehrer" => "nicole@vimeo.com",
                            "Mike Westendorf" => "mikew@vimeo.com",
                            "Jason Hawkins" => "jasonh@vimeo.com",
-                           "Jennifer Lim" => "jennifer@vimeo.com"}
+                           "Jennifer Lim" => "jennifer@vimeo.com" }
   s.social_media_url   = "http://twitter.com/vimeo"
 
   s.ios.deployment_target = "8.0"
