@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
     :git => "https://github.com/vimeo/VimeoNetworking.git", 
     :tag => s.version.to_s 
   }
-  s.source_files  = "VimeoNetworking/VimeoNetworking/**/*.{h,m,swift,cer}"
+  s.source_files  = "VimeoNetworking/**/*.{h,m,swift,cer}"
   s.frameworks = ["Foundation"]
 
   # We should consider dropping this as a subspec until we have the basics working.
