@@ -3,18 +3,11 @@ use_frameworks!
 workspace 'VimeoNetworking'
 project 'VimeoNetworkingExample-iOS/VimeoNetworkingExample-iOS.xcodeproj'
 
-def shared_pods
+target 'VimeoNetworkingExample-iOS' do
     pod 'AFNetworking', '3.1.0'
     pod 'VimeoNetworking', :path => '../VimeoNetworking'
-end
 
-target 'VimeoNetworkingExample-iOS' do
-	project 'VimeoNetworkingExample-iOS/VimeoNetworkingExample-iOS.xcodeproj'
-	shared_pods
+    target 'VimeoNetworkingExample-iOSTests' do
+    	inherit! :search_paths
+	end
 end
-
-target 'VimeoNetworkingExample-iOSTests' do
-	project 'VimeoNetworkingExample-iOS/VimeoNetworkingExample-iOS.xcodeproj'
-	shared_pods
-end
-
