@@ -19,7 +19,6 @@ xcuserdata
 DerivedData
 .idea/
 *.LSOverride
-xcshareddata
 
 # Cocoapods
 
