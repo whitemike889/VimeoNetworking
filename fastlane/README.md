@@ -11,21 +11,6 @@ sudo gem install fastlane
 fastlane ios build_example
 ```
 buid the example project
-### ios ios
-```
-fastlane ios ios
-```
-build ios
-### ios iosold
-```
-fastlane ios iosold
-```
-build ios old
-### ios all
-```
-fastlane ios all
-```
-build all
 
 ----
 

@@ -22,22 +22,16 @@ platform :ios do
 
   desc "buid the example project"
   lane :build_example do |options|
-
-    type = options[:type]
-    types = {
-      "ios" => ["VimeoUpload-iOS", "generic/platform=iOS"],
-      "iosold" => ["VimeoUpload-iOS-OldUpload", "generic/platform=iOS"],
-    }
     
     cocoapods
 
     # cant use gym: https://github.com/fastlane/fastlane/issues/1816
     xcodebuild(
-      workspace: "VimeoUpload.xcworkspace",
-      scheme: types[type][0],
+      workspace: "VimeoNetworking.xcworkspace",
+      scheme: "VimeoNetworkingExample-iOS",
       configuration: "Release",
       build: true,
-      destination: types[type][1],
+      destination: "generic/platform=iOS",
       build_settings: {
         "CODE_SIGNING_REQUIRED" => "NO",
         "CODE_SIGN_IDENTITY" => ""
@@ -46,24 +40,6 @@ platform :ios do
       derived_data_path: "build/"
     )
 
-  end
-
-  desc "build ios"
-  lane :ios do |options|
-    build_example(type:"ios")
-  end
-
-  desc "build ios old"
-  lane :iosold do |options|
-    build_example(type:"iosold")
-  end
-
-  desc "build all"
-  lane :all do |options|
-    
-    ios
-    iosold
-    
   end
 
   after_all do |lane|
