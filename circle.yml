@@ -1,3 +1,6 @@
+general:
+  artifacts:
+    - "xcodebuild.log"
 machine:
   xcode:
     version: 8.0
