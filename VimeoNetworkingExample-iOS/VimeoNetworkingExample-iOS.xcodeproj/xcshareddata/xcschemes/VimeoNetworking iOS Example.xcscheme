@@ -28,9 +28,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "092D2BF524C6949F3D45ED134CA67D99"
+               BlueprintIdentifier = "A33B0E4A31DD20D2C1A59F59507A100D"
                BuildableName = "VimeoNetworking.framework"
-               BlueprintName = "VimeoNetworking"
+               BlueprintName = "VimeoNetworking-iOS"
                ReferencedContainer = "container:../Pods/Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -40,7 +40,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
