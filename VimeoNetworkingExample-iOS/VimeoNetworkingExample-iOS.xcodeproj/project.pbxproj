@@ -381,8 +381,8 @@
 			targets = (
 				018B9F951C9B34050054650E /* VimeoNetworkingExample-iOS */,
 				018B9FAB1C9B34050054650E /* VimeoNetworkingExample-iOSTests */,
-				0CAAF2631E02055C003C5CBA /* VimeoNetworkingtvOS */,
 				0CAAF27F1E0207F5003C5CBA /* VimeoNetworkingiOS */,
+				0CAAF2631E02055C003C5CBA /* VimeoNetworkingtvOS */,
 			);
 		};
 /* End PBXProject section */
