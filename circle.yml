@@ -9,6 +9,7 @@ dependencies:
     override:
         - bundle install
     cache_directories:
+        - "~/.cocoapods"
         - "Pods"
         - "vendor/bundle"
 
