@@ -38,16 +38,6 @@
                ReferencedContainer = "container:VimeoNetworkingExample-iOS.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "018B9FB61C9B34050054650E"
-               BuildableName = "VimeoNetworkingExample-iOSUITests.xctest"
-               BlueprintName = "VimeoNetworkingExample-iOSUITests"
-               ReferencedContainer = "container:VimeoNetworkingExample-iOS.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
