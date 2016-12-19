@@ -14,10 +14,24 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "965A86B31E08346000177CFD"
+               BlueprintIdentifier = "962B2BBB1E086A4300A942C1"
                BuildableName = "VimeoNetworkingiOS.framework"
                BlueprintName = "VimeoNetworkingiOS"
                ReferencedContainer = "container:VimeoNetworkingExample-iOS.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A33B0E4A31DD20D2C1A59F59507A100D"
+               BuildableName = "VimeoNetworking.framework"
+               BlueprintName = "VimeoNetworking-iOS"
+               ReferencedContainer = "container:../Pods/Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,6 +43,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "962B2BBB1E086A4300A942C1"
+            BuildableName = "VimeoNetworkingiOS.framework"
+            BlueprintName = "VimeoNetworkingiOS"
+            ReferencedContainer = "container:VimeoNetworkingExample-iOS.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -45,7 +68,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "965A86B31E08346000177CFD"
+            BlueprintIdentifier = "962B2BBB1E086A4300A942C1"
             BuildableName = "VimeoNetworkingiOS.framework"
             BlueprintName = "VimeoNetworkingiOS"
             ReferencedContainer = "container:VimeoNetworkingExample-iOS.xcodeproj">
@@ -63,7 +86,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "965A86B31E08346000177CFD"
+            BlueprintIdentifier = "962B2BBB1E086A4300A942C1"
             BuildableName = "VimeoNetworkingiOS.framework"
             BlueprintName = "VimeoNetworkingiOS"
             ReferencedContainer = "container:VimeoNetworkingExample-iOS.xcodeproj">

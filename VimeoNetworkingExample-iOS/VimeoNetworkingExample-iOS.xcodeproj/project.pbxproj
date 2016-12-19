@@ -17,14 +17,14 @@
 		01CDBEF71CEB9C100093DDF4 /* ModelObjectValidationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CDBEF61CEB9C100093DDF4 /* ModelObjectValidationTests.swift */; };
 		01FD38A71CC9289200326408 /* VimeoNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FD38A61CC9289200326408 /* VimeoNetworking.framework */; };
 		0C7364351DFF4871000C3585 /* NSErrorExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7364331DFF4871000C3585 /* NSErrorExtensionTests.swift */; };
-		13C8E87B530C13A8B01F8B32 /* Pods_VimeoNetworkingiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 504639537019D6A4E5030DA6 /* Pods_VimeoNetworkingiOS.framework */; };
 		3C6F88841D999878006A24F4 /* programmed_cinema.json in Resources */ = {isa = PBXBuildFile; fileRef = 3C6F88821D999878006A24F4 /* programmed_cinema.json */; };
 		3C6F88851D999878006A24F4 /* FakeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6F88831D999878006A24F4 /* FakeDataSource.swift */; };
+		400B045E6ABCB6E4082795E4 /* Pods_VimeoNetworkingiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 504639537019D6A4E5030DA6 /* Pods_VimeoNetworkingiOS.framework */; };
 		87058FEADEEE3DC46C473D2D /* Pods_VimeoNetworkingtvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0217A46C2443AF5BDC0DBEC9 /* Pods_VimeoNetworkingtvOS.framework */; };
+		962B2BC01E086A4300A942C1 /* VimeoNetworkingiOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 962B2BBE1E086A4300A942C1 /* VimeoNetworkingiOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		962B2BC41E086A7200A942C1 /* VimeoNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 965A86BC1E083B4800177CFD /* VimeoNetworking.framework */; };
 		965A86A91E0832B800177CFD /* VimeoNetworkingtvOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 965A86A71E0832B800177CFD /* VimeoNetworkingtvOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		965A86AE1E08331700177CFD /* VimeoNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 965A86AD1E08331700177CFD /* VimeoNetworking.framework */; };
-		965A86B81E08346000177CFD /* VimeoNetworkingiOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 965A86B61E08346000177CFD /* VimeoNetworkingiOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		965A86BD1E083B4800177CFD /* VimeoNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 965A86BC1E083B4800177CFD /* VimeoNetworking.framework */; };
 		CC22A6749CADF4DA91D73F04 /* Pods_VimeoNetworkingExample_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D22A36411CC71C284010480 /* Pods_VimeoNetworkingExample_iOSTests.framework */; };
 		DEB396A3F44BBFBE9A602F1A /* Pods_VimeoNetworkingExample_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46114AFA04898F979611854A /* Pods_VimeoNetworkingExample_iOS.framework */; };
 /* End PBXBuildFile section */
@@ -77,13 +77,13 @@
 		877275AB8CF6E03A208126C6 /* Pods-VimeoNetworkingiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworkingiOS.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-VimeoNetworkingiOS/Pods-VimeoNetworkingiOS.debug.xcconfig"; sourceTree = "<group>"; };
 		8DE6E0CB4A121DA9FF19446C /* Pods-VimeoNetworking-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-tvOS.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-VimeoNetworking-tvOS/Pods-VimeoNetworking-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		9137FBEE6790E27021C4F16A /* Pods-VimeoNetworking-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-tvOSTests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-VimeoNetworking-tvOSTests/Pods-VimeoNetworking-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		962B2BBC1E086A4300A942C1 /* VimeoNetworkingiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VimeoNetworkingiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		962B2BBE1E086A4300A942C1 /* VimeoNetworkingiOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VimeoNetworkingiOS.h; sourceTree = "<group>"; };
+		962B2BBF1E086A4300A942C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		965A86A51E0832B800177CFD /* VimeoNetworkingtvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VimeoNetworkingtvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		965A86A71E0832B800177CFD /* VimeoNetworkingtvOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VimeoNetworkingtvOS.h; sourceTree = "<group>"; };
 		965A86A81E0832B800177CFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		965A86AD1E08331700177CFD /* VimeoNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VimeoNetworking.framework; path = "../../../Library/Developer/Xcode/DerivedData/VimeoNetworking-gajrbqsavvytjuemnfdxbcqcttjy/Build/Products/Debug-iphonesimulator/VimeoNetworking/VimeoNetworking.framework"; sourceTree = "<group>"; };
-		965A86B41E08346000177CFD /* VimeoNetworkingiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VimeoNetworkingiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		965A86B61E08346000177CFD /* VimeoNetworkingiOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VimeoNetworkingiOS.h; sourceTree = "<group>"; };
-		965A86B71E08346000177CFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		965A86BC1E083B4800177CFD /* VimeoNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VimeoNetworking.framework; path = "../../../Library/Developer/Xcode/DerivedData/VimeoNetworking-gajrbqsavvytjuemnfdxbcqcttjy/Build/Products/Debug-iphonesimulator/VimeoNetworking-iOS/VimeoNetworking.framework"; sourceTree = "<group>"; };
 		9D22A36411CC71C284010480 /* Pods_VimeoNetworkingExample_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimeoNetworkingExample_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A28A01D89F7D023CF49B4F1F /* Pods_VimeoNetworkingExample_iOS_VimeoNetworking_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimeoNetworkingExample_iOS_VimeoNetworking_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,21 +114,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		962B2BB81E086A4300A942C1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				962B2BC41E086A7200A942C1 /* VimeoNetworking.framework in Frameworks */,
+				400B045E6ABCB6E4082795E4 /* Pods_VimeoNetworkingiOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		965A86A11E0832B800177CFD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				965A86AE1E08331700177CFD /* VimeoNetworking.framework in Frameworks */,
 				87058FEADEEE3DC46C473D2D /* Pods_VimeoNetworkingtvOS.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		965A86B01E08346000177CFD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				965A86BD1E083B4800177CFD /* VimeoNetworking.framework in Frameworks */,
-				13C8E87B530C13A8B01F8B32 /* Pods_VimeoNetworkingiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,7 +142,7 @@
 				018B9F981C9B34050054650E /* VimeoNetworkingExample-iOS */,
 				018B9FAF1C9B34050054650E /* VimeoNetworkingExample-iOSTests */,
 				965A86A61E0832B800177CFD /* VimeoNetworkingtvOS */,
-				965A86B51E08346000177CFD /* VimeoNetworkingiOS */,
+				962B2BBD1E086A4300A942C1 /* VimeoNetworkingiOS */,
 				018B9F971C9B34050054650E /* Products */,
 				9E56BEC99D20C5D586D815EB /* Pods */,
 				902392C1CE34A5CDD3AB5229 /* Frameworks */,
@@ -155,7 +155,7 @@
 				018B9F961C9B34050054650E /* VimeoNetworkingExample-iOS.app */,
 				018B9FAC1C9B34050054650E /* VimeoNetworkingExample-iOSTests.xctest */,
 				965A86A51E0832B800177CFD /* VimeoNetworkingtvOS.framework */,
-				965A86B41E08346000177CFD /* VimeoNetworkingiOS.framework */,
+				962B2BBC1E086A4300A942C1 /* VimeoNetworkingiOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -206,6 +206,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		962B2BBD1E086A4300A942C1 /* VimeoNetworkingiOS */ = {
+			isa = PBXGroup;
+			children = (
+				962B2BBE1E086A4300A942C1 /* VimeoNetworkingiOS.h */,
+				962B2BBF1E086A4300A942C1 /* Info.plist */,
+			);
+			path = VimeoNetworkingiOS;
+			sourceTree = "<group>";
+		};
 		965A86A61E0832B800177CFD /* VimeoNetworkingtvOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,15 +222,6 @@
 				965A86A81E0832B800177CFD /* Info.plist */,
 			);
 			path = VimeoNetworkingtvOS;
-			sourceTree = "<group>";
-		};
-		965A86B51E08346000177CFD /* VimeoNetworkingiOS */ = {
-			isa = PBXGroup;
-			children = (
-				965A86B61E08346000177CFD /* VimeoNetworkingiOS.h */,
-				965A86B71E08346000177CFD /* Info.plist */,
-			);
-			path = VimeoNetworkingiOS;
 			sourceTree = "<group>";
 		};
 		9E56BEC99D20C5D586D815EB /* Pods */ = {
@@ -254,19 +254,19 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		962B2BB91E086A4300A942C1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				962B2BC01E086A4300A942C1 /* VimeoNetworkingiOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		965A86A21E0832B800177CFD /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				965A86A91E0832B800177CFD /* VimeoNetworkingtvOS.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		965A86B11E08346000177CFD /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				965A86B81E08346000177CFD /* VimeoNetworkingiOS.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +314,26 @@
 			productReference = 018B9FAC1C9B34050054650E /* VimeoNetworkingExample-iOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		962B2BBB1E086A4300A942C1 /* VimeoNetworkingiOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 962B2BC11E086A4300A942C1 /* Build configuration list for PBXNativeTarget "VimeoNetworkingiOS" */;
+			buildPhases = (
+				24AA79945A54719BDC6C8615 /* [CP] Check Pods Manifest.lock */,
+				962B2BB71E086A4300A942C1 /* Sources */,
+				962B2BB81E086A4300A942C1 /* Frameworks */,
+				962B2BB91E086A4300A942C1 /* Headers */,
+				962B2BBA1E086A4300A942C1 /* Resources */,
+				9B9144318F248476AF69462F /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VimeoNetworkingiOS;
+			productName = VimeoNetworkingiOS;
+			productReference = 962B2BBC1E086A4300A942C1 /* VimeoNetworkingiOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		965A86A41E0832B800177CFD /* VimeoNetworkingtvOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 965A86AA1E0832B800177CFD /* Build configuration list for PBXNativeTarget "VimeoNetworkingtvOS" */;
@@ -334,26 +354,6 @@
 			productReference = 965A86A51E0832B800177CFD /* VimeoNetworkingtvOS.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		965A86B31E08346000177CFD /* VimeoNetworkingiOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 965A86BB1E08346000177CFD /* Build configuration list for PBXNativeTarget "VimeoNetworkingiOS" */;
-			buildPhases = (
-				67003C1DB8C6FB0022EEDFB0 /* [CP] Check Pods Manifest.lock */,
-				965A86AF1E08346000177CFD /* Sources */,
-				965A86B01E08346000177CFD /* Frameworks */,
-				965A86B11E08346000177CFD /* Headers */,
-				965A86B21E08346000177CFD /* Resources */,
-				0F39361D6AECC3A49AA7CDA6 /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = VimeoNetworkingiOS;
-			productName = VimeoNetworkingiOS;
-			productReference = 965A86B41E08346000177CFD /* VimeoNetworkingiOS.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -372,11 +372,11 @@
 						CreatedOnToolsVersion = 7.3;
 						TestTargetID = 018B9F951C9B34050054650E;
 					};
-					965A86A41E0832B800177CFD = {
+					962B2BBB1E086A4300A942C1 = {
 						CreatedOnToolsVersion = 8.2;
 						ProvisioningStyle = Automatic;
 					};
-					965A86B31E08346000177CFD = {
+					965A86A41E0832B800177CFD = {
 						CreatedOnToolsVersion = 8.2;
 						ProvisioningStyle = Automatic;
 					};
@@ -398,7 +398,7 @@
 				018B9F951C9B34050054650E /* VimeoNetworkingExample-iOS */,
 				018B9FAB1C9B34050054650E /* VimeoNetworkingExample-iOSTests */,
 				965A86A41E0832B800177CFD /* VimeoNetworkingtvOS */,
-				965A86B31E08346000177CFD /* VimeoNetworkingiOS */,
+				962B2BBB1E086A4300A942C1 /* VimeoNetworkingiOS */,
 			);
 		};
 /* End PBXProject section */
@@ -422,14 +422,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		965A86A31E0832B800177CFD /* Resources */ = {
+		962B2BBA1E086A4300A942C1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		965A86B21E08346000177CFD /* Resources */ = {
+		965A86A31E0832B800177CFD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -452,21 +452,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-VimeoNetworkingExample-iOSTests/Pods-VimeoNetworkingExample-iOSTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		0F39361D6AECC3A49AA7CDA6 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-VimeoNetworkingiOS/Pods-VimeoNetworkingiOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		13C1F651C572424FF37A05C8 /* [CP] Check Pods Manifest.lock */ = {
@@ -499,6 +484,21 @@
 			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-VimeoNetworkingExample-iOSTests/Pods-VimeoNetworkingExample-iOSTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		24AA79945A54719BDC6C8615 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		2A6F07E4B6DFCDF6B00B2528 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -514,7 +514,7 @@
 			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-VimeoNetworkingtvOS/Pods-VimeoNetworkingtvOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		67003C1DB8C6FB0022EEDFB0 /* [CP] Check Pods Manifest.lock */ = {
+		71B404CD2698E61D84231D74 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -529,19 +529,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		71B404CD2698E61D84231D74 /* [CP] Check Pods Manifest.lock */ = {
+		9B9144318F248476AF69462F /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-VimeoNetworkingiOS/Pods-VimeoNetworkingiOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A6FE6BD20258845A82DA36E1 /* [CP] Check Pods Manifest.lock */ = {
@@ -613,14 +613,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		965A86A01E0832B800177CFD /* Sources */ = {
+		962B2BB71E086A4300A942C1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		965A86AF1E08346000177CFD /* Sources */ = {
+		965A86A01E0832B800177CFD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -813,6 +813,57 @@
 			};
 			name = Release;
 		};
+		962B2BC21E086A4300A942C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 877275AB8CF6E03A208126C6 /* Pods-VimeoNetworkingiOS.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = VimeoNetworkingiOS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = vimeo.VimeoNetworkingiOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 2.3;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		962B2BC31E086A4300A942C1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 77DA21A0B73E1F649AAFB056 /* Pods-VimeoNetworkingiOS.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = VimeoNetworkingiOS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = vimeo.VimeoNetworkingiOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		965A86AB1E0832B800177CFD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 23123B1864A49F7FB59F9197 /* Pods-VimeoNetworkingtvOS.debug.xcconfig */;
@@ -835,7 +886,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 10.1;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -862,60 +913,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 10.1;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		965A86B91E08346000177CFD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 877275AB8CF6E03A208126C6 /* Pods-VimeoNetworkingiOS.debug.xcconfig */;
-			buildSettings = {
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = VimeoNetworkingiOS/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = vimeo.VimeoNetworkingiOS;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 2.3;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 10.1;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		965A86BA1E08346000177CFD /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 77DA21A0B73E1F649AAFB056 /* Pods-VimeoNetworkingiOS.release.xcconfig */;
-			buildSettings = {
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = VimeoNetworkingiOS/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = vimeo.VimeoNetworkingiOS;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 10.1;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -951,20 +949,19 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		962B2BC11E086A4300A942C1 /* Build configuration list for PBXNativeTarget "VimeoNetworkingiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				962B2BC21E086A4300A942C1 /* Debug */,
+				962B2BC31E086A4300A942C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		965A86AA1E0832B800177CFD /* Build configuration list for PBXNativeTarget "VimeoNetworkingtvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				965A86AB1E0832B800177CFD /* Debug */,
 				965A86AC1E0832B800177CFD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		965A86BB1E08346000177CFD /* Build configuration list for PBXNativeTarget "VimeoNetworkingiOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				965A86B91E08346000177CFD /* Debug */,
-				965A86BA1E08346000177CFD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

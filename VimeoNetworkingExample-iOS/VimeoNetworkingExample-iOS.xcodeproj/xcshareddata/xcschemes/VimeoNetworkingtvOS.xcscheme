@@ -20,6 +20,20 @@
                ReferencedContainer = "container:VimeoNetworkingExample-iOS.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F04DF81A9FD8CCF648786184F1984262"
+               BuildableName = "VimeoNetworking.framework"
+               BlueprintName = "VimeoNetworking-tvOS"
+               ReferencedContainer = "container:../Pods/Pods.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -29,6 +43,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "965A86A41E0832B800177CFD"
+            BuildableName = "VimeoNetworkingtvOS.framework"
+            BlueprintName = "VimeoNetworkingtvOS"
+            ReferencedContainer = "container:VimeoNetworkingExample-iOS.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>

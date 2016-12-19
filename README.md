@@ -7,7 +7,7 @@
 ## Supported Platforms
 
 - iOS (8.0+)
-- tvOS
+- tvOS (9.0+)
 
 ## Installing with CocoaPods
 
