@@ -15,3 +15,8 @@ target 'VimeoNetworkingExample-iOS' do
     	inherit! :search_paths
 	end
 end
+
+target 'VimeoNetworkingtvOS' do
+	shared_pods
+	inherit! :search_paths
+end
