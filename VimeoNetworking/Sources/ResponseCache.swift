@@ -150,7 +150,6 @@ final internal class ResponseCache
                 let fileManager = NSFileManager()
                 
                 let directoryURL = self.cachesDirectoryURL()
-                _ = self.fileURLForKey(key: key)
                 
                 guard let directoryPath = directoryURL.path,
                     let filePath = self.fileURLForKey(key: key)?.path
