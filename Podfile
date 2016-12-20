@@ -16,16 +16,13 @@ target 'VimeoNetworkingExample-iOS' do
 	end
 end
 
-target 'VimeoNetworkingtvOS' do
-	shared_pods
-	inherit! :search_paths
-end
+target 'VimeoNetworkingExample-tvOS' do
+    shared_pods
 
-target 'VimeoNetworkingiOS' do
-	shared_pods
-	inherit! :search_paths
+    target 'VimeoNetworkingExample-tvOSTests' do
+    	inherit! :search_paths
+	end
 end
-
 
 post_install do |installer|
     installer.pods_project.targets.each do |target|

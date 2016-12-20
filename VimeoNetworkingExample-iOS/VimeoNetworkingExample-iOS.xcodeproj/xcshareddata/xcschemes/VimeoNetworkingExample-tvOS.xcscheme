@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "965A86A41E0832B800177CFD"
-               BuildableName = "VimeoNetworkingtvOS.framework"
-               BlueprintName = "VimeoNetworkingtvOS"
+               BlueprintIdentifier = "966F0EF81E09D5740066DCF0"
+               BuildableName = "VimeoNetworkingExample-tvOS.app"
+               BlueprintName = "VimeoNetworkingExample-tvOS"
                ReferencedContainer = "container:VimeoNetworkingExample-iOS.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,13 +42,23 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "966F0F081E09D5740066DCF0"
+               BuildableName = "VimeoNetworkingExample-tvOSTests.xctest"
+               BlueprintName = "VimeoNetworkingExample-tvOSTests"
+               ReferencedContainer = "container:VimeoNetworkingExample-iOS.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "965A86A41E0832B800177CFD"
-            BuildableName = "VimeoNetworkingtvOS.framework"
-            BlueprintName = "VimeoNetworkingtvOS"
+            BlueprintIdentifier = "966F0EF81E09D5740066DCF0"
+            BuildableName = "VimeoNetworkingExample-tvOS.app"
+            BlueprintName = "VimeoNetworkingExample-tvOS"
             ReferencedContainer = "container:VimeoNetworkingExample-iOS.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -65,15 +75,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "965A86A41E0832B800177CFD"
-            BuildableName = "VimeoNetworkingtvOS.framework"
-            BlueprintName = "VimeoNetworkingtvOS"
+            BlueprintIdentifier = "966F0EF81E09D5740066DCF0"
+            BuildableName = "VimeoNetworkingExample-tvOS.app"
+            BlueprintName = "VimeoNetworkingExample-tvOS"
             ReferencedContainer = "container:VimeoNetworkingExample-iOS.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -83,15 +94,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "965A86A41E0832B800177CFD"
-            BuildableName = "VimeoNetworkingtvOS.framework"
-            BlueprintName = "VimeoNetworkingtvOS"
+            BlueprintIdentifier = "966F0EF81E09D5740066DCF0"
+            BuildableName = "VimeoNetworkingExample-tvOS.app"
+            BlueprintName = "VimeoNetworkingExample-tvOS"
             ReferencedContainer = "container:VimeoNetworkingExample-iOS.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
