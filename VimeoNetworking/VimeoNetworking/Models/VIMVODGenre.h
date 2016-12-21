@@ -14,6 +14,7 @@
 @property (nonatomic, copy, nullable) NSString *name;
 @property (nonatomic, copy, nullable) NSString *canonical;
 @property (nonatomic, copy, nullable) NSString *link;
+@property (nonatomic, strong, nullable) NSDictionary *connections;
 
 - (nullable VIMConnection *)connectionWithName:(nonnull NSString *)connectionName;
 

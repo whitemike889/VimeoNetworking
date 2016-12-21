@@ -58,6 +58,7 @@ extern NSString *const __nonnull VIMConnectionNameRecommendedChannels;
 extern NSString *const __nonnull VIMConnectionNameRecommendedUsers;
 extern NSString *const __nonnull VIMConnectionNameModeratedChannels;
 extern NSString *const __nonnull VIMConnectionNameContents;
+extern NSString *const __nonnull VIMConnectionNamePages;
 
 @interface VIMConnection : VIMModelObject
 

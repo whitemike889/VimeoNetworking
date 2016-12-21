@@ -10,9 +10,6 @@
 
 @interface VIMVODGenre ()
 
-@property (nonatomic, strong) NSDictionary *metadata;
-@property (nonatomic, strong) NSDictionary *connections;
-
 @end
 
 @implementation VIMVODGenre
@@ -37,15 +34,18 @@
 {
     NSMutableDictionary *connections = [NSMutableDictionary dictionary];
     
-    NSDictionary *dict = [self.metadata valueForKey:@"connections"];
-    if ([dict isKindOfClass:[NSDictionary class]])
+    NSDictionary *dict = self.connections;
+    if([dict isKindOfClass:[NSDictionary class]])
     {
-        for (NSString *key in [dict allKeys])
+        for(NSString *key in [dict allKeys])
         {
             NSDictionary *value = [dict valueForKey:key];
-            if ([value isKindOfClass:[NSDictionary class]])
+            if([value isKindOfClass:[NSDictionary class]])
             {
                 VIMConnection *connection = [[VIMConnection alloc] initWithKeyValueDictionary:value];
+                if([connection respondsToSelector:@selector(didFinishMapping)])
+                    [connection didFinishMapping];
+                
                 [connections setObject:connection forKey:key];
             }
         }
