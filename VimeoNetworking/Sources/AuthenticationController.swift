@@ -117,7 +117,7 @@ final public class AuthenticationController
             loadedAccount = try self.loadClientCredentialsAccount()
         }
         
-        if loadedAccount != nil
+        if let _ = loadedAccount
         {
             // TODO: refresh user [RH] (4/25/16)
             
