@@ -20,10 +20,6 @@
 		234B183FA295853A0F735D3F /* Pods_VimeoNetworkingExample_tvOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2F770DEBD4E467F7F728F84 /* Pods_VimeoNetworkingExample_tvOSTests.framework */; };
 		3C6F88841D999878006A24F4 /* programmed_cinema.json in Resources */ = {isa = PBXBuildFile; fileRef = 3C6F88821D999878006A24F4 /* programmed_cinema.json */; };
 		3C6F88851D999878006A24F4 /* FakeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6F88831D999878006A24F4 /* FakeDataSource.swift */; };
-		966F0EFC1E09D5740066DCF0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966F0EFB1E09D5740066DCF0 /* AppDelegate.swift */; };
-		966F0EFE1E09D5740066DCF0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966F0EFD1E09D5740066DCF0 /* ViewController.swift */; };
-		966F0F011E09D5740066DCF0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 966F0EFF1E09D5740066DCF0 /* Main.storyboard */; };
-		966F0F031E09D5740066DCF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 966F0F021E09D5740066DCF0 /* Assets.xcassets */; };
 		966F0F0E1E09D5740066DCF0 /* VimeoNetworkingExample_tvOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966F0F0D1E09D5740066DCF0 /* VimeoNetworkingExample_tvOSTests.swift */; };
 		B6315CBCEC56CC56CDD852C3 /* Pods_VimeoNetworkingExample_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAFB88210DDF0B7DB12C7F1D /* Pods_VimeoNetworkingExample_tvOS.framework */; };
 		CC22A6749CADF4DA91D73F04 /* Pods_VimeoNetworkingExample_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D22A36411CC71C284010480 /* Pods_VimeoNetworkingExample_iOSTests.framework */; };
@@ -95,11 +91,6 @@
 		966F0EEF1E09D55E0066DCF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		966F0EF11E09D55E0066DCF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		966F0EF91E09D5740066DCF0 /* VimeoNetworkingExample-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VimeoNetworkingExample-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		966F0EFB1E09D5740066DCF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		966F0EFD1E09D5740066DCF0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		966F0F001E09D5740066DCF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		966F0F021E09D5740066DCF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		966F0F041E09D5740066DCF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		966F0F091E09D5740066DCF0 /* VimeoNetworkingExample-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "VimeoNetworkingExample-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		966F0F0D1E09D5740066DCF0 /* VimeoNetworkingExample_tvOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VimeoNetworkingExample_tvOSTests.swift; sourceTree = "<group>"; };
 		966F0F0F1E09D5740066DCF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -162,7 +153,6 @@
 				018B9F981C9B34050054650E /* VimeoNetworkingExample-iOS */,
 				018B9FAF1C9B34050054650E /* VimeoNetworkingExample-iOSTests */,
 				966F0EE71E09D55E0066DCF0 /* VimeoNetworkingExample-tvOS */,
-				966F0EFA1E09D5740066DCF0 /* VimeoNetworkingExample-tvOS */,
 				966F0F0C1E09D5740066DCF0 /* VimeoNetworkingExample-tvOSTests */,
 				018B9F971C9B34050054650E /* Products */,
 				9E56BEC99D20C5D586D815EB /* Pods */,
@@ -237,18 +227,6 @@
 				966F0EEC1E09D55E0066DCF0 /* Main.storyboard */,
 				966F0EEF1E09D55E0066DCF0 /* Assets.xcassets */,
 				966F0EF11E09D55E0066DCF0 /* Info.plist */,
-			);
-			path = "VimeoNetworkingExample-tvOS";
-			sourceTree = "<group>";
-		};
-		966F0EFA1E09D5740066DCF0 /* VimeoNetworkingExample-tvOS */ = {
-			isa = PBXGroup;
-			children = (
-				966F0EFB1E09D5740066DCF0 /* AppDelegate.swift */,
-				966F0EFD1E09D5740066DCF0 /* ViewController.swift */,
-				966F0EFF1E09D5740066DCF0 /* Main.storyboard */,
-				966F0F021E09D5740066DCF0 /* Assets.xcassets */,
-				966F0F041E09D5740066DCF0 /* Info.plist */,
 			);
 			path = "VimeoNetworkingExample-tvOS";
 			sourceTree = "<group>";
@@ -453,8 +431,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				966F0F031E09D5740066DCF0 /* Assets.xcassets in Resources */,
-				966F0F011E09D5740066DCF0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,7 +486,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		173AE94535CA59D7E231FAF0 /* [CP] Embed Pods Frameworks */ = {
@@ -570,7 +546,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		A6FE6BD20258845A82DA36E1 /* [CP] Check Pods Manifest.lock */ = {
@@ -585,7 +561,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		C3C638DB439B296F24C0C11D /* [CP] Copy Pods Resources */ = {
@@ -645,7 +621,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -676,8 +652,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				966F0EFE1E09D5740066DCF0 /* ViewController.swift in Sources */,
-				966F0EFC1E09D5740066DCF0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -725,14 +699,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				966F0EED1E09D55E0066DCF0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		966F0EFF1E09D5740066DCF0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				966F0F001E09D5740066DCF0 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -943,7 +909,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 90E3A1F0166091A070203C67 /* Pods-VimeoNetworkingExample-tvOSTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				DEVELOPMENT_TEAM = 35R365FS4Q;
@@ -963,7 +928,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3D1A821E9248D03C2D131632 /* Pods-VimeoNetworkingExample-tvOSTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				DEVELOPMENT_TEAM = 35R365FS4Q;
