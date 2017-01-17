@@ -112,7 +112,7 @@ class NSErrorExtensionTests: XCTestCase {
         
         XCTAssertNotNil(invalidParameters as? NSArray)
         
-        let invalidParamsDict = invalidParameters![0]
+        let invalidParamsDict = invalidParameters!.firstObject!!
         XCTAssertEqual(invalidParamsDict["error"], "Unable to log in Please enter a valid email address and/or password")
         XCTAssertEqual(invalidParamsDict["developer_message"], "Password and/or email provided are invalid")
         XCTAssertEqual(invalidParamsDict["error_code"], 2218)
