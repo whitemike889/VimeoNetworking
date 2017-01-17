@@ -131,7 +131,7 @@ final public class VimeoClient
     // MARK: - Authentication
     
         /// Stores the current account, if one exists
-    public internal(set) var currentAccount: VIMAccount?
+    public var currentAccount: VIMAccount?
     {
         didSet
         {
@@ -144,7 +144,8 @@ final public class VimeoClient
                 self.sessionManager.clientDidClearAccount()
             }
             
-            Notification.AuthenticatedAccountDidChange.post(object: self.currentAccount)
+            Notification.AuthenticatedAccountDidChange.post(object: self.currentAccount,
+                                                            userInfo: [UserInfoKey.PreviousAccount.rawValue : oldValue ?? NSNull()])
         }
     }
     
