@@ -12,10 +12,10 @@ public class Spatial: VIMModelObject
 {
     
     /// Represents the projection. Value returned by the server can be: "equirectangular", "cylindrical", "cubical", "pyramid", "dome".
-    dynamic public var projection: String?
+    dynamic var projection: String?
     
     /// Represents the format. Value returned by the server can be: "mono", left-right", "top-bottom"
-    dynamic public var stereoFormat: String?
+    dynamic var stereoFormat: String?
     
     // MARK: - VIMMappable
     
