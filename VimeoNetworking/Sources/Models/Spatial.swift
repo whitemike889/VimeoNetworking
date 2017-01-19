@@ -7,10 +7,15 @@
 //
 //
 
+/// Spatial stores all information related to threesixty video
 public class Spatial: VIMModelObject
 {
-    public dynamic var projection: String?
-    public dynamic var stereoFormat: String?
+    
+    /// Represents the projection. Value returned by the server can be: "equirectangular", "cylindrical", "cubical", "pyramid", "dome".
+    dynamic public var projection: String?
+    
+    /// Represents the format. Value returned by the server can be: "mono", left-right", "top-bottom"
+    dynamic public var stereoFormat: String?
     
     // MARK: - VIMMappable
     
