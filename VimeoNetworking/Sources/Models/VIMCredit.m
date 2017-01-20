@@ -1,5 +1,5 @@
 //
-//  VIMNotification.h
+//  VIMCredit.m
 //  Pods
 //
 //  Created by Fiel Guhit on 1/20/17.
@@ -24,40 +24,8 @@
 //  THE SOFTWARE.
 //
 
-#import "VIMModelObject.h"
+#import "VIMCredit.h"
 
-@class VIMComment;
-@class VIMVideo;
-@class VIMCredit;
-@class VIMUser;
-
-typedef NS_ENUM(NSUInteger, VIMNotificationType) {
-    VIMNotificationTypeNone = 0,
-    VIMNotificationTypeComment,
-    VIMNotificationTypeCredit,
-    VIMNotificationTypeFollow,
-    VIMNotificationTypeLike,
-    VIMNotificationTypeMention,
-    VIMNotificationTypeReply,
-    VIMNotificationTypeShare,
-    VIMNotificationTypeVideoAvailable,
-    VIMNotificationTypeVODPreorderAvailable,
-    VIMNotificationTypeVODRentalExpirationWarning,
-    VIMNotificationTypeVODPurchase,
-    VIMNotificationTypeAccountExpirationWarning,
-    VIMNotificationTypeStorageWarning
-};
-
-@interface VIMNotification : VIMModelObject
-
-@property (nonatomic, copy, nullable) NSString *uri;
-@property (nonatomic, nullable) NSDate *createdTime;
-@property (nonatomic) BOOL new;
-@property (nonatomic) BOOL seen;
-@property (nonatomic) VIMNotificationType type;
-@property (nonatomic, nullable) VIMComment *comment;
-@property (nonatomic, nullable) VIMVideo *video;
-@property (nonatomic, nullable) VIMCredit *credit;
-@property (nonatomic, nullable) VIMUser *user;
+@implementation VIMCredit
 
 @end
