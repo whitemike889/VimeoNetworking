@@ -25,7 +25,45 @@
 //
 
 #import "VIMNotification.h"
+#import "VIMVideo.h"
+#import "VIMUser.h"
+#import "VIMCredit.h"
 
 @implementation VIMNotification
+
+#pragma mark - <VIMMappable>
+
+- (id)getObjectMapping
+{
+     return @{@"clip": @"video"};
+}
+
+- (Class)getClassForObjectKey:(NSString *)key
+{
+    if ([key isEqualToString:@"clip"])
+    {
+        return [VIMVideo class];
+    }
+    
+    if ([key isEqualToString:@"user"])
+    {
+        return [VIMUser class];
+    }
+    
+    if ([key isEqualToString:@"credit"])
+    {
+        return [VIMCredit class];
+    }
+    
+    return nil;
+}
+
+- (void)didFinishMapping
+{
+    if ([self.createdTime isKindOfClass:[NSString class]])
+    {
+        self.createdTime = [[VIMModelObject dateFormatter] dateFromString:(NSString *)self.createdTime];
+    }
+}
 
 @end
