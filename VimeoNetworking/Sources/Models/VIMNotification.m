@@ -64,6 +64,38 @@
     {
         self.createdTime = [[VIMModelObject dateFormatter] dateFromString:(NSString *)self.createdTime];
     }
+    
+    [self setNotificationType];
+}
+
+- (void)setNotificationType
+{
+    VIMNotificationType notificationType = VIMNotificationTypeNone;
+    
+    if (self.type)
+    {
+        NSDictionary *enumMap = @{@"comment" : @(VIMNotificationTypeComment),
+                                  @"credit" : @(VIMNotificationTypeCredit),
+                                  @"follow" : @(VIMNotificationTypeFollow),
+                                  @"like" : @(VIMNotificationTypeLike),
+                                  @"mention" : @(VIMNotificationTypeMention),
+                                  @"reply" : @(VIMNotificationTypeReply),
+                                  @"share" : @(VIMNotificationTypeShare),
+                                  @"video_available" : @(VIMNotificationTypeVideoAvailable),
+                                  @"vod_preorder_available" : @(VIMNotificationTypeVODPreorderAvailable),
+                                  @"vod_rental_expiration_warning" : @(VIMNotificationTypeVODRentalExpirationWarning),
+                                  @"vod_purchase" : @(VIMNotificationTypeVODPurchase),
+                                  @"account_expiration_warning" : @(VIMNotificationTypeAccountExpirationWarning),
+                                  @"storage_warning" : @(VIMNotificationTypeStorageWarning)};
+        
+        NSNumber *notificationNumber = enumMap[self.type];
+        if (notificationNumber)
+        {
+            notificationType = [notificationNumber unsignedIntegerValue];
+        }
+    }
+    
+    self.notificationType = notificationType;
 }
 
 @end

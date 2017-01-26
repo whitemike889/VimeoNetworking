@@ -54,7 +54,8 @@ typedef NS_ENUM(NSUInteger, VIMNotificationType) {
 @property (nonatomic, nullable) NSDate *createdTime;
 @property (nonatomic) BOOL new;
 @property (nonatomic) BOOL seen;
-@property (nonatomic) VIMNotificationType type;
+@property (nonatomic, copy, nullable) NSString *type;
+@property (nonatomic) VIMNotificationType notificationType;
 @property (nonatomic, nullable) VIMComment *comment;
 @property (nonatomic, nullable) VIMVideo *video;
 @property (nonatomic, nullable) VIMCredit *credit;
