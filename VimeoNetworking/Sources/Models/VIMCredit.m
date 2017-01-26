@@ -25,7 +25,31 @@
 //
 
 #import "VIMCredit.h"
+#import "VIMVideo.h"
+#import "VIMUser.h"
 
 @implementation VIMCredit
+
+#pragma mark - <VIMMappable>
+
+- (id)getObjectMapping
+{
+    return @{@"clip": @"video"};
+}
+
+- (Class)getClassForObjectKey:(NSString *)key
+{
+    if ([key isEqualToString:@"clip"])
+    {
+        return [VIMVideo class];
+    }
+    
+    if ([key isEqualToString:@"user"])
+    {
+        return [VIMUser class];
+    }
+    
+    return nil;
+}
 
 @end
