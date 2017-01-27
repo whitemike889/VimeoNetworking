@@ -71,6 +71,11 @@ extern NSString *const __nonnull VIMConnectionNameNotifications;
 @property (nonatomic, strong, nullable) NSNumber *mainVideosCount;
 @property (nonatomic, strong, nullable) NSNumber *viewableVideosCount;
 
+#pragma mark - Notifications related only
+@property (nonatomic, strong, nullable) NSNumber *totalNew;
+@property (nonatomic, strong, nullable) NSNumber *totalUnread;
+- (void)setNotifications:(nonnull NSDictionary *)dic;
+
 - (BOOL)canGet;
 - (BOOL)canPost;
 

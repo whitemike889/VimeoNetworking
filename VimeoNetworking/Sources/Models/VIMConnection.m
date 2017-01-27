@@ -91,4 +91,11 @@ NSString *const VIMConnectionNameNotifications = @"notifications";
     return (self.options && [self.options containsObject:@"POST"]);
 }
 
+- (void)setNotifications:(nonnull NSDictionary *)dic
+{
+    // We can't both either just call `didFinishMapping` because one of the property received from the server is prefixed by `new..` and doesn't follow the naming convention.
+    // or use the `getObjectMapping` because it doesn't get called. See `didFinishMapping` comment [JL] 01/27/2017
+    self.totalNew = [dic objectForKey:@"new_total"];
+    self.totalUnread = [dic objectForKey:@"unread_total"];
+}
 @end
