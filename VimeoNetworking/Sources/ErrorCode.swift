@@ -77,6 +77,16 @@ public enum VimeoErrorCode: Int
     case TokenNotGenerated = 5001
     case DRMStreamLimitHit = 3420
     case DRMDeviceLimitHit = 3421
+
+    // Batch follow
+    case BatchUserDoesNotExist = 2900
+    case BatchFollowUserRequestExceeded = 2901
+    case BatchSubscribeChannelRequestExceeded = 2902
+    case BatchChannelDoesNotExist = 2903
+    case UserNotAllowedToFollowUsers = 3417
+    case UserNotAllowedToFollowChannels = 3418
+    case BatchFollowUserRequestFailed = 4005
+    case BatchSubscribeChannelRequestFailed = 4006
 }
 
 /// `HTTPStatusCode` contains HTTP status code constants used to inspect response status
