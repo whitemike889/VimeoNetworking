@@ -211,7 +211,8 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
             "application/vnd.vimeo.ondemand.season+json",
             "application/vnd.vimeo.programmed.cinema+json",
             "application/vnd.vimeo.policydocument+json",
-            "application/vnd.vimeo.notification+json"]
+            "application/vnd.vimeo.notification+json",
+            "application/vnd.vimeo.notification.subscriptions+json"]
         )
     }
 }

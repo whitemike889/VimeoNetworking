@@ -50,6 +50,11 @@ public class ObservationToken
     }
 }
 
+public enum UserInfoKey: NSString
+{
+    case PreviousAccount
+}
+
 /// `Notification` declares a number of global events that can be broadcast by the networking library and observed by clients.
 public enum Notification: String
 {
@@ -82,11 +87,11 @@ public enum Notification: String
      
      - parameter object: an optional object to pass to observers of this `Notification`
      */
-    public func post(object object: AnyObject?)
+    public func post(object object: AnyObject?, userInfo: [NSObject: AnyObject]? = nil)
     {
         dispatch_async(dispatch_get_main_queue())
         {
-            self.dynamicType.NotificationCenter.postNotificationName(self.rawValue, object: object)
+            self.dynamicType.NotificationCenter.postNotificationName(self.rawValue, object: object, userInfo: userInfo)
         }
     }
     
