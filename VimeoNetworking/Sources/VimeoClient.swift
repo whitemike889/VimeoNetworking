@@ -144,8 +144,14 @@ final public class VimeoClient
                 self.sessionManager.clientDidClearAccount()
             }
             
-            Notification.AuthenticatedAccountDidChange.post(object: self.currentAccount)
+            self.notifyObserversAccountChanged(self.currentAccount, previousAccount: oldValue)
         }
+    }
+    
+    public func notifyObserversAccountChanged(account: VIMAccount?, previousAccount: VIMAccount?)
+    {
+        Notification.AuthenticatedAccountDidChange.post(object: account,
+                                                        userInfo: [UserInfoKey.PreviousAccount.rawValue : previousAccount ?? NSNull()])
     }
     
     // MARK: - Request
