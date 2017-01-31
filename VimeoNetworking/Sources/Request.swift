@@ -181,7 +181,14 @@ public struct Request<ModelType: MappableResponse>
             }
         }
         
-        return components!.string!
+        if let theURI = components?.string?.stringByRemovingPercentEncoding
+        {
+            return theURI
+        }
+        else
+        {
+            return ""
+        }
     }
     
     // MARK: Copying requests
