@@ -32,14 +32,9 @@
 
 #pragma mark - <VIMMappable>
 
-- (id)getObjectMapping
-{
-    return @{@"clip": @"video"};
-}
-
 - (Class)getClassForObjectKey:(NSString *)key
 {
-    if ([key isEqualToString:@"clip"])
+    if ([key isEqualToString:@"video"])
     {
         return [VIMVideo class];
     }
