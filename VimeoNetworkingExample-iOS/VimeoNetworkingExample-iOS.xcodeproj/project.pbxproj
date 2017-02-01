@@ -21,6 +21,7 @@
 		3C6F88841D999878006A24F4 /* programmed_cinema.json in Resources */ = {isa = PBXBuildFile; fileRef = 3C6F88821D999878006A24F4 /* programmed_cinema.json */; };
 		3C6F88851D999878006A24F4 /* FakeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6F88831D999878006A24F4 /* FakeDataSource.swift */; };
 		966F0F0E1E09D5740066DCF0 /* VimeoNetworkingExample_tvOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966F0F0D1E09D5740066DCF0 /* VimeoNetworkingExample_tvOSTests.swift */; };
+		A7D414481E2E6FC500B68B14 /* VimeoClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D414471E2E6FC500B68B14 /* VimeoClientTests.swift */; };
 		B6315CBCEC56CC56CDD852C3 /* Pods_VimeoNetworkingExample_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAFB88210DDF0B7DB12C7F1D /* Pods_VimeoNetworkingExample_tvOS.framework */; };
 		CC22A6749CADF4DA91D73F04 /* Pods_VimeoNetworkingExample_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D22A36411CC71C284010480 /* Pods_VimeoNetworkingExample_iOSTests.framework */; };
 		DEB396A3F44BBFBE9A602F1A /* Pods_VimeoNetworkingExample_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46114AFA04898F979611854A /* Pods_VimeoNetworkingExample_iOS.framework */; };
@@ -98,6 +99,7 @@
 		A28A01D89F7D023CF49B4F1F /* Pods_VimeoNetworkingExample_iOS_VimeoNetworking_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimeoNetworkingExample_iOS_VimeoNetworking_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2F770DEBD4E467F7F728F84 /* Pods_VimeoNetworkingExample_tvOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimeoNetworkingExample_tvOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A76827E778C303147C297596 /* Pods-VimeoNetworkingExample-iOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworkingExample-iOSUITests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-VimeoNetworkingExample-iOSUITests/Pods-VimeoNetworkingExample-iOSUITests.release.xcconfig"; sourceTree = "<group>"; };
+		A7D414471E2E6FC500B68B14 /* VimeoClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VimeoClientTests.swift; sourceTree = "<group>"; };
 		AAA8BDDF1F5FAC07D5EBE694 /* Pods-VimeoNetworkingExample-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworkingExample-tvOS.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-VimeoNetworkingExample-tvOS/Pods-VimeoNetworkingExample-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		B922437EFB7C0E4240397B12 /* Pods-VimeoNetworking tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking tvOS.release.xcconfig"; path = "../Pods/Target Support Files/Pods-VimeoNetworking tvOS/Pods-VimeoNetworking tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		C91C8608AAEE4CC821051413 /* Pods_VimeoNetworking_tvOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimeoNetworking_tvOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -194,6 +196,7 @@
 				3C6F88831D999878006A24F4 /* FakeDataSource.swift */,
 				01CDBEF61CEB9C100093DDF4 /* ModelObjectValidationTests.swift */,
 				0C7364331DFF4871000C3585 /* NSErrorExtensionTests.swift */,
+				A7D414471E2E6FC500B68B14 /* VimeoClientTests.swift */,
 			);
 			path = "VimeoNetworkingExample-iOSTests";
 			sourceTree = "<group>";
@@ -645,6 +648,7 @@
 				01CDBEF71CEB9C100093DDF4 /* ModelObjectValidationTests.swift in Sources */,
 				0C7364351DFF4871000C3585 /* NSErrorExtensionTests.swift in Sources */,
 				3C6F88851D999878006A24F4 /* FakeDataSource.swift in Sources */,
+				A7D414481E2E6FC500B68B14 /* VimeoClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
