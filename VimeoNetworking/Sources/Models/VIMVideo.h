@@ -110,7 +110,7 @@ typedef NS_ENUM(NSUInteger, VIMVideoProcessingStatus) {
 - (BOOL)isDRMProtected;
 - (NSInteger)likesCount;
 - (NSInteger)commentsCount;
-- (BOOL)is360Video;
+- (BOOL)is360;
 
 - (void)setIsLiked:(BOOL)isLiked;
 - (void)setIsWatchLater:(BOOL)isWatchLater;
