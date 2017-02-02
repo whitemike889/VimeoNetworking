@@ -180,8 +180,8 @@ public struct Request<ModelType: MappableResponse>
                 components?.query = queryString
             }
         }
-        
-        return components!.string!
+
+        return components?.string?.stringByRemovingPercentEncoding ?? ""
     }
     
     // MARK: Copying requests
