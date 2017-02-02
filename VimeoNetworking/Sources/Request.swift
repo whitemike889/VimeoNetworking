@@ -180,15 +180,8 @@ public struct Request<ModelType: MappableResponse>
                 components?.query = queryString
             }
         }
-        
-        if let theURI = components?.string?.stringByRemovingPercentEncoding
-        {
-            return theURI
-        }
-        else
-        {
-            return ""
-        }
+
+        return components?.string?.stringByRemovingPercentEncoding ?? ""
     }
     
     // MARK: Copying requests
