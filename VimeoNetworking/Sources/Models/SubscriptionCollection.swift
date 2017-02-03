@@ -32,6 +32,36 @@ public class SubscriptionCollection: VIMModelObject
         
         return nil
     }
+    
+    // MARK: - Helper
+
+    static public func toSubscription(dictionary: [String : Bool]) -> Subscription?
+    {
+        let subscriptionCollections = SubscriptionCollection()
+        
+        if subscriptionCollections.subscriptions == nil
+        {
+           subscriptionCollections.subscriptions = Subscription()
+        }
+        
+        guard let subscriptions = subscriptionCollections.subscriptions else
+        {
+            return nil
+        }
+        
+        subscriptions.comment = dictionary["comment"] ?? false
+        subscriptions.credit = dictionary["credit"] ?? false
+        subscriptions.like = dictionary["like"] ?? false
+        subscriptions.mention = dictionary["mention"] ?? false
+        subscriptions.reply = dictionary["reply"] ?? false
+        subscriptions.follow = dictionary["follow"] ?? false
+        subscriptions.videoAvailable = dictionary["video_available"] ?? false
+        subscriptions.vodPreorderAvailable = dictionary["vod_preorder_available"] ?? false
+        subscriptions.vodRentalExpirationWarning = dictionary["vod_rental_expiration_warning"] ?? false
+        subscriptions.share = dictionary["share"] ?? false
+        
+        return subscriptions
+    }
 }
 
 public class Subscription: VIMModelObject
