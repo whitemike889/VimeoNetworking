@@ -28,8 +28,6 @@
 
 #import "VIMModelObject.h"
 
-@class VIMVideoLog;
-
 @interface VIMVideoPlayFile : VIMModelObject
 
 @property (nonatomic, copy, nullable) NSString *link;

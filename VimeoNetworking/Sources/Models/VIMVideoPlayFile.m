@@ -25,7 +25,6 @@
 //
 
 #import "VIMVideoPlayFile.h"
-#import "VIMVideoLog.h"
 
 @interface VIMVideoPlayFile()
 
