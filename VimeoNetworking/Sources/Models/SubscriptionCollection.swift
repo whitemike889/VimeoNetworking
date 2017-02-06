@@ -14,7 +14,7 @@ public class SubscriptionCollection: VIMModelObject
     
     public var uri: String?
     public var modifiedTime: NSDate?
-    public var subscriptions: Subscription?
+    public var subscription = Subscription()
     
     // MARK: - VIMMappable
     
@@ -35,32 +35,10 @@ public class SubscriptionCollection: VIMModelObject
     
     // MARK: - Helper
 
-    static public func toSubscription(dictionary: [String : Bool]) -> Subscription?
+    public convenience init(dictionary: [String : Bool])
     {
-        let subscriptionCollections = SubscriptionCollection()
-        
-        if subscriptionCollections.subscriptions == nil
-        {
-           subscriptionCollections.subscriptions = Subscription()
-        }
-        
-        guard let subscriptions = subscriptionCollections.subscriptions else
-        {
-            return nil
-        }
-        
-        subscriptions.comment = dictionary["comment"] ?? false
-        subscriptions.credit = dictionary["credit"] ?? false
-        subscriptions.like = dictionary["like"] ?? false
-        subscriptions.mention = dictionary["mention"] ?? false
-        subscriptions.reply = dictionary["reply"] ?? false
-        subscriptions.follow = dictionary["follow"] ?? false
-        subscriptions.videoAvailable = dictionary["video_available"] ?? false
-        subscriptions.vodPreorderAvailable = dictionary["vod_preorder_available"] ?? false
-        subscriptions.vodRentalExpirationWarning = dictionary["vod_rental_expiration_warning"] ?? false
-        subscriptions.share = dictionary["share"] ?? false
-        
-        return subscriptions
+        self.init()
+        self.subscription = Subscription(dictionary: dictionary)
     }
 }
 
@@ -80,6 +58,39 @@ public class Subscription: VIMModelObject
     public var accountExpirationWarning: Bool = false
     public var share: Bool = false
     
+    public convenience init(dictionary: [String : Bool])
+    {
+        self.init()
+        
+        self.comment = dictionary["comment"] ?? false
+        self.credit = dictionary["credit"] ?? false
+        self.like = dictionary["like"] ?? false
+        self.mention = dictionary["mention"] ?? false
+        self.reply = dictionary["reply"] ?? false
+        self.follow = dictionary["follow"] ?? false
+        self.videoAvailable = dictionary["video_available"] ?? false
+        self.vodPreorderAvailable = dictionary["vod_preorder_available"] ?? false
+        self.vodRentalExpirationWarning = dictionary["vod_rental_expiration_warning"] ?? false
+        self.share = dictionary["share"] ?? false
+    }
+
+    public var toDictionary: [String: Bool]
+    {
+        let dictionary = ["comment" : self.comment,
+                          "credit" : self.credit,
+                          "like" : self.like,
+                          "mention" : self.mention,
+                          "reply" : self.reply,
+                          "follow" : self.follow,
+                          "video_available" : self.videoAvailable,
+                          "vod_preorder_available" : self.vodPreorderAvailable,
+                          "vod_rental_expiration_warning" : self.vodRentalExpirationWarning,
+                          "account_expiration_warning" : self.accountExpirationWarning,
+                          "share" : self.share]
+        
+        return dictionary
+    }
+
     // MARK: - VIMMappable
     
     public override func getObjectMapping() -> AnyObject!
