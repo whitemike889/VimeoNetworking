@@ -103,6 +103,12 @@ final public class VimeoClient
         /// response cache handles all memory and disk caching of response dictionaries
     private let responseCache = ResponseCache()
     
+    private struct Constants
+    {
+        static let BearerQuery = "Bearer "
+        static let AuthorizationHeader = "Authorization"
+    }
+    
     /**
      Create a new client
      
@@ -473,9 +479,9 @@ final public class VimeoClient
             return nil
         }
         
-        if let bearerHeader = task.originalRequest?.allHTTPHeaderFields?["Authorization"]
+        if let bearerHeader = task.originalRequest?.allHTTPHeaderFields?[Constants.AuthorizationHeader]
         {
-            guard let range = bearerHeader.rangeOfString("Bearer ") else
+            guard let range = bearerHeader.rangeOfString(Constants.BearerQuery) else
             {
                 return nil
             }
