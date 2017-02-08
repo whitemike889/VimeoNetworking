@@ -20,18 +20,10 @@ public extension Request
     
     /// Create a request that updates the push notification subscriptions
     ///
-    /// - Parameter subscription: The subscription object contains the boolean values for each of those: comment, credit, like, reply, follow, video_available that defines what the user is subscripted to.
+    /// - Parameter subscription: The subscription dictionary contains the boolean values for each of those: comment, credit, like, reply, follow, video_available that defines what the user is subscripted to.
     /// - Returns: The result of the .PATCH is a SubscriptionCollection
-    public static func updateNotificationSubscriptions(subscription: Subscription) -> Request
+    public static func updateNotificationSubscriptions(subscription: VimeoClient.RequestParametersDictionary) -> Request
     {
-        let parameters = [
-                        "comment": subscription.comment,
-                        "credit": subscription.credit,
-                        "like": subscription.like,
-                        "reply": subscription.reply,
-                        "follow": subscription.follow,
-                        "video_available": subscription.videoAvailable]
-        
-        return Request(method: .PATCH, path: Path, parameters: parameters)
+        return Request(method: .PATCH, path: Path, parameters: subscription)
     }
 }
