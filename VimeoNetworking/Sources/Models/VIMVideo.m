@@ -436,6 +436,15 @@ NSString *VIMContentRating_Safe = @"safe";
 
 - (BOOL)isDRMProtected
 {
+    if (self.playRepresentation.drmFiles.fairPlayFile)
+    {
+        return YES;
+    }
+
+    // The following only applies to VIMVideos with VOD metadata.
+    // If the VOD item that this VIMVideo represents (through purchase, rental, or subscription) is proteceted by DRM,
+    // we consider this VIMVideo to be protected by DRM [ghking] 2/8/17 cc [jasonhawkins]
+    
     VIMInteraction *buyInteraction = [self interactionWithName:VIMInteractionNameBuy];
     BOOL isBuyDRMProtected = buyInteraction.isForDRMProtectedContent;
     
