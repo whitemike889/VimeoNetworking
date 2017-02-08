@@ -28,6 +28,7 @@
 #import "VIMVideo.h"
 #import "VIMUser.h"
 #import "VIMCredit.h"
+#import "VIMComment.h"
 
 @implementation VIMNotification
 
@@ -69,6 +70,10 @@
     if ([key isEqualToString:@"credit"])
     {
         return [VIMCredit class];
+    }
+    
+    if ([key isEqualToString:@"comment"]) {
+        return [VIMComment class];
     }
     
     return nil;
