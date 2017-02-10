@@ -6,14 +6,18 @@
 //
 //
 
-import Foundation
-
+/// Represents all the subscriptions with extra informations
 public class SubscriptionCollection: VIMModelObject
 {
     // MARK: - Properties
-    
+
+    /// Represents the uri
     public var uri: String?
+    
+    /// Represents the modified time
     public var modifiedTime: NSDate?
+    
+    /// Represents the subscription
     public var subscription: Subscription?
     
     // MARK: - VIMMappable
