@@ -6,24 +6,45 @@
 //
 //
 
-import Foundation
-
+/// Represents all the notifications that the user is Subscribed to.
 public class Subscription: VIMModelObject
 {
     // MARK: - Properties
     
-    public var comment: NSNumber?
-    public var credit: NSNumber?
-    public var like: NSNumber?
-    public var mention: NSNumber?
-    public var reply: NSNumber?
-    public var follow: NSNumber?
-    public var videoAvailable: NSNumber?
-    public var vodPreorderAvailable: NSNumber?
-    public var vodRentalExpirationWarning: NSNumber?
-    public var accountExpirationWarning: NSNumber?
-    public var share: NSNumber?
+    /// Represents wether the user is subscribed to the `comment` notification.
+    var comment: NSNumber?
     
+    /// Represents wether the user is subscribed to the `credit` notification.
+    var credit: NSNumber?
+    
+    /// Represents wether the user is subscribed to the `like` notification.
+    var like: NSNumber?
+    
+    /// Represents wether the user is subscribed to the `mention` notification.
+    var mention: NSNumber?
+    
+    /// Represents wether the user is subscribed to the `reply` notification.
+    var reply: NSNumber?
+    
+    /// Represents wether the user is subscribed to the `follow` notification.
+    var follow: NSNumber?
+    
+    /// Represents wether the user is subscribed to the `video available` notification.
+    var videoAvailable: NSNumber?
+    
+    /// Represents wether the user is subscribed to the `vod pre order available` notification.
+    var vodPreorderAvailable: NSNumber?
+    
+    /// Represents wether the user is subscribed to the `vod rental expiration warning` notification.
+    var vodRentalExpirationWarning: NSNumber?
+    
+    /// Represents wether the user is subscribed to the `account expiration warning` notification.
+    var accountExpirationWarning: NSNumber?
+    
+    /// Represents wether the user is subscribed to the `share` notification.
+    var share: NSNumber?
+    
+    /// Represents the Subscription object as a Dictionary
     public var toDictionary: [NSObject: AnyObject]
     {
         let dictionary = ["comment": self.comment ?? false,
@@ -41,7 +62,7 @@ public class Subscription: VIMModelObject
     
     // MARK: - VIMMappable
     
-    public override func getObjectMapping() -> AnyObject!
+    override public func getObjectMapping() -> AnyObject!
     {
         return [
             "video_available": "videoAvailable",
