@@ -42,6 +42,11 @@ private protocol Cache
 /// Response cache handles the storage of JSON response dictionaries indexed by their associated `Request`.  It contains both memory and disk caching functionality
 final internal class ResponseCache
 {
+    struct Constant
+    {
+        static let cacheDirectory = "com.vimeo.Caches"
+    }
+    
     /**
      Stores a response dictionary for a request.
      
@@ -162,7 +167,7 @@ final internal class ResponseCache
                 
                 do
                 {
-                    if !fileManager.fileExistsAtPath(directoryPath)
+                       if !fileManager.fileExistsAtPath(directoryPath)
                     {
                         try fileManager.createDirectoryAtPath(directoryPath, withIntermediateDirectories: true, attributes: nil)
                     }
@@ -273,13 +278,17 @@ final internal class ResponseCache
         
         private func cachesDirectoryURL() -> NSURL
         {
+            // Apple /Caches directory
             guard let directory = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true).first
             else
             {
                 fatalError("no cache directories found")
             }
             
-            return NSURL(fileURLWithPath: directory)
+            // We need to create a directory in `../Library/Caches folder`. Otherwise, trying to remove the Apple /Caches folder will always fails. Note that it's noticeable while testing on a device.
+            let cacheDirectory = directory + Constant.cacheDirectory
+            
+            return NSURL(fileURLWithPath: cacheDirectory)
         }
         
         private func fileURLForKey(key key: String) -> NSURL?
