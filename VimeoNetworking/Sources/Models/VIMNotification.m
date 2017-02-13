@@ -28,8 +28,25 @@
 #import "VIMVideo.h"
 #import "VIMUser.h"
 #import "VIMCredit.h"
+#import "VIMComment.h"
 
 @implementation VIMNotification
+
++ (NSDictionary<NSString *, NSNumber *> *)supportedTypeMap
+{
+    static dispatch_once_t onceToken;
+    static NSDictionary *_typeMap;
+    dispatch_once(&onceToken, ^{
+        _typeMap = @{@"comment" : @(VIMNotificationTypeComment),
+                     @"credit" : @(VIMNotificationTypeCredit),
+                     @"follow" : @(VIMNotificationTypeFollow),
+                     @"like" : @(VIMNotificationTypeLike),
+                     @"reply" : @(VIMNotificationTypeReply),
+                     @"video_available" : @(VIMNotificationTypeVideoAvailable)};
+    });
+    
+    return _typeMap;
+}
 
 #pragma mark - <VIMMappable>
 
@@ -55,6 +72,11 @@
         return [VIMCredit class];
     }
     
+    if ([key isEqualToString:@"comment"])
+    {
+        return [VIMComment class];
+    }
+    
     return nil;
 }
 
@@ -74,21 +96,7 @@
     
     if (self.type)
     {
-        NSDictionary *enumMap = @{@"comment" : @(VIMNotificationTypeComment),
-                                  @"credit" : @(VIMNotificationTypeCredit),
-                                  @"follow" : @(VIMNotificationTypeFollow),
-                                  @"like" : @(VIMNotificationTypeLike),
-                                  @"mention" : @(VIMNotificationTypeMention),
-                                  @"reply" : @(VIMNotificationTypeReply),
-                                  @"share" : @(VIMNotificationTypeShare),
-                                  @"video_available" : @(VIMNotificationTypeVideoAvailable),
-                                  @"vod_preorder_available" : @(VIMNotificationTypeVODPreorderAvailable),
-                                  @"vod_rental_expiration_warning" : @(VIMNotificationTypeVODRentalExpirationWarning),
-                                  @"vod_purchase" : @(VIMNotificationTypeVODPurchase),
-                                  @"account_expiration_warning" : @(VIMNotificationTypeAccountExpirationWarning),
-                                  @"storage_warning" : @(VIMNotificationTypeStorageWarning)};
-        
-        NSNumber *notificationNumber = enumMap[self.type];
+        NSNumber *notificationNumber = [self.class supportedTypeMap][self.type];
         if (notificationNumber)
         {
             notificationType = [notificationNumber unsignedIntegerValue];

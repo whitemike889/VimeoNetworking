@@ -135,7 +135,7 @@ NSString *VIMContentRating_Safe = @"safe";
     
     if ([key isEqualToString:@"spatial"])
     {
-        return [Spatial class];
+            return [Spatial class];
     }
     
     return nil;
