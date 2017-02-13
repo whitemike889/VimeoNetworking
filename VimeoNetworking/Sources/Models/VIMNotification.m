@@ -72,7 +72,8 @@
         return [VIMCredit class];
     }
     
-    if ([key isEqualToString:@"comment"]) {
+    if ([key isEqualToString:@"comment"])
+    {
         return [VIMComment class];
     }
     
