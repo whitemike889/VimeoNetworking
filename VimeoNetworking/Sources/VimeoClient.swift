@@ -474,26 +474,13 @@ final public class VimeoClient
     
     private func token(fromTask task: NSURLSessionDataTask?) -> String?
     {
-        guard let task = task else
+        guard let bearerHeader = task?.originalRequest?.allHTTPHeaderFields?[Constants.AuthorizationHeader],
+            range = bearerHeader.rangeOfString(Constants.BearerQuery) else
         {
             return nil
         }
         
-        if let bearerHeader = task.originalRequest?.allHTTPHeaderFields?[Constants.AuthorizationHeader]
-        {
-            guard let range = bearerHeader.rangeOfString(Constants.BearerQuery) else
-            {
-                return nil
-            }
-            
-            var mutableBearerHeader = String(bearerHeader)
-            mutableBearerHeader.removeRange(range)
-            return mutableBearerHeader
-        }
-        else
-        {
-            return nil
-        }
+        return String(bearerHeader).removeRange(range)
     }
 }
 
