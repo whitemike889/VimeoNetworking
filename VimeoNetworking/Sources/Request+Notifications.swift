@@ -34,7 +34,7 @@ public extension Request
         {
             parameters = [
                 "latest_notification_uri" : uri,
-                "new" : true
+                "new" : "false"
             ]
         }
         
@@ -48,7 +48,7 @@ public extension Request
             if let uri = notification.uri
             {
                 parameters.append([
-                    "seen": true,
+                    "seen": "true",
                     "uri": uri]
                 )
             }
