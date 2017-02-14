@@ -44,7 +44,7 @@ final internal class ResponseCache
 {
     struct Constant
     {
-        static let cacheDirectory = "com.vimeo.Caches"
+        static let CacheDirectory = "com.vimeo.Caches"
     }
     
     /**
@@ -167,7 +167,7 @@ final internal class ResponseCache
                 
                 do
                 {
-                       if !fileManager.fileExistsAtPath(directoryPath)
+                    if !fileManager.fileExistsAtPath(directoryPath)
                     {
                         try fileManager.createDirectoryAtPath(directoryPath, withIntermediateDirectories: true, attributes: nil)
                     }
@@ -285,10 +285,14 @@ final internal class ResponseCache
                 fatalError("no cache directories found")
             }
             
-            // We need to create a directory in `../Library/Caches folder`. Otherwise, trying to remove the Apple /Caches folder will always fails. Note that it's noticeable while testing on a device.
-            let cacheDirectory = directory + Constant.cacheDirectory
+            // We need to create a directory in `../Library/Caches folder`. Otherwise, trying to remove the Apple /Caches folder will always fail. Note that it's noticeable while testing on a device.
+            guard let url = NSURL(fileURLWithPath: directory).URLByAppendingPathComponent(Constant.CacheDirectory) else
+            {
+                assertionFailure("Unable to create cacheDirectory directory")
+                return NSURL(fileURLWithPath: directory)
+            }
             
-            return NSURL(fileURLWithPath: cacheDirectory)
+            return url
         }
         
         private func fileURLForKey(key key: String) -> NSURL?
