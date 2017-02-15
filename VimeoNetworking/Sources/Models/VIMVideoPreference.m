@@ -26,6 +26,20 @@
 
 #import "VIMVideoPreference.h"
 
+static NSString * const kPrivacy = @"privacy";
+
 @implementation VIMVideoPreference
+
+#pragma mark - VIMMappable
+
+- (Class)getClassForObjectKey:(NSString *)key
+{
+    if ([key isEqualToString:kPrivacy])
+    {
+        return [VIMPrivacy class];
+    }
+    
+    return nil;
+}
 
 @end
