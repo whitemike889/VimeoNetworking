@@ -28,4 +28,16 @@
 
 @implementation VIMVideoPreference
 
+#pragma mark - VIMMappable
+
+- (Class)getClassForObjectKey:(NSString *)key
+{
+    if ([key isEqualToString:@"privacy"])
+    {
+        return [VIMPrivacy class];
+    }
+    
+    return nil;
+}
+
 @end
