@@ -51,13 +51,7 @@ public enum CacheFetchPolicy
      */
     static func defaultPolicyForMethod(method: VimeoClient.Method) -> CacheFetchPolicy
     {
-        switch method
-        {
-        case .GET:
-            return .CacheThenNetwork
-        case .DELETE, .PATCH, .POST, .PUT:
-            return .NetworkOnly
-        }
+        return .NetworkOnly
     }
 }
 
@@ -180,8 +174,8 @@ public struct Request<ModelType: MappableResponse>
                 components?.query = queryString
             }
         }
-        
-        return components!.string!
+
+        return components?.string?.stringByRemovingPercentEncoding ?? ""
     }
     
     // MARK: Copying requests

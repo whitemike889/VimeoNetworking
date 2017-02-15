@@ -35,7 +35,6 @@
 #import "VIMPrivacy.h"
 #import "VIMAppeal.h"
 #import "VIMTag.h"
-#import "VIMVideoLog.h"
 #import "VIMCategory.h"
 #import "VIMVideoPlayRepresentation.h"
 #import "VIMVideoDRMFiles.h"
@@ -122,11 +121,6 @@ NSString *VIMContentRating_Safe = @"safe";
         return [VIMAppeal class];
     }
     
-    if ([key isEqualToString:@"log"])
-    {
-        return [VIMVideoLog class];
-    }
-    
     if ([key isEqualToString:@"play"])
     {
         return [VIMVideoPlayRepresentation class];
@@ -141,7 +135,7 @@ NSString *VIMContentRating_Safe = @"safe";
     
     if ([key isEqualToString:@"spatial"])
     {
-        return [Spatial class];
+            return [Spatial class];
     }
     
     return nil;
@@ -442,6 +436,15 @@ NSString *VIMContentRating_Safe = @"safe";
 
 - (BOOL)isDRMProtected
 {
+    if (self.playRepresentation.drmFiles.fairPlayFile)
+    {
+        return YES;
+    }
+
+    // The following only applies to VIMVideos with VOD metadata.
+    // If the VOD item that this VIMVideo represents (through purchase, rental, or subscription) is proteceted by DRM,
+    // we consider this VIMVideo to be protected by DRM [ghking] 2/8/17 cc [jasonhawkins]
+    
     VIMInteraction *buyInteraction = [self interactionWithName:VIMInteractionNameBuy];
     BOOL isBuyDRMProtected = buyInteraction.isForDRMProtectedContent;
     
@@ -490,7 +493,7 @@ NSString *VIMContentRating_Safe = @"safe";
     return (self.canViewComments ? commentsConnection.total.intValue : 0);
 }
 
-- (BOOL)is360Video
+- (BOOL)is360
 {
     return self.spatial != nil;
 }
