@@ -37,15 +37,8 @@ typedef NS_ENUM(NSUInteger, VIMNotificationType) {
     VIMNotificationTypeCredit,
     VIMNotificationTypeFollow,
     VIMNotificationTypeLike,
-    VIMNotificationTypeMention,
     VIMNotificationTypeReply,
-    VIMNotificationTypeShare,
-    VIMNotificationTypeVideoAvailable,
-    VIMNotificationTypeVODPreorderAvailable,
-    VIMNotificationTypeVODRentalExpirationWarning,
-    VIMNotificationTypeVODPurchase,
-    VIMNotificationTypeAccountExpirationWarning,
-    VIMNotificationTypeStorageWarning
+    VIMNotificationTypeVideoAvailable
 };
 
 @interface VIMNotification : VIMModelObject
@@ -55,10 +48,13 @@ typedef NS_ENUM(NSUInteger, VIMNotificationType) {
 @property (nonatomic) BOOL new;
 @property (nonatomic) BOOL seen;
 @property (nonatomic, copy, nullable) NSString *type;
-@property (nonatomic) VIMNotificationType notificationType;
 @property (nonatomic, nullable) VIMComment *comment;
 @property (nonatomic, nullable) VIMVideo *video;
 @property (nonatomic, nullable) VIMCredit *credit;
 @property (nonatomic, nullable) VIMUser *user;
+
+@property (nonatomic) VIMNotificationType notificationType;
+
++ (nonnull NSDictionary<NSString *, NSNumber *> *)supportedTypeMap;
 
 @end

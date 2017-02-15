@@ -103,6 +103,12 @@ final public class VimeoClient
         /// response cache handles all memory and disk caching of response dictionaries
     private let responseCache = ResponseCache()
     
+    private struct Constants
+    {
+        static let BearerQuery = "Bearer "
+        static let AuthorizationHeader = "Authorization"
+    }
+    
     /**
      Create a new client
      
@@ -422,7 +428,7 @@ final public class VimeoClient
             return
         }
         
-        self.handleError(error, request: request)
+        self.handleError(error, request: request, task: task)
         
         if case .MultipleAttempts(let attemptCount, let initialDelay) = request.retryPolicy
             where attemptCount > 1
@@ -454,7 +460,7 @@ final public class VimeoClient
     
     // MARK: - Private error handling
     
-    private func handleError<ModelType: MappableResponse>(error: NSError, request: Request<ModelType>)
+    private func handleError<ModelType: MappableResponse>(error: NSError, request: Request<ModelType>, task: NSURLSessionDataTask? = nil)
     {
         if error.isServiceUnavailableError
         {
@@ -462,8 +468,20 @@ final public class VimeoClient
         }
         else if error.isInvalidTokenError
         {
-            Notification.ClientDidReceiveInvalidTokenError.post(object: nil)
+            Notification.ClientDidReceiveInvalidTokenError.post(object: self.token(fromTask: task))
         }
+    }
+    
+    private func token(fromTask task: NSURLSessionDataTask?) -> String?
+    {
+        guard let bearerHeader = task?.originalRequest?.allHTTPHeaderFields?[Constants.AuthorizationHeader],
+            let range = bearerHeader.rangeOfString(Constants.BearerQuery) else
+        {
+            return nil
+        }
+        var str = bearerHeader
+        str.removeRange(range)
+        return str
     }
 }
 
