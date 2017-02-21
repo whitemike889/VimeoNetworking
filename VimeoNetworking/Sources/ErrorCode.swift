@@ -77,6 +77,7 @@ public enum VimeoErrorCode: Int
     case TokenNotGenerated = 5001
     case DRMStreamLimitHit = 3420
     case DRMDeviceLimitHit = 3421
+    case UnverifiedUser = 3411
 
     // Batch follow
     case BatchUserDoesNotExist = 2900
