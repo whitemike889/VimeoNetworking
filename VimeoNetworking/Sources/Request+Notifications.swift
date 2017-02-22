@@ -8,6 +8,8 @@
 
 public extension Request
 {
+    private typealias ParameterDictionary = [String: AnyObject]
+    
     private static var Path: String { return "/me/notifications" }
     
     /// Create a request that updates the push notification subscriptions
@@ -29,7 +31,7 @@ public extension Request
     
     public static func markLatestNotification(notification: VIMNotification) -> Request
     {
-        var parameters:[String: AnyObject]? = nil
+        var parameters: ParameterDictionary? = nil
         if let uri = notification.uri
         {
             parameters = [
@@ -43,7 +45,7 @@ public extension Request
     
     public static func seenNotifications(notifications: [VIMNotification]) -> Request
     {
-        var parameters: [[String: AnyObject]] = []
+        var parameters: [ParameterDictionary] = []
         notifications.map { (notification: VIMNotification) -> Void in
             if let uri = notification.uri
             {
