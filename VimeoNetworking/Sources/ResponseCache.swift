@@ -245,7 +245,7 @@ final internal class ResponseCache
                     // a cached response won't be repopulated until another request is made.
                     // Thus we don't assert, and simply exit the method.
                     
-                    print("No cache file to remove at filePath: \(filePath).")
+                    print("No cache file to remove for key: \(key).")
                     
                     return
                 }
