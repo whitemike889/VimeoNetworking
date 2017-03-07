@@ -26,15 +26,26 @@
 
 #import "VIMVideoPreference.h"
 
-static NSString * const kPrivacy = @"privacy";
-
 @implementation VIMVideoPreference
 
 #pragma mark - VIMMappable
 
+- (void)didFinishMapping
+{
+    // In API version 3.3.1, privacy changed from a string to a VIMPrivacy object.
+    // This is a migration to convert pre-3.3.1 versions to the new version. [ghking] 2/23/17
+    
+    if ([self.privacy isKindOfClass:[NSString class]])
+    {
+        VIMPrivacy *privacy = [VIMPrivacy new];
+        privacy.view = self.privacy;
+        self.privacy = privacy;
+    }
+}
+
 - (Class)getClassForObjectKey:(NSString *)key
 {
-    if ([key isEqualToString:kPrivacy])
+    if ([key isEqualToString:@"privacy"])
     {
         return [VIMPrivacy class];
     }

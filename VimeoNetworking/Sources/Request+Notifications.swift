@@ -12,11 +12,19 @@ public extension Request
     
     private static var Path: String { return "/me/notifications" }
     
+    /// Retrieve the notification subscriptions.
+    ///
+    /// - Returns: subscriptionCollection
+    public static func getNotificationSubscription() -> Request
+    {
+        return Request(method: .GET, path: Path, parameters: nil)
+    }
+    
     /// Create a request that updates the push notification subscriptions
     ///
-    /// - Parameter subscription: The subscription object contains the boolean values for each of those: comment, credit, like, reply, follow, video_available that defines what the user is subscripted to.
+    /// - Parameter subscription: The subscription dictionary contains the boolean values for each of those: comment, credit, like, reply, follow, video_available that defines what the user is subscripted to.
     /// - Returns: The result of the .PATCH is a SubscriptionCollection
-    public static func updateNotificationSubscriptions(subscription: Subscription) -> Request
+    public static func updateNotificationSubscriptions(subscription: VimeoClient.RequestParametersDictionary) -> Request
     {
         let parameters = [
                         "comment": subscription.comment,
