@@ -12,12 +12,14 @@ public extension Request
     
     private static var Path: String { return "/me/notifications" }
     
+    private static var SubscriptionsPath: String { return Path.stringByAppendingString("/subscriptions") }
+    
     /// Retrieve the notification subscriptions.
     ///
     /// - Returns: subscriptionCollection
     public static func getNotificationSubscription() -> Request
     {
-        return Request(method: .GET, path: Path, parameters: nil)
+        return Request(method: .GET, path: SubscriptionsPath, parameters: nil)
     }
     
     /// Create a request that updates the push notification subscriptions
@@ -26,7 +28,7 @@ public extension Request
     /// - Returns: The result of the .PATCH is a SubscriptionCollection
     public static func updateNotificationSubscriptions(subscription: VimeoClient.RequestParametersDictionary) -> Request
     {
-        return Request(method: .PATCH, path: Path.stringByAppendingString("/subscriptions"), parameters: subscription)
+        return Request(method: .PATCH, path: SubscriptionsPath, parameters: subscription)
     }
     
     public static func markLatestNotification(notification: VIMNotification) -> Request
