@@ -26,15 +26,7 @@ public extension Request
     /// - Returns: The result of the .PATCH is a SubscriptionCollection
     public static func updateNotificationSubscriptions(subscription: VimeoClient.RequestParametersDictionary) -> Request
     {
-        let parameters = [
-                        "comment": subscription.comment,
-                        "credit": subscription.credit,
-                        "like": subscription.like,
-                        "reply": subscription.reply,
-                        "follow": subscription.follow,
-                        "video_available": subscription.videoAvailable]
-        
-        return Request(method: .PATCH, path: Path.stringByAppendingString("/subscriptions"), parameters: parameters)
+        return Request(method: .PATCH, path: Path, parameters: subscription)
     }
     
     public static func markLatestNotification(notification: VIMNotification) -> Request
