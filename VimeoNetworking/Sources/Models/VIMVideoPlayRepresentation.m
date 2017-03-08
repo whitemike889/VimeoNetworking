@@ -74,7 +74,7 @@
     
     if ([key isEqualToString:@"progress"])
     {
-            return [PlayProgress class];
+        return [PlayProgress class];
     }
     
     return nil;
