@@ -26,7 +26,7 @@
 
 #import "VIMObjectMapper.h"
 #import "VIMUser.h"
-#import "VIMConnection.h"
+#import "VIMNotificationsConnection.h"
 #import "VIMInteraction.h"
 #import "VIMPictureCollection.h"
 #import "VIMPicture.h"
@@ -52,6 +52,11 @@
 - (VIMConnection *)connectionWithName:(NSString *)connectionName
 {
     return [self.connections objectForKey:connectionName];
+}
+
+- (VIMNotificationsConnection *)notificationsConnection
+{
+    return [self.connections objectForKey:VIMConnectionNameNotifications];
 }
 
 - (VIMInteraction *)interactionWithName:(NSString *)name
@@ -152,7 +157,8 @@
             NSDictionary *value = [dict valueForKey:key];
             if([value isKindOfClass:[NSDictionary class]])
             {
-                VIMConnection *connection = [[VIMConnection alloc] initWithKeyValueDictionary:value];
+                Class connectionClass = [key isEqualToString:VIMConnectionNameNotifications] ? [VIMNotificationsConnection class] : [VIMConnection class];
+                VIMConnection *connection = [[connectionClass alloc] initWithKeyValueDictionary:value];
                 
                 if([connection respondsToSelector:@selector(didFinishMapping)])
                 {

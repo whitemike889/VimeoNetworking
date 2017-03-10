@@ -60,29 +60,9 @@ NSString *const VIMConnectionNameModeratedChannels = @"moderated_channels";
 NSString *const VIMConnectionNameContents = @"contents";
 NSString *const VIMConnectionNameNotifications = @"notifications";
 
-@interface VIMConnection ()
-@property (nonatomic, strong, nullable) NSNumber *extra_total;
-@property (nonatomic, strong, nullable) NSNumber *main_total;
-@property (nonatomic, strong, nullable) NSNumber *viewable_total;
-@property (nonatomic, copy, nullable) NSDictionary *type_count;
-@end
-
 @implementation VIMConnection
 
 #pragma mark - VIMMappable
-
-- (void)didFinishMapping
-{
-    // TODO: Why not use getObjectMapping to achieve below?
-    // That method won't be called if a VIMModelObject is created with initWithKeyValueDictionary
-    // We should fix that or make this aspect of object mapping more transparent [NL] 05/21/2016
-    
-    self.extraVideosCount = self.extra_total;
-    self.mainVideosCount = self.main_total;
-    self.viewableVideosCount = self.viewable_total;
-    
-    self.totalNotificationsNew = self.type_count;
-}
 
 - (BOOL)canGet
 {
