@@ -225,10 +225,22 @@ final internal class ResponseCache
                 
                 let fileManager = FileManager()
                 
-                guard let filePath = self.fileURLForKey(key: key)?.path
-                    else
+                guard let filePath = self.fileURLForKey(key: key)?.path else
                 {
-                    assertionFailure("No cache path found.")
+                    // Assert to catch a badly formed filepath.
+                    
+                    assertionFailure("No valid cache file path found for key: \(key).")
+                    
+                    return
+                }
+                
+                guard fileManager.fileExists(atPath: filePath) == true else
+                {
+                    // Multiple attempts to remove the cache file are possible given that
+                    // a cached response won't be repopulated until another request is made.
+                    // Thus we don't assert, and simply exit the method.
+                    
+                    print("No cache file to remove for key: \(key).")
                     
                     return
                 }
@@ -237,9 +249,9 @@ final internal class ResponseCache
                 {
                     try fileManager.removeItem(atPath: filePath)
                 }
-                catch
+                catch let error
                 {
-                    print("Could not remove disk cache for \(key).")
+                    print("Removal of disk cache for \(key) failed with error \(error)")
                 }
             }) 
         }
