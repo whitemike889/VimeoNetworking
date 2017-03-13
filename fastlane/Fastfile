@@ -17,12 +17,12 @@ default_platform :ios
 
 platform :ios do
   before_all do
-    ensure_xcode_version(version: "8.2.1")
+    ensure_xcode_version(version: "8.0")
   end
 
   desc "buid the example project"
   lane :build_example do |options|
-
+    
     # cant use gym: https://github.com/fastlane/fastlane/issues/1816
     xcodebuild(
       workspace: "VimeoNetworking.xcworkspace",
@@ -59,11 +59,11 @@ platform :ios do
   end
 
   after_all do |lane|
-
+    
   end
 
   error do |lane, exception|
-
+    
   end
 end
 
