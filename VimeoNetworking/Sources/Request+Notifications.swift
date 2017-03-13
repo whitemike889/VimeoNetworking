@@ -31,21 +31,22 @@ public extension Request
         return Request(method: .PATCH, path: SubscriptionsPath, parameters: subscription)
     }
     
-    public static func markLatestNotification(notification: VIMNotification) -> Request
+    public static func markNotificationAsNotNewRequest(notification: VIMNotification) -> Request
     {
-        var parameters: ParameterDictionary? = nil
-        if let uri = notification.uri
+        guard let uri = notification.uri else
         {
-            parameters = [
-                "latest_notification_uri" : uri,
-                "new" : "false"
-            ]
+            return Request(method: .PATCH, path: Path, parameters: nil)
         }
         
+        let parameters = [
+            "latest_notification_uri" : uri,
+            "new" : "false"
+        ]
+
         return Request(method: .PATCH, path: Path, parameters: parameters)
     }
     
-    public static func seenNotifications(notifications: [VIMNotification]) -> Request
+    public static func markNotificationsAsSeenRequest(notifications: [VIMNotification]) -> Request
     {
         var parameters: [ParameterDictionary] = []
         notifications.map { (notification: VIMNotification) -> Void in
