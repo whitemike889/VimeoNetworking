@@ -1,5 +1,13 @@
 #ifdef __OBJC__
 #import <UIKit/UIKit.h>
+#else
+#ifndef FOUNDATION_EXPORT
+#if defined(__cplusplus)
+#define FOUNDATION_EXPORT extern "C"
+#else
+#define FOUNDATION_EXPORT extern
+#endif
+#endif
 #endif
 
 #import "VIMAccount.h"
@@ -15,6 +23,7 @@
 #import "VIMMappable.h"
 #import "VIMModelObject.h"
 #import "VIMNotification.h"
+#import "VIMNotificationsConnection.h"
 #import "VIMObjectMapper.h"
 #import "VIMPicture.h"
 #import "VIMPictureCollection.h"
@@ -45,6 +54,7 @@
 #import "VIMVideoPreference.h"
 #import "VIMVideoProgressiveFile.h"
 #import "VIMVideoUtils.h"
+#import "VIMVODConnection.h"
 #import "VIMVODItem.h"
 #import "Objc_ExceptionCatcher.h"
 #import "VimeoNetworking.h"
