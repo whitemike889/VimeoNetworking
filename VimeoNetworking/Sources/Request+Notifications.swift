@@ -15,7 +15,7 @@ public extension Request
     /// Retrieve the notification subscriptions.
     ///
     /// - Returns: subscriptionCollection
-    public static func getNotificationSubscription(notificationsURI: String) -> Request
+    public static func getNotificationSubscriptionRequest(notificationsURI: String) -> Request
     {
         let subscriptionsURI = notificationsURI.stringByAppendingString(SubscriptionsPathComponent)
         
@@ -26,7 +26,7 @@ public extension Request
     ///
     /// - Parameter subscription: The subscription dictionary contains the boolean values for each of those: comment, credit, like, reply, follow, video_available that defines what the user is subscripted to.
     /// - Returns: The result of the .PATCH is a SubscriptionCollection
-    public static func updateNotificationSubscriptions(subscription: VimeoClient.RequestParametersDictionary, notificationsURI: String) -> Request
+    public static func updateNotificationSubscriptionsRequest(subscription: VimeoClient.RequestParametersDictionary, notificationsURI: String) -> Request
     {
         let subscriptionsURI = notificationsURI.stringByAppendingString(SubscriptionsPathComponent)
         
