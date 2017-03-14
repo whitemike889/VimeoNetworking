@@ -30,6 +30,7 @@
 #import "VIMVideoDASHFile.h"
 #import "VIMVideoDRMFiles.h"
 #import "VIMVideoProgressiveFile.h"
+#import <VimeoNetworking/VimeoNetworking-Swift.h>
 
 @interface VIMVideoPlayRepresentation()
 
@@ -69,6 +70,11 @@
     if ([key isEqualToString:@"drm"])
     {
         return [VIMVideoDRMFiles class];
+    }
+    
+    if ([key isEqualToString:@"progress"])
+    {
+        return [PlayProgress class];
     }
     
     return nil;

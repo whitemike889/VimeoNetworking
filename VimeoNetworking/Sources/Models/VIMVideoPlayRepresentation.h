@@ -30,6 +30,7 @@
 @class VIMVideoDASHFile;
 @class VIMVideoDRMFiles;
 @class VIMVideoProgressiveFile;
+@class PlayProgress;
 
 typedef NS_ENUM(NSUInteger, VIMVideoPlayabilityStatus) {
     VIMVideoPlayabilityStatusUnavailable,           // Not finished transcoding
@@ -45,5 +46,6 @@ typedef NS_ENUM(NSUInteger, VIMVideoPlayabilityStatus) {
 @property (nonatomic, strong, nullable) VIMVideoDRMFiles *drmFiles;
 @property (nonatomic, strong, nullable) NSArray<VIMVideoProgressiveFile *> *progressiveFiles;
 @property (nonatomic, assign) VIMVideoPlayabilityStatus playabilityStatus;
+@property (nonatomic, strong, nullable) PlayProgress *progress;
 
 @end
