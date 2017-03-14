@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// An object representing the amount of progress a video has been viewed.
+/// An object representing the amount of progress for which a video has been played.
 public class PlayProgress: VIMModelObject
 {
     /// The time, in seconds, that the video has been viewed.
