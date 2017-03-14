@@ -26,7 +26,7 @@
 
 #import "VIMObjectMapper.h"
 #import "VIMUser.h"
-#import "VIMConnection.h"
+#import "VIMNotificationsConnection.h"
 #import "VIMInteraction.h"
 #import "VIMPictureCollection.h"
 #import "VIMPicture.h"
@@ -52,6 +52,11 @@
 - (VIMConnection *)connectionWithName:(NSString *)connectionName
 {
     return [self.connections objectForKey:connectionName];
+}
+
+- (VIMNotificationsConnection *)notificationsConnection
+{
+    return [self.connections objectForKey:VIMConnectionNameNotifications];
 }
 
 - (VIMInteraction *)interactionWithName:(NSString *)name
@@ -145,14 +150,21 @@
     NSMutableDictionary *connections = [NSMutableDictionary dictionary];
     
     NSDictionary *dict = [self.metadata valueForKey:@"connections"];
-    if([dict isKindOfClass:[NSDictionary class]])
+    if ([dict isKindOfClass:[NSDictionary class]])
     {
         for(NSString *key in [dict allKeys])
         {
             NSDictionary *value = [dict valueForKey:key];
-            if([value isKindOfClass:[NSDictionary class]])
+            if ([value isKindOfClass:[NSDictionary class]])
             {
-                VIMConnection *connection = [[VIMConnection alloc] initWithKeyValueDictionary:value];
+                Class connectionClass = [key isEqualToString:VIMConnectionNameNotifications] ? [VIMNotificationsConnection class] : [VIMConnection class];
+                VIMConnection *connection = [[connectionClass alloc] initWithKeyValueDictionary:value];
+                
+                if ([connection respondsToSelector:@selector(didFinishMapping)])
+                {
+                    [connection didFinishMapping];
+                }
+                
                 [connections setObject:connection forKey:key];
             }
         }
@@ -166,15 +178,15 @@
     NSMutableDictionary *interactions = [NSMutableDictionary dictionary];
     
     NSDictionary *dict = [self.metadata valueForKey:@"interactions"];
-    if([dict isKindOfClass:[NSDictionary class]])
+    if ([dict isKindOfClass:[NSDictionary class]])
     {
         for(NSString *key in [dict allKeys])
         {
             NSDictionary *value = [dict valueForKey:key];
-            if([value isKindOfClass:[NSDictionary class]])
+            if ([value isKindOfClass:[NSDictionary class]])
             {
                 VIMInteraction *interaction = [[VIMInteraction alloc] initWithKeyValueDictionary:value];
-                if([interaction respondsToSelector:@selector(didFinishMapping)])
+                if ([interaction respondsToSelector:@selector(didFinishMapping)])
                     [interaction didFinishMapping];
                 
                 [interactions setObject:interaction forKey:key];

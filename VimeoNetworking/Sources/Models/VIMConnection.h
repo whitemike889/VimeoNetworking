@@ -66,11 +66,6 @@ extern NSString *const __nonnull VIMConnectionNameNotifications;
 @property (nonatomic, strong, nullable) NSNumber *total;
 @property (nonatomic, strong, nullable) NSArray *options;
 
-#pragma mark - VOD related only
-@property (nonatomic, strong, nullable) NSNumber *extraVideosCount;
-@property (nonatomic, strong, nullable) NSNumber *mainVideosCount;
-@property (nonatomic, strong, nullable) NSNumber *viewableVideosCount;
-
 - (BOOL)canGet;
 - (BOOL)canPost;
 

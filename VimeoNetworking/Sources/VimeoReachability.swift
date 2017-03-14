@@ -11,11 +11,16 @@ import AFNetworking
 
 public class VimeoReachability
 {
+    private static var LastKnownReachabilityStatus = AFNetworkReachabilityStatus.Unknown
+    
     internal static func beginPostingReachabilityChangeNotifications()
     {
         AFNetworkReachabilityManager.sharedManager().setReachabilityStatusChangeBlock { (status) in
-            
-            Notification.ReachabilityDidChange.post(object: nil)
+            if LastKnownReachabilityStatus != status
+            {
+                LastKnownReachabilityStatus = status
+                Notification.ReachabilityDidChange.post(object: nil)
+            }
         }
         
         AFNetworkReachabilityManager.sharedManager().startMonitoring()

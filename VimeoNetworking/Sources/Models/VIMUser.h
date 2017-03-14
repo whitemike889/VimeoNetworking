@@ -27,6 +27,7 @@
 #import "VIMModelObject.h"
 
 @class VIMConnection;
+@class VIMNotificationsConnection;
 @class VIMInteraction;
 @class VIMPictureCollection;
 @class VIMPreference;
@@ -62,6 +63,7 @@ typedef NS_ENUM(NSInteger, VIMUserAccountType)
 @property (nonatomic, copy, nullable) NSString *account;
 
 - (nullable VIMConnection *)connectionWithName:(nonnull NSString *)connectionName;
+- (nullable VIMNotificationsConnection *)notificationsConnection;
 - (nullable VIMInteraction *)interactionWithName:(nonnull NSString *)name;
 
 - (BOOL)hasCopyrightMatch;
