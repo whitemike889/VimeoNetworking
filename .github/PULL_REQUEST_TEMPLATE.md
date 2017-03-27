@@ -33,4 +33,4 @@
 
 - *Identify necessary conditions for testing (e.g. logged out, bad connectivity).*
 
-- *If a special type of account is needed for log in, provide credentials (e.g. business account, purchased items).*
+- *If a special type of account is needed for log in, contact a developer privately to provide credentials.
