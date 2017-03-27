@@ -1,10 +1,10 @@
-#### Ticket
+#### Ticket (For Vimeo staff only)
 
 [TICKET_NUMBER](https://vimean.atlassian.net/browse/TICKET_NUMBER)
 
-#### Ticket Summary
+#### Issue Summary
 
-- *Outline the goals of the ticket in technical terms. If this branch fixes a bug, state what caused the bug.*
+- *Outline the goals of the PR in technical terms. If this branch fixes a bug, state what caused the bug.*
 
 #### Pull Request Checklist
 
