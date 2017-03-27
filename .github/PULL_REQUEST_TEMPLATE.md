@@ -15,12 +15,6 @@
 - [ ] New classes have Documentation
 - [ ] New public methods have Documentation
 
-#### Submodules
-
-- *If this PR relies on pull requested changes to submodules, provide the PR link(s) below.*
-
-- *Briefly state what the changes to submodule(s) accomplish. Add a more detailed implementation summary to the submodule PR description(s).*
-
 #### Implementation Summary
 
 - *Identify the core components that were added or changed, and briefly state the reasoning behind these changes.*
