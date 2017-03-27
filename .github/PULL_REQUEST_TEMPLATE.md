@@ -1,10 +1,8 @@
-#### Ticket (For Vimeo staff only)
+#### Ticket
+
+- *This is required for Vimeo staff only. If not applicable to your PR, use "N/A".*
 
 [TICKET_NUMBER](https://vimean.atlassian.net/browse/TICKET_NUMBER)
-
-#### Issue Summary
-
-- *Outline the goals of the PR in technical terms. If this branch fixes a bug, state what caused the bug.*
 
 #### Pull Request Checklist
 
@@ -14,6 +12,10 @@
 - [ ] New classes contain license headers
 - [ ] New classes have Documentation
 - [ ] New public methods have Documentation
+
+#### Issue Summary
+
+- *Outline the goals of the PR in technical terms. If this branch fixes a bug, state what caused the bug.*
 
 #### Implementation Summary
 
@@ -25,7 +27,7 @@
 
 - *Provide the order in which files or components should be reviewed.* 
 
-- *List general components of the application that this PR will affect.*
+- *List the general components that this PR will affect.*
 
 - *Identify any copy and pasted code with a large diff.*
 
