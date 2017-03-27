@@ -6,6 +6,15 @@
 
 - *Outline the goals of the ticket in technical terms. If this branch fixes a bug, state what caused the bug.*
 
+#### Pull Request Checklist
+
+- [ ] Resolved any merge conflicts
+- [ ] No build errors or warnings are introduced
+- [ ] New files are written in Swift
+- [ ] New classes contain license headers
+- [ ] New classes have Documentation
+- [ ] New public methods have Documentation
+
 #### Submodules
 
 - *If this PR relies on pull requested changes to submodules, provide the PR link(s) below.*
