@@ -63,20 +63,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         {
             authenticationController.clientCredentialsGrant { result in
                 
-//                switch result
-//                {
-//                case .Success(let account):
-//                    print("authenticated successfully: \(account)")
-//                case .Failure(let error):
-//                    print("failure authenticating: \(error)")
-//                    
-//                    let title = "Client Credentials Authentication Failed"
-//                    let message = "Make sure that your client identifier and client secret are set correctly in VimeoClient+Shared.swift"
-//                    
-//                    let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-//                    splitViewController.presentViewController(alert, animated: true, completion: nil)
-//                    print(title + ": " + message)
-//                }
+                switch result
+                {
+                case .success(let account):
+                    print("authenticated successfully: \(account)")
+                case .failure(let error):
+                    print("failure authenticating: \(error)")
+                    
+                    let title = "Client Credentials Authentication Failed"
+                    let message = "Make sure that your client identifier and client secret are set correctly in VimeoClient+Shared.swift"
+                    
+                    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    splitViewController.present(alert, animated: true, completion: nil)
+                    print(title + ": " + message)
+                }
             }
         }
         
@@ -93,22 +93,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         
         AuthenticationController(client: VimeoClient.defaultClient).codeGrant(responseURL: url) { result in
             
-//            switch result
-//            {
-//            case .Success(let account):
-//                print("authenticated successfully: \(account)")
-//            case .Failure(let error):
-//                print("failure authenticating: \(error)")
-//                
-//                let title = "Code Grant Authentication Failed"
-//                let message = "Make sure that your redirect URI is added to the dev portal"
-//                
-//                let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-//                let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
-//                alert.addAction(action)
-//                self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
-//                print(title + ": " + message)
-//            }
+            switch result
+            {
+            case .success(let account):
+                print("authenticated successfully: \(account)")
+            case .failure(let error):
+                print("failure authenticating: \(error)")
+                
+                let title = "Code Grant Authentication Failed"
+                let message = "Make sure that your redirect URI is added to the dev portal"
+                
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(action)
+                self.window?.rootViewController?.present(alert, animated: true, completion: nil)
+                print(title + ": " + message)
+            }
         }
         
         return true
