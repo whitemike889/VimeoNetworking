@@ -1,8 +1,8 @@
 #### Ticket
 
-- *This is required for Vimeo staff only. If not applicable to your PR, use "N/A".*
-
 [TICKET_NUMBER](https://vimean.atlassian.net/browse/TICKET_NUMBER)
+
+- *Note: this is required for Vimeo staff only. If not applicable to your PR, use "N/A".*
 
 #### Pull Request Checklist
 
@@ -35,4 +35,4 @@
 
 - *Identify necessary conditions for testing (e.g. logged out, bad connectivity).*
 
-- *If a special type of account is needed for log in, contact a developer privately to provide credentials.
+- *If a special type of account is needed for log in, contact a developer privately to provide credentials.*
