@@ -16,6 +16,7 @@ open class VimeoReachability
     internal static func beginPostingReachabilityChangeNotifications()
     {
         AFNetworkReachabilityManager.shared().setReachabilityStatusChange { (status) in
+
             if LastKnownReachabilityStatus != status
             {
                 LastKnownReachabilityStatus = status

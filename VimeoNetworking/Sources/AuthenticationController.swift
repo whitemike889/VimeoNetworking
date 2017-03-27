@@ -573,7 +573,6 @@ final public class AuthenticationController
             let accountType: AccountStore.AccountType = (account.user != nil) ? .user : .clientCredentials
             
             try self.accountStore.saveAccount(account, type: accountType)
-
         }
         catch let error
         {
