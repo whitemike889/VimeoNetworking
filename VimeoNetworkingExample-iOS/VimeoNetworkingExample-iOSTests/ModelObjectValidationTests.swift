@@ -184,7 +184,6 @@ class ModelObjectValidationTests: XCTestCase
                 let video = video as! VIMVideo
                 
                 XCTAssertNotNil(video.uri)
-//                XCTAssertNotNil(video.videoDescription)
                 XCTAssertNotNil(video.files)
                 XCTAssertNotNil(video.resourceKey)
             }
