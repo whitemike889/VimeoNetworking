@@ -29,7 +29,7 @@
 #import "VIMObjectMapper.h"
 #import "VIMUser.h"
 #import "VIMPicture.h"
-#import "VIMConnection.h"
+#import "VIMVODConnection.h"
 #import "VIMInteraction.h"
 #import "VIMPictureCollection.h"
 #import "VIMVideo.h"
@@ -58,21 +58,21 @@
 
 - (NSNumber * _Nullable)extraVideosTotal;
 {
-    VIMConnection *videosConnection = [self getVideosConnection];
+    VIMVODConnection *videosConnection = [self getVideosConnection];
     
     return videosConnection.extraVideosCount;
 }
 
 - (NSNumber * _Nullable)mainVideosTotal;
 {
-    VIMConnection *videosConnection = [self getVideosConnection];
+    VIMVODConnection *videosConnection = [self getVideosConnection];
     
     return videosConnection.mainVideosCount;
 }
 
 - (NSNumber * _Nullable)viewableVideosTotal;
 {
-    VIMConnection *videosConnection = [self getVideosConnection];
+    VIMVODConnection *videosConnection = [self getVideosConnection];
     
     return videosConnection.viewableVideosCount;
 }
@@ -217,7 +217,8 @@
             NSDictionary *value = [dict valueForKey:key];
             if([value isKindOfClass:[NSDictionary class]])
             {
-                VIMConnection *connection = [[VIMConnection alloc] initWithKeyValueDictionary:value];
+                Class connectionClass = [key isEqualToString:VIMConnectionNameVideos] ? [VIMVODConnection class] : [VIMConnection class];
+                VIMConnection *connection = [[connectionClass alloc] initWithKeyValueDictionary:value];
                 if([connection respondsToSelector:@selector(didFinishMapping)])
                     [connection didFinishMapping];
                 
@@ -279,7 +280,7 @@
 
 #pragma mark - Helpers
 
-- (VIMConnection *)getVideosConnection
+- (VIMVODConnection *)getVideosConnection
 {
     return [self connectionWithName:VIMConnectionNameVideos];
 }

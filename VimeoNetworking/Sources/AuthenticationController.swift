@@ -127,6 +127,13 @@ final public class AuthenticationController
         return loadedAccount
     }
     
+    public func saveAccount(account: VIMAccount) throws
+    {
+        let accountType: AccountStore.AccountType = (account.user != nil) ? .user : .clientCredentials
+        
+        try self.accountStore.saveAccount(account, type: accountType)
+    }
+    
     // MARK: - Private Saved Accounts
     
     fileprivate func loadAccount(_ accountType: AccountStore.AccountType) throws -> VIMAccount?
@@ -566,6 +573,7 @@ final public class AuthenticationController
             let accountType: AccountStore.AccountType = (account.user != nil) ? .user : .clientCredentials
             
             try self.accountStore.saveAccount(account, type: accountType)
+
         }
         catch let error
         {
