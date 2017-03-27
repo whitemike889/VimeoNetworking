@@ -38,7 +38,7 @@ class FakeDataSource<T: VIMMappable>
     {                
         mapper.addMappingClass(T.self, forKeypath: keyPath)
         
-        let mappedData = mapper.applyMappingToJSON(jsonData)
+        let mappedData: [String : Any] = mapper.applyMapping(toJSON: jsonData) as! Dictionary
         if let objects = mappedData["data"] as? [T]
         {
             self.items = objects

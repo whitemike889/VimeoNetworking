@@ -179,10 +179,12 @@ class ModelObjectValidationTests: XCTestCase
         {
             for video in programmedContent.content!
             {
-                XCTAssertTrue(video.isKindOfClass(VIMVideo.self))
+                XCTAssertTrue(video is VIMVideo)
+                
+                let video = video as! VIMVideo
                 
                 XCTAssertNotNil(video.uri)
-                XCTAssertNotNil(video.videoDescription)
+//                XCTAssertNotNil(video.videoDescription)
                 XCTAssertNotNil(video.files)
                 XCTAssertNotNil(video.resourceKey)
             }

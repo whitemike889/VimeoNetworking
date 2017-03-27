@@ -112,11 +112,11 @@ class NSErrorExtensionTests: XCTestCase {
         
         XCTAssertNotNil(invalidParameters as? NSArray)
         
-        let invalidParamsDict = invalidParameters!.firstObject!!
-        XCTAssertEqual(invalidParamsDict["error"], "Unable to log in Please enter a valid email address and/or password")
-        XCTAssertEqual(invalidParamsDict["developer_message"], "Password and/or email provided are invalid")
-        XCTAssertEqual(invalidParamsDict["error_code"], 2218)
-        XCTAssertEqual(invalidParamsDict["field"], "password")
+        let invalidParamsDict: [String : AnyObject] = invalidParameters!.firstObject! as! Dictionary
+        XCTAssertEqual(invalidParamsDict["error"] as! String, "Unable to log in Please enter a valid email address and/or password")
+        XCTAssertEqual(invalidParamsDict["developer_message"] as! String, "Password and/or email provided are invalid")
+        XCTAssertEqual(invalidParamsDict["error_code"] as! Int, 2218)
+        XCTAssertEqual(invalidParamsDict["field"] as! String, "password")
     }
     
     func testVimeoInvalidParametersFirstVimeoUserMessage() {
