@@ -154,7 +154,7 @@ final public class VimeoClient
     
     public func notifyObserversAccountChanged(_ account: VIMAccount?, previousAccount: VIMAccount?)
     {
-        Notification.AuthenticatedAccountDidChange.post(object: account,
+        NetworkingNotification.AuthenticatedAccountDidChange.post(object: account,
                                                         userInfo: [UserInfoKey.previousAccount.rawValue : previousAccount ?? NSNull()])
     }
     
@@ -465,11 +465,11 @@ final public class VimeoClient
     {
         if error.isServiceUnavailableError
         {
-            Notification.ClientDidReceiveServiceUnavailableError.post(object: nil)
+            NetworkingNotification.ClientDidReceiveServiceUnavailableError.post(object: nil)
         }
         else if error.isInvalidTokenError
         {
-            Notification.ClientDidReceiveInvalidTokenError.post(object: self.token(fromTask: task) as AnyObject?)
+            NetworkingNotification.ClientDidReceiveInvalidTokenError.post(object: self.token(fromTask: task) as AnyObject?)
         }
     }
     

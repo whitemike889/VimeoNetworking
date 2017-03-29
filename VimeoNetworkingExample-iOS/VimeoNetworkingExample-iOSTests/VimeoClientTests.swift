@@ -44,7 +44,7 @@ class VimeoClientTests: XCTestCase
     func testInitialCurrentAccountNotificationUserInfo()
     {
         let expectation = self.expectation(description: "Wait for initial account notification")
-        let token: ObservationToken? = Notification.AuthenticatedAccountDidChange.observe() { (notification: Foundation.Notification) in
+        let token: ObservationToken? = NetworkingNotification.AuthenticatedAccountDidChange.observe() { (notification: Notification) in
             XCTAssert(notification.object != nil)
             XCTAssert(notification.userInfo != nil)
             XCTAssert(notification.userInfo![UserInfoKey.previousAccount.rawValue] as? VIMAccount == nil)
@@ -58,7 +58,7 @@ class VimeoClientTests: XCTestCase
         
         self.waitForExpectations(timeout: 10, handler: nil)
         
-        Notification.AuthenticatedAccountDidChange.removeObserver(self)
+        NetworkingNotification.AuthenticatedAccountDidChange.removeObserver(self)
     }
     
     func testSubsequentAccountNotificationUserInfo()
@@ -67,7 +67,7 @@ class VimeoClientTests: XCTestCase
         let secondAccount = VIMAccount()
         
         let expectation = self.expectation(description: "Wait for subsequent account notification")
-        let token: ObservationToken? = Notification.AuthenticatedAccountDidChange.observe() { (notification: Foundation.Notification) in
+        let token: ObservationToken? = NetworkingNotification.AuthenticatedAccountDidChange.observe() { (notification: Notification) in
             XCTAssert(notification.userInfo != nil)
             
             if let previousAccount = notification.userInfo![UserInfoKey.previousAccount.rawValue] as? VIMAccount {
@@ -82,6 +82,6 @@ class VimeoClientTests: XCTestCase
         
         self.waitForExpectations(timeout: 10, handler: nil)
         
-        Notification.AuthenticatedAccountDidChange.removeObserver(self)
+        NetworkingNotification.AuthenticatedAccountDidChange.removeObserver(self)
     }
 }
