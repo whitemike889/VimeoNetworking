@@ -43,6 +43,10 @@ typedef NS_ENUM(NSInteger, VIMInteractionStreamStatus) {
     VIMInteractionStreamStatusAvailable             // user can purchase but has not yet
 };
 
+// SVOD Status Constants
+extern NSString * const __nonnull VIMSVODStatus_NotPurchased;
+extern NSString * const __nonnull VIMSVODStatus_MonthlySubscription;
+
 @interface VIMInteraction : VIMModelObject
 
 @property (nonatomic, copy, nullable) NSString *uri;
