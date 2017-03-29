@@ -34,6 +34,11 @@ NSString * const VIMInteractionNameLike = @"like";
 NSString * const VIMInteractionNameBuy = @"buy";
 NSString * const VIMInteractionNameRent = @"rent";
 NSString * const VIMInteractionNameSubscribe = @"subscribe";
+NSString * const VIMInteractionNameSVOD = @"svod";
+
+// SVOD Interaction Constants
+NSString * const VIMSVODStatus_NotPurchased = @"not_purchased";
+NSString * const VIMSVODStatus_MonthlySubscription = @"monthly";
 
 @interface VIMInteraction()
 @property (nonatomic, copy, nullable) NSString *added_time;
