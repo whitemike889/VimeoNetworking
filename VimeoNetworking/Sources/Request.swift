@@ -112,7 +112,7 @@ public struct Request<ModelType: MappableResponse>
     public let path: String
     
         /// any parameters to include with the request
-    public let parameters: AnyObject?
+    public let parameters: Any?
 
         /// query a nested JSON key path for the response model object to be returned
     public let modelKeyPath: String?
@@ -143,7 +143,7 @@ public struct Request<ModelType: MappableResponse>
      */
     public init(method: VimeoClient.Method = .GET,
                 path: String,
-                parameters: AnyObject? = nil,
+                parameters: Any? = nil,
                 modelKeyPath: String? = nil,
                 cacheFetchPolicy: CacheFetchPolicy? = nil,
                 shouldCacheResponse: Bool? = nil,
