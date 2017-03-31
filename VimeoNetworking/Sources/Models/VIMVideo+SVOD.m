@@ -16,7 +16,12 @@
 {
     VIMInteraction *interation = [self interactionWithName:VIMInteractionNameSVOD];
     
-    return interation != nil;
+    if (interation != nil)
+    {
+        return YES;
+    }
+    
+    return NO;
 }
 
 - (VIMVideoSVODAccess)svodAccess
@@ -35,9 +40,12 @@
         }
         else
         {
-            return VIMVideoSVODAccessUnknown;
+            return VIMVideoSVODAccessInvalid;
         }
     }
+    
+    return VIMVideoSVODAccessNotSVOD;
 }
 
 @end
+
