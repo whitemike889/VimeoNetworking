@@ -11,7 +11,8 @@
 typedef NS_ENUM(NSUInteger, VIMVideoSVODAccess) {
     VIMVideoSVODAccessNotPurchased,
     VIMVideoSVODAccessMonthly,
-    VIMVideoSVODAccessUnknown
+    VIMVideoSVODAccessInvalid,
+    VIMVideoSVODAccessNotSVOD
 };
 
 @interface VIMVideo (SVOD)
