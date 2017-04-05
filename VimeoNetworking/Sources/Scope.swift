@@ -38,6 +38,9 @@ public enum Scope: String
         /// View Vimeo On Demand purchase history
     case Purchased = "purchased"
     
+        /// App can send purchase receipts to Vimeo server to unlock products
+    case Purchase = "purchase"
+    
         /// Create new videos, groups, albums, etc.
     case Create = "create"
     

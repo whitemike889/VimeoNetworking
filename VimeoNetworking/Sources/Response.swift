@@ -83,17 +83,17 @@ import Foundation
      
      - returns: an initialized `Response`
      */
-    init(model: ModelType,
-         json: VimeoClient.ResponseDictionary,
-         isCachedResponse: Bool = false,
-         isFinalResponse: Bool = true,
-         totalCount: Int? = nil,
-         page: Int? = nil,
-         itemsPerPage: Int? = nil,
-         nextPageRequest: Request<ModelType>? = nil,
-         previousPageRequest: Request<ModelType>? = nil,
-         firstPageRequest: Request<ModelType>? = nil,
-         lastPageRequest: Request<ModelType>? = nil)
+    public init(model: ModelType,
+             json: VimeoClient.ResponseDictionary,
+             isCachedResponse: Bool = false,
+             isFinalResponse: Bool = true,
+             totalCount: Int? = nil,
+             page: Int? = nil,
+             itemsPerPage: Int? = nil,
+             nextPageRequest: Request<ModelType>? = nil,
+             previousPageRequest: Request<ModelType>? = nil,
+             firstPageRequest: Request<ModelType>? = nil,
+             lastPageRequest: Request<ModelType>? = nil)
     {
         self.model = model
         self.json = json

@@ -34,6 +34,7 @@
 #import "VIMUploadTicket.h"
 #import "VIMUser.h"
 #import "VIMUserBadge.h"
+#import "VIMVideo+SVOD.h"
 #import "VIMVideo+VOD.h"
 #import "VIMVideo.h"
 #import "VIMVideoDASHFile.h"
