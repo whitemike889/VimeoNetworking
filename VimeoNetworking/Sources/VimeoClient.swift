@@ -61,7 +61,13 @@ final public class VimeoClient
         /// The path of the request
         public let path: String?
         
-        private let task: NSURLSessionDataTask?
+        public let task: NSURLSessionDataTask?
+
+        public init(path: String?, task: NSURLSessionDataTask?)
+        {
+            self.path = path
+            self.task = task
+        }
         
         /**
          Cancel the request
