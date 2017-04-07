@@ -138,21 +138,21 @@ extension Array: MappableResponse
 /**
  *  `VIMNullResponse` is a model object containing no information. This allows for the representation of successful requests that intentionally return no response dictionary.
  */
-open class VIMNullResponse: MappableResponse
+public class VIMNullResponse: MappableResponse
 {
     public typealias Element = VIMNullResponse
     
-    open static var mappingClass: AnyClass?
+    public static var mappingClass: AnyClass?
     {
         return self
     }
     
-    open static var modelKeyPath: String?
+    public static var modelKeyPath: String?
     {
         return nil
     }
     
-    open func validateModel() throws
+    public func validateModel() throws
     {
         // NO-OP: a null response object is always valid
     }

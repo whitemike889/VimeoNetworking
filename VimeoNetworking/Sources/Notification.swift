@@ -27,7 +27,7 @@
 import Foundation
 
 /// `ObservationToken` manages the lifecycle of a block observer.  Note: on deinit, the token cancels its own observation, so it must be stored strongly if the associated block observation is to continue.
-open class ObservationToken
+public class ObservationToken
 {
     private let observer: NSObjectProtocol
     
@@ -39,7 +39,7 @@ open class ObservationToken
     /**
      Ends the block observation associated with this token
      */
-    open func stopObserving()
+    public func stopObserving()
     {
         Notification.removeObserver(self.observer)
     }
