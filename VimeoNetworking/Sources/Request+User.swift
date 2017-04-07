@@ -34,12 +34,12 @@ public typealias UserListRequest = Request<[VIMUser]>
 
 public extension Request
 {
-    fileprivate static var MeUserURI: String { return "/me" }
-    fileprivate static var FollowingPathFormat: String { return "%@/following" }
-    fileprivate static var FollowersPathFormat: String { return "%@/followers" }
-    fileprivate static var UsersPath: String { return "/users" }
+    private static var MeUserURI: String { return "/me" }
+    private static var FollowingPathFormat: String { return "%@/following" }
+    private static var FollowersPathFormat: String { return "%@/followers" }
+    private static var UsersPath: String { return "/users" }
 
-    fileprivate static var QueryKey: String { return "query" }
+    private static var QueryKey: String { return "query" }
     
     /**
      Create a request to get the current user

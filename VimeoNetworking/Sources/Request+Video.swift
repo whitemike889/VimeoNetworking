@@ -34,9 +34,9 @@ public typealias VideoListRequest = Request<[VIMVideo]>
 
 public extension Request
 {
-    fileprivate static var QueryKey: String { return "query" }
+    private static var QueryKey: String { return "query" }
     
-    fileprivate static var VideosPath: String { return "/videos" }
+    private static var VideosPath: String { return "/videos" }
     
     // MARK: - 
     

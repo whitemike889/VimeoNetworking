@@ -34,9 +34,9 @@ public typealias ChannelListRequest = Request<[VIMChannel]>
 
 public extension Request
 {
-    fileprivate static var QueryKey: String { return "query" }
+    private static var QueryKey: String { return "query" }
     
-    fileprivate static var ChannelsPath: String { return "/channels" }
+    private static var ChannelsPath: String { return "/channels" }
     
     /**
      Create a new request to get a specific channel

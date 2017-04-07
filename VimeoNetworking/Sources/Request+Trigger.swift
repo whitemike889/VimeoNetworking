@@ -8,7 +8,7 @@
 
 extension Request
 {
-    fileprivate static var TriggersURI: String { return "/triggers" }
+    private static var TriggersURI: String { return "/triggers" }
 
     /// `Request` that returns a single `VIMTrigger`
     public typealias TriggerRequest = Request<VIMTrigger>
@@ -88,7 +88,7 @@ extension Request
     
     // MARK: Helpers
     
-    fileprivate static func uri(withDeviceToken deviceToken: String) -> String
+    private static func uri(withDeviceToken deviceToken: String) -> String
     {
         let deviceTypeIdentifier = UIDevice.current.userInterfaceIdiom == .phone ? "iphone" : "ipad"
         

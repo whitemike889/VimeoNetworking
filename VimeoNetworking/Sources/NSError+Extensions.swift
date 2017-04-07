@@ -170,12 +170,12 @@ public extension NSError
     
     // MARK: -
     
-    fileprivate static let VimeoErrorCodeHeaderKey = "Vimeo-Error-Code"
-    fileprivate static let VimeoErrorCodeKeyLegacy = "VimeoErrorCode"
-    fileprivate static let VimeoErrorCodeKey = "error_code"
-    fileprivate static let VimeoInvalidParametersKey = "invalid_parameters"
-    fileprivate static let VimeoUserMessageKey = "error"
-    fileprivate static let VimeoDeveloperMessageKey = "developer_message"
+    private static let VimeoErrorCodeHeaderKey = "Vimeo-Error-Code"
+    private static let VimeoErrorCodeKeyLegacy = "VimeoErrorCode"
+    private static let VimeoErrorCodeKey = "error_code"
+    private static let VimeoInvalidParametersKey = "invalid_parameters"
+    private static let VimeoUserMessageKey = "error"
+    private static let VimeoDeveloperMessageKey = "developer_message"
     
         /// Returns the status code of the failing response, if available
     public var statusCode: Int?

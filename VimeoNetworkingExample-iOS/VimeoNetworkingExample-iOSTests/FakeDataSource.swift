@@ -29,7 +29,7 @@ import Foundation
 
 class FakeDataSource<T: VIMMappable>
 {
-    fileprivate let mapper = VIMObjectMapper()
+    private let mapper = VIMObjectMapper()
     
     var items: [T]?
     var error: NSError?

@@ -32,7 +32,7 @@ import AFNetworking
  */
 final public class VimeoResponseSerializer: AFJSONResponseSerializer
 {
-    fileprivate static let ErrorDomain = "VimeoResponseSerializerErrorDomain"
+    private static let ErrorDomain = "VimeoResponseSerializerErrorDomain"
     
     override init()
     {
@@ -162,7 +162,7 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
     
     // MARK: Private API
 
-    fileprivate func errorInfoFromResponse(_ response: URLResponse?, responseObject: AnyObject?) -> [String: AnyObject]?
+    private func errorInfoFromResponse(_ response: URLResponse?, responseObject: AnyObject?) -> [String: AnyObject]?
     {
         var errorInfo: [String: AnyObject] = [:]
         
@@ -187,7 +187,7 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
         return errorInfo.count == 0 ? nil : errorInfo
     }
 
-    fileprivate static func acceptableContentTypes() -> Set<String>
+    private static func acceptableContentTypes() -> Set<String>
     {
         return Set(
             ["application/json",

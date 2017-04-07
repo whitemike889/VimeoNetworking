@@ -37,8 +37,8 @@ class MasterViewController: UITableViewController
         }
     }
     
-    fileprivate var accountObservationToken: ObservationToken?
-    fileprivate var authenticationButton: UIBarButtonItem?
+    private var accountObservationToken: ObservationToken?
+    private var authenticationButton: UIBarButtonItem?
     
     // MARK: - View Controller
 
@@ -68,7 +68,7 @@ class MasterViewController: UITableViewController
     
     // MARK: - Setup
     
-    fileprivate func setupAccountObservation()
+    private func setupAccountObservation()
     {
         // This allows us to fetch a new list of items whenever the current account changes (on log in or log out events)
         
@@ -139,7 +139,7 @@ class MasterViewController: UITableViewController
         }
     }
     
-    fileprivate func updateAuthenticationButton()
+    private func updateAuthenticationButton()
     {
         if VimeoClient.defaultClient.currentAccount?.isAuthenticatedWithUser() == true
         {
@@ -153,7 +153,7 @@ class MasterViewController: UITableViewController
     
     // MARK: - Actions
     
-    @objc fileprivate func didTapAuthenticationButton()
+    @objc private func didTapAuthenticationButton()
     {
         // If the user is logged in, the button logs them out.
         // If the user is logged out, the button launches the code grant authorization page.

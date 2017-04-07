@@ -130,7 +130,7 @@ public extension VimeoSessionManager
     
     // Would prefer that this live in a NSURLSessionConfiguration extension but the method name would conflict [AH] 2/5/2016
     
-    fileprivate static func backgroundSessionConfiguration(identifier: String) -> URLSessionConfiguration
+    private static func backgroundSessionConfiguration(identifier: String) -> URLSessionConfiguration
     {
         return URLSessionConfiguration.background(withIdentifier: identifier)
     }

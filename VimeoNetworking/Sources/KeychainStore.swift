@@ -30,8 +30,8 @@ import Security
 /// `KeychainStore` saves data securely in the Keychain
 final class KeychainStore
 {
-    fileprivate let service: String
-    fileprivate let accessGroup: String?
+    private let service: String
+    private let accessGroup: String?
     
     /**
      Create a new `KeychainStore`
@@ -121,7 +121,7 @@ final class KeychainStore
     
     // MARK: - 
     
-    fileprivate func queryForKey(_ key: String) -> [String: AnyObject]
+    private func queryForKey(_ key: String) -> [String: AnyObject]
     {
         var query: [String: AnyObject] = [:]
         
@@ -137,7 +137,7 @@ final class KeychainStore
         return query
     }
     
-    fileprivate func errorForStatus(_ status: OSStatus) -> NSError
+    private func errorForStatus(_ status: OSStatus) -> NSError
     {
         let errorMessage: String
         

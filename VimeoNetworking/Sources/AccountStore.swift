@@ -55,11 +55,11 @@ final class AccountStore
     
     // MARK: - 
     
-    fileprivate static let ErrorDomain = "AccountStoreErrorDomain"
+    private static let ErrorDomain = "AccountStoreErrorDomain"
     
     // MARK: - 
     
-    fileprivate let keychainStore: KeychainStore
+    private let keychainStore: KeychainStore
     
     // MARK: -
     

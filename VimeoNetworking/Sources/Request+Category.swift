@@ -34,7 +34,7 @@ public typealias CategoryListRequest = Request<[VIMCategory]>
 
 public extension Request
 {
-    fileprivate static var CategoriesPath: String { return "/categories" }
+    private static var CategoriesPath: String { return "/categories" }
     
     /**
      Create a request that gets a specific category

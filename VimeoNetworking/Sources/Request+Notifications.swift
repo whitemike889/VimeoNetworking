@@ -8,7 +8,7 @@
 
 public extension Request
 {
-    fileprivate static var Path: String { return "/me/notifications/subscriptions" }
+    private static var Path: String { return "/me/notifications/subscriptions" }
 
     private typealias ParameterDictionary = [String: AnyObject]
 

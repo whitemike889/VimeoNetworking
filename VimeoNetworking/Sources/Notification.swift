@@ -29,7 +29,7 @@ import Foundation
 /// `ObservationToken` manages the lifecycle of a block observer.  Note: on deinit, the token cancels its own observation, so it must be stored strongly if the associated block observation is to continue.
 open class ObservationToken
 {
-    fileprivate let observer: NSObjectProtocol
+    private let observer: NSObjectProtocol
     
     fileprivate init(observer: NSObjectProtocol)
     {
@@ -78,7 +78,7 @@ public enum Notification: String
     
     // MARK: -
     
-    fileprivate static let NotificationCenter = Foundation.NotificationCenter.default
+    private static let NotificationCenter = Foundation.NotificationCenter.default
     
     // MARK: -
     

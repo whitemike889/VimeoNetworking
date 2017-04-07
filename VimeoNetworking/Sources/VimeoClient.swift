@@ -87,10 +87,10 @@ final public class VimeoClient
     // MARK: -
     
         /// Session manager handles the http session data tasks and request/response serialization
-    fileprivate let sessionManager: VimeoSessionManager
+    private let sessionManager: VimeoSessionManager
     
         /// response cache handles all memory and disk caching of response dictionaries
-    fileprivate let responseCache = ResponseCache()
+    private let responseCache = ResponseCache()
     
     internal struct Constants
     {
@@ -311,7 +311,7 @@ final public class VimeoClient
     
     // MARK: - Private task completion handlers
     
-    fileprivate func handleTaskSuccess<ModelType: MappableResponse>(request: Request<ModelType>, task: URLSessionDataTask?, responseObject: Any?, isCachedResponse: Bool = false, isFinalResponse: Bool = true, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<ModelType>>.T)
+    private func handleTaskSuccess<ModelType: MappableResponse>(request: Request<ModelType>, task: URLSessionDataTask?, responseObject: Any?, isCachedResponse: Bool = false, isFinalResponse: Bool = true, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<ModelType>>.T)
     {
         guard let responseDictionary = responseObject as? ResponseDictionary
         else
@@ -421,7 +421,7 @@ final public class VimeoClient
         }
     }
     
-    fileprivate func handleTaskFailure<ModelType: MappableResponse>(request: Request<ModelType>, task: URLSessionDataTask?, error: NSError?, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<ModelType>>.T)
+    private func handleTaskFailure<ModelType: MappableResponse>(request: Request<ModelType>, task: URLSessionDataTask?, error: NSError?, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<ModelType>>.T)
     {
         let error = error ?? NSError(domain: type(of: self).ErrorDomain, code: LocalErrorCode.undefined.rawValue, userInfo: [NSLocalizedDescriptionKey: "Undefined error"])
         
@@ -461,7 +461,7 @@ final public class VimeoClient
     
     // MARK: - Private error handling
     
-    fileprivate func handleError<ModelType: MappableResponse>(_ error: NSError, request: Request<ModelType>, task: URLSessionDataTask? = nil)
+    private func handleError<ModelType: MappableResponse>(_ error: NSError, request: Request<ModelType>, task: URLSessionDataTask? = nil)
     {
         if error.isServiceUnavailableError
         {
@@ -473,7 +473,7 @@ final public class VimeoClient
         }
     }
     
-    fileprivate func token(fromTask task: URLSessionDataTask?) -> String?
+    private func token(fromTask task: URLSessionDataTask?) -> String?
     {
         guard let bearerHeader = task?.originalRequest?.allHTTPHeaderFields?[Constants.AuthorizationHeader],
             let range = bearerHeader.range(of: Constants.BearerQuery) else

@@ -100,8 +100,8 @@ extension RetryPolicy
 public struct Request<ModelType: MappableResponse>
 {
     // TODO: Make these static when Swift supports it [RH] (5/24/16)
-    fileprivate let PageKey = "page"
-    fileprivate let PerPageKey = "per_page"
+    private let PageKey = "page"
+    private let PerPageKey = "per_page"
     
     // MARK: -
     

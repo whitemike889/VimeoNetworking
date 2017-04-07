@@ -33,10 +33,10 @@ open class VIMProgrammedContent: VIMModelObject
     dynamic open var type: String?
     dynamic open var content: NSArray?
  
-    dynamic fileprivate var metadata: [AnyHashable: Any]?
-    dynamic fileprivate var connections: [AnyHashable: Any]?
+    dynamic private var metadata: [AnyHashable: Any]?
+    dynamic private var connections: [AnyHashable: Any]?
     
-    fileprivate struct Constants
+    private struct Constants
     {
         static let ConnectionsKey = "connections"
         static let ContentKey = "content"
@@ -88,7 +88,7 @@ open class VIMProgrammedContent: VIMModelObject
     
     // MARK: Parsing Helpers
     
-    fileprivate func parseConnections()
+    private func parseConnections()
     {
         guard let dict = self.metadata?[Constants.ConnectionsKey] as? [AnyHashable: Any] else
         {
