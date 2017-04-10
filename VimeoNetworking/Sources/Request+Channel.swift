@@ -62,8 +62,8 @@ public extension Request
     {
         var parameters = refinements ?? [:]
         
-        parameters[self.QueryKey] = query as AnyObject?
+        parameters[self.QueryKey] = query
         
-        return Request(path: self.ChannelsPath, parameters: parameters as AnyObject?)
+        return Request(path: self.ChannelsPath, parameters: parameters)
     }
 }

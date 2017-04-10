@@ -119,7 +119,7 @@ public extension NSError
     
      - returns: An error with additional user info
      */
-    func errorByAddingUserInfo(_ userInfo: [String: AnyObject]) -> NSError
+    func errorByAddingUserInfo(_ userInfo: [String: Any]) -> NSError
     {
         return self.errorByAddingDomain(nil, code: nil, userInfo: userInfo)
     }
@@ -145,7 +145,7 @@ public extension NSError
      
      - returns: An error with additional information in the user info dictionary
      */
-    func errorByAddingDomain(_ domain: String?, code: Int?, userInfo: [String: AnyObject]?) -> NSError
+    func errorByAddingDomain(_ domain: String?, code: Int?, userInfo: [String: Any]?) -> NSError
     {
 //        let augmentedInfo = NSMutableDictionary(dictionary: self.userInfo)
         var augmentedInfo = self.userInfo as [AnyHashable: Any]

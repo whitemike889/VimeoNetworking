@@ -60,9 +60,9 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
      
      - returns: the serialized JSON dictionary
      */
-    public func responseObjectFromDownloadTaskResponse(response: URLResponse?, url: URL?, error: NSError?) throws -> [String: AnyObject]?
+    public func responseObjectFromDownloadTaskResponse(response: URLResponse?, url: URL?, error: NSError?) throws -> [String: Any]?
     {
-        var responseObject: [String: AnyObject]? = nil
+        var responseObject: [String: Any]? = nil
         var serializationError: NSError? = nil
         do
         {
@@ -73,7 +73,7 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
             serializationError = error
         }
         
-        try checkDataResponseForError(response: response, responseObject: responseObject as AnyObject?, error: error)
+        try checkDataResponseForError(response: response, responseObject: responseObject, error: error)
         
         if let serializationError = serializationError
         {
@@ -92,7 +92,7 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
      
      - throws: an error if the data response contains an error
      */
-    public func checkDataResponseForError(response: URLResponse?, responseObject: AnyObject?, error: NSError?) throws
+    public func checkDataResponseForError(response: URLResponse?, responseObject: Any?, error: NSError?) throws
     {
         // TODO: If error is nil and errorInfo is non-nil, we should throw an error [AH] 2/5/2016
         
@@ -131,7 +131,7 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
      
      - returns: downloaded data serialized into JSON dictionary
      */
-    public func dictionaryFromDownloadTaskResponse(url: URL?) throws -> [String: AnyObject]
+    public func dictionaryFromDownloadTaskResponse(url: URL?) throws -> [String: Any]
     {
         guard let url = url else
         {
@@ -145,10 +145,10 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
             throw NSError(domain: type(of: self).ErrorDomain, code: 0, userInfo: userInfo)
         }
         
-        var dictionary: [String: AnyObject]? = [:]
+        var dictionary: [String: Any]? = [:]
         if data.count > 0
         {
-            dictionary = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as? [String: AnyObject]
+            dictionary = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as? [String: Any]
         }
         
         if dictionary == nil
@@ -162,7 +162,7 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
     
     // MARK: Private API
 
-    private func errorInfoFromResponse(_ response: URLResponse?, responseObject: AnyObject?) -> [String: AnyObject]?
+    private func errorInfoFromResponse(_ response: URLResponse?, responseObject: Any?) -> [String: Any]?
     {
         var errorInfo: [String: AnyObject] = [:]
         

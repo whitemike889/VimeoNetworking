@@ -61,8 +61,8 @@ final class KeychainStore
         
         var query = self.queryForKey(key)
         
-        query[kSecValueData as String] = data as AnyObject?
-        query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock as String as String as AnyObject?
+        query[kSecValueData as String] = data
+        query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock as String
         
         let status = SecItemAdd(query as CFDictionary, nil)
         
@@ -85,7 +85,7 @@ final class KeychainStore
     {
         var query = self.queryForKey(key)
         
-        query[kSecMatchLimit as String] = kSecMatchLimitOne as String as String as AnyObject?
+        query[kSecMatchLimit as String] = kSecMatchLimitOne as NSString
         query[kSecReturnData as String] = kCFBooleanTrue
         
         var attributes: AnyObject? = nil
@@ -121,17 +121,17 @@ final class KeychainStore
     
     // MARK: - 
     
-    private func queryForKey(_ key: String) -> [String: AnyObject]
+    private func queryForKey(_ key: String) -> [String: Any]
     {
-        var query: [String: AnyObject] = [:]
+        var query: [String: Any] = [:]
         
-        query[kSecClass as String] = kSecClassGenericPassword as String as String as AnyObject?
-        query[kSecAttrService as String] = self.service as AnyObject?
-        query[kSecAttrAccount as String] = key as AnyObject?
+        query[kSecClass as String] = kSecClassGenericPassword as String
+        query[kSecAttrService as String] = self.service as String
+        query[kSecAttrAccount as String] = key as String
         
         if let accessGroup = self.accessGroup
         {
-            query[kSecAttrAccessGroup as String] = accessGroup as AnyObject?
+            query[kSecAttrAccessGroup as String] = accessGroup as String
         }
         
         return query

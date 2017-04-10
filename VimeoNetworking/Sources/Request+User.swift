@@ -121,9 +121,9 @@ public extension Request
     {
         var parameters = refinements ?? [:]
         
-        parameters[self.QueryKey] = query as AnyObject?
+        parameters[self.QueryKey] = query
         
-        return Request(path: self.UsersPath, parameters: parameters as AnyObject?)
+        return Request(path: self.UsersPath, parameters: parameters)
     }
     
     // MARK: - Edit User
@@ -138,6 +138,6 @@ public extension Request
      */
     public static func patchUser(userURI: String, parameters: VimeoClient.RequestParametersDictionary) -> Request
     {
-        return Request(method: .PATCH, path: userURI, parameters: parameters as AnyObject?)
+        return Request(method: .PATCH, path: userURI, parameters: parameters)
     }
 }

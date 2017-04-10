@@ -10,7 +10,7 @@ public extension Request
 {
     private static var Path: String { return "/me/notifications/subscriptions" }
 
-    private typealias ParameterDictionary = [String: AnyObject]
+    private typealias ParameterDictionary = [AnyHashable: Any]
 
     private static var SubscriptionsPathComponent: String { return "/subscriptions" }
 
@@ -44,7 +44,7 @@ public extension Request
     {
         let subscriptionsURI = Request.subscriptionsURI(notificationsURI: notificationsURI, deviceToken: deviceToken)
 
-        return Request(method: .PATCH, path: subscriptionsURI, parameters: subscription as AnyObject?)
+        return Request(method: .PATCH, path: subscriptionsURI, parameters: subscription)
     }
 
     // MARK: - Helper
@@ -66,22 +66,22 @@ public extension Request
             "new" : "false"
         ]
 
-        return Request(method: .PATCH, path: notificationsURI, parameters: parameters as AnyObject?)
+        return Request(method: .PATCH, path: notificationsURI, parameters: parameters)
     }
 
     public static func markNotificationsAsSeenRequest(notifications: [VIMNotification], notificationsURI: String) -> Request
     {
         var parameters: [ParameterDictionary] = []
-        notifications.map { (notification: VIMNotification) -> Void in
+        let _ = notifications.map { (notification: VIMNotification) -> Void in
             if let uri = notification.uri
             {
                 parameters.append([
-                    "seen": "true" as AnyObject,
-                    "uri": uri as AnyObject]
+                    "seen": "true",
+                    "uri": uri]
                 )
             }
         }
 
-        return Request(method: .PATCH, path: notificationsURI, parameters: parameters as AnyObject?)
+        return Request(method: .PATCH, path: notificationsURI, parameters: parameters)
     }
 }
