@@ -179,9 +179,9 @@ public extension NSError
         /// Returns the status code of the failing response, if available
     public var statusCode: Int?
     {
-        if let response = self.userInfo[AFNetworkingOperationFailingURLResponseErrorKey]
+        if let response = self.userInfo[AFNetworkingOperationFailingURLResponseErrorKey] as? HTTPURLResponse
         {
-            return (response as AnyObject).statusCode
+            return response.statusCode
         }
         
         return nil
@@ -195,9 +195,8 @@ public extension NSError
             return errorCode
         }
         
-        if let response = self.userInfo[AFNetworkingOperationFailingURLResponseErrorKey],
-            let headers = (response as AnyObject).allHeaderFields,
-            let vimeoErrorCode = headers[type(of: self).VimeoErrorCodeHeaderKey] as? String
+        if let response = self.userInfo[AFNetworkingOperationFailingURLResponseErrorKey] as? HTTPURLResponse,
+            let vimeoErrorCode = response.allHeaderFields[type(of: self).VimeoErrorCodeHeaderKey] as? String
         {
             return Int(vimeoErrorCode)
         }
