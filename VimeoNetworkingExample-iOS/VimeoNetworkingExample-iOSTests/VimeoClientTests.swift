@@ -58,7 +58,7 @@ class VimeoClientTests: XCTestCase
         
         self.waitForExpectations(timeout: 10, handler: nil)
         
-        Notification.AuthenticatedAccountDidChange.removeObserver(self)
+        Notification.AuthenticatedAccountDidChange.removeObserver(target: self)
     }
     
     func testSubsequentAccountNotificationUserInfo()
@@ -82,6 +82,6 @@ class VimeoClientTests: XCTestCase
         
         self.waitForExpectations(timeout: 10, handler: nil)
         
-        Notification.AuthenticatedAccountDidChange.removeObserver(self)
+        Notification.AuthenticatedAccountDidChange.removeObserver(target: self)
     }
 }
