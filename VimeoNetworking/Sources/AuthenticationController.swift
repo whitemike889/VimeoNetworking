@@ -264,7 +264,7 @@ final public class AuthenticationController
         let adhocClient = VimeoClient(appConfiguration: self.configuration, sessionManager: customSessionManager)
         let request = AuthenticationRequest.verifyAccessTokenRequest()
 
-        self.authenticate(client: adhocClient, request: request, completion: completion)
+        self.authenticate(with: adhocClient, request: request, completion: completion)
     }
     
     // MARK: - Private Authentication
@@ -277,7 +277,7 @@ final public class AuthenticationController
      - parameter password:   a user's password
      - parameter completion: handler for authentication success or failure
      */
-    public func logIn(email: String, password: String, completion: @escaping AuthenticationCompletion)
+    public func logIn(with email: String, password: String, completion: @escaping AuthenticationCompletion)
     {
         let request = AuthenticationRequest.logInRequest(email: email, password: password, scopes: self.configuration.scopes)
         
@@ -293,7 +293,7 @@ final public class AuthenticationController
      - parameter password:   the new user's password
      - parameter completion: handler for authentication success or failure
      */
-    public func join(name: String, email: String, password: String, completion: @escaping AuthenticationCompletion)
+    public func join(with name: String, email: String, password: String, completion: @escaping AuthenticationCompletion)
     {
         let request = AuthenticationRequest.joinRequest(name: name, email: email, password: password, scopes: self.configuration.scopes)
         
@@ -307,7 +307,7 @@ final public class AuthenticationController
      - parameter facebookToken: token from facebook SDK
      - parameter completion:    handler for authentication success or failure
      */
-    public func facebookLogIn(facebookToken: String, completion: @escaping AuthenticationCompletion)
+    public func facebookLogIn(with facebookToken: String, completion: @escaping AuthenticationCompletion)
     {
         let request = AuthenticationRequest.logInFacebookRequest(facebookToken: facebookToken, scopes: self.configuration.scopes)
         
@@ -321,7 +321,7 @@ final public class AuthenticationController
      - parameter facebookToken: token from facebook SDK
      - parameter completion:    handler for authentication success or failure
      */
-    public func facebookJoin(facebookToken: String, completion: @escaping AuthenticationCompletion)
+    public func facebookJoin(with facebookToken: String, completion: @escaping AuthenticationCompletion)
     {
         let request = AuthenticationRequest.joinFacebookRequest(facebookToken: facebookToken, scopes: self.configuration.scopes)
         
@@ -335,7 +335,7 @@ final public class AuthenticationController
      - parameter accountResponseDictionary: account response dictionary
      - parameter completion:                handler for authentication success or failure
      */
-    public func authenticate(withAccountResponseDictionary accountResponseDictionary: VimeoClient.ResponseDictionary, completion: AuthenticationCompletion)
+    public func authenticate(with accountResponseDictionary: VimeoClient.ResponseDictionary, completion: AuthenticationCompletion)
     {
         let result: Result<Response<VIMAccount>>
         
@@ -524,12 +524,12 @@ final public class AuthenticationController
     
     private func authenticate(request: AuthenticationRequest, completion: @escaping AuthenticationCompletion)
     {
-        self.authenticate(client: self.authenticatorClient, request: request, completion: completion)
+        self.authenticate(with: self.authenticatorClient, request: request, completion: completion)
     }
     
-    private func authenticate(client: VimeoClient, request: AuthenticationRequest, completion: @escaping AuthenticationCompletion)
+    private func authenticate(with client: VimeoClient, request: AuthenticationRequest, completion: @escaping AuthenticationCompletion)
     {
-        client.request(request: request) { result in
+        let _ = client.request(request: request) { result in
             
             let handledResult = self.handleAuthenticationResult(result: result)
             
