@@ -386,7 +386,7 @@ final public class AuthenticationController
     {
         let infoRequest = PinCodeRequest.getPinCodeRequest(scopes: self.configuration.scopes)
         
-        self.authenticatorClient.request(request: infoRequest) { result in
+        let _ = self.authenticatorClient.request(request: infoRequest) { result in
             switch result
             {
             case .success(let result):
@@ -497,7 +497,7 @@ final public class AuthenticationController
         }
         
         let deleteTokensRequest = Request<VIMNullResponse>.deleteTokensRequest()
-        self.client.request(request: deleteTokensRequest) { (result) in
+        let _ = self.client.request(request: deleteTokensRequest) { (result) in
             switch result
             {
             case .success:
