@@ -192,7 +192,7 @@ final public class VimeoClient
                     
                     if let responseDictionary = responseDictionary
                     {
-                        self.handleTaskSuccess(request: request, task: nil, responseObject: responseDictionary as AnyObject?, isCachedResponse: true, isFinalResponse: request.cacheFetchPolicy == .cacheOnly, completionQueue: completionQueue, completion: completion)
+                        self.handleTaskSuccess(request: request, task: nil, responseObject: responseDictionary, isCachedResponse: true, isFinalResponse: request.cacheFetchPolicy == .cacheOnly, completionQueue: completionQueue, completion: completion)
                     }
                     else if request.cacheFetchPolicy == .cacheOnly
                     {
@@ -469,7 +469,7 @@ final public class VimeoClient
         }
         else if error.isInvalidTokenError
         {
-            Notification.ClientDidReceiveInvalidTokenError.post(object: self.token(fromTask: task) as AnyObject?)
+            Notification.ClientDidReceiveInvalidTokenError.post(object: self.token(fromTask: task))
         }
     }
     

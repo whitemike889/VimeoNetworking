@@ -34,7 +34,7 @@ class FakeDataSource<T: VIMMappable>
     var items: [T]?
     var error: NSError?
     
-    init(jsonData: [String: AnyObject], keyPath: String)
+    init(jsonData: [String: Any], keyPath: String)
     {                
         mapper.addMappingClass(T.self, forKeypath: keyPath)
         
@@ -49,12 +49,12 @@ class FakeDataSource<T: VIMMappable>
         }
     }
 
-    static func loadJSONFile(_ jsonFileName: String, withExtension: String) -> [String: AnyObject]
+    static func loadJSONFile(_ jsonFileName: String, withExtension: String) -> [String: Any]
     {
         let jsonFilePath = Bundle.main.path(forResource: jsonFileName, ofType: withExtension)
         let jsonData = try? Data(contentsOf: URL(fileURLWithPath: jsonFilePath!))
         let jsonDict = try! JSONSerialization.jsonObject(with: jsonData!, options: JSONSerialization.ReadingOptions.allowFragments)
         
-        return (jsonDict as? [String: AnyObject])!
+        return (jsonDict as? [String: Any])!
     }
 }

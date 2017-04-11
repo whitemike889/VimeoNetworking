@@ -41,7 +41,7 @@ public class ObservationToken
      */
     public func stopObserving()
     {
-        Notification.removeObserver(self.observer)
+        Notification.removeObserver(target: self.observer)
     }
     
     deinit
@@ -87,7 +87,7 @@ public enum Notification: String
      
      - parameter object: an optional object to pass to observers of this `Notification`
      */
-    public func post(object: AnyObject?, userInfo: [AnyHashable: Any]? = nil)
+    public func post(object: Any?, userInfo: [AnyHashable: Any]? = nil)
     {
         DispatchQueue.main.async
         {
@@ -101,7 +101,7 @@ public enum Notification: String
      - parameter target:   the object on which to call the `selector` method
      - parameter selector: method to call when the notification is broadcast
      */
-    public func observe(_ target: AnyObject, selector: Selector)
+    public func observe(target: Any, selector: Selector)
     {
         type(of: self).NotificationCenter.addObserver(target, selector: selector, name: NSNotification.Name(rawValue: self.rawValue), object: nil)
     }
@@ -124,7 +124,7 @@ public enum Notification: String
      
      - parameter target: the target to remove
      */
-    public func removeObserver(_ target: AnyObject)
+    public func removeObserver(target: Any)
     {
         type(of: self).NotificationCenter.removeObserver(target, name: NSNotification.Name(rawValue: self.rawValue), object: nil)
     }
@@ -135,7 +135,7 @@ public enum Notification: String
      
      - parameter target: the target to remove
      */
-    public static func removeObserver(_ target: AnyObject)
+    public static func removeObserver(target: Any)
     {
         self.NotificationCenter.removeObserver(target)
     }

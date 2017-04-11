@@ -164,9 +164,9 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
 
     private func errorInfoFromResponse(_ response: URLResponse?, responseObject: Any?) -> [String: Any]?
     {
-        var errorInfo: [String: AnyObject] = [:]
+        var errorInfo: [String: Any] = [:]
         
-        if let dictionary = responseObject as? [String: AnyObject]
+        if let dictionary = responseObject as? [String: Any]
         {
             let errorKeys = ["error", "VimeoErrorCode", "error_code", "developer_message", "invalid_parameters"]
             
@@ -181,7 +181,7 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
         
         if let headerErrorCode = (response as? HTTPURLResponse)?.allHeaderFields["Vimeo-Error-Code"]
         {
-            errorInfo["error_code"] = headerErrorCode as AnyObject?
+            errorInfo["error_code"] = headerErrorCode
         }
         
         return errorInfo.count == 0 ? nil : errorInfo

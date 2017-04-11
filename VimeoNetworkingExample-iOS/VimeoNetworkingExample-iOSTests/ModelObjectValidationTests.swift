@@ -125,7 +125,7 @@ class ModelObjectValidationTests: XCTestCase
         let jsonData = try? Data(contentsOf: URL(fileURLWithPath: jsonFilePath!))
         let jsonDict = try! JSONSerialization.jsonObject(with: jsonData!, options: JSONSerialization.ReadingOptions.allowFragments)
         
-        return FakeDataSource<VIMProgrammedContent>(jsonData: jsonDict as! [String : AnyObject], keyPath: "data")
+        return FakeDataSource<VIMProgrammedContent>(jsonData: jsonDict as! [String : Any], keyPath: "data")
     }
     
     func testProgrammedContentMapped()

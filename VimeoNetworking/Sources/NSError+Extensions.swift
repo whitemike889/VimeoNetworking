@@ -90,7 +90,7 @@ public extension NSError
         if let description = description
         {
             let userInfo = [NSLocalizedDescriptionKey: description]
-            error = error.errorByAddingDomain(domain, code: code, userInfo: userInfo as [String : AnyObject]?)
+            error = error.errorByAddingDomain(domain, code: code, userInfo: userInfo as [String : Any]?)
         }
         else
         {
@@ -217,7 +217,7 @@ public extension NSError
     {
         var errorCodes: [Int] = []
         
-        if let json = self.errorResponseBodyJSON, let invalidParameters = json[type(of: self).VimeoInvalidParametersKey] as? [[String: AnyObject]]
+        if let json = self.errorResponseBodyJSON, let invalidParameters = json[type(of: self).VimeoInvalidParametersKey] as? [[String: Any]]
         {
             for invalidParameter in invalidParameters
             {
@@ -232,13 +232,13 @@ public extension NSError
     }
     
         /// Returns the api error JSON dictionary, if available
-    public var errorResponseBodyJSON: [String: AnyObject]?
+    public var errorResponseBodyJSON: [String: Any]?
     {
         if let data = self.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] as? Data
         {
             do
             {
-                let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject]
+                let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
                 
                 return json
             }
