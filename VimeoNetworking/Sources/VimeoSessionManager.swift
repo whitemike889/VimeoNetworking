@@ -62,7 +62,7 @@ final public class VimeoSessionManager: AFHTTPSessionManager
      
      - parameter account: the new account
      */
-    func clientDidAuthenticateWithAccount(_ account: VIMAccount)
+    func clientDidAuthenticateWithAccount(account: VIMAccount)
     {
         guard let requestSerializer = self.requestSerializer as? VimeoRequestSerializer
         else

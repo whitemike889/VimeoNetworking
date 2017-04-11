@@ -49,7 +49,7 @@ public enum CacheFetchPolicy
      
      - returns: the default cache policy for the provided `Method`
      */
-    static func defaultPolicyForMethod(_ method: VimeoClient.Method) -> CacheFetchPolicy
+    static func defaultPolicyForMethod(method: VimeoClient.Method) -> CacheFetchPolicy
     {
         return .networkOnly
     }
@@ -76,7 +76,7 @@ public enum RetryPolicy
      
      - returns: the default retry policy for the given `Method`
      */
-    static func defaultPolicyForMethod(_ method: VimeoClient.Method) -> RetryPolicy
+    static func defaultPolicyForMethod(method: VimeoClient.Method) -> RetryPolicy
     {
         switch method
         {
@@ -153,9 +153,9 @@ public struct Request<ModelType: MappableResponse>
         self.path = path
         self.parameters = parameters
         self.modelKeyPath = modelKeyPath
-        self.cacheFetchPolicy = cacheFetchPolicy ?? CacheFetchPolicy.defaultPolicyForMethod(method)
+        self.cacheFetchPolicy = cacheFetchPolicy ?? CacheFetchPolicy.defaultPolicyForMethod(method: method)
         self.shouldCacheResponse = shouldCacheResponse ?? (method == .GET)
-        self.retryPolicy = retryPolicy ?? RetryPolicy.defaultPolicyForMethod(method)
+        self.retryPolicy = retryPolicy ?? RetryPolicy.defaultPolicyForMethod(method: method)
     }
     
         /// Returns a fully-formed URI comprised of the path plus a query string of any parameters

@@ -90,7 +90,7 @@ class MasterViewController: UITableViewController
                 request = Request<[VIMVideo]>(path: "/channels/staffpicks/videos")
             }
             
-            VimeoClient.defaultClient.request(request) { [weak self] result in
+            VimeoClient.defaultClient.request(request: request) { [weak self] result in
                 
 //                guard let strongSelf = self
 //                else

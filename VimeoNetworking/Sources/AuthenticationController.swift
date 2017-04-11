@@ -92,12 +92,12 @@ final public class AuthenticationController
     
     public func loadClientCredentialsAccount() throws -> VIMAccount?
     {
-        return try self.loadAccount(.clientCredentials)
+        return try self.loadAccount(accountType: .clientCredentials)
     }
 
     public func loadUserAccount() throws -> VIMAccount?
     {
-        return try self.loadAccount(.user)
+        return try self.loadAccount(accountType: .user)
     }
     
     @available(*, deprecated, message: "Use loadUserAccount or loadClientCredentialsAccount instead.")
@@ -131,14 +131,14 @@ final public class AuthenticationController
     {
         let accountType: AccountStore.AccountType = (account.user != nil) ? .user : .clientCredentials
         
-        try self.accountStore.saveAccount(account, type: accountType)
+        try self.accountStore.saveAccount(account: account, type: accountType)
     }
     
     // MARK: - Private Saved Accounts
     
-    private func loadAccount(_ accountType: AccountStore.AccountType) throws -> VIMAccount?
+    private func loadAccount(accountType: AccountStore.AccountType) throws -> VIMAccount?
     {
-        let loadedAccount = try self.accountStore.loadAccount(accountType)
+        let loadedAccount = try self.accountStore.loadAccount(type: accountType)
         
         if let loadedAccount = loadedAccount
         {
@@ -161,7 +161,7 @@ final public class AuthenticationController
      
      - parameter completion: handles authentication success or failure
      */
-    public func clientCredentialsGrant(_ completion: @escaping AuthenticationCompletion)
+    public func clientCredentialsGrant(completion: @escaping AuthenticationCompletion)
     {
         let request = AuthenticationRequest.clientCredentialsGrantRequest(scopes: self.configuration.scopes)
         
@@ -188,7 +188,7 @@ final public class AuthenticationController
         let parameters = [type(of: self).ResponseTypeKey: type(of: self).CodeKey,
                           type(of: self).ClientIDKey: self.configuration.clientIdentifier,
                           type(of: self).RedirectURIKey: self.codeGrantRedirectURI,
-                          type(of: self).ScopeKey: Scope.combine(self.configuration.scopes),
+                          type(of: self).ScopeKey: Scope.combine(scopes: self.configuration.scopes),
                           type(of: self).StateKey: type(of: self).state]
         
         guard let urlString = VimeoBaseURLString?.appendingPathComponent(type(of: self).CodeGrantAuthorizationPath).absoluteString
@@ -258,13 +258,13 @@ final public class AuthenticationController
      - parameter token: a constant token generated for your api's app
      - parameter completion: handles authentication success or failure
      */
-    public func accessToken(_ token: String, completion: @escaping AuthenticationCompletion)
+    public func accessToken(token: String, completion: @escaping AuthenticationCompletion)
     {
         let customSessionManager =  VimeoSessionManager.defaultSessionManager(accessTokenProvider: {token})
         let adhocClient = VimeoClient(appConfiguration: self.configuration, sessionManager: customSessionManager)
         let request = AuthenticationRequest.verifyAccessTokenRequest()
 
-        self.authenticate(adhocClient, request: request, completion: completion)
+        self.authenticate(client: adhocClient, request: request, completion: completion)
     }
     
     // MARK: - Private Authentication
@@ -341,7 +341,7 @@ final public class AuthenticationController
         
         do
         {
-            let account: VIMAccount = try VIMObjectMapper.mapObject(accountResponseDictionary)
+            let account: VIMAccount = try VIMObjectMapper.mapObject(responseDictionary: accountResponseDictionary)
             
             let response = Response(model: account, json: accountResponseDictionary)
             
@@ -352,7 +352,7 @@ final public class AuthenticationController
             result = Result.failure(error: error)
         }
         
-        let handledResult = self.handleAuthenticationResult(result)
+        let handledResult = self.handleAuthenticationResult(result: result)
         
         completion(handledResult)
     }
@@ -373,7 +373,7 @@ final public class AuthenticationController
     
     
         /// **(PRIVATE: Vimeo Use Only)** Handles the initial information to present to the user for pin code auth
-    public typealias PinCodeInfoHander = (_ pinCode: String, _ activateLink: String) -> Void
+    public typealias PinCodeInfoHander = (String, String) -> Void
     
     /**
      **(PRIVATE: Vimeo Use Only, will not work for third-party applications)**
@@ -386,7 +386,7 @@ final public class AuthenticationController
     {
         let infoRequest = PinCodeRequest.getPinCodeRequest(scopes: self.configuration.scopes)
         
-        self.authenticatorClient.request(infoRequest) { result in
+        self.authenticatorClient.request(request: infoRequest) { result in
             switch result
             {
             case .success(let result):
@@ -497,7 +497,7 @@ final public class AuthenticationController
         }
         
         let deleteTokensRequest = Request<VIMNullResponse>.deleteTokensRequest()
-        self.client.request(deleteTokensRequest) { (result) in
+        self.client.request(request: deleteTokensRequest) { (result) in
             switch result
             {
             case .success:
@@ -509,7 +509,7 @@ final public class AuthenticationController
         
         if loadClientCredentials
         {
-            let loadedClientCredentialsAccount = (try? self.accountStore.loadAccount(.clientCredentials)) ?? nil
+            let loadedClientCredentialsAccount = (try? self.accountStore.loadAccount(type: .clientCredentials)) ?? nil
             try self.setClientAccount(with: loadedClientCredentialsAccount, shouldClearCache: true)
         }
         else
@@ -517,27 +517,27 @@ final public class AuthenticationController
             try self.setClientAccount(with: nil, shouldClearCache: true)
         }
         
-        try self.accountStore.removeAccount(.user)
+        try self.accountStore.removeAccount(type: .user)
     }
     
     // MARK: - Private
     
     private func authenticate(request: AuthenticationRequest, completion: @escaping AuthenticationCompletion)
     {
-        self.authenticate(self.authenticatorClient, request: request, completion: completion)
+        self.authenticate(client: self.authenticatorClient, request: request, completion: completion)
     }
     
-    private func authenticate(_ client: VimeoClient, request: AuthenticationRequest, completion: @escaping AuthenticationCompletion)
+    private func authenticate(client: VimeoClient, request: AuthenticationRequest, completion: @escaping AuthenticationCompletion)
     {
-        client.request(request) { result in
+        client.request(request: request) { result in
             
-            let handledResult = self.handleAuthenticationResult(result)
+            let handledResult = self.handleAuthenticationResult(result: result)
             
             completion(handledResult)
         }
     }
     
-    private func handleAuthenticationResult(_ result: Result<Response<VIMAccount>>) -> Result<VIMAccount>
+    private func handleAuthenticationResult(result: Result<Response<VIMAccount>>) -> Result<VIMAccount>
     {
         guard case .success(let accountResponse) = result
         else
@@ -572,7 +572,7 @@ final public class AuthenticationController
             
             let accountType: AccountStore.AccountType = (account.user != nil) ? .user : .clientCredentials
             
-            try self.accountStore.saveAccount(account, type: accountType)
+            try self.accountStore.saveAccount(account: account, type: accountType)
         }
         catch let error
         {

@@ -74,7 +74,7 @@ extension Request where ModelType: VIMAccount
     static func clientCredentialsGrantRequest(scopes: [Scope]) -> Request
     {
         let parameters = [GrantTypeKey: GrantTypeClientCredentials,
-                          ScopeKey: Scope.combine(scopes)]
+                          ScopeKey: Scope.combine(scopes: scopes)]
         
         return Request(method: .POST, path: AuthenticationPathClientCredentials, parameters: parameters, cacheFetchPolicy: .networkOnly, shouldCacheResponse: false)
     }
@@ -108,7 +108,7 @@ extension Request where ModelType: VIMAccount
     static func logInRequest(email: String, password: String, scopes: [Scope]) -> Request
     {
         let parameters = [GrantTypeKey: GrantTypePassword,
-                          ScopeKey: Scope.combine(scopes),
+                          ScopeKey: Scope.combine(scopes: scopes),
                           UsernameKey: email,
                           PasswordKey: password]
         
@@ -137,7 +137,7 @@ extension Request where ModelType: VIMAccount
      */
     static func joinRequest(name: String, email: String, password: String, scopes: [Scope]) -> Request
     {
-        let parameters = [ScopeKey: Scope.combine(scopes),
+        let parameters = [ScopeKey: Scope.combine(scopes: scopes),
                           DisplayNameKey: name,
                           EmailKey: email,
                           PasswordKey: password]
@@ -156,7 +156,7 @@ extension Request where ModelType: VIMAccount
     static func logInFacebookRequest(facebookToken: String, scopes: [Scope]) -> Request
     {
         let parameters = [GrantTypeKey: GrantTypeFacebook,
-                          ScopeKey: Scope.combine(scopes),
+                          ScopeKey: Scope.combine(scopes: scopes),
                           TokenKey: facebookToken]
         
         return Request(method: .POST, path: AuthenticationPathFacebookToken, parameters: parameters, cacheFetchPolicy: .networkOnly, shouldCacheResponse: false)
@@ -172,7 +172,7 @@ extension Request where ModelType: VIMAccount
      */
     static func joinFacebookRequest(facebookToken: String, scopes: [Scope]) -> Request
     {
-        let parameters = [ScopeKey: Scope.combine(scopes),
+        let parameters = [ScopeKey: Scope.combine(scopes: scopes),
                           TokenKey: facebookToken]
         
         return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters, cacheFetchPolicy: .networkOnly, shouldCacheResponse: false)
@@ -252,7 +252,7 @@ extension Request where ModelType: PinCodeInfo
     static func getPinCodeRequest(scopes: [Scope]) -> Request
     {
         let parameters = [GrantTypeKey: GrantTypePinCode,
-                          ScopeKey: Scope.combine(scopes)]
+                          ScopeKey: Scope.combine(scopes: scopes)]
         
         return Request(method: .POST, path: AuthenticationPathPinCode, parameters: parameters, cacheFetchPolicy: .networkOnly, shouldCacheResponse: false)
     }

@@ -49,7 +49,7 @@ class FakeDataSource<T: VIMMappable>
         }
     }
 
-    static func loadJSONFile(_ jsonFileName: String, withExtension: String) -> [String: Any]
+    static func loadJSONFile(jsonFileName: String, withExtension: String) -> [String: Any]
     {
         let jsonFilePath = Bundle.main.path(forResource: jsonFileName, ofType: withExtension)
         let jsonData = try? Data(contentsOf: URL(fileURLWithPath: jsonFilePath!))

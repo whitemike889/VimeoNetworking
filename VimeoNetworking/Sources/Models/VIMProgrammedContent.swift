@@ -45,7 +45,7 @@ public class VIMProgrammedContent: VIMModelObject
     
     // MARK: Public API
     
-    public func connectionWithName(_ connectionName: String) -> VIMConnection?
+    public func connectionWithName(connectionName: String) -> VIMConnection?
     {
         return self.connections?[connectionName] as? VIMConnection
     }

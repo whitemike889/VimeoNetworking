@@ -141,18 +141,18 @@ final public class VimeoClient
         {
             if let authenticatedAccount = self.currentAccount
             {
-                self.sessionManager.clientDidAuthenticateWithAccount(authenticatedAccount)
+                self.sessionManager.clientDidAuthenticateWithAccount(account: authenticatedAccount)
             }
             else
             {
                 self.sessionManager.clientDidClearAccount()
             }
             
-            self.notifyObserversAccountChanged(self.currentAccount, previousAccount: oldValue)
+            self.notifyObserversAccountChanged(account: self.currentAccount, previousAccount: oldValue)
         }
     }
     
-    public func notifyObserversAccountChanged(_ account: VIMAccount?, previousAccount: VIMAccount?)
+    public func notifyObserversAccountChanged(account: VIMAccount?, previousAccount: VIMAccount?)
     {
         Notification.AuthenticatedAccountDidChange.post(object: account,
                                                         userInfo: [UserInfoKey.previousAccount.rawValue : previousAccount ?? NSNull()])
@@ -169,7 +169,7 @@ final public class VimeoClient
      
      - returns: a `RequestToken` for the in-flight request
      */
-    public func request<ModelType: MappableResponse>(_ request: Request<ModelType>, completionQueue: DispatchQueue = DispatchQueue.main, completion: @escaping ResultCompletion<Response<ModelType>>.T) -> RequestToken
+    public func request<ModelType: MappableResponse>(request: Request<ModelType>, completionQueue: DispatchQueue = DispatchQueue.main, completion: @escaping ResultCompletion<Response<ModelType>>.T) -> RequestToken
     {
         var networkRequestCompleted = false
         
@@ -177,7 +177,7 @@ final public class VimeoClient
         {
         case .cacheOnly, .cacheThenNetwork:
             
-            self.responseCache.responseForRequest(request) { result in
+            self.responseCache.responseForRequest(request: request) { result in
                 
                 if networkRequestCompleted
                 {
@@ -199,7 +199,7 @@ final public class VimeoClient
                         let description = "Cached response not found"
                         let error = NSError(domain: type(of: self).ErrorDomain, code: LocalErrorCode.cachedResponseNotFound.rawValue, userInfo: [NSLocalizedDescriptionKey: description])
                         
-                        self.handleError(error, request: request)
+                        self.handleError(error: error, request: request)
                         
                         completionQueue.async
                         {
@@ -215,7 +215,7 @@ final public class VimeoClient
                     
                     print("cache failure: \(error)")
                     
-                    self.handleError(error, request: request)
+                    self.handleError(error: error, request: request)
                     
                     if request.cacheFetchPolicy == .cacheOnly
                     {
@@ -345,7 +345,7 @@ final public class VimeoClient
         
         do
         {
-            let modelObject: ModelType = try VIMObjectMapper.mapObject(responseDictionary, modelKeyPath: request.modelKeyPath)
+            let modelObject: ModelType = try VIMObjectMapper.mapObject(responseDictionary: responseDictionary, modelKeyPath: request.modelKeyPath)
             
             var response: Response<ModelType>
             
@@ -405,7 +405,7 @@ final public class VimeoClient
             // To avoid a poisoned cache, explicitly wait until model object parsing is successful to store responseDictionary [RH]
             if request.shouldCacheResponse
             {
-                self.responseCache.setResponse(responseDictionary, forRequest: request)
+                self.responseCache.setResponse(responseDictionary: responseDictionary, forRequest: request)
             }
             
             completionQueue.async
@@ -430,7 +430,7 @@ final public class VimeoClient
             return
         }
         
-        self.handleError(error, request: request, task: task)
+        self.handleError(error: error, request: request, task: task)
         
         if case .multipleAttempts(let attemptCount, let initialDelay) = request.retryPolicy, attemptCount > 1
         {
@@ -439,7 +439,7 @@ final public class VimeoClient
             
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(initialDelay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC))
             {
-                let _ = self.request(retryRequest, completionQueue: completionQueue, completion: completion)
+                let _ = self.request(request: retryRequest, completionQueue: completionQueue, completion: completion)
             }
         }
         
@@ -448,7 +448,7 @@ final public class VimeoClient
             var cacheRequest = request
             cacheRequest.cacheFetchPolicy = .cacheOnly
             
-            let _ = self.request(cacheRequest, completionQueue: completionQueue, completion: completion)
+            let _ = self.request(request: cacheRequest, completionQueue: completionQueue, completion: completion)
             
             return
         }
@@ -461,7 +461,7 @@ final public class VimeoClient
     
     // MARK: - Private error handling
     
-    private func handleError<ModelType: MappableResponse>(_ error: NSError, request: Request<ModelType>, task: URLSessionDataTask? = nil)
+    private func handleError<ModelType: MappableResponse>(error: NSError, request: Request<ModelType>, task: URLSessionDataTask? = nil)
     {
         if error.isServiceUnavailableError
         {

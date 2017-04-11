@@ -112,7 +112,7 @@ public enum Notification: String
      - returns: an ObservationToken, which must be strongly stored in an appropriate context for as long as observation is relevant.
      */
     
-    public func observe(_ observationHandler: @escaping (Foundation.Notification) -> Void) -> ObservationToken
+    public func observe(observationHandler: @escaping (Foundation.Notification) -> Void) -> ObservationToken
     {
         let observer = type(of: self).NotificationCenter.addObserver(forName: NSNotification.Name(rawValue: self.rawValue), object: nil, queue: OperationQueue.main, using: observationHandler)
         

@@ -54,7 +54,7 @@ class VimeoClientTests: XCTestCase
         
         XCTAssert(token != nil)
         
-        self.client.notifyObserversAccountChanged(VIMAccount(), previousAccount: nil)
+        self.client.notifyObserversAccountChanged(account: VIMAccount(), previousAccount: nil)
         
         self.waitForExpectations(timeout: 10, handler: nil)
         
@@ -78,7 +78,7 @@ class VimeoClientTests: XCTestCase
         
         XCTAssert(token != nil)
         
-        self.client.notifyObserversAccountChanged(secondAccount, previousAccount: firstAccount)
+        self.client.notifyObserversAccountChanged(account: secondAccount, previousAccount: firstAccount)
         
         self.waitForExpectations(timeout: 10, handler: nil)
         

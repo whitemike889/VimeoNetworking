@@ -201,7 +201,7 @@ class ModelObjectValidationTests: XCTestCase
         
         for programmedContent in programmedContentItems
         {
-            XCTAssertNotNil(programmedContent.connectionWithName(VIMConnectionNameContents))
+            XCTAssertNotNil(programmedContent.connectionWithName(connectionName: VIMConnectionNameContents))
         }
     }
     
