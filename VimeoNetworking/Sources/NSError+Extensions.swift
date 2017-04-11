@@ -169,12 +169,15 @@ public extension NSError
     
     // MARK: -
     
-    private static let VimeoErrorCodeHeaderKey = "Vimeo-Error-Code"
-    private static let VimeoErrorCodeKeyLegacy = "VimeoErrorCode"
-    private static let VimeoErrorCodeKey = "error_code"
-    private static let VimeoInvalidParametersKey = "invalid_parameters"
-    private static let VimeoUserMessageKey = "error"
-    private static let VimeoDeveloperMessageKey = "developer_message"
+    private struct Constants
+    {
+        static let VimeoErrorCodeHeaderKey = "Vimeo-Error-Code"
+        static let VimeoErrorCodeKeyLegacy = "VimeoErrorCode"
+        static let VimeoErrorCodeKey = "error_code"
+        static let VimeoInvalidParametersKey = "invalid_parameters"
+        static let VimeoUserMessageKey = "error"
+        static let VimeoDeveloperMessageKey = "developer_message"
+    }
     
         /// Returns the status code of the failing response, if available
     public var statusCode: Int?
@@ -190,19 +193,19 @@ public extension NSError
         /// Returns the api error code of the failing response, if available
     public var vimeoServerErrorCode: Int?
     {
-        if let errorCode = (self.userInfo[type(of: self).VimeoErrorCodeKeyLegacy] as? Int)
+        if let errorCode = (self.userInfo[Constants.VimeoErrorCodeKeyLegacy] as? Int)
         {
             return errorCode
         }
         
         if let response = self.userInfo[AFNetworkingOperationFailingURLResponseErrorKey] as? HTTPURLResponse,
-            let vimeoErrorCode = response.allHeaderFields[type(of: self).VimeoErrorCodeHeaderKey] as? String
+            let vimeoErrorCode = response.allHeaderFields[Constants.VimeoErrorCodeHeaderKey] as? String
         {
             return Int(vimeoErrorCode)
         }
         
         if let json = self.errorResponseBodyJSON,
-            let errorCode = (json[type(of: self).VimeoErrorCodeKey] as? Int)
+            let errorCode = (json[Constants.VimeoErrorCodeKey] as? Int)
         {
             return errorCode
         }
@@ -215,11 +218,11 @@ public extension NSError
     {
         var errorCodes: [Int] = []
         
-        if let json = self.errorResponseBodyJSON, let invalidParameters = json[type(of: self).VimeoInvalidParametersKey] as? [[AnyHashable: Any]]
+        if let json = self.errorResponseBodyJSON, let invalidParameters = json[Constants.VimeoInvalidParametersKey] as? [[AnyHashable: Any]]
         {
             for invalidParameter in invalidParameters
             {
-                if let code = invalidParameter[type(of: self).VimeoErrorCodeKey] as? Int
+                if let code = invalidParameter[Constants.VimeoErrorCodeKey] as? Int
                 {
                     errorCodes.append(code)
                 }
@@ -258,12 +261,12 @@ public extension NSError
         /// Returns the user message from the api error JSON dictionary if it exists
     public var vimeoInvalidParametersFirstVimeoUserMessage: String?
     {
-        guard let json = self.errorResponseBodyJSON, let invalidParameters = json[type(of: self).VimeoInvalidParametersKey] as? [AnyObject] else
+        guard let json = self.errorResponseBodyJSON, let invalidParameters = json[Constants.VimeoInvalidParametersKey] as? [AnyObject] else
         {
             return nil
         }
         
-        return invalidParameters.first?[type(of: self).VimeoUserMessageKey] as? String
+        return invalidParameters.first?[Constants.VimeoUserMessageKey] as? String
     }
     
         /// Returns an underscore separated string of all the error codes in the the api error JSON dictionary if any exist, otherwise returns nil
@@ -294,7 +297,7 @@ public extension NSError
             return nil
         }
         
-        return json[type(of: self).VimeoUserMessageKey] as? String
+        return json[Constants.VimeoUserMessageKey] as? String
     }
     
         /// Returns the "developer_message" key from the api error JSON dictionary if it exists, otherwise returns nil
@@ -305,6 +308,6 @@ public extension NSError
             return nil
         }
         
-        return json[type(of: self).VimeoDeveloperMessageKey] as? String
+        return json[Constants.VimeoDeveloperMessageKey] as? String
     }
 }

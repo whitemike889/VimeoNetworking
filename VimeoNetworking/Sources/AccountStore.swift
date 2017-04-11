@@ -55,7 +55,10 @@ final class AccountStore
     
     // MARK: - 
     
-    private static let ErrorDomain = "AccountStoreErrorDomain"
+    private struct Constants
+    {
+        static let ErrorDomain = "AccountStoreErrorDomain"
+    }
     
     // MARK: - 
     
@@ -125,7 +128,7 @@ final class AccountStore
             else
             {
                 let description = "Received corrupted VIMAccount data from keychain"
-                let error = NSError(domain: type(of: self).ErrorDomain, code: LocalErrorCode.accountCorrupted.rawValue, userInfo: [NSLocalizedDescriptionKey: description])
+                let error = NSError(domain: Constants.ErrorDomain, code: LocalErrorCode.accountCorrupted.rawValue, userInfo: [NSLocalizedDescriptionKey: description])
                 
                 throw error
             }

@@ -32,7 +32,10 @@ import AFNetworking
  */
 final public class VimeoResponseSerializer: AFJSONResponseSerializer
 {
-    private static let ErrorDomain = "VimeoResponseSerializerErrorDomain"
+    private struct Constants
+    {
+        static let ErrorDomain = "VimeoResponseSerializerErrorDomain"
+    }
     
     override init()
     {
@@ -118,7 +121,7 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
         if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode < 200 || httpResponse.statusCode > 299
         {
             let userInfo = [NSLocalizedDescriptionKey: "Invalid http status code for download task."]
-            throw NSError(domain: type(of: self).ErrorDomain, code: 0, userInfo: userInfo)
+            throw NSError(domain: Constants.ErrorDomain, code: 0, userInfo: userInfo)
         }
     }
     
@@ -136,13 +139,13 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
         guard let url = url else
         {
             let userInfo = [NSLocalizedDescriptionKey: "Url for completed download task is nil."]
-            throw NSError(domain: type(of: self).ErrorDomain, code: 0, userInfo: userInfo)
+            throw NSError(domain: Constants.ErrorDomain, code: 0, userInfo: userInfo)
         }
         
         guard let data = try? Data(contentsOf: url) else
         {
             let userInfo = [NSLocalizedDescriptionKey: "Data at url for completed download task is nil."]
-            throw NSError(domain: type(of: self).ErrorDomain, code: 0, userInfo: userInfo)
+            throw NSError(domain: Constants.ErrorDomain, code: 0, userInfo: userInfo)
         }
         
         var dictionary: [AnyHashable: Any]? = [:]
@@ -154,7 +157,7 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
         if dictionary == nil
         {
             let userInfo = [NSLocalizedDescriptionKey: "Download task response dictionary is nil."]
-            throw NSError(domain: type(of: self).ErrorDomain, code: 0, userInfo: userInfo)
+            throw NSError(domain: Constants.ErrorDomain, code: 0, userInfo: userInfo)
         }
         
         return dictionary!
