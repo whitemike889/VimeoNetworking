@@ -31,7 +31,7 @@ public typealias SoundtrackListRequest = Request<[VIMSoundtrack]>
 
 public extension Request
 {
-    fileprivate static var SoundtracksURI: String { return "/songs" }
+    private static var SoundtracksURI: String { return "/songs" }
     
     /**
      GET request to retrieve the root list of soundtracks

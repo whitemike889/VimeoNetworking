@@ -48,6 +48,6 @@ public extension Request
     {
         let parameters = ["active": "true"]
         
-        return Request(method: .PATCH, path: pictureURI, parameters: parameters as AnyObject?)
+        return Request(method: .PATCH, path: pictureURI, parameters: parameters)
     }
 }

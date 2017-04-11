@@ -49,7 +49,7 @@ public enum CacheFetchPolicy
      
      - returns: the default cache policy for the provided `Method`
      */
-    static func defaultPolicyForMethod(_ method: VimeoClient.Method) -> CacheFetchPolicy
+    static func defaultPolicyForMethod(method: VimeoClient.Method) -> CacheFetchPolicy
     {
         return .networkOnly
     }
@@ -76,7 +76,7 @@ public enum RetryPolicy
      
      - returns: the default retry policy for the given `Method`
      */
-    static func defaultPolicyForMethod(_ method: VimeoClient.Method) -> RetryPolicy
+    static func defaultPolicyForMethod(method: VimeoClient.Method) -> RetryPolicy
     {
         switch method
         {
@@ -100,8 +100,8 @@ extension RetryPolicy
 public struct Request<ModelType: MappableResponse>
 {
     // TODO: Make these static when Swift supports it [RH] (5/24/16)
-    fileprivate let PageKey = "page"
-    fileprivate let PerPageKey = "per_page"
+    private let PageKey = "page"
+    private let PerPageKey = "per_page"
     
     // MARK: -
     
@@ -153,9 +153,9 @@ public struct Request<ModelType: MappableResponse>
         self.path = path
         self.parameters = parameters
         self.modelKeyPath = modelKeyPath
-        self.cacheFetchPolicy = cacheFetchPolicy ?? CacheFetchPolicy.defaultPolicyForMethod(method)
+        self.cacheFetchPolicy = cacheFetchPolicy ?? CacheFetchPolicy.defaultPolicyForMethod(method: method)
         self.shouldCacheResponse = shouldCacheResponse ?? (method == .GET)
-        self.retryPolicy = retryPolicy ?? RetryPolicy.defaultPolicyForMethod(method)
+        self.retryPolicy = retryPolicy ?? RetryPolicy.defaultPolicyForMethod(method: method)
     }
     
         /// Returns a fully-formed URI comprised of the path plus a query string of any parameters
@@ -193,13 +193,13 @@ public struct Request<ModelType: MappableResponse>
         {
             queryParametersDictionary.forEach { (key, value) in
                 
-                updatedParameters[key] = value as AnyObject?
+                updatedParameters[key] = value
             }
         }
         
         return Request(method: self.method,
                        path: updatedPath,
-                       parameters: updatedParameters as AnyObject?,
+                       parameters: updatedParameters,
                        modelKeyPath: self.modelKeyPath,
                        cacheFetchPolicy: self.cacheFetchPolicy,
                        shouldCacheResponse: self.shouldCacheResponse,

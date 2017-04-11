@@ -30,8 +30,8 @@ import Security
 /// `KeychainStore` saves data securely in the Keychain
 final class KeychainStore
 {
-    fileprivate let service: String
-    fileprivate let accessGroup: String?
+    private let service: String
+    private let accessGroup: String?
     
     /**
      Create a new `KeychainStore`
@@ -55,20 +55,20 @@ final class KeychainStore
      
      - throws: an error if saving failed
      */
-    func setData(_ data: NSData, forKey key: String) throws
+    func setData(data: NSData, forKey key: String) throws
     {
-        try self.deleteDataForKey(key)
+        try self.deleteDataForKey(key: key)
         
-        var query = self.queryForKey(key)
+        var query = self.queryForKey(key: key)
         
-        query[kSecValueData as String] = data as AnyObject?
-        query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock as String as String as AnyObject?
+        query[kSecValueData as String] = data
+        query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock as String
         
         let status = SecItemAdd(query as CFDictionary, nil)
         
         if status != errSecSuccess
         {
-            throw self.errorForStatus(status)
+            throw self.errorForStatus(status: status)
         }
     }
     
@@ -81,11 +81,11 @@ final class KeychainStore
      
      - returns: data, if found
      */
-    func dataForKey(_ key: String) throws -> Data?
+    func dataForKey(key: String) throws -> Data?
     {
-        var query = self.queryForKey(key)
+        var query = self.queryForKey(key: key)
         
-        query[kSecMatchLimit as String] = kSecMatchLimitOne as String as String as AnyObject?
+        query[kSecMatchLimit as String] = kSecMatchLimitOne as NSString
         query[kSecReturnData as String] = kCFBooleanTrue
         
         var attributes: AnyObject? = nil
@@ -94,7 +94,7 @@ final class KeychainStore
         
         if status != errSecSuccess && status != errSecItemNotFound
         {
-            throw self.errorForStatus(status)
+            throw self.errorForStatus(status: status)
         }
         
         return data
@@ -107,37 +107,37 @@ final class KeychainStore
      
      - throws: an error if the data exists but deleting failed
      */
-    func deleteDataForKey(_ key: String) throws
+    func deleteDataForKey(key: String) throws
     {
-        let query = self.queryForKey(key)
+        let query = self.queryForKey(key: key)
         
         let status = SecItemDelete(query as CFDictionary)
         
         if status != errSecSuccess && status != errSecItemNotFound
         {
-            throw self.errorForStatus(status)
+            throw self.errorForStatus(status: status)
         }
     }
     
     // MARK: - 
     
-    fileprivate func queryForKey(_ key: String) -> [String: AnyObject]
+    private func queryForKey(key: String) -> [String: Any]
     {
-        var query: [String: AnyObject] = [:]
+        var query: [String: Any] = [:]
         
-        query[kSecClass as String] = kSecClassGenericPassword as String as String as AnyObject?
-        query[kSecAttrService as String] = self.service as AnyObject?
-        query[kSecAttrAccount as String] = key as AnyObject?
+        query[kSecClass as String] = kSecClassGenericPassword as String
+        query[kSecAttrService as String] = self.service as String
+        query[kSecAttrAccount as String] = key as String
         
         if let accessGroup = self.accessGroup
         {
-            query[kSecAttrAccessGroup as String] = accessGroup as AnyObject?
+            query[kSecAttrAccessGroup as String] = accessGroup as String
         }
         
         return query
     }
     
-    fileprivate func errorForStatus(_ status: OSStatus) -> NSError
+    private func errorForStatus(status: OSStatus) -> NSError
     {
         let errorMessage: String
         

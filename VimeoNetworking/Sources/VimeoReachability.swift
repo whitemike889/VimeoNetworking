@@ -9,7 +9,7 @@
 import UIKit
 import AFNetworking
 
-open class VimeoReachability
+public class VimeoReachability
 {
     private static var LastKnownReachabilityStatus = AFNetworkReachabilityStatus.unknown
     
@@ -27,17 +27,17 @@ open class VimeoReachability
         AFNetworkReachabilityManager.shared().startMonitoring()
     }
     
-    open static func reachable() -> Bool
+    public static func reachable() -> Bool
     {
         return AFNetworkReachabilityManager.shared().isReachable
     }
     
-    open static func reachableViaCellular() -> Bool
+    public static func reachableViaCellular() -> Bool
     {
         return AFNetworkReachabilityManager.shared().isReachableViaWWAN
     }
     
-    open static func reachableViaWiFi() -> Bool
+    public static func reachableViaWiFi() -> Bool
     {
         return AFNetworkReachabilityManager.shared().isReachableViaWiFi
     }

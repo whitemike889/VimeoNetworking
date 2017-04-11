@@ -27,9 +27,9 @@
 import Foundation
 
 /// `ObservationToken` manages the lifecycle of a block observer.  Note: on deinit, the token cancels its own observation, so it must be stored strongly if the associated block observation is to continue.
-open class ObservationToken
+public class ObservationToken
 {
-    fileprivate let observer: NSObjectProtocol
+    private let observer: NSObjectProtocol
     
     fileprivate init(observer: NSObjectProtocol)
     {
@@ -39,9 +39,9 @@ open class ObservationToken
     /**
      Ends the block observation associated with this token
      */
-    open func stopObserving()
+    public func stopObserving()
     {
-        NetworkingNotification.removeObserver(self.observer)
+        NetworkingNotification.removeObserver(target: self.observer)
     }
     
     deinit
@@ -83,7 +83,7 @@ public enum NetworkingNotification: String
      
      - parameter object: an optional object to pass to observers of this `NetworkingNotification`
      */
-    public func post(object: AnyObject?, userInfo: [AnyHashable: Any]? = nil)
+    public func post(object: Any?, userInfo: [AnyHashable: Any]? = nil)
     {
         DispatchQueue.main.async
         {
@@ -97,7 +97,7 @@ public enum NetworkingNotification: String
      - parameter target:   the object on which to call the `selector` method
      - parameter selector: method to call when the notification is broadcast
      */
-    public func observe(_ target: AnyObject, selector: Selector)
+    public func observe(target: Any, selector: Selector)
     {
         NotificationCenter.default.addObserver(target, selector: selector, name: Notification.Name(rawValue: self.rawValue), object: nil)
     }
@@ -108,7 +108,7 @@ public enum NetworkingNotification: String
      - returns: an ObservationToken, which must be strongly stored in an appropriate context for as long as observation is relevant.
      */
     
-    public func observe(_ observationHandler: @escaping (Notification) -> Void) -> ObservationToken
+    public func observe(observationHandler: @escaping (Notification) -> Void) -> ObservationToken
     {
         let observer = NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: self.rawValue), object: nil, queue: OperationQueue.main, using: observationHandler)
         
@@ -120,18 +120,17 @@ public enum NetworkingNotification: String
      
      - parameter target: the target to remove
      */
-    public func removeObserver(_ target: AnyObject)
+    public func removeObserver(target: Any)
     {
         NotificationCenter.default.removeObserver(target, name: Notification.Name(rawValue: self.rawValue), object: nil)
     }
-    
     
     /**
      Removes a target from all notification observation
      
      - parameter target: the target to remove
      */
-    public static func removeObserver(_ target: AnyObject)
+    public static func removeObserver(target: Any)
     {
         NotificationCenter.default.removeObserver(target)
     }

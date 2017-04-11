@@ -8,18 +8,30 @@
 
 public extension Request
 {
-    fileprivate static var Path: String { return "/me/notifications/subscriptions" }
+    private static var Path: String { return "/me/notifications/subscriptions" }
 
-    private typealias ParameterDictionary = [String: AnyObject]
+    private typealias ParameterDictionary = [AnyHashable: Any]
 
     private static var SubscriptionsPathComponent: String { return "/subscriptions" }
+
+    // MARK: - Notifications API
+
+    /// Handle Mutliple Devices: Create a request that set the device as active to receive Notifications. This request should be made only once: When the app first launch. The purpose of the request is to notify the server side, this device should receive push notifications.
+    ///
+    /// - Parameter deviceToken: The token that is stored in `SMKNotificationsCenter`
+    public static func setDeviceAsActiveToReceiveNotifications(notificationsURI: String, deviceToken: String) -> Request
+    {
+        let subscriptionsURI = Request.subscriptionsURI(notificationsURI: notificationsURI, deviceToken: deviceToken)
+
+        return Request(method: .PUT, path: subscriptionsURI, parameters: nil)
+    }
 
     /// Retrieve the notification subscriptions.
     ///
     /// - Returns: subscriptionCollection
-    public static func getNotificationSubscriptionRequest(notificationsURI: String) -> Request
+    public static func getNotificationSubscriptionRequest(notificationsURI: String, deviceToken: String) -> Request
     {
-        let subscriptionsURI = notificationsURI.appending(SubscriptionsPathComponent)
+        let subscriptionsURI = Request.subscriptionsURI(notificationsURI: notificationsURI, deviceToken: deviceToken)
 
         return Request(method: .GET, path: subscriptionsURI, parameters: nil)
     }
@@ -28,13 +40,20 @@ public extension Request
     ///
     /// - Parameter subscription: The subscription dictionary contains the boolean values for each of those: comment, credit, like, reply, follow, video_available that defines what the user is subscripted to.
     /// - Returns: The result of the .PATCH is a SubscriptionCollection
-    public static func updateNotificationSubscriptionsRequest(subscription: VimeoClient.RequestParametersDictionary, notificationsURI: String) -> Request
+    public static func updateNotificationSubscriptionsRequest(subscription: VimeoClient.RequestParametersDictionary, notificationsURI: String, deviceToken: String) -> Request
     {
-        let subscriptionsURI = notificationsURI.appending(SubscriptionsPathComponent)
+        let subscriptionsURI = Request.subscriptionsURI(notificationsURI: notificationsURI, deviceToken: deviceToken)
 
-        return Request(method: .PATCH, path: subscriptionsURI, parameters: subscription as AnyObject?)
+        return Request(method: .PATCH, path: subscriptionsURI, parameters: subscription)
     }
 
+    // MARK: - Helper
+
+    private static func subscriptionsURI(notificationsURI: String, deviceToken: String) -> String
+    {
+        return notificationsURI + "/\(deviceToken)" + SubscriptionsPathComponent
+    }
+    
     public static func markNotificationAsNotNewRequest(notification: VIMNotification, notificationsURI: String) -> Request
     {
         guard let latestURI = notification.uri else
@@ -47,22 +66,22 @@ public extension Request
             "new" : "false"
         ]
 
-        return Request(method: .PATCH, path: notificationsURI, parameters: parameters as AnyObject?)
+        return Request(method: .PATCH, path: notificationsURI, parameters: parameters)
     }
 
     public static func markNotificationsAsSeenRequest(notifications: [VIMNotification], notificationsURI: String) -> Request
     {
         var parameters: [ParameterDictionary] = []
-        notifications.map { (notification: VIMNotification) -> Void in
+        let _ = notifications.map { (notification: VIMNotification) -> Void in
             if let uri = notification.uri
             {
                 parameters.append([
-                    "seen": "true" as AnyObject,
-                    "uri": uri as AnyObject]
+                    "seen": "true",
+                    "uri": uri]
                 )
             }
         }
 
-        return Request(method: .PATCH, path: notificationsURI, parameters: parameters as AnyObject?)
+        return Request(method: .PATCH, path: notificationsURI, parameters: parameters)
     }
 }

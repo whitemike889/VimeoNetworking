@@ -34,7 +34,7 @@ extension URLSessionConfiguration
      
      - returns: an NSURLSessionConfiguration.defaultSessionConfiguration() with the desired cache policy set
      */
-    class func defaultSessionConfigurationWithCachePolicy(_ cachePolicy: NSURLRequest.CachePolicy) -> URLSessionConfiguration {
+    class func defaultSessionConfigurationWithCachePolicy(cachePolicy: NSURLRequest.CachePolicy) -> URLSessionConfiguration {
         let sessionConfiguration = URLSessionConfiguration.default
         sessionConfiguration.requestCachePolicy = cachePolicy
         
@@ -47,6 +47,6 @@ extension URLSessionConfiguration
      - returns: an NSURLSessionConfiguration.defaultSessionConfiguration() with the request cache policy set to .ReloadIgnoringLocalCacheData
      */
     class func defaultSessionConfigurationNoCache() -> URLSessionConfiguration {
-        return URLSessionConfiguration.defaultSessionConfigurationWithCachePolicy(.reloadIgnoringLocalCacheData)
+        return URLSessionConfiguration.defaultSessionConfigurationWithCachePolicy(cachePolicy: .reloadIgnoringLocalCacheData)
     }
 }

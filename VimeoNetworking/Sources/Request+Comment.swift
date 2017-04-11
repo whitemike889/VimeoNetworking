@@ -21,6 +21,6 @@ public extension Request
     {
         let parameters = ["text": text]
         
-        return Request(method: .POST, path: uri, parameters: parameters as AnyObject?)
+        return Request(method: .POST, path: uri, parameters: parameters)
     }
 }

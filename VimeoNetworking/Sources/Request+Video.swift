@@ -34,9 +34,9 @@ public typealias VideoListRequest = Request<[VIMVideo]>
 
 public extension Request
 {
-    fileprivate static var QueryKey: String { return "query" }
+    private static var QueryKey: String { return "query" }
     
-    fileprivate static var VideosPath: String { return "/videos" }
+    private static var VideosPath: String { return "/videos" }
     
     // MARK: - 
     
@@ -64,7 +64,7 @@ public extension Request
     {
         let parameters = ["password": password]
         
-        return Request(path: videoURI, parameters: parameters as AnyObject?)
+        return Request(path: videoURI, parameters: parameters)
     }
     
     /**
@@ -78,7 +78,7 @@ public extension Request
     {
         let parameters = ["_video_override": "true"]
         
-        return Request(path: vodVideoURI, parameters: parameters as AnyObject?)
+        return Request(path: vodVideoURI, parameters: parameters)
     }
     
     /**
@@ -92,7 +92,7 @@ public extension Request
     {
         let parameters = [VimeoClient.Constants.PerPageKey: 100]
         
-        return Request(path: videoURI, parameters: parameters as AnyObject?)
+        return Request(path: videoURI, parameters: parameters)
     }
     
     // MARK: - Search
@@ -109,9 +109,9 @@ public extension Request
     {
         var parameters = refinements ?? [:]
         
-        parameters[self.QueryKey] = query as AnyObject?
+        parameters[self.QueryKey] = query
         
-        return Request(path: self.VideosPath, parameters: parameters as AnyObject?)
+        return Request(path: self.VideosPath, parameters: parameters)
     }
     
     // MARK: - Edit Video
@@ -126,7 +126,7 @@ public extension Request
      */
     public static func patchVideoRequest(videoURI: String, parameters: VimeoClient.RequestParametersDictionary) -> Request
     {
-        return Request(method: .PATCH, path: videoURI, parameters: parameters as AnyObject?)
+        return Request(method: .PATCH, path: videoURI, parameters: parameters)
     }
     
     /**

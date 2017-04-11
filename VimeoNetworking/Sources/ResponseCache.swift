@@ -26,11 +26,11 @@
 
 import Foundation
 
-private typealias ResponseDictionaryClosure = (_ responseDictionary: VimeoClient.ResponseDictionary?) -> Void
+private typealias ResponseDictionaryClosure = (VimeoClient.ResponseDictionary?) -> Void
 
 private protocol Cache
 {
-    func setResponseDictionary(_ responseDictionary: VimeoClient.ResponseDictionary, forKey key: String)
+    func setResponseDictionary(responseDictionary: VimeoClient.ResponseDictionary, forKey key: String)
     
     func responseDictionary(forKey key: String, completion: @escaping ResponseDictionaryClosure)
     
@@ -53,12 +53,12 @@ final internal class ResponseCache
      - parameter responseDictionary: the response dictionary to store
      - parameter request:            the request associated with the response
      */
-    func setResponse<ModelType>(_ responseDictionary: VimeoClient.ResponseDictionary, forRequest request: Request<ModelType>)
+    func setResponse<ModelType>(responseDictionary: VimeoClient.ResponseDictionary, forRequest request: Request<ModelType>)
     {
         let key = request.cacheKey
         
-        self.memoryCache.setResponseDictionary(responseDictionary, forKey: key)
-        self.diskCache.setResponseDictionary(responseDictionary, forKey: key)
+        self.memoryCache.setResponseDictionary(responseDictionary: responseDictionary, forKey: key)
+        self.diskCache.setResponseDictionary(responseDictionary: responseDictionary, forKey: key)
     }
     
     /**
@@ -67,7 +67,7 @@ final internal class ResponseCache
      - parameter request:    the request for which the cache should be queried
      - parameter completion: returns `.Success(ResponseDictionary)`, if found in cache, or `.Success(nil)` for a cache miss.  Returns `.Failure(NSError)` if an error occurred.
      */
-    func responseForRequest<ModelType>(_ request: Request<ModelType>, completion: @escaping ResultCompletion<VimeoClient.ResponseDictionary?>.T)
+    func responseForRequest<ModelType>(request: Request<ModelType>, completion: @escaping ResultCompletion<VimeoClient.ResponseDictionary?>.T)
     {
         let key = request.cacheKey
         
@@ -109,30 +109,30 @@ final internal class ResponseCache
 
     // MARK: - Memory Cache
     
-    fileprivate let memoryCache = ResponseMemoryCache()
+    private let memoryCache = ResponseMemoryCache()
     
-    fileprivate class ResponseMemoryCache: Cache
+    private class ResponseMemoryCache: Cache
     {
-        fileprivate let cache = NSCache<AnyObject, AnyObject>()
+        private let cache = NSCache<AnyObject, AnyObject>()
         
-        fileprivate func setResponseDictionary(_ responseDictionary: VimeoClient.ResponseDictionary, forKey key: String)
+        func setResponseDictionary(responseDictionary: VimeoClient.ResponseDictionary, forKey key: String)
         {
             self.cache.setObject(responseDictionary as AnyObject, forKey: key as AnyObject)
         }
         
-        fileprivate func responseDictionary(forKey key: String, completion: @escaping ResponseDictionaryClosure)
+        func responseDictionary(forKey key: String, completion: @escaping ResponseDictionaryClosure)
         {
             let responseDictionary = self.cache.object(forKey: key as AnyObject) as? VimeoClient.ResponseDictionary
             
             completion(responseDictionary)
         }
         
-        fileprivate func removeResponseDictionary(forKey key: String)
+        func removeResponseDictionary(forKey key: String)
         {
             self.cache.removeObject(forKey: key as AnyObject)
         }
         
-        fileprivate func removeAllResponseDictionaries()
+        func removeAllResponseDictionaries()
         {
             self.cache.removeAllObjects()
         }
@@ -140,13 +140,13 @@ final internal class ResponseCache
     
     // MARK: - Disk Cache
     
-    fileprivate let diskCache = ResponseDiskCache()
+    private let diskCache = ResponseDiskCache()
     
-    fileprivate class ResponseDiskCache: Cache
+    private class ResponseDiskCache: Cache
     {
-        fileprivate let queue = DispatchQueue(label: "com.vimeo.VIMCache.diskQueue", attributes: DispatchQueue.Attributes.concurrent)
+        private let queue = DispatchQueue(label: "com.vimeo.VIMCache.diskQueue", attributes: DispatchQueue.Attributes.concurrent)
         
-        fileprivate func setResponseDictionary(_ responseDictionary: VimeoClient.ResponseDictionary, forKey key: String)
+        func setResponseDictionary(responseDictionary: VimeoClient.ResponseDictionary, forKey key: String)
         {
             self.queue.async(flags: .barrier, execute: {
                 
@@ -219,7 +219,7 @@ final internal class ResponseCache
             }
         }
         
-        fileprivate func removeResponseDictionary(forKey key: String)
+        func removeResponseDictionary(forKey key: String)
         {
             self.queue.async(flags: .barrier, execute: {
                 
@@ -256,7 +256,7 @@ final internal class ResponseCache
             }) 
         }
         
-        fileprivate func removeAllResponseDictionaries()
+        func removeAllResponseDictionaries()
         {
             self.queue.async(flags: .barrier, execute: {
                 
@@ -282,7 +282,7 @@ final internal class ResponseCache
         
         // MARK: - directories
         
-        fileprivate func cachesDirectoryURL() -> URL
+        private func cachesDirectoryURL() -> URL
         {
             // Apple /Caches directory
             guard let directory = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first else
@@ -296,7 +296,7 @@ final internal class ResponseCache
             // Removed a `guard let` here since the method above doesn't return an optional. We may still want to include some error checking. [JSH] 03/13/17
         }
         
-        fileprivate func fileURLForKey(key: String) -> URL?
+        private func fileURLForKey(key: String) -> URL?
         {
             let fileURL = self.cachesDirectoryURL().appendingPathComponent(key)
             

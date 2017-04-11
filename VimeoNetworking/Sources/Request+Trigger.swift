@@ -8,7 +8,7 @@
 
 extension Request
 {
-    fileprivate static var TriggersURI: String { return "/triggers" }
+    private static var TriggersURI: String { return "/triggers" }
 
     /// `Request` that returns a single `VIMTrigger`
     public typealias TriggerRequest = Request<VIMTrigger>
@@ -26,7 +26,7 @@ extension Request
     {
         let uri = self.uri(withDeviceToken: deviceToken)
         
-        return Request(method: .PUT, path: uri, parameters: parameters as AnyObject?)
+        return Request(method: .PUT, path: uri, parameters: parameters)
     }
     
     /**
@@ -42,7 +42,7 @@ extension Request
     {
         let uri = self.uri(withDeviceToken: deviceToken)
 
-        return Request(method: .DELETE, path: uri, parameters: parameters as AnyObject?)
+        return Request(method: .DELETE, path: uri, parameters: parameters)
     }
     
     /**
@@ -55,7 +55,7 @@ extension Request
      */
     public static func addPushNotificationTrigger(withParameters parameters: VimeoClient.RequestParametersDictionary) -> Request
     {
-        return Request(method: .POST, path: self.TriggersURI, parameters: parameters as AnyObject?)
+        return Request(method: .POST, path: self.TriggersURI, parameters: parameters)
     }
     
     /**
@@ -83,12 +83,12 @@ extension Request
     {
         let uri = self.uri(withDeviceToken: deviceToken) + self.TriggersURI
 
-        return Request(method: .PUT, path: uri, parameters: parameters as AnyObject?, modelKeyPath: "data")
+        return Request(method: .PUT, path: uri, parameters: parameters, modelKeyPath: "data")
     }
     
     // MARK: Helpers
     
-    fileprivate static func uri(withDeviceToken deviceToken: String) -> String
+    private static func uri(withDeviceToken deviceToken: String) -> String
     {
         let deviceTypeIdentifier = UIDevice.current.userInterfaceIdiom == .phone ? "iphone" : "ipad"
         

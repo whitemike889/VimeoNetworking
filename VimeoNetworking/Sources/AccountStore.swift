@@ -55,11 +55,11 @@ final class AccountStore
     
     // MARK: - 
     
-    fileprivate static let ErrorDomain = "AccountStoreErrorDomain"
+    private static let ErrorDomain = "AccountStoreErrorDomain"
     
     // MARK: - 
     
-    fileprivate let keychainStore: KeychainStore
+    private let keychainStore: KeychainStore
     
     // MARK: -
     
@@ -85,14 +85,14 @@ final class AccountStore
      
      - throws: an error if the data could not be saved
      */
-    func saveAccount(_ account: VIMAccount, type: AccountType) throws
+    func saveAccount(account: VIMAccount, type: AccountType) throws
     {
         let data = NSMutableData()
         let archiver = NSKeyedArchiver(forWritingWith: data)
         archiver.encode(account)
         archiver.finishEncoding()
         
-        try self.keychainStore.setData(data, forKey: type.keychainKey())
+        try self.keychainStore.setData(data: data, forKey: type.keychainKey())
     }
     
     /**
@@ -104,11 +104,11 @@ final class AccountStore
      
      - returns: an account of the specified type, if one was found
      */
-    func loadAccount(_ type: AccountType) throws -> VIMAccount?
+    func loadAccount(type: AccountType) throws -> VIMAccount?
     {
         do
         {
-            guard let data = try self.keychainStore.dataForKey(type.keychainKey())
+            guard let data = try self.keychainStore.dataForKey(key: type.keychainKey())
             else
             {
                 return nil
@@ -132,14 +132,14 @@ final class AccountStore
             
             if let userJSON = account.userJSON as? VimeoClient.ResponseDictionary
             {
-                try account.user = VIMObjectMapper.mapObject(userJSON) as VIMUser
+                try account.user = VIMObjectMapper.mapObject(responseDictionary: userJSON) as VIMUser
             }
             
             return account
         }
         catch let error
         {
-            _ = try? self.removeAccount(type)
+            _ = try? self.removeAccount(type: type)
             
             throw error
         }
@@ -152,8 +152,8 @@ final class AccountStore
      
      - throws: an error if the data exists but could not be removed
      */
-    func removeAccount(_ type: AccountType) throws
+    func removeAccount(type: AccountType) throws
     {
-        try self.keychainStore.deleteDataForKey(type.keychainKey())
+        try self.keychainStore.deleteDataForKey(key: type.keychainKey())
     }
 }

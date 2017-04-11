@@ -8,21 +8,21 @@
 //
 
 /// Spatial stores all information related to threesixty video
-open class Spatial: VIMModelObject
+public class Spatial: VIMModelObject
 {
-    open static let StereoFormatMono = "mono"
-    open static let StereoFormatLeftRight = "left-right"
-    open static let StereoFormatTopBottom = "top-bottom"
+    public static let StereoFormatMono = "mono"
+    public static let StereoFormatLeftRight = "left-right"
+    public static let StereoFormatTopBottom = "top-bottom"
     
     /// Represents the projection. Value returned by the server can be: "equirectangular", "cylindrical", "cubical", "pyramid", "dome".
-    open var projection: String?
+    public var projection: String?
     
     /// Represents the format. Value returned by the server can be: "mono", "left-right", "top-bottom"
-    open var stereoFormat: String?
+    public var stereoFormat: String?
     
     // MARK: - VIMMappable
     
-    open override func getObjectMapping() -> Any
+    public override func getObjectMapping() -> Any
     {
         return ["stereo_format" : "stereoFormat"]
     }

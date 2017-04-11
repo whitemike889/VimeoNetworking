@@ -32,8 +32,8 @@ import AFNetworking
  */
 final public class VimeoRequestSerializer: AFJSONRequestSerializer
 {
-    fileprivate static let AcceptHeaderKey = "Accept"
-    fileprivate static let AuthorizationHeaderKey = "Authorization"
+    private static let AcceptHeaderKey = "Accept"
+    private static let AuthorizationHeaderKey = "Authorization"
     
     public typealias AccessTokenProvider = (Void) -> String?
     
@@ -43,7 +43,7 @@ final public class VimeoRequestSerializer: AFJSONRequestSerializer
     var accessTokenProvider: AccessTokenProvider?
     
     // for unauthenticated requests
-    fileprivate let appConfiguration: AppConfiguration?
+    private let appConfiguration: AppConfiguration?
     
     // MARK: - Initialization
     
@@ -125,13 +125,13 @@ final public class VimeoRequestSerializer: AFJSONRequestSerializer
     
     // MARK: Private API
     
-    fileprivate func setup(apiVersion: String)
+    private func setup(apiVersion: String)
     {
         self.setValue("application/vnd.vimeo.*+json; version=\(apiVersion)", forHTTPHeaderField: type(of: self).AcceptHeaderKey)
 //        self.writingOptions = .PrettyPrinted
     }
 
-    fileprivate func setAuthorizationHeader(request: NSMutableURLRequest) -> NSMutableURLRequest
+    private func setAuthorizationHeader(request: NSMutableURLRequest) -> NSMutableURLRequest
     {
         if let token = self.accessTokenProvider?()
         {

@@ -54,11 +54,11 @@ class VimeoClientTests: XCTestCase
         
         XCTAssert(token != nil)
         
-        self.client.notifyObserversAccountChanged(VIMAccount(), previousAccount: nil)
+        self.client.notifyObserversAccountChanged(account: VIMAccount(), previousAccount: nil)
         
         self.waitForExpectations(timeout: 10, handler: nil)
         
-        NetworkingNotification.AuthenticatedAccountDidChange.removeObserver(self)
+        NetworkingNotification.AuthenticatedAccountDidChange.removeObserver(target: self)
     }
     
     func testSubsequentAccountNotificationUserInfo()
@@ -78,10 +78,10 @@ class VimeoClientTests: XCTestCase
         
         XCTAssert(token != nil)
         
-        self.client.notifyObserversAccountChanged(secondAccount, previousAccount: firstAccount)
+        self.client.notifyObserversAccountChanged(account: secondAccount, previousAccount: firstAccount)
         
         self.waitForExpectations(timeout: 10, handler: nil)
         
-        NetworkingNotification.AuthenticatedAccountDidChange.removeObserver(self)
+        NetworkingNotification.AuthenticatedAccountDidChange.removeObserver(target: self)
     }
 }

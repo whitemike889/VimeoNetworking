@@ -44,5 +44,5 @@ public enum Result<ResultType>
 /// `ResultCompletion` creates a generic typealias to generally define completion blocks that return a `Result` 
 public enum ResultCompletion<ResultType>
 {
-    public typealias T = (_ result: Result<ResultType>) -> Void
+    public typealias T = (Result<ResultType>) -> Void
 }

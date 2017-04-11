@@ -41,7 +41,7 @@ extension VIMObjectMapper
      
      - returns: A deserialized object of type `ModelType`
      */
-    static func mapObject<ModelType: MappableResponse>(_ responseDictionary: VimeoClient.ResponseDictionary, modelKeyPath: String? = nil) throws -> ModelType
+    static func mapObject<ModelType: MappableResponse>(responseDictionary: VimeoClient.ResponseDictionary, modelKeyPath: String? = nil) throws -> ModelType
     {
         guard let mappingClass = ModelType.mappingClass
         else
