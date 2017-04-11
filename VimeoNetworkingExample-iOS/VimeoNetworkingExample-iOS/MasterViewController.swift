@@ -72,7 +72,7 @@ class MasterViewController: UITableViewController
     {
         // This allows us to fetch a new list of items whenever the current account changes (on log in or log out events)
         
-        self.accountObservationToken = Notification.AuthenticatedAccountDidChange.observe { [weak self] notification in
+        self.accountObservationToken = NetworkingNotification.AuthenticatedAccountDidChange.observe { [weak self] notification in
             
             guard let strongSelf = self
             else

@@ -1,5 +1,5 @@
 //
-//  Notification.swift
+//  NetworkingNotification.swift
 //  VimeoNetworking
 //
 //  Created by Huebner, Rob on 4/25/16.
@@ -41,7 +41,7 @@ public class ObservationToken
      */
     public func stopObserving()
     {
-        Notification.removeObserver(target: self.observer)
+        NetworkingNotification.removeObserver(target: self.observer)
     }
     
     deinit
@@ -55,8 +55,8 @@ public enum UserInfoKey: NSString
     case previousAccount
 }
 
-/// `Notification` declares a number of global events that can be broadcast by the networking library and observed by clients.
-public enum Notification: String
+/// `NetworkingNotification` declares a number of global events that can be broadcast by the networking library and observed by clients.
+public enum NetworkingNotification: String
 {
         /// Sent when any response returns a 503 Service Unavailable error
     case ClientDidReceiveServiceUnavailableError
@@ -78,20 +78,16 @@ public enum Notification: String
     
     // MARK: -
     
-    private static let NotificationCenter = Foundation.NotificationCenter.default
-    
-    // MARK: -
-    
     /**
      Broadcast a global notification
      
-     - parameter object: an optional object to pass to observers of this `Notification`
+     - parameter object: an optional object to pass to observers of this `NetworkingNotification`
      */
     public func post(object: Any?, userInfo: [AnyHashable: Any]? = nil)
     {
         DispatchQueue.main.async
         {
-            type(of: self).NotificationCenter.post(name: Foundation.Notification.Name(rawValue: self.rawValue), object: object, userInfo: userInfo)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: self.rawValue), object: object, userInfo: userInfo)
         }
     }
     
@@ -103,7 +99,7 @@ public enum Notification: String
      */
     public func observe(target: Any, selector: Selector)
     {
-        type(of: self).NotificationCenter.addObserver(target, selector: selector, name: NSNotification.Name(rawValue: self.rawValue), object: nil)
+        NotificationCenter.default.addObserver(target, selector: selector, name: Notification.Name(rawValue: self.rawValue), object: nil)
     }
     
     /**
@@ -112,9 +108,9 @@ public enum Notification: String
      - returns: an ObservationToken, which must be strongly stored in an appropriate context for as long as observation is relevant.
      */
     
-    public func observe(observationHandler: @escaping (Foundation.Notification) -> Void) -> ObservationToken
+    public func observe(observationHandler: @escaping (Notification) -> Void) -> ObservationToken
     {
-        let observer = type(of: self).NotificationCenter.addObserver(forName: NSNotification.Name(rawValue: self.rawValue), object: nil, queue: OperationQueue.main, using: observationHandler)
+        let observer = NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: self.rawValue), object: nil, queue: OperationQueue.main, using: observationHandler)
         
         return ObservationToken(observer: observer)
     }
@@ -126,9 +122,8 @@ public enum Notification: String
      */
     public func removeObserver(target: Any)
     {
-        type(of: self).NotificationCenter.removeObserver(target, name: NSNotification.Name(rawValue: self.rawValue), object: nil)
+        NotificationCenter.default.removeObserver(target, name: Notification.Name(rawValue: self.rawValue), object: nil)
     }
-    
     
     /**
      Removes a target from all notification observation
@@ -137,6 +132,6 @@ public enum Notification: String
      */
     public static func removeObserver(target: Any)
     {
-        self.NotificationCenter.removeObserver(target)
+        NotificationCenter.default.removeObserver(target)
     }
 }

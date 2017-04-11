@@ -34,9 +34,9 @@ public extension Request
     {
         var cacheKey = "cached" + self.path
         
-        if let parameters = self.parameters
+        if let description = (self.parameters as? CustomStringConvertible)?.description
         {
-            cacheKey = cacheKey + "." + String((parameters as AnyObject).description.hashValue)
+            cacheKey = cacheKey + "." + String(description.hashValue)
         }
         
         cacheKey = cacheKey.replacingOccurrences(of: "/", with: ".")
