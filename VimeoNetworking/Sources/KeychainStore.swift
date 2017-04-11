@@ -85,7 +85,7 @@ final class KeychainStore
     {
         var query = self.queryForKey(key: key)
         
-        query[kSecMatchLimit as String] = kSecMatchLimitOne as NSString
+        query[kSecMatchLimit as String] = kSecMatchLimitOne
         query[kSecReturnData as String] = kCFBooleanTrue
         
         var attributes: AnyObject? = nil
@@ -121,17 +121,17 @@ final class KeychainStore
     
     // MARK: - 
     
-    private func queryForKey(key: String) -> [String: Any]
+    private func queryForKey(key: String) -> [AnyHashable: Any]
     {
-        var query: [String: Any] = [:]
+        var query: [AnyHashable: Any] = [:]
         
         query[kSecClass as String] = kSecClassGenericPassword as String
-        query[kSecAttrService as String] = self.service as String
-        query[kSecAttrAccount as String] = key as String
+        query[kSecAttrService as String] = self.service
+        query[kSecAttrAccount as String] = key
         
         if let accessGroup = self.accessGroup
         {
-            query[kSecAttrAccessGroup as String] = accessGroup as String
+            query[kSecAttrAccessGroup as String] = accessGroup
         }
         
         return query

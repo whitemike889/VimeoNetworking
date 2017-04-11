@@ -105,7 +105,7 @@ extension Request where ModelType: VIMAccount
      
      - returns: a new `Request`
      */
-    static func logInRequest(email: String, password: String, scopes: [Scope]) -> Request
+    static func logInRequest(with email: String, password: String, scopes: [Scope]) -> Request
     {
         let parameters = [GrantTypeKey: GrantTypePassword,
                           ScopeKey: Scope.combine(scopes: scopes),
@@ -135,7 +135,7 @@ extension Request where ModelType: VIMAccount
      
      - returns: a new `Request`
      */
-    static func joinRequest(name: String, email: String, password: String, scopes: [Scope]) -> Request
+    static func joinRequest(with name: String, email: String, password: String, scopes: [Scope]) -> Request
     {
         let parameters = [ScopeKey: Scope.combine(scopes: scopes),
                           DisplayNameKey: name,

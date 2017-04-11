@@ -74,8 +74,7 @@ class MasterViewController: UITableViewController
         
         self.accountObservationToken = NetworkingNotification.AuthenticatedAccountDidChange.observe { [weak self] notification in
             
-            guard let strongSelf = self
-            else
+            guard let strongSelf = self else
             {
                 return
             }
@@ -90,48 +89,46 @@ class MasterViewController: UITableViewController
                 request = Request<[VIMVideo]>(path: "/channels/staffpicks/videos")
             }
             
-            VimeoClient.defaultClient.request(request: request) { [weak self] result in
+            let _ = VimeoClient.defaultClient.request(request: request) { [weak self] result in
                 
-//                guard let strongSelf = self
-//                else
-//                {
-//                    return
-//                }
-//                
-//                switch result
-//                {
-//                case .Success(let response):
-//                    
-//                    strongSelf.videos = response.model
-//                    
-//                    if let nextPageRequest = response.nextPageRequest
-//                    {
-//                        print("starting next page request")
-//                        
-//                        VimeoClient.defaultClient.request(nextPageRequest) { [weak self] result in
-//                            
-//                            guard let strongSelf = self
-//                            else
-//                            {
-//                                return
-//                            }
-//                            
-//                            if case .Success(let response) = result
-//                            {
-//                                print("next page request completed!")
-//                                strongSelf.videos.appendContentsOf(response.model)
-//                                strongSelf.tableView.reloadData()
-//                            }
-//                        }
-//                    }
-//                case .Failure(let error):
-//                    let title = "Video Request Failed"
-//                    let message = "\(request.path) could not be loaded: \(error.localizedDescription)"
-//                    let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-//                    let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
-//                    alert.addAction(action)
-//                    strongSelf.presentViewController(alert, animated: true, completion: nil)
-//                }
+                guard let strongSelf = self else
+                {
+                    return
+                }
+                
+                switch result
+                {
+                case .success(let response):
+                    
+                    strongSelf.videos = response.model
+                    
+                    if let nextPageRequest = response.nextPageRequest
+                    {
+                        print("starting next page request")
+                        
+                        let _ = VimeoClient.defaultClient.request(request: nextPageRequest) { [weak self] result in
+                            
+                            guard let strongSelf = self else
+                            {
+                                return
+                            }
+                            
+                            if case .success(let response) = result
+                            {
+                                print("next page request completed!")
+                                strongSelf.videos.append(contentsOf: response.model)
+                                strongSelf.tableView.reloadData()
+                            }
+                        }
+                    }
+                case .failure(let error):
+                    let title = "Video Request Failed"
+                    let message = "\(request.path) could not be loaded: \(error.localizedDescription)"
+                    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alert.addAction(action)
+                    strongSelf.present(alert, animated: true, completion: nil)
+                }
             }
             
             strongSelf.navigationItem.title = request.path

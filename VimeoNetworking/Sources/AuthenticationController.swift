@@ -279,7 +279,7 @@ final public class AuthenticationController
      */
     public func logIn(with email: String, password: String, completion: @escaping AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.logInRequest(email: email, password: password, scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.logInRequest(with: email, password: password, scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
     }
@@ -295,7 +295,7 @@ final public class AuthenticationController
      */
     public func join(with name: String, email: String, password: String, completion: @escaping AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.joinRequest(name: name, email: email, password: password, scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.joinRequest(with: name, email: email, password: password, scopes: self.configuration.scopes)
         
         self.authenticate(request: request, completion: completion)
     }

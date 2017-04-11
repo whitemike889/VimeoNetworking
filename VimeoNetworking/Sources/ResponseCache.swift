@@ -181,7 +181,7 @@ final internal class ResponseCache
             }) 
         }
         
-        internal func responseDictionary(forKey key: String, completion: @escaping (VimeoClient.ResponseDictionary?) -> Void)
+        func responseDictionary(forKey key: String, completion: @escaping (VimeoClient.ResponseDictionary?) -> Void)
         {
             self.queue.async {
                 
@@ -292,15 +292,11 @@ final internal class ResponseCache
             
             // We need to create a directory in `../Library/Caches folder`. Otherwise, trying to remove the Apple /Caches folder will always fail. Note that it's noticeable while testing on a device.
             return URL(fileURLWithPath: directory).appendingPathComponent(Constant.CacheDirectory, isDirectory: true)
-            
-            // Removed a `guard let` here since the method above doesn't return an optional. We may still want to include some error checking. [JSH] 03/13/17
         }
         
         private func fileURLForKey(key: String) -> URL?
         {
             let fileURL = self.cachesDirectoryURL().appendingPathComponent(key)
-            
-            // Similar to the method above, we may want additional error checking here. [JSH] 03/13/17
             
             return fileURL
         }

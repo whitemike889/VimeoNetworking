@@ -62,7 +62,7 @@ public class Subscription: VIMModelObject
     
     // MARK: - VIMMappable
     
-    @objc override public func getObjectMapping() -> Any
+    override public func getObjectMapping() -> Any
     {
         return [
             "video_available": "videoAvailable",

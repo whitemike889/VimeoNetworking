@@ -90,7 +90,7 @@ public extension NSError
         if let description = description
         {
             let userInfo = [NSLocalizedDescriptionKey: description]
-            error = error.errorByAddingDomain(domain: domain, code: code, userInfo: userInfo as [String : Any]?)
+            error = error.errorByAddingDomain(domain: domain, code: code, userInfo: userInfo)
         }
         else
         {
@@ -119,7 +119,7 @@ public extension NSError
     
      - returns: An error with additional user info
      */
-    func errorByAddingUserInfo(userInfo: [String: Any]) -> NSError
+    func errorByAddingUserInfo(userInfo: [AnyHashable: Any]) -> NSError
     {
         return self.errorByAddingDomain(domain: nil, code: nil, userInfo: userInfo)
     }
@@ -145,10 +145,9 @@ public extension NSError
      
      - returns: An error with additional information in the user info dictionary
      */
-    func errorByAddingDomain(domain: String?, code: Int?, userInfo: [String: Any]?) -> NSError
+    func errorByAddingDomain(domain: String?, code: Int?, userInfo: [AnyHashable: Any]?) -> NSError
     {
-//        let augmentedInfo = NSMutableDictionary(dictionary: self.userInfo)
-        var augmentedInfo = self.userInfo as [AnyHashable: Any]
+        var augmentedInfo = self.userInfo
         
         if let domain = domain
         {
@@ -191,7 +190,7 @@ public extension NSError
         /// Returns the api error code of the failing response, if available
     public var vimeoServerErrorCode: Int?
     {
-        if let errorCode = (self.userInfo[type(of: self).VimeoErrorCodeKeyLegacy] as? NSNumber)?.intValue
+        if let errorCode = (self.userInfo[type(of: self).VimeoErrorCodeKeyLegacy] as? Int)
         {
             return errorCode
         }
@@ -204,7 +203,7 @@ public extension NSError
         }
         
         if let json = self.errorResponseBodyJSON,
-            let errorCode = (json[type(of: self).VimeoErrorCodeKey] as? NSNumber)?.intValue
+            let errorCode = (json[type(of: self).VimeoErrorCodeKey] as? Int)
         {
             return errorCode
         }
@@ -217,7 +216,7 @@ public extension NSError
     {
         var errorCodes: [Int] = []
         
-        if let json = self.errorResponseBodyJSON, let invalidParameters = json[type(of: self).VimeoInvalidParametersKey] as? [[String: Any]]
+        if let json = self.errorResponseBodyJSON, let invalidParameters = json[type(of: self).VimeoInvalidParametersKey] as? [[AnyHashable: Any]]
         {
             for invalidParameter in invalidParameters
             {
@@ -232,13 +231,13 @@ public extension NSError
     }
     
         /// Returns the api error JSON dictionary, if available
-    public var errorResponseBodyJSON: [String: Any]?
+    public var errorResponseBodyJSON: [AnyHashable: Any]?
     {
         if let data = self.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] as? Data
         {
             do
             {
-                let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                let json = try JSONSerialization.jsonObject(with: data, options: []) as? [AnyHashable: Any]
                 
                 return json
             }

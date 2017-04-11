@@ -60,9 +60,9 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
      
      - returns: the serialized JSON dictionary
      */
-    public func responseObjectFromDownloadTaskResponse(response: URLResponse?, url: URL?, error: NSError?) throws -> [String: Any]?
+    public func responseObjectFromDownloadTaskResponse(response: URLResponse?, url: URL?, error: NSError?) throws -> [AnyHashable: Any]?
     {
-        var responseObject: [String: Any]? = nil
+        var responseObject: [AnyHashable: Any]? = nil
         var serializationError: NSError? = nil
         do
         {
@@ -131,7 +131,7 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
      
      - returns: downloaded data serialized into JSON dictionary
      */
-    public func dictionaryFromDownloadTaskResponse(url: URL?) throws -> [String: Any]
+    public func dictionaryFromDownloadTaskResponse(url: URL?) throws -> [AnyHashable: Any]
     {
         guard let url = url else
         {
@@ -145,10 +145,10 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
             throw NSError(domain: type(of: self).ErrorDomain, code: 0, userInfo: userInfo)
         }
         
-        var dictionary: [String: Any]? = [:]
+        var dictionary: [AnyHashable: Any]? = [:]
         if data.count > 0
         {
-            dictionary = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as? [String: Any]
+            dictionary = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as? [AnyHashable: Any]
         }
         
         if dictionary == nil
@@ -162,9 +162,9 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
     
     // MARK: Private API
 
-    private func errorInfoFromResponse(response: URLResponse?, responseObject: Any?) -> [String: Any]?
+    private func errorInfoFromResponse(response: URLResponse?, responseObject: Any?) -> [AnyHashable: Any]?
     {
-        var errorInfo: [String: Any] = [:]
+        var errorInfo: [AnyHashable: Any] = [:]
         
         if let dictionary = responseObject as? [String: Any]
         {

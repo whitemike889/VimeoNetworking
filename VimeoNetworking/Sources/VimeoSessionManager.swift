@@ -44,7 +44,7 @@ final public class VimeoSessionManager: AFHTTPSessionManager
      */
     required public init(sessionConfiguration: URLSessionConfiguration, requestSerializer: VimeoRequestSerializer)
     {        
-        super.init(baseURL: VimeoBaseURLString as URL?, sessionConfiguration: sessionConfiguration)
+        super.init(baseURL: VimeoBaseURLString, sessionConfiguration: sessionConfiguration)
         
         self.requestSerializer = requestSerializer
         self.responseSerializer = VimeoResponseSerializer()
@@ -62,7 +62,7 @@ final public class VimeoSessionManager: AFHTTPSessionManager
      
      - parameter account: the new account
      */
-    func clientDidAuthenticateWithAccount(account: VIMAccount)
+    func clientDidAuthenticateWithAccount(with account: VIMAccount)
     {
         guard let requestSerializer = self.requestSerializer as? VimeoRequestSerializer
         else

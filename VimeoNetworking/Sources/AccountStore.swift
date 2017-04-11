@@ -130,7 +130,7 @@ final class AccountStore
                 throw error
             }
             
-            if let userJSON = account.userJSON as? VimeoClient.ResponseDictionary
+            if let userJSON = account.userJSON
             {
                 try account.user = VIMObjectMapper.mapObject(responseDictionary: userJSON) as VIMUser
             }
