@@ -72,6 +72,10 @@ public class Subscription: VIMModelObject
     }
     
     // MARK: - Helpers
+    
+    /// Helper method that determine whether a user has all the subscription settings turned off.
+    ///
+    /// - Returns: A boolean that indicates whether the user has all the settings for push notifications disabled.
     public func areSubscriptionsDisabled() -> Bool
     {
         return (self.comment == false &&
