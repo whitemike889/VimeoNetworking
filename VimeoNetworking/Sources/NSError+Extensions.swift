@@ -83,18 +83,18 @@ public extension NSError
      
      - returns: a new `NSError`
      */
-    class func errorWithDomain(domain: String?, code: Int?, description: String?) -> NSError
+    class func errorWith(domain: String?, code: Int?, description: String?) -> NSError
     {
         var error = NSError(domain: VimeoErrorKey.VimeoErrorDomain.rawValue, code: 0, userInfo: nil)
         
         if let description = description
         {
             let userInfo = [NSLocalizedDescriptionKey: description]
-            error = error.errorByAddingDomain(domain: domain, code: code, userInfo: userInfo)
+            error = error.errorByAdding(domain: domain, code: code, userInfo: userInfo)
         }
         else
         {
-            error = error.errorByAddingDomain(domain: domain, code: code, userInfo: nil)
+            error = error.errorByAdding(domain: domain, code: code, userInfo: nil)
         }
         
         return error
@@ -107,9 +107,9 @@ public extension NSError
      
      - returns: An error with additional information in the user info dictionary
      */
-    func errorByAddingDomain(domain: String) -> NSError
+    func errorByAdding(domain: String) -> NSError
     {
-        return self.errorByAddingDomain(domain: domain, code: nil, userInfo: nil)
+        return self.errorByAdding(domain: domain, code: nil, userInfo: nil)
     }
     
     /**
@@ -119,9 +119,9 @@ public extension NSError
     
      - returns: An error with additional user info
      */
-    func errorByAddingUserInfo(userInfo: [AnyHashable: Any]) -> NSError
+    func errorByAdding(userInfo: [AnyHashable: Any]) -> NSError
     {
-        return self.errorByAddingDomain(domain: nil, code: nil, userInfo: userInfo)
+        return self.errorByAdding(domain: nil, code: nil, userInfo: userInfo)
     }
     
     /**
@@ -131,9 +131,9 @@ public extension NSError
      
      - returns: An error with additional information in the user info dictionary
      */
-    func errorByAddingCode(code: Int) -> NSError
+    func errorByAdding(code: Int) -> NSError
     {
-        return self.errorByAddingDomain(domain: nil, code: code, userInfo: nil)
+        return self.errorByAdding(domain: nil, code: code, userInfo: nil)
     }
     
     /**
@@ -145,7 +145,7 @@ public extension NSError
      
      - returns: An error with additional information in the user info dictionary
      */
-    func errorByAddingDomain(domain: String?, code: Int?, userInfo: [AnyHashable: Any]?) -> NSError
+    func errorByAdding(domain: String?, code: Int?, userInfo: [AnyHashable: Any]?) -> NSError
     {
         var augmentedInfo = self.userInfo
         
