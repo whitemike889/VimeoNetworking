@@ -70,4 +70,18 @@ public class Subscription: VIMModelObject
             "vod_rental_expiration_warning": "vodRentalExpirationWarning",
             "account_expiration_warning": "accountExpirationWarning"]
     }
+    
+    // MARK: - Helpers
+    public func areSubscriptionsDisabled() -> Bool
+    {
+        return (self.comment == false &&
+                self.credit == false &&
+                self.like == false &&
+                self.mention == false &&
+                self.reply == false &&
+                self.follow == false &&
+                self.vodPreorderAvailable == false &&
+                self.videoAvailable == false &&
+                self.share == false)
+    }
 }
