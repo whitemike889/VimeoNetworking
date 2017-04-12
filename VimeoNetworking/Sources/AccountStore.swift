@@ -95,7 +95,7 @@ final class AccountStore
         archiver.encode(account)
         archiver.finishEncoding()
         
-        try self.keychainStore.setData(data: data, forKey: type.keychainKey())
+        try self.keychainStore.setData(data, forKey: type.keychainKey())
     }
     
     /**
@@ -111,7 +111,7 @@ final class AccountStore
     {
         do
         {
-            guard let data = try self.keychainStore.dataForKey(key: type.keychainKey())
+            guard let data = try self.keychainStore.data(for: type.keychainKey())
             else
             {
                 return nil
@@ -157,6 +157,6 @@ final class AccountStore
      */
     func removeAccount(type: AccountType) throws
     {
-        try self.keychainStore.deleteDataForKey(key: type.keychainKey())
+        try self.keychainStore.deleteData(for: type.keychainKey())
     }
 }

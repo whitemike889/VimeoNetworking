@@ -55,11 +55,11 @@ final class KeychainStore
      
      - throws: an error if saving failed
      */
-    func setData(data: NSData, forKey key: String) throws
+    func setData(_ data: NSData, forKey key: String) throws
     {
-        try self.deleteDataForKey(key: key)
+        try self.deleteData(for: key)
         
-        var query = self.queryForKey(key: key)
+        var query = self.query(for: key)
         
         query[kSecValueData as String] = data
         query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock as String
@@ -68,7 +68,7 @@ final class KeychainStore
         
         if status != errSecSuccess
         {
-            throw self.errorForStatus(status: status)
+            throw self.error(for: status)
         }
     }
     
@@ -81,9 +81,9 @@ final class KeychainStore
      
      - returns: data, if found
      */
-    func dataForKey(key: String) throws -> Data?
+    func data(for key: String) throws -> Data?
     {
-        var query = self.queryForKey(key: key)
+        var query = self.query(for: key)
         
         query[kSecMatchLimit as String] = kSecMatchLimitOne
         query[kSecReturnData as String] = kCFBooleanTrue
@@ -94,7 +94,7 @@ final class KeychainStore
         
         if status != errSecSuccess && status != errSecItemNotFound
         {
-            throw self.errorForStatus(status: status)
+            throw self.error(for: status)
         }
         
         return data
@@ -107,21 +107,21 @@ final class KeychainStore
      
      - throws: an error if the data exists but deleting failed
      */
-    func deleteDataForKey(key: String) throws
+    func deleteData(for key: String) throws
     {
-        let query = self.queryForKey(key: key)
+        let query = self.query(for: key)
         
         let status = SecItemDelete(query as CFDictionary)
         
         if status != errSecSuccess && status != errSecItemNotFound
         {
-            throw self.errorForStatus(status: status)
+            throw self.error(for: status)
         }
     }
     
     // MARK: - 
     
-    private func queryForKey(key: String) -> [AnyHashable: Any]
+    private func query(for key: String) -> [AnyHashable: Any]
     {
         var query: [AnyHashable: Any] = [:]
         
@@ -137,7 +137,7 @@ final class KeychainStore
         return query
     }
     
-    private func errorForStatus(status: OSStatus) -> NSError
+    private func error(for status: OSStatus) -> NSError
     {
         let errorMessage: String
         
