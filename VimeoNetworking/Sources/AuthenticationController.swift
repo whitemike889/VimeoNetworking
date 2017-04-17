@@ -168,7 +168,7 @@ final public class AuthenticationController
     {
         let request = AuthenticationRequest.clientCredentialsGrantRequest(scopes: self.configuration.scopes)
         
-        self.authenticate(request: request, completion: completion)
+        self.authenticate(with: request, completion: completion)
     }
     
         /// Returns the redirect URI used to launch this application after code grant authorization
@@ -252,7 +252,7 @@ final public class AuthenticationController
         
         let request = AuthenticationRequest.codeGrantRequest(code: code, redirectURI: self.codeGrantRedirectURI)
         
-        self.authenticate(request: request, completion: completion)
+        self.authenticate(with: request, completion: completion)
     }
     
     /**
@@ -284,7 +284,7 @@ final public class AuthenticationController
     {
         let request = AuthenticationRequest.logInRequest(with: email, password: password, scopes: self.configuration.scopes)
         
-        self.authenticate(request: request, completion: completion)
+        self.authenticate(with: request, completion: completion)
     }
     
     /**
@@ -300,7 +300,7 @@ final public class AuthenticationController
     {
         let request = AuthenticationRequest.joinRequest(with: name, email: email, password: password, scopes: self.configuration.scopes)
         
-        self.authenticate(request: request, completion: completion)
+        self.authenticate(with: request, completion: completion)
     }
     
     /**
@@ -314,7 +314,7 @@ final public class AuthenticationController
     {
         let request = AuthenticationRequest.logInFacebookRequest(facebookToken: facebookToken, scopes: self.configuration.scopes)
         
-        self.authenticate(request: request, completion: completion)
+        self.authenticate(with: request, completion: completion)
     }
     
     /**
@@ -328,7 +328,7 @@ final public class AuthenticationController
     {
         let request = AuthenticationRequest.joinFacebookRequest(facebookToken: facebookToken, scopes: self.configuration.scopes)
         
-        self.authenticate(request: request, completion: completion)
+        self.authenticate(with: request, completion: completion)
     }
     
     /**
@@ -371,7 +371,7 @@ final public class AuthenticationController
     {
         let request = AuthenticationRequest.appTokenExchangeRequest(accessToken: accessToken)
         
-        self.authenticate(request: request, completion: completion)
+        self.authenticate(with: request, completion: completion)
     }
     
     
@@ -441,7 +441,7 @@ final public class AuthenticationController
         
         let authorizationRequest = AuthenticationRequest.authorizePinCodeRequest(userCode: userCode, deviceCode: deviceCode)
         
-        self.authenticate(request: authorizationRequest) { [weak self] result in
+        self.authenticate(with: authorizationRequest) { [weak self] result in
             
             switch result
             {
@@ -525,7 +525,7 @@ final public class AuthenticationController
     
     // MARK: - Private
     
-    private func authenticate(request: AuthenticationRequest, completion: @escaping AuthenticationCompletion)
+    private func authenticate(with request: AuthenticationRequest, completion: @escaping AuthenticationCompletion)
     {
         self.authenticate(with: self.authenticatorClient, request: request, completion: completion)
     }
