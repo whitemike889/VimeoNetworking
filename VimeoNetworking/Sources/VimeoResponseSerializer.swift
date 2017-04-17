@@ -103,7 +103,7 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
         
         if let error = error
         {
-            throw error.errorByAdding(userInfo: errorInfo)
+            throw error.error(byAddingUserInfo: errorInfo)
         }
 
         try self.checkStatusCodeValidity(response: response)
