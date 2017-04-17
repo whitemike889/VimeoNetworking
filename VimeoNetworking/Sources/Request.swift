@@ -180,7 +180,7 @@ public struct Request<ModelType: MappableResponse>
     
     // MARK: Copying requests
     
-    internal func associatedPageRequest(newPath: String) -> Request<ModelType>
+    internal func associatedPageRequest(withNewPath newPath: String) -> Request<ModelType>
     {
         // Since page response paging paths bake the paging parameters into the path,
         // strip them out and upsert them back into the body parameters.

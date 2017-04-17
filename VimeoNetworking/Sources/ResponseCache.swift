@@ -30,7 +30,7 @@ private typealias ResponseDictionaryClosure = (VimeoClient.ResponseDictionary?) 
 
 private protocol Cache
 {
-    func setResponseDictionary(responseDictionary: VimeoClient.ResponseDictionary, forKey key: String)
+    func setResponseDictionary(_ responseDictionary: VimeoClient.ResponseDictionary, forKey key: String)
     
     func responseDictionary(forKey key: String, completion: @escaping ResponseDictionaryClosure)
     
@@ -57,8 +57,8 @@ final internal class ResponseCache
     {
         let key = request.cacheKey
         
-        self.memoryCache.setResponseDictionary(responseDictionary: responseDictionary, forKey: key)
-        self.diskCache.setResponseDictionary(responseDictionary: responseDictionary, forKey: key)
+        self.memoryCache.setResponseDictionary(responseDictionary, forKey: key)
+        self.diskCache.setResponseDictionary(responseDictionary, forKey: key)
     }
     
     /**
@@ -67,7 +67,7 @@ final internal class ResponseCache
      - parameter request:    the request for which the cache should be queried
      - parameter completion: returns `.Success(ResponseDictionary)`, if found in cache, or `.Success(nil)` for a cache miss.  Returns `.Failure(NSError)` if an error occurred.
      */
-    func responseForRequest<ModelType>(request: Request<ModelType>, completion: @escaping ResultCompletion<VimeoClient.ResponseDictionary?>.T)
+    func response<ModelType>(forRequest request: Request<ModelType>, completion: @escaping ResultCompletion<VimeoClient.ResponseDictionary?>.T)
     {
         let key = request.cacheKey
         
@@ -115,7 +115,7 @@ final internal class ResponseCache
     {
         private let cache = NSCache<AnyObject, AnyObject>()
         
-        func setResponseDictionary(responseDictionary: VimeoClient.ResponseDictionary, forKey key: String)
+        func setResponseDictionary(_ responseDictionary: VimeoClient.ResponseDictionary, forKey key: String)
         {
             self.cache.setObject(responseDictionary as AnyObject, forKey: key as AnyObject)
         }
@@ -146,7 +146,7 @@ final internal class ResponseCache
     {
         private let queue = DispatchQueue(label: "com.vimeo.VIMCache.diskQueue", attributes: DispatchQueue.Attributes.concurrent)
         
-        func setResponseDictionary(responseDictionary: VimeoClient.ResponseDictionary, forKey key: String)
+        func setResponseDictionary(_ responseDictionary: VimeoClient.ResponseDictionary, forKey key: String)
         {
             self.queue.async(flags: .barrier, execute: {
                 
@@ -154,7 +154,7 @@ final internal class ResponseCache
                 let fileManager = FileManager()
                 let directoryPath = self.cachesDirectoryURL().path
                 
-                guard let filePath = self.fileURLForKey(key: key)?.path else
+                guard let filePath = self.fileURL(forKey: key)?.path else
                 {
                     assertionFailure("No cache path found.")
                     return
@@ -185,7 +185,7 @@ final internal class ResponseCache
         {
             self.queue.async {
                 
-                guard let filePath = self.fileURLForKey(key: key)?.path
+                guard let filePath = self.fileURL(forKey: key)?.path
                     else
                 {
                     assertionFailure("No cache path found.")
@@ -225,7 +225,7 @@ final internal class ResponseCache
                 
                 let fileManager = FileManager()
                 
-                guard let filePath = self.fileURLForKey(key: key)?.path else
+                guard let filePath = self.fileURL(forKey: key)?.path else
                 {
                     // Assert to catch a badly formed filepath.
                     
@@ -294,7 +294,7 @@ final internal class ResponseCache
             return URL(fileURLWithPath: directory).appendingPathComponent(Constant.CacheDirectory, isDirectory: true)
         }
         
-        private func fileURLForKey(key: String) -> URL?
+        private func fileURL(forKey key: String) -> URL?
         {
             let fileURL = self.cachesDirectoryURL().appendingPathComponent(key)
             

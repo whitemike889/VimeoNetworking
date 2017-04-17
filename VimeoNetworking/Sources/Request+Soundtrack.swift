@@ -40,7 +40,7 @@ public extension Request
      */
     public static func getSoundtrackListRequest() -> Request
     {
-        return self.getSoundtrackListRequest(soundtracksURI: self.SoundtracksURI)
+        return self.getSoundtrackListRequest(forSoundtracksURI: self.SoundtracksURI)
     }
     
     /**
@@ -50,7 +50,7 @@ public extension Request
      
      - returns: a constructed `Request`
      */
-    public static func getSoundtrackListRequest(soundtracksURI: String) -> Request
+    public static func getSoundtrackListRequest(forSoundtracksURI soundtracksURI: String) -> Request
     {
         return Request(path: soundtracksURI)
     }

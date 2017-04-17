@@ -60,7 +60,7 @@ public enum Scope: String
      
      - returns: a string of space-separated scope strings
      */
-    public static func combine(scopes: [Scope]) -> String
+    public static func combine(_ scopes: [Scope]) -> String
     {
         return scopes.map({ $0.rawValue }).joined(separator: " ")
     }

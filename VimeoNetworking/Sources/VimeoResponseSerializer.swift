@@ -99,7 +99,7 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
     {
         // TODO: If error is nil and errorInfo is non-nil, we should throw an error [AH] 2/5/2016
         
-        let errorInfo = self.errorInfoFrom(response: response, responseObject: responseObject) ?? [:]
+        let errorInfo = self.errorInfo(fromResponse: response, responseObject: responseObject) ?? [:]
         
         if let error = error
         {
@@ -165,7 +165,7 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
     
     // MARK: Private API
 
-    private func errorInfoFrom(response: URLResponse?, responseObject: Any?) -> [AnyHashable: Any]?
+    private func errorInfo(fromResponse response: URLResponse?, responseObject: Any?) -> [AnyHashable: Any]?
     {
         var errorInfo: [AnyHashable: Any] = [:]
         

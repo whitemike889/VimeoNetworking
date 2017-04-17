@@ -59,22 +59,22 @@ public enum UserInfoKey: NSString
 public enum NetworkingNotification: String
 {
         /// Sent when any response returns a 503 Service Unavailable error
-    case ClientDidReceiveServiceUnavailableError
+    case clientDidReceiveServiceUnavailableError
     
         /// Sent when any response returns an invalid token error
-    case ClientDidReceiveInvalidTokenError
+    case clientDidReceiveInvalidTokenError
     
         /// **(Not yet implemented)** Sent when the online/offline status of the current device changes
-    case ReachabilityDidChange
+    case reachabilityDidChange
     
         /// Sent when the stored authenticated account is changed
-    case AuthenticatedAccountDidChange
+    case authenticatedAccountDidChange
     
         /// **(Not yet implemented)** Sent when the user stored with the authenticated account is refreshed
-    case AuthenticatedAccountDidRefresh
+    case authenticatedAccountDidRefresh
     
         /// Sent when any object has been updated with new metadata and UI should be updated
-    case ObjectDidUpdate
+    case objectDidUpdate
     
     // MARK: -
     

@@ -43,7 +43,7 @@ public extension Request
      
      - returns: a new `Request`
      */
-    public static func getCategoryRequest(categoryURI: String) -> Request
+    public static func getCategoryRequest(forCategoryURI categoryURI: String) -> Request
     {
         return Request(path: categoryURI)
     }

@@ -19,9 +19,9 @@ public extension Request
     /// Handle Mutliple Devices: Create a request that set the device as active to receive Notifications. This request should be made only once: When the app first launch. The purpose of the request is to notify the server side, this device should receive push notifications.
     ///
     /// - Parameter deviceToken: The token that is stored in `SMKNotificationsCenter`
-    public static func setDeviceAsActiveToReceiveNotifications(notificationsURI: String, deviceToken: String) -> Request
+    public static func setDeviceAsActiveToReceiveNotifications(forNotificationsURI notificationsURI: String, deviceToken: String) -> Request
     {
-        let subscriptionsURI = Request.subscriptionsURI(notificationsURI: notificationsURI, deviceToken: deviceToken)
+        let subscriptionsURI = Request.subscriptionsURI(forNotificationsURI: notificationsURI, deviceToken: deviceToken)
 
         return Request(method: .PUT, path: subscriptionsURI, parameters: nil)
     }
@@ -29,9 +29,9 @@ public extension Request
     /// Retrieve the notification subscriptions.
     ///
     /// - Returns: subscriptionCollection
-    public static func getNotificationSubscriptionRequest(notificationsURI: String, deviceToken: String) -> Request
+    public static func getNotificationSubscriptionRequest(forNotificationsURI notificationsURI: String, deviceToken: String) -> Request
     {
-        let subscriptionsURI = Request.subscriptionsURI(notificationsURI: notificationsURI, deviceToken: deviceToken)
+        let subscriptionsURI = Request.subscriptionsURI(forNotificationsURI: notificationsURI, deviceToken: deviceToken)
 
         return Request(method: .GET, path: subscriptionsURI, parameters: nil)
     }
@@ -40,21 +40,21 @@ public extension Request
     ///
     /// - Parameter subscription: The subscription dictionary contains the boolean values for each of those: comment, credit, like, reply, follow, video_available that defines what the user is subscripted to.
     /// - Returns: The result of the .PATCH is a SubscriptionCollection
-    public static func updateNotificationSubscriptionsRequest(subscription: VimeoClient.RequestParametersDictionary, notificationsURI: String, deviceToken: String) -> Request
+    public static func updateNotificationSubscriptionsRequest(withSubscription subscription: VimeoClient.RequestParametersDictionary, notificationsURI: String, deviceToken: String) -> Request
     {
-        let subscriptionsURI = Request.subscriptionsURI(notificationsURI: notificationsURI, deviceToken: deviceToken)
+        let subscriptionsURI = Request.subscriptionsURI(forNotificationsURI: notificationsURI, deviceToken: deviceToken)
 
         return Request(method: .PATCH, path: subscriptionsURI, parameters: subscription)
     }
 
     // MARK: - Helper
 
-    private static func subscriptionsURI(notificationsURI: String, deviceToken: String) -> String
+    private static func subscriptionsURI(forNotificationsURI notificationsURI: String, deviceToken: String) -> String
     {
         return notificationsURI + "/\(deviceToken)" + SubscriptionsPathComponent
     }
     
-    public static func markNotificationAsNotNewRequest(notification: VIMNotification, notificationsURI: String) -> Request
+    public static func markNotificationAsNotNewRequest(forNotification notification: VIMNotification, notificationsURI: String) -> Request
     {
         guard let latestURI = notification.uri else
         {
@@ -69,7 +69,7 @@ public extension Request
         return Request(method: .PATCH, path: notificationsURI, parameters: parameters)
     }
 
-    public static func markNotificationsAsSeenRequest(notifications: [VIMNotification], notificationsURI: String) -> Request
+    public static func markNotificationsAsSeenRequest(forNotifications notifications: [VIMNotification], notificationsURI: String) -> Request
     {
         var parameters: [ParameterDictionary] = []
         let _ = notifications.map { (notification: VIMNotification) -> Void in

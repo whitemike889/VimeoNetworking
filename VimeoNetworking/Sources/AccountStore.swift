@@ -95,7 +95,7 @@ final class AccountStore
         archiver.encode(account)
         archiver.finishEncoding()
         
-        try self.keychainStore.setData(data, forKey: type.keychainKey())
+        try self.keychainStore.set(data: data, forKey: type.keychainKey())
     }
     
     /**

@@ -20,7 +20,7 @@ public class VimeoReachability
             if LastKnownReachabilityStatus != status
             {
                 LastKnownReachabilityStatus = status
-                NetworkingNotification.ReachabilityDidChange.post(object: nil)
+                NetworkingNotification.reachabilityDidChange.post(object: nil)
             }
         }
         

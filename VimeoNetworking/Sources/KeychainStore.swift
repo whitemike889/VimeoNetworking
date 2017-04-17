@@ -55,7 +55,7 @@ final class KeychainStore
      
      - throws: an error if saving failed
      */
-    func setData(_ data: NSData, forKey key: String) throws
+    func set(data: NSData, forKey key: String) throws
     {
         try self.deleteData(for: key)
         

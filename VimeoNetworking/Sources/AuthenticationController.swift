@@ -191,7 +191,7 @@ final public class AuthenticationController
         let parameters = [Constants.ResponseTypeKey: Constants.CodeKey,
                           Constants.ClientIDKey: self.configuration.clientIdentifier,
                           Constants.RedirectURIKey: self.codeGrantRedirectURI,
-                          Constants.ScopeKey: Scope.combine(scopes: self.configuration.scopes),
+                          Constants.ScopeKey: Scope.combine(self.configuration.scopes),
                           Constants.StateKey: type(of: self).state]
         
         guard let urlString = VimeoBaseURLString?.appendingPathComponent(Constants.CodeGrantAuthorizationPath).absoluteString
@@ -250,7 +250,7 @@ final public class AuthenticationController
             return
         }
         
-        let request = AuthenticationRequest.codeGrantRequest(code: code, redirectURI: self.codeGrantRedirectURI)
+        let request = AuthenticationRequest.codeGrantRequest(withCode: code, redirectURI: self.codeGrantRedirectURI)
         
         self.authenticate(with: request, completion: completion)
     }
@@ -280,9 +280,9 @@ final public class AuthenticationController
      - parameter password:   a user's password
      - parameter completion: handler for authentication success or failure
      */
-    public func logIn(with email: String, password: String, completion: @escaping AuthenticationCompletion)
+    public func logIn(withEmail email: String, password: String, completion: @escaping AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.logInRequest(with: email, password: password, scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.logInRequest(withEmail: email, password: password, scopes: self.configuration.scopes)
         
         self.authenticate(with: request, completion: completion)
     }
@@ -296,9 +296,9 @@ final public class AuthenticationController
      - parameter password:   the new user's password
      - parameter completion: handler for authentication success or failure
      */
-    public func join(with name: String, email: String, password: String, completion: @escaping AuthenticationCompletion)
+    public func join(withName name: String, email: String, password: String, completion: @escaping AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.joinRequest(with: name, email: email, password: password, scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.joinRequest(withName: name, email: email, password: password, scopes: self.configuration.scopes)
         
         self.authenticate(with: request, completion: completion)
     }
@@ -310,9 +310,9 @@ final public class AuthenticationController
      - parameter facebookToken: token from facebook SDK
      - parameter completion:    handler for authentication success or failure
      */
-    public func facebookLogIn(with facebookToken: String, completion: @escaping AuthenticationCompletion)
+    public func facebookLogIn(withToken facebookToken: String, completion: @escaping AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.logInFacebookRequest(facebookToken: facebookToken, scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.logInFacebookRequest(withToken: facebookToken, scopes: self.configuration.scopes)
         
         self.authenticate(with: request, completion: completion)
     }
@@ -324,9 +324,9 @@ final public class AuthenticationController
      - parameter facebookToken: token from facebook SDK
      - parameter completion:    handler for authentication success or failure
      */
-    public func facebookJoin(with facebookToken: String, completion: @escaping AuthenticationCompletion)
+    public func facebookJoin(withToken facebookToken: String, completion: @escaping AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.joinFacebookRequest(facebookToken: facebookToken, scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.joinFacebookRequest(withToken: facebookToken, scopes: self.configuration.scopes)
         
         self.authenticate(with: request, completion: completion)
     }
@@ -338,7 +338,7 @@ final public class AuthenticationController
      - parameter accountResponseDictionary: account response dictionary
      - parameter completion:                handler for authentication success or failure
      */
-    public func authenticate(with accountResponseDictionary: VimeoClient.ResponseDictionary, completion: AuthenticationCompletion)
+    public func authenticate(withResponse accountResponseDictionary: VimeoClient.ResponseDictionary, completion: AuthenticationCompletion)
     {
         let result: Result<Response<VIMAccount>>
         
@@ -369,7 +369,7 @@ final public class AuthenticationController
      */
     public func appTokenExchange(accessToken: String, completion: @escaping AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.appTokenExchangeRequest(accessToken: accessToken)
+        let request = AuthenticationRequest.appTokenExchangeRequest(withAccessToken: accessToken)
         
         self.authenticate(with: request, completion: completion)
     }
@@ -387,7 +387,7 @@ final public class AuthenticationController
      */
     public func pinCode(infoHandler: @escaping PinCodeInfoHander, completion: @escaping AuthenticationCompletion)
     {
-        let infoRequest = PinCodeRequest.getPinCodeRequest(scopes: self.configuration.scopes)
+        let infoRequest = PinCodeRequest.getPinCodeRequest(forScopes: self.configuration.scopes)
         
         let _ = self.authenticatorClient.request(infoRequest) { result in
             switch result
@@ -439,7 +439,7 @@ final public class AuthenticationController
             return
         }
         
-        let authorizationRequest = AuthenticationRequest.authorizePinCodeRequest(userCode: userCode, deviceCode: deviceCode)
+        let authorizationRequest = AuthenticationRequest.authorizePinCodeRequest(withUserCode: userCode, deviceCode: deviceCode)
         
         self.authenticate(with: authorizationRequest) { [weak self] result in
             

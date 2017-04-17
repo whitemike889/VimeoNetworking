@@ -27,7 +27,7 @@ import Foundation
 
 extension Dictionary
 {
-    public mutating func append(dictionary: Dictionary<Key, Value>)
+    public mutating func append(_ dictionary: Dictionary<Key, Value>)
     {
         for (key, value) in dictionary
         {

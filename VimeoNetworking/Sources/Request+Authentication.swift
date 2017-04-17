@@ -74,7 +74,7 @@ extension Request where ModelType: VIMAccount
     static func clientCredentialsGrantRequest(scopes: [Scope]) -> Request
     {
         let parameters = [GrantTypeKey: GrantTypeClientCredentials,
-                          ScopeKey: Scope.combine(scopes: scopes)]
+                          ScopeKey: Scope.combine(scopes)]
         
         return Request(method: .POST, path: AuthenticationPathClientCredentials, parameters: parameters, cacheFetchPolicy: .networkOnly, shouldCacheResponse: false)
     }
@@ -87,7 +87,7 @@ extension Request where ModelType: VIMAccount
      
      - returns: a new `Request`
      */
-    static func codeGrantRequest(code: String, redirectURI: String) -> Request
+    static func codeGrantRequest(withCode code: String, redirectURI: String) -> Request
     {
         let parameters = [GrantTypeKey: GrantTypeAuthorizationCode,
                           CodeKey: code,
@@ -105,10 +105,10 @@ extension Request where ModelType: VIMAccount
      
      - returns: a new `Request`
      */
-    static func logInRequest(with email: String, password: String, scopes: [Scope]) -> Request
+    static func logInRequest(withEmail email: String, password: String, scopes: [Scope]) -> Request
     {
         let parameters = [GrantTypeKey: GrantTypePassword,
-                          ScopeKey: Scope.combine(scopes: scopes),
+                          ScopeKey: Scope.combine(scopes),
                           UsernameKey: email,
                           PasswordKey: password]
         
@@ -135,9 +135,9 @@ extension Request where ModelType: VIMAccount
      
      - returns: a new `Request`
      */
-    static func joinRequest(with name: String, email: String, password: String, scopes: [Scope]) -> Request
+    static func joinRequest(withName name: String, email: String, password: String, scopes: [Scope]) -> Request
     {
-        let parameters = [ScopeKey: Scope.combine(scopes: scopes),
+        let parameters = [ScopeKey: Scope.combine(scopes),
                           DisplayNameKey: name,
                           EmailKey: email,
                           PasswordKey: password]
@@ -153,10 +153,10 @@ extension Request where ModelType: VIMAccount
      
      - returns: a new `Request`
      */
-    static func logInFacebookRequest(facebookToken: String, scopes: [Scope]) -> Request
+    static func logInFacebookRequest(withToken facebookToken: String, scopes: [Scope]) -> Request
     {
         let parameters = [GrantTypeKey: GrantTypeFacebook,
-                          ScopeKey: Scope.combine(scopes: scopes),
+                          ScopeKey: Scope.combine(scopes),
                           TokenKey: facebookToken]
         
         return Request(method: .POST, path: AuthenticationPathFacebookToken, parameters: parameters, cacheFetchPolicy: .networkOnly, shouldCacheResponse: false)
@@ -170,9 +170,9 @@ extension Request where ModelType: VIMAccount
      
      - returns: a new `Request`
      */
-    static func joinFacebookRequest(facebookToken: String, scopes: [Scope]) -> Request
+    static func joinFacebookRequest(withToken facebookToken: String, scopes: [Scope]) -> Request
     {
-        let parameters = [ScopeKey: Scope.combine(scopes: scopes),
+        let parameters = [ScopeKey: Scope.combine(scopes),
                           TokenKey: facebookToken]
         
         return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters, cacheFetchPolicy: .networkOnly, shouldCacheResponse: false)
@@ -186,7 +186,7 @@ extension Request where ModelType: VIMAccount
      
      - returns: a new `Request`
      */
-    static func authorizePinCodeRequest(userCode: String, deviceCode: String) -> Request
+    static func authorizePinCodeRequest(withUserCode userCode: String, deviceCode: String) -> Request
     {
         let parameters = [PinCodeKey: userCode,
                           DeviceCodeKey: deviceCode]
@@ -201,7 +201,7 @@ extension Request where ModelType: VIMAccount
      
      - returns: a new `Request`
      */
-    static func appTokenExchangeRequest(accessToken: String) -> Request
+    static func appTokenExchangeRequest(withAccessToken accessToken: String) -> Request
     {
         let parameters = [AccessTokenKey: accessToken]
         
@@ -249,10 +249,10 @@ extension Request where ModelType: PinCodeInfo
      
      - returns: a new `Request`
      */
-    static func getPinCodeRequest(scopes: [Scope]) -> Request
+    static func getPinCodeRequest(forScopes scopes: [Scope]) -> Request
     {
         let parameters = [GrantTypeKey: GrantTypePinCode,
-                          ScopeKey: Scope.combine(scopes: scopes)]
+                          ScopeKey: Scope.combine(scopes)]
         
         return Request(method: .POST, path: AuthenticationPathPinCode, parameters: parameters, cacheFetchPolicy: .networkOnly, shouldCacheResponse: false)
     }

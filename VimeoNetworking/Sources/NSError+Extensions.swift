@@ -161,7 +161,7 @@ public extension NSError
         
         if let userInfo = userInfo
         {
-            augmentedInfo.append(dictionary: userInfo)
+            augmentedInfo.append(userInfo)
         }
         
         return NSError(domain: self.domain, code: self.code, userInfo: augmentedInfo)
@@ -205,7 +205,7 @@ public extension NSError
         }
         
         if let json = self.errorResponseBodyJSON,
-            let errorCode = (json[Constants.VimeoErrorCodeKey] as? Int)
+            let errorCode = json[Constants.VimeoErrorCodeKey] as? Int
         {
             return errorCode
         }
