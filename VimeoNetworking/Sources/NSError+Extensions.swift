@@ -48,7 +48,7 @@ public extension NSError
     {
         if let urlResponse = self.userInfo[AFNetworkingOperationFailingURLResponseErrorKey] as? HTTPURLResponse, urlResponse.statusCode == HTTPStatusCode.unauthorized.rawValue
         {
-            if let header = urlResponse.allHeaderFields["WWW-Authenticate"] as? String, header == "Bearer error=\"invalid_token\""
+            if let header = urlResponse.allHeaderFields["Www-Authenticate"] as? String, header == "Bearer error=\"invalid_token\""
             {
                 return true
             }
