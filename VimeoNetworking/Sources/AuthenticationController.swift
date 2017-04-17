@@ -355,7 +355,7 @@ final public class AuthenticationController
             result = Result.failure(error: error)
         }
         
-        let handledResult = self.handleAuthenticationResult(result: result)
+        let handledResult = self.handleAuthenticationResult(result)
         
         completion(handledResult)
     }
@@ -534,13 +534,13 @@ final public class AuthenticationController
     {
         let _ = client.request(request: request) { result in
             
-            let handledResult = self.handleAuthenticationResult(result: result)
+            let handledResult = self.handleAuthenticationResult(result)
             
             completion(handledResult)
         }
     }
     
-    private func handleAuthenticationResult(result: Result<Response<VIMAccount>>) -> Result<VIMAccount>
+    private func handleAuthenticationResult(_ result: Result<Response<VIMAccount>>) -> Result<VIMAccount>
     {
         guard case .success(let accountResponse) = result
         else
