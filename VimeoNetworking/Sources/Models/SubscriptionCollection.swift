@@ -15,20 +15,20 @@ public class SubscriptionCollection: VIMModelObject
     public var uri: String?
     
     /// Represents the modified time
-    public var modifiedTime: NSDate?
+    public var modifiedTime: Date?
     
     /// Represents the subscription
     public var subscription: Subscription?
     
     // MARK: - VIMMappable
     
-    public override func getObjectMapping() -> AnyObject!
+    public override func getObjectMapping() -> Any
     {
         return ["modified_time": "modifiedTime",
                 "subscriptions": "subscription"]
     }
     
-    public override func getClassForObjectKey(key: String!) -> AnyClass!
+    public override func getClassForObjectKey(_ key: String!) -> AnyClass!
     {
         if key == "subscriptions"
         {

@@ -22,7 +22,7 @@ public class Spatial: VIMModelObject
     
     // MARK: - VIMMappable
     
-    public override func getObjectMapping() -> AnyObject!
+    public override func getObjectMapping() -> Any
     {
         return ["stereo_format" : "stereoFormat"]
     }

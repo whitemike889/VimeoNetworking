@@ -1,9 +1,8 @@
 //
-//  Request+Cache.swift
-//  VimeoNetworkingExample-iOS
+//  Dictionary+Extension.swift
+//  Pods
 //
-//  Created by Huebner, Rob on 4/14/16.
-//  Copyright © 2016 Vimeo. All rights reserved.
+//  Copyright © 2017 Vimeo. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,21 +25,13 @@
 
 import Foundation
 
-
-public extension Request
+extension Dictionary
 {
-    /// Generates a unique cache key for a request, taking into account endpoint and parameters
-    var cacheKey: String
+    public mutating func append(_ dictionary: Dictionary<Key, Value>)
     {
-        var cacheKey = "cached" + self.path
-        
-        if let description = (self.parameters as? CustomStringConvertible)?.description
+        for (key, value) in dictionary
         {
-            cacheKey = cacheKey + "." + String(description.hashValue)
+            self[key] = value
         }
-        
-        cacheKey = cacheKey.replacingOccurrences(of: "/", with: ".")
-        
-        return cacheKey
     }
 }

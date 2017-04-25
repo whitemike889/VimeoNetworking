@@ -40,17 +40,15 @@ public extension NSError
         /// Returns true if the error is a 503 Service Unavailable error
     public var isServiceUnavailableError: Bool
     {
-        return self.statusCode == HTTPStatusCode.ServiceUnavailable.rawValue
+        return self.statusCode == HTTPStatusCode.serviceUnavailable.rawValue
     }
     
         /// Returns true if the error is due to an invalid access token
     public var isInvalidTokenError: Bool
     {
-        if let urlResponse = self.userInfo[AFNetworkingOperationFailingURLResponseErrorKey] as? NSHTTPURLResponse
-            where urlResponse.statusCode == HTTPStatusCode.Unauthorized.rawValue
+        if let urlResponse = self.userInfo[AFNetworkingOperationFailingURLResponseErrorKey] as? HTTPURLResponse, urlResponse.statusCode == HTTPStatusCode.unauthorized.rawValue
         {
-            if let header = urlResponse.allHeaderFields["WWW-Authenticate"] as? String
-                where header == "Bearer error=\"invalid_token\""
+            if let header = urlResponse.allHeaderFields["Www-Authenticate"] as? String, header == "Bearer error=\"invalid_token\""
             {
                 return true
             }
@@ -85,18 +83,18 @@ public extension NSError
      
      - returns: a new `NSError`
      */
-    class func errorWithDomain(domain: String?, code: Int?, description: String?) -> NSError
+    class func error(withDomain domain: String?, code: Int?, description: String?) -> NSError
     {
         var error = NSError(domain: VimeoErrorKey.VimeoErrorDomain.rawValue, code: 0, userInfo: nil)
         
         if let description = description
         {
             let userInfo = [NSLocalizedDescriptionKey: description]
-            error = error.errorByAddingDomain(domain, code: code, userInfo: userInfo)
+            error = error.error(byAddingDomain: domain, code: code, userInfo: userInfo)
         }
         else
         {
-            error = error.errorByAddingDomain(domain, code: code, userInfo: nil)
+            error = error.error(byAddingDomain: domain, code: code, userInfo: nil)
         }
         
         return error
@@ -109,9 +107,9 @@ public extension NSError
      
      - returns: An error with additional information in the user info dictionary
      */
-    func errorByAddingDomain(domain: String) -> NSError
+    func error(byAddingDomain domain: String) -> NSError
     {
-        return self.errorByAddingDomain(domain, code: nil, userInfo: nil)
+        return self.error(byAddingDomain: domain, code: nil, userInfo: nil)
     }
     
     /**
@@ -121,9 +119,9 @@ public extension NSError
     
      - returns: An error with additional user info
      */
-    func errorByAddingUserInfo(userInfo: [String: AnyObject]) -> NSError
+    func error(byAddingUserInfo userInfo: [AnyHashable: Any]) -> NSError
     {
-        return self.errorByAddingDomain(nil, code: nil, userInfo: userInfo)
+        return self.error(byAddingDomain: nil, code: nil, userInfo: userInfo)
     }
     
     /**
@@ -133,9 +131,9 @@ public extension NSError
      
      - returns: An error with additional information in the user info dictionary
      */
-    func errorByAddingCode(code: Int) -> NSError
+    func error(byAddingCode code: Int) -> NSError
     {
-        return self.errorByAddingDomain(nil, code: code, userInfo: nil)
+        return self.error(byAddingDomain: nil, code: code, userInfo: nil)
     }
     
     /**
@@ -147,9 +145,9 @@ public extension NSError
      
      - returns: An error with additional information in the user info dictionary
      */
-    func errorByAddingDomain(domain: String?, code: Int?, userInfo: [String: AnyObject]?) -> NSError
+    func error(byAddingDomain domain: String?, code: Int?, userInfo: [AnyHashable: Any]?) -> NSError
     {
-        let augmentedInfo = NSMutableDictionary(dictionary: self.userInfo)
+        var augmentedInfo = self.userInfo
         
         if let domain = domain
         {
@@ -163,25 +161,28 @@ public extension NSError
         
         if let userInfo = userInfo
         {
-            augmentedInfo.addEntriesFromDictionary(userInfo)
+            augmentedInfo.append(userInfo)
         }
         
-        return NSError(domain: self.domain, code: self.code, userInfo: augmentedInfo as [NSObject: AnyObject])
+        return NSError(domain: self.domain, code: self.code, userInfo: augmentedInfo)
     }
     
     // MARK: -
     
-    private static let VimeoErrorCodeHeaderKey = "Vimeo-Error-Code"
-    private static let VimeoErrorCodeKeyLegacy = "VimeoErrorCode"
-    private static let VimeoErrorCodeKey = "error_code"
-    private static let VimeoInvalidParametersKey = "invalid_parameters"
-    private static let VimeoUserMessageKey = "error"
-    private static let VimeoDeveloperMessageKey = "developer_message"
+    private struct Constants
+    {
+        static let VimeoErrorCodeHeaderKey = "Vimeo-Error-Code"
+        static let VimeoErrorCodeKeyLegacy = "VimeoErrorCode"
+        static let VimeoErrorCodeKey = "error_code"
+        static let VimeoInvalidParametersKey = "invalid_parameters"
+        static let VimeoUserMessageKey = "error"
+        static let VimeoDeveloperMessageKey = "developer_message"
+    }
     
         /// Returns the status code of the failing response, if available
     public var statusCode: Int?
     {
-        if let response = self.userInfo[AFNetworkingOperationFailingURLResponseErrorKey]
+        if let response = self.userInfo[AFNetworkingOperationFailingURLResponseErrorKey] as? HTTPURLResponse
         {
             return response.statusCode
         }
@@ -192,20 +193,19 @@ public extension NSError
         /// Returns the api error code of the failing response, if available
     public var vimeoServerErrorCode: Int?
     {
-        if let errorCode = (self.userInfo[self.dynamicType.VimeoErrorCodeKeyLegacy] as? NSNumber)?.integerValue
+        if let errorCode = (self.userInfo[Constants.VimeoErrorCodeKeyLegacy] as? Int)
         {
             return errorCode
         }
         
-        if let response = self.userInfo[AFNetworkingOperationFailingURLResponseErrorKey],
-            let headers = response.allHeaderFields,
-            let vimeoErrorCode = headers[self.dynamicType.VimeoErrorCodeHeaderKey] as? String
+        if let response = self.userInfo[AFNetworkingOperationFailingURLResponseErrorKey] as? HTTPURLResponse,
+            let vimeoErrorCode = response.allHeaderFields[Constants.VimeoErrorCodeHeaderKey] as? String
         {
             return Int(vimeoErrorCode)
         }
         
         if let json = self.errorResponseBodyJSON,
-            let errorCode = (json[self.dynamicType.VimeoErrorCodeKey] as? NSNumber)?.integerValue
+            let errorCode = json[Constants.VimeoErrorCodeKey] as? Int
         {
             return errorCode
         }
@@ -218,11 +218,11 @@ public extension NSError
     {
         var errorCodes: [Int] = []
         
-        if let json = self.errorResponseBodyJSON, let invalidParameters = json[self.dynamicType.VimeoInvalidParametersKey] as? [[String: AnyObject]]
+        if let json = self.errorResponseBodyJSON, let invalidParameters = json[Constants.VimeoInvalidParametersKey] as? [[AnyHashable: Any]]
         {
             for invalidParameter in invalidParameters
             {
-                if let code = invalidParameter[self.dynamicType.VimeoErrorCodeKey] as? Int
+                if let code = invalidParameter[Constants.VimeoErrorCodeKey] as? Int
                 {
                     errorCodes.append(code)
                 }
@@ -233,13 +233,13 @@ public extension NSError
     }
     
         /// Returns the api error JSON dictionary, if available
-    public var errorResponseBodyJSON: [String: AnyObject]?
+    public var errorResponseBodyJSON: [AnyHashable: Any]?
     {
-        if let data = self.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] as? NSData
+        if let data = self.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] as? Data
         {
             do
             {
-                let json = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? [String: AnyObject]
+                let json = try JSONSerialization.jsonObject(with: data, options: []) as? [AnyHashable: Any]
                 
                 return json
             }
@@ -261,12 +261,12 @@ public extension NSError
         /// Returns the user message from the api error JSON dictionary if it exists
     public var vimeoInvalidParametersFirstVimeoUserMessage: String?
     {
-        guard let json = self.errorResponseBodyJSON, invalidParameters = json[self.dynamicType.VimeoInvalidParametersKey] as? [AnyObject] else
+        guard let json = self.errorResponseBodyJSON, let invalidParameters = json[Constants.VimeoInvalidParametersKey] as? [AnyObject] else
         {
             return nil
         }
         
-        return invalidParameters.first?[self.dynamicType.VimeoUserMessageKey] as? String
+        return invalidParameters.first?[Constants.VimeoUserMessageKey] as? String
     }
     
         /// Returns an underscore separated string of all the error codes in the the api error JSON dictionary if any exist, otherwise returns nil
@@ -286,7 +286,7 @@ public extension NSError
             result += "\(code)_"
         }
         
-        return result.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "_"))
+        return result.trimmingCharacters(in: CharacterSet(charactersIn: "_"))
     }
     
         /// Returns the "error" key from the api error JSON dictionary if it exists, otherwise returns nil
@@ -297,7 +297,7 @@ public extension NSError
             return nil
         }
         
-        return json[self.dynamicType.VimeoUserMessageKey] as? String
+        return json[Constants.VimeoUserMessageKey] as? String
     }
     
         /// Returns the "developer_message" key from the api error JSON dictionary if it exists, otherwise returns nil
@@ -308,6 +308,6 @@ public extension NSError
             return nil
         }
         
-        return json[self.dynamicType.VimeoDeveloperMessageKey] as? String
+        return json[Constants.VimeoDeveloperMessageKey] as? String
     }
 }

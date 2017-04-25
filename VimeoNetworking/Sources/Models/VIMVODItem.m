@@ -282,7 +282,7 @@
 
 - (VIMVODConnection *)getVideosConnection
 {
-    return [self connectionWithName:VIMConnectionNameVideos];
+    return (VIMVODConnection *)[self connectionWithName:VIMConnectionNameVideos];
 }
 
 - (BOOL)canDoInteraction:(NSString *)interactionName
