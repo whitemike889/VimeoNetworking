@@ -54,14 +54,14 @@ class MasterViewController: UITableViewController
         
         self.setupAccountObservation()
         
-        self.authenticationButton = UIBarButtonItem(title: nil, style: .Plain, target: self, action: #selector(didTapAuthenticationButton))
+        self.authenticationButton = UIBarButtonItem(title: nil, style: .plain, target: self, action: #selector(didTapAuthenticationButton))
         self.updateAuthenticationButton()
         self.navigationItem.rightBarButtonItem = self.authenticationButton
     }
 
-    override func viewWillAppear(animated: Bool)
+    override func viewWillAppear(_ animated: Bool)
     {
-        self.clearsSelectionOnViewWillAppear = self.splitViewController?.collapsed ?? true
+        self.clearsSelectionOnViewWillAppear = self.splitViewController?.isCollapsed ?? true
 
         super.viewWillAppear(animated)
     }
@@ -72,10 +72,9 @@ class MasterViewController: UITableViewController
     {
         // This allows us to fetch a new list of items whenever the current account changes (on log in or log out events)
         
-        self.accountObservationToken = Notification.AuthenticatedAccountDidChange.observe { [weak self] notification in
+        self.accountObservationToken = NetworkingNotification.authenticatedAccountDidChange.observe { [weak self] notification in
             
-            guard let strongSelf = self
-            else
+            guard let strongSelf = self else
             {
                 return
             }
@@ -90,17 +89,16 @@ class MasterViewController: UITableViewController
                 request = Request<[VIMVideo]>(path: "/channels/staffpicks/videos")
             }
             
-            VimeoClient.defaultClient.request(request) { [weak self] result in
+            let _ = VimeoClient.defaultClient.request(request) { [weak self] result in
                 
-                guard let strongSelf = self
-                else
+                guard let strongSelf = self else
                 {
                     return
                 }
                 
                 switch result
                 {
-                case .Success(let response):
+                case .success(let response):
                     
                     strongSelf.videos = response.model
                     
@@ -108,29 +106,28 @@ class MasterViewController: UITableViewController
                     {
                         print("starting next page request")
                         
-                        VimeoClient.defaultClient.request(nextPageRequest) { [weak self] result in
+                        let _ = VimeoClient.defaultClient.request(nextPageRequest) { [weak self] result in
                             
-                            guard let strongSelf = self
-                            else
+                            guard let strongSelf = self else
                             {
                                 return
                             }
                             
-                            if case .Success(let response) = result
+                            if case .success(let response) = result
                             {
                                 print("next page request completed!")
-                                strongSelf.videos.appendContentsOf(response.model)
+                                strongSelf.videos.append(contentsOf: response.model)
                                 strongSelf.tableView.reloadData()
                             }
                         }
                     }
-                case .Failure(let error):
+                case .failure(let error):
                     let title = "Video Request Failed"
                     let message = "\(request.path) could not be loaded: \(error.localizedDescription)"
-                    let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-                    let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    let action = UIAlertAction(title: "OK", style: .default, handler: nil)
                     alert.addAction(action)
-                    strongSelf.presentViewController(alert, animated: true, completion: nil)
+                    strongSelf.present(alert, animated: true, completion: nil)
                 }
             }
             
@@ -169,32 +166,32 @@ class MasterViewController: UITableViewController
             {
                 let title = "Couldn't Log Out"
                 let message = "Logging out failed: \(error.localizedDescription)"
-                let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-                let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alert.addAction(action)
-                self.presentViewController(alert, animated: true, completion: nil)
+                self.present(alert, animated: true, completion: nil)
             }
         }
         else
         {
             let URL = authenticationController.codeGrantAuthorizationURL()
             
-            UIApplication.sharedApplication().openURL(URL)
+            UIApplication.shared.openURL(URL)
         }
     }
 
     // MARK: - Segues
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if segue.identifier == "showDetail"
         {
             if let indexPath = self.tableView.indexPathForSelectedRow
             {
                 let object = videos[indexPath.row]
-                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
+                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
                 controller.detailItem = object
-                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
         }
@@ -202,19 +199,19 @@ class MasterViewController: UITableViewController
 
     // MARK: - UITableViewDataSource
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    override func numberOfSections(in tableView: UITableView) -> Int
     {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return self.videos.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
         let video = self.videos[indexPath.row]
         

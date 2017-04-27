@@ -31,16 +31,16 @@ import AFNetworking
 public enum CacheFetchPolicy
 {
         /// Only request cached responses.  No network request is made.
-    case CacheOnly
+    case cacheOnly
     
         /// Try to load from both cache and network, note that two results may be returned when using this method (cached, then network)
-    case CacheThenNetwork
+    case cacheThenNetwork
     
         /// Only try to load the request from network.  The cache is not queried
-    case NetworkOnly
+    case networkOnly
     
         /// First try the network request, then fallback to cache if it fails
-    case TryNetworkThenCache
+    case tryNetworkThenCache
     
     /**
      Construct the default cache fetch policy for a given `Method`
@@ -51,7 +51,7 @@ public enum CacheFetchPolicy
      */
     static func defaultPolicyForMethod(method: VimeoClient.Method) -> CacheFetchPolicy
     {
-        return .NetworkOnly
+        return .networkOnly
     }
 }
 
@@ -59,7 +59,7 @@ public enum CacheFetchPolicy
 public enum RetryPolicy
 {
         /// Only one attempt is made, no retry behavior
-    case SingleAttempt
+    case singleAttempt
     
     /**
       Retry a request a specified number of times, starting with a specified delay
@@ -67,7 +67,7 @@ public enum RetryPolicy
      - parameter attemptCount: maximum number of times this request should be retried
      - parameter initialDelay: the delay (in seconds) until first retry. The next delay is doubled with each retry to provide `back-off` behavior, which tends to lead to a greater probability of recovery
      */
-    case MultipleAttempts(attemptCount: Int, initialDelay: NSTimeInterval)
+    case multipleAttempts(attemptCount: Int, initialDelay: TimeInterval)
     
     /**
      Construct the default retry policy for a given `Method`
@@ -76,12 +76,12 @@ public enum RetryPolicy
      
      - returns: the default retry policy for the given `Method`
      */
-    static func defaultPolicyForMethod(method: VimeoClient.Method) -> RetryPolicy
+    static func defaultPolicyForMethod(for method: VimeoClient.Method) -> RetryPolicy
     {
         switch method
         {
         case .GET, .DELETE, .PATCH, .POST, .PUT:
-            return .SingleAttempt
+            return .singleAttempt
         }
     }
 }
@@ -89,7 +89,7 @@ public enum RetryPolicy
 extension RetryPolicy
 {
     /// Convenience `RetryPolicy` constructor that provides a standard multiple attempt policy
-    static let TryThreeTimes: RetryPolicy = .MultipleAttempts(attemptCount: 3, initialDelay: 2.0)
+    static let TryThreeTimes: RetryPolicy = .multipleAttempts(attemptCount: 3, initialDelay: 2.0)
 }
 
 /**
@@ -112,7 +112,7 @@ public struct Request<ModelType: MappableResponse>
     public let path: String
     
         /// any parameters to include with the request
-    public let parameters: AnyObject?
+    public let parameters: Any?
 
         /// query a nested JSON key path for the response model object to be returned
     public let modelKeyPath: String?
@@ -143,7 +143,7 @@ public struct Request<ModelType: MappableResponse>
      */
     public init(method: VimeoClient.Method = .GET,
                 path: String,
-                parameters: AnyObject? = nil,
+                parameters: Any? = nil,
                 modelKeyPath: String? = nil,
                 cacheFetchPolicy: CacheFetchPolicy? = nil,
                 shouldCacheResponse: Bool? = nil,
@@ -153,9 +153,9 @@ public struct Request<ModelType: MappableResponse>
         self.path = path
         self.parameters = parameters
         self.modelKeyPath = modelKeyPath
-        self.cacheFetchPolicy = cacheFetchPolicy ?? CacheFetchPolicy.defaultPolicyForMethod(method)
+        self.cacheFetchPolicy = cacheFetchPolicy ?? CacheFetchPolicy.defaultPolicyForMethod(method: method)
         self.shouldCacheResponse = shouldCacheResponse ?? (method == .GET)
-        self.retryPolicy = retryPolicy ?? RetryPolicy.defaultPolicyForMethod(method)
+        self.retryPolicy = retryPolicy ?? RetryPolicy.defaultPolicyForMethod(for: method)
     }
     
         /// Returns a fully-formed URI comprised of the path plus a query string of any parameters
@@ -163,7 +163,7 @@ public struct Request<ModelType: MappableResponse>
     {
         let URI = self.path
         
-        let components = NSURLComponents(string: URI)
+        var components = URLComponents(string: URI)
 
         if let parameters = self.parameters as? VimeoClient.RequestParametersDictionary
         {
@@ -174,13 +174,13 @@ public struct Request<ModelType: MappableResponse>
                 components?.query = queryString
             }
         }
-
-        return components?.string?.stringByRemovingPercentEncoding ?? ""
+        
+        return components?.string?.removingPercentEncoding ?? ""
     }
     
     // MARK: Copying requests
     
-    internal func associatedPageRequest(newPath newPath: String) -> Request<ModelType>
+    internal func associatedPageRequest(withNewPath newPath: String) -> Request<ModelType>
     {
         // Since page response paging paths bake the paging parameters into the path,
         // strip them out and upsert them back into the body parameters.

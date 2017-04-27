@@ -121,11 +121,11 @@ class ModelObjectValidationTests: XCTestCase
     // MARK - Helper Method For Cinema testing
     func cinemaEndpointDataSource() -> FakeDataSource<VIMProgrammedContent>
     {
-        let jsonFilePath = NSBundle(forClass: self.dynamicType).pathForResource("programmed_cinema", ofType: "json")
-        let jsonData = NSData(contentsOfFile: jsonFilePath!)
-        let jsonDict = try! NSJSONSerialization.JSONObjectWithData(jsonData!, options: NSJSONReadingOptions.AllowFragments)
+        let jsonFilePath = Bundle(for: type(of: self)).path(forResource: "programmed_cinema", ofType: "json")
+        let jsonData = try? Data(contentsOf: URL(fileURLWithPath: jsonFilePath!))
+        let jsonDict = try! JSONSerialization.jsonObject(with: jsonData!, options: JSONSerialization.ReadingOptions.allowFragments)
         
-        return FakeDataSource<VIMProgrammedContent>(jsonData: jsonDict as! [String : AnyObject], keyPath: "data")
+        return FakeDataSource<VIMProgrammedContent>(jsonData: jsonDict as! [String : Any], keyPath: "data")
     }
     
     func testProgrammedContentMapped()
@@ -179,10 +179,11 @@ class ModelObjectValidationTests: XCTestCase
         {
             for video in programmedContent.content!
             {
-                XCTAssertTrue(video.isKindOfClass(VIMVideo.self))
+                XCTAssertTrue(video is VIMVideo)
+                
+                let video = video as! VIMVideo
                 
                 XCTAssertNotNil(video.uri)
-                XCTAssertNotNil(video.videoDescription)
                 XCTAssertNotNil(video.files)
                 XCTAssertNotNil(video.resourceKey)
             }
@@ -200,7 +201,7 @@ class ModelObjectValidationTests: XCTestCase
         
         for programmedContent in programmedContentItems
         {
-            XCTAssertNotNil(programmedContent.connectionWithName(VIMConnectionNameContents))
+            XCTAssertNotNil(programmedContent.connectionWithName(connectionName: VIMConnectionNameContents))
         }
     }
     

@@ -38,7 +38,7 @@
     if ([self.privacy isKindOfClass:[NSString class]])
     {
         VIMPrivacy *privacy = [VIMPrivacy new];
-        privacy.view = self.privacy;
+        privacy.view = (NSString *)self.privacy;
         self.privacy = privacy;
     }
 }
