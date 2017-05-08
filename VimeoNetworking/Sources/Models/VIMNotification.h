@@ -38,7 +38,8 @@ typedef NS_ENUM(NSUInteger, VIMNotificationType) {
     VIMNotificationTypeFollow,
     VIMNotificationTypeLike,
     VIMNotificationTypeReply,
-    VIMNotificationTypeVideoAvailable
+    VIMNotificationTypeVideoAvailable,
+    VIMNotificationTypeFollowedUserVideoAvailable
 };
 
 @interface VIMNotification : VIMModelObject
