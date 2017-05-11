@@ -32,10 +32,14 @@ import AFNetworking
  */
 final public class VimeoRequestSerializer: AFJSONRequestSerializer
 {
-    private static let AcceptHeaderKey = "Accept"
-    private static let AuthorizationHeaderKey = "Authorization"
     
-    public typealias AccessTokenProvider = Void -> String?
+    private struct Constants
+    {
+        static let AcceptHeaderKey = "Accept"
+        static let AuthorizationHeaderKey = "Authorization"
+    }
+    
+    public typealias AccessTokenProvider = (Void) -> String?
     
     // MARK: 
     
@@ -55,7 +59,7 @@ final public class VimeoRequestSerializer: AFJSONRequestSerializer
      
      - returns: an initialized `VimeoRequestSerializer`
      */
-    init(accessTokenProvider: AccessTokenProvider, apiVersion: String = VimeoDefaultAPIVersionString)
+    init(accessTokenProvider: @escaping AccessTokenProvider, apiVersion: String = VimeoDefaultAPIVersionString)
     {
         self.accessTokenProvider = accessTokenProvider
         self.appConfiguration = nil
@@ -92,51 +96,60 @@ final public class VimeoRequestSerializer: AFJSONRequestSerializer
     
     // MARK: Overrides
     
-    override public func requestWithMethod(method: String, URLString: String, parameters: AnyObject?, error: NSErrorPointer) -> NSMutableURLRequest
+    public override func request(withMethod method: String, urlString URLString: String, parameters: Any?, error: NSErrorPointer) -> NSMutableURLRequest
     {
-        var request = super.requestWithMethod(method, URLString: URLString, parameters: parameters, error: error)
-       
-        request = self.setAuthorizationHeader(request: request)
+        var request = super.request(withMethod: method, urlString: URLString, parameters: parameters, error: error) as URLRequest
         
-        return request
+        request = self.requestWithAuthorizationHeader(fromRequest: request)
+        
+        return (request as NSURLRequest).mutableCopy() as! NSMutableURLRequest
     }
     
-    override public func requestBySerializingRequest(request: NSURLRequest, withParameters parameters: AnyObject?, error: NSErrorPointer) -> NSURLRequest?
+    public override func multipartFormRequest(withMethod method: String, urlString URLString: String, parameters: [String : Any]?, constructingBodyWith block: ((AFMultipartFormData) -> Void)?, error: NSErrorPointer) -> NSMutableURLRequest
     {
-        if let request = super.requestBySerializingRequest(request, withParameters: parameters, error: error)
+        var request = super.multipartFormRequest(withMethod: method, urlString: URLString, parameters: parameters, constructingBodyWith: block, error: error) as URLRequest
+        
+        request = self.requestWithAuthorizationHeader(fromRequest: request)
+        
+        return (request as NSURLRequest).mutableCopy() as! NSMutableURLRequest
+    }
+    
+    public override func request(withMultipartForm request: URLRequest, writingStreamContentsToFile fileURL: URL, completionHandler handler: ((Error?) -> Void)? = nil) -> NSMutableURLRequest
+    {
+        var request = super.request(withMultipartForm: request, writingStreamContentsToFile: fileURL, completionHandler: handler) as URLRequest
+        
+        request = self.requestWithAuthorizationHeader(fromRequest: request)
+        
+        return (request as NSURLRequest).mutableCopy() as! NSMutableURLRequest
+    }
+    
+    public override func request(bySerializingRequest request: URLRequest, withParameters parameters: Any?, error: NSErrorPointer) -> URLRequest?
+    {
+        if var request = super.request(bySerializingRequest: request, withParameters: parameters, error: error)
         {
-            var mutableRequest = request.mutableCopy() as! NSMutableURLRequest
-            mutableRequest = self.setAuthorizationHeader(request: mutableRequest)
+            request = self.requestWithAuthorizationHeader(fromRequest: request)
             
-            return mutableRequest.copy() as? NSURLRequest
+            return request
         }
         
         return nil
     }
     
-    override public func requestWithMultipartFormRequest(request: NSURLRequest, writingStreamContentsToFile fileURL: NSURL, completionHandler handler: ((NSError?) -> Void)?) -> NSMutableURLRequest
-    {
-        var request = super.requestWithMultipartFormRequest(request, writingStreamContentsToFile: fileURL, completionHandler: handler)
-    
-        request = self.setAuthorizationHeader(request: request)
-        
-        return request
-    }
-    
     // MARK: Private API
     
-    private func setup(apiVersion apiVersion: String)
+    private func setup(apiVersion: String)
     {
-        self.setValue("application/vnd.vimeo.*+json; version=\(apiVersion)", forHTTPHeaderField: self.dynamicType.AcceptHeaderKey)
-//        self.writingOptions = .PrettyPrinted
+        self.setValue("application/vnd.vimeo.*+json; version=\(apiVersion)", forHTTPHeaderField: Constants.AcceptHeaderKey)
     }
 
-    private func setAuthorizationHeader(request request: NSMutableURLRequest) -> NSMutableURLRequest
+    private func requestWithAuthorizationHeader(fromRequest request: URLRequest) -> URLRequest
     {
+        var request = request
+        
         if let token = self.accessTokenProvider?()
         {
             let value = "Bearer \(token)"
-            request.setValue(value, forHTTPHeaderField: self.dynamicType.AuthorizationHeaderKey)
+            request.setValue(value, forHTTPHeaderField: Constants.AuthorizationHeaderKey)
         }
         else if let appConfiguration = self.appConfiguration
         {
@@ -144,13 +157,13 @@ final public class VimeoRequestSerializer: AFJSONRequestSerializer
             let clientSecret = appConfiguration.clientSecret
             
             let authString = "\(clientID):\(clientSecret)"
-            let authData = authString.dataUsingEncoding(NSUTF8StringEncoding)
-            let base64String = authData?.base64EncodedStringWithOptions([])
+            let authData = authString.data(using: String.Encoding.utf8)
+            let base64String = authData?.base64EncodedString(options: [])
             
             if let base64String = base64String
             {
                 let headerValue = "Basic \(base64String)"
-                request.setValue(headerValue, forHTTPHeaderField: self.dynamicType.AuthorizationHeaderKey)
+                request.setValue(headerValue, forHTTPHeaderField: Constants.AuthorizationHeaderKey)
             }
         }
         

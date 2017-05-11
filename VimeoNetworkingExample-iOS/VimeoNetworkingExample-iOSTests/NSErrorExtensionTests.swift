@@ -44,11 +44,11 @@ class NSErrorExtensionTests: XCTestCase {
                                      "field": "password"
                                     ]
                                 ]
-                            ]
+                            ] as [String : Any]
         
-        let fakeErrorData = try! NSJSONSerialization.dataWithJSONObject(fakeErrorJSON, options: NSJSONWritingOptions.init(rawValue: 0))
+        let fakeErrorData = try! JSONSerialization.data(withJSONObject: fakeErrorJSON, options: JSONSerialization.WritingOptions.init(rawValue: 0))
         
-        let userInfo = [NSLocalizedDescriptionKey: "Request failed: bad request (400)", "com.alamofire.serialization.response.error.data": fakeErrorData]
+        let userInfo = [NSLocalizedDescriptionKey: "Request failed: bad request (400)", "com.alamofire.serialization.response.error.data": fakeErrorData] as [String : Any]
         self.testApiError = NSError(domain: "com.vimeo.networking-test", code: -1011, userInfo: userInfo)
     }
     
@@ -92,7 +92,7 @@ class NSErrorExtensionTests: XCTestCase {
     }
     
     func testVimeoResponseHeaderServerErrorCode() {
-        let fakeResponse = NSHTTPURLResponse(URL: NSURL(string: "vimeo-networking-tests")!, statusCode: 403, HTTPVersion: "1.0", headerFields: ["Vimeo-Error-Code": "4101"])
+        let fakeResponse = HTTPURLResponse(url: URL(string: "vimeo-networking-tests")!, statusCode: 403, httpVersion: "1.0", headerFields: ["Vimeo-Error-Code": "4101"])
         var userInfo = self.testApiError.userInfo
         userInfo["com.alamofire.serialization.response.error.response"] = fakeResponse
         let error = NSError(domain: self.testApiError.domain, code: self.testApiError.code, userInfo: userInfo)
@@ -112,15 +112,14 @@ class NSErrorExtensionTests: XCTestCase {
         
         XCTAssertNotNil(invalidParameters as? NSArray)
         
-        let invalidParamsDict = invalidParameters!.firstObject!!
-        XCTAssertEqual(invalidParamsDict["error"], "Unable to log in Please enter a valid email address and/or password")
-        XCTAssertEqual(invalidParamsDict["developer_message"], "Password and/or email provided are invalid")
-        XCTAssertEqual(invalidParamsDict["error_code"], 2218)
-        XCTAssertEqual(invalidParamsDict["field"], "password")
+        let invalidParamsDict = (invalidParameters as? NSArray)?.firstObject as? Dictionary<AnyHashable, Any>
+        XCTAssertEqual(invalidParamsDict?["error"] as? String, "Unable to log in Please enter a valid email address and/or password")
+        XCTAssertEqual(invalidParamsDict?["developer_message"] as? String, "Password and/or email provided are invalid")
+        XCTAssertEqual(invalidParamsDict?["error_code"] as? Int, 2218)
+        XCTAssertEqual(invalidParamsDict?["field"] as? String, "password")
     }
     
     func testVimeoInvalidParametersFirstVimeoUserMessage() {
         XCTAssertEqual(self.testApiError.vimeoInvalidParametersFirstVimeoUserMessage, "Unable to log in Please enter a valid email address and/or password")
     }
-    
 }

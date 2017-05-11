@@ -45,7 +45,7 @@ public class Subscription: VIMModelObject
     var share: NSNumber?
     
     /// Represents the Subscription object as a Dictionary
-    public var toDictionary: [NSObject: AnyObject]
+    public var toDictionary: [AnyHashable: Any]
     {
         let dictionary = ["comment": self.comment ?? false,
                           "credit": self.credit ?? false,
@@ -62,7 +62,7 @@ public class Subscription: VIMModelObject
     
     // MARK: - VIMMappable
     
-    override public func getObjectMapping() -> AnyObject!
+    override public func getObjectMapping() -> Any
     {
         return [
             "video_available": "videoAvailable",

@@ -33,8 +33,8 @@ public class VIMProgrammedContent: VIMModelObject
     dynamic public var type: String?
     dynamic public var content: NSArray?
  
-    dynamic private var metadata: [NSObject: AnyObject]?
-    dynamic private var connections: [NSObject: AnyObject]?
+    dynamic private var metadata: [AnyHashable: Any]?
+    dynamic private var connections: [AnyHashable: Any]?
     
     private struct Constants
     {
@@ -51,7 +51,7 @@ public class VIMProgrammedContent: VIMModelObject
     }
     
     //Note: No super call in this method, see explanation in didFinishMapping() [MW] 10/19/16
-    override public func getClassForCollectionKey(key: String!) -> AnyClass!
+    override public func getClassForCollectionKey(_ key: String!) -> AnyClass!
     {
         if key == Constants.ContentKey
         {
@@ -62,7 +62,7 @@ public class VIMProgrammedContent: VIMModelObject
     }
     
     //Note: No super call in this method, see explanation in didFinishMapping() [MW] 10/19/16
-    override public func getClassForObjectKey(key: String!) -> AnyClass!
+    override public func getClassForObjectKey(_ key: String!) -> AnyClass!
     {
         if key == Constants.MetadataKey
         {
@@ -90,15 +90,15 @@ public class VIMProgrammedContent: VIMModelObject
     
     private func parseConnections()
     {
-        guard let dict = self.metadata?[Constants.ConnectionsKey] as? [NSObject: AnyObject] else
+        guard let dict = self.metadata?[Constants.ConnectionsKey] as? [AnyHashable: Any] else
         {
             return
         }
      
-        self.connections = [NSObject: AnyObject]()
+        self.connections = [AnyHashable: Any]()
         for (key, value) in dict
         {
-            if let valueDict = value as? [NSObject: AnyObject]
+            if let valueDict = value as? [AnyHashable: Any]
             {
                 self.connections?[key] = VIMConnection(keyValueDictionary: valueDict)
             }

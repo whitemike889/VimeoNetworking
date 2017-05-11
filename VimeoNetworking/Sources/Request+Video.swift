@@ -47,7 +47,7 @@ public extension Request
      
      - returns: a new `Request`
      */
-    public static func getVideoRequest(videoURI videoURI: String) -> Request
+    public static func videoRequest(forVideoURI videoURI: String) -> Request
     {
         return Request(path: videoURI)
     }
@@ -60,7 +60,7 @@ public extension Request
      
      - returns: a new `Request`
      */
-    static func passwordProtectedVideoRequest(videoURI videoURI: String, password: String) -> Request
+    static func passwordProtectedVideoRequest(forVideoURI videoURI: String, password: String) -> Request
     {
         let parameters = ["password": password]
         
@@ -74,7 +74,7 @@ public extension Request
      
      - returns: a new `Request`
      */
-    static func vodVideoRequest(vodVideoURI vodVideoURI: String) -> Request
+    static func vodVideoRequest(forVODVideoURI vodVideoURI: String) -> Request
     {
         let parameters = ["_video_override": "true"]
         
@@ -88,9 +88,9 @@ public extension Request
      
      - returns: a new `Request`
      */
-    static func selectedUsersRequest(videoURI videoURI: String) -> Request
+    static func selectedUsersRequest(forVideoURI videoURI: String) -> Request
     {
-        let parameters = [VimeoClient.PerPageKey: 100]
+        let parameters = [VimeoClient.Constants.PerPageKey: 100]
         
         return Request(path: videoURI, parameters: parameters)
     }
@@ -105,7 +105,7 @@ public extension Request
      
      - returns: a new `Request`
      */
-    public static func queryVideos(query query: String, refinements: VimeoClient.RequestParametersDictionary? = nil) -> Request
+    public static func queryVideos(withQuery query: String, refinements: VimeoClient.RequestParametersDictionary? = nil) -> Request
     {
         var parameters = refinements ?? [:]
         
@@ -124,7 +124,7 @@ public extension Request
      
      - returns: a new `Request`
      */
-    public static func patchVideoRequest(videoURI videoURI: String, parameters: VimeoClient.RequestParametersDictionary) -> Request
+    public static func patchVideoRequest(withVideoURI videoURI: String, parameters: VimeoClient.RequestParametersDictionary) -> Request
     {
         return Request(method: .PATCH, path: videoURI, parameters: parameters)
     }
@@ -136,7 +136,7 @@ public extension Request
      
      - returns: a new `Request`
      */
-    public static func deleteVideoRequest(videoURI videoURI: String) -> Request
+    public static func deleteVideoRequest(forVideoURI videoURI: String) -> Request
     {
         return Request(method: .DELETE, path: videoURI)
     }

@@ -22,12 +22,12 @@ public class SubscriptionCollection: VIMModelObject
     
     // MARK: - VIMMappable
     
-    public override func getObjectMapping() -> AnyObject!
+    public override func getObjectMapping() -> Any
     {
         return ["subscriptions": "subscription"]
     }
     
-    public override func getClassForObjectKey(key: String!) -> AnyClass!
+    public override func getClassForObjectKey(_ key: String!) -> AnyClass!
     {
         if key == "subscriptions"
         {
