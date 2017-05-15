@@ -82,13 +82,19 @@ final public class AuthenticationController
      
      - returns: a new `AuthenticationController`
      */
-    public init(client: VimeoClient)
+    public init?(client: VimeoClient)
     {
-        self.configuration = client.configuration
-        self.client = client
-        self.accountStore = AccountStore(configuration: client.configuration)
+        guard let configuration = client.configuration else
+        {
+            assertionFailure("VimeoClient argument cannot contain nil configuration")
+            return nil
+        }
         
-        self.authenticatorClient = VimeoClient(appConfiguration: client.configuration)
+        self.configuration = configuration
+        self.client = client
+        self.accountStore = AccountStore(configuration: configuration)
+        
+        self.authenticatorClient = VimeoClient(appConfiguration: configuration)
     }
     
     // MARK: - Public Saved Accounts
