@@ -48,11 +48,9 @@ NSInteger const VIMModelObjectValidationErrorCode = 10101;
     static dispatch_once_t onceToken;
 
     dispatch_once(&onceToken, ^{
-
         dateFormatter = [[NSDateFormatter alloc] init];
         dateFormatter.locale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
         dateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
-        
     });
     
     return dateFormatter;
