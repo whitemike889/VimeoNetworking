@@ -13,20 +13,20 @@ class ExceptionCatcherTests: XCTestCase
 {
     func test_ExceptionCatcher_CatchesArchiverExceptions()
     {
-        let badData = Data(repeating: 1, count: 20)
-        
         do
         {
             try ExceptionCatcher.doUnsafe
             {
-                _ = NSKeyedUnarchiver.unarchiveObject(with: badData) as? VimeoClient.ResponseDictionary
+                let exception = NSException(name: NSExceptionName.invalidArchiveOperationException, reason: "test exception", userInfo: nil)
+                exception.raise()
             }
         }
         catch let error
         {
-            XCTAssertEqual(error.localizedDescription, NSExceptionName.invalidArchiveOperationException.rawValue)
+            XCTAssertEqual(error.localizedDescription, "test exception")
+            return
         }
         
-//        XCTFail("This test should throw an exception!")
+        XCTFail("This test should throw an exception!")
     }
 }
