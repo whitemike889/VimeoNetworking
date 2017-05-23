@@ -47,6 +47,11 @@ final internal class ResponseCache
         static let CacheDirectory = "com.vimeo.Caches"
     }
     
+    /**
+     Initializer
+     
+     - parameter cacheDirectory: the directory name where the cache files will be stored.  Defaults to com.vimeo.Caches.
+     */
     init(cacheDirectory: String = Constant.CacheDirectory)
     {
         self.memoryCache = ResponseMemoryCache()
