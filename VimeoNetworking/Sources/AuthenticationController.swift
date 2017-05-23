@@ -82,13 +82,13 @@ final public class AuthenticationController
      
      - returns: a new `AuthenticationController`
      */
-    public init(client: VimeoClient)
+    public init(client: VimeoClient, appConfiguration: AppConfiguration)
     {
-        self.configuration = client.configuration
+        self.configuration = appConfiguration
         self.client = client
-        self.accountStore = AccountStore(configuration: client.configuration)
+        self.accountStore = AccountStore(configuration: configuration)
         
-        self.authenticatorClient = VimeoClient(appConfiguration: client.configuration)
+        self.authenticatorClient = VimeoClient(appConfiguration: configuration)
     }
     
     // MARK: - Public Saved Accounts
