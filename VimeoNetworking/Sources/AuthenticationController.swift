@@ -194,11 +194,7 @@ final public class AuthenticationController
                           Constants.ScopeKey: Scope.combine(self.configuration.scopes),
                           Constants.StateKey: type(of: self).state]
         
-        guard let urlString = VimeoBaseURLString?.appendingPathComponent(Constants.CodeGrantAuthorizationPath).absoluteString
-        else
-        {
-            fatalError("Could not make code grant auth URL")
-        }
+        let urlString = VimeoBaseURL.appendingPathComponent(Constants.CodeGrantAuthorizationPath).absoluteString
         
         var error: NSError?
         let urlRequest = VimeoRequestSerializer(appConfiguration: self.configuration).request(withMethod: VimeoClient.Method.GET.rawValue, urlString: urlString, parameters: parameters, error: &error)
