@@ -34,11 +34,15 @@ class FakeDataSource<T: VIMMappable>
     var items: [T]?
     var error: NSError?
     
-    init(jsonData: [String: AnyObject], keyPath: String)
+    init(jsonData: [AnyHashable: Any], keyPath: String)
     {                
         mapper.addMappingClass(T.self, forKeypath: keyPath)
         
-        let mappedData = mapper.applyMappingToJSON(jsonData)
+        guard let mappedData = mapper.applyMapping(toJSON: jsonData) as? [AnyHashable: Any] else
+        {
+            return
+        }
+        
         if let objects = mappedData["data"] as? [T]
         {
             self.items = objects
@@ -49,12 +53,12 @@ class FakeDataSource<T: VIMMappable>
         }
     }
 
-    static func loadJSONFile(jsonFileName: String, withExtension: String) -> [String: AnyObject]
+    static func loadJSONFile(jsonFileName: String, withExtension: String) -> [AnyHashable: Any]
     {
-        let jsonFilePath = NSBundle.mainBundle().pathForResource(jsonFileName, ofType: withExtension)
-        let jsonData = NSData(contentsOfFile: jsonFilePath!)
-        let jsonDict = try! NSJSONSerialization.JSONObjectWithData(jsonData!, options: NSJSONReadingOptions.AllowFragments)
+        let jsonFilePath = Bundle.main.path(forResource: jsonFileName, ofType: withExtension)
+        let jsonData = try? Data(contentsOf: URL(fileURLWithPath: jsonFilePath!))
+        let jsonDict = try! JSONSerialization.jsonObject(with: jsonData!, options: JSONSerialization.ReadingOptions.allowFragments)
         
-        return (jsonDict as? [String: AnyObject])!
+        return (jsonDict as? [AnyHashable: Any])!
     }
 }

@@ -18,7 +18,7 @@ public extension Request
      
      - returns: a new `Request`
      */
-    public static func createPictureRequest(userURI userURI: String) -> Request
+    public static func createPictureRequest(forUserURI userURI: String) -> Request
     {
         let uri = userURI + "/pictures"
         
@@ -32,7 +32,7 @@ public extension Request
      
      - returns: a new `Request`
      */
-    public static func deletePictureRequest(pictureURI pictureURI: String) -> Request
+    public static func deletePictureRequest(forPictureURI pictureURI: String) -> Request
     {
         return Request(method: .DELETE, path: pictureURI)
     }
@@ -44,7 +44,7 @@ public extension Request
      
      - returns: a new `Request`
      */
-    public static func activatePictureRequest(pictureURI pictureURI: String) -> Request
+    public static func activatePictureRequest(forPictureURI pictureURI: String) -> Request
     {
         let parameters = ["active": "true"]
         

@@ -26,13 +26,13 @@
 
 import Foundation
 
-private typealias ResponseDictionaryClosure = (responseDictionary: VimeoClient.ResponseDictionary?) -> Void
+private typealias ResponseDictionaryClosure = (VimeoClient.ResponseDictionary?) -> Void
 
 private protocol Cache
 {
-    func setResponseDictionary(responseDictionary: VimeoClient.ResponseDictionary, forKey key: String)
+    func setResponseDictionary(_ responseDictionary: VimeoClient.ResponseDictionary, forKey key: String)
     
-    func responseDictionary(forKey key: String, completion: ResponseDictionaryClosure)
+    func responseDictionary(forKey key: String, completion: @escaping ResponseDictionaryClosure)
     
     func removeResponseDictionary(forKey key: String)
     
@@ -67,7 +67,7 @@ final internal class ResponseCache
      - parameter request:    the request for which the cache should be queried
      - parameter completion: returns `.Success(ResponseDictionary)`, if found in cache, or `.Success(nil)` for a cache miss.  Returns `.Failure(NSError)` if an error occurred.
      */
-    func responseForRequest<ModelType>(request: Request<ModelType>, completion: ResultCompletion<VimeoClient.ResponseDictionary?>.T)
+    func response<ModelType>(forRequest request: Request<ModelType>, completion: @escaping ResultCompletion<VimeoClient.ResponseDictionary?>.T)
     {
         let key = request.cacheKey
         
@@ -75,13 +75,13 @@ final internal class ResponseCache
             
             if responseDictionary != nil
             {
-                completion(result: .Success(result: responseDictionary))
+                completion(.success(result: responseDictionary))
             }
             else
             {
                 self.diskCache.responseDictionary(forKey: key, completion: { (responseDictionary) in
                     
-                    completion(result: .Success(result: responseDictionary))
+                    completion(.success(result: responseDictionary))
                 })
             }
         }
@@ -113,26 +113,26 @@ final internal class ResponseCache
     
     private class ResponseMemoryCache: Cache
     {
-        private let cache = NSCache()
+        private let cache = NSCache<AnyObject, AnyObject>()
         
-        private func setResponseDictionary(responseDictionary: VimeoClient.ResponseDictionary, forKey key: String)
+        func setResponseDictionary(_ responseDictionary: VimeoClient.ResponseDictionary, forKey key: String)
         {
-            self.cache.setObject(responseDictionary, forKey: key)
+            self.cache.setObject(responseDictionary as AnyObject, forKey: key as AnyObject)
         }
         
-        private func responseDictionary(forKey key: String, completion: ResponseDictionaryClosure)
+        func responseDictionary(forKey key: String, completion: @escaping ResponseDictionaryClosure)
         {
-            let responseDictionary = self.cache.objectForKey(key) as? VimeoClient.ResponseDictionary
+            let responseDictionary = self.cache.object(forKey: key as AnyObject) as? VimeoClient.ResponseDictionary
             
-            completion(responseDictionary: responseDictionary)
+            completion(responseDictionary)
         }
         
-        private func removeResponseDictionary(forKey key: String)
+        func removeResponseDictionary(forKey key: String)
         {
-            self.cache.removeObjectForKey(key)
+            self.cache.removeObject(forKey: key as AnyObject)
         }
         
-        private func removeAllResponseDictionaries()
+        func removeAllResponseDictionaries()
         {
             self.cache.removeAllObjects()
         }
@@ -144,35 +144,30 @@ final internal class ResponseCache
     
     private class ResponseDiskCache: Cache
     {
-        private let queue = dispatch_queue_create("com.vimeo.VIMCache.diskQueue", DISPATCH_QUEUE_CONCURRENT)
+        private let queue = DispatchQueue(label: "com.vimeo.VIMCache.diskQueue", attributes: DispatchQueue.Attributes.concurrent)
         
-        private func setResponseDictionary(responseDictionary: VimeoClient.ResponseDictionary, forKey key: String)
+        func setResponseDictionary(_ responseDictionary: VimeoClient.ResponseDictionary, forKey key: String)
         {
-            dispatch_barrier_async(self.queue) {
+            self.queue.async(flags: .barrier, execute: {
                 
-                let data = NSKeyedArchiver.archivedDataWithRootObject(responseDictionary)
+                let data = NSKeyedArchiver.archivedData(withRootObject: responseDictionary)
+                let fileManager = FileManager()
+                let directoryPath = self.cachesDirectoryURL().path
                 
-                let fileManager = NSFileManager()
-                
-                let directoryURL = self.cachesDirectoryURL()
-                
-                guard let directoryPath = directoryURL.path,
-                    let filePath = self.fileURLForKey(key: key)?.path
-                else
+                guard let filePath = self.fileURL(forKey: key)?.path else 
                 {
-                    assertionFailure("no cache path found")
-                    
+                    assertionFailure("No cache path found.")
                     return
                 }
                 
                 do
                 {
-                    if !fileManager.fileExistsAtPath(directoryPath)
+                    if !fileManager.fileExists(atPath: directoryPath)
                     {
-                        try fileManager.createDirectoryAtPath(directoryPath, withIntermediateDirectories: true, attributes: nil)
+                        try fileManager.createDirectory(atPath: directoryPath, withIntermediateDirectories: true, attributes: nil)
                     }
                     
-                    let success = fileManager.createFileAtPath(filePath, contents: data, attributes: nil)
+                    let success = fileManager.createFile(atPath: filePath, contents: data, attributes: nil)
                     
                     if !success
                     {
@@ -183,25 +178,25 @@ final internal class ResponseCache
                 {
                     print("ResponseDiskCache error: \(error)")
                 }
-            }
+            }) 
         }
         
-        private func responseDictionary(forKey key: String, completion: ResponseDictionaryClosure)
+        func responseDictionary(forKey key: String, completion: @escaping (VimeoClient.ResponseDictionary?) -> Void)
         {
-            dispatch_async(self.queue) {
+            self.queue.async {
                 
-                guard let filePath = self.fileURLForKey(key: key)?.path
+                guard let filePath = self.fileURL(forKey: key)?.path
                     else
                 {
-                    assertionFailure("no cache path found")
+                    assertionFailure("No cache path found.")
                     
                     return
                 }
                 
-                guard let data = NSData(contentsOfFile: filePath)
+                guard let data = try? Data(contentsOf: URL(fileURLWithPath: filePath))
                 else
                 {
-                    completion(responseDictionary: nil)
+                    completion(nil)
                     
                     return
                 }
@@ -212,25 +207,25 @@ final internal class ResponseCache
                 {
                     try ExceptionCatcher.doUnsafe
                     {
-                        responseDictionary = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? VimeoClient.ResponseDictionary
+                        responseDictionary = NSKeyedUnarchiver.unarchiveObject(with: data) as? VimeoClient.ResponseDictionary
                     }
                 }
                 catch let error
                 {
-                    print("error decoding response dictionary: \(error)")
+                    print("Error decoding response dictionary: \(error)")
                 }
                 
-                completion(responseDictionary: responseDictionary)
+                completion(responseDictionary)
             }
         }
         
-        private func removeResponseDictionary(forKey key: String)
+        func removeResponseDictionary(forKey key: String)
         {
-            dispatch_barrier_async(self.queue) {
+            self.queue.async(flags: .barrier, execute: {
                 
-                let fileManager = NSFileManager()
+                let fileManager = FileManager()
                 
-                guard let filePath = self.fileURLForKey(key: key)?.path else
+                guard let filePath = self.fileURL(forKey: key)?.path else
                 {
                     // Assert to catch a badly formed filepath.
                     
@@ -239,7 +234,7 @@ final internal class ResponseCache
                     return
                 }
                 
-                guard fileManager.fileExistsAtPath(filePath) == true else
+                guard fileManager.fileExists(atPath: filePath) == true else
                 {
                     // Multiple attempts to remove the cache file are possible given that
                     // a cached response won't be repopulated until another request is made.
@@ -252,69 +247,56 @@ final internal class ResponseCache
                 
                 do
                 {
-                    try fileManager.removeItemAtPath(filePath)
+                    try fileManager.removeItem(atPath: filePath)
                 }
                 catch let error
                 {
                     print("Removal of disk cache for \(key) failed with error \(error)")
                 }
-            }
+            }) 
         }
         
-        private func removeAllResponseDictionaries()
+        func removeAllResponseDictionaries()
         {
-            dispatch_barrier_async(self.queue) {
+            self.queue.async(flags: .barrier, execute: {
                 
-                let fileManager = NSFileManager()
+                let fileManager = FileManager()
+                let directoryPath = self.cachesDirectoryURL().path
                 
-                guard let directoryPath = self.cachesDirectoryURL().path
-                else
+                guard !directoryPath.isEmpty else
                 {
-                    assertionFailure("no cache directory")
-                    
+                    assertionFailure("No cache directory.")
                     return
                 }
                 
                 do
                 {
-                    try fileManager.removeItemAtPath(directoryPath)
+                    try fileManager.removeItem(atPath: directoryPath)
                 }
                 catch
                 {
-                    print("could not clear disk cache")
+                    print("Could not clear disk cache.")
                 }
-            }
+            }) 
         }
         
         // MARK: - directories
         
-        private func cachesDirectoryURL() -> NSURL
+        private func cachesDirectoryURL() -> URL
         {
             // Apple /Caches directory
-            guard let directory = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true).first
-            else
+            guard let directory = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first else
             {
-                fatalError("no cache directories found")
+                fatalError("No cache directories found.")
             }
             
             // We need to create a directory in `../Library/Caches folder`. Otherwise, trying to remove the Apple /Caches folder will always fail. Note that it's noticeable while testing on a device.
-            guard let url = NSURL(fileURLWithPath: directory).URLByAppendingPathComponent(Constant.CacheDirectory) else
-            {
-                assertionFailure("Unable to create cacheDirectory directory")
-                return NSURL(fileURLWithPath: directory)
-            }
-            
-            return url
+            return URL(fileURLWithPath: directory).appendingPathComponent(Constant.CacheDirectory, isDirectory: true)
         }
         
-        private func fileURLForKey(key key: String) -> NSURL?
+        private func fileURL(forKey key: String) -> URL?
         {
-            guard let fileURL = self.cachesDirectoryURL().URLByAppendingPathComponent(key) else
-            {
-                assertionFailure("Unable to create cache file URL.")
-                
-                return nil
-            }
+            let fileURL = self.cachesDirectoryURL().appendingPathComponent(key)
             
             return fileURL
         }

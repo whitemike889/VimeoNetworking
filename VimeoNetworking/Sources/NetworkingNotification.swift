@@ -1,5 +1,5 @@
 //
-//  Notification.swift
+//  NetworkingNotification.swift
 //  VimeoNetworking
 //
 //  Created by Huebner, Rob on 4/25/16.
@@ -31,7 +31,7 @@ public class ObservationToken
 {
     private let observer: NSObjectProtocol
     
-    private init(observer: NSObjectProtocol)
+    fileprivate init(observer: NSObjectProtocol)
     {
         self.observer = observer
     }
@@ -41,7 +41,7 @@ public class ObservationToken
      */
     public func stopObserving()
     {
-        Notification.removeObserver(self.observer)
+        NetworkingNotification.removeObserver(target: self.observer)
     }
     
     deinit
@@ -52,46 +52,42 @@ public class ObservationToken
 
 public enum UserInfoKey: NSString
 {
-    case PreviousAccount
+    case previousAccount
 }
 
-/// `Notification` declares a number of global events that can be broadcast by the networking library and observed by clients.
-public enum Notification: String
+/// `NetworkingNotification` declares a number of global events that can be broadcast by the networking library and observed by clients.
+public enum NetworkingNotification: String
 {
         /// Sent when any response returns a 503 Service Unavailable error
-    case ClientDidReceiveServiceUnavailableError
+    case clientDidReceiveServiceUnavailableError
     
         /// Sent when any response returns an invalid token error
-    case ClientDidReceiveInvalidTokenError
+    case clientDidReceiveInvalidTokenError
     
         /// **(Not yet implemented)** Sent when the online/offline status of the current device changes
-    case ReachabilityDidChange
+    case reachabilityDidChange
     
         /// Sent when the stored authenticated account is changed
-    case AuthenticatedAccountDidChange
+    case authenticatedAccountDidChange
     
         /// **(Not yet implemented)** Sent when the user stored with the authenticated account is refreshed
-    case AuthenticatedAccountDidRefresh
+    case authenticatedAccountDidRefresh
     
         /// Sent when any object has been updated with new metadata and UI should be updated
-    case ObjectDidUpdate
-    
-    // MARK: -
-    
-    private static let NotificationCenter = NSNotificationCenter.defaultCenter()
+    case objectDidUpdate
     
     // MARK: -
     
     /**
      Broadcast a global notification
      
-     - parameter object: an optional object to pass to observers of this `Notification`
+     - parameter object: an optional object to pass to observers of this `NetworkingNotification`
      */
-    public func post(object object: AnyObject?, userInfo: [NSObject: AnyObject]? = nil)
+    public func post(object: Any?, userInfo: [AnyHashable: Any]? = nil)
     {
-        dispatch_async(dispatch_get_main_queue())
+        DispatchQueue.main.async
         {
-            self.dynamicType.NotificationCenter.postNotificationName(self.rawValue, object: object, userInfo: userInfo)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: self.rawValue), object: object, userInfo: userInfo)
         }
     }
     
@@ -101,9 +97,9 @@ public enum Notification: String
      - parameter target:   the object on which to call the `selector` method
      - parameter selector: method to call when the notification is broadcast
      */
-    public func observe(target: AnyObject, selector: Selector)
+    public func observe(target: Any, selector: Selector)
     {
-        self.dynamicType.NotificationCenter.addObserver(target, selector: selector, name: self.rawValue, object: nil)
+        NotificationCenter.default.addObserver(target, selector: selector, name: Notification.Name(rawValue: self.rawValue), object: nil)
     }
     
     /**
@@ -111,10 +107,10 @@ public enum Notification: String
      
      - returns: an ObservationToken, which must be strongly stored in an appropriate context for as long as observation is relevant.
      */
-    @warn_unused_result(message = "Token must be strongly stored, observation ceases on token deallocation")
-    public func observe(observationHandler: (NSNotification) -> Void) -> ObservationToken
+    
+    public func observe(observationHandler: @escaping (Notification) -> Void) -> ObservationToken
     {
-        let observer = self.dynamicType.NotificationCenter.addObserverForName(self.rawValue, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: observationHandler)
+        let observer = NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: self.rawValue), object: nil, queue: OperationQueue.main, using: observationHandler)
         
         return ObservationToken(observer: observer)
     }
@@ -124,19 +120,18 @@ public enum Notification: String
      
      - parameter target: the target to remove
      */
-    public func removeObserver(target: AnyObject)
+    public func removeObserver(target: Any)
     {
-        self.dynamicType.NotificationCenter.removeObserver(target, name: self.rawValue, object: nil)
+        NotificationCenter.default.removeObserver(target, name: Notification.Name(rawValue: self.rawValue), object: nil)
     }
-    
     
     /**
      Removes a target from all notification observation
      
      - parameter target: the target to remove
      */
-    public static func removeObserver(target: AnyObject)
+    public static func removeObserver(target: Any)
     {
-        self.NotificationCenter.removeObserver(target)
+        NotificationCenter.default.removeObserver(target)
     }
 }

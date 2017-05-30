@@ -32,13 +32,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 {
     var window: UIWindow?
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
     {
         // Override point for customization after application launch.
         let splitViewController = self.window!.rootViewController as! UISplitViewController
         splitViewController.delegate = self
         let navigationController = splitViewController.viewControllers.last as! UINavigationController
-        navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
+        navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
         
         // Starting the authentication process
         
@@ -65,16 +65,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                 
                 switch result
                 {
-                case .Success(let account):
+                case .success(let account):
                     print("authenticated successfully: \(account)")
-                case .Failure(let error):
+                case .failure(let error):
                     print("failure authenticating: \(error)")
                     
                     let title = "Client Credentials Authentication Failed"
                     let message = "Make sure that your client identifier and client secret are set correctly in VimeoClient+Shared.swift"
                     
-                    let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-                    splitViewController.presentViewController(alert, animated: true, completion: nil)
+                    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    splitViewController.present(alert, animated: true, completion: nil)
                     print(title + ": " + message)
                 }
             }
@@ -85,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     
     // MARK: - URLs
     
-    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool
     {
         // This handles the redirect URL opened by Vimeo when you complete code grant authentication.
         // If your app isn't opening after you accept permissions on Vimeo, check that your app has the correct URL scheme registered.
@@ -95,18 +95,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             
             switch result
             {
-            case .Success(let account):
+            case .success(let account):
                 print("authenticated successfully: \(account)")
-            case .Failure(let error):
+            case .failure(let error):
                 print("failure authenticating: \(error)")
                 
                 let title = "Code Grant Authentication Failed"
                 let message = "Make sure that your redirect URI is added to the dev portal"
                 
-                let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-                let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alert.addAction(action)
-                self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+                self.window?.rootViewController?.present(alert, animated: true, completion: nil)
                 print(title + ": " + message)
             }
         }
@@ -116,7 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     // MARK: - Split view
 
-    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController, ontoPrimaryViewController primaryViewController: UIViewController) -> Bool
+    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool
     {
         guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
         guard let topAsDetailController = secondaryAsNavController.topViewController as? DetailViewController else { return false }

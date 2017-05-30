@@ -35,7 +35,7 @@ public class VIMBadge: VIMModelObject
     dynamic public var text: String?
     dynamic public var pictures: VIMPictureCollection?
     
-    public override func getClassForObjectKey(key: String) -> AnyClass?
+    public override func getClassForObjectKey(_ key: String) -> AnyClass?
     {
         if key == "pictures"
         {
