@@ -29,7 +29,7 @@ import XCTest
 
 class Request_CategoryTests: XCTestCase
 {
-    func test_Request_ValidateCategoriesRequest()
+    func test_CategoryRequest_ValidateCategoriesListRequest()
     {
         let request = CategoryRequest.getCategoriesRequest()
         
@@ -37,7 +37,7 @@ class Request_CategoryTests: XCTestCase
         XCTAssertTrue(RequestComparisons.ValidateDefaults(request: request))
     }
     
-    func test_Request_ValidateCateogryRequest()
+    func test_CategoryRequest_ValidateSingleCateogryRequest()
     {
         let request = CategoryRequest.getCategoryRequest(forCategoryURI: "/animation")
         

@@ -76,7 +76,7 @@ class VIMCategory_Tests: XCTestCase
     {
         XCTAssertNotNil(self.parsedCategory?.subcategories)
         
-        let subCatsArray = self.categoryJSONDict?["subcategories"] as? [Dictionary<String, String>]
+        let subCategories = self.categoryJSONDict?["subcategories"] as? [Dictionary<String, String>]
         
         var i = 0
         for subCategory in self.parsedCategory?.subcategories as! [VIMCategory]
@@ -85,9 +85,9 @@ class VIMCategory_Tests: XCTestCase
             XCTAssertNotNil(subCategory.uri)
             XCTAssertNotNil(subCategory.link)
             
-            XCTAssertEqual(subCategory.name, subCatsArray?[i]["name"])
-            XCTAssertEqual(subCategory.uri, subCatsArray?[i]["uri"])
-            XCTAssertEqual(subCategory.link, subCatsArray?[i]["link"])
+            XCTAssertEqual(subCategory.name, subCategories?[i]["name"])
+            XCTAssertEqual(subCategory.uri, subCategories?[i]["uri"])
+            XCTAssertEqual(subCategory.link, subCategories?[i]["link"])
             
             i = i + 1
         }
