@@ -194,7 +194,7 @@ final public class AuthenticationController
                           Constants.ScopeKey: Scope.combine(self.configuration.scopes),
                           Constants.StateKey: type(of: self).state]
         
-        let urlString = VimeoBaseURL.appendingPathComponent(Constants.CodeGrantAuthorizationPath).absoluteString
+        let urlString = self.configuration.baseUrl.appendingPathComponent(Constants.CodeGrantAuthorizationPath).absoluteString
         
         var error: NSError?
         let urlRequest = VimeoRequestSerializer(appConfiguration: self.configuration).request(withMethod: VimeoClient.Method.GET.rawValue, urlString: urlString, parameters: parameters, error: &error)
@@ -259,7 +259,7 @@ final public class AuthenticationController
      */
     public func accessToken(token: String, completion: @escaping AuthenticationCompletion)
     {
-        let customSessionManager =  VimeoSessionManager.defaultSessionManager(accessTokenProvider: {token})
+        let customSessionManager =  VimeoSessionManager.defaultSessionManager(baseUrl: self.configuration.baseUrl, accessTokenProvider: {token})
         let adhocClient = VimeoClient(appConfiguration: self.configuration, sessionManager: customSessionManager)
         let request = AuthenticationRequest.verifyAccessTokenRequest()
 

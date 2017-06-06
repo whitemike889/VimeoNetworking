@@ -50,7 +50,7 @@ public struct AppConfiguration
      - parameter keychainService:     Identifes your application to the system keychain, defaults to `KeychainServiceVimeo`
      - parameter keychainAccessGroup: Access group your application should use for the system keychain, defaults to nil
      - parameter apiVersion:          API version your requests should use, defaults to `VimeoDefaultAPIVersionString`
-     - parameter baseUrl:             The baseUrl for HTTP requests made using this configuration, defaults to `VimeoBaseUrl`
+     - parameter baseUrl:             The baseUrl for HTTP requests made using this configuration, defaults to `VimeoBaseURL`
      
      - returns: an initialized AppConfiguration
      */

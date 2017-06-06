@@ -33,12 +33,12 @@ public extension VimeoSessionManager
     /**
      Creates an authenticated session manager with a static access token
      
-     - parameter baseUrl: the base URL for the HTTP client
+     - parameter baseUrl: the base URL for the HTTP client.  This value should usually be set to `VimeoBaseURL`.
      - parameter accessToken: the static access token to use for request serialization
      
      - returns: an initialized `VimeoSessionManager`
      */
-    static func defaultSessionManager(baseUrl: URL = VimeoBaseURL, accessToken: String) -> VimeoSessionManager
+    static func defaultSessionManager(baseUrl: URL, accessToken: String) -> VimeoSessionManager
     {
         let sessionConfiguration = URLSessionConfiguration.defaultSessionConfigurationNoCache()
         let requestSerializer = VimeoRequestSerializer(accessTokenProvider: { accessToken })
@@ -49,12 +49,12 @@ public extension VimeoSessionManager
     /**
      Creates a session manager with a block that provides an access token.  Note that if no access token is returned by the provider block, no Authorization header will be serialized with new requests, whereas a Basic Authorization header is required at minimum for all api endpoints.  For unauthenticated requests, use a constructor that accepts an `AppConfiguration`.
      
-     - parameter baseUrl: the base URL for the HTTP client
+     - parameter baseUrl: the base URL for the HTTP client.  This value should usually be set to `VimeoBaseURL`.
      - parameter accessTokenProvider: a block that provides an access token dynamically, called on each request serialization
      
      - returns: an initialized `VimeoSessionManager`
      */
-    static func defaultSessionManager(baseUrl: URL = VimeoBaseURL, accessTokenProvider: @escaping VimeoRequestSerializer.AccessTokenProvider) -> VimeoSessionManager
+    static func defaultSessionManager(baseUrl: URL, accessTokenProvider: @escaping VimeoRequestSerializer.AccessTokenProvider) -> VimeoSessionManager
     {
         let sessionConfiguration = URLSessionConfiguration.defaultSessionConfigurationNoCache()
         let requestSerializer = VimeoRequestSerializer(accessTokenProvider: accessTokenProvider)
@@ -83,12 +83,12 @@ public extension VimeoSessionManager
      Creates an authenticated background session manager with a static access token
      
      - parameter identifier: the background session identifier
-     - parameter baseUrl: the base URL for the HTTP client
+     - parameter baseUrl: the base URL for the HTTP client.  This value should usually be set to `VimeoBaseURL`.
      - parameter accessToken: the static access token to use for request serialization
      
      - returns: an initialized `VimeoSessionManager`
      */
-    static func backgroundSessionManager(identifier: String, baseUrl: URL = VimeoBaseURL, accessToken: String) -> VimeoSessionManager
+    static func backgroundSessionManager(identifier: String, baseUrl: URL, accessToken: String) -> VimeoSessionManager
     {
         let sessionConfiguration = self.backgroundSessionConfiguration(identifier: identifier)
         let requestSerializer = VimeoRequestSerializer(accessTokenProvider: { accessToken })
@@ -96,17 +96,16 @@ public extension VimeoSessionManager
         return VimeoSessionManager(baseUrl: baseUrl, sessionConfiguration: sessionConfiguration, requestSerializer: requestSerializer)
     }
     
-    
     /**
      Creates a background session manager with a block that provides an access token.  Note that if no access token is returned by the provider block, no Authorization header will be serialized with new requests, whereas a Basic Authorization header is required at minimum for all api endpoints.  For unauthenticated requests, use a constructor that accepts an `AppConfiguration`.
      
      - parameter identifier: the background session identifier
-     - parameter baseUrl: the base URL for the HTTP client
+     - parameter baseUrl: the base URL for the HTTP client.  This value should usually be set to `VimeoBaseURL`.
      - parameter accessTokenProvider: a block that provides an access token dynamically, called on each request serialization
      
      - returns: an initialized `VimeoSessionManager`
      */
-    static func backgroundSessionManager(identifier: String, baseUrl: URL = VimeoBaseURL, accessTokenProvider: @escaping VimeoRequestSerializer.AccessTokenProvider) -> VimeoSessionManager
+    static func backgroundSessionManager(identifier: String, baseUrl: URL, accessTokenProvider: @escaping VimeoRequestSerializer.AccessTokenProvider) -> VimeoSessionManager
     {
         let sessionConfiguration = self.backgroundSessionConfiguration(identifier: identifier)
         let requestSerializer = VimeoRequestSerializer(accessTokenProvider: accessTokenProvider)
