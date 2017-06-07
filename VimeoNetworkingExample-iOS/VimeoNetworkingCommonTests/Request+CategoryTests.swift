@@ -1,8 +1,8 @@
 //
-//  ObjC_ExceptionCatcher.m
-//  VimeoNetworking
+//  Request+CategoryTests.swift
+//  VimeoNetworkingExample-iOSTests, VimeoNetworkingExample-tvOSTests
 //
-//  Created by Huebner, Rob on 4/26/16.
+//  Created by Westendorf, Mike on 5/21/17.
 //  Copyright © 2016 Vimeo. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,25 +24,24 @@
 //  THE SOFTWARE.
 //
 
-#import "Objc_ExceptionCatcher.h"
+import XCTest
+@testable import VimeoNetworking
 
-@implementation ObjC_ExceptionCatcher
-
-+ (nullable NSError *)_doUnsafe:(nonnull void(^)(void))unsafeBlock
+class Request_CategoryTests: XCTestCase
 {
-    @try
+    func test_CategoryRequest_ValidateCategoriesListRequest()
     {
-        if (unsafeBlock)
-        {
-            unsafeBlock();
-        }
-    }
-    @catch (NSException *exception)
-    {
-        return [NSError errorWithDomain:exception.name code:0 userInfo:@{NSLocalizedDescriptionKey: exception.description}];
+        let request = CategoryRequest.getCategoriesRequest()
+        
+        XCTAssertEqual(request.URI, "/categories")
+        XCTAssertTrue(RequestComparisons.ValidateDefaults(request: request))
     }
     
-    return nil;
+    func test_CategoryRequest_ValidateSingleCateogryRequest()
+    {
+        let request = CategoryRequest.getCategoryRequest(forCategoryURI: "/animation")
+        
+        XCTAssertEqual(request.URI, "/animation")
+        XCTAssertTrue(RequestComparisons.ValidateDefaults(request: request))
+    }
 }
-
-@end

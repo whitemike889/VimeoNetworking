@@ -1,8 +1,8 @@
 //
-//  ObjC_ExceptionCatcher.m
-//  VimeoNetworking
+//  ObjectMappingTestUtilities.swift
+//  VimeoNetworkingExample-iOSTests, VimeoNetworkingExample-tvOSTests
 //
-//  Created by Huebner, Rob on 4/26/16.
+//  Created by Westendorf, Mike on 5/21/17.
 //  Copyright © 2016 Vimeo. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,25 +24,21 @@
 //  THE SOFTWARE.
 //
 
-#import "Objc_ExceptionCatcher.h"
+import Foundation
+import VimeoNetworking
 
-@implementation ObjC_ExceptionCatcher
-
-+ (nullable NSError *)_doUnsafe:(nonnull void(^)(void))unsafeBlock
+class ResponseUtilities
 {
-    @try
+    static func loadResponse(from fileName: String) -> VimeoClient.ResponseDictionary?
     {
-        if (unsafeBlock)
+        guard let fileUrl = Bundle(for: self).url(forResource: fileName, withExtension: nil) else
         {
-            unsafeBlock();
+            return nil
         }
+        
+        let jsonData = try! Data(contentsOf: fileUrl)
+        let jsonDict = try! JSONSerialization.jsonObject(with: jsonData, options: .allowFragments)
+        
+        return jsonDict as? VimeoClient.ResponseDictionary
     }
-    @catch (NSException *exception)
-    {
-        return [NSError errorWithDomain:exception.name code:0 userInfo:@{NSLocalizedDescriptionKey: exception.description}];
-    }
-    
-    return nil;
 }
-
-@end
