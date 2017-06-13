@@ -1,8 +1,8 @@
 //
-//  ObjC_ExceptionCatcher.m
-//  VimeoNetworking
+//  ExceptionCatcherTests.swift
+//  VimeoNetworkingExample-iOSTests, VimeoNetworkingExample-tvOSTests
 //
-//  Created by Huebner, Rob on 4/26/16.
+//  Created by Westendorf, Mike on 5/21/17.
 //  Copyright © 2016 Vimeo. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,25 +24,27 @@
 //  THE SOFTWARE.
 //
 
-#import "Objc_ExceptionCatcher.h"
+import XCTest
+@testable import VimeoNetworking
 
-@implementation ObjC_ExceptionCatcher
-
-+ (nullable NSError *)_doUnsafe:(nonnull void(^)(void))unsafeBlock
+class ExceptionCatcherTests: XCTestCase
 {
-    @try
+    func test_ExceptionCatcher_CatchesArchiverExceptions()
     {
-        if (unsafeBlock)
+        do
         {
-            unsafeBlock();
+            try ExceptionCatcher.doUnsafe
+            {
+                let exception = NSException(name: NSExceptionName.invalidArchiveOperationException, reason: "test exception", userInfo: nil)
+                exception.raise()
+            }
         }
+        catch let error
+        {
+            XCTAssertEqual(error.localizedDescription, "test exception")
+            return
+        }
+        
+        XCTFail("This test should throw an exception!")
     }
-    @catch (NSException *exception)
-    {
-        return [NSError errorWithDomain:exception.name code:0 userInfo:@{NSLocalizedDescriptionKey: exception.description}];
-    }
-    
-    return nil;
 }
-
-@end

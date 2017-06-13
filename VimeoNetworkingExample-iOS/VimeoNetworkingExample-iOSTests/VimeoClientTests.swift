@@ -29,8 +29,8 @@ import XCTest
 
 class VimeoClientTests: XCTestCase
 {
-    let configuration = AppConfiguration(clientIdentifier: "13175bcf4414a49c8ce74be465c441c3daec9de9",
-                                         clientSecret: "22d869d54feb4ee729b9fd87802c9cedcf3a9b71",
+    let configuration = AppConfiguration(clientIdentifier: "{CLIENT ID}",
+                                         clientSecret: "{CLIENT SECRET}",
                                          scopes: [.Public, .Private, .Purchased, .Create, .Edit, .Delete, .Interact, .Upload],
                                          keychainService: "com.vimeo.keychain_service",
                                          apiVersion: "3.3")
