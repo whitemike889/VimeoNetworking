@@ -48,7 +48,8 @@ platform :ios do
       configuration: "Debug",
       buildlog_path: ".",
       derived_data_path: "build/",
-      formatter: 'xcpretty-json-formatter'
+      formatter: 'xcpretty-json-formatter',
+      code_coverage: true
     )
 
     pretty_junit(file_pattern: "fastlane/test_output/report.junit")
