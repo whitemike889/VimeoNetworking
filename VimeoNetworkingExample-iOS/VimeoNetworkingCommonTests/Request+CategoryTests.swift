@@ -1,8 +1,8 @@
 //
-//  Request+Cache.swift
-//  VimeoNetworkingExample-iOS
+//  Request+CategoryTests.swift
+//  VimeoNetworkingExample-iOSTests, VimeoNetworkingExample-tvOSTests
 //
-//  Created by Huebner, Rob on 4/14/16.
+//  Created by Westendorf, Mike on 5/21/17.
 //  Copyright © 2016 Vimeo. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,20 +24,24 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
+import XCTest
+@testable import VimeoNetworking
 
-
-public extension Request
+class Request_CategoryTests: XCTestCase
 {
-    /// Generates a unique cache key for a request, taking into account endpoint and parameters
-    var cacheKey: String
+    func test_CategoryRequest_ValidateCategoriesListRequest()
     {
-        let url = NSURL(string: self.path)
-        let urlPath = url?.path ?? ""
+        let request = CategoryRequest.getCategoriesRequest()
         
-        var cacheKey = "cached" + urlPath + "." + String(self.path.hashValue)
-        cacheKey = cacheKey.replacingOccurrences(of: "/", with: ".")
+        XCTAssertEqual(request.URI, "/categories")
+        XCTAssertTrue(RequestComparisons.ValidateDefaults(request: request))
+    }
+    
+    func test_CategoryRequest_ValidateSingleCateogryRequest()
+    {
+        let request = CategoryRequest.getCategoryRequest(forCategoryURI: "/animation")
         
-        return cacheKey
+        XCTAssertEqual(request.URI, "/animation")
+        XCTAssertTrue(RequestComparisons.ValidateDefaults(request: request))
     }
 }

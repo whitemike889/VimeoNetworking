@@ -1,8 +1,8 @@
 //
-//  Request+Cache.swift
-//  VimeoNetworkingExample-iOS
+//  ExceptionCatcherTests.swift
+//  VimeoNetworkingExample-iOSTests, VimeoNetworkingExample-tvOSTests
 //
-//  Created by Huebner, Rob on 4/14/16.
+//  Created by Westendorf, Mike on 5/21/17.
 //  Copyright © 2016 Vimeo. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,20 +24,27 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
+import XCTest
+@testable import VimeoNetworking
 
-
-public extension Request
+class ExceptionCatcherTests: XCTestCase
 {
-    /// Generates a unique cache key for a request, taking into account endpoint and parameters
-    var cacheKey: String
+    func test_ExceptionCatcher_CatchesArchiverExceptions()
     {
-        let url = NSURL(string: self.path)
-        let urlPath = url?.path ?? ""
+        do
+        {
+            try ExceptionCatcher.doUnsafe
+            {
+                let exception = NSException(name: NSExceptionName.invalidArchiveOperationException, reason: "test exception", userInfo: nil)
+                exception.raise()
+            }
+        }
+        catch let error
+        {
+            XCTAssertEqual(error.localizedDescription, "test exception")
+            return
+        }
         
-        var cacheKey = "cached" + urlPath + "." + String(self.path.hashValue)
-        cacheKey = cacheKey.replacingOccurrences(of: "/", with: ".")
-        
-        return cacheKey
+        XCTFail("This test should throw an exception!")
     }
 }

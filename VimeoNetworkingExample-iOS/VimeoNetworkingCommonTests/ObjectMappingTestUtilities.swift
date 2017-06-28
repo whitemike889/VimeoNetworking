@@ -1,8 +1,8 @@
 //
-//  Request+Cache.swift
-//  VimeoNetworkingExample-iOS
+//  ObjectMappingTestUtilities.swift
+//  VimeoNetworkingExample-iOSTests, VimeoNetworkingExample-tvOSTests
 //
-//  Created by Huebner, Rob on 4/14/16.
+//  Created by Westendorf, Mike on 5/21/17.
 //  Copyright © 2016 Vimeo. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,19 +25,20 @@
 //
 
 import Foundation
+import VimeoNetworking
 
-
-public extension Request
+class ResponseUtilities
 {
-    /// Generates a unique cache key for a request, taking into account endpoint and parameters
-    var cacheKey: String
+    static func loadResponse(from fileName: String) -> VimeoClient.ResponseDictionary?
     {
-        let url = NSURL(string: self.path)
-        let urlPath = url?.path ?? ""
+        guard let fileUrl = Bundle(for: self).url(forResource: fileName, withExtension: nil) else
+        {
+            return nil
+        }
         
-        var cacheKey = "cached" + urlPath + "." + String(self.path.hashValue)
-        cacheKey = cacheKey.replacingOccurrences(of: "/", with: ".")
+        let jsonData = try! Data(contentsOf: fileUrl)
+        let jsonDict = try! JSONSerialization.jsonObject(with: jsonData, options: .allowFragments)
         
-        return cacheKey
+        return jsonDict as? VimeoClient.ResponseDictionary
     }
 }

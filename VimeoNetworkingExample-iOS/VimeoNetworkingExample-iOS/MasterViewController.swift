@@ -155,7 +155,7 @@ class MasterViewController: UITableViewController
         // If the user is logged in, the button logs them out.
         // If the user is logged out, the button launches the code grant authorization page.
         
-        let authenticationController = AuthenticationController(client: VimeoClient.defaultClient)
+        let authenticationController = AuthenticationController(client: VimeoClient.defaultClient, appConfiguration: AppConfiguration.defaultConfiguration)
         if VimeoClient.defaultClient.currentAccount?.isAuthenticatedWithUser() == true
         {
             do

@@ -1,8 +1,8 @@
 //
-//  Request+Cache.swift
-//  VimeoNetworkingExample-iOS
+//  ScopeTests.swift
+//  VimeoNetworkingExample-iOSTests, VimeoNetworkingExample-tvOSTests
 //
-//  Created by Huebner, Rob on 4/14/16.
+//  Created by Westendorf, Mike on 5/21/17.
 //  Copyright © 2016 Vimeo. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,20 +24,13 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
+import XCTest
+@testable import VimeoNetworking
 
-
-public extension Request
+class ScopeTests: XCTestCase
 {
-    /// Generates a unique cache key for a request, taking into account endpoint and parameters
-    var cacheKey: String
+    func test_Scope_CombineReturnsSpaceSeparatedList()
     {
-        let url = NSURL(string: self.path)
-        let urlPath = url?.path ?? ""
-        
-        var cacheKey = "cached" + urlPath + "." + String(self.path.hashValue)
-        cacheKey = cacheKey.replacingOccurrences(of: "/", with: ".")
-        
-        return cacheKey
+        XCTAssertEqual(Scope.combine([.Create, .Delete, .Edit, .Interact]), "create delete edit interact")
     }
 }

@@ -1,8 +1,8 @@
 //
-//  Request+Cache.swift
-//  VimeoNetworkingExample-iOS
+//  Dictionary+ExtensionTests.swift
+//  VimeoNetworkingExample-iOSTests, VimeoNetworkingExample-tvOSTests
 //
-//  Created by Huebner, Rob on 4/14/16.
+//  Created by Westendorf, Mike on 5/21/17.
 //  Copyright © 2016 Vimeo. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,20 +24,18 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
+import XCTest
+@testable import VimeoNetworking
 
-
-public extension Request
+class Dictionary_ExtensionTests: XCTestCase
 {
-    /// Generates a unique cache key for a request, taking into account endpoint and parameters
-    var cacheKey: String
+    func test_DictionaryExtension_AppendAddsNewItemsFromDictionary()
     {
-        let url = NSURL(string: self.path)
-        let urlPath = url?.path ?? ""
+        let comparisonDict = ["testKey1" : "testValue1", "testKey2" : "testValue2", "testKey3" : "testValue3"]
         
-        var cacheKey = "cached" + urlPath + "." + String(self.path.hashValue)
-        cacheKey = cacheKey.replacingOccurrences(of: "/", with: ".")
+        var dictionary = ["testKey1" : "testValue1"]
+        dictionary.append(["testKey2" : "testValue2", "testKey3" : "testValue3"])
         
-        return cacheKey
+        XCTAssertEqual(dictionary, comparisonDict)
     }
 }
