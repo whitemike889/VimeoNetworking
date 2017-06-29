@@ -9,8 +9,8 @@
 - iOS (8.0+)
 - tvOS (9.0+)
 
-## Installing with CocoaPods
-At this stage of development VimeoNetworking is not yet available as CocoaPod via the public Podspecs repo. For now we recommend including it in your project as a submodule. If you'd still like to work with VimeoNetworking as a development pod, simply configure your Podfile as shown below.
+## Installing
+At this stage of development VimeoNetworking is not yet available as a CocoaPod via the public Podspecs repo. For now we recommend including it in your project as a submodule. If you'd still like to work with VimeoNetworking as a development pod, simply configure your Podfile as shown below.
 
 To get started integrating `VimeoNetworking`, add the following lines to your `Podfile` and run `pod install`:
 
