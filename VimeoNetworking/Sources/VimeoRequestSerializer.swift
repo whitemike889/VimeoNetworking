@@ -200,6 +200,10 @@ final public class VimeoRequestSerializer: AFJSONRequestSerializer
             // So, on tvOS the User Agent will only specify the framework. System information might be something we want to add 
             // in the future if AFNetworking isn't providing it. [ghking] 6/19/17
             
+            #if !os(tvOS)
+                assertionFailure("An existing user agent was not found")
+            #endif
+            
             request.setValue(frameworkString, forHTTPHeaderField: Constants.UserAgentKey)
 
             return request
