@@ -29,6 +29,7 @@
 // Interaction names
 
 extern NSString * const __nonnull VIMInteractionNameWatchLater;
+extern NSString * const __nonnull VIMInteractionNameChannel;
 extern NSString * const __nonnull VIMInteractionNameFollow;
 extern NSString * const __nonnull VIMInteractionNameLike;
 extern NSString * const __nonnull VIMInteractionNameBuy;

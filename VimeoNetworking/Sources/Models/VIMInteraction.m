@@ -29,6 +29,7 @@
 // Interaction names
 
 NSString * const VIMInteractionNameWatchLater = @"watchlater";
+NSString * const VIMInteractionNameChannel = @"channel";
 NSString * const VIMInteractionNameFollow = @"follow";
 NSString * const VIMInteractionNameLike = @"like";
 NSString * const VIMInteractionNameBuy = @"buy";
