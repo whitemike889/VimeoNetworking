@@ -411,11 +411,6 @@ NSString *VIMContentRating_Safe = @"safe";
     return interaction.added.boolValue;
 }
 
-- (BOOL)isInModeratedChannelContext
-{
-    return [self interactionWithName:VIMInteractionNameChannel] != nil;
-}
-
 - (BOOL)isRatedAllAudiences
 {
     NSString *contentRating = [self singleContentRatingIfAvailable];

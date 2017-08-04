@@ -486,7 +486,6 @@ final public class VimeoClient
     }
 }
 
-
 extension VimeoClient
 {
     /// Singleton instance for VimeoClient. Applications must call configureSharedClient(withAppConfiguration appConfiguration:)
