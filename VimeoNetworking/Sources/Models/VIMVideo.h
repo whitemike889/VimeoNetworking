@@ -110,7 +110,19 @@ typedef NS_ENUM(NSUInteger, VIMVideoProcessingStatus) {
 - (BOOL)isDRMProtected;
 - (NSInteger)likesCount;
 - (NSInteger)commentsCount;
+
+/**
+ Checks for the existence of a Spatial object on this VIMVideo and returns `true` if it exists.
+ 
+ @return Returns true is a Spatial object exists for this VIMVideo.
+ */
 - (BOOL)is360;
+
+/**
+ Checks for the existence of a VIMLive object on this VIMVideo and returns `true` if it exists.
+
+ @return Returns true is a VIMLive object exists for this VIMVideo.
+ */
 - (BOOL)isLive;
 
 - (void)setIsLiked:(BOOL)isLiked;
