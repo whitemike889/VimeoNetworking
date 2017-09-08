@@ -111,6 +111,7 @@ typedef NS_ENUM(NSUInteger, VIMVideoProcessingStatus) {
 - (NSInteger)likesCount;
 - (NSInteger)commentsCount;
 - (BOOL)is360;
+- (BOOL)isLive;
 
 - (void)setIsLiked:(BOOL)isLiked;
 - (void)setIsWatchLater:(BOOL)isWatchLater;
