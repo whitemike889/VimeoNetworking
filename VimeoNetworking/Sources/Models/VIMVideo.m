@@ -501,4 +501,9 @@ NSString *VIMContentRating_Safe = @"safe";
     return self.spatial != nil;
 }
 
+- (BOOL)isLive
+{
+    return self.live != nil;
+}
+
 @end
