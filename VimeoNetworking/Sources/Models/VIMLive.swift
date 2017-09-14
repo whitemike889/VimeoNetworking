@@ -50,6 +50,14 @@ public enum LiveStreamingStatus: String
 /// a `clip` response.
 public class VIMLive: VIMModelObject
 {
+    public static let LiveStreamStatusUnavailable = "unavailable"
+    public static let LiveStreamStatusPending = "pending"
+    public static let LiveStreamStatusReady = "ready"
+    public static let LiveStreamStatusStreamingPreview = "streaming_preview"
+    public static let LiveStreamStatusStreaming = "streaming"
+    public static let LiveStreamStatusStreamingError = "streaming_error"
+    public static let LiveStreamStatusEnded = "ended"
+    
     /// An RTMP link used to host a live stream.
     public private(set) var link: String?
     
