@@ -125,6 +125,27 @@ typedef NS_ENUM(NSUInteger, VIMVideoProcessingStatus) {
  */
 - (BOOL)isLive;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
+- (BOOL)isPreBroadcast;
+
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
+- (BOOL)isMidBroadcast;
+
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
+- (BOOL)isPostBroadcast;
+
 - (void)setIsLiked:(BOOL)isLiked;
 - (void)setIsWatchLater:(BOOL)isWatchLater;
 

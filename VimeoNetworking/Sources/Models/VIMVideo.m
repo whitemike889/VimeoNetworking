@@ -506,4 +506,19 @@ NSString *VIMContentRating_Safe = @"safe";
     return self.live != nil;
 }
 
+- (BOOL)isPreBroadcast
+{
+    return self.isLive && ([self.live.status isEqual: VIMLive.LiveStreamStatusUnavailable] || [self.live.status isEqual: VIMLive.LiveStreamStatusReady] || [self.live.status isEqual: VIMLive.LiveStreamStatusPending]);
+}
+
+- (BOOL)isMidBroadcast
+{
+    return self.isLive && [self.live.status isEqual: VIMLive.LiveStreamStatusStreaming];
+}
+
+- (BOOL)isPostBroadcast
+{
+    return self.isLive && ([self.live.status isEqual: VIMLive.LiveStreamStatusDone] || [self.live.status isEqual: VIMLive.LiveStreamStatusStreamingError]);
+}
+
 @end
