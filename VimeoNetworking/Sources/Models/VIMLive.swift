@@ -43,7 +43,7 @@ public enum LiveStreamingStatus: String
     case streamingPreview = "streaming_preview"
     case streaming = "streaming"
     case streamingError = "streaming_error"
-    case ended = "ended"
+    case done = "done"
 }
 
 /// An object that represents the `live` field in
