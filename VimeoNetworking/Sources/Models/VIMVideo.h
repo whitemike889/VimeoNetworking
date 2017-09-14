@@ -126,23 +126,23 @@ typedef NS_ENUM(NSUInteger, VIMVideoProcessingStatus) {
 - (BOOL)isLive;
 
 /**
- <#Description#>
+ Determines whether the current video represents a live video and whether or not the broadcast has started.
 
- @return <#return value description#>
+ @return Returns @p true if the live video's broadcast has not begun.
  */
 - (BOOL)isPreBroadcast;
 
 /**
- <#Description#>
+ Determines whether the current video represents a live video and if the broadcast is underway.
 
- @return <#return value description#>
+ @return Returns @p true when the live video's broadcast is underway.
  */
 - (BOOL)isMidBroadcast;
 
 /**
- <#Description#>
+ Determines whether the current video represents a live video  and whether or not the broadcast has ended.
 
- @return <#return value description#>
+ @return Returns @p true when the live video's broadcast has ended.
  */
 - (BOOL)isPostBroadcast;
 
