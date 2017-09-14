@@ -56,7 +56,7 @@ public class VIMLive: VIMModelObject
     public static let LiveStreamStatusStreamingPreview = "streaming_preview"
     public static let LiveStreamStatusStreaming = "streaming"
     public static let LiveStreamStatusStreamingError = "streaming_error"
-    public static let LiveStreamStatusEnded = "ended"
+    public static let LiveStreamStatusDone = "done"
     
     /// An RTMP link used to host a live stream.
     public private(set) var link: String?
