@@ -50,7 +50,7 @@ public class Subscription: VIMModelObject
     /// Represents the Subscription object as a Dictionary
     public var toDictionary: [AnyHashable: Any]
     {
-        let dictionary = ["comment": self.comment ?? false,
+        let dictionary: [String: Any] = ["comment": self.comment ?? false,
                           "credit": self.credit ?? false,
                           "like": self.like ?? false,
                           "mention": self.mention ?? false,
