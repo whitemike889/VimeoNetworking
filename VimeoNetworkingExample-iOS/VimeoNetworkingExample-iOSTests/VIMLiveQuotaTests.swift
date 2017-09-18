@@ -1,8 +1,8 @@
 //
-//  VIMLiveTests.swift
+//  VIMLiveQuotaTests.swift
 //  VimeoNetworkingExample-iOS
 //
-//  Created by Van Nguyen on 08/29/2017.
+//  Created by Van Nguyen on 09/11/2017.
 //  Copyright (c) Vimeo (https://vimeo.com)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,10 +25,10 @@
 //
 
 import XCTest
-import OHHTTPStubs
 import VimeoNetworking
+import OHHTTPStubs
 
-class VIMLiveTests: XCTestCase
+class VIMLiveQuotaTests: XCTestCase
 {
     override func setUp()
     {
@@ -38,7 +38,7 @@ class VIMLiveTests: XCTestCase
                                                                                  clientSecret: "{CLIENT_SECRET}",
                                                                                  scopes: [.Public, .Private, .Purchased, .Create, .Edit, .Delete, .Interact, .Upload],
                                                                                  keychainService: "com.vimeo.keychain_service",
-                                                                                 apiVersion: "3.3.10"))
+                                                                                 apiVersion: "3.3.12"))
     }
     
     override func tearDown()
@@ -48,12 +48,12 @@ class VIMLiveTests: XCTestCase
         OHHTTPStubs.removeAllStubs()
     }
     
-    func testParsingLiveObject()
+    func testParsingLiveQuotaObject()
     {
-        let request = Request<VIMVideo>(path: "/videos/224357160")
+        let request = Request<VIMUser>(path: "/users/99999999")
         
-        stub(condition: isPath("/videos/224357160")) { _ in
-            let stubPath = OHPathForFile("clip_live.json", type(of: self))
+        stub(condition: isPath("/users/99999999")) { _ in
+            let stubPath = OHPathForFile("user_live.json", type(of: self))
             return fixture(filePath: stubPath!, headers: ["Content-Type":"application/json"])
         }
         
@@ -63,15 +63,16 @@ class VIMLiveTests: XCTestCase
             switch response
             {
             case .success(let result):
-                let video = result.model
+                let user = result.model
                 
-                XCTAssertNotNil(video.live)
-                XCTAssertEqual(video.live?.link, "rtmp://rtmp.cloud.vimeo.com/live?token=b23a326b-eb96-432d-97d5-122afa3a4e47")
-                XCTAssertEqual(video.live?.key, "42f9947e-6bb6-4119-bc37-8ee9d49c8567")
-                XCTAssertEqual(video.live?.activeTime?.description, "2017-08-01T18:18:44+00:00")
-                XCTAssertNil(video.live?.endedTime)
-                XCTAssertNil(video.live?.archivedTime)
-                XCTAssertEqual(video.live?.liveStreamingStatus, .streaming)
+                XCTAssertNotNil(user.liveQuota)
+                XCTAssertNotNil(user.liveQuota?.streams)
+                XCTAssertNotNil(user.liveQuota?.time)
+                XCTAssertEqual(user.liveQuota?.streams?.maxStreams, 1)
+                XCTAssertEqual(user.liveQuota?.streams?.remainingStreams, 1)
+                XCTAssertEqual(user.liveQuota?.time?.maxTimePerEvent, 300)
+                XCTAssertEqual(user.liveQuota?.time?.maxTimePerMonth, 300)
+                XCTAssertEqual(user.liveQuota?.time?.remainingTimeThisMonth, 17259)
                 
             case .failure(let error):
                 XCTFail("\(error)")
