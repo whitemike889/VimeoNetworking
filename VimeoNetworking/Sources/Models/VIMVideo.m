@@ -518,7 +518,7 @@ NSString *VIMContentRating_Safe = @"safe";
 
 - (BOOL)isPostBroadcast
 {
-    return self.isLive && ([self.live.status isEqual: VIMLive.LiveStreamStatusDone] || [self.live.status isEqual: VIMLive.LiveStreamStatusStreamingError]);
+    return self.isLive && ([self.live.status isEqual: VIMLive.LiveStreamStatusDone]);
 }
 
 @end
