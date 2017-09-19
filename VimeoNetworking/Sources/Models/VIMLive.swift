@@ -28,12 +28,12 @@ import Foundation
 
 /// The streaming status of a live video.
 ///
-/// - unavailable: the RTMP link is visible but not yet able to receive the stream.
+/// - unavailable: The RTMP link is visible but not yet able to receive the stream.
 /// - pending: Vimeo is working on setting up the connection.
-/// - ready: the RTMP's URL is ready to receive video content.
-/// - streamingPreview: the stream is in a "preview" state. It will be accessible to the public when you transition to "streaming".
+/// - ready: The RTMP's URL is ready to receive video content.
+/// - streamingPreview: The stream is in a "preview" state. It will be accessible to the public when you transition to "streaming".
 /// - streaming: The stream is open and receiving content.
-/// - streamingError: The stream has been terminated by Vimeo.
+/// - streamingError: The stream has failed due to an error relating to the broadcaster; They may have reached their monthly broadcast limit, for example.
 /// - done: The stream has been ended intentionally by the end-user.
 public enum LiveStreamingStatus: String
 {
@@ -50,12 +50,25 @@ public enum LiveStreamingStatus: String
 /// a `clip` response.
 public class VIMLive: VIMModelObject
 {
+    /// The RTMP link is visible but not yet able to receive the stream.
     public static let LiveStreamStatusUnavailable = "unavailable"
+    
+    /// Vimeo is working on setting up the connection.
     public static let LiveStreamStatusPending = "pending"
+    
+    /// The RTMP's URL is ready to receive video content.
     public static let LiveStreamStatusReady = "ready"
+    
+    /// The stream is in a "preview" state. It will be accessible to the public when you transition to "streaming".
     public static let LiveStreamStatusStreamingPreview = "streaming_preview"
+    
+    /// The stream is open and receiving content.
     public static let LiveStreamStatusStreaming = "streaming"
+    
+    /// The stream has failed due to an error relating to the broadcaster; They may have reached their monthly broadcast limit, for example.
     public static let LiveStreamStatusStreamingError = "streaming_error"
+    
+    /// The stream has been ended intentionally by the end-user.
     public static let LiveStreamStatusDone = "done"
     
     /// An RTMP link used to host a live stream.
