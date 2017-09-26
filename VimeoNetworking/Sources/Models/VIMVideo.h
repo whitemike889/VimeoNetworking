@@ -148,9 +148,9 @@ typedef NS_ENUM(NSUInteger, VIMVideoProcessingStatus) {
 - (BOOL)isArchivingBroadcast;
 
 /**
- Determines whether the current video represents a live video  and whether or not the broadcast has ended.
+ Determines whether the current video represents a live video, whether the live event has ended, and if an archive of the broadcast is ready for playback.
 
- @return Returns @p true when the live video's broadcast has ended.
+ @return Returns @p true when the live video event has ended and an archive of the broadcast is available.
  */
 - (BOOL)isPostBroadcast;
 
