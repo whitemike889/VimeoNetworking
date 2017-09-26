@@ -120,36 +120,42 @@ typedef NS_ENUM(NSUInteger, VIMVideoProcessingStatus) {
 - (BOOL)is360;
 
 /**
- Checks for the existence of a VIMLive object on this VIMVideo and returns @p true if one exists.
+ Checks for the existence of a VIMLive object on this VIMVideo and returns @p true if one exists, but does not check the state of the live event.
 
  @return Returns @p true is a VIMLive object exists for this VIMVideo.
  */
 - (BOOL)isLive;
 
 /**
- Determines whether the current video represents a live video and whether or not the broadcast has started.
+ Determines whether the current video represents a live event and if the event is in the pre, mid, or archiving state indicating that a live event is currently underway.
+
+ @return Returns @p true if the live video's broadcast is about to begin, is underway, or is being archived. Returns @p false if the live video's broadcast has already been archived.
+ */
 - (BOOL)isLiveEventInProgress;
+
+/**
+ Determines whether the current video represents a live event and whether or not the broadcast has started.
 
  @return Returns @p true if the live video's broadcast has not begun.
  */
 - (BOOL)isPreBroadcast;
 
 /**
- Determines whether the current video represents a live video and if the broadcast is underway.
+ Determines whether the current video represents a live event and if the broadcast is underway.
 
  @return Returns @p true when the live video's broadcast is underway.
  */
 - (BOOL)isMidBroadcast;
 
 /**
- Determines whether the current video represents a live video that is in the process of being archived.
+ Determines whether the current video represents a live event that is in the process of being archived.
 
  @return Returns @p true when the live video's broadcast has ended and is being archived.
  */
 - (BOOL)isArchivingBroadcast;
 
 /**
- Determines whether the current video represents a live video, whether the live event has ended, and if an archive of the broadcast is ready for playback.
+ Determines whether the current video represents a live event, whether it has ended, and if an archive of the broadcast is ready for playback.
 
  @return Returns @p true when the live video event has ended and an archive of the broadcast is available.
  */
