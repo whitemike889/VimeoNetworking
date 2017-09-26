@@ -49,4 +49,43 @@ class VIMVideoTests: XCTestCase
         XCTAssertNotNil(testVideoObject)
         XCTAssertFalse(testVideoObject.isLive())
     }
+    
+    func test_isLiveEventInProgress_returnsTrue_whenEventIsInMidBroadcastState()
+    {
+        let liveDictionary: [String: Any] = ["link": "vimeo.com", "key": "abcdefg", "activeTime": Date(), "endedTime": Date(), "archivedTime": Date(), "status": "ready"]
+        let testLiveObject = VIMLive(keyValueDictionary: liveDictionary)!
+        
+        let videoDictionary: [String: Any] = ["live": testLiveObject]
+        let testVideoObject = VIMVideo(keyValueDictionary: videoDictionary)!
+        
+        XCTAssertNotNil(testLiveObject)
+        XCTAssertNotNil(testVideoObject)
+        XCTAssertTrue(testVideoObject.isLiveEventInProgress())
+    }
+    
+    func test_isLiveEventInProgress_returnsTrue_whenEventIsInPreBroadcastState()
+    {
+        let liveDictionary: [String: Any] = ["link": "vimeo.com", "key": "abcdefg", "activeTime": Date(), "endedTime": Date(), "archivedTime": Date(), "status": "archiving"]
+        let testLiveObject = VIMLive(keyValueDictionary: liveDictionary)!
+        
+        let videoDictionary: [String: Any] = ["live": testLiveObject]
+        let testVideoObject = VIMVideo(keyValueDictionary: videoDictionary)!
+        
+        XCTAssertNotNil(testLiveObject)
+        XCTAssertNotNil(testVideoObject)
+        XCTAssertTrue(testVideoObject.isLiveEventInProgress())
+    }
+    
+    func test_isLiveEventInProgress_returnsFalse_whenEventIsInPostBroadcastState()
+    {
+        let liveDictionary: [String: Any] = ["link": "vimeo.com", "key": "abcdefg", "activeTime": Date(), "endedTime": Date(), "archivedTime": Date(), "status": "done"]
+        let testLiveObject = VIMLive(keyValueDictionary: liveDictionary)!
+        
+        let videoDictionary: [String: Any] = ["live": testLiveObject]
+        let testVideoObject = VIMVideo(keyValueDictionary: videoDictionary)!
+        
+        XCTAssertNotNil(testLiveObject)
+        XCTAssertNotNil(testVideoObject)
+        XCTAssertFalse(testVideoObject.isLiveEventInProgress())
+    }
 }
