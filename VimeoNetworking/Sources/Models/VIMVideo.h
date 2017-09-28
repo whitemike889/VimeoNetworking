@@ -115,14 +115,14 @@ typedef NS_ENUM(NSUInteger, VIMVideoProcessingStatus) {
 /**
  Checks for the existence of a Spatial object on this VIMVideo and returns @p true if one exists.
  
- @return Returns @p true is a Spatial object exists for this VIMVideo.
+ @return Returns @p true if a Spatial object exists for this VIMVideo.
  */
 - (BOOL)is360;
 
 /**
  Checks for the existence of a VIMLive object on this VIMVideo and returns @p true if one exists, but does not check the state of the live event.
 
- @return Returns @p true is a VIMLive object exists for this VIMVideo.
+ @return Returns @p true if a VIMLive object exists for this VIMVideo.
  */
 - (BOOL)isLive;
 
