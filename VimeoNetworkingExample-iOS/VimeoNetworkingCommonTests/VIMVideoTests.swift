@@ -28,11 +28,11 @@ import XCTest
 
 class VIMVideoTests: XCTestCase
 {
+    private var liveDictionary: [String: Any] = ["link": "vimeo.com", "key": "abcdefg", "activeTime": Date(), "endedTime": Date(), "archivedTime": Date()]
+    
     func test_isLive_returnsTrue_whenLiveObjectExists()
     {
-        let liveDictionary: [String: Any] = ["link": "vimeo.com", "key": "abcdefg", "activeTime": Date(), "endedTime": Date(), "archivedTime": Date()]
         let testLiveObject = VIMLive(keyValueDictionary: liveDictionary)!
-        
         let videoDictionary: [String: Any] = ["live": testLiveObject]
         let testVideoObject = VIMVideo(keyValueDictionary: videoDictionary)!
         
@@ -45,16 +45,14 @@ class VIMVideoTests: XCTestCase
     {
         let videoDictionary: [String: Any] = ["link": "vimeo.com"]
         let testVideoObject = VIMVideo(keyValueDictionary: videoDictionary)!
-        
         XCTAssertNotNil(testVideoObject)
         XCTAssertFalse(testVideoObject.isLive())
     }
     
-    func test_isLiveEventInProgress_returnsTrue_whenEventIsInMidBroadcastState()
+    func test_isLiveEventInProgress_returnsTrue_whenEventIsInUnavailablePreBroadcastState()
     {
-        let liveDictionary: [String: Any] = ["link": "vimeo.com", "key": "abcdefg", "activeTime": Date(), "endedTime": Date(), "archivedTime": Date(), "status": "ready"]
+        liveDictionary["status"] = "unavailable"
         let testLiveObject = VIMLive(keyValueDictionary: liveDictionary)!
-        
         let videoDictionary: [String: Any] = ["live": testLiveObject]
         let testVideoObject = VIMVideo(keyValueDictionary: videoDictionary)!
         
@@ -63,11 +61,34 @@ class VIMVideoTests: XCTestCase
         XCTAssertTrue(testVideoObject.isLiveEventInProgress())
     }
     
-    func test_isLiveEventInProgress_returnsTrue_whenEventIsInPreBroadcastState()
+    func test_isLiveEventInProgress_returnsTrue_whenEventIsInPendingPreBroadcastState()
     {
-        let liveDictionary: [String: Any] = ["link": "vimeo.com", "key": "abcdefg", "activeTime": Date(), "endedTime": Date(), "archivedTime": Date(), "status": "archiving"]
+        liveDictionary["status"] = "pending"
         let testLiveObject = VIMLive(keyValueDictionary: liveDictionary)!
+        let videoDictionary: [String: Any] = ["live": testLiveObject]
+        let testVideoObject = VIMVideo(keyValueDictionary: videoDictionary)!
+
+        XCTAssertNotNil(testLiveObject)
+        XCTAssertNotNil(testVideoObject)
+        XCTAssertTrue(testVideoObject.isLiveEventInProgress())
+    }
+    
+    func test_isLiveEventInProgress_returnsTrue_whenEventIsInMidBroadcastState()
+    {
+        liveDictionary["status"] = "ready"
+        let testLiveObject = VIMLive(keyValueDictionary: liveDictionary)!
+        let videoDictionary: [String: Any] = ["live": testLiveObject]
+        let testVideoObject = VIMVideo(keyValueDictionary: videoDictionary)!
         
+        XCTAssertNotNil(testLiveObject)
+        XCTAssertNotNil(testVideoObject)
+        XCTAssertTrue(testVideoObject.isLiveEventInProgress())
+    }
+    
+    func test_isLiveEventInProgress_returnsTrue_whenEventIsInArchivingState()
+    {
+        liveDictionary["status"] = "archiving"
+        let testLiveObject = VIMLive(keyValueDictionary: liveDictionary)!
         let videoDictionary: [String: Any] = ["live": testLiveObject]
         let testVideoObject = VIMVideo(keyValueDictionary: videoDictionary)!
         
@@ -78,14 +99,25 @@ class VIMVideoTests: XCTestCase
     
     func test_isLiveEventInProgress_returnsFalse_whenEventIsInPostBroadcastState()
     {
-        let liveDictionary: [String: Any] = ["link": "vimeo.com", "key": "abcdefg", "activeTime": Date(), "endedTime": Date(), "archivedTime": Date(), "status": "done"]
+        liveDictionary["status"] = "done"
         let testLiveObject = VIMLive(keyValueDictionary: liveDictionary)!
-        
         let videoDictionary: [String: Any] = ["live": testLiveObject]
         let testVideoObject = VIMVideo(keyValueDictionary: videoDictionary)!
         
         XCTAssertNotNil(testLiveObject)
         XCTAssertNotNil(testVideoObject)
         XCTAssertFalse(testVideoObject.isLiveEventInProgress())
+    }
+    
+    func test_isPostBroadcast_returnsTrue_whenEventIsInDoneState()
+    {
+        liveDictionary["status"] = "done"
+        let testLiveObject = VIMLive(keyValueDictionary: liveDictionary)!
+        let videoDictionary: [String: Any] = ["live": testLiveObject]
+        let testVideoObject = VIMVideo(keyValueDictionary: videoDictionary)!
+        
+        XCTAssertNotNil(testLiveObject)
+        XCTAssertNotNil(testVideoObject)
+        XCTAssertTrue(testVideoObject.isPostBroadcast())
     }
 }
