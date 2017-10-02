@@ -509,7 +509,7 @@ NSString *VIMContentRating_Safe = @"safe";
 
 - (BOOL)isLiveEventInProgress
 {
-    return self.live != nil && (self.isPreBroadcast == YES || self.isMidBroadcast == YES || self.isArchivingBroadcast == YES);
+    return self.live != nil && (self.isPreBroadcast || self.isMidBroadcast || self.isArchivingBroadcast);
 }
 
 - (BOOL)isPreBroadcast
