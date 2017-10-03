@@ -34,6 +34,7 @@ import Foundation
 /// - streamingPreview: The stream is in a "preview" state. It will be accessible to the public when you transition to "streaming".
 /// - streaming: The stream is open and receiving content.
 /// - streamingError: The stream has failed due to an error relating to the broadcaster; They may have reached their monthly broadcast limit, for example.
+/// - archiving: The stream has finished, and the video is in the process of being archived, but is not ready to play yet.
 /// - done: The stream has been ended intentionally by the end-user.
 public enum LiveStreamingStatus: String
 {
@@ -43,6 +44,7 @@ public enum LiveStreamingStatus: String
     case streamingPreview = "streaming_preview"
     case streaming = "streaming"
     case streamingError = "streaming_error"
+    case archiving = "archiving"
     case done = "done"
 }
 
@@ -67,6 +69,9 @@ public class VIMLive: VIMModelObject
     
     /// The stream has failed due to an error relating to the broadcaster; They may have reached their monthly broadcast limit, for example.
     public static let LiveStreamStatusStreamingError = "streaming_error"
+    
+    /// The stream has finished, and the video is in the process of being archived, but is not ready to play yet.
+    public static let LiveStreamStatusArchiving = "archiving"
     
     /// The stream has been ended intentionally by the end-user.
     public static let LiveStreamStatusDone = "done"
