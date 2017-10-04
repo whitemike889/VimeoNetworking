@@ -73,7 +73,7 @@ class VIMVideoTests: XCTestCase
         XCTAssertTrue(testVideoObject.isLiveEventInProgress())
     }
     
-    func test_isLiveEventInProgress_returnsTrue_whenEventIsInMidBroadcastState()
+    func test_isLiveEventInProgress_returnsTrue_whenEventIsInReadyPreBroadcastState()
     {
         liveDictionary["status"] = "ready"
         let testLiveObject = VIMLive(keyValueDictionary: liveDictionary)!
