@@ -24,9 +24,16 @@
 //  THE SOFTWARE.
 //
 
+/// An object representing the `chat` field in a `live` response. This
+/// `live` response is part of the `clip` representation.
 public class VIMLiveChat: VIMModelObject
 {
+    /// The ID of the live event chat room.
     public private(set) var roomId: NSNumber?
+    
+    /// JWT for the user to access the live event chat room.
     public private(set) var token: String?
+    
+    /// The current user.
     public private(set) var user: VIMLiveChatUser?
 }

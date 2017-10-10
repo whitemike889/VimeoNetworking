@@ -24,6 +24,15 @@
 //  THE SOFTWARE.
 //
 
+/// The user's account type.
+///
+/// - basic: "Vimeo Basic" tier.
+/// - business: "Vimeo Business" tier.
+/// - liveBusiness: "Business Live" tier.
+/// - livePro: "PRO Live" tier.
+/// - plus: "Vimeo Plus" tier.
+/// - pro: "Vimeo PRO" tier.
+/// - proUnlimited: "Custom Live" tier.
 public enum AccountType: String
 {
     case basic = "basic"
@@ -35,9 +44,16 @@ public enum AccountType: String
     case proUnlimited = "pro_unlimited"
 }
 
+/// An object representing the `user` field in a `chat` response.
 public class VIMLiveChatUser: VIMModelObject
 {
+    /// The user's account type in `String`. This property is for internal
+    /// use only. Use `accountType` property to query the user's account
+    /// type instead.
     public private(set) var account: String?
+    
+    /// The user's account type in `AccountType`. Using this property is
+    /// preferred over `account`.
     public var accountType: AccountType?
     {
         guard let accountValue = self.account else
@@ -48,11 +64,24 @@ public class VIMLiveChatUser: VIMModelObject
         return AccountType(rawValue: accountValue)
     }
     
+    /// The user's ID.
     public private(set) var id: NSNumber?
+    
+    /// Is this user the creator of the live event?
     public private(set) var isCreator: NSNumber?
+    
+    /// Is this user a Vimeo staff member?
     public private(set) var isStaff: NSNumber?
+    
+    /// The absolute URL of this user.
     public private(set) var link: String?
+    
+    /// The users' display name.
     public private(set) var name: String?
-    public private(set) var pictures: VIMPicture?
+    
+    /// The active picture for this user.
+    public private(set) var picture: VIMPicture?
+    
+    /// URI of the current user.
     public private(set) var uri: NSNumber?
 }
