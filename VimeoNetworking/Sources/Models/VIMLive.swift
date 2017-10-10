@@ -116,4 +116,6 @@ public class VIMLive: VIMModelObject
         
         return LiveStreamingStatus(rawValue: status)
     }
+    
+    public private(set) var chat: VIMLiveChat?
 }
