@@ -47,6 +47,12 @@ public enum AccountType: String
 /// An object representing the `user` field in a `chat` response.
 public class VIMLiveChatUser: VIMModelObject
 {
+    private struct Constants
+    {
+        static let PictureResponseKey = "pictures"
+        static let PictureModelKey = "picture"
+    }
+    
     /// The user's account type in `String`. This property is for internal
     /// use only. Use `accountType` property to query the user's account
     /// type instead.
@@ -87,7 +93,7 @@ public class VIMLiveChatUser: VIMModelObject
     
     public override func getClassForObjectKey(_ key: String!) -> AnyClass?
     {
-        if key == "pictures"
+        if key == Constants.PictureResponseKey
         {
             return VIMPicture.self
         }
@@ -97,6 +103,6 @@ public class VIMLiveChatUser: VIMModelObject
     
     public override func getObjectMapping() -> Any?
     {
-        return ["pictures": "picture"]
+        return [Constants.PictureResponseKey: Constants.PictureModelKey]
     }
 }

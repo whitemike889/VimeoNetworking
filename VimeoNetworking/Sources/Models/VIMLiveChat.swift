@@ -28,6 +28,11 @@
 /// `live` response is part of the `clip` representation.
 public class VIMLiveChat: VIMModelObject
 {
+    private struct Constants
+    {
+        static let UserKey = "user"
+    }
+    
     /// The ID of the live event chat room.
     public private(set) var roomId: NSNumber?
     
@@ -39,7 +44,7 @@ public class VIMLiveChat: VIMModelObject
     
     public override func getClassForObjectKey(_ key: String!) -> AnyClass?
     {
-        if key == "user"
+        if key == Constants.UserKey
         {
             return VIMLiveChatUser.self
         }
