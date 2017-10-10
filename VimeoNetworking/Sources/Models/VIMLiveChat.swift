@@ -9,4 +9,5 @@ public class VIMLiveChat: VIMModelObject
 {
     public private(set) var roomId: NSNumber?
     public private(set) var token: String?
+    public private(set) var user: VIMLiveChatUser?
 }
