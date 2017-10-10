@@ -36,4 +36,14 @@ public class VIMLiveChat: VIMModelObject
     
     /// The current user.
     public private(set) var user: VIMLiveChatUser?
+    
+    public override func getClassForObjectKey(_ key: String!) -> AnyClass?
+    {
+        if key == "user"
+        {
+            return VIMLiveChatUser.self
+        }
+        
+        return nil
+    }
 }

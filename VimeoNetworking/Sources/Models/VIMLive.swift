@@ -119,4 +119,14 @@ public class VIMLive: VIMModelObject
     
     /// The live event's chat.
     public private(set) var chat: VIMLiveChat?
+    
+    public override func getClassForObjectKey(_ key: String!) -> AnyClass?
+    {
+        if key == "chat"
+        {
+            return VIMLiveChat.self
+        }
+        
+        return nil
+    }
 }

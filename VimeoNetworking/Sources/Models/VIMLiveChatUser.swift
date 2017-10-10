@@ -84,4 +84,19 @@ public class VIMLiveChatUser: VIMModelObject
     
     /// URI of the current user.
     public private(set) var uri: NSNumber?
+    
+    public override func getClassForObjectKey(_ key: String!) -> AnyClass?
+    {
+        if key == "pictures"
+        {
+            return VIMPicture.self
+        }
+        
+        return nil
+    }
+    
+    public override func getObjectMapping() -> Any?
+    {
+        return ["pictures": "picture"]
+    }
 }
