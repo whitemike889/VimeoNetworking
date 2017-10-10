@@ -48,6 +48,34 @@ class VIMLiveTests: XCTestCase
         OHHTTPStubs.removeAllStubs()
     }
     
+    private func assert(liveObject live: VIMLive?)
+    {
+        XCTAssertNotNil(live)
+        XCTAssertEqual(live?.link, "rtmp://rtmp.cloud.vimeo.com/live?token=b23a326b-eb96-432d-97d5-122afa3a4e47")
+        XCTAssertEqual(live?.key, "42f9947e-6bb6-4119-bc37-8ee9d49c8567")
+        XCTAssertEqual(live?.activeTime?.description, "2017-08-01T18:18:44+00:00")
+        XCTAssertNil(live?.endedTime)
+        XCTAssertNil(live?.archivedTime)
+        XCTAssertEqual(live?.liveStreamingStatus, .streaming)
+    }
+    
+    private func assert(liveChatObject chat: VIMLiveChat?)
+    {
+        XCTAssertNotNil(chat)
+        XCTAssertEqual(chat?.roomId?.int64Value, 237627886)
+        XCTAssertEqual(chat?.token, "asdfghjkl;1234")
+    }
+    
+    private func assert(liveChatUserObject user: VIMLiveChatUser?)
+    {
+        XCTAssertNotNil(user)
+        XCTAssertEqual(user?.accountType, .liveBusiness)
+        XCTAssertEqual(user?.id?.int64Value, 58957602)
+        XCTAssertEqual(user?.name, "Van Le Nguyen")
+        XCTAssertEqual(user?.isStaff?.boolValue, true)
+        XCTAssertEqual(user?.isCreator?.boolValue, true)
+    }
+    
     func testParsingLiveObject()
     {
         let request = Request<VIMVideo>(path: "/videos/224357160")
@@ -65,13 +93,9 @@ class VIMLiveTests: XCTestCase
             case .success(let result):
                 let video = result.model
                 
-                XCTAssertNotNil(video.live)
-                XCTAssertEqual(video.live?.link, "rtmp://rtmp.cloud.vimeo.com/live?token=b23a326b-eb96-432d-97d5-122afa3a4e47")
-                XCTAssertEqual(video.live?.key, "42f9947e-6bb6-4119-bc37-8ee9d49c8567")
-                XCTAssertEqual(video.live?.activeTime?.description, "2017-08-01T18:18:44+00:00")
-                XCTAssertNil(video.live?.endedTime)
-                XCTAssertNil(video.live?.archivedTime)
-                XCTAssertEqual(video.live?.liveStreamingStatus, .streaming)
+                self.assert(liveObject: video.live)
+                self.assert(liveChatObject: video.live?.chat)
+                self.assert(liveChatUserObject: video.live?.chat?.user)
                 
             case .failure(let error):
                 XCTFail("\(error)")
