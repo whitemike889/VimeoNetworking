@@ -50,7 +50,6 @@ public class VIMLiveChatUser: VIMModelObject
     private struct Constants
     {
         static let PictureResponseKey = "pictures"
-        static let PictureModelKey = "picture"
     }
     
     /// The user's account type in `String`. This property is for internal
@@ -79,30 +78,22 @@ public class VIMLiveChatUser: VIMModelObject
     /// Is this user a Vimeo staff member?
     public private(set) var isStaff: NSNumber?
     
-    /// The absolute URL of this user.
-    public private(set) var link: String?
-    
     /// The users' display name.
     public private(set) var name: String?
     
     /// The active picture for this user.
-    public private(set) var picture: VIMPicture?
+    public private(set) var pictures: VIMPictureCollection?
     
     /// URI of the current user.
-    public private(set) var uri: NSNumber?
+    public private(set) var uri: String?
     
     public override func getClassForObjectKey(_ key: String!) -> AnyClass?
     {
         if key == Constants.PictureResponseKey
         {
-            return VIMPicture.self
+            return VIMPictureCollection.self
         }
         
         return nil
-    }
-    
-    public override func getObjectMapping() -> Any?
-    {
-        return [Constants.PictureResponseKey: Constants.PictureModelKey]
     }
 }
