@@ -74,6 +74,8 @@ class VIMLiveTests: XCTestCase
         XCTAssertEqual(user?.name, "Van Le Nguyen")
         XCTAssertEqual(user?.isStaff?.boolValue, true)
         XCTAssertEqual(user?.isCreator?.boolValue, true)
+        XCTAssertEqual(user?.uri, "/users/58957602")
+        XCTAssertNotNil(user?.pictures)
     }
     
     func testParsingLiveObject()
