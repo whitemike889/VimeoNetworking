@@ -51,8 +51,8 @@ class VIMLiveTests: XCTestCase
     private func assert(liveObject live: VIMLive?)
     {
         XCTAssertNotNil(live)
-        XCTAssertEqual(live?.link, "rtmp://rtmp.cloud.vimeo.com/live?token=b23a326b-eb96-432d-97d5-122afa3a4e47")
-        XCTAssertEqual(live?.key, "42f9947e-6bb6-4119-bc37-8ee9d49c8567")
+        XCTAssertEqual(live?.link, "rtmp://rtmp.cloud.vimeo.com/live?token=999999")
+        XCTAssertEqual(live?.key, "999999")
         XCTAssertEqual(live?.activeTime?.description, "2017-08-01T18:18:44+00:00")
         XCTAssertNil(live?.endedTime)
         XCTAssertNil(live?.archivedTime)
@@ -62,7 +62,7 @@ class VIMLiveTests: XCTestCase
     private func assert(liveChatObject chat: VIMLiveChat?)
     {
         XCTAssertNotNil(chat)
-        XCTAssertEqual(chat?.roomId?.int64Value, 237627886)
+        XCTAssertEqual(chat?.roomId?.int64Value, 999999)
         XCTAssertEqual(chat?.token, "asdfghjkl;1234")
     }
     
@@ -70,19 +70,19 @@ class VIMLiveTests: XCTestCase
     {
         XCTAssertNotNil(user)
         XCTAssertEqual(user?.accountType, .liveBusiness)
-        XCTAssertEqual(user?.id?.int64Value, 58957602)
-        XCTAssertEqual(user?.name, "Van Le Nguyen")
+        XCTAssertEqual(user?.id?.int64Value, 999999)
+        XCTAssertEqual(user?.name, "Some Random Dude")
         XCTAssertEqual(user?.isStaff?.boolValue, true)
         XCTAssertEqual(user?.isCreator?.boolValue, true)
-        XCTAssertEqual(user?.uri, "/users/58957602")
+        XCTAssertEqual(user?.uri, "/users/999999")
         XCTAssertNotNil(user?.pictures)
     }
     
     func testParsingLiveObject()
     {
-        let request = Request<VIMVideo>(path: "/videos/224357160")
+        let request = Request<VIMVideo>(path: "/videos/999999")
         
-        stub(condition: isPath("/videos/224357160")) { _ in
+        stub(condition: isPath("/videos/999999")) { _ in
             let stubPath = OHPathForFile("clip_live.json", type(of: self))
             return fixture(filePath: stubPath!, headers: ["Content-Type":"application/json"])
         }
