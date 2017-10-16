@@ -24,8 +24,6 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
-
 /// Stores all static information relevant to a client application
 public struct AppConfiguration
 {
