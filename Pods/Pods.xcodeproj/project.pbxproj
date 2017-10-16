@@ -2309,9 +2309,9 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		10B29FE3637C8C3636DAAAD5891BD6C1 /* Debug */ = {
+		19276A718E3777C3DFB4BDF8568D6DA8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7D42FD5CB528446DC9EB56EC4C5850A5 /* VimeoNetworking-iOS.xcconfig */;
+			baseConfigurationReference = 9FE86ADD413F057509C1095E519FA5EA /* OHHTTPStubs-iOS.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2322,25 +2322,26 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/VimeoNetworking-iOS/VimeoNetworking-iOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/VimeoNetworking-iOS/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/OHHTTPStubs-iOS/OHHTTPStubs-iOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/OHHTTPStubs-iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/VimeoNetworking-iOS/VimeoNetworking-iOS.modulemap";
-				PRODUCT_NAME = VimeoNetworking;
+				MODULEMAP_FILE = "Target Support Files/OHHTTPStubs-iOS/OHHTTPStubs-iOS.modulemap";
+				PRODUCT_NAME = OHHTTPStubs;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		131FD10396A62371957763FD515043B8 /* Release */ = {
+		266173FAD53F0FE05B53B2EC4010F94F /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F9AA9738D67B6EDD0C39AEF905287D26 /* Pods-VimeoNetworkingExample-iOS.release.xcconfig */;
 			buildSettings = {
@@ -2367,6 +2368,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2374,9 +2376,9 @@
 			};
 			name = Release;
 		};
-		14A920DB275AC39D7C0AB9A152AD051A /* Debug */ = {
+		29D30D5A857973C768FA642E3545E6E0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C4E60BBDC815350D181719A4920EEFE7 /* AFNetworking-iOS.xcconfig */;
+			baseConfigurationReference = 8E0C2D0BD32AB407DEC37B20F7D4296E /* Pods-VimeoNetworkingExample-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2387,25 +2389,31 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/AFNetworking-iOS/AFNetworking-iOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/AFNetworking-iOS/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-VimeoNetworkingExample-tvOSTests/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/AFNetworking-iOS/AFNetworking-iOS.modulemap";
-				PRODUCT_NAME = AFNetworking;
-				SDKROOT = iphoneos;
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-VimeoNetworkingExample-tvOSTests/Pods-VimeoNetworkingExample-tvOSTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_VimeoNetworkingExample_tvOSTests;
+				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		23422C866C7AC5D28F722ED0FE70B7A4 /* Release */ = {
+		30DE3BDE415B7487F140DA5A5DB512CD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C4E60BBDC815350D181719A4920EEFE7 /* AFNetworking-iOS.xcconfig */;
+			baseConfigurationReference = 723BC0803DB25CED4A33055244E1F0CF /* Pods-VimeoNetworkingExample-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2416,25 +2424,61 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/AFNetworking-iOS/AFNetworking-iOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/AFNetworking-iOS/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-VimeoNetworkingExample-tvOSTests/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/AFNetworking-iOS/AFNetworking-iOS.modulemap";
-				PRODUCT_NAME = AFNetworking;
-				SDKROOT = iphoneos;
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-VimeoNetworkingExample-tvOSTests/Pods-VimeoNetworkingExample-tvOSTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_VimeoNetworkingExample_tvOSTests;
+				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		2620FF112E45D2554779EEB85BD327E3 /* Release */ = {
+		3EA813106BB4BE13A4F9AF4996747866 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EEE2C7D37BA8BCF1A1B007D3F7B1A96A /* AFNetworking-tvOS.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/AFNetworking-tvOS/AFNetworking-tvOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AFNetworking-tvOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/AFNetworking-tvOS/AFNetworking-tvOS.modulemap";
+				PRODUCT_NAME = AFNetworking;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		3FEC0E5EEEB4A5E55CE8FDBD9F9D8114 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9FE86ADD413F057509C1095E519FA5EA /* OHHTTPStubs-iOS.xcconfig */;
 			buildSettings = {
@@ -2457,7 +2501,8 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2465,38 +2510,7 @@
 			};
 			name = Release;
 		};
-		2EBFA7375C32443AF01F18B63490CE39 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7D42FD5CB528446DC9EB56EC4C5850A5 /* VimeoNetworking-iOS.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/VimeoNetworking-iOS/VimeoNetworking-iOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/VimeoNetworking-iOS/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/VimeoNetworking-iOS/VimeoNetworking-iOS.modulemap";
-				PRODUCT_NAME = VimeoNetworking;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		33008F69CE86E6F49A3E87EDED5BE4E7 /* Debug */ = {
+		40C4FAEA8017E641C0045DBB576E0D89 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5EF23B1E2D740197B2808DB8BAD1E680 /* VimeoNetworking-tvOS.xcconfig */;
 			buildSettings = {
@@ -2519,7 +2533,8 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2527,9 +2542,9 @@
 			};
 			name = Debug;
 		};
-		411D429EA56745EEBBED8639DC1579BB /* Release */ = {
+		42694757AE9EBFD229ACD66AD41C8368 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 52EDAFED497340DDFE07D1CAFBD4E1E2 /* OHHTTPStubs-tvOS.xcconfig */;
+			baseConfigurationReference = EA174A361D33358C1B6FBAABEDCFA3E1 /* Pods-VimeoNetworkingExample-iOSTests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2540,25 +2555,29 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/OHHTTPStubs-tvOS/OHHTTPStubs-tvOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/OHHTTPStubs-tvOS/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-VimeoNetworkingExample-iOSTests/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/OHHTTPStubs-tvOS/OHHTTPStubs-tvOS.modulemap";
-				PRODUCT_NAME = OHHTTPStubs;
-				SDKROOT = appletvos;
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-VimeoNetworkingExample-iOSTests/Pods-VimeoNetworkingExample-iOSTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_VimeoNetworkingExample_iOSTests;
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		4ECEF39A0D9D2A52F22005C238DB2988 /* Debug */ = {
+		451038E688B1DCFDFBD70EDB20B92BBE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E8747CDC6A5178FA30CF966D34F38BBC /* Pods-VimeoNetworkingExample-iOSTests.debug.xcconfig */;
 			buildSettings = {
@@ -2586,15 +2605,16 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		6132B9F82F000D87C3B1A2B7B7614EF3 /* Release */ = {
+		4B6CE4FDC9BB497DC237A2B2601F46B6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 02EEBCBA39BF1BEF3DD81313C3531B7E /* Pods-VimeoNetworkingExample-tvOS.release.xcconfig */;
+			baseConfigurationReference = 6F85721083E51F60E38313582585534E /* Pods-VimeoNetworkingExample-tvOS.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2617,14 +2637,45 @@
 				PRODUCT_NAME = Pods_VimeoNetworkingExample_tvOS;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
+		};
+		764F7A8713C53FECE62EAD1BAA8F4F33 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C4E60BBDC815350D181719A4920EEFE7 /* AFNetworking-iOS.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/AFNetworking-iOS/AFNetworking-iOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AFNetworking-iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/AFNetworking-iOS/AFNetworking-iOS.modulemap";
+				PRODUCT_NAME = AFNetworking;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
 		};
 		81E682B7CB148FAADCCCB0A9CF7ABB63 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -2686,9 +2737,9 @@
 			};
 			name = Debug;
 		};
-		8E0A590E17C8C3DBAD51F4B3803751EB /* Debug */ = {
+		8C466ECB121E52A54F0436113BFBEE8D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9A82DAFF1C309F67512EA3FCDFC21A55 /* Pods-VimeoNetworkingExample-iOS.debug.xcconfig */;
+			baseConfigurationReference = 7D42FD5CB528446DC9EB56EC4C5850A5 /* VimeoNetworking-iOS.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2699,21 +2750,51 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-VimeoNetworkingExample-iOS/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/VimeoNetworking-iOS/VimeoNetworking-iOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/VimeoNetworking-iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-VimeoNetworkingExample-iOS/Pods-VimeoNetworkingExample-iOS.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_VimeoNetworkingExample_iOS;
+				MODULEMAP_FILE = "Target Support Files/VimeoNetworking-iOS/VimeoNetworking-iOS.modulemap";
+				PRODUCT_NAME = VimeoNetworking;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8E3CD91F566B771121CBE7CA9DC34D15 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7D42FD5CB528446DC9EB56EC4C5850A5 /* VimeoNetworking-iOS.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/VimeoNetworking-iOS/VimeoNetworking-iOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/VimeoNetworking-iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/VimeoNetworking-iOS/VimeoNetworking-iOS.modulemap";
+				PRODUCT_NAME = VimeoNetworking;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -2776,9 +2857,41 @@
 			};
 			name = Release;
 		};
-		94A24DD3A38FB8E8A6D2091DC88F0CB8 /* Debug */ = {
+		AF19150B3FD5BC77C203C3FEC152F599 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F85721083E51F60E38313582585534E /* Pods-VimeoNetworkingExample-tvOS.debug.xcconfig */;
+			baseConfigurationReference = 52EDAFED497340DDFE07D1CAFBD4E1E2 /* OHHTTPStubs-tvOS.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/OHHTTPStubs-tvOS/OHHTTPStubs-tvOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/OHHTTPStubs-tvOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/OHHTTPStubs-tvOS/OHHTTPStubs-tvOS.modulemap";
+				PRODUCT_NAME = OHHTTPStubs;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		B2FC01D0F1D6A49BAD3C502A3623C656 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 02EEBCBA39BF1BEF3DD81313C3531B7E /* Pods-VimeoNetworkingExample-tvOS.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2801,18 +2914,19 @@
 				PRODUCT_NAME = Pods_VimeoNetworkingExample_tvOS;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
-		A1E376EDC9BA1EF561593F5388E4067B /* Debug */ = {
+		C14FAE16F52796C4B63F1CC71AFA3A21 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9FE86ADD413F057509C1095E519FA5EA /* OHHTTPStubs-iOS.xcconfig */;
+			baseConfigurationReference = C4E60BBDC815350D181719A4920EEFE7 /* AFNetworking-iOS.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2823,51 +2937,18 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/OHHTTPStubs-iOS/OHHTTPStubs-iOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/OHHTTPStubs-iOS/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/AFNetworking-iOS/AFNetworking-iOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AFNetworking-iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/OHHTTPStubs-iOS/OHHTTPStubs-iOS.modulemap";
-				PRODUCT_NAME = OHHTTPStubs;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		A4EA75D1A158929B983CFCCC2307DA9E /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EA174A361D33358C1B6FBAABEDCFA3E1 /* Pods-VimeoNetworkingExample-iOSTests.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-VimeoNetworkingExample-iOSTests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-VimeoNetworkingExample-iOSTests/Pods-VimeoNetworkingExample-iOSTests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_VimeoNetworkingExample_iOSTests;
+				MODULEMAP_FILE = "Target Support Files/AFNetworking-iOS/AFNetworking-iOS.modulemap";
+				PRODUCT_NAME = AFNetworking;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2875,9 +2956,9 @@
 			};
 			name = Release;
 		};
-		B11D20A88297871391484B301FAC5CE9 /* Debug */ = {
+		D1B0E8DA0AA4133CC15E7349B08CA86C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8E0C2D0BD32AB407DEC37B20F7D4296E /* Pods-VimeoNetworkingExample-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = 5EF23B1E2D740197B2808DB8BAD1E680 /* VimeoNetworking-tvOS.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2888,28 +2969,26 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-VimeoNetworkingExample-tvOSTests/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/VimeoNetworking-tvOS/VimeoNetworking-tvOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/VimeoNetworking-tvOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-VimeoNetworkingExample-tvOSTests/Pods-VimeoNetworkingExample-tvOSTests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_VimeoNetworkingExample_tvOSTests;
+				MODULEMAP_FILE = "Target Support Files/VimeoNetworking-tvOS/VimeoNetworking-tvOS.modulemap";
+				PRODUCT_NAME = VimeoNetworking;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
-		B3A9307B4F4579C80548B241135A3DEC /* Debug */ = {
+		DBD9B87B0927C89649384A6CF197A4E6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EEE2C7D37BA8BCF1A1B007D3F7B1A96A /* AFNetworking-tvOS.xcconfig */;
 			buildSettings = {
@@ -2930,7 +3009,8 @@
 				PRODUCT_NAME = AFNetworking;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2938,7 +3018,7 @@
 			};
 			name = Debug;
 		};
-		CBA43F47FBC894B12601CEE24C805E96 /* Debug */ = {
+		F559639012C3F7D3DF0805503E70A586 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 52EDAFED497340DDFE07D1CAFBD4E1E2 /* OHHTTPStubs-tvOS.xcconfig */;
 			buildSettings = {
@@ -2961,7 +3041,8 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2969,9 +3050,9 @@
 			};
 			name = Debug;
 		};
-		DEC87AD96F18BB134E354485120A90E9 /* Release */ = {
+		FE9592E4DD943323276F258E3A06183D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EEE2C7D37BA8BCF1A1B007D3F7B1A96A /* AFNetworking-tvOS.xcconfig */;
+			baseConfigurationReference = 9A82DAFF1C309F67512EA3FCDFC21A55 /* Pods-VimeoNetworkingExample-iOS.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2982,88 +3063,27 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/AFNetworking-tvOS/AFNetworking-tvOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/AFNetworking-tvOS/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-VimeoNetworkingExample-iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/AFNetworking-tvOS/AFNetworking-tvOS.modulemap";
-				PRODUCT_NAME = AFNetworking;
-				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		E27311FD5A3905BB3DB77DF703118D05 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5EF23B1E2D740197B2808DB8BAD1E680 /* VimeoNetworking-tvOS.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/VimeoNetworking-tvOS/VimeoNetworking-tvOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/VimeoNetworking-tvOS/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/VimeoNetworking-tvOS/VimeoNetworking-tvOS.modulemap";
-				PRODUCT_NAME = VimeoNetworking;
-				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		E5023AEB9748CADF1CE4ACDD7E28EBEA /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 723BC0803DB25CED4A33055244E1F0CF /* Pods-VimeoNetworkingExample-tvOSTests.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-VimeoNetworkingExample-tvOSTests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-VimeoNetworkingExample-tvOSTests/Pods-VimeoNetworkingExample-tvOSTests.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-VimeoNetworkingExample-iOS/Pods-VimeoNetworkingExample-iOS.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_VimeoNetworkingExample_tvOSTests;
-				SDKROOT = appletvos;
+				PRODUCT_NAME = Pods_VimeoNetworkingExample_iOS;
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
-				VALIDATE_PRODUCT = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
@@ -3071,8 +3091,8 @@
 		1A288F81AA7A4BCA6A2F64BF48CF10B2 /* Build configuration list for PBXNativeTarget "OHHTTPStubs-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CBA43F47FBC894B12601CEE24C805E96 /* Debug */,
-				411D429EA56745EEBBED8639DC1579BB /* Release */,
+				F559639012C3F7D3DF0805503E70A586 /* Debug */,
+				AF19150B3FD5BC77C203C3FEC152F599 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3080,8 +3100,8 @@
 		23D35D8A3679C1C8AD07ED732241B4A7 /* Build configuration list for PBXNativeTarget "Pods-VimeoNetworkingExample-tvOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B11D20A88297871391484B301FAC5CE9 /* Debug */,
-				E5023AEB9748CADF1CE4ACDD7E28EBEA /* Release */,
+				29D30D5A857973C768FA642E3545E6E0 /* Debug */,
+				30DE3BDE415B7487F140DA5A5DB512CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3089,8 +3109,8 @@
 		2A52DBCEFB2FA7BB4A5E477998E761B1 /* Build configuration list for PBXNativeTarget "Pods-VimeoNetworkingExample-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				94A24DD3A38FB8E8A6D2091DC88F0CB8 /* Debug */,
-				6132B9F82F000D87C3B1A2B7B7614EF3 /* Release */,
+				4B6CE4FDC9BB497DC237A2B2601F46B6 /* Debug */,
+				B2FC01D0F1D6A49BAD3C502A3623C656 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3107,8 +3127,8 @@
 		2F337E646D4755472A4C26A8E8251D29 /* Build configuration list for PBXNativeTarget "AFNetworking-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B3A9307B4F4579C80548B241135A3DEC /* Debug */,
-				DEC87AD96F18BB134E354485120A90E9 /* Release */,
+				DBD9B87B0927C89649384A6CF197A4E6 /* Debug */,
+				3EA813106BB4BE13A4F9AF4996747866 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3116,8 +3136,8 @@
 		83EBD6A4BB445691228E760AF4ACCEDF /* Build configuration list for PBXNativeTarget "AFNetworking-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				14A920DB275AC39D7C0AB9A152AD051A /* Debug */,
-				23422C866C7AC5D28F722ED0FE70B7A4 /* Release */,
+				764F7A8713C53FECE62EAD1BAA8F4F33 /* Debug */,
+				C14FAE16F52796C4B63F1CC71AFA3A21 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3125,8 +3145,8 @@
 		AA031AB680F2A7D347E1D5503E8AA562 /* Build configuration list for PBXNativeTarget "Pods-VimeoNetworkingExample-iOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4ECEF39A0D9D2A52F22005C238DB2988 /* Debug */,
-				A4EA75D1A158929B983CFCCC2307DA9E /* Release */,
+				451038E688B1DCFDFBD70EDB20B92BBE /* Debug */,
+				42694757AE9EBFD229ACD66AD41C8368 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3134,8 +3154,8 @@
 		B66E94B377B2F5F8E8802B826E095696 /* Build configuration list for PBXNativeTarget "OHHTTPStubs-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A1E376EDC9BA1EF561593F5388E4067B /* Debug */,
-				2620FF112E45D2554779EEB85BD327E3 /* Release */,
+				19276A718E3777C3DFB4BDF8568D6DA8 /* Debug */,
+				3FEC0E5EEEB4A5E55CE8FDBD9F9D8114 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3143,8 +3163,8 @@
 		C3702D480A1AF5E53C60E4ED7FF049B1 /* Build configuration list for PBXNativeTarget "VimeoNetworking-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				33008F69CE86E6F49A3E87EDED5BE4E7 /* Debug */,
-				E27311FD5A3905BB3DB77DF703118D05 /* Release */,
+				40C4FAEA8017E641C0045DBB576E0D89 /* Debug */,
+				D1B0E8DA0AA4133CC15E7349B08CA86C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3152,8 +3172,8 @@
 		E456E7B94399D03D0EF914BAB5110170 /* Build configuration list for PBXNativeTarget "VimeoNetworking-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				10B29FE3637C8C3636DAAAD5891BD6C1 /* Debug */,
-				2EBFA7375C32443AF01F18B63490CE39 /* Release */,
+				8E3CD91F566B771121CBE7CA9DC34D15 /* Debug */,
+				8C466ECB121E52A54F0436113BFBEE8D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3161,8 +3181,8 @@
 		E53805CE07C288296552EB795A7AA8A7 /* Build configuration list for PBXNativeTarget "Pods-VimeoNetworkingExample-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8E0A590E17C8C3DBAD51F4B3803751EB /* Debug */,
-				131FD10396A62371957763FD515043B8 /* Release */,
+				FE9592E4DD943323276F258E3A06183D /* Debug */,
+				266173FAD53F0FE05B53B2EC4010F94F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

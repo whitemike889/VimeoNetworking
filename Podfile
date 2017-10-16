@@ -32,6 +32,7 @@ post_install do |installer|
             if config.name == "Release"
                 config.build_settings["SWIFT_OPTIMIZATION_LEVEL"] = "-Owholemodule"
             end
+            config.build_settings["SWIFT_SWIFT3_OBJC_INFERENCE"] = "Default"
         end
     end
 end
