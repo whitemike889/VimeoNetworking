@@ -35,7 +35,7 @@ public class VIMLiveHeartbeat: VIMModelObject
     }
     
     /// The heartbeat URL that the client should send requests to.
-    public private(set) var heartbeatUrl: String?
+    @objc public private(set) var heartbeatUrl: String?
     
     override public func getObjectMapping() -> Any?
     {
