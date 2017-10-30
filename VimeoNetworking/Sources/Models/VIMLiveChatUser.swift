@@ -52,13 +52,9 @@ public class VIMLiveChatUser: VIMModelObject
         static let PictureResponseKey = "pictures"
     }
     
-    /// The user's account type in `String`. This property is for internal
-    /// use only. Use `accountType` property to query the user's account
-    /// type instead.
-    public private(set) var account: String?
+    private(set) var account: String?
     
-    /// The user's account type in `AccountType`. Using this property is
-    /// preferred over `account`.
+    /// The user's account type in `AccountType`.
     public var accountType: AccountType?
     {
         guard let accountValue = self.account else
