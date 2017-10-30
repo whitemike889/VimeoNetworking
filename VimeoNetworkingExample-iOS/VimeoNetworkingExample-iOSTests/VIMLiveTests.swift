@@ -51,9 +51,9 @@ class VIMLiveTests: XCTestCase
     private func assert(liveObject live: VIMLive?)
     {
         XCTAssertNotNil(live)
-        XCTAssertEqual(live?.link, "mock_link")
-        XCTAssertEqual(live?.key, "mock_key")
-        XCTAssertEqual(live?.activeTime?.description, "mock_active_time")
+        XCTAssertEqual(live?.link, MockConstants.Link)
+        XCTAssertEqual(live?.key, MockConstants.Key)
+        XCTAssertEqual(live?.activeTime?.description, MockConstants.ActiveTime)
         XCTAssertNil(live?.endedTime)
         XCTAssertNil(live?.archivedTime)
         XCTAssertEqual(live?.liveStreamingStatus, .streaming)
@@ -62,28 +62,28 @@ class VIMLiveTests: XCTestCase
     private func assert(liveChatObject chat: VIMLiveChat?)
     {
         XCTAssertNotNil(chat)
-        XCTAssertEqual(chat?.roomId?.int64Value, -1)
-        XCTAssertEqual(chat?.token, "mock_token")
+        XCTAssertEqual(chat?.roomId?.int64Value, MockConstants.Id)
+        XCTAssertEqual(chat?.token, MockConstants.Token)
     }
     
     private func assert(liveChatUserObject user: VIMLiveChatUser?)
     {
         XCTAssertNotNil(user)
         XCTAssertEqual(user?.accountType, .liveBusiness)
-        XCTAssertEqual(user?.id?.int64Value, -1)
-        XCTAssertEqual(user?.name, "mock_name")
+        XCTAssertEqual(user?.id?.int64Value, MockConstants.Id)
+        XCTAssertEqual(user?.name, MockConstants.Name)
         XCTAssertEqual(user?.isStaff?.boolValue, true)
         XCTAssertEqual(user?.isCreator?.boolValue, true)
-        XCTAssertEqual(user?.uri, "mock_uri")
+        XCTAssertEqual(user?.uri, MockConstants.Uri)
         XCTAssertNotNil(user?.pictures)
-        XCTAssertEqual(user?.link, "mock_link")
+        XCTAssertEqual(user?.link, MockConstants.Link)
     }
     
     func testParsingLiveObject()
     {
-        let request = Request<VIMVideo>(path: "/videos/999999")
+        let request = Request<VIMVideo>(path: "/videos/" + MockConstants.CensoredId)
         
-        stub(condition: isPath("/videos/999999")) { _ in
+        stub(condition: isPath("/videos/" + MockConstants.CensoredId)) { _ in
             let stubPath = OHPathForFile("clip_live.json", type(of: self))
             return fixture(filePath: stubPath!, headers: ["Content-Type":"application/json"])
         }

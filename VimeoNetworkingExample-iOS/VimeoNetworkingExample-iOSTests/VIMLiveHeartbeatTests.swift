@@ -50,9 +50,9 @@ class VIMLiveHeartbeatTests: XCTestCase
     
     func testParsingLiveHeartbeatObject()
     {
-        let request = Request<VIMVideo>(path: "/videos/xxxxxx")
+        let request = Request<VIMVideo>(path: "/videos/" + MockConstants.CensoredId)
         
-        stub(condition: isPath("/videos/xxxxxx")) { _ in
+        stub(condition: isPath("/videos/" + MockConstants.CensoredId)) { _ in
             let stubPath = OHPathForFile("clip_live.json", type(of: self))
             return fixture(filePath: stubPath!, headers: ["Content-Type":"application/json"])
         }
@@ -68,7 +68,7 @@ class VIMLiveHeartbeatTests: XCTestCase
                 let liveHeartbeat = video.playRepresentation?.hlsFile?.heartbeat
                 
                 XCTAssertNotNil(liveHeartbeat)
-                XCTAssertEqual(liveHeartbeat?.heartbeatUrl, "mock_heartbeat")
+                XCTAssertEqual(liveHeartbeat?.heartbeatUrl, MockConstants.Heartbeat)
                 
             case .failure(let error):
                 XCTFail("\(error)")

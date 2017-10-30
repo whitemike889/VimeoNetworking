@@ -50,9 +50,9 @@ class VIMLiveQuotaTests: XCTestCase
     
     func testParsingLiveQuotaObject()
     {
-        let request = Request<VIMUser>(path: "/users/xxxxxx")
+        let request = Request<VIMUser>(path: "/users/" + MockConstants.CensoredId)
         
-        stub(condition: isPath("/users/xxxxxx")) { _ in
+        stub(condition: isPath("/users/" + MockConstants.CensoredId)) { _ in
             let stubPath = OHPathForFile("user_live.json", type(of: self))
             return fixture(filePath: stubPath!, headers: ["Content-Type":"application/json"])
         }
