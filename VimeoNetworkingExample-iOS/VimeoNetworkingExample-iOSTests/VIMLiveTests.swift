@@ -51,9 +51,9 @@ class VIMLiveTests: XCTestCase
     private func assert(liveObject live: VIMLive?)
     {
         XCTAssertNotNil(live)
-        XCTAssertEqual(live?.link, "rtmp://rtmp.cloud.vimeo.com/live?token=999999")
-        XCTAssertEqual(live?.key, "999999")
-        XCTAssertEqual(live?.activeTime?.description, "2017-08-01T18:18:44+00:00")
+        XCTAssertEqual(live?.link, "mock_link")
+        XCTAssertEqual(live?.key, "mock_key")
+        XCTAssertEqual(live?.activeTime?.description, "mock_active_time")
         XCTAssertNil(live?.endedTime)
         XCTAssertNil(live?.archivedTime)
         XCTAssertEqual(live?.liveStreamingStatus, .streaming)
@@ -62,21 +62,21 @@ class VIMLiveTests: XCTestCase
     private func assert(liveChatObject chat: VIMLiveChat?)
     {
         XCTAssertNotNil(chat)
-        XCTAssertEqual(chat?.roomId?.int64Value, 999999)
-        XCTAssertEqual(chat?.token, "asdfghjkl;1234")
+        XCTAssertEqual(chat?.roomId?.int64Value, -1)
+        XCTAssertEqual(chat?.token, "mock_token")
     }
     
     private func assert(liveChatUserObject user: VIMLiveChatUser?)
     {
         XCTAssertNotNil(user)
         XCTAssertEqual(user?.accountType, .liveBusiness)
-        XCTAssertEqual(user?.id?.int64Value, 999999)
-        XCTAssertEqual(user?.name, "Some Random Dude")
+        XCTAssertEqual(user?.id?.int64Value, -1)
+        XCTAssertEqual(user?.name, "mock_name")
         XCTAssertEqual(user?.isStaff?.boolValue, true)
         XCTAssertEqual(user?.isCreator?.boolValue, true)
-        XCTAssertEqual(user?.uri, "/users/999999")
+        XCTAssertEqual(user?.uri, "mock_uri")
         XCTAssertNotNil(user?.pictures)
-        XCTAssertEqual(user?.link, "https://vimeo.com/somerandomdude")
+        XCTAssertEqual(user?.link, "mock_link")
     }
     
     func testParsingLiveObject()

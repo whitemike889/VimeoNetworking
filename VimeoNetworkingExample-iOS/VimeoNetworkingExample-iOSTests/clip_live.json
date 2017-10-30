@@ -1,17 +1,17 @@
 {
-    "uri": "/videos/999999",
-    "name": "Dev test with ngrok",
+    "uri": "mock_uri",
+    "name": "mock_name",
     "description": null,
-    "link": "https://vimeo.dev/999999",
+    "link": "mock_link",
     "duration": 2479,
     "width": 1024,
     "language": null,
     "height": 640,
     "embed": {
-        "html": "<iframe src=\"https://player2.vimeo.dev/video/999999?badge=0&autopause=0&player_id=0\" width=\"400\" height=\"300\" frameborder=\"0\" title=\"Dev test with ngrok\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>"
+        "html": "mock_html"
     },
     "created_time": null,
-    "modified_time": "2017-08-01T15:53:26+00:00",
+    "modified_time": "mock_modified_time",
     "release_time": null,
     "content_rating": [
                        "safe"
@@ -32,35 +32,35 @@
                   {
                   "width": 100,
                   "height": 75,
-                  "link": "https://devi.vimeocdn.com/video/default_100x75?r=pad",
-                  "link_with_play_button": "https://devi.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fdevi.vimeocdn.com%2Fvideo%2Fdefault_100x75&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png"
+                  "link": "mock_link",
+                  "link_with_play_button": "mock_with_play_button"
                   },
                   {
                   "width": 200,
                   "height": 150,
-                  "link": "https://devi.vimeocdn.com/video/default_200x150?r=pad",
-                  "link_with_play_button": "https://devi.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fdevi.vimeocdn.com%2Fvideo%2Fdefault_200x150&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png"
+                  "link": "mock_link",
+                  "link_with_play_button": "mock_with_play_button"
                   },
                   {
                   "width": 295,
                   "height": 166,
-                  "link": "https://devi.vimeocdn.com/video/default_295x166?r=pad",
-                  "link_with_play_button": "https://devi.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fdevi.vimeocdn.com%2Fvideo%2Fdefault_295x166&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png"
+                  "link": "mock_link",
+                  "link_with_play_button": "mock_with_play_button"
                   },
                   {
                   "width": 640,
                   "height": 480,
-                  "link": "https://devi.vimeocdn.com/video/default_640x480?r=pad",
-                  "link_with_play_button": "https://devi.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fdevi.vimeocdn.com%2Fvideo%2Fdefault_640x480&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png"
+                  "link": "mock_link",
+                  "link_with_play_button": "mock_with_play_button"
                   },
                   {
                   "width": 960,
                   "height": 720,
-                  "link": "https://devi.vimeocdn.com/video/default_960x720?r=pad",
-                  "link_with_play_button": "https://devi.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fdevi.vimeocdn.com%2Fvideo%2Fdefault_960x720&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png"
+                  "link": "mock_link",
+                  "link_with_play_button": "mock_with_play_button"
                   }
                   ],
-        "resource_key": "999999"
+        "resource_key": "mock_resource_key"
     },
     "tags": [],
     "stats": {
@@ -68,96 +68,96 @@
     },
     "categories": [],
     "log": {
-        "play": "https://api.vimeo.dev/videos/999999/stats/play/ts/1501614003:90d0f28da5d6d3c61c324220fc86e3887042da00",
-        "like_press": "https://api.vimeo.dev/videos/999999/stats/like_press/ts/1501614003:90d0f28da5d6d3c61c324220fc86e3887042da00",
-        "watchlater_press": "https://api.vimeo.dev/videos/999999/stats/watchlater_press/ts/1501614003:90d0f28da5d6d3c61c324220fc86e3887042da00",
-        "load": "https://api.vimeo.dev/videos/999999/stats/load/ts/1501614003:90d0f28da5d6d3c61c324220fc86e3887042da00",
-        "exit": "https://api.vimeo.dev/videos/999999/stats/exit/ts/1501614003:90d0f28da5d6d3c61c324220fc86e3887042da00"
+        "play": "mock_play",
+        "like_press": "mock_like_press",
+        "watchlater_press": "mock_watchlater_press",
+        "load": "mock_load",
+        "exit": "mock_exit"
     },
     "play": {
         "status": "playable",
         "dash": {
-            "link": "https://live.vimeocdn.com/stream/42f9947e-6bb6-4119-bc37-8ee9d49c8567/player/dash.mpd",
-            "log": "https://api.vimeo.dev/videos/999999/log/dash/1501704030/7c7f33d8de88a46e9648e882e34ee6de82e2e295",
-            "link_expiration_time": "2017-08-03T01:00:30+00:00"
+            "link": "mock_link",
+            "log": "mock_log",
+            "link_expiration_time": "mock_link_expiration_time"
         },
         "hls": {
-            "link": "https://live.vimeocdn.com/stream/42f9947e-6bb6-4119-bc37-8ee9d49c8567/player/hls.m3u8",
-            "log": "https://api.vimeo.dev/videos/999999/log/hls/1501704030/4d87cac825f4922931e1f7bbf89f908a22d368fe",
-            "link_expiration_time": "2017-08-03T01:00:30+00:00",
+            "link": "mock_link",
+            "log": "mock_log",
+            "link_expiration_time": "mock_link_expiration_time",
             "live": {
-                "heartbeat": "https://api.vimeo.com/videos/999999/heartbeat/hls/1507067883/3082903e82078a78bd146ca542899a124e1c47fe"
+                "heartbeat": "mock_heartbeat"
             }
         }
     },
     "app": {
-        "name": "Vimeo Live",
-        "uri": "/apps/999999"
+        "name": "mock_name",
+        "uri": "mock_uri"
     },
     "status": "available",
-    "resource_key": "999999",
+    "resource_key": "mock_resource_key",
     "live": {
-        "link": "rtmp://rtmp.cloud.vimeo.com/live?token=999999",
-        "key": "999999",
-        "active_time": "2017-08-01T18:18:44+00:00",
+        "link": "mock_link",
+        "key": "mock_key",
+        "active_time": "mock_active_time",
         "ended_time": null,
         "archived_time": null,
         "status": "streaming",
         "scheduled_start_time": null,
         "chat": {
-            "room_id": 999999,
-            "token": "asdfghjkl;1234",
+            "room_id": -1,
+            "token": "mock_token",
             "user": {
-                "uri": "/users/999999",
-                "id": 999999,
-                "name": "Some Random Dude",
+                "uri": "mock_uri",
+                "id": -1,
+                "name": "mock_name",
                 "account": "live_business",
                 "is_staff": true,
                 "is_creator": true,
                 "pictures": {
-                    "uri": "/users/999999/pictures/999999",
+                    "uri": "mock_uri",
                     "active": true,
                     "type": "custom",
                     "sizes": [{
                                   "width": 30,
                                   "height": 30,
-                                  "link": "https://i.vimeocdn.com/portrait/999999_30x30"
+                                  "link": "mock_link"
                               }, {
                                   "width": 75,
                                   "height": 75,
-                                  "link": "https://i.vimeocdn.com/portrait/999999_75x75"
+                                  "link": "mock_link"
                               }, {
                                   "width": 100,
                                   "height": 100,
-                                  "link": "https://i.vimeocdn.com/portrait/999999_100x100"
+                                  "link": "mock_link"
                               }, {
                                   "width": 300,
                                   "height": 300,
-                                  "link": "https://i.vimeocdn.com/portrait/999999_300x300"
+                                  "link": "mock_link"
                               }, {
                                   "width": 72,
                                   "height": 72,
-                                  "link": "https://i.vimeocdn.com/portrait/999999_72x72"
+                                  "link": "mock_link"
                               }, {
                                   "width": 144,
                                   "height": 144,
-                                  "link": "https://i.vimeocdn.com/portrait/999999_144x144"
+                                  "link": "mock_link"
                               }, {
                                   "width": 216,
                                   "height": 216,
-                                  "link": "https://i.vimeocdn.com/portrait/999999_216x216"
+                                  "link": "mock_link"
                               }, {
                                   "width": 288,
                                   "height": 288,
-                                  "link": "https://i.vimeocdn.com/portrait/999999_288x288"
+                                  "link": "mock_link"
                               }, {
                                   "width": 360,
                                   "height": 360,
-                                  "link": "https://i.vimeocdn.com/portrait/999999_360x360"
+                                  "link": "mock_link"
                               }],
-                    "resource_key": "999999"
+                    "resource_key": "mock_resource_key"
                 },
-                "link": "https://vimeo.com/somerandomdude"
+                "link": "mock_link"
             }
         }
     }
