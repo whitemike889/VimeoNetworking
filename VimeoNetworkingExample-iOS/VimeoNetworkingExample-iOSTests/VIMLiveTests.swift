@@ -48,11 +48,42 @@ class VIMLiveTests: XCTestCase
         OHHTTPStubs.removeAllStubs()
     }
     
+    private func assert(liveObject live: VIMLive?)
+    {
+        XCTAssertNotNil(live)
+        XCTAssertEqual(live?.link, MockLive.Link)
+        XCTAssertEqual(live?.key, MockLive.Key)
+        XCTAssertEqual(live?.activeTime?.description, MockLive.ActiveTime)
+        XCTAssertNil(live?.endedTime)
+        XCTAssertNil(live?.archivedTime)
+        XCTAssertEqual(live?.liveStreamingStatus, .streaming)
+    }
+    
+    private func assert(liveChatObject chat: VIMLiveChat?)
+    {
+        XCTAssertNotNil(chat)
+        XCTAssertEqual(chat?.roomId?.int64Value, MockLiveChat.RoomId)
+        XCTAssertEqual(chat?.token, MockLiveChat.Token)
+    }
+    
+    private func assert(liveChatUserObject user: VIMLiveChatUser?)
+    {
+        XCTAssertNotNil(user)
+        XCTAssertEqual(user?.accountType, .liveBusiness)
+        XCTAssertEqual(user?.id?.int64Value, MockLiveChatUser.Id)
+        XCTAssertEqual(user?.name, MockLiveChatUser.Name)
+        XCTAssertEqual(user?.isStaff?.boolValue, true)
+        XCTAssertEqual(user?.isCreator?.boolValue, true)
+        XCTAssertEqual(user?.uri, MockLiveChatUser.Uri)
+        XCTAssertNotNil(user?.pictures)
+        XCTAssertEqual(user?.link, MockLiveChatUser.Link)
+    }
+    
     func testParsingLiveObject()
     {
-        let request = Request<VIMVideo>(path: "/videos/224357160")
+        let request = Request<VIMVideo>(path: "/videos/" + Constants.CensoredId)
         
-        stub(condition: isPath("/videos/224357160")) { _ in
+        stub(condition: isPath("/videos/" + Constants.CensoredId)) { _ in
             let stubPath = OHPathForFile("clip_live.json", type(of: self))
             return fixture(filePath: stubPath!, headers: ["Content-Type":"application/json"])
         }
@@ -65,13 +96,9 @@ class VIMLiveTests: XCTestCase
             case .success(let result):
                 let video = result.model
                 
-                XCTAssertNotNil(video.live)
-                XCTAssertEqual(video.live?.link, "rtmp://rtmp.cloud.vimeo.com/live?token=b23a326b-eb96-432d-97d5-122afa3a4e47")
-                XCTAssertEqual(video.live?.key, "42f9947e-6bb6-4119-bc37-8ee9d49c8567")
-                XCTAssertEqual(video.live?.activeTime?.description, "2017-08-01T18:18:44+00:00")
-                XCTAssertNil(video.live?.endedTime)
-                XCTAssertNil(video.live?.archivedTime)
-                XCTAssertEqual(video.live?.liveStreamingStatus, .streaming)
+                self.assert(liveObject: video.live)
+                self.assert(liveChatObject: video.live?.chat)
+                self.assert(liveChatUserObject: video.live?.chat?.user)
                 
             case .failure(let error):
                 XCTFail("\(error)")

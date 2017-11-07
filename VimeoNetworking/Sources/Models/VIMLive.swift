@@ -52,6 +52,11 @@ public enum LiveStreamingStatus: String
 /// a `clip` response.
 public class VIMLive: VIMModelObject
 {
+    private struct Constants
+    {
+        static let ChatKey = "chat"
+    }
+    
     /// The RTMP link is visible but not yet able to receive the stream.
     public static let LiveStreamStatusUnavailable = "unavailable"
     
@@ -115,5 +120,18 @@ public class VIMLive: VIMModelObject
         }
         
         return LiveStreamingStatus(rawValue: status)
+    }
+    
+    /// The live event's chat.
+    public private(set) var chat: VIMLiveChat?
+    
+    public override func getClassForObjectKey(_ key: String!) -> AnyClass?
+    {
+        if key == Constants.ChatKey
+        {
+            return VIMLiveChat.self
+        }
+        
+        return nil
     }
 }
