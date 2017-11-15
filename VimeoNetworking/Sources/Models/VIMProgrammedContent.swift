@@ -33,8 +33,8 @@ public class VIMProgrammedContent: VIMModelObject
     @objc dynamic public private(set) var type: String?
     @objc dynamic public private(set) var content: NSArray?
  
-    private var metadata: [AnyHashable: Any]?
-    private var connections: [AnyHashable: Any]?
+    @objc dynamic private var metadata: [AnyHashable: Any]?
+    @objc dynamic private var connections: [AnyHashable: Any]?
     
     private struct Constants
     {
