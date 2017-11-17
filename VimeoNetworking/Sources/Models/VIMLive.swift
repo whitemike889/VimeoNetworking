@@ -82,24 +82,24 @@ public class VIMLive: VIMModelObject
     public static let LiveStreamStatusDone = "done"
     
     /// An RTMP link used to host a live stream.
-    public private(set) var link: String?
+    @objc dynamic public private(set) var link: String?
     
     /// A token for streaming.
-    public private(set) var key: String?
+    @objc dynamic public private(set) var key: String?
     
     /// The timestamp that the stream is active.
-    public private(set) var activeTime: NSDate?
+    @objc dynamic public private(set) var activeTime: NSDate?
     
     /// The timestamp that the stream is over.
-    public private(set) var endedTime: NSDate?
+    @objc dynamic public private(set) var endedTime: NSDate?
     
     /// The timestamp that the live video is
     /// archived.
-    public private(set) var archivedTime: NSDate?
+    @objc dynamic public private(set) var archivedTime: NSDate?
     
     /// The timestamp that the live video is
     /// scheduled to be online.
-    public private(set) var scheduledStartTime: NSDate?
+    @objc dynamic public private(set) var scheduledStartTime: NSDate?
     
     /**
         The status of the live video in string.
@@ -109,7 +109,7 @@ public class VIMLive: VIMModelObject
         check the status of a live video. Use
         `liveStreamingStatus` instead for easy checking.
      */
-    public private(set) var status: String?
+    @objc dynamic public private(set) var status: String?
     
     /// The status of the live video in `LiveStreamingStatus` enum.
     public var liveStreamingStatus: LiveStreamingStatus?
