@@ -1,133 +1,133 @@
 {
-    "uri": "/users/99999999",
-    "name": "Some Random Dude",
-    "link": "https://vimeo.com/somerandomdude",
+    "uri": "mock_uri",
+    "name": "mock_name",
+    "link": "mock_link",
     "location": "New York",
-    "bio": "\"Some meaningless quote.\" -- Some famous dude",
-    "created_time": "2016-11-11T12:41:17+00:00",
+    "bio": "mock_bio",
+    "created_time": "mock_created_time",
     "account": "basic",
     "pictures": {
-        "uri": "/users/99999999/pictures/99999999",
+        "uri": "mock_uri",
         "active": true,
         "type": "custom",
         "sizes": [{
                   "width": 30,
                   "height": 30,
-                  "link": "https://i.vimeocdn.com/portrait/99999999_30x30"
+                  "link": "mock_link"
                   }, {
                   "width": 75,
                   "height": 75,
-                  "link": "https://i.vimeocdn.com/portrait/99999999_75x75"
+                  "link": "mock_link"
                   }, {
                   "width": 100,
                   "height": 100,
-                  "link": "https://i.vimeocdn.com/portrait/99999999_100x100"
+                  "link": "mock_link"
                   }, {
                   "width": 300,
                   "height": 300,
-                  "link": "https://i.vimeocdn.com/portrait/99999999_300x300"
+                  "link": "mock_link"
                   }],
-        "resource_key": "0b2345e12eb6c7c2a7fa925f025c86b6b1d6eb3d"
+        "resource_key": "mock_resource_key"
     },
     "websites": [],
     "metadata": {
         "connections": {
             "albums": {
-                "uri": "/users/99999999/albums",
+                "uri": "mock_uri",
                 "options": ["GET"],
                 "total": 0
             },
             "appearances": {
-                "uri": "/users/99999999/appearances",
+                "uri": "mock_uri",
                 "options": ["GET"],
                 "total": 0
             },
             "categories": {
-                "uri": "/users/99999999/categories",
+                "uri": "mock_uri",
                 "options": ["GET"],
                 "total": 6
             },
             "channels": {
-                "uri": "/users/99999999/channels",
+                "uri": "mock_uri",
                 "options": ["GET"],
                 "total": 49
             },
             "feed": {
-                "uri": "/users/99999999/feed",
+                "uri": "mock_uri",
                 "options": ["GET"]
             },
             "followers": {
-                "uri": "/users/99999999/followers",
+                "uri": "mock_uri",
                 "options": ["GET"],
                 "total": 17
             },
             "following": {
-                "uri": "/users/99999999/following",
+                "uri": "mock_uri",
                 "options": ["GET"],
                 "total": 106
             },
             "groups": {
-                "uri": "/users/99999999/groups",
+                "uri": "mock_uri",
                 "options": ["GET"],
                 "total": 0
             },
             "likes": {
-                "uri": "/users/99999999/likes",
+                "uri": "mock_uri",
                 "options": ["GET"],
                 "total": 5
             },
             "moderated_channels": {
-                "uri": "/users/99999999/channels?filter=moderated",
+                "uri": "mock_uri",
                 "options": ["GET"],
                 "total": 0
             },
             "portfolios": {
-                "uri": "/users/99999999/portfolios",
+                "uri": "mock_uri",
                 "options": ["GET"],
                 "total": 0
             },
             "videos": {
-                "uri": "/users/99999999/videos",
+                "uri": "mock_uri",
                 "options": ["GET"],
                 "total": 2
             },
             "watchlater": {
-                "uri": "/users/99999999/watchlater",
+                "uri": "mock_uri",
                 "options": ["GET"],
                 "total": 24
             },
             "shared": {
-                "uri": "/users/99999999/shared/videos",
+                "uri": "mock_uri",
                 "options": ["GET"],
                 "total": 0
             },
             "pictures": {
-                "uri": "/users/99999999/pictures",
+                "uri": "mock_uri",
                 "options": ["GET", "POST"],
                 "total": 2
             },
             "violations": {
-                "uri": "/users/99999999/violations",
+                "uri": "mock_uri",
                 "options": ["GET"],
                 "total": 0
             },
             "recommended_users": {
-                "uri": "/me/recommendations/users",
+                "uri": "mock_uri",
                 "options": ["GET"],
                 "total": 55
             },
             "recommended_channels": {
-                "uri": "/me/recommendations/channels",
+                "uri": "mock_uri",
                 "options": ["GET"],
                 "total": 53
             },
             "watched_videos": {
-                "uri": "/me/watched/videos",
+                "uri": "mock_uri",
                 "options": ["GET"],
                 "total": 422
             },
             "notifications": {
-                "uri": "/me/notifications",
+                "uri": "mock_uri",
                 "total_new": 0,
                 "new_total": 0,
                 "unread_total": 0,
@@ -150,7 +150,7 @@
                 }
             },
             "block": {
-                "uri": "/me/block",
+                "uri": "mock_uri",
                 "options": ["GET"],
                 "total": 0
             }
@@ -159,8 +159,8 @@
     "badge": {
         "type": "staff",
         "text": "Staff",
-        "alt_text": "Learn more about Vimeo",
-        "url": "/about"
+        "alt_text": "mock_alt_text",
+        "url": "mock_url"
     },
     "preferences": {
         "videos": {
@@ -186,7 +186,7 @@
         }
     },
     "emails": [{
-               "email": "yo.whats.up.dude@apple.com"
+               "email": "mock_email"
                }],
     "live_quota": {
         "time": {
@@ -199,5 +199,5 @@
             "maximum": 1
         }
     },
-    "resource_key": "cc8882b961b0d01e7a0be7c6b59d9ffe9e98e562"
+    "resource_key": "mock_resource_key"
 }
