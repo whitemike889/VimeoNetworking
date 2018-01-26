@@ -87,27 +87,27 @@ public class VIMLiveChatUser: VIMModelObject
     }
     
     /// The user's ID.
-    public private(set) var id: NSNumber?
+    @objc public private(set) var id: NSNumber?
     
     /// Is this user the creator of the live event?
-    public private(set) var isCreator: NSNumber?
+    @objc public private(set) var isCreator: NSNumber?
     
     /// Is this user a Vimeo staff member?
-    public private(set) var isStaff: NSNumber?
+    @objc public private(set) var isStaff: NSNumber?
     
     /// The users' display name.
-    public private(set) var name: String?
+    @objc public private(set) var name: String?
     
     /// The active picture for this user.
-    public private(set) var pictures: VIMPictureCollection?
+    @objc public private(set) var pictures: VIMPictureCollection?
     
     /// URI of the current user.
-    public private(set) var uri: String?
+    @objc public private(set) var uri: String?
     
     /// Absolute URL of the current user.
-    public private(set) var link: String?
+    @objc public private(set) var link: String?
     
-    public override func getClassForObjectKey(_ key: String!) -> AnyClass?
+    @objc public override func getClassForObjectKey(_ key: String!) -> AnyClass?
     {
         if key == Constants.PictureResponseKey
         {

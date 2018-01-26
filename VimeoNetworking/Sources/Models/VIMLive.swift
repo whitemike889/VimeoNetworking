@@ -81,7 +81,7 @@ public class VIMLive: VIMModelObject
     @objc public static let LiveStreamStatusArchiving = "archiving"
     
     /// There was a problem archiving the stream.
-    public static let LiveStreamStatusArchiveError = "archive_error"
+    @objc public static let LiveStreamStatusArchiveError = "archive_error"
     
     /// The stream has been ended intentionally by the end-user.
     @objc public static let LiveStreamStatusDone = "done"
@@ -128,7 +128,7 @@ public class VIMLive: VIMModelObject
     }
     
     /// The live event's chat.
-    public private(set) var chat: VIMLiveChat?
+    @objc public private(set) var chat: VIMLiveChat?
     
     public override func getClassForObjectKey(_ key: String!) -> AnyClass?
     {
