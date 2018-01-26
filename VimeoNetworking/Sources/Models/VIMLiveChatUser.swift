@@ -47,6 +47,27 @@ public enum AccountType: String
 /// An object representing the `user` field in a `chat` response.
 public class VIMLiveChatUser: VIMModelObject
 {
+    /// Objecive-C accessible constant for the "Vimeo Basic" tier.
+    @objc public static let AccountTypeBasic = "basic"
+    
+    /// Objecive-C accessible constant for the "Vimeo Business" tier.
+    @objc public static let AccountTypeBusiness = "business"
+    
+    /// Objecive-C accessible constant for the "Business Live" tier.
+    @objc public static let AccountTypeLiveBusiness = "live_business"
+    
+    /// Objecive-C accessible constant for the "PRO Live" tier.
+    @objc public static let AccountTypeLivePro = "live_pro"
+    
+    /// Objecive-C accessible constant for the "Vimeo Plus" tier.
+    @objc public static let AccountTypePlus = "plus"
+    
+    /// Objecive-C accessible constant for the "Vimeo PRO" tier.
+    @objc public static let AccountTypePro = "pro"
+    
+    /// Objecive-C accessible constant for the "Custom Live" tier.
+    @objc public static let AccountTypeProUnlimited = "pro_unlimited"
+    
     private struct Constants
     {
         static let PictureResponseKey = "pictures"
