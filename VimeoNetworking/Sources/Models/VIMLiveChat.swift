@@ -1,8 +1,8 @@
 //
-//  VIMLiveHeartbeat.swift
+//  VIMLiveChat.swift
 //  VimeoNetworking
 //
-//  Created by Van Nguyen on 10/04/2017.
+//  Created by Van Nguyen on 10/10/2017.
 //  Copyright (c) Vimeo (https://vimeo.com)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,21 +24,31 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
-
-/// An object representing the `live` object in either an `hls` or a `dash` response.
-public class VIMLiveHeartbeat: VIMModelObject
+/// An object representing the `chat` field in a `live` response. This
+/// `live` response is part of the `clip` representation.
+public class VIMLiveChat: VIMModelObject
 {
     private struct Constants
     {
-        static let HeartbeatUrlKey = "heartbeat"
+        static let UserKey = "user"
     }
     
-    /// The heartbeat URL that the client should send requests to.
-    @objc dynamic public private(set) var heartbeatUrl: String?
+    /// The ID of the live event chat room.
+    public private(set) var roomId: NSNumber?
     
-    override public func getObjectMapping() -> Any?
+    /// JWT for the user to access the live event chat room.
+    public private(set) var token: String?
+    
+    /// The current user.
+    public private(set) var user: VIMLiveChatUser?
+    
+    public override func getClassForObjectKey(_ key: String!) -> AnyClass?
     {
-        return [Constants.HeartbeatUrlKey: "heartbeatUrl"]
+        if key == Constants.UserKey
+        {
+            return VIMLiveChatUser.self
+        }
+        
+        return nil
     }
 }
