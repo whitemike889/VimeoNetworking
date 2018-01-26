@@ -69,7 +69,6 @@ class VIMLiveTests: XCTestCase
     private func assert(liveChatUserObject user: VIMLiveChatUser?)
     {
         XCTAssertNotNil(user)
-        XCTAssertEqual(user?.accountType, .liveBusiness)
         XCTAssertEqual(user?.id?.int64Value, MockLiveChatUser.Id)
         XCTAssertEqual(user?.name, MockLiveChatUser.Name)
         XCTAssertEqual(user?.isStaff?.boolValue, true)
