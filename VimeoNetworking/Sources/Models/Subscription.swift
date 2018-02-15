@@ -48,7 +48,7 @@ public class Subscription: VIMModelObject
     @objc dynamic public private(set) var followedUserVideoAvailable: NSNumber?
     
     /// Represents the Subscription object as a Dictionary
-    public var toDictionary: [AnyHashable: Any]
+    @objc public var toDictionary: [AnyHashable: Any]
     {
         let dictionary: [AnyHashable: Any] = ["comment": self.comment ?? false,
                                               "credit": self.credit ?? false,
@@ -81,7 +81,7 @@ public class Subscription: VIMModelObject
     /// Helper method that determine whether a user has all the subscription settings turned off.
     ///
     /// - Returns: A boolean that indicates whether the user has all the settings for push notifications disabled.
-    public func areSubscriptionsDisabled() -> Bool
+    @objc public func areSubscriptionsDisabled() -> Bool
     {
         return (self.comment == false &&
                 self.credit == false &&

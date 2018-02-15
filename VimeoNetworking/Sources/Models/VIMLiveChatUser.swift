@@ -107,7 +107,7 @@ public class VIMLiveChatUser: VIMModelObject
     /// Absolute URL of the current user.
     @objc public private(set) var link: String?
     
-    @objc public override func getClassForObjectKey(_ key: String!) -> AnyClass?
+    public override func getClassForObjectKey(_ key: String!) -> AnyClass?
     {
         if key == Constants.PictureResponseKey
         {
