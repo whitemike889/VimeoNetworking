@@ -73,7 +73,10 @@ public class VIMLiveChatUser: VIMModelObject
         static let PictureResponseKey = "pictures"
     }
     
-    private(set) var account: String?
+    /// Returns a string representation of the account type, if available.
+    ///
+    /// - Note: This property provides an interface for  from Objective-C.
+    @objc public private(set) var account: String?
     
     /// The user's account type in `AccountType`.
     public var accountType: AccountType?
