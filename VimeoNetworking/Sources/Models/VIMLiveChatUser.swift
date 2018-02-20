@@ -75,7 +75,7 @@ public class VIMLiveChatUser: VIMModelObject
     
     /// Returns a string representation of the account type, if available.
     ///
-    /// - Note: This property provides an interface for  from Objective-C.
+    /// - Note: This property provides an Objective-C interface for the Swift-only property, `accountType`.
     @objc public private(set) var account: String?
     
     /// The user's account type in `AccountType`.
