@@ -110,8 +110,6 @@
 		01FD38A61CC9289200326408 /* VimeoNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VimeoNetworking.framework; path = "../VimeoNetworking/build/Debug-iphoneos/VimeoNetworking.framework"; sourceTree = "<group>"; };
 		0217A46C2443AF5BDC0DBEC9 /* Pods_VimeoNetworkingtvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimeoNetworkingtvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		097D1643FEAE7486DB0CB7D6 /* Pods-VimeoNetworkingExample-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworkingExample-iOSTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-VimeoNetworkingExample-iOSTests/Pods-VimeoNetworkingExample-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		0C3424B62035F06A008FDD60 /* VimeoNetworkingExample-iOSTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VimeoNetworkingExample-iOSTests-Bridging-Header.h"; sourceTree = "<group>"; };
-		0C3424B72035F06A008FDD60 /* VimeoNetworkingExample-tvOSTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VimeoNetworkingExample-tvOSTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		0C7364331DFF4871000C3585 /* NSErrorExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSErrorExtensionTests.swift; sourceTree = "<group>"; };
 		0CAAF25B1E0201F1003C5CBA /* VimeoNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VimeoNetworking.framework; path = "../../../Library/Developer/Xcode/DerivedData/VimeoNetworking-eybwmmbikpeubpbxrlpwzwxtbzfr/Build/Products/Debug-iphonesimulator/VimeoNetworking/VimeoNetworking.framework"; sourceTree = "<group>"; };
 		0CF362E11F62E90400B22589 /* VIMVideoTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VIMVideoTests.swift; path = VimeoNetworkingCommonTests/VIMVideoTests.swift; sourceTree = "<group>"; };
@@ -289,8 +287,6 @@
 				8E34023F1F673821001544C4 /* user_live.json */,
 				8EDAF23C1F8523B1006072EF /* VIMLiveHeartbeatTests.swift */,
 				8E49138C1FA786DA0061723A /* MockConstants.swift */,
-				0C3424B62035F06A008FDD60 /* VimeoNetworkingExample-iOSTests-Bridging-Header.h */,
-				0C3424B72035F06A008FDD60 /* VimeoNetworkingExample-tvOSTests-Bridging-Header.h */,
 			);
 			path = "VimeoNetworkingExample-iOSTests";
 			sourceTree = "<group>";
