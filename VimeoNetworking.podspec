@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
                      "Jennifer Lim" => "jennifer@vimeo.com" }
   s.social_media_url   = "http://twitter.com/vimeo"
 
-  s.ios.deployment_target = "8.0"
+  s.ios.deployment_target = "9.0"
   s.tvos.deployment_target = "9.0"
 
   s.requires_arc = true
@@ -24,4 +24,5 @@ Pod::Spec.new do |s|
   s.resources = "VimeoNetworking/Resources/**/*.*"
 
   s.dependency 'AFNetworking', '3.1.0'
+  s.dependency 'Models'
 end

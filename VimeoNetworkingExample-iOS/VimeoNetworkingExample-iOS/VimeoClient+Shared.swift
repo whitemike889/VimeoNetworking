@@ -31,7 +31,7 @@ extension AppConfiguration
 {
     /// The default configuration to use for this application, populate your client key, secret, and scopes.
     /// Also, don't forget to set up your application to receive the code grant authentication redirect, see the README for details.
-    static let defaultConfiguration = AppConfiguration(clientIdentifier: "YOUR_CLIENT_KEY_HERE", clientSecret: "YOUR_CLIENT_SECRET_HERE", scopes: [], keychainService: "")
+    static let defaultConfiguration = AppConfiguration(clientIdentifier: "174e3b334d22aab88d2dd8786e2cb6e3993a8687", clientSecret: "3SLfqh9sAvZ4wYQB5AYjiIgkMTqi8eKNiDkQlOYz/SNDK6234t+pI/ysSaEmcpsnGVM7bexU7EuTHrYG9Bcp9lQqJnU/3iL8tHexcFzUaATUyor0Zogh8o48d6cItYvV", scopes: [], keychainService: "")
 }
 
 /// Extend vimeo client to provide a default client

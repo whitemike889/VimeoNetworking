@@ -19,7 +19,7 @@
   },
   "social_media_url": "http://twitter.com/vimeo",
   "platforms": {
-    "ios": "8.0",
+    "ios": "9.0",
     "tvos": "9.0"
   },
   "requires_arc": true,
@@ -32,6 +32,9 @@
   "dependencies": {
     "AFNetworking": [
       "3.1.0"
+    ],
+    "Models": [
+
     ]
   }
 }

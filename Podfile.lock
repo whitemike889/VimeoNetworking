@@ -14,6 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - Models (0.1.0)
   - OHHTTPStubs/Core (6.0.0)
   - OHHTTPStubs/Default (6.0.0):
     - OHHTTPStubs/Core
@@ -29,21 +30,26 @@ PODS:
     - OHHTTPStubs/Default
   - VimeoNetworking (3.0.1):
     - AFNetworking (= 3.1.0)
+    - Models
 
 DEPENDENCIES:
   - AFNetworking (= 3.1.0)
+  - Models (from `../../../Models`)
   - OHHTTPStubs/Swift (= 6.0.0)
   - VimeoNetworking (from `../VimeoNetworking`)
 
 EXTERNAL SOURCES:
+  Models:
+    :path: ../../../Models
   VimeoNetworking:
-    :path: "../VimeoNetworking"
+    :path: ../VimeoNetworking
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  Models: 13c822c04cba529c911dc75d2151762a6d37e1a4
   OHHTTPStubs: 752f9b11fd810a15162d50f11c06ff94f8e012eb
-  VimeoNetworking: 5d30e46c8561e2e0a7472e93b915ec1a26a6acfd
+  VimeoNetworking: 8e24b9edb99a321a2196afe8d5c2257ac448719d
 
-PODFILE CHECKSUM: 8bc00af8cb642e1f83b3344d3caef185d1921606
+PODFILE CHECKSUM: 277937047a78ec6aa5cdee7073208b8572419778
 
 COCOAPODS: 1.2.0

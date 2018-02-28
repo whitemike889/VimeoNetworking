@@ -90,10 +90,12 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/AFNetworking-tvOS/AFNetworking.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Models-tvOS/Models.framework"
   install_framework "$BUILT_PRODUCTS_DIR/VimeoNetworking-tvOS/VimeoNetworking.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/AFNetworking-tvOS/AFNetworking.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Models-tvOS/Models.framework"
   install_framework "$BUILT_PRODUCTS_DIR/VimeoNetworking-tvOS/VimeoNetworking.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

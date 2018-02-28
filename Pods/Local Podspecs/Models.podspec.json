@@ -1,0 +1,23 @@
+{
+  "name": "Models",
+  "version": "0.1.0",
+  "summary": "Internal Vimeo models.",
+  "description": "Internal Vimeo models.",
+  "homepage": "https://github.vimeows.com/MobileApps/Models",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Gavin King": "gavin@vimeo.com"
+  },
+  "source": {
+    "git": "https://github.vimeows.com/MobileApps/Models",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "9.0",
+    "tvos": "9.0"
+  },
+  "source_files": "Models/Classes/**/*"
+}
