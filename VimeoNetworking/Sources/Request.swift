@@ -97,7 +97,7 @@ extension RetryPolicy
  *
  *  `<ModelType>` is the type of the expected response model object
  */
-public struct Request<ModelType: MappableResponse>
+public struct Request<ModelType>
 {
     // TODO: Make these static when Swift supports it [RH] (5/24/16)
     private let PageKey = "page"

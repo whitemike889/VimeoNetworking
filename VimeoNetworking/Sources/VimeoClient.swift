@@ -25,6 +25,7 @@
 //
 
 import Foundation
+import Models
 
 /// `VimeoClient` handles a rich assortment of functionality focused around interacting with the Vimeo API.  A client object tracks an authenticated account, handles the low-level execution of requests through a session manager with caching functionality, presents a high-level `Request` and `Response` interface, and notifies of globally relevant events and errors through `Notification`s
 /// 
@@ -174,95 +175,37 @@ final public class VimeoClient
      
      - returns: a `RequestToken` for the in-flight request
      */
+    
+    public func request<T: Model>(_ request: Request<T>, completionQueue: DispatchQueue = DispatchQueue.main, completion: @escaping ResultCompletion<Response<T>>.T) -> RequestToken
+    {
+        fatalError()
+    }
+    
+    public func request<T: Model>(_ request: Request<Page<T>>, completionQueue: DispatchQueue = DispatchQueue.main, completion: @escaping ResultCompletion<Response<Page<T>>>.T) -> RequestToken
+    {
+        fatalError()
+    }
+    
     public func request<ModelType: MappableResponse>(_ request: Request<ModelType>, completionQueue: DispatchQueue = DispatchQueue.main, completion: @escaping ResultCompletion<Response<ModelType>>.T) -> RequestToken
     {
-        var networkRequestCompleted = false
-        
-        switch request.cacheFetchPolicy
-        {
-        case .cacheOnly, .cacheThenNetwork:
-            
-            self.responseCache.response(forRequest: request) { result in
-                
-                if networkRequestCompleted
-                {
-                    // If the network request somehow completes before the cache, abort any cache action [RH] (4/21/16)
-                    
-                    return
-                }
-                
-                switch result
-                {
-                case .success(let responseDictionary):
-                    
-                    if let responseDictionary = responseDictionary
-                    {
-                        self.handleTaskSuccess(forRequest: request, task: nil, responseObject: responseDictionary, isCachedResponse: true, isFinalResponse: request.cacheFetchPolicy == .cacheOnly, completionQueue: completionQueue, completion: completion)
-                    }
-                    else if request.cacheFetchPolicy == .cacheOnly
-                    {
-                        let description = "Cached response not found"
-                        let error = NSError(domain: type(of: self).ErrorDomain, code: LocalErrorCode.cachedResponseNotFound.rawValue, userInfo: [NSLocalizedDescriptionKey: description])
-                        
-                        self.handleError(error, request: request)
-                        
-                        completionQueue.async
-                        {
-                            completion(.failure(error: error))
-                        }
-                    }
-                    else
-                    {
-                        // no action required for a cache miss with a network request pending [RH]
-                    }
-                    
-                case .failure(let error):
-                    
-                    print("cache failure: \(error)")
-                    
-                    self.handleError(error, request: request)
-                    
-                    if request.cacheFetchPolicy == .cacheOnly
-                    {
-                        completionQueue.async
-                        {
-                            completion(.failure(error: error))
-                        }
-                    }
-                    else
-                    {
-                        // no action required for a cache error with a network request pending [RH]
-                    }
-                }
-            }
-            
-            if request.cacheFetchPolicy == .cacheOnly
-            {
-                return RequestToken(path: request.path, task: nil)
-            }
-            
-        case .networkOnly, .tryNetworkThenCache:
-            break
-        }
-        
         let success: (URLSessionDataTask, Any?) -> Void = { (task, responseObject) in
             
             DispatchQueue.global(qos: .userInitiated).async {
-                networkRequestCompleted = true
+                
                 self.handleTaskSuccess(forRequest: request, task: task, responseObject: responseObject, completionQueue: completionQueue, completion: completion)
             }
         }
         
         let failure: (URLSessionDataTask?, Error) -> Void = { (task, error) in
-            DispatchQueue.global(qos: .userInitiated).async {
-                networkRequestCompleted = true
+            
+            DispatchQueue.global(qos: .userInitiated).async{
+                
                 self.handleTaskFailure(forRequest: request, task: task, error: error as NSError, completionQueue: completionQueue, completion: completion)
             }
         }
         
         let path = request.path
         let parameters = request.parameters
-        
         let task: URLSessionDataTask?
         
         switch request.method
@@ -279,22 +222,7 @@ final public class VimeoClient
             task = self.sessionManager?.delete(path, parameters: parameters, success: success, failure: failure)
         }
         
-        guard let requestTask = task else
-        {
-            let description = "Session manager did not return a task"
-            
-            assertionFailure(description)
-            
-            let error = NSError(domain: type(of: self).ErrorDomain, code: LocalErrorCode.requestMalformed.rawValue, userInfo: [NSLocalizedDescriptionKey: description])
-            
-            networkRequestCompleted = true
-            
-            self.handleTaskFailure(forRequest: request, task: task, error: error, completionQueue: completionQueue, completion: completion)
-            
-            return RequestToken(path: request.path, task: nil)
-        }
-        
-        return RequestToken(path: request.path, task: requestTask)
+        return RequestToken(path: request.path, task: task)
     }
     
     /**
@@ -317,15 +245,24 @@ final public class VimeoClient
     
     // MARK: - Private task completion handlers
     
+    private func handleTaskSuccess<T: Model>(forRequest request: Request<T>, task: URLSessionDataTask?, responseObject: Any?, isCachedResponse: Bool = false, isFinalResponse: Bool = true, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<T>>.T)
+    {
+        fatalError()
+    }
+    
+    private func handleTaskSuccess<T: Model>(forRequest request: Request<Page<T>>, task: URLSessionDataTask?, responseObject: Any?, isCachedResponse: Bool = false, isFinalResponse: Bool = true, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<Page<T>>>.T)
+    {
+        fatalError()
+    }
+    
     private func handleTaskSuccess<ModelType: MappableResponse>(forRequest request: Request<ModelType>, task: URLSessionDataTask?, responseObject: Any?, isCachedResponse: Bool = false, isFinalResponse: Bool = true, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<ModelType>>.T)
     {
-        guard let responseDictionary = responseObject as? ResponseDictionary
-        else
+        guard let responseDictionary = responseObject as? ResponseDictionary else
         {
             if ModelType.self == VIMNullResponse.self
             {
                 let nullResponseObject = VIMNullResponse()
-                
+
                 // Swift complains that this cast always fails, but it doesn't seem to ever actually fail, and it's required to call completion with this response [RH] (4/12/2016)
                 // It's also worth noting that (as of writing) there's no way to direct the compiler to ignore specific instances of warnings in Swift :S [RH] (4/13/16)
                 let response = Response(model: nullResponseObject, json: [:]) as! Response<ModelType>
@@ -338,54 +275,54 @@ final public class VimeoClient
             else
             {
                 let description = "VimeoClient requestSuccess returned invalid/absent dictionary"
-                
+
                 assertionFailure(description)
-                
+
                 let error = NSError(domain: type(of: self).ErrorDomain, code: LocalErrorCode.invalidResponseDictionary.rawValue, userInfo: [NSLocalizedDescriptionKey: description])
-                
+
                 self.handleTaskFailure(forRequest: request, task: task, error: error, completionQueue: completionQueue, completion: completion)
             }
-            
+
             return
         }
-        
+
         do
         {
             let modelObject: ModelType = try VIMObjectMapper.mapObject(responseDictionary: responseDictionary, modelKeyPath: request.modelKeyPath)
-            
+
             var response: Response<ModelType>
-            
+
             if let pagingDictionary = responseDictionary[Constants.PagingKey] as? ResponseDictionary
             {
                 let totalCount = responseDictionary[Constants.TotalKey] as? Int ?? 0
                 let currentPage = responseDictionary[Constants.PageKey] as? Int ?? 0
                 let itemsPerPage = responseDictionary[Constants.PerPageKey] as? Int ?? 0
-                
+
                 var nextPageRequest: Request<ModelType>? = nil
                 var previousPageRequest: Request<ModelType>? = nil
                 var firstPageRequest: Request<ModelType>? = nil
                 var lastPageRequest: Request<ModelType>? = nil
-                
+
                 if let nextPageLink = pagingDictionary[Constants.NextKey] as? String
                 {
                     nextPageRequest = request.associatedPageRequest(withNewPath: nextPageLink)
                 }
-                
+
                 if let previousPageLink = pagingDictionary[Constants.PreviousKey] as? String
                 {
                     previousPageRequest = request.associatedPageRequest(withNewPath: previousPageLink)
                 }
-                
+
                 if let firstPageLink = pagingDictionary[Constants.FirstKey] as? String
                 {
                     firstPageRequest = request.associatedPageRequest(withNewPath: firstPageLink)
                 }
-                
+
                 if let lastPageLink = pagingDictionary[Constants.LastKey] as? String
                 {
                     lastPageRequest = request.associatedPageRequest(withNewPath: lastPageLink)
                 }
-                
+
                 response = Response<ModelType>(model: modelObject,
                                                json: responseDictionary,
                                                isCachedResponse: isCachedResponse,
@@ -402,13 +339,13 @@ final public class VimeoClient
             {
                 response = Response<ModelType>(model: modelObject, json: responseDictionary, isCachedResponse: isCachedResponse, isFinalResponse: isFinalResponse)
             }
-            
+
             // To avoid a poisoned cache, explicitly wait until model object parsing is successful to store responseDictionary [RH]
             if request.shouldCacheResponse
             {
                 self.responseCache.setResponse(responseDictionary: responseDictionary, forRequest: request)
             }
-            
+
             completionQueue.async
             {
                 completion(.success(result: response))
@@ -417,9 +354,19 @@ final public class VimeoClient
         catch let error
         {
             self.responseCache.removeResponse(forKey: request.cacheKey)
-            
+
             self.handleTaskFailure(forRequest: request, task: task, error: error as NSError, completionQueue: completionQueue, completion: completion)
         }
+    }
+    
+    private func handleTaskFailure<T: Model>(forRequest request: Request<T>, task: URLSessionDataTask?, error: NSError?, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<T>>.T)
+    {
+        fatalError()
+    }
+    
+    private func handleTaskFailure<T: Model>(forRequest request: Request<Page<T>>, task: URLSessionDataTask?, error: NSError?, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<Page<T>>>.T)
+    {
+        fatalError()
     }
     
     private func handleTaskFailure<ModelType: MappableResponse>(forRequest request: Request<ModelType>, task: URLSessionDataTask?, error: NSError?, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<ModelType>>.T)
@@ -462,7 +409,7 @@ final public class VimeoClient
     
     // MARK: - Private error handling
     
-    private func handleError<ModelType: MappableResponse>(_ error: NSError, request: Request<ModelType>, task: URLSessionDataTask? = nil)
+    private func handleError<ModelType>(_ error: NSError, request: Request<ModelType>, task: URLSessionDataTask? = nil)
     {
         if error.isServiceUnavailableError
         {
@@ -494,10 +441,10 @@ extension VimeoClient
     /// before it can be accessed.
     public static var sharedClient: VimeoClient
     {
-        guard let _ = self._sharedClient.configuration,
-            let _ = self._sharedClient.sessionManager else
+        guard let _ = self._sharedClient.configuration, let _ = self._sharedClient.sessionManager else
         {
             assertionFailure("VimeoClient.sharedClient must be configured before accessing")
+            
             return self._sharedClient
         }
         

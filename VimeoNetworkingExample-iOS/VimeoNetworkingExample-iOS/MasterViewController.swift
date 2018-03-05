@@ -25,11 +25,12 @@
 //
 
 import UIKit
+import Models
 
 class MasterViewController: UITableViewController
 {
     var detailViewController: DetailViewController? = nil
-    var videos: [VIMVideo] = []
+    var videos: [Video] = []
     {
         didSet
         {
@@ -79,56 +80,58 @@ class MasterViewController: UITableViewController
                 return
             }
             
-            let request: Request<[VIMVideo]>
+            let request: Request<Video>
             if VimeoClient.defaultClient.currentAccount?.isAuthenticatedWithUser() == true
             {
-                request = Request<[VIMVideo]>(path: "/me/videos")
+                request = Request<Video>(path: "/me/videos")
             }
             else
             {
-                request = Request<[VIMVideo]>(path: "/channels/staffpicks/videos")
+                request = Request<Video>(path: "/channels/staffpicks/videos")
             }
             
             let _ = VimeoClient.defaultClient.request(request) { [weak self] result in
                 
-                guard let strongSelf = self else
-                {
-                    return
-                }
-                
-                switch result
-                {
-                case .success(let response):
-                    
-                    strongSelf.videos = response.model
-                    
-                    if let nextPageRequest = response.nextPageRequest
-                    {
-                        print("starting next page request")
-                        
-                        let _ = VimeoClient.defaultClient.request(nextPageRequest) { [weak self] result in
-                            
-                            guard let strongSelf = self else
-                            {
-                                return
-                            }
-                            
-                            if case .success(let response) = result
-                            {
-                                print("next page request completed!")
-                                strongSelf.videos.append(contentsOf: response.model)
-                                strongSelf.tableView.reloadData()
-                            }
-                        }
-                    }
-                case .failure(let error):
-                    let title = "Video Request Failed"
-                    let message = "\(request.path) could not be loaded: \(error.localizedDescription)"
-                    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                    let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-                    alert.addAction(action)
-                    strongSelf.present(alert, animated: true, completion: nil)
-                }
+//                guard let strongSelf = self else
+//                {
+//                    return
+//                }
+//
+//                switch result
+//                {
+//                case .success(let response):
+//
+//                    strongSelf.videos = response.model
+//
+//                    if let nextPageRequest = response.nextPageRequest
+//                    {
+//                        print("starting next page request")
+//
+//                        let _ = VimeoClient.defaultClient.request(nextPageRequest) { [weak self] result in
+//
+//                            guard let strongSelf = self else
+//                            {
+//                                return
+//                            }
+//
+//                            if case .success(let response) = result
+//                            {
+//                                print("next page request completed!")
+//                                strongSelf.videos.append(contentsOf: response.model)
+//                                strongSelf.tableView.reloadData()
+//                            }
+//                        }
+//                    }
+//
+//                case .failure(let error):
+//
+//                    let title = "Video Request Failed"
+//                    let message = "\(request.path) could not be loaded: \(error.localizedDescription)"
+//                    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+//                    let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+//                    alert.addAction(action)
+//                    strongSelf.present(alert, animated: true, completion: nil)
+//                }
             }
             
             strongSelf.navigationItem.title = request.path
@@ -184,17 +187,17 @@ class MasterViewController: UITableViewController
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        if segue.identifier == "showDetail"
-        {
-            if let indexPath = self.tableView.indexPathForSelectedRow
-            {
-                let object = videos[indexPath.row]
-                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
-                controller.detailItem = object
-                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
-                controller.navigationItem.leftItemsSupplementBackButton = true
-            }
-        }
+//        if segue.identifier == "showDetail"
+//        {
+//            if let indexPath = self.tableView.indexPathForSelectedRow
+//            {
+//                let object = videos[indexPath.row]
+//                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
+//                controller.detailItem = object
+//                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
+//                controller.navigationItem.leftItemsSupplementBackButton = true
+//            }
+//        }
     }
 
     // MARK: - UITableViewDataSource

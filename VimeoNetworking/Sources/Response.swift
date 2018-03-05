@@ -29,7 +29,7 @@ import Foundation
 /**
  *  `Response` represents a successful result returned by `VimeoClient` in fulfillment of a `Request`.
  */
- public struct Response<ModelType: MappableResponse>
+ public struct Response<ModelType>
 {
         /// The parsed model object or array of model objects returned by the response
     public let model: ModelType
