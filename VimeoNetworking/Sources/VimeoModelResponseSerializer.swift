@@ -11,6 +11,6 @@ class VimeoModelResponseSerializer: VimeoResponseSerializer
 {
     override func responseObject(for response: URLResponse?, data: Data?, error: NSErrorPointer) -> Any?
     {
-        return super.responseObject(for: response, data: data, error: error)
+        return data
     }
 }

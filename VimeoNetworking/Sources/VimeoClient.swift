@@ -174,9 +174,43 @@ final public class VimeoClient
         fatalError()
     }
     
-    public func request<T: Model>(_ request: Request<Page<T>>, completionQueue: DispatchQueue = DispatchQueue.main, completion: @escaping ResultCompletion<Response<Page<T>>>.T) -> RequestToken
+    public func request<T: Model>(_ request: Request<[T]>, completionQueue: DispatchQueue = DispatchQueue.main, completion: @escaping ResultCompletion<Response<[T]>>.T) -> RequestToken
     {
-        fatalError()
+        let success: (URLSessionDataTask, Any?) -> Void = { (task, responseObject) in
+            
+            DispatchQueue.global(qos: .userInitiated).async {
+                
+                self.handleTaskSuccess(forRequest: request, task: task, responseObject: responseObject, completionQueue: completionQueue, completion: completion)
+            }
+        }
+        
+        let failure: (URLSessionDataTask?, Error) -> Void = { (task, error) in
+            
+            DispatchQueue.global(qos: .userInitiated).async{
+                
+                self.handleTaskFailure(forRequest: request, task: task, error: error as NSError, completionQueue: completionQueue, completion: completion)
+            }
+        }
+        
+        let path = request.path
+        let parameters = request.parameters
+        let task: URLSessionDataTask?
+        
+        switch request.method
+        {
+        case .GET:
+            task = self.modelSessionManager.get(path, parameters: parameters, progress: nil, success: success, failure: failure)
+        case .POST:
+            task = self.modelSessionManager.post(path, parameters: parameters, progress: nil, success: success, failure: failure)
+        case .PUT:
+            task = self.modelSessionManager.put(path, parameters: parameters, success: success, failure: failure)
+        case .PATCH:
+            task = self.modelSessionManager.patch(path, parameters: parameters, success: success, failure: failure)
+        case .DELETE:
+            task = self.sessionManager.delete(path, parameters: parameters, success: success, failure: failure)
+        }
+        
+        return RequestToken(path: request.path, task: task)
     }
     
     public func request<ModelType: MappableResponse>(_ request: Request<ModelType>, completionQueue: DispatchQueue = DispatchQueue.main, completion: @escaping ResultCompletion<Response<ModelType>>.T) -> RequestToken
@@ -243,9 +277,75 @@ final public class VimeoClient
         fatalError()
     }
     
-    private func handleTaskSuccess<T: Model>(forRequest request: Request<Page<T>>, task: URLSessionDataTask?, responseObject: Any?, isCachedResponse: Bool = false, isFinalResponse: Bool = true, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<Page<T>>>.T)
+    private func handleTaskSuccess<T: Model>(forRequest request: Request<[T]>, task: URLSessionDataTask?, responseObject: Any?, isCachedResponse: Bool = false, isFinalResponse: Bool = true, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<[T]>>.T)
     {
-        fatalError()
+        guard let data = responseObject as? Data else
+        {
+            fatalError()
+        }
+        
+        let decoder = JSONDecoder()
+        
+        if #available(iOS 10.0, *)
+        {
+            decoder.dateDecodingStrategy = .iso8601
+        }
+        else
+        {
+            fatalError()
+        }
+        
+        do
+        {
+            // Decode page
+            
+            let page = try decoder.decode(Page<T>.self, from: data)
+            
+            // Encode page data to JSON
+            
+            let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+            
+            // Do stuff with the decoded response
+            
+            var nextPageRequest: Request<[T]>? = nil
+            var previousPageRequest: Request<[T]>? = nil
+            var firstPageRequest: Request<[T]>? = nil
+            var lastPageRequest: Request<[T]>? = nil
+
+            if let nextPageLink = page.paging.next
+            {
+                nextPageRequest = request.associatedPageRequest(withNewPath: nextPageLink)
+            }
+
+            if let previousPageLink = page.paging.previous
+            {
+                previousPageRequest = request.associatedPageRequest(withNewPath: previousPageLink)
+            }
+
+            firstPageRequest = request.associatedPageRequest(withNewPath: page.paging.first)
+            lastPageRequest = request.associatedPageRequest(withNewPath: page.paging.last)
+
+            let response = Response<[T]>(model: page.data,
+                                           json: json,
+                                           isCachedResponse: isCachedResponse,
+                                           isFinalResponse: isFinalResponse,
+                                           totalCount: page.total,
+                                           page: page.page,
+                                           itemsPerPage: page.perPage,
+                                           nextPageRequest: nextPageRequest,
+                                           previousPageRequest: previousPageRequest,
+                                           firstPageRequest: firstPageRequest,
+                                           lastPageRequest: lastPageRequest)
+            
+            completionQueue.async
+            {
+                completion(.success(result: response))
+            }
+        }
+        catch let error
+        {
+            fatalError()
+        }
     }
     
     private func handleTaskSuccess<ModelType: MappableResponse>(forRequest request: Request<ModelType>, task: URLSessionDataTask?, responseObject: Any?, isCachedResponse: Bool = false, isFinalResponse: Bool = true, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<ModelType>>.T)
@@ -354,11 +454,15 @@ final public class VimeoClient
     
     private func handleTaskFailure<T: Model>(forRequest request: Request<T>, task: URLSessionDataTask?, error: NSError?, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<T>>.T)
     {
+        // TODO: DO NOT MERGE: Is this neeeded?
+        
         fatalError()
     }
     
-    private func handleTaskFailure<T: Model>(forRequest request: Request<Page<T>>, task: URLSessionDataTask?, error: NSError?, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<Page<T>>>.T)
+    private func handleTaskFailure<T: Model>(forRequest request: Request<Page<T>>, task: URLSessionDataTask?, error: NSError?, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<[T]>>.T)
     {
+        // TODO: DO NOT MERGE: Is this neeeded?
+
         fatalError()
     }
     
