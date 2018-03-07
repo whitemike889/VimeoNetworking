@@ -47,7 +47,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Models:
-    :commit: 45ea35806e0d1c8f1f212c583e91ebc42c7146cf
+    :commit: 0b318ea2dde6c67f03a5fcda29098ab0a197d5bf
     :git: https://github.vimeows.com/MobileApps/Models
 
 SPEC CHECKSUMS:
