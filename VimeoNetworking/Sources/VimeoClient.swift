@@ -105,10 +105,10 @@ final public class VimeoClient
     
     // MARK: -
 
-    private let responseCache = ResponseCache()
-    private let configuration: AppConfiguration
-    private let sessionManager: VimeoSessionManager
-    private let modelSessionManager: VimeoSessionManager
+    fileprivate let responseCache = ResponseCache()
+    fileprivate let configuration: AppConfiguration
+    fileprivate let sessionManager: VimeoSessionManager
+    fileprivate let modelSessionManager: VimeoSessionManager
     
     // MARK: -
 
@@ -168,71 +168,95 @@ final public class VimeoClient
      
      - returns: a `RequestToken` for the in-flight request
      */
-    
-    public func request<T: Model>(_ request: Request<T>, completionQueue: DispatchQueue = DispatchQueue.main, completion: @escaping ResultCompletion<Response<T>>.T) -> RequestToken
-    {
-        fatalError()
-    }
-    
-    public func request<T: Model>(_ request: Request<[T]>, completionQueue: DispatchQueue = DispatchQueue.main, completion: @escaping ResultCompletion<Response<[T]>>.T) -> RequestToken
-    {
-        let success: (URLSessionDataTask, Any?) -> Void = { (task, responseObject) in
-            
-            DispatchQueue.global(qos: .userInitiated).async {
-                
-                self.handleTaskSuccess(forRequest: request, task: task, responseObject: responseObject, completionQueue: completionQueue, completion: completion)
-            }
-        }
-        
-        let failure: (URLSessionDataTask?, Error) -> Void = { (task, error) in
-            
-            DispatchQueue.global(qos: .userInitiated).async{
-                
-                self.handleTaskFailure(forRequest: request, task: task, error: error as NSError, completionQueue: completionQueue, completion: completion)
-            }
-        }
-        
-        let path = request.path
-        let parameters = request.parameters
-        let task: URLSessionDataTask?
-        
-        switch request.method
-        {
-        case .GET:
-            task = self.modelSessionManager.get(path, parameters: parameters, progress: nil, success: success, failure: failure)
-        case .POST:
-            task = self.modelSessionManager.post(path, parameters: parameters, progress: nil, success: success, failure: failure)
-        case .PUT:
-            task = self.modelSessionManager.put(path, parameters: parameters, success: success, failure: failure)
-        case .PATCH:
-            task = self.modelSessionManager.patch(path, parameters: parameters, success: success, failure: failure)
-        case .DELETE:
-            task = self.sessionManager.delete(path, parameters: parameters, success: success, failure: failure)
-        }
-        
-        return RequestToken(path: request.path, task: task)
-    }
-    
     public func request<ModelType: MappableResponse>(_ request: Request<ModelType>, completionQueue: DispatchQueue = DispatchQueue.main, completion: @escaping ResultCompletion<Response<ModelType>>.T) -> RequestToken
     {
+        var networkRequestCompleted = false
+        
+        switch request.cacheFetchPolicy
+        {
+        case .cacheOnly, .cacheThenNetwork:
+            
+            self.responseCache.response(forRequest: request) { result in
+                
+                if networkRequestCompleted
+                {
+                    // If the network request somehow completes before the cache, abort any cache action [RH] (4/21/16)
+                    
+                    return
+                }
+                
+                switch result
+                {
+                case .success(let responseDictionary):
+                    
+                    if let responseDictionary = responseDictionary
+                    {
+                        self.handleTaskSuccess(forRequest: request, task: nil, responseObject: responseDictionary, isCachedResponse: true, isFinalResponse: request.cacheFetchPolicy == .cacheOnly, completionQueue: completionQueue, completion: completion)
+                    }
+                    else if request.cacheFetchPolicy == .cacheOnly
+                    {
+                        let description = "Cached response not found"
+                        let error = NSError(domain: type(of: self).ErrorDomain, code: LocalErrorCode.cachedResponseNotFound.rawValue, userInfo: [NSLocalizedDescriptionKey: description])
+                        
+                        self.handleError(error, request: request)
+                        
+                        completionQueue.async
+                            {
+                                completion(.failure(error: error))
+                        }
+                    }
+                    else
+                    {
+                        // no action required for a cache miss with a network request pending [RH]
+                    }
+                    
+                case .failure(let error):
+                    
+                    print("cache failure: \(error)")
+                    
+                    self.handleError(error, request: request)
+                    
+                    if request.cacheFetchPolicy == .cacheOnly
+                    {
+                        completionQueue.async
+                            {
+                                completion(.failure(error: error))
+                        }
+                    }
+                    else
+                    {
+                        // no action required for a cache error with a network request pending [RH]
+                    }
+                }
+            }
+            
+            if request.cacheFetchPolicy == .cacheOnly
+            {
+                return RequestToken(path: request.path, task: nil)
+            }
+            
+        case .networkOnly, .tryNetworkThenCache:
+            break
+        }
+        
         let success: (URLSessionDataTask, Any?) -> Void = { (task, responseObject) in
             
             DispatchQueue.global(qos: .userInitiated).async {
-                
+                networkRequestCompleted = true
                 self.handleTaskSuccess(forRequest: request, task: task, responseObject: responseObject, completionQueue: completionQueue, completion: completion)
             }
         }
         
         let failure: (URLSessionDataTask?, Error) -> Void = { (task, error) in
-            
-            DispatchQueue.global(qos: .userInitiated).async{
-                
+            DispatchQueue.global(qos: .userInitiated).async {
+                networkRequestCompleted = true
                 self.handleTaskFailure(forRequest: request, task: task, error: error as NSError, completionQueue: completionQueue, completion: completion)
             }
         }
         
         let path = request.path
         let parameters = request.parameters
+        
         let task: URLSessionDataTask?
         
         switch request.method
@@ -249,7 +273,22 @@ final public class VimeoClient
             task = self.sessionManager.delete(path, parameters: parameters, success: success, failure: failure)
         }
         
-        return RequestToken(path: request.path, task: task)
+        guard let requestTask = task else
+        {
+            let description = "Session manager did not return a task"
+            
+            assertionFailure(description)
+            
+            let error = NSError(domain: type(of: self).ErrorDomain, code: LocalErrorCode.requestMalformed.rawValue, userInfo: [NSLocalizedDescriptionKey: description])
+            
+            networkRequestCompleted = true
+            
+            self.handleTaskFailure(forRequest: request, task: task, error: error, completionQueue: completionQueue, completion: completion)
+            
+            return RequestToken(path: request.path, task: nil)
+        }
+        
+        return RequestToken(path: request.path, task: requestTask)
     }
     
     /**
@@ -271,82 +310,6 @@ final public class VimeoClient
     }
     
     // MARK: - Private task completion handlers
-    
-    private func handleTaskSuccess<T: Model>(forRequest request: Request<T>, task: URLSessionDataTask?, responseObject: Any?, isCachedResponse: Bool = false, isFinalResponse: Bool = true, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<T>>.T)
-    {
-        fatalError()
-    }
-    
-    private func handleTaskSuccess<T: Model>(forRequest request: Request<[T]>, task: URLSessionDataTask?, responseObject: Any?, isCachedResponse: Bool = false, isFinalResponse: Bool = true, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<[T]>>.T)
-    {
-        guard let data = responseObject as? Data else
-        {
-            fatalError()
-        }
-        
-        let decoder = JSONDecoder()
-        
-        if #available(iOS 10.0, *)
-        {
-            decoder.dateDecodingStrategy = .iso8601
-        }
-        else
-        {
-            fatalError()
-        }
-        
-        do
-        {
-            // Decode page
-            
-            let page = try decoder.decode(Page<T>.self, from: data)
-            
-            // Encode page data to JSON
-            
-            let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-            
-            // Do stuff with the decoded response
-            
-            var nextPageRequest: Request<[T]>? = nil
-            var previousPageRequest: Request<[T]>? = nil
-            var firstPageRequest: Request<[T]>? = nil
-            var lastPageRequest: Request<[T]>? = nil
-
-            if let nextPageLink = page.paging.next
-            {
-                nextPageRequest = request.associatedPageRequest(withNewPath: nextPageLink)
-            }
-
-            if let previousPageLink = page.paging.previous
-            {
-                previousPageRequest = request.associatedPageRequest(withNewPath: previousPageLink)
-            }
-
-            firstPageRequest = request.associatedPageRequest(withNewPath: page.paging.first)
-            lastPageRequest = request.associatedPageRequest(withNewPath: page.paging.last)
-
-            let response = Response<[T]>(model: page.data,
-                                           json: json,
-                                           isCachedResponse: isCachedResponse,
-                                           isFinalResponse: isFinalResponse,
-                                           totalCount: page.total,
-                                           page: page.page,
-                                           itemsPerPage: page.perPage,
-                                           nextPageRequest: nextPageRequest,
-                                           previousPageRequest: previousPageRequest,
-                                           firstPageRequest: firstPageRequest,
-                                           lastPageRequest: lastPageRequest)
-            
-            completionQueue.async
-            {
-                completion(.success(result: response))
-            }
-        }
-        catch let error
-        {
-            fatalError()
-        }
-    }
     
     private func handleTaskSuccess<ModelType: MappableResponse>(forRequest request: Request<ModelType>, task: URLSessionDataTask?, responseObject: Any?, isCachedResponse: Bool = false, isFinalResponse: Bool = true, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<ModelType>>.T)
     {
@@ -452,20 +415,6 @@ final public class VimeoClient
         }
     }
     
-    private func handleTaskFailure<T: Model>(forRequest request: Request<T>, task: URLSessionDataTask?, error: NSError?, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<T>>.T)
-    {
-        // TODO: DO NOT MERGE: Is this neeeded?
-        
-        fatalError()
-    }
-    
-    private func handleTaskFailure<T: Model>(forRequest request: Request<Page<T>>, task: URLSessionDataTask?, error: NSError?, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<[T]>>.T)
-    {
-        // TODO: DO NOT MERGE: Is this neeeded?
-
-        fatalError()
-    }
-    
     private func handleTaskFailure<ModelType: MappableResponse>(forRequest request: Request<ModelType>, task: URLSessionDataTask?, error: NSError?, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<ModelType>>.T)
     {
         let error = error ?? NSError(domain: type(of: self).ErrorDomain, code: LocalErrorCode.undefined.rawValue, userInfo: [NSLocalizedDescriptionKey: "Undefined error"])
@@ -506,7 +455,7 @@ final public class VimeoClient
     
     // MARK: - Private error handling
     
-    private func handleError<ModelType>(_ error: NSError, request: Request<ModelType>, task: URLSessionDataTask? = nil)
+    fileprivate func handleError<ModelType>(_ error: NSError, request: Request<ModelType>, task: URLSessionDataTask? = nil)
     {
         if error.isServiceUnavailableError
         {
@@ -557,5 +506,148 @@ extension VimeoClient
     public static func configureSharedClient(withAppConfiguration appConfiguration: AppConfiguration)
     {
         self._sharedClient = VimeoClient(appConfiguration: appConfiguration)
+    }
+}
+
+// MARK: Model Stream Requests
+
+extension VimeoClient
+{
+    public func request<T: Model>(_ request: Request<[T]>, completionQueue: DispatchQueue = DispatchQueue.main, completion: @escaping ResultCompletion<Response<[T]>>.T) -> RequestToken
+    {
+        let success: (URLSessionDataTask, Any?) -> Void = { (task, responseObject) in
+            
+            DispatchQueue.global(qos: .userInitiated).async {
+                
+                self.handleTaskSuccess(forRequest: request, task: task, responseObject: responseObject, completionQueue: completionQueue, completion: completion)
+            }
+        }
+        
+        let failure: (URLSessionDataTask?, Error) -> Void = { (task, error) in
+            
+            DispatchQueue.global(qos: .userInitiated).async{
+                
+                self.handleTaskFailure(forRequest: request, task: task, error: error as NSError, completionQueue: completionQueue, completion: completion)
+            }
+        }
+        
+        let path = request.path
+        let parameters = request.parameters
+        let task: URLSessionDataTask?
+        
+        switch request.method
+        {
+        case .GET:
+            task = self.modelSessionManager.get(path, parameters: parameters, progress: nil, success: success, failure: failure)
+        case .POST:
+            task = self.modelSessionManager.post(path, parameters: parameters, progress: nil, success: success, failure: failure)
+        case .PUT:
+            task = self.modelSessionManager.put(path, parameters: parameters, success: success, failure: failure)
+        case .PATCH:
+            task = self.modelSessionManager.patch(path, parameters: parameters, success: success, failure: failure)
+        case .DELETE:
+            task = self.sessionManager.delete(path, parameters: parameters, success: success, failure: failure)
+        }
+        
+        return RequestToken(path: request.path, task: task)
+    }
+    
+    private func handleTaskSuccess<T: Model>(forRequest request: Request<[T]>, task: URLSessionDataTask?, responseObject: Any?, isCachedResponse: Bool = false, isFinalResponse: Bool = true, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<[T]>>.T)
+    {
+        guard let data = responseObject as? Data else
+        {
+            let error = NSError(domain: type(of: self).ErrorDomain, code: LocalErrorCode.invalidResponseDictionary.rawValue, userInfo: nil)
+            
+            self.handleTaskFailure(forRequest: request, task: task, error: error, completionQueue: completionQueue, completion: completion)
+            
+            return
+        }
+        
+        let decoder = JSONDecoder()
+        
+        if #available(iOS 10.0, *)
+        {
+            decoder.dateDecodingStrategy = .iso8601
+        }
+        else
+        {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+            decoder.dateDecodingStrategy = .formatted(dateFormatter)
+        }
+        
+        do
+        {
+            // Decode page
+            
+            let page = try decoder.decode(Page<T>.self, from: data)
+            
+            // Encode page data to JSON
+            
+            guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else
+            {
+                let error = NSError(domain: type(of: self).ErrorDomain, code: LocalErrorCode.invalidResponseDictionary.rawValue, userInfo: nil)
+                
+                self.handleTaskFailure(forRequest: request, task: task, error: error, completionQueue: completionQueue, completion: completion)
+                
+                return
+            }
+            
+            // Construct the response
+            
+            var nextPageRequest: Request<[T]>? = nil
+            var previousPageRequest: Request<[T]>? = nil
+            var firstPageRequest: Request<[T]>? = nil
+            var lastPageRequest: Request<[T]>? = nil
+            
+            if let nextPageLink = page.paging.next
+            {
+                nextPageRequest = request.associatedPageRequest(withNewPath: nextPageLink)
+            }
+            
+            if let previousPageLink = page.paging.previous
+            {
+                previousPageRequest = request.associatedPageRequest(withNewPath: previousPageLink)
+            }
+            
+            firstPageRequest = request.associatedPageRequest(withNewPath: page.paging.first)
+            lastPageRequest = request.associatedPageRequest(withNewPath: page.paging.last)
+            
+            let response = Response<[T]>(model: page.data,
+                                         json: json,
+                                         isCachedResponse: isCachedResponse,
+                                         isFinalResponse: isFinalResponse,
+                                         totalCount: page.total,
+                                         page: page.page,
+                                         itemsPerPage: page.perPage,
+                                         nextPageRequest: nextPageRequest,
+                                         previousPageRequest: previousPageRequest,
+                                         firstPageRequest: firstPageRequest,
+                                         lastPageRequest: lastPageRequest)
+            
+            completionQueue.async
+            {
+                completion(.success(result: response))
+            }
+        }
+        catch let error
+        {
+            self.handleTaskFailure(forRequest: request, task: task, error: error as NSError, completionQueue: completionQueue, completion: completion)
+        }
+    }
+    
+    private func handleTaskFailure<T: Model>(forRequest request: Request<[T]>, task: URLSessionDataTask?, error: NSError, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<[T]>>.T)
+    {
+        if error.code == NSURLErrorCancelled
+        {
+            return
+        }
+        
+        self.handleError(error, request: request, task: task)
+        
+        completionQueue.async
+        {
+            completion(.failure(error: error))
+        }
     }
 }
