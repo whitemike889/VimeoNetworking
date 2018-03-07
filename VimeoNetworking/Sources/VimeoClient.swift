@@ -201,8 +201,8 @@ final public class VimeoClient
                         self.handleError(error, request: request)
                         
                         completionQueue.async
-                            {
-                                completion(.failure(error: error))
+                        {
+                            completion(.failure(error: error))
                         }
                     }
                     else
@@ -219,8 +219,8 @@ final public class VimeoClient
                     if request.cacheFetchPolicy == .cacheOnly
                     {
                         completionQueue.async
-                            {
-                                completion(.failure(error: error))
+                        {
+                            completion(.failure(error: error))
                         }
                     }
                     else
