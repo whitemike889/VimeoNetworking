@@ -34,15 +34,21 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (= 3.1.0)
-  - Models (from `../../../Models`)
+  - Models (from `https://github.vimeows.com/MobileApps/Models`, branch `develop`)
   - OHHTTPStubs/Swift (= 6.0.0)
   - VimeoNetworking (from `../VimeoNetworking`)
 
 EXTERNAL SOURCES:
   Models:
-    :path: ../../../Models
+    :branch: develop
+    :git: https://github.vimeows.com/MobileApps/Models
   VimeoNetworking:
     :path: ../VimeoNetworking
+
+CHECKOUT OPTIONS:
+  Models:
+    :commit: 45ea35806e0d1c8f1f212c583e91ebc42c7146cf
+    :git: https://github.vimeows.com/MobileApps/Models
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -50,6 +56,6 @@ SPEC CHECKSUMS:
   OHHTTPStubs: 752f9b11fd810a15162d50f11c06ff94f8e012eb
   VimeoNetworking: 8e24b9edb99a321a2196afe8d5c2257ac448719d
 
-PODFILE CHECKSUM: 277937047a78ec6aa5cdee7073208b8572419778
+PODFILE CHECKSUM: 105802af1957b605e7bab4aaeb5c346e6fbbba0b
 
 COCOAPODS: 1.2.0
