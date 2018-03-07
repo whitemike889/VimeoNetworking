@@ -42,8 +42,9 @@ public extension VimeoSessionManager
     {
         let sessionConfiguration = URLSessionConfiguration.defaultSessionConfigurationNoCache()
         let requestSerializer = VimeoRequestSerializer(accessTokenProvider: { accessToken })
+        let responseSerializer = VimeoResponseSerializer()
         
-        return VimeoSessionManager(baseUrl: baseUrl, sessionConfiguration: sessionConfiguration, requestSerializer: requestSerializer)
+        return VimeoSessionManager(baseUrl: baseUrl, sessionConfiguration: sessionConfiguration, requestSerializer: requestSerializer, responseSerializer: responseSerializer)
     }
     
     /**
@@ -58,8 +59,9 @@ public extension VimeoSessionManager
     {
         let sessionConfiguration = URLSessionConfiguration.defaultSessionConfigurationNoCache()
         let requestSerializer = VimeoRequestSerializer(accessTokenProvider: accessTokenProvider)
+        let responseSerializer = VimeoResponseSerializer()
         
-        return VimeoSessionManager(baseUrl: baseUrl, sessionConfiguration: sessionConfiguration, requestSerializer: requestSerializer)
+        return VimeoSessionManager(baseUrl: baseUrl, sessionConfiguration: sessionConfiguration, requestSerializer: requestSerializer, responseSerializer: responseSerializer)
     }
     
     /**
@@ -73,8 +75,9 @@ public extension VimeoSessionManager
     {
         let sessionConfiguration = URLSessionConfiguration.defaultSessionConfigurationNoCache()
         let requestSerializer = VimeoRequestSerializer(appConfiguration: appConfiguration)
+        let responseSerializer = VimeoResponseSerializer()
         
-        return VimeoSessionManager(baseUrl: appConfiguration.baseUrl, sessionConfiguration: sessionConfiguration, requestSerializer: requestSerializer)
+        return VimeoSessionManager(baseUrl: appConfiguration.baseUrl, sessionConfiguration: sessionConfiguration, requestSerializer: requestSerializer, responseSerializer: responseSerializer)
     }
     
     // MARK: - Background Session Initialization
@@ -92,8 +95,9 @@ public extension VimeoSessionManager
     {
         let sessionConfiguration = self.backgroundSessionConfiguration(identifier: identifier)
         let requestSerializer = VimeoRequestSerializer(accessTokenProvider: { accessToken })
+        let responseSerializer = VimeoResponseSerializer()
         
-        return VimeoSessionManager(baseUrl: baseUrl, sessionConfiguration: sessionConfiguration, requestSerializer: requestSerializer)
+        return VimeoSessionManager(baseUrl: baseUrl, sessionConfiguration: sessionConfiguration, requestSerializer: requestSerializer, responseSerializer: responseSerializer)
     }
     
     /**
@@ -109,8 +113,9 @@ public extension VimeoSessionManager
     {
         let sessionConfiguration = self.backgroundSessionConfiguration(identifier: identifier)
         let requestSerializer = VimeoRequestSerializer(accessTokenProvider: accessTokenProvider)
+        let responseSerializer = VimeoResponseSerializer()
         
-        return VimeoSessionManager(baseUrl: baseUrl, sessionConfiguration: sessionConfiguration, requestSerializer: requestSerializer)
+        return VimeoSessionManager(baseUrl: baseUrl, sessionConfiguration: sessionConfiguration, requestSerializer: requestSerializer, responseSerializer: responseSerializer)
     }
     
     /**
@@ -125,8 +130,9 @@ public extension VimeoSessionManager
     {
         let sessionConfiguration = self.backgroundSessionConfiguration(identifier: identifier)
         let requestSerializer = VimeoRequestSerializer(appConfiguration: appConfiguration)
+        let responseSerializer = VimeoResponseSerializer()
         
-        return VimeoSessionManager(baseUrl: appConfiguration.baseUrl, sessionConfiguration: sessionConfiguration, requestSerializer: requestSerializer)
+        return VimeoSessionManager(baseUrl: appConfiguration.baseUrl, sessionConfiguration: sessionConfiguration, requestSerializer: requestSerializer, responseSerializer: responseSerializer)
     }
     
     // MARK: Private API

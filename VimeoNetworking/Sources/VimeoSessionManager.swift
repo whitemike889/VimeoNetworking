@@ -43,12 +43,12 @@ final public class VimeoSessionManager: AFHTTPSessionManager
      
      - returns: an initialized `VimeoSessionManager`
      */
-    required public init(baseUrl: URL, sessionConfiguration: URLSessionConfiguration, requestSerializer: VimeoRequestSerializer)
+    required public init(baseUrl: URL, sessionConfiguration: URLSessionConfiguration, requestSerializer: VimeoRequestSerializer, responseSerializer: VimeoResponseSerializer)
     {        
         super.init(baseURL: baseUrl, sessionConfiguration: sessionConfiguration)
         
         self.requestSerializer = requestSerializer
-        self.responseSerializer = VimeoResponseSerializer()
+        self.responseSerializer = responseSerializer
     }
     
     required public init?(coder aDecoder: NSCoder)
@@ -65,14 +65,17 @@ final public class VimeoSessionManager: AFHTTPSessionManager
      */
     func clientDidAuthenticate(with account: VIMAccount)
     {
-        guard let requestSerializer = self.requestSerializer as? VimeoRequestSerializer
-        else
+        guard let requestSerializer = self.requestSerializer as? VimeoRequestSerializer else
         {
+            assertionFailure()
+
             return
         }
         
         let accessToken = account.accessToken
+        
         requestSerializer.accessTokenProvider = {
+            
             return accessToken
         }
     }
@@ -82,9 +85,10 @@ final public class VimeoSessionManager: AFHTTPSessionManager
      */
     func clientDidClearAccount()
     {
-        guard let requestSerializer = self.requestSerializer as? VimeoRequestSerializer
-            else
+        guard let requestSerializer = self.requestSerializer as? VimeoRequestSerializer else
         {
+            assertionFailure()
+            
             return
         }
         
