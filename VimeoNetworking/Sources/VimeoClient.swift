@@ -104,8 +104,8 @@ final public class VimeoClient
     
     // MARK: -
 
+    public let configuration: AppConfiguration
     fileprivate let responseCache = ResponseCache()
-    fileprivate let configuration: AppConfiguration
     fileprivate let sessionManager: VimeoSessionManager
     fileprivate let codableSessionManager: VimeoSessionManager
     
