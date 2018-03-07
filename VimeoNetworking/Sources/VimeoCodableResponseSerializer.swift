@@ -1,5 +1,5 @@
 //
-//  VimeoModelResponseSerializer.swift
+//  VimeoCodableResponseSerializer.swift
 //  AFNetworking-iOS
 //
 //  Created by King, Gavin on 3/7/18.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class VimeoModelResponseSerializer: VimeoResponseSerializer
+class VimeoCodableResponseSerializer: VimeoResponseSerializer
 {
     override func responseObject(for response: URLResponse?, data: Data?, error: NSErrorPointer) -> Any?
     {

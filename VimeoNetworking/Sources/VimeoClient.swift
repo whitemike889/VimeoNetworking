@@ -108,7 +108,7 @@ final public class VimeoClient
     fileprivate let responseCache = ResponseCache()
     fileprivate let configuration: AppConfiguration
     fileprivate let sessionManager: VimeoSessionManager
-    fileprivate let modelSessionManager: VimeoSessionManager
+    fileprivate let codableSessionManager: VimeoSessionManager
     
     // MARK: -
 
@@ -123,7 +123,7 @@ final public class VimeoClient
     {
         self.configuration = appConfiguration
         self.sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: appConfiguration)
-        self.modelSessionManager = VimeoSessionManager.defaultModelSessionManager(appConfiguration: appConfiguration)
+        self.codableSessionManager = VimeoSessionManager.defaultCodableSessionManager(appConfiguration: appConfiguration)
         
         VimeoReachability.beginPostingReachabilityChangeNotifications()
     }
@@ -139,12 +139,12 @@ final public class VimeoClient
             if let authenticatedAccount = self.currentAccount
             {
                 self.sessionManager.clientDidAuthenticate(with: authenticatedAccount)
-                self.modelSessionManager.clientDidAuthenticate(with: authenticatedAccount)
+                self.codableSessionManager.clientDidAuthenticate(with: authenticatedAccount)
             }
             else
             {
                 self.sessionManager.clientDidClearAccount()
-                self.modelSessionManager.clientDidClearAccount()
+                self.codableSessionManager.clientDidClearAccount()
             }
             
             self.notifyObserversAccountChanged(forAccount: self.currentAccount, previousAccount: oldValue)
@@ -509,11 +509,11 @@ extension VimeoClient
     }
 }
 
-// MARK: Model Stream Requests
+// MARK: Codable Stream Requests
 
 extension VimeoClient
 {
-    public func request<T: Model>(_ request: Request<[T]>, completionQueue: DispatchQueue = DispatchQueue.main, completion: @escaping ResultCompletion<Response<[T]>>.T) -> RequestToken
+    public func request<T: Codable>(_ request: Request<[T]>, completionQueue: DispatchQueue = DispatchQueue.main, completion: @escaping ResultCompletion<Response<[T]>>.T) -> RequestToken
     {
         let success: (URLSessionDataTask, Any?) -> Void = { (task, responseObject) in
             
@@ -538,21 +538,21 @@ extension VimeoClient
         switch request.method
         {
         case .GET:
-            task = self.modelSessionManager.get(path, parameters: parameters, progress: nil, success: success, failure: failure)
+            task = self.codableSessionManager.get(path, parameters: parameters, progress: nil, success: success, failure: failure)
         case .POST:
-            task = self.modelSessionManager.post(path, parameters: parameters, progress: nil, success: success, failure: failure)
+            task = self.codableSessionManager.post(path, parameters: parameters, progress: nil, success: success, failure: failure)
         case .PUT:
-            task = self.modelSessionManager.put(path, parameters: parameters, success: success, failure: failure)
+            task = self.codableSessionManager.put(path, parameters: parameters, success: success, failure: failure)
         case .PATCH:
-            task = self.modelSessionManager.patch(path, parameters: parameters, success: success, failure: failure)
+            task = self.codableSessionManager.patch(path, parameters: parameters, success: success, failure: failure)
         case .DELETE:
-            task = self.sessionManager.delete(path, parameters: parameters, success: success, failure: failure)
+            task = self.codableSessionManager.delete(path, parameters: parameters, success: success, failure: failure)
         }
         
         return RequestToken(path: request.path, task: task)
     }
     
-    private func handleTaskSuccess<T: Model>(forRequest request: Request<[T]>, task: URLSessionDataTask?, responseObject: Any?, isCachedResponse: Bool = false, isFinalResponse: Bool = true, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<[T]>>.T)
+    private func handleTaskSuccess<T: Codable>(forRequest request: Request<[T]>, task: URLSessionDataTask?, responseObject: Any?, isCachedResponse: Bool = false, isFinalResponse: Bool = true, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<[T]>>.T)
     {
         guard let data = responseObject as? Data else
         {
@@ -636,7 +636,7 @@ extension VimeoClient
         }
     }
     
-    private func handleTaskFailure<T: Model>(forRequest request: Request<[T]>, task: URLSessionDataTask?, error: NSError, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<[T]>>.T)
+    private func handleTaskFailure<T: Codable>(forRequest request: Request<[T]>, task: URLSessionDataTask?, error: NSError, completionQueue: DispatchQueue, completion: @escaping ResultCompletion<Response<[T]>>.T)
     {
         if error.code == NSURLErrorCancelled
         {

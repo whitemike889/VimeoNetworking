@@ -45,15 +45,6 @@ public extension VimeoSessionManager
         
         return VimeoSessionManager(baseUrl: appConfiguration.baseUrl, sessionConfiguration: sessionConfiguration, requestSerializer: requestSerializer, responseSerializer: responseSerializer)
     }
-    
-    static func defaultModelSessionManager(appConfiguration: AppConfiguration) -> VimeoSessionManager
-    {
-        let sessionConfiguration = URLSessionConfiguration.defaultSessionConfigurationNoCache()
-        let requestSerializer = VimeoRequestSerializer(appConfiguration: appConfiguration)
-        let responseSerializer = VimeoModelResponseSerializer()
-        
-        return VimeoSessionManager(baseUrl: appConfiguration.baseUrl, sessionConfiguration: sessionConfiguration, requestSerializer: requestSerializer, responseSerializer: responseSerializer)
-    }
 }
 
 // MARK: - Background Session Initialization
@@ -120,5 +111,17 @@ public extension VimeoSessionManager
     private static func backgroundSessionConfiguration(identifier: String) -> URLSessionConfiguration
     {
         return URLSessionConfiguration.background(withIdentifier: identifier)
+    }
+}
+
+extension VimeoSessionManager
+{
+    static func defaultCodableSessionManager(appConfiguration: AppConfiguration) -> VimeoSessionManager
+    {
+        let sessionConfiguration = URLSessionConfiguration.defaultSessionConfigurationNoCache()
+        let requestSerializer = VimeoRequestSerializer(appConfiguration: appConfiguration)
+        let responseSerializer = VimeoCodableResponseSerializer()
+        
+        return VimeoSessionManager(baseUrl: appConfiguration.baseUrl, sessionConfiguration: sessionConfiguration, requestSerializer: requestSerializer, responseSerializer: responseSerializer)
     }
 }
