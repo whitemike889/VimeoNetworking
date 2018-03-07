@@ -88,12 +88,6 @@ final public class VimeoClient
     
     // MARK: -
     
-        /// Session manager handles the http session data tasks and request/response serialization
-    fileprivate var sessionManager: VimeoSessionManager? = nil
-    
-        /// response cache handles all memory and disk caching of response dictionaries
-    private let responseCache = ResponseCache()
-    
     struct Constants
     {
         fileprivate static let BearerQuery = "Bearer "
@@ -109,6 +103,14 @@ final public class VimeoClient
         static let LastKey = "last"
     }
     
+    // MARK: -
+
+    private let configuration: AppConfiguration
+    private let sessionManager: VimeoSessionManager
+    private let responseCache = ResponseCache()
+    
+    // MARK: -
+
     /**
      Create a new client
      
@@ -121,37 +123,28 @@ final public class VimeoClient
         self.init(appConfiguration: appConfiguration, sessionManager: VimeoSessionManager.defaultSessionManager(appConfiguration: appConfiguration))
     }
     
-    public init(appConfiguration: AppConfiguration?, sessionManager: VimeoSessionManager?)
+    public init(appConfiguration: AppConfiguration, sessionManager: VimeoSessionManager)
     {
-        if let appConfiguration = appConfiguration,
-            let sessionManager = sessionManager
-        {
-            self.configuration = appConfiguration
-            self.sessionManager = sessionManager
-            
-            VimeoReachability.beginPostingReachabilityChangeNotifications()
-        }
+        self.configuration = appConfiguration
+        self.sessionManager = sessionManager
+        
+        VimeoReachability.beginPostingReachabilityChangeNotifications()
     }
-    
-    // MARK: - Configuration
-    
-    /// The client's configuration
-    public fileprivate(set) var configuration: AppConfiguration? = nil
     
     // MARK: - Authentication
     
-        /// Stores the current account, if one exists
+    /// Stores the current account, if one exists
     public internal(set) var currentAccount: VIMAccount?
     {
         didSet
         {
             if let authenticatedAccount = self.currentAccount
             {
-                self.sessionManager?.clientDidAuthenticate(with: authenticatedAccount)
+                self.sessionManager.clientDidAuthenticate(with: authenticatedAccount)
             }
             else
             {
-                self.sessionManager?.clientDidClearAccount()
+                self.sessionManager.clientDidClearAccount()
             }
             
             self.notifyObserversAccountChanged(forAccount: self.currentAccount, previousAccount: oldValue)
@@ -211,15 +204,15 @@ final public class VimeoClient
         switch request.method
         {
         case .GET:
-            task = self.sessionManager?.get(path, parameters: parameters, progress: nil, success: success, failure: failure)
+            task = self.sessionManager.get(path, parameters: parameters, progress: nil, success: success, failure: failure)
         case .POST:
-            task = self.sessionManager?.post(path, parameters: parameters, progress: nil, success: success, failure: failure)
+            task = self.sessionManager.post(path, parameters: parameters, progress: nil, success: success, failure: failure)
         case .PUT:
-            task = self.sessionManager?.put(path, parameters: parameters, success: success, failure: failure)
+            task = self.sessionManager.put(path, parameters: parameters, success: success, failure: failure)
         case .PATCH:
-            task = self.sessionManager?.patch(path, parameters: parameters, success: success, failure: failure)
+            task = self.sessionManager.patch(path, parameters: parameters, success: success, failure: failure)
         case .DELETE:
-            task = self.sessionManager?.delete(path, parameters: parameters, success: success, failure: failure)
+            task = self.sessionManager.delete(path, parameters: parameters, success: success, failure: failure)
         }
         
         return RequestToken(path: request.path, task: task)
@@ -434,23 +427,23 @@ final public class VimeoClient
     }
 }
 
-
 extension VimeoClient
 {
     /// Singleton instance for VimeoClient. Applications must call configureSharedClient(withAppConfiguration appConfiguration:)
     /// before it can be accessed.
     public static var sharedClient: VimeoClient
     {
-        guard let _ = self._sharedClient.configuration, let _ = self._sharedClient.sessionManager else
+        if let sharedClient = self._sharedClient
         {
-            assertionFailure("VimeoClient.sharedClient must be configured before accessing")
-            
-            return self._sharedClient
+            return sharedClient
         }
-        
-        return self._sharedClient
+        else
+        {
+            fatalError("VimeoClient has not yet been configured.")
+        }
     }
-    private static let _sharedClient = VimeoClient(appConfiguration: nil, sessionManager: nil)
+    
+    private static var _sharedClient: VimeoClient?
     
     /// Configures the singleton sharedClient instance. This function allows applications to provide
     /// client specific app configurations at start time.
@@ -459,9 +452,8 @@ extension VimeoClient
     ///   - appConfiguration: An AppConfiguration instance
     public static func configureSharedClient(withAppConfiguration appConfiguration: AppConfiguration)
     {
-        self._sharedClient.configuration = appConfiguration
-        self._sharedClient.sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: appConfiguration)
+        let sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: appConfiguration)
         
-        VimeoReachability.beginPostingReachabilityChangeNotifications()
+        self._sharedClient = VimeoClient(appConfiguration: appConfiguration, sessionManager: sessionManager)
     }
 }
