@@ -26,44 +26,10 @@
 
 import Foundation
 
+// MARK: - Default Session Initialization
+
 public extension VimeoSessionManager
 {
-    // MARK: - Default Session Initialization
-    
-    /**
-     Creates an authenticated session manager with a static access token
-     
-     - parameter baseUrl: the base URL for the HTTP client.  This value should usually be set to `VimeoBaseURL`.
-     - parameter accessToken: the static access token to use for request serialization
-     
-     - returns: an initialized `VimeoSessionManager`
-     */
-    static func defaultSessionManager(baseUrl: URL, accessToken: String) -> VimeoSessionManager
-    {
-        let sessionConfiguration = URLSessionConfiguration.defaultSessionConfigurationNoCache()
-        let requestSerializer = VimeoRequestSerializer(accessTokenProvider: { accessToken })
-        let responseSerializer = VimeoResponseSerializer()
-        
-        return VimeoSessionManager(baseUrl: baseUrl, sessionConfiguration: sessionConfiguration, requestSerializer: requestSerializer, responseSerializer: responseSerializer)
-    }
-    
-    /**
-     Creates a session manager with a block that provides an access token.  Note that if no access token is returned by the provider block, no Authorization header will be serialized with new requests, whereas a Basic Authorization header is required at minimum for all api endpoints.  For unauthenticated requests, use a constructor that accepts an `AppConfiguration`.
-     
-     - parameter baseUrl: the base URL for the HTTP client.  This value should usually be set to `VimeoBaseURL`.
-     - parameter accessTokenProvider: a block that provides an access token dynamically, called on each request serialization
-     
-     - returns: an initialized `VimeoSessionManager`
-     */
-    static func defaultSessionManager(baseUrl: URL, accessTokenProvider: @escaping VimeoRequestSerializer.AccessTokenProvider) -> VimeoSessionManager
-    {
-        let sessionConfiguration = URLSessionConfiguration.defaultSessionConfigurationNoCache()
-        let requestSerializer = VimeoRequestSerializer(accessTokenProvider: accessTokenProvider)
-        let responseSerializer = VimeoResponseSerializer()
-        
-        return VimeoSessionManager(baseUrl: baseUrl, sessionConfiguration: sessionConfiguration, requestSerializer: requestSerializer, responseSerializer: responseSerializer)
-    }
-    
     /**
      Creates an unauthenticated session manager with a static application configuration
      
@@ -80,8 +46,20 @@ public extension VimeoSessionManager
         return VimeoSessionManager(baseUrl: appConfiguration.baseUrl, sessionConfiguration: sessionConfiguration, requestSerializer: requestSerializer, responseSerializer: responseSerializer)
     }
     
-    // MARK: - Background Session Initialization
-    
+    static func defaultModelSessionManager(appConfiguration: AppConfiguration) -> VimeoSessionManager
+    {
+        let sessionConfiguration = URLSessionConfiguration.defaultSessionConfigurationNoCache()
+        let requestSerializer = VimeoRequestSerializer(appConfiguration: appConfiguration)
+        let responseSerializer = VimeoModelResponseSerializer()
+        
+        return VimeoSessionManager(baseUrl: appConfiguration.baseUrl, sessionConfiguration: sessionConfiguration, requestSerializer: requestSerializer, responseSerializer: responseSerializer)
+    }
+}
+
+// MARK: - Background Session Initialization
+
+public extension VimeoSessionManager
+{
     /**
      Creates an authenticated background session manager with a static access token
      

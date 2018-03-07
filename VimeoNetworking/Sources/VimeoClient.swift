@@ -105,9 +105,10 @@ final public class VimeoClient
     
     // MARK: -
 
+    private let responseCache = ResponseCache()
     private let configuration: AppConfiguration
     private let sessionManager: VimeoSessionManager
-    private let responseCache = ResponseCache()
+    private let modelSessionManager: VimeoSessionManager
     
     // MARK: -
 
@@ -118,18 +119,15 @@ final public class VimeoClient
      
      - returns: an initialized `VimeoClient`
      */
-    convenience public init(appConfiguration: AppConfiguration)
-    {
-        self.init(appConfiguration: appConfiguration, sessionManager: VimeoSessionManager.defaultSessionManager(appConfiguration: appConfiguration))
-    }
-    
-    public init(appConfiguration: AppConfiguration, sessionManager: VimeoSessionManager)
+    public init(appConfiguration: AppConfiguration)
     {
         self.configuration = appConfiguration
-        self.sessionManager = sessionManager
+        self.sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: appConfiguration)
+        self.modelSessionManager = VimeoSessionManager.defaultModelSessionManager(appConfiguration: appConfiguration)
         
         VimeoReachability.beginPostingReachabilityChangeNotifications()
     }
+    
     
     // MARK: - Authentication
     
@@ -141,10 +139,12 @@ final public class VimeoClient
             if let authenticatedAccount = self.currentAccount
             {
                 self.sessionManager.clientDidAuthenticate(with: authenticatedAccount)
+                self.modelSessionManager.clientDidAuthenticate(with: authenticatedAccount)
             }
             else
             {
                 self.sessionManager.clientDidClearAccount()
+                self.modelSessionManager.clientDidClearAccount()
             }
             
             self.notifyObserversAccountChanged(forAccount: self.currentAccount, previousAccount: oldValue)
@@ -452,8 +452,6 @@ extension VimeoClient
     ///   - appConfiguration: An AppConfiguration instance
     public static func configureSharedClient(withAppConfiguration appConfiguration: AppConfiguration)
     {
-        let sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: appConfiguration)
-        
-        self._sharedClient = VimeoClient(appConfiguration: appConfiguration, sessionManager: sessionManager)
+        self._sharedClient = VimeoClient(appConfiguration: appConfiguration)
     }
 }
