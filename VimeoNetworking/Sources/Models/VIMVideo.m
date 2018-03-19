@@ -544,7 +544,7 @@ NSString *VIMContentRating_Safe = @"safe";
     NSString *trimmedReviewLink = [self.reviewPage.link stringByReplacingOccurrencesOfString:@" " withString:@""];
     
     return  self.reviewPage != nil &&
-            self.reviewPage.isActive &&
+            self.reviewPage.isActive.boolValue == true &&
             self.reviewPage.link != nil &&
             trimmedReviewLink.length > 0;
 }

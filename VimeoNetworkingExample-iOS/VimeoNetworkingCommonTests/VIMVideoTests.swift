@@ -132,4 +132,38 @@ class VIMVideoTests: XCTestCase
         XCTAssertNotNil(testVideoObject)
         XCTAssertTrue(testVideoObject.isPostBroadcast())
     }
+    
+    // MARK: - Review Page
+    
+    func test_video_has_review_page()
+    {
+        let reviewPageDictionary: [String: Any] = ["active": true, "link": "test/linkNotEmpty"]
+        let reviewObject = (VIMReviewPage(keyValueDictionary: reviewPageDictionary))!
+        let videoDictionary: [String: Any] = ["reviewPage": reviewObject]
+        let testVideoObject = VIMVideo(keyValueDictionary: videoDictionary)!
+
+        XCTAssertNotNil(reviewObject)
+        XCTAssertNotNil(testVideoObject)
+        XCTAssertTrue(testVideoObject.hasReviewPage())
+    }
+    
+    func test_video_hasnt_review_page()
+    {
+        let reviewPageDictionary: [String: Any] = ["active": true, "link": ""]
+        let reviewObject = (VIMReviewPage(keyValueDictionary: reviewPageDictionary))!
+        let videoDictionary: [String: Any] = ["reviewPage": reviewObject]
+        let testVideoObject = VIMVideo(keyValueDictionary: videoDictionary)!
+        
+        XCTAssertFalse(testVideoObject.hasReviewPage())
+    }
+    
+    func test_video_hasnt_review_page_because_is_inactive()
+    {
+        let reviewPageDictionary: [String: Any] = ["active": false, "link": "test/LinkExistButIsNotActive"]
+        let reviewObject = (VIMReviewPage(keyValueDictionary: reviewPageDictionary))!
+        let videoDictionary: [String: Any] = ["reviewPage": reviewObject]
+        let testVideoObject = VIMVideo(keyValueDictionary: videoDictionary)!
+        
+        XCTAssertEqual(testVideoObject.hasReviewPage(), false)
+    }
 }
