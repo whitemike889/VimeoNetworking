@@ -539,4 +539,14 @@ NSString *VIMContentRating_Safe = @"safe";
     return self.isLive && ([self.live.status isEqual: VIMLive.LiveStreamStatusDone]);
 }
 
+- (BOOL)hasReviewPage
+{
+    NSString *trimmedReviewLink = [self.reviewPage.link stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    return  self.reviewPage != nil &&
+            self.reviewPage.isActive &&
+            self.reviewPage.link != nil &&
+            trimmedReviewLink.length > 0;
+}
+
 @end
