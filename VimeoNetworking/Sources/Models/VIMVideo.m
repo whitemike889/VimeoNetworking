@@ -77,7 +77,9 @@ NSString *VIMContentRating_Safe = @"safe";
 {
     return @{@"description": @"videoDescription",
              @"pictures": @"pictureCollection",
-             @"play": @"playRepresentation"};
+             @"play": @"playRepresentation",
+             @"review_page": @"reviewPage",
+             };
 }
 
 - (Class)getClassForCollectionKey:(NSString *)key
@@ -139,6 +141,11 @@ NSString *VIMContentRating_Safe = @"safe";
     if ([key isEqualToString:@"live"])
     {
         return [VIMLive class];
+    }
+    
+    if ([key isEqualToString:@"review_page"])
+    {
+        return [VIMReviewPage class];
     }
     
     return nil;

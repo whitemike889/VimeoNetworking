@@ -37,6 +37,7 @@
 @class VIMBadge;
 @class Spatial;
 @class VIMLive;
+@class VIMReviewPage;
 
 extern NSString * __nonnull VIMContentRating_Language;
 extern NSString * __nonnull VIMContentRating_Drugs;
@@ -87,6 +88,7 @@ typedef NS_ENUM(NSUInteger, VIMVideoProcessingStatus) {
 @property (nonatomic, strong, nullable) VIMBadge *badge;
 @property (nonatomic, strong, nullable) Spatial *spatial;
 @property (nonatomic, strong, nullable) VIMLive *live;
+@property (nonatomic, strong, nullable) VIMReviewPage *reviewPage;
 
 @property (nonatomic, assign) VIMVideoProcessingStatus videoStatus;
 
