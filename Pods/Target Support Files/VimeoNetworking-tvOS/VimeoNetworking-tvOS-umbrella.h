@@ -33,7 +33,6 @@
 #import "VIMQuantityQuota.h"
 #import "VIMRecommendation.h"
 #import "VIMSeason.h"
-#import "VIMSizeQuota.h"
 #import "VIMSoundtrack.h"
 #import "VIMTag.h"
 #import "VIMThumbnailUploadTicket.h"
