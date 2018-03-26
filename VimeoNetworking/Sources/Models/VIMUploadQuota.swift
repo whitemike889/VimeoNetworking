@@ -35,18 +35,23 @@ public class VIMUploadQuota: VIMModelObject
         
         return nil
     }
+
+    /// Determines whether the user has a periodic storage quota limit or has a lifetime upload quota storage limit only.
+    @objc public lazy var isPeriodicQuota: Bool = {
+        return self.space?.showing == "periodic"
+    }()
 }
 
 public class VIMSpace: VIMSizeQuota
 {
-    /// Whether the values of the upload_quota.space fields are for the lifetime quota or the periodic quota.
+    /// Whether the values of the upload_quota.space fields are for the lifetime quota or the periodic quota. Values can be `lifetime` or `periodic`.
     @objc dynamic public private(set) var showing: String?
 }
 
 public class VIMPeriodic: VIMSizeQuota
 {
     /// The time in ISO 8601 format when your upload quota resets.
-    @objc dynamic public private(set) var resetDate: Date?
+    @objc dynamic public private(set) var resetDate: NSDate?
 
     // MARK: - VIMMappable
 
@@ -54,4 +59,11 @@ public class VIMPeriodic: VIMSizeQuota
     {
         return ["reset_date" : "resetDate"]
     }
+}
+
+public class VIMSizeQuota: VIMModelObject
+{
+    @objc dynamic public private(set) var free: NSNumber?
+    @objc dynamic public private(set) var max: NSNumber?
+    @objc dynamic public private(set) var used: NSNumber?
 }
