@@ -10,7 +10,7 @@ import Foundation
 public class VIMUploadQuota: VIMModelObject
 {
     /// The values within `VIMSpace` reflect the lowest of lifetime or period for free and max.
-    @objc dynamic public private(set) var space: VIMSpace?
+    @objc dynamic public var space: VIMSpace?
     
     /// Represents the current quota perio
     @objc dynamic public private(set) var periodic: VIMPeriodic?
