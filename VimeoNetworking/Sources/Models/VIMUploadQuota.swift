@@ -12,11 +12,11 @@ public class VIMUploadQuota: VIMModelObject
     /// The values within `VIMSpace` reflect the lowest of lifetime or period for free and max.
     @objc dynamic public var space: VIMSpace?
     
-    /// Represents the current quota perio
-    @objc dynamic public private(set) var periodic: VIMPeriodic?
+    /// Represents the current quota period
+    @objc dynamic public var periodic: VIMPeriodic?
     
     /// Represents the lifetime quota period
-    @objc dynamic public private(set) var lifetime: VIMSizeQuota?
+    @objc dynamic public var lifetime: VIMSizeQuota?
     
     public override func getClassForObjectKey(_ key: String!) -> AnyClass!
     {
