@@ -63,7 +63,7 @@ public class VIMPeriodic: VIMSizeQuota
 
 public class VIMSizeQuota: VIMModelObject
 {
-    @objc dynamic public private(set) var free: NSNumber?
-    @objc dynamic public private(set) var max: NSNumber?
-    @objc dynamic public private(set) var used: NSNumber?
+    @objc dynamic public var free: NSNumber?
+    @objc dynamic public var max: NSNumber?
+    @objc dynamic public var used: NSNumber?
 }
