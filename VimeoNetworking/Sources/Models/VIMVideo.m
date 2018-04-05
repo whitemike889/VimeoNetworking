@@ -77,7 +77,9 @@ NSString *VIMContentRating_Safe = @"safe";
 {
     return @{@"description": @"videoDescription",
              @"pictures": @"pictureCollection",
-             @"play": @"playRepresentation"};
+             @"play": @"playRepresentation",
+             @"review_page": @"reviewPage",
+             };
 }
 
 - (Class)getClassForCollectionKey:(NSString *)key
@@ -139,6 +141,11 @@ NSString *VIMContentRating_Safe = @"safe";
     if ([key isEqualToString:@"live"])
     {
         return [VIMLive class];
+    }
+    
+    if ([key isEqualToString:@"review_page"])
+    {
+        return [VIMReviewPage class];
     }
     
     return nil;
@@ -530,6 +537,16 @@ NSString *VIMContentRating_Safe = @"safe";
 - (BOOL)isPostBroadcast
 {
     return self.isLive && ([self.live.status isEqual: VIMLive.LiveStreamStatusDone]);
+}
+
+- (BOOL)hasReviewPage
+{
+    NSString *trimmedReviewLink = [self.reviewPage.link stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    return  self.reviewPage != nil &&
+            self.reviewPage.isActive.boolValue == true &&
+            self.reviewPage.link != nil &&
+            trimmedReviewLink.length > 0;
 }
 
 @end
