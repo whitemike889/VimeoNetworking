@@ -119,7 +119,7 @@ public enum VimeoErrorKey: String
     
      - returns: An error with additional user info
      */
-    func error(byAddingUserInfo userInfo: [AnyHashable: Any]) -> NSError
+    func error(byAddingUserInfo userInfo: [String: Any]) -> NSError
     {
         return self.error(byAddingDomain: nil, code: nil, userInfo: userInfo)
     }
@@ -145,7 +145,7 @@ public enum VimeoErrorKey: String
      
      - returns: An error with additional information in the user info dictionary
      */
-    @nonobjc func error(byAddingDomain domain: String?, code: Int?, userInfo: [AnyHashable: Any]?) -> NSError
+    @nonobjc func error(byAddingDomain domain: String?, code: Int?, userInfo: [String: Any]?) -> NSError
     {
         var augmentedInfo = self.userInfo
         
@@ -161,7 +161,7 @@ public enum VimeoErrorKey: String
         
         if let userInfo = userInfo
         {
-            augmentedInfo.append(userInfo as! Dictionary<String, Any>)
+            augmentedInfo.append(userInfo)
         }
         
         return NSError(domain: self.domain, code: self.code, userInfo: augmentedInfo)
@@ -218,7 +218,7 @@ public enum VimeoErrorKey: String
     {
         var errorCodes: [Int] = []
         
-        if let json = self.errorResponseBodyJSON, let invalidParameters = json[Constants.VimeoInvalidParametersKey] as? [[AnyHashable: Any]]
+        if let json = self.errorResponseBodyJSON, let invalidParameters = json[Constants.VimeoInvalidParametersKey] as? [[String: Any]]
         {
             for invalidParameter in invalidParameters
             {
@@ -233,13 +233,13 @@ public enum VimeoErrorKey: String
     }
     
         /// Returns the api error JSON dictionary, if available
-    public var errorResponseBodyJSON: [AnyHashable: Any]?
+    public var errorResponseBodyJSON: [String: Any]?
     {
         if let data = self.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] as? Data
         {
             do
             {
-                let json = try JSONSerialization.jsonObject(with: data, options: []) as? [AnyHashable: Any]
+                let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
                 
                 return json
             }

@@ -48,9 +48,9 @@ public class Subscription: VIMModelObject
     @objc dynamic public private(set) var followedUserVideoAvailable: NSNumber?
     
     /// Represents the Subscription object as a Dictionary
-    @objc public var toDictionary: [AnyHashable: Any]
+    @objc public var toDictionary: [String: Any]
     {
-        let dictionary: [AnyHashable: Any] = ["comment": self.comment ?? false,
+        let dictionary: [String: Any] = ["comment": self.comment ?? false,
                                               "credit": self.credit ?? false,
                                               "like": self.like ?? false,
                                               "mention": self.mention ?? false,
