@@ -204,7 +204,6 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer
             "application/vnd.vimeo.user+json",
             "application/vnd.vimeo.picture+json",
             "application/vnd.vimeo.activity+json",
-            "application/vnd.vimeo.uploadticket+json",
             "application/vnd.vimeo.error+json",
             "application/vnd.vimeo.trigger+json",
             "application/vnd.vimeo.category+json",

@@ -37,7 +37,6 @@
 #import "VIMTag.h"
 #import "VIMThumbnailUploadTicket.h"
 #import "VIMTrigger.h"
-#import "VIMUploadTicket.h"
 #import "VIMUser.h"
 #import "VIMUserBadge.h"
 #import "VIMVideo+VOD.h"
