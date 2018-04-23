@@ -50,6 +50,7 @@ FOUNDATION_EXPORT const unsigned char VimeoNetworkingVersionString[];
 #import <VimeoNetworking/VIMQuantityQuota.h>
 #import <VimeoNetworking/VIMTag.h>
 #import <VimeoNetworking/VIMTrigger.h>
+#import <VimeoNetworking/VIMUploadTicket.h>
 #import <VimeoNetworking/VIMUser.h>
 #import <VimeoNetworking/VIMVideo.h>
 #import <VimeoNetworking/VIMVideoFile.h>
