@@ -4,13 +4,31 @@
 //
 //  Created by Lehrer, Nicole on 4/18/18.
 //
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
+//
 
 import Foundation
 
 /// Encapsulates the upload-related information on a video object.
 public class VIMUpload: VIMModelObject
 {
-    /// The type of upload approach
+    /// The approach for uploading the video, expressed as a Swift-only enum
     ///
     /// - streaming: Two-step upload without using tus; this will be deprecated
     /// - post: Upload with an HTML form or POST
@@ -24,7 +42,7 @@ public class VIMUpload: VIMModelObject
         case tus
     }
     
-    /// The status of the upload
+    /// The status code for the availability of the uploaded video, expressed as a Swift-only enum
     ///
     /// - complete: The upload is complete
     /// - error: The upload ended with an error
@@ -36,26 +54,39 @@ public class VIMUpload: VIMModelObject
         case underway = "in_progress"
     }
     
+    /// The approach for uploading the video
     @objc dynamic public private(set) var approach: String?
 
+    /// The file size in bytes of the uploaded video
     @objc dynamic public private(set) var size: NSNumber?
 
+    /// The status code for the availability of the uploaded video
     @objc dynamic public private(set) var status: String?
     
+    /// The HTML form for uploading a video through the post approach
     @objc dynamic public private(set) var form: String?
     
+    /// The link of the video to capture through the pull approach
     @objc dynamic public private(set) var link: String?
 
+    /// The URI for completing the upload
     @objc dynamic public private(set) var completeUri: String?
     
+    /// The redirect URL for the upload app
     @objc dynamic public private(set) var redirectUrl: String?
 
+    /// The link for sending video file data
     @objc dynamic public private(set) var uploadLink: String?
     
+    /// The approach for uploading the video, mapped to a Swift-only enum
     public private(set) var uploadApproach: UploadApproach?
     
+    /// The status code for the availability of the uploaded video, mapped to a Swift-only enum
     public private(set) var uploadStatus: UploadStatus?
     
+    // MARK: - VIMMappable Protocol Conformance
+    
+    /// Called when automatic object mapping completes
     public override func didFinishMapping()
     {
         if let approachString = self.approach
