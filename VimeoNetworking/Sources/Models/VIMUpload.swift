@@ -60,7 +60,7 @@ public class VIMUpload: VIMModelObject
     {
         if let approachString = self.approach
         {
-            self.uploadApproach =  UploadApproach(rawValue: approachString)
+            self.uploadApproach = UploadApproach(rawValue: approachString)
         }
         
         if let statusString = self.status
