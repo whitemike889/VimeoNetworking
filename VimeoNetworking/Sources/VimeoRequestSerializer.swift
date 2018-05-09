@@ -161,6 +161,13 @@ final public class VimeoRequestSerializer: AFJSONRequestSerializer
         {
             let value = "Bearer \(token)"
             request.setValue(value, forHTTPHeaderField: Constants.AuthorizationHeaderKey)
+
+            Logger.log(message: value, subject: .api, level: .info, fileName: #file, line: #line)
+
+            let msg = request.url?.absoluteString ?? ""
+            Logger.log(message: msg, subject: .api, level: .warning, fileName: #file, line: #line)
+
+            Logger.log(message: "error simulation", subject: .api, level: .error, fileName: #file, line: #line)
         }
         else if let appConfiguration = self.appConfiguration
         {
