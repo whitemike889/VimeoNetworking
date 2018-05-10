@@ -40,7 +40,7 @@ final public class VimeoRequestSerializer: AFJSONRequestSerializer
         static let UserAgentKey = "User-Agent"
     }
     
-    public typealias AccessTokenProvider = (Void) -> String?
+    public typealias AccessTokenProvider = () -> String?
     
     // MARK: 
     
@@ -60,7 +60,7 @@ final public class VimeoRequestSerializer: AFJSONRequestSerializer
      
      - returns: an initialized `VimeoRequestSerializer`
      */
-    init(accessTokenProvider: @escaping AccessTokenProvider, apiVersion: String = VimeoDefaultAPIVersionString)
+    init(accessTokenProvider: @escaping AccessTokenProvider, apiVersion: String)
     {
         self.accessTokenProvider = accessTokenProvider
         self.appConfiguration = nil
