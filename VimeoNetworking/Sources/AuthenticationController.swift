@@ -292,9 +292,9 @@ final public class AuthenticationController
      - parameter password:   the new user's password
      - parameter completion: handler for authentication success or failure
      */
-    public func join(withName name: String, email: String, password: String, completion: @escaping AuthenticationCompletion)
+    public func join(withName name: String, email: String, password: String, marketingOptIn: String, completion: @escaping AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.joinRequest(withName: name, email: email, password: password, scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.joinRequest(withName: name, email: email, password: password, marketingOptIn: marketingOptIn, scopes: self.configuration.scopes)
         
         self.authenticate(with: request, completion: completion)
     }
