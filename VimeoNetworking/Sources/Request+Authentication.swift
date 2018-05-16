@@ -171,10 +171,11 @@ extension Request where ModelType: VIMAccount
      
      - returns: a new `Request`
      */
-    static func joinFacebookRequest(withToken facebookToken: String, scopes: [Scope]) -> Request
+    static func joinFacebookRequest(withToken facebookToken: String, marketingOptIn: String, scopes: [Scope]) -> Request
     {
         let parameters = [ScopeKey: Scope.combine(scopes),
-                          TokenKey: facebookToken]
+                          TokenKey: facebookToken,
+                          MarketingOptIn: marketingOptIn]
         
         return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters)
     }

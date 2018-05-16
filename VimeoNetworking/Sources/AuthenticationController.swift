@@ -320,9 +320,9 @@ final public class AuthenticationController
      - parameter facebookToken: token from facebook SDK
      - parameter completion:    handler for authentication success or failure
      */
-    public func facebookJoin(withToken facebookToken: String, completion: @escaping AuthenticationCompletion)
+    public func facebookJoin(withToken facebookToken: String, marketingOptIn: String, completion: @escaping AuthenticationCompletion)
     {
-        let request = AuthenticationRequest.joinFacebookRequest(withToken: facebookToken, scopes: self.configuration.scopes)
+        let request = AuthenticationRequest.joinFacebookRequest(withToken: facebookToken, marketingOptIn: marketingOptIn, scopes: self.configuration.scopes)
         
         self.authenticate(with: request, completion: completion)
     }
