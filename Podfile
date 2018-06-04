@@ -10,6 +10,7 @@ def shared_pods
 end
 
 target 'VimeoNetworkingExample-iOS' do
+    platform :ios, '8.0'
     shared_pods
 
     target 'VimeoNetworkingExample-iOSTests' do
@@ -19,6 +20,7 @@ target 'VimeoNetworkingExample-iOS' do
 end
 
 target 'VimeoNetworkingExample-tvOS' do
+    platform :tvos, '9.0'
     shared_pods
 
     target 'VimeoNetworkingExample-tvOSTests' do
