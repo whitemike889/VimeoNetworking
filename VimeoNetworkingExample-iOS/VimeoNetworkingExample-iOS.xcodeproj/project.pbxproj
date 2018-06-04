@@ -446,6 +446,7 @@
 				13C1F651C572424FF37A05C8 /* [CP] Check Pods Manifest.lock */,
 				018B9F921C9B34050054650E /* Sources */,
 				018B9F931C9B34050054650E /* Frameworks */,
+				0C2A0F8520C5E0E000B29725 /* ShellScript */,
 				018B9F941C9B34050054650E /* Resources */,
 				CA6E2119DFC5EFCAF0C431FA /* [CP] Embed Pods Frameworks */,
 			);
@@ -485,6 +486,7 @@
 				9B613935A5A18428B6721060 /* [CP] Check Pods Manifest.lock */,
 				966F0EF51E09D5740066DCF0 /* Sources */,
 				966F0EF61E09D5740066DCF0 /* Frameworks */,
+				0C2A0F8620C5E0F700B29725 /* ShellScript */,
 				966F0EF71E09D5740066DCF0 /* Resources */,
 				44371D5D7841C6F904AAED4C /* [CP] Embed Pods Frameworks */,
 			);
@@ -625,6 +627,32 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0C2A0F8520C5E0E000B29725 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "WORKSPACE_ROOT=$( cd \"$(dirname \"${SRCROOT[0]}\")\" ; pwd -P )\n\nif which swiftlint >/dev/null; then\n    \"$PODS_ROOT\"/SwiftLint/swiftlint autocorrect --config \"$WORKSPACE_ROOT\"/.swiftlint.yml\nelse\n    echo \"Warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+		0C2A0F8620C5E0F700B29725 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "WORKSPACE_ROOT=$( cd \"$(dirname \"${SRCROOT[0]}\")\" ; pwd -P )\n\nif which swiftlint >/dev/null; then\n    \"$PODS_ROOT\"/SwiftLint/swiftlint autocorrect --config \"$WORKSPACE_ROOT\"/.swiftlint.yml\nelse\n    echo \"Warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
 		13C1F651C572424FF37A05C8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
