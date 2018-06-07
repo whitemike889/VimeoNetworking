@@ -334,6 +334,7 @@ NSString *VIMContentRating_Safe = @"safe";
                                       [NSNumber numberWithInt:VIMVideoProcessingStatusUploadingError], @"uploading_error",
                                       [NSNumber numberWithInt:VIMVideoProcessingStatusTranscodingError], @"transcoding_error",
                                       [NSNumber numberWithInt:VIMVideoProcessingStatusQuotaExceeded], @"quota_exceeded",
+                                      [NSNumber numberWithInt:VIMVideoProcessingStatusTotalCapExceeded], @"total_cap_exceeded",
                                       nil];
     
     NSNumber *number = [statusDictionary objectForKey:self.status];
