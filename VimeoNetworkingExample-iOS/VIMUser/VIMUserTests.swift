@@ -85,6 +85,8 @@ class VIMUserTests: XCTestCase
                     XCTAssertEqual(analyticsIdentifier, "live_premium")
                 case .proUnlimited:
                     XCTAssertEqual(analyticsIdentifier, "pro_unlimited")
+                case .producer:
+                    XCTAssertEqual(analyticsIdentifier, "producer")
                 }
                 
             case .failure(let error):
