@@ -37,7 +37,9 @@ typedef NS_ENUM(NSInteger, VIMUserBadgeType)
     VIMUserBadgeTypeAlum,
     VIMUserBadgeTypeStaff,
     VIMUserBadgeTypeSupport,
-    VIMUserBadgeTypeCuration
+    VIMUserBadgeTypeCuration,
+    VIMUserBadgeTypeProUnlimited,
+    VIMUserBadgeTypeProducer
 };
 
 @interface VIMUserBadge : VIMModelObject
