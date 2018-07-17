@@ -147,4 +147,18 @@ class VIMUserTests: XCTestCase
         let expectation = self.expectation(description: "Expectation for Business User Object")
         self.checkReturnedAccountType(withExpectedType: .business, andExpectation: expectation)
     }
+
+    func testUserObjectReturningProUnlimitedForAccountType()
+    {
+        self.stubResponse(withFile: "user_pro_unlimited.json")
+        let expectation = self.expectation(description: "Expectation for Pro Unlimited User Object")
+        self.checkReturnedAccountType(withExpectedType: .proUnlimited, andExpectation: expectation)
+    }
+
+    func testUserObjectReturningProducerForAccountType()
+    {
+        self.stubResponse(withFile: "user_producer.json")
+        let expectation = self.expectation(description: "Expectation for Pro Unlimited User Object")
+        self.checkReturnedAccountType(withExpectedType: .producer, andExpectation: expectation)
+    }
 }
