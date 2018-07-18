@@ -30,6 +30,7 @@ typedef NS_ENUM(NSInteger, VIMUserBadgeType)
 {
     VIMUserBadgeTypeDefault = 0,
     VIMUserBadgeTypePlus,
+    // PRO and PRO Unlimited have the same BadgeType `PRO` [JL 07/18/2018]
     VIMUserBadgeTypePro,
     VIMUserBadgeTypeBusiness,
     VIMUserBadgeTypeLiveBusiness,
@@ -38,7 +39,6 @@ typedef NS_ENUM(NSInteger, VIMUserBadgeType)
     VIMUserBadgeTypeStaff,
     VIMUserBadgeTypeSupport,
     VIMUserBadgeTypeCuration,
-    VIMUserBadgeTypeProUnlimited,
     VIMUserBadgeTypeProducer
 };
 
