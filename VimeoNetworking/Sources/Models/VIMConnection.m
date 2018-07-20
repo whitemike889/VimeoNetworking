@@ -61,7 +61,6 @@ NSString *const VIMConnectionNameContents = @"contents";
 NSString *const VIMConnectionNameNotifications = @"notifications";
 NSString *const VIMConnectionNameBlockUser = @"block";
 NSString *const VIMConnectionNameLiveStats = @"live_stats";
-NSString *const VIMConnectionNameTextTracks = @"texttracks";
 
 
 @implementation VIMConnection
