@@ -209,7 +209,7 @@ final public class VimeoRequestSerializer: AFJSONRequestSerializer
             return request
         }
         
-        let modifiedUserAgent = existingUserAgent + " " + frameworkString
+        let modifiedUserAgent = "\(existingUserAgent) \(frameworkString)"
         
         request.setValue(modifiedUserAgent, forHTTPHeaderField: Constants.UserAgentKey)
         
