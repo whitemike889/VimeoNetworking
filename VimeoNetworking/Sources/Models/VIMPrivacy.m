@@ -43,7 +43,7 @@ NSString *VIMPrivacy_Disabled = @"disable";
 {
     return @{@"add": @"canAdd",
              @"download" : @"canDownload",
-             @"_bypass_Token" : @"bypassToken"};
+             @"_bypass_token" : @"bypassToken"};
 }
 
 @end
