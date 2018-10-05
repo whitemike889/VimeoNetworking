@@ -7,8 +7,7 @@
 //
 
 /// Represents all the subscriptions with extra informations
-public class SubscriptionCollection: VIMModelObject
-{
+public class SubscriptionCollection: VIMModelObject {
     // MARK: - Properties
 
     /// Represents the uri
@@ -22,15 +21,12 @@ public class SubscriptionCollection: VIMModelObject
     
     // MARK: - VIMMappable
     
-    public override func getObjectMapping() -> Any
-    {
+    public override func getObjectMapping() -> Any {
         return ["subscriptions": "subscription"]
     }
     
-    public override func getClassForObjectKey(_ key: String!) -> AnyClass!
-    {
-        if key == "subscriptions"
-        {
+    public override func getClassForObjectKey(_ key: String!) -> AnyClass! {
+        if key == "subscriptions" {
             return Subscription.self
         }
         

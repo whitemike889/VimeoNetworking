@@ -26,8 +26,7 @@
 
 import Foundation
 
-extension VIMObjectMapper
-{
+extension VIMObjectMapper {
     static var ErrorDomain: String { return "ObjectMapperErrorDomain" }
     
     /**
@@ -41,11 +40,9 @@ extension VIMObjectMapper
      
      - returns: A deserialized object of type `ModelType`
      */
-    static func mapObject<ModelType: MappableResponse>(responseDictionary: VimeoClient.ResponseDictionary, modelKeyPath: String? = nil) throws -> ModelType
-    {
+    static func mapObject<ModelType: MappableResponse>(responseDictionary: VimeoClient.ResponseDictionary, modelKeyPath: String? = nil) throws -> ModelType {
         guard let mappingClass = ModelType.mappingClass
-        else
-        {
+        else {
             let description = "no mapping class found"
             
             assertionFailure(description)
@@ -60,14 +57,12 @@ extension VIMObjectMapper
         objectMapper.addMappingClass(mappingClass, forKeypath: modelKeyPath ?? "")
         var mappedObject = objectMapper.applyMapping(toJSON: responseDictionary)
         
-        if let modelKeyPath = modelKeyPath
-        {
+        if let modelKeyPath = modelKeyPath {
             mappedObject = (mappedObject as? VimeoClient.ResponseDictionary)?[modelKeyPath]
         }
         
         guard let modelObject = mappedObject as? ModelType
-        else
-        {
+        else {
             let description = "couldn't map to ModelType"
             
             assertionFailure(description)
