@@ -136,9 +136,6 @@ final public class VimeoClient
     
     /// The client's configuration
     public fileprivate(set) var configuration: AppConfiguration? = nil
-
-    /// An optional block for accessing, configuring and returning the updated session manager
-    public fileprivate(set) var configureSessionManagerBlock: ((VimeoSessionManager) -> VimeoSessionManager)? = nil
     
     // MARK: - Authentication
     
@@ -472,10 +469,9 @@ extension VimeoClient
     ///
     /// - Parameters:
     ///   - appConfiguration: An AppConfiguration instance
-    public static func configureSharedClient(withAppConfiguration appConfiguration: AppConfiguration, configureSessionManagerBlock: ((VimeoSessionManager) -> VimeoSessionManager)?)
+    public static func configureSharedClient(withAppConfiguration appConfiguration: AppConfiguration, configureSessionManagerBlock: ConfigureSessionManagerBlock?)
     {
         self._sharedClient.configuration = appConfiguration
-        self._sharedClient.configureSessionManagerBlock = configureSessionManagerBlock
         
         let defaultSessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: appConfiguration, configureSessionManagerBlock: configureSessionManagerBlock)
         self._sharedClient.sessionManager = defaultSessionManager
