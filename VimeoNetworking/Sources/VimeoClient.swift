@@ -115,7 +115,7 @@ final public class VimeoClient
      
      - returns: an initialized `VimeoClient`
      */
-    convenience public init(appConfiguration: AppConfiguration, configureSessionManagerBlock: ((VimeoSessionManager) -> VimeoSessionManager)?)
+    convenience public init(appConfiguration: AppConfiguration, configureSessionManagerBlock: ConfigureSessionManagerBlock?)
     {
         self.init(appConfiguration: appConfiguration, sessionManager: VimeoSessionManager.defaultSessionManager(appConfiguration: appConfiguration, configureSessionManagerBlock: configureSessionManagerBlock))
     }
