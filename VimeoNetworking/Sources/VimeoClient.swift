@@ -115,9 +115,9 @@ final public class VimeoClient
      
      - returns: an initialized `VimeoClient`
      */
-    convenience public init(appConfiguration: AppConfiguration)
+    convenience public init(appConfiguration: AppConfiguration, configureSessionManagerBlock: ((VimeoSessionManager) -> VimeoSessionManager)?)
     {
-        self.init(appConfiguration: appConfiguration, sessionManager: VimeoSessionManager.defaultSessionManager(appConfiguration: appConfiguration))
+        self.init(appConfiguration: appConfiguration, sessionManager: VimeoSessionManager.defaultSessionManager(appConfiguration: appConfiguration, configureSessionManagerBlock: configureSessionManagerBlock))
     }
     
     public init(appConfiguration: AppConfiguration?, sessionManager: VimeoSessionManager?)
@@ -136,6 +136,9 @@ final public class VimeoClient
     
     /// The client's configuration
     public fileprivate(set) var configuration: AppConfiguration? = nil
+
+    /// An optional block for accessing, configuring and returning the updated session manager
+    public fileprivate(set) var configureSessionManagerBlock: ((VimeoSessionManager) -> VimeoSessionManager)? = nil
     
     // MARK: - Authentication
     
@@ -469,10 +472,13 @@ extension VimeoClient
     ///
     /// - Parameters:
     ///   - appConfiguration: An AppConfiguration instance
-    public static func configureSharedClient(withAppConfiguration appConfiguration: AppConfiguration)
+    public static func configureSharedClient(withAppConfiguration appConfiguration: AppConfiguration, configureSessionManagerBlock: ((VimeoSessionManager) -> VimeoSessionManager)?)
     {
         self._sharedClient.configuration = appConfiguration
-        self._sharedClient.sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: appConfiguration)
+        self._sharedClient.configureSessionManagerBlock = configureSessionManagerBlock
+        
+        let defaultSessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: appConfiguration, configureSessionManagerBlock: configureSessionManagerBlock)
+        self._sharedClient.sessionManager = defaultSessionManager
         
         VimeoReachability.beginPostingReachabilityChangeNotifications()
     }

@@ -69,12 +69,15 @@ public extension VimeoSessionManager
      
      - returns: an initialized `VimeoSessionManager`
      */
-    static func defaultSessionManager(appConfiguration: AppConfiguration) -> VimeoSessionManager
+    static func defaultSessionManager(appConfiguration: AppConfiguration, configureSessionManagerBlock: ((VimeoSessionManager) -> VimeoSessionManager)?) -> VimeoSessionManager
     {
         let sessionConfiguration = URLSessionConfiguration.defaultSessionConfigurationNoCache()
         let requestSerializer = VimeoRequestSerializer(appConfiguration: appConfiguration)
         
-        return VimeoSessionManager(baseUrl: appConfiguration.baseUrl, sessionConfiguration: sessionConfiguration, requestSerializer: requestSerializer)
+        let vimeoSessionManager = VimeoSessionManager(baseUrl: appConfiguration.baseUrl, sessionConfiguration: sessionConfiguration, requestSerializer: requestSerializer)
+        
+        let configuredVimeoSessionManager = configureSessionManagerBlock?(vimeoSessionManager) ?? vimeoSessionManager
+        return configuredVimeoSessionManager
     }
     
     // MARK: - Background Session Initialization
