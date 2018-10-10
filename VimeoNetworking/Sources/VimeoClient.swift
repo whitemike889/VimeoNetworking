@@ -108,13 +108,11 @@ final public class VimeoClient
         static let LastKey = "last"
     }
     
-    /**
-     Create a new client
-     
-     - parameter appConfiguration: Your application's configuration
-     
-     - returns: an initialized `VimeoClient`
-     */
+    /// Create a new client
+    ///
+    /// - Parameters:
+    ///   - appConfiguration: Your application's configuration
+    ///   - configureSessionManagerBlock: a block to configure the session manager
     convenience public init(appConfiguration: AppConfiguration, configureSessionManagerBlock: ConfigureSessionManagerBlock?)
     {
         self.init(appConfiguration: appConfiguration, sessionManager: VimeoSessionManager.defaultSessionManager(appConfiguration: appConfiguration, configureSessionManagerBlock: configureSessionManagerBlock))
@@ -469,6 +467,7 @@ extension VimeoClient
     ///
     /// - Parameters:
     ///   - appConfiguration: An AppConfiguration instance
+    ///   - configureSessionManagerBlock: a block to configure the session manager
     public static func configureSharedClient(withAppConfiguration appConfiguration: AppConfiguration, configureSessionManagerBlock: ConfigureSessionManagerBlock?)
     {
         self._sharedClient.configuration = appConfiguration
