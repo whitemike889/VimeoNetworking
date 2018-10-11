@@ -85,9 +85,9 @@ final public class AuthenticationController
     {
         self.configuration = appConfiguration
         self.client = client
-        self.accountStore = AccountStore(configuration: configuration)
+        self.accountStore = AccountStore(configuration: appConfiguration)
         
-        self.authenticatorClient = VimeoClient(appConfiguration: self.configuration, configureSessionManagerBlock: configureSessionManagerBlock)
+        self.authenticatorClient = VimeoClient(appConfiguration: appConfiguration, configureSessionManagerBlock: configureSessionManagerBlock)
     }
     
     // MARK: - Public Saved Accounts
