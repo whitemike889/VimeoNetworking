@@ -473,6 +473,8 @@ extension VimeoClient
         self._sharedClient.configuration = appConfiguration
         
         let defaultSessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: appConfiguration, configureSessionManagerBlock: configureSessionManagerBlock)
+        
+        self._sharedClient.sessionManager?.invalidateSessionCancelingTasks(false)
         self._sharedClient.sessionManager = defaultSessionManager
         
         VimeoReachability.beginPostingReachabilityChangeNotifications()
