@@ -38,5 +38,5 @@ extension AppConfiguration
 extension VimeoClient
 {
     /// The default client this application should use for networking, must be authenticated by an `AuthenticationController` before sending requests
-    static let defaultClient = VimeoClient(appConfiguration: AppConfiguration.defaultConfiguration)
+    static let defaultClient = VimeoClient(appConfiguration: AppConfiguration.defaultConfiguration, configureSessionManagerBlock: nil)
 }
