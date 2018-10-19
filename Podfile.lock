@@ -28,7 +28,7 @@ PODS:
   - OHHTTPStubs/Swift (6.0.0):
     - OHHTTPStubs/Default
   - SwiftLint (0.25.1)
-  - VimeoNetworking (3.3.0):
+  - VimeoNetworking (3.3.1):
     - AFNetworking (= 3.1.0)
 
 DEPENDENCIES:
@@ -51,7 +51,7 @@ SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   OHHTTPStubs: 752f9b11fd810a15162d50f11c06ff94f8e012eb
   SwiftLint: ce933681be10c3266e82576dad676fa815a602e9
-  VimeoNetworking: 39809ca45e76e920b8602b42a11ed62ff568f28e
+  VimeoNetworking: 6c51314fe2ba1c5c0eb23a638daf46af8aa9df30
 
 PODFILE CHECKSUM: 15308d7273e1bf844b2ad8c456612b686e9c5b45
 
