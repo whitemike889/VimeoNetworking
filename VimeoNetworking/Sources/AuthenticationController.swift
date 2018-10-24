@@ -148,10 +148,6 @@ final public class AuthenticationController
 
             try self.setClientAccount(with: loadedAccount)
         }
-        else
-        {
-            print("Failed to load \(accountType) account")
-        }
         
         return loadedAccount
     }
