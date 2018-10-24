@@ -44,7 +44,7 @@ final public class VimeoRequestSerializer: AFJSONRequestSerializer
     
     // MARK:
     
-    // for authenticated requests
+    // for authenticated requests (Applicable to logged in/out VIMAccount)
     var accessTokenProvider: AccessTokenProvider?
     
     // for unauthenticated requests
