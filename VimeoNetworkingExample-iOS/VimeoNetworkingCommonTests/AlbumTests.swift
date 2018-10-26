@@ -23,8 +23,8 @@ class AlbumTests: XCTestCase {
     }
 
     override func tearDown() {
-        testAlbum = nil
-        albumJSONDictionary = nil
+        self.testAlbum = nil
+        self.albumJSONDictionary = nil
     }
 
     func testAlbumObjectParsesCorrectly() {
