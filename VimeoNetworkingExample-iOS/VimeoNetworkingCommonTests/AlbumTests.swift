@@ -27,7 +27,7 @@ class AlbumTests: XCTestCase {
         self.albumJSONDictionary = nil
     }
 
-    func testAlbumObjectParsesCorrectly() {
+    func test_AlbumObject_ParsesCorrectly() {
         guard let album = self.testAlbum else {
             assertionFailure("Failed to unwrap the test album.")
             return
@@ -48,7 +48,7 @@ class AlbumTests: XCTestCase {
         XCTAssertEqual(album.theme, "dark")
     }
     
-    func testAlbumLogoOjbectParsesCorrectly() {
+    func test_AlbumLogoOjbect_ParsesCorrectly() {
         guard let album = self.testAlbum else {
             assertionFailure("Failed to unwrap the test album.")
             return
@@ -64,7 +64,7 @@ class AlbumTests: XCTestCase {
         XCTAssertEqual(logo.link, "https://i.vimeocdn.com/album_custom_logo/18363_200x200")
     }
     
-    func testAlbumEmbedObjectParsesCorrectly() {
+    func test_AlbumEmbedObject_ParsesCorrectly() {
         guard let album = self.testAlbum else {
             assertionFailure("Failed to unwrap the test album.")
             return
