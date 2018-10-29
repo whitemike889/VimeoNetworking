@@ -39,7 +39,6 @@ import Foundation
             static let Logo = "custom_logo"
             static let CreatedTime = "created_time"
             static let ModifiedTime = "modified_time"
-            static let Pictures = "pictures"
             static let User = "user"
             static let Privacy = "privacy"
             static let Embed = "embed"
@@ -93,8 +92,6 @@ import Foundation
         case Constant.Key.Privacy:
             return Constant.Class.Privacy
         case Constant.Key.Logo:
-            return Constant.Class.PictureCollection
-        case Constant.Key.Pictures:
             return Constant.Class.PictureCollection
         case Constant.Key.Embed:
             return Constant.Class.Embed
