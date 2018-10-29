@@ -36,8 +36,6 @@ class AlbumTests: XCTestCase {
         XCTAssertEqual(album.albumName, "2018")
         XCTAssertEqual(album.albumDescription, "Favorites from 2018.")
         XCTAssertEqual(album.albumLogo?.uri, "/users/267176/albums/5451829/logos/18363")
-        XCTAssertNotNil(album.createdTime)
-        XCTAssertNotNil(album.modifiedTime)
         XCTAssertEqual(album.privacy?.view, "anybody")
         XCTAssertEqual(album.duration, 1003)
         XCTAssertEqual(album.uri, "/users/267176/albums/5451829")
@@ -46,6 +44,18 @@ class AlbumTests: XCTestCase {
         XCTAssertNotNil(album.pictures)
         XCTAssertNotNil(album.user)
         XCTAssertEqual(album.theme, "dark")
+    }
+    
+    func test_AlbumDates_ParseAndFormatCorrectly() {
+        guard let album = self.testAlbum else {
+            assertionFailure("Failed to unwrap the test album.")
+            return
+        }
+        
+        XCTAssertNotNil(album.createdTimeString)
+        XCTAssertEqual(album.createdTime!.timeIntervalSince1970, TimeInterval(1538405413))
+        XCTAssertNotNil(album.modifiedTimeString)
+        XCTAssertEqual(album.modifiedTime!.timeIntervalSince1970, TimeInterval(1540585280))
     }
     
     func test_AlbumLogoOjbect_ParsesCorrectly() {
