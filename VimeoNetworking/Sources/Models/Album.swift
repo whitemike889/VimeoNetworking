@@ -48,8 +48,8 @@ import Foundation
             static let Name = "albumName"
             static let Description = "albumDescription"
             static let Logo = "albumLogo"
-            static let CreatedTime = "createdTime"
-            static let ModifiedTime = "modifiedTime"
+            static let CreatedTime = "createdTimeString"
+            static let ModifiedTime = "modifiedTimeString"
         }
         
         struct Class {
@@ -64,8 +64,10 @@ import Foundation
     @objc public var albumName: String?
     @objc public var albumDescription: String?
     @objc public var albumLogo: VIMPictureCollection?
-    @objc public var createdTime: NSDate?
-    @objc public var modifiedTime: NSDate?
+    @objc public var createdTimeString: String?
+    @objc public var createdTime: Date?
+    @objc public var modifiedTimeString: String?
+    @objc public var modifiedTime: Date?
     @objc public var privacy: VIMPrivacy?
     @objc public var duration: NSNumber?
     @objc public var uri: String?
@@ -74,6 +76,7 @@ import Foundation
     @objc public var pictures: VIMPictureCollection?
     @objc public var user: VIMUser?
     @objc public var theme: String?
+    
     
     public override func getObjectMapping() -> Any! {
         return [
@@ -98,5 +101,21 @@ import Foundation
         default:
             return nil
         }
+    }
+    
+    public override func didFinishMapping() {
+        self.createdTime = self.formatDate(from: self.createdTimeString)
+        self.modifiedTime = self.formatDate(from: self.modifiedTimeString)
+    }
+    
+    // MARK: - Private
+    
+    private func formatDate(from dateString: String?) -> Date? {
+        guard let dateString = dateString,
+            let date = VIMModelObject.dateFormatter()?.date(from: dateString) else {
+                return nil
+        }
+        
+        return date
     }
 }
