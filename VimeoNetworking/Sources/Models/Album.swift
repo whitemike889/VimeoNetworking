@@ -26,7 +26,7 @@
 
 import Foundation
 
-@objc public class EmbedShare: VIMObjectMapper {
+@objc public class AlbumEmbed: VIMObjectMapper {
     @objc var html: String?
 }
 
@@ -57,7 +57,7 @@ import Foundation
             static let PictureCollection = VIMPictureCollection.self
             static let Privacy = VIMPrivacy.self
             static let User = VIMUser.self
-            static let Embed = EmbedShare.self
+            static let Embed = AlbumEmbed.self
         }
     }
     
@@ -72,7 +72,7 @@ import Foundation
     @objc public var duration: NSNumber?
     @objc public var uri: String?
     @objc public var link: String?
-    @objc public var embed: EmbedShare?
+    @objc public var embed: AlbumEmbed?
     @objc public var pictures: VIMPictureCollection?
     @objc public var user: VIMUser?
     @objc public var theme: String?
