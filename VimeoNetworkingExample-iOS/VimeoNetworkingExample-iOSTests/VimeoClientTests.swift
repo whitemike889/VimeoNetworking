@@ -37,7 +37,7 @@ class VimeoClientTests: XCTestCase
     
     lazy var client: VimeoClient =
     {
-        return VimeoClient(appConfiguration: self.configuration)
+        return VimeoClient(appConfiguration: self.configuration, configureSessionManagerBlock: nil)
     }()
     
     func testInitialCurrentAccountNotificationUserInfo()
