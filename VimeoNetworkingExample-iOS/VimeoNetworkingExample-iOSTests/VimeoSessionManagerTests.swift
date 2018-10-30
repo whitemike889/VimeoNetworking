@@ -38,8 +38,8 @@ class VimeoSessionManagerTests: XCTestCase
                                              scopes: [.Public, .Private, .Purchased, .Create, .Edit, .Delete, .Interact, .Upload],
                                              keychainService: "com.vimeo.keychain_service",
                                              apiVersion: "3.3")
-        
-        let sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: configuration)
+    
+        let sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: configuration, configureSessionManagerBlock: nil)
         XCTAssertEqual(sessionManager.baseURL, TestVimeoBaseURL)
     }
     
@@ -53,7 +53,7 @@ class VimeoSessionManagerTests: XCTestCase
                                              apiVersion: "3.3",
                                              baseUrl: testApiServer)
         
-        let sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: configuration)
+        let sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: configuration, configureSessionManagerBlock: nil)
         XCTAssertEqual(sessionManager.baseURL, testApiServer)
     }
     
@@ -67,7 +67,7 @@ class VimeoSessionManagerTests: XCTestCase
                                              apiVersion: "3.3",
                                              baseUrl: testApiServer)
         
-        let sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: configuration)
+        let sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: configuration, configureSessionManagerBlock: nil)
         
         let testPath = "/test/api/endpoint"
         let testUrl = testApiServer.appendingPathComponent(testPath)
@@ -96,7 +96,7 @@ class VimeoSessionManagerTests: XCTestCase
                                              keychainService: "com.vimeo.keychain_service",
                                              apiVersion: "3.3")
         
-        let sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: configuration)
+        let sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: configuration, configureSessionManagerBlock: nil)
         
         let testPath = "/test/api/endpoint"
         let testUrl = TestVimeoBaseURL.appendingPathComponent(testPath)
@@ -125,7 +125,7 @@ class VimeoSessionManagerTests: XCTestCase
                                              keychainService: "com.vimeo.keychain_service",
                                              apiVersion: "3.3")
         
-        let sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: configuration)
+        let sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: configuration, configureSessionManagerBlock: nil)
         
         let testAccount = VIMAccount()
         testAccount.accessToken = "TestAccessToken"
@@ -149,8 +149,8 @@ class VimeoSessionManagerTests: XCTestCase
                                              keychainService: "com.vimeo.keychain_service",
                                              apiVersion: "3.3")
         
-        let sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: configuration)
-        
+        let sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: configuration, configureSessionManagerBlock: nil)
+
         let testAccount = VIMAccount()
         testAccount.accessToken = "TestAccessToken"
         
