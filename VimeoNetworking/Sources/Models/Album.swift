@@ -77,7 +77,6 @@ import Foundation
     @objc public var user: VIMUser?
     @objc public var theme: String?
     
-    
     public override func getObjectMapping() -> Any! {
         return [
             Constant.Key.Name : Constant.Value.Name,
