@@ -26,16 +26,14 @@
 import Foundation
 
 /// Encapsulates the upload-related information on a video object.
-public class VIMUpload: VIMModelObject
-{
+public class VIMUpload: VIMModelObject {
     /// The approach for uploading the video, expressed as a Swift-only enum
     ///
     /// - streaming: Two-step upload without using tus; this will be deprecated
     /// - post: Upload with an HTML form or POST
     /// - pull: Upload from a video file that already exists on the internet
     /// - tus: Upload using the open-source tus protocol
-    public enum UploadApproach: String
-    {
+    public enum UploadApproach: String {
         case streaming
         case post
         case pull
@@ -47,8 +45,7 @@ public class VIMUpload: VIMModelObject
     /// - complete: The upload is complete
     /// - error: The upload ended with an error
     /// - underway: The upload is in progress
-    public enum UploadStatus: String
-    {
+    public enum UploadStatus: String {
         case complete
         case error
         case inProgress = "in_progress"
@@ -87,15 +84,12 @@ public class VIMUpload: VIMModelObject
     // MARK: - VIMMappable Protocol Conformance
     
     /// Called when automatic object mapping completes
-    public override func didFinishMapping()
-    {
-        if let approachString = self.approach
-        {
+    public override func didFinishMapping() {
+        if let approachString = self.approach {
             self.uploadApproach = UploadApproach(rawValue: approachString)
         }
         
-        if let statusString = self.status
-        {
+        if let statusString = self.status {
             self.uploadStatus = UploadStatus(rawValue: statusString)
         }
     }
@@ -104,8 +98,7 @@ public class VIMUpload: VIMModelObject
     /// Typically used to rename a property to one that follows this project's naming conventions.
     ///
     /// - Returns: A dictionary where the keys are the JSON response names and the values are the new property names.
-    public override func getObjectMapping() -> Any
-    {
+    public override func getObjectMapping() -> Any {
         return ["complete_uri": "completeURI", "redirect_url": "redirectURL"]
     }
 }

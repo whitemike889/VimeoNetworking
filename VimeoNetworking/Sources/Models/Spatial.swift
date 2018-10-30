@@ -8,8 +8,7 @@
 //
 
 /// Spatial stores all information related to threesixty video
-public class Spatial: VIMModelObject
-{
+public class Spatial: VIMModelObject {
     @objc public static let StereoFormatMono = "mono"
     @objc public static let StereoFormatLeftRight = "left-right"
     @objc public static let StereoFormatTopBottom = "top-bottom"
@@ -22,8 +21,7 @@ public class Spatial: VIMModelObject
     
     // MARK: - VIMMappable
     
-    public override func getObjectMapping() -> Any
-    {
+    public override func getObjectMapping() -> Any {
         return ["stereo_format" : "stereoFormat"]
     }
 }

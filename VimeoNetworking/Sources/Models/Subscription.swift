@@ -7,8 +7,7 @@
 //
 
 /// Represents all the notifications that the user is Subscribed to.
-public class Subscription: VIMModelObject
-{
+public class Subscription: VIMModelObject {
     // MARK: - Properties
     
     /// Represents wether the user is subscribed to the `comment` notification.
@@ -48,8 +47,7 @@ public class Subscription: VIMModelObject
     @objc dynamic public private(set) var followedUserVideoAvailable: NSNumber?
     
     /// Represents the Subscription object as a Dictionary
-    @objc public var toDictionary: [String: Any]
-    {
+    @objc public var toDictionary: [String: Any] {
         let dictionary: [String: Any] = ["comment": self.comment ?? false,
                                               "credit": self.credit ?? false,
                                               "like": self.like ?? false,
@@ -66,8 +64,7 @@ public class Subscription: VIMModelObject
     
     // MARK: - VIMMappable
     
-    override public func getObjectMapping() -> Any
-    {
+    override public func getObjectMapping() -> Any {
         return [
             "video_available": "videoAvailable",
             "vod_preorder_available": "vodPreorderAvailable",
@@ -81,8 +78,7 @@ public class Subscription: VIMModelObject
     /// Helper method that determine whether a user has all the subscription settings turned off.
     ///
     /// - Returns: A boolean that indicates whether the user has all the settings for push notifications disabled.
-    @objc public func areSubscriptionsDisabled() -> Bool
-    {
+    @objc public func areSubscriptionsDisabled() -> Bool {
         return (self.comment == false &&
                 self.credit == false &&
                 self.like == false &&
