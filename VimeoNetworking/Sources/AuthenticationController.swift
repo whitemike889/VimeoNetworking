@@ -138,9 +138,9 @@ final public class AuthenticationController {
             try self.setClientAccount(with: loadedAccount)
         }
         else {
+            // TODO: We should probably surface this error to the client
             print("Failed to load \(accountType) account")
         }
-        
         return loadedAccount
     }
 
