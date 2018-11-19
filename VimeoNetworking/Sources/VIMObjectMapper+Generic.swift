@@ -24,8 +24,7 @@
 //  THE SOFTWARE.
 //
 
-extension VIMObjectMapper
-{
+extension VIMObjectMapper {
     static var ErrorDomain: String { return "ObjectMapperErrorDomain" }
 
     /**
@@ -39,10 +38,8 @@ extension VIMObjectMapper
 
      - returns: A deserialized object of type `ModelType`
      */
-    static func mapObject<ModelType: MappableResponse>(responseDictionary: VimeoClient.ResponseDictionary, modelKeyPath: String? = nil) throws -> ModelType
-    {
-        guard let mappingClass = ModelType.mappingClass else
-        {
+    static func mapObject<ModelType: MappableResponse>(responseDictionary: VimeoClient.ResponseDictionary, modelKeyPath: String? = nil) throws -> ModelType {
+        guard let mappingClass = ModelType.mappingClass else {
             let description = "no mapping class found"
 
             assertionFailure(description)
@@ -65,8 +62,7 @@ extension VIMObjectMapper
             using: modelKeyPath.components(separatedBy: ".")
         )
 
-        guard let modelObject: ModelType = modelObjectOrNil else
-        {
+        guard let modelObject: ModelType = modelObjectOrNil else {
             let description = "couldn't map to ModelType"
 
             assertionFailure(description)
@@ -81,20 +77,17 @@ extension VIMObjectMapper
         return modelObject
     }
 
-    private static func findMappedObject<MappedObject: MappableResponse>(in responseDictionary: VimeoClient.ResponseDictionary?, using keyPaths: [String]) -> MappedObject?
-    {
+    private static func findMappedObject<MappedObject: MappableResponse>(in responseDictionary: VimeoClient.ResponseDictionary?, using keyPaths: [String]) -> MappedObject? {
         var keyPaths = keyPaths
 
-        guard keyPaths.isEmpty == false else
-        {
+        guard keyPaths.isEmpty == false else {
             return nil
         }
 
         let keyPath = keyPaths.removeFirst()
         let nested: Any? = responseDictionary?[keyPath]
 
-        guard let nestedResponseDictionary = nested as? VimeoClient.ResponseDictionary else
-        {
+        guard let nestedResponseDictionary = nested as? VimeoClient.ResponseDictionary else {
             return nested as? MappedObject
         }
 
