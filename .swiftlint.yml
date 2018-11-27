@@ -24,6 +24,7 @@
 whitelist_rules:
   - trailing_newline
   - trailing_whitespace
+  - opening_brace
 
 # Paths to include during linting.
 included:
