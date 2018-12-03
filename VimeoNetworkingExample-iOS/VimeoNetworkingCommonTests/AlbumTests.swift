@@ -86,4 +86,17 @@ class AlbumTests: XCTestCase {
             <div style='padding:56.25% 0 0 0;position:relative;'><iframe src='https://vimeo.com/album/5451829/embed' allowfullscreen frameborder='0' style='position:absolute;top:0;left:0;width:100%;height:100%;'></iframe></div>
             """)
     }
+    
+    func test_AlbumConnection_ParsesCorrectly() {
+        guard let album = self.testAlbum else {
+            assertionFailure("Failed to unwrap the test album.")
+            return
+        }
+        
+        XCTAssertNotNil(album.conntectionWithName(connectionName: VIMConnectionNameVideos), "Expected to find a videos connection but return nil instead.")
+        
+        let videosConnection = album.conntectionWithName(connectionName: VIMConnectionNameVideos)
+        XCTAssertEqual(videosConnection?.uri, "/albums/5451829/videos", "The connection URI's do not match.")
+        XCTAssertEqual(videosConnection?.total, 2, "The total number of videos in the connection do not much the expected number of 2.")
+    }
 }
