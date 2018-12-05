@@ -41,12 +41,24 @@ class AlbumTests: XCTestCase {
         XCTAssertEqual(album.uri, "/users/267176/albums/5451829")
         XCTAssertEqual(album.link, "https://vimeo.com/album/5451829")
         XCTAssertNotNil(album.embed?.html)
-        XCTAssertNotNil(album.pictures)
+        XCTAssertNotNil(album.videoThumbnails)
         XCTAssertNotNil(album.user)
         XCTAssertEqual(album.theme, "dark")
     }
     
-    func test_AlbumDates_ParseAndFormatCorrectly() {
+    func test_AlbumPictures_ParsesCorrectly() {
+        guard let album = self.testAlbum else {
+            assertionFailure("Failed to unwrap the test album.")
+            return
+        }
+        
+        XCTAssertNotNil(album.videoThumbnails)
+        XCTAssertTrue(album.videoThumbnails?.count == 2)
+        XCTAssertEqual(album.videoThumbnails?[0].uri, "/videos/248249215/pictures/673727920")
+        XCTAssertEqual(album.videoThumbnails?[1].uri, "/videos/190063150/pictures/624750928")
+    }
+    
+    func test_AlbumDates_ParsesAndFormatCorrectly() {
         guard let album = self.testAlbum else {
             assertionFailure("Failed to unwrap the test album.")
             return
