@@ -42,6 +42,7 @@ import Foundation
             static let User = "user"
             static let Privacy = "privacy"
             static let Embed = "embed"
+            static let Pictures = "pictures"
         }
         
         struct Value {
@@ -50,14 +51,18 @@ import Foundation
             static let Logo = "albumLogo"
             static let CreatedTime = "createdTimeString"
             static let ModifiedTime = "modifiedTimeString"
+            static let VideoThumbnails = "videoThumbnails"
         }
         
         struct Class {
-            static let Picture = VIMPicture.self
             static let PictureCollection = VIMPictureCollection.self
             static let Privacy = VIMPrivacy.self
             static let User = VIMUser.self
             static let Embed = AlbumEmbed.self
+        }
+        
+        struct Collections {
+            static let Pictures = "pictures"
         }
     }
     
@@ -73,7 +78,7 @@ import Foundation
     @objc public var uri: String?
     @objc public var link: String?
     @objc public var embed: AlbumEmbed?
-    @objc public var pictures: VIMPictureCollection?
+    @objc public var videoThumbnails: [VIMPictureCollection]?
     @objc public var user: VIMUser?
     @objc public var theme: String?
     
@@ -83,7 +88,8 @@ import Foundation
             Constant.Key.Description : Constant.Value.Description,
             Constant.Key.Logo : Constant.Value.Logo,
             Constant.Key.CreatedTime : Constant.Value.CreatedTime,
-            Constant.Key.ModifiedTime : Constant.Value.ModifiedTime
+            Constant.Key.ModifiedTime : Constant.Value.ModifiedTime,
+            Constant.Key.Pictures : Constant.Value.VideoThumbnails
         ]
     }
     
@@ -97,6 +103,15 @@ import Foundation
             return Constant.Class.PictureCollection
         case Constant.Key.Embed:
             return Constant.Class.Embed
+        default:
+            return nil
+        }
+    }
+    
+    public override func getClassForCollectionKey(_ key: String!) -> AnyClass! {
+        switch key {
+        case Constant.Collections.Pictures:
+            return Constant.Class.PictureCollection
         default:
             return nil
         }
