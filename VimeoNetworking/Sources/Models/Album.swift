@@ -43,6 +43,8 @@ import Foundation
             static let Privacy = "privacy"
             static let Embed = "embed"
             static let Pictures = "pictures"
+            static let Metadata = "metadata"
+            static let Connections = "connections"
         }
         
         struct Value {
@@ -59,10 +61,12 @@ import Foundation
             static let Privacy = VIMPrivacy.self
             static let User = VIMUser.self
             static let Embed = AlbumEmbed.self
+            static let MutableDictionary = NSMutableDictionary.self
         }
         
         struct Collections {
             static let Pictures = "pictures"
+            static let Array = NSArray.self
         }
     }
     
@@ -81,6 +85,8 @@ import Foundation
     @objc public var videoThumbnails: [VIMPictureCollection]?
     @objc public var user: VIMUser?
     @objc public var theme: String?
+    @objc dynamic private var metadata: [String: Any]?
+    @objc dynamic private var connections: [String: Any]?
     
     public override func getObjectMapping() -> Any! {
         return [
@@ -103,6 +109,8 @@ import Foundation
             return Constant.Class.PictureCollection
         case Constant.Key.Embed:
             return Constant.Class.Embed
+        case Constant.Key.Metadata:
+            return Constant.Class.MutableDictionary
         default:
             return nil
         }
@@ -120,6 +128,24 @@ import Foundation
     public override func didFinishMapping() {
         self.createdTime = self.formatDate(from: self.createdTimeString)
         self.modifiedTime = self.formatDate(from: self.modifiedTimeString)
+        self.parseConnections()
+    }
+    
+    public func conntectionWithName(connectionName: String) -> VIMConnection? {
+        return self.connections?[connectionName] as? VIMConnection
+    }
+    
+    private func parseConnections() {
+        guard let dictionary = self.metadata?[Constant.Key.Connections] as? [String: Any] else {
+            return
+        }
+        
+        self.connections = [String: Any]()
+        for (key, value) in dictionary {
+            if let valueDict = value as? [String: Any] {
+                self.connections?[key] = VIMConnection(keyValueDictionary: valueDict)
+            }
+        }
     }
     
     // MARK: - Private
