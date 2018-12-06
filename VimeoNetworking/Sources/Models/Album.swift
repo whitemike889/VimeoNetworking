@@ -82,7 +82,7 @@ import Foundation
     @objc public var uri: String?
     @objc public var link: String?
     @objc public var embed: AlbumEmbed?
-    @objc public var videoThumbnails: [VIMPictureCollection]?
+    @objc public var videoThumbnails: NSArray?
     @objc public var user: VIMUser?
     @objc public var theme: String?
     @objc dynamic private var metadata: [String: Any]?

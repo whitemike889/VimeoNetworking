@@ -54,8 +54,11 @@ class AlbumTests: XCTestCase {
         
         XCTAssertNotNil(album.videoThumbnails)
         XCTAssertTrue(album.videoThumbnails?.count == 2)
-        XCTAssertEqual(album.videoThumbnails?[0].uri, "/videos/248249215/pictures/673727920")
-        XCTAssertEqual(album.videoThumbnails?[1].uri, "/videos/190063150/pictures/624750928")
+        
+        let videoThumbnails0 = album.videoThumbnails![0] as! VIMPictureCollection
+        let videoThumbnails1 = album.videoThumbnails![1] as! VIMPictureCollection
+        XCTAssertEqual(videoThumbnails0.uri, "/videos/248249215/pictures/673727920")
+        XCTAssertEqual(videoThumbnails1.uri, "/videos/190063150/pictures/624750928")
     }
     
     func test_AlbumDates_ParsesAndFormatCorrectly() {
