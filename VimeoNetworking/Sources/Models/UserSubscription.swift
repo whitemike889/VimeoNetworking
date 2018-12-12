@@ -1,8 +1,8 @@
 //
-//  Progress.swift
-//  Pods
+//  UserSubscription.swift
+//  VimeoNetworking
 //
-//  Created by Hawkins, Jason on 3/2/17.
+//  Created by Westendorf, Michael on 11/30/18.
 //  Copyright (c) 2014-2018 Vimeo (https://vimeo.com)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,10 +24,23 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
-
-/// An object representing the amount of progress for which a video has been played.
-public class PlayProgress: VIMModelObject {
-    /// The time, in seconds, that the video has been viewed.
-    @objc dynamic public var seconds: NSNumber?
+/// This class contains information about the logged in user's subscription status, including information about any free trials the user may be in and information
+/// about the user's renewal date.
+public class UserSubscription: VIMModelObject {
+    /// Object containing information about the logged in user's renewal date
+    @objc dynamic public private(set) var renewal: UserSubscriptionRenewal?
+    
+    /// Object containing information about the logged in user's free trial status
+    @objc dynamic public private(set) var trial: UserSubscriptionTrial?
+    
+    public override func getClassForObjectKey(_ key: String!) -> AnyClass! {
+        if key == "renewal" {
+            return UserSubscriptionRenewal.self
+        }
+        if key == "trial" {
+            return UserSubscriptionTrial.self
+        }
+        
+        return nil
+    }
 }

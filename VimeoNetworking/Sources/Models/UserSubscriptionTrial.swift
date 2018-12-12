@@ -1,8 +1,8 @@
 //
-//  Progress.swift
-//  Pods
+//  UserSubscriptionTrial.swift
+//  VimeoNetworking
 //
-//  Created by Hawkins, Jason on 3/2/17.
+//  Created by Westendorf, Michael on 11/30/18.
 //  Copyright (c) 2014-2018 Vimeo (https://vimeo.com)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,10 +24,16 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
-
-/// An object representing the amount of progress for which a video has been played.
-public class PlayProgress: VIMModelObject {
-    /// The time, in seconds, that the video has been viewed.
-    @objc dynamic public var seconds: NSNumber?
+/// This class represents the free trial status for the logged in user, including the status of their trial (if they are in one) and whether or not
+/// they have ever had a free trial.
+public class UserSubscriptionTrial: VIMModelObject {
+    /// The status of a user's free trial.
+    ///
+    /// This property will have a value of `free_trial` if the user is currently in a trial period, otherwise this field will be nil.
+    @objc dynamic public private(set) var status: String?
+    
+    /// Indicates whether the user has ever been in a free trial.
+    ///
+    /// A value of 0 indicates the user has never had a free trial, a value of 1 indicates that the user has had a free trial at some point.
+    @objc dynamic public private(set) var hasBeenInFreeTrial: NSNumber?
 }
