@@ -33,7 +33,7 @@ public class UserSubscription: VIMModelObject {
     /// Object containing information about the logged in user's free trial status
     @objc dynamic public private(set) var trial: UserSubscriptionTrial?
     
-    public override func getClassForObjectKey(_ key: String!) -> AnyClass! {
+    public override func getClassForObjectKey(_ key: String!) -> AnyClass? {
         if key == "renewal" {
             return UserSubscriptionRenewal.self
         }

@@ -41,7 +41,7 @@ public class UserMembership: VIMModelObject {
     /// - remark: This property replaces the VIMUser.account property.
     @objc dynamic public private(set) var type: String?
     
-    public override func getClassForObjectKey(_ key: String!) -> AnyClass! {
+    public override func getClassForObjectKey(_ key: String!) -> AnyClass? {
         if key == "badge" {
             return VIMUserBadge.self
         }

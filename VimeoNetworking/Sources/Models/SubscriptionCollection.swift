@@ -43,7 +43,7 @@ public class SubscriptionCollection: VIMModelObject {
         return ["subscriptions": "subscription"]
     }
     
-    public override func getClassForObjectKey(_ key: String!) -> AnyClass! {
+    public override func getClassForObjectKey(_ key: String!) -> AnyClass? {
         if key == "subscriptions" {
             return Subscription.self
         }
