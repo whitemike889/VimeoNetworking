@@ -380,7 +380,14 @@ static NSString *const Producer = @"producer";
     return currentAccountTotal == responseTotal;
 }
 
-- (BOOL)hasBeenInFreeTrial {
+- (BOOL)hasBeenInFreeTrial
+{
+    if([self.membership.subscription.trial.hasBeenInFreeTrial respondsToSelector: @selector(boolValue)] == NO)
+    {
+        NSAssert(NO, @"hasBeenInFreeTrial is expected to be an NSNumber and should respond to boolValue!");
+        return NO;
+    }
+    
     return self.membership.subscription.trial.hasBeenInFreeTrial.boolValue;
 }
 

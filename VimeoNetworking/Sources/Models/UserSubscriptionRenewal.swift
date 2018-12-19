@@ -31,23 +31,19 @@ public class UserSubscriptionRenewal: VIMModelObject {
     @objc dynamic public private(set) var displayDate: String?
     
     /// A **Date** object representing the subscription renewal date.
-    @objc dynamic public private(set) var renewalDate: Date?
+    @objc dynamic public private(set) var formattedRenewalDate: Date?
     
-    @objc dynamic private var renewalDateString: String?
-    
-    override public func getObjectMapping() -> Any {
-        return [ "renewal_date": "renewalDateString" ]
-    }
+    @objc dynamic private var renewalDate: String?
     
     override public func didFinishMapping() {
-        self.formatDisplayDate()
+        self.formatRenewalDate()
     }
     
-    private func formatDisplayDate() {
-        guard let renewalDateString = self.renewalDateString, let dateFormatter = VIMModelObject.dateFormatter() else {
+    private func formatRenewalDate() {
+        guard let renewalDate = self.renewalDate, let dateFormatter = VIMModelObject.dateFormatter() else {
             return
         }
         
-        self.renewalDate = dateFormatter.date(from: renewalDateString)
+        self.formattedRenewalDate = dateFormatter.date(from: renewalDate)
     }
 }

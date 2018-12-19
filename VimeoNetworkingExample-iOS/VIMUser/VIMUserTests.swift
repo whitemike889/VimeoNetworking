@@ -65,7 +65,7 @@ class VIMUserTests: XCTestCase
         return Request<VIMUser>(path: TestConstants.UserUri)
     }
     
-    private func checkReturnedAccountType(for user: VIMUser, withExpectedType expectedType: VIMUserAccountType)
+    private func checkAccountTypeAnalyticsIdentifier(for user: VIMUser, withExpectedType expectedType: VIMUserAccountType)
     {
         XCTAssertEqual(user.accountType, expectedType)
         
@@ -115,7 +115,7 @@ class VIMUserTests: XCTestCase
         self.stubResponse(withFile: "user_live_pro.json")
         let request = self.userRequest()
         self.send(request: request, withDescription: "Expectation for Live Pro User Object") { user in
-            self.checkReturnedAccountType(for: user!, withExpectedType: .livePro)
+            self.checkAccountTypeAnalyticsIdentifier(for: user!, withExpectedType: .livePro)
         }
     }
     
@@ -124,7 +124,7 @@ class VIMUserTests: XCTestCase
         self.stubResponse(withFile: "user_live_business.json")
         let request = self.userRequest()
         self.send(request: request, withDescription: "Expectation for Live Business User Object") { user in
-            self.checkReturnedAccountType(for: user!, withExpectedType: .liveBusiness)
+            self.checkAccountTypeAnalyticsIdentifier(for: user!, withExpectedType: .liveBusiness)
         }
     }
     
@@ -133,7 +133,7 @@ class VIMUserTests: XCTestCase
         self.stubResponse(withFile: "user_live_premium.json")
         let request = self.userRequest()
         self.send(request: request, withDescription: "Expectation for Live Premium User Object") { user in
-            self.checkReturnedAccountType(for: user!, withExpectedType: .livePremium)
+            self.checkAccountTypeAnalyticsIdentifier(for: user!, withExpectedType: .livePremium)
         }
     }
     
@@ -142,7 +142,7 @@ class VIMUserTests: XCTestCase
         self.stubResponse(withFile: "user_basic.json")
         let request = self.userRequest()
         self.send(request: request, withDescription: "Expectation for Basic User Object") { user in
-            self.checkReturnedAccountType(for: user!, withExpectedType: .basic)
+            self.checkAccountTypeAnalyticsIdentifier(for: user!, withExpectedType: .basic)
         }
     }
     
@@ -151,7 +151,7 @@ class VIMUserTests: XCTestCase
         self.stubResponse(withFile: "user_plus.json")
         let request = self.userRequest()
         self.send(request: request, withDescription: "Expectation for Plus User Object") { user in
-            self.checkReturnedAccountType(for: user!, withExpectedType: .plus)
+            self.checkAccountTypeAnalyticsIdentifier(for: user!, withExpectedType: .plus)
         }
     }
     
@@ -160,7 +160,7 @@ class VIMUserTests: XCTestCase
         self.stubResponse(withFile: "user_pro.json")
         let request = self.userRequest()
         self.send(request: request, withDescription: "Expectation for Pro User Object") { user in
-            self.checkReturnedAccountType(for: user!, withExpectedType: .pro)
+            self.checkAccountTypeAnalyticsIdentifier(for: user!, withExpectedType: .pro)
         }
     }
     
@@ -169,7 +169,7 @@ class VIMUserTests: XCTestCase
         self.stubResponse(withFile: "user_business.json")
         let request = self.userRequest()
         self.send(request: request, withDescription: "Expectation for Business User Object") { user in
-            self.checkReturnedAccountType(for: user!, withExpectedType: .business)
+            self.checkAccountTypeAnalyticsIdentifier(for: user!, withExpectedType: .business)
         }
     }
 
@@ -178,7 +178,7 @@ class VIMUserTests: XCTestCase
         self.stubResponse(withFile: "user_pro_unlimited.json")
         let request = self.userRequest()
         self.send(request: request, withDescription: "Expectation for Pro Unlimited User Object") { user in
-            self.checkReturnedAccountType(for: user!, withExpectedType: .proUnlimited)
+            self.checkAccountTypeAnalyticsIdentifier(for: user!, withExpectedType: .proUnlimited)
         }
     }
 
@@ -187,7 +187,7 @@ class VIMUserTests: XCTestCase
         self.stubResponse(withFile: "user_producer.json")
         let request = self.userRequest()
         self.send(request: request, withDescription: "Expectation for Pro Unlimited User Object") { user in
-            self.checkReturnedAccountType(for: user!, withExpectedType: .producer)
+            self.checkAccountTypeAnalyticsIdentifier(for: user!, withExpectedType: .producer)
         }
     }
     
@@ -210,7 +210,7 @@ class VIMUserTests: XCTestCase
             XCTAssertEqual(user?.membership?.subscription?.renewal?.displayDate, "2019-06-12")
             
             let testDate = VIMModelObject.dateFormatter()?.date(from: "2019-06-12T04:00:00+00:00")
-            XCTAssertEqual(user?.membership?.subscription?.renewal?.renewalDate, testDate)
+            XCTAssertEqual(user?.membership?.subscription?.renewal?.formattedRenewalDate, testDate)
         }
     }
     
