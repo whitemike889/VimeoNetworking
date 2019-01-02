@@ -108,6 +108,10 @@ static NSString *const Producer = @"producer";
         return [VIMLiveQuota class];
     }
 
+    if ([key isEqualToString:@"membership"]) {
+        return [UserMembership class];
+    }
+    
     return nil;
 }
 
@@ -214,39 +218,39 @@ static NSString *const Producer = @"producer";
 
 - (void)parseAccountType
 {
-    if ([self.account isEqualToString:Plus])
+    if ([self.membership.type isEqualToString:Plus])
     {
         self.accountType = VIMUserAccountTypePlus;
     }
-    else if ([self.account isEqualToString:Pro])
+    else if ([self.membership.type isEqualToString:Pro])
     {
         self.accountType = VIMUserAccountTypePro;
     }
-    else if ([self.account isEqualToString:Basic])
+    else if ([self.membership.type isEqualToString:Basic])
     {
         self.accountType = VIMUserAccountTypeBasic;
     }
-    else if ([self.account isEqualToString:Business])
+    else if ([self.membership.type isEqualToString:Business])
     {
         self.accountType = VIMUserAccountTypeBusiness;
     }
-    else if ([self.account isEqualToString:LivePro])
+    else if ([self.membership.type isEqualToString:LivePro])
     {
         self.accountType = VIMUserAccountTypeLivePro;
     }
-    else if ([self.account isEqualToString:LiveBusiness])
+    else if ([self.membership.type isEqualToString:LiveBusiness])
     {
         self.accountType = VIMUserAccountTypeLiveBusiness;
     }
-    else if ([self.account isEqualToString:LivePremium])
+    else if ([self.membership.type isEqualToString:LivePremium])
     {
         self.accountType = VIMUserAccountTypeLivePremium;
     }
-    else if ([self.account isEqualToString:ProUnlimited])
+    else if ([self.membership.type isEqualToString:ProUnlimited])
     {
         self.accountType = VIMUserAccountTypeProUnlimited;
     }
-    else if ([self.account isEqualToString:Producer])
+    else if ([self.membership.type isEqualToString:Producer])
     {
         self.accountType = VIMUserAccountTypeProducer;
     }
@@ -374,6 +378,17 @@ static NSString *const Producer = @"producer";
     NSInteger responseTotal = [responseConnection supportedNotificationNewTotal];
     
     return currentAccountTotal == responseTotal;
+}
+
+- (BOOL)hasBeenInFreeTrial
+{
+    if([self.membership.subscription.trial.hasBeenInFreeTrial respondsToSelector: @selector(boolValue)] == NO)
+    {
+        NSAssert(NO, @"hasBeenInFreeTrial is expected to be an NSNumber and should respond to boolValue!");
+        return NO;
+    }
+    
+    return self.membership.subscription.trial.hasBeenInFreeTrial.boolValue;
 }
 
 @end
