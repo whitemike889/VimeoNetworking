@@ -27,7 +27,7 @@
 import Foundation
 
 @objc public class AlbumEmbed: VIMObjectMapper {
-    @objc var html: String?
+    @objc public var html: String?
 }
 
 @objc public class Album: VIMModelObject {
