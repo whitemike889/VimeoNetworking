@@ -333,11 +333,16 @@ static NSString *const Producer = @"producer";
 
 // This is only called for unarchived model objects [AH]
 
-- (void)upgradeFromModelVersion:(NSUInteger)fromVersion toModelVersion:(NSUInteger)toVersion
+- (void)upgradeFromModelVersion:(NSUInteger)fromVersion toModelVersion:(NSUInteger)toVersion withCoder:(NSCoder *)aDecoder
 {
     if ((fromVersion == 1 && toVersion == 2) || (fromVersion == 2 && toVersion == 3))
     {
         [self checkIntegrityOfPictureCollection];
+    }
+    
+    if(fromVersion < 4)
+    {
+        [self updateMembershipInfo: aDecoder];
     }
 }
 
@@ -366,6 +371,29 @@ static NSString *const Producer = @"producer";
                 self.pictureCollection.pictures = pictureObjects;
             }
         }
+    }
+}
+
+// For models prior to version 4, there was a computed property defined in VIMUser+Extension.swift named "membership" which returned a String
+// value.  That computed property has been renamed to "localizedAccountName" and "membership" is now a property defined in VIMUser.h with a type
+// of "UserMembership".  This means that during de-serialization, the wrong type will be put into membership and needs to be fixed.  We check to
+// see if this mismatch has occurred and re-create a correct UserMembership object from the data we have in the decoder object.
+// [MW] 1/18/19
+- (void)updateMembershipInfo:(NSCoder *)aDecoder
+{
+    if(![self.membership isKindOfClass: [UserMembership self]])
+    {
+        self.membership = [[UserMembership alloc] init];
+        
+        VIMUserBadge *badge = [aDecoder decodeObjectForKey: @"badge"];
+        self.membership.badge = badge;
+        
+        NSString *account = [aDecoder decodeObjectForKey: @"account"];
+        self.membership.type = account;
+        
+        // Set new properties to nil since the data didn't exist at the time this model was serialized to disk.
+        self.membership.display = nil;
+        self.membership.subscription = nil;
     }
 }
 
