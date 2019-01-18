@@ -28,18 +28,18 @@
 public class UserMembership: VIMModelObject {
     
     /// Object describing the visual badge to display to indicate the user's account type.
-    @objc dynamic public internal(set) var badge: VIMUserBadge?
+    @objc dynamic public var badge: VIMUserBadge?
     
     /// A non-localized string representation of the user's account type that can be used for display purposes.
-    @objc dynamic public internal(set) var display: String?
+    @objc dynamic public var display: String?
 
     /// An object containing information about the user's subscription status.  This information will only be available for the current logged in user.
     /// - remark: This information is only available for the current logged in user.
-    @objc dynamic public internal(set) var subscription: UserSubscription?
+    @objc dynamic public var subscription: UserSubscription?
     
     /// A string representation of the user's account type.  This value should not be used for display purposes, use the **display** property instead.
     /// - remark: This property replaces the VIMUser.account property.
-    @objc dynamic public internal(set) var type: String?
+    @objc dynamic public var type: String?
     
     public override func getClassForObjectKey(_ key: String!) -> AnyClass? {
         if key == "badge" {
