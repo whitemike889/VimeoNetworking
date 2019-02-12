@@ -79,6 +79,7 @@ NSString *VIMContentRating_Safe = @"safe";
              @"pictures": @"pictureCollection",
              @"play": @"playRepresentation",
              @"review_page": @"reviewPage",
+             @"file_transfer": @"fileTransfer"
              };
 }
 
@@ -151,6 +152,11 @@ NSString *VIMContentRating_Safe = @"safe";
     if ([key isEqualToString:@"upload"])
     {
         return [VIMUpload class];
+    }
+    
+    if ([key isEqualToString:@"file_transfer"])
+    {
+        return [FileTransfer class];
     }
     
     return nil;
