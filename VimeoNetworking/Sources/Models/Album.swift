@@ -131,7 +131,7 @@ import Foundation
         self.parseConnections()
     }
     
-    public func conntectionWithName(connectionName: String) -> VIMConnection? {
+    public func connectionWithName(connectionName: String) -> VIMConnection? {
         return self.connections?[connectionName] as? VIMConnection
     }
     
