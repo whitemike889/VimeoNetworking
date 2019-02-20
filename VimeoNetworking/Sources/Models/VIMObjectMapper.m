@@ -318,13 +318,11 @@
 				for (id jsonArrayItem in jsonArray)
                 {
                     id object = [self _createObjectsFromJSON:jsonArrayItem keypath:keypath mappingClass:jsonClass];
+                    NSAssert(object != nil, @"Error: The object resulting from `_createObjectsFromJSON:` is nil.");
+                    
                     if (object != nil)
                     {
                         [resultArray addObject:object];
-                    }
-                    else
-                    {
-                        NSLog(@"Error: The object resulting from `_createObjectsFromJSON:` is nil.");
                     }
                 }
 				
@@ -337,7 +335,7 @@
         }
         else
         {
-			NSLog(@"_createObjectsFromJSON: Encountered an unknown object type '%@' in JSON", [JSON class]);
+            NSAssert(NO, @"_createObjectsFromJSON: Encountered an unknown object type '%@' in JSON", [JSON class]);
         }
     }
     
