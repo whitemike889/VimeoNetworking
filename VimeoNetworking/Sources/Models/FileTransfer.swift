@@ -27,6 +27,7 @@
 /// `FileTransfer` represents a `file_transfer` response in a `video`
 /// response.
 @objc public class FileTransfer: VIMModelObject {
+    
     /// A URL for getting the video file.
     @objc public private(set) var url: URL?
     
