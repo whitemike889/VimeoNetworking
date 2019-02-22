@@ -121,6 +121,8 @@
 		3DDB062A7D454DD3F4F3B2659DE0573A /* VIMTag.h in Headers */ = {isa = PBXBuildFile; fileRef = C850C5794E8ED72A44DD3D70929B5D7C /* VIMTag.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E193AD16FFC6FAF727DC56EC48C97F8 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A714259BF8355E2CF37EE17258A289CC /* AFNetworkReachabilityManager.m */; };
 		3E3D1C58080CAA85D8524988A321A078 /* VIMThumbnailUploadTicket.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BFD6948595AC793E50D657629655AB9 /* VIMThumbnailUploadTicket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E581EA122186EAB00BBBE51 /* GCS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E581EA022186EAB00BBBE51 /* GCS.swift */; };
+		3E581EA222186EAB00BBBE51 /* GCS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E581EA022186EAB00BBBE51 /* GCS.swift */; };
 		3F0D757CBC63D688689BE12410FA15BA /* Request+Soundtrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC7A5B62AF03A6BFC655867CEDB80E /* Request+Soundtrack.swift */; };
 		3F741EA0C204DC7EE8A068BA1B8EFD03 /* OHHTTPStubsResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A07D1FF3DFDE6B422F2EAADD824CF8 /* OHHTTPStubsResponse.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		4045FCE6C26BB44FF21A5D805E24139F /* VIMVideoProgressiveFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 421E24712E4EA1E2DC3F216F92697BF9 /* VIMVideoProgressiveFile.m */; };
@@ -602,6 +604,7 @@
 		3CBB8E2021B1A4A300092D24 /* UserSubscriptionTrial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSubscriptionTrial.swift; sourceTree = "<group>"; };
 		3DB9F95F175362974D9C05ED9E54009C /* Pods-VimeoNetworkingExample-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VimeoNetworkingExample-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3E403018A219B1706367654CD8EF6B8C /* VimeoNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = VimeoNetworking.h; path = VimeoNetworking/Sources/VimeoNetworking.h; sourceTree = "<group>"; };
+		3E581EA022186EAB00BBBE51 /* GCS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCS.swift; sourceTree = "<group>"; };
 		3E911C478DE04F75AE4FE191CE6A5D8A /* AFNetworking-tvOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "AFNetworking-tvOS-umbrella.h"; path = "../AFNetworking-tvOS/AFNetworking-tvOS-umbrella.h"; sourceTree = "<group>"; };
 		3ED81E309C8B1F3F7D2A7631037B5554 /* VIMComment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VIMComment.h; sourceTree = "<group>"; };
 		402E1AD49AB01E49B347380A10C3C098 /* Pods-VimeoNetworkingExample-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VimeoNetworkingExample-tvOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -936,6 +939,7 @@
 			isa = PBXGroup;
 			children = (
 				68AEE38E3B1344007C9965A0B9B338DD /* PinCodeInfo.swift */,
+				3E581EA022186EAB00BBBE51 /* GCS.swift */,
 				90C9E43D5D6167989BBC67735167B4E1 /* PlayProgress.swift */,
 				13FAA716BE3752F02DDD14A1E8261CDA /* Spatial.swift */,
 				793FF9824EAE5DCE64516871C8CC9687 /* Subscription.swift */,
@@ -2161,6 +2165,7 @@
 				E032DA4771C071475DD51636039A7A5D /* VIMSpace.swift in Sources */,
 				84237C1A2F5682C6FF68125C5606B23D /* VIMTag.m in Sources */,
 				30684EE9C9CAD56476C983E334959F25 /* VIMThumbnailUploadTicket.m in Sources */,
+				3E581EA222186EAB00BBBE51 /* GCS.swift in Sources */,
 				3456D124F3538180EBB1D3922293C705 /* VIMTrigger.m in Sources */,
 				D428350AD0C2192E2819EAAB7CC52E5E /* VIMUpload.swift in Sources */,
 				0B46CE63DF1AC42FAE9821AD63D9CB07 /* VIMUploadQuota.swift in Sources */,
@@ -2286,6 +2291,7 @@
 				8698DD3916732A0A106531BC0747D0C7 /* VIMSpace.swift in Sources */,
 				E787E810BB091F38EE37F9B71B1295D4 /* VIMTag.m in Sources */,
 				A0139954EBF774178494A511DABCABC2 /* VIMThumbnailUploadTicket.m in Sources */,
+				3E581EA122186EAB00BBBE51 /* GCS.swift in Sources */,
 				E69934C4E876D14C210A41E51D00B6CD /* VIMTrigger.m in Sources */,
 				BA6833B4D5762B87DF4AE37808CAA973 /* VIMUpload.swift in Sources */,
 				366CA6504033A36893C77CFB8E69576F /* VIMUploadQuota.swift in Sources */,
