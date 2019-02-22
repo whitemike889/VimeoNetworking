@@ -171,6 +171,7 @@ typedef NS_ENUM(NSUInteger, VIMVideoProcessingStatus) {
 - (void)setIsLiked:(BOOL)isLiked;
 - (void)setIsWatchLater:(BOOL)isWatchLater;
 - (BOOL)hasReviewPage;
+
 /**
  Determines if the video has a file transfer page. A video has a file
  transfer page if @p canDownload privacy is @p true and there is a
