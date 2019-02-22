@@ -173,14 +173,14 @@ typedef NS_ENUM(NSUInteger, VIMVideoProcessingStatus) {
 - (BOOL)hasReviewPage;
 
 /**
- Determines if the video has a file transfer page. A video has a file
+ Determines if the video allows file transfer. A video has a file
  transfer page if @p canDownload privacy is @p true and there is a
  @p file_transfer response.
  
  
  @return @p true if the video has a file transfer page.
  */
-- (BOOL)hasFileTransferPage;
+- (BOOL)allowsFileTransfer;
 - (BOOL)canDownloadFromDesktop;
 
 @end
