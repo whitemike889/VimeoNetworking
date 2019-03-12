@@ -37,20 +37,9 @@ public extension Request {
     
     /// Returns a new request to fetch a specific album.
     ///
-    /// - Parameter albumURI: The album's URI.
+    /// - Parameter uri: The album's URI.
     /// - Returns: Returns a new `Request` for an individual album.
-    public static func getAlbumRequest(forAlbumURI albumURI: String) -> Request {
-        return Request(path: albumURI)
-    }
-    
-    /// Returns a new request to fetch a password protected album.
-    ///
-    /// - Parameters:
-    ///   - albumURI: The password protected album's URI.
-    ///   - password: The password used to attempt to unlock the album.
-    /// - Returns: Returns a new `Request` for a password protected album.
-    public static func getPasswordProtectedAlbumRequest(forAlbumURI albumURI: String, password: String) -> Request {
-        let parameters = [Constants.PasswordKey: password]
-        return Request(path: albumURI, parameters: parameters)
+    public static func albumRequest(for uri: String) -> Request {
+        return Request(path: uri)
     }
 }
