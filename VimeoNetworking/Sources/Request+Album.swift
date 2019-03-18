@@ -29,13 +29,17 @@ public typealias AlbumRequest = Request<Album>
 /// `Request` that returns an array of `Album` objects.
 public typealias AlbumListRequest = Request<[Album]>
 
+fileprivate struct Constants {
+    static let PasswordKey = "password"
+}
+
 public extension Request {
     
-    /// Create a new request to get a specific album.
+    /// Returns a new request to fetch a specific album.
     ///
-    /// - Parameter albumURI: The album's URI.
-    /// - Returns: A new `Request`.
-    public static func getAlbumRequest(forAlbumURI albumURI: String) -> Request {
-        return Request(path: albumURI)
+    /// - Parameter uri: The album's URI.
+    /// - Returns: Returns a new `Request` for an individual album.
+    public static func albumRequest(for uri: String) -> Request {
+        return Request(path: uri)
     }
 }
