@@ -404,6 +404,12 @@ NSString *VIMContentRating_Safe = @"safe";
     return self.videoStatus == VIMVideoProcessingStatusUploading;
 }
 
+- (BOOL)isStock
+{
+    NSString *privacy = self.privacy.view;
+    return [privacy isEqualToString:VIMPrivacy_Stock];
+}
+
 // New
 
 - (void)setIsLiked:(BOOL)isLiked
