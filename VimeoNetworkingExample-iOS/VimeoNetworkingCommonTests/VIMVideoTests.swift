@@ -207,4 +207,13 @@ class VIMVideoTests: XCTestCase
         let testVideoObject = VIMVideo(keyValueDictionary: videoDictionary)!
         XCTAssertFalse(testVideoObject.isStock(), "Test video object was not stock but unexpectedly returned true.")
     }
+    
+    func test_isPrivate_returnsFalse_whenPrivacyViewIsStock()
+    {
+        let privacyDictionary: [String: Any] = ["view": "stock"]
+        let privacy = VIMPrivacy(keyValueDictionary: privacyDictionary)!
+        let videoDictionary: [String: Any] = ["privacy": privacy as Any]
+        let testVideoObject = VIMVideo(keyValueDictionary: videoDictionary)!
+        XCTAssertFalse(testVideoObject.isPrivate(), "Test video object is stock and should not return as private.")
+    }
 }
