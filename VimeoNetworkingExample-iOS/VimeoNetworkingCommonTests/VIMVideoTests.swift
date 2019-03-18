@@ -189,4 +189,22 @@ class VIMVideoTests: XCTestCase
         let canDownload = testVideoObject.canDownloadFromDesktop()
         XCTAssertFalse(canDownload, "canDownloadFromDesktop unexpectedly returns true")
     }
+    
+    func test_isStock_returnsTrue_whenPrivacyViewIsStock()
+    {
+        let privacyDictionary: [String: Any] = ["view": "stock"]
+        let privacy = VIMPrivacy(keyValueDictionary: privacyDictionary)!
+        let videoDictionary: [String: Any] = ["privacy": privacy as Any]
+        let testVideoObject = VIMVideo(keyValueDictionary: videoDictionary)!
+        XCTAssertTrue(testVideoObject.isStock(), "Test video object was stock but unexpectedly returned false.")
+    }
+    
+    func test_isStock_returnsFalse_whenPrivacyViewIsNotStock()
+    {
+        let privacyDictionary: [String: Any] = ["view": "unlisted"]
+        let privacy = VIMPrivacy(keyValueDictionary: privacyDictionary)!
+        let videoDictionary: [String: Any] = ["privacy": privacy as Any]
+        let testVideoObject = VIMVideo(keyValueDictionary: videoDictionary)!
+        XCTAssertFalse(testVideoObject.isStock(), "Test video object was not stock but unexpectedly returned true.")
+    }
 }
