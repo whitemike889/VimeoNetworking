@@ -29,10 +29,6 @@ public typealias AlbumRequest = Request<Album>
 /// `Request` that returns an array of `Album` objects.
 public typealias AlbumListRequest = Request<[Album]>
 
-fileprivate struct Constants {
-    static let PasswordKey = "password"
-}
-
 public extension Request {
     
     /// Returns a new request to fetch a specific album.
