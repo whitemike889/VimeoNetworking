@@ -109,6 +109,7 @@ typedef NS_ENUM(NSUInteger, VIMVideoProcessingStatus) {
 - (BOOL)isAvailable;
 - (BOOL)isTranscoding;
 - (BOOL)isUploading;
+- (BOOL)isStock;
 
 - (BOOL)isLiked;
 - (BOOL)isWatchLater;
