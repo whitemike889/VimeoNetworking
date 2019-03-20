@@ -1,8 +1,8 @@
 //
-//  Request+Album.swift
+//  Request+PasswordProtected.swift
 //  VimeoNetworking
 //
-//  Copyright © 2018 Vimeo. All rights reserved.
+//  Copyright (c) 2019 Vimeo (https://vimeo.com)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,19 +23,20 @@
 //  THE SOFTWARE.
 //
 
-/// `Request` that returns a single `Album`.
-public typealias AlbumRequest = Request<Album>
+fileprivate struct Constants {
+    static let PasswordKey = "password"
+}
 
-/// `Request` that returns an array of `Album` objects.
-public typealias AlbumListRequest = Request<[Album]>
-
-public extension Request {
+extension Request {
     
-    /// Returns a new request to fetch a specific album.
+    /// Returns a new request for a password-protected item, such as a video or an album.
     ///
-    /// - Parameter uri: The album's URI.
-    /// - Returns: Returns a new `Request` for an individual album.
-    public static func albumRequest(for uri: String) -> Request {
-        return Request(path: uri)
+    /// - Parameters:
+    ///   - uri: The URI for the item.
+    ///   - password: The password for the item that will be sent to the server.
+    /// - Returns: Returns a `Request` for a password-protected item.
+    public static func passwordProtectedRequest(for uri: String, password: String) -> Request {
+        let parameters = [Constants.PasswordKey: password]
+        return Request(path: uri, parameters: parameters)
     }
 }
