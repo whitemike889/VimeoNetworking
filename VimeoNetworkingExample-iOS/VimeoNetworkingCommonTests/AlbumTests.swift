@@ -114,4 +114,22 @@ class AlbumTests: XCTestCase {
         XCTAssertEqual(videosConnection?.uri, "/albums/5451829/videos", "The connection URI's do not match.")
         XCTAssertEqual(videosConnection?.total, 2, "The total number of videos in the connection do not much the expected number of 2.")
     }
+    
+    func test_isPasswordProtected_returnsTrue_whenPrivacyViewIsPassword()
+    {
+        let privacyDictionary: [String: Any] = ["view": "password"]
+        let privacy = VIMPrivacy(keyValueDictionary: privacyDictionary)!
+        let videoDictionary: [String: Any] = ["privacy": privacy as Any]
+        let testAlbum = Album(keyValueDictionary: videoDictionary)!
+        XCTAssertTrue(testAlbum.isPasswordProtected(), "Test album should return as password protected.")
+    }
+    
+    func test_isPasswordProtected_returnsFalse_whenPrivacyViewIsEmbedOnly()
+    {
+        let privacyDictionary: [String: Any] = ["view": "embed_only"]
+        let privacy = VIMPrivacy(keyValueDictionary: privacyDictionary)!
+        let videoDictionary: [String: Any] = ["privacy": privacy as Any]
+        let testAlbum = Album(keyValueDictionary: videoDictionary)!
+        XCTAssertFalse(testAlbum.isPasswordProtected(), "Test album should not return as password protected.")
+    }
 }
