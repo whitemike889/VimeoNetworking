@@ -54,6 +54,7 @@ import Foundation
             static let CreatedTime = "createdTimeString"
             static let ModifiedTime = "modifiedTimeString"
             static let VideoThumbnails = "videoThumbnails"
+            static let Password = "password"
         }
         
         struct Class {
@@ -135,6 +136,14 @@ import Foundation
         return self.connections?[connectionName] as? VIMConnection
     }
     
+    // MARK: - Convenience
+    
+    public func isPasswordProtected() -> Bool {
+        return self.privacy?.view == Constant.Value.Password
+    }
+    
+    // MARK: - Private
+
     private func parseConnections() {
         guard let dictionary = self.metadata?[Constant.Key.Connections] as? [String: Any] else {
             return
@@ -147,8 +156,6 @@ import Foundation
             }
         }
     }
-    
-    // MARK: - Private
     
     private func formatDate(from dateString: String?) -> Date? {
         guard let dateString = dateString,
