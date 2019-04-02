@@ -117,7 +117,7 @@ import Foundation
         }
     }
     
-    public override func getClassForCollectionKey(_ key: String?) -> AnyClass! {
+    public override func getClassForCollectionKey(_ key: String?) -> AnyClass? {
         switch key {
         case Constant.Collections.Pictures:
             return Constant.Class.PictureCollection
