@@ -386,7 +386,7 @@ NSString *VIMContentRating_Safe = @"safe";
 - (BOOL)isPrivate
 {
     NSString *privacy = self.privacy.view;
-    return ![privacy isEqualToString:VIMPrivacy_Public] && ![privacy isEqualToString:VIMPrivacy_VOD];
+    return ![privacy isEqualToString:VIMPrivacy_Public] && ![privacy isEqualToString:VIMPrivacy_VOD] && ![privacy isEqualToString:VIMPrivacy_Stock];
 }
 
 - (BOOL)isAvailable
@@ -402,6 +402,12 @@ NSString *VIMContentRating_Safe = @"safe";
 - (BOOL)isUploading
 {
     return self.videoStatus == VIMVideoProcessingStatusUploading;
+}
+
+- (BOOL)isStock
+{
+    NSString *privacy = self.privacy.view;
+    return [privacy isEqualToString:VIMPrivacy_Stock];
 }
 
 // New
