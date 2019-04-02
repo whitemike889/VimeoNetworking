@@ -89,7 +89,7 @@ import Foundation
     @objc dynamic private var metadata: [String: Any]?
     @objc dynamic private var connections: [String: Any]?
     
-    public override func getObjectMapping() -> Any! {
+    public override func getObjectMapping() -> Any? {
         return [
             Constant.Key.Name : Constant.Value.Name,
             Constant.Key.Description : Constant.Value.Description,
@@ -100,7 +100,7 @@ import Foundation
         ]
     }
     
-    public override func getClassForObjectKey(_ key: String!) -> AnyClass? {
+    public override func getClassForObjectKey(_ key: String?) -> AnyClass? {
         switch key {
         case Constant.Key.User:
             return Constant.Class.User
@@ -117,7 +117,7 @@ import Foundation
         }
     }
     
-    public override func getClassForCollectionKey(_ key: String!) -> AnyClass! {
+    public override func getClassForCollectionKey(_ key: String?) -> AnyClass! {
         switch key {
         case Constant.Collections.Pictures:
             return Constant.Class.PictureCollection
