@@ -38,6 +38,7 @@
 /// - Interact: Interact with Vimeo resources, such as liking a video or following a member.
 /// - Upload: Upload videos.
 /// - Stats: Receive live-related statistics.
+/// - PromoCodes: Add, remove, and review Vimeo On Demand promotions.
 /// - VideoFiles: Access video files belonging to members with Vimeo PRO membership or higher.
 ///
 /// - Note: An authenticated access token with the `public` scope is identical to an unauthenticated access token,
@@ -53,6 +54,7 @@ public enum Scope: String, CaseIterable {
     case Interact = "interact"
     case Upload = "upload"
     case Stats = "stats"
+    case PromoCodes = "promo_codes"
     case VideoFiles = "video_files"
     
     /// Combines an array of scopes into a scope string as expected by the API.
