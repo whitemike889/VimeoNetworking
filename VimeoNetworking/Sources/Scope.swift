@@ -40,8 +40,8 @@
 /// - Stats: Receive live-related statistics.
 /// - VideoFiles: Access video files belonging to members with Vimeo PRO membership or higher.
 ///
-/// - Note: An authenticated access token with the `publi`c scope is identical to an unauthenticated access token,
-///         except that you can use the /me endpoint to refer to the currently logged-in user. Accessing /me with
+/// - Note: An authenticated access token with the `public` scope is identical to an unauthenticated access token,
+///         except that you can use the `/me` endpoint to refer to the currently logged-in user. Accessing `/me` with
 ///         an unauthenticated access token generates an error.
 public enum Scope: String, CaseIterable {
     case Public = "public"
