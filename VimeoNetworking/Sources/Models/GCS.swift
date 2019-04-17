@@ -1,9 +1,9 @@
 //
-//  VIMPrivacy.h
-//  VimeoNetworking
+//  GCS.swift
+//  Vimeo
 //
-//  Created by Kashif Muhammad on 9/24/14.
-//  Copyright (c) 2014-2015 Vimeo (https://vimeo.com)
+//  Created by Nguyen, Van on 11/8/18.
+//  Copyright © 2018 Vimeo. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,26 +24,26 @@
 //  THE SOFTWARE.
 //
 
-#import "VIMModelObject.h"
-
-extern NSString * __nonnull VIMPrivacy_Private;
-extern NSString * __nonnull VIMPrivacy_Select;
-extern NSString * __nonnull VIMPrivacy_Public;
-extern NSString * __nonnull VIMPrivacy_VOD;
-extern NSString * __nonnull VIMPrivacy_Following;
-extern NSString * __nonnull VIMPrivacy_Password;
-extern NSString * __nonnull VIMPrivacy_Unlisted;
-extern NSString * __nonnull VIMPrivacy_Disabled;
-extern NSString * __nonnull VIMPrivacy_Stock;
-
-@interface VIMPrivacy : VIMModelObject
-
-@property (nonatomic, copy, nullable) NSNumber *canAdd;
-@property (nonatomic, copy, nullable) NSNumber *canDownload;
-
-@property (nonatomic, copy, nullable) NSString *comments;
-@property (nonatomic, copy, nullable) NSString *embed;
-@property (nonatomic, copy, nullable) NSString *view;
-@property (nonatomic, copy, nullable) NSString *bypassToken;
-
-@end
+public class GCS: VIMModelObject {
+    public enum Connection: String {
+        case uploadAttempt = "upload_attempt"
+    }
+    
+    @objc public private(set) var startByte: NSNumber?
+    @objc public private(set) var endByte: NSNumber?
+    @objc public private(set) var uploadLink: String?
+    @objc internal private(set) var metadata: [String: Any]?
+    
+    public private(set) var connections = [Connection: VIMConnection]()
+    
+    override public func didFinishMapping() {
+        guard let metadata = self.metadata, let connections = metadata["connections"] as? [String: Any] else {
+            return
+        }
+        
+        let uploadAttemptDict = connections[Connection.uploadAttempt.rawValue] as? [String: Any]
+        let uploadAttemptConnection = VIMConnection(keyValueDictionary: uploadAttemptDict)
+        
+        self.connections[.uploadAttempt] = uploadAttemptConnection
+    }
+}
