@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 {
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     {
         // Override point for customization after application launch.
         let splitViewController = self.window!.rootViewController as! UISplitViewController
@@ -85,12 +85,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     
     // MARK: - URLs
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool
     {
         // This handles the redirect URL opened by Vimeo when you complete code grant authentication.
         // If your app isn't opening after you accept permissions on Vimeo, check that your app has the correct URL scheme registered.
-        // See the README for more information.
         
+        // See the README for more information.
         AuthenticationController(client: VimeoClient.defaultClient, appConfiguration: AppConfiguration.defaultConfiguration, configureSessionManagerBlock: nil).codeGrant(responseURL: url) { result in
             
             switch result
