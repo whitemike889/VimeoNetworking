@@ -38,7 +38,7 @@ class Request_ProgrammedContent: XCTestCase
                                                                           clientSecret: "{CLIENT_SECRET}",
                                                                           scopes: [.Public, .Private, .Purchased, .Create, .Edit, .Delete, .Interact, .Upload],
                                                                           keychainService: "com.vimeo.keychain_service",
-                                                                          apiVersion: "3.3.1"))
+                                                                          apiVersion: "3.3.1"), configureSessionManagerBlock: nil)
     }
     
     override func tearDown()

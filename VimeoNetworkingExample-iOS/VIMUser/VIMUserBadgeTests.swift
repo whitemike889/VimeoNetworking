@@ -38,7 +38,8 @@ class VIMUserBadgeTests: XCTestCase
                                                                                  clientSecret: "{CLIENT_SECRET}",
                                                                                  scopes: [.Public, .Private, .Purchased, .Create, .Edit, .Delete, .Interact, .Upload],
                                                                                  keychainService: "com.vimeo.keychain_service",
-                                                                                 apiVersion: "3.3.10"))
+                                                                                 apiVersion: "3.3.10"),
+                                                                                 configureSessionManagerBlock: nil)
     }
     
     override func tearDown()
@@ -64,7 +65,7 @@ class VIMUserBadgeTests: XCTestCase
             switch response
             {
             case .success(let result):
-                XCTAssertEqual(result.model.badge?.badgeType, expectedType)
+                XCTAssertEqual(result.model.membership?.badge?.badgeType, expectedType)
                 
             case .failure(let error):
                 XCTFail("\(error)")
