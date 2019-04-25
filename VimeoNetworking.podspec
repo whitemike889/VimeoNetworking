@@ -18,7 +18,8 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = "8.0"
   s.tvos.deployment_target = "9.0"
-
+  s.swift_version = "4.2"
+  
   s.requires_arc = true
   s.source = { :git => "https://github.com/vimeo/VimeoNetworking.git", :tag => s.version.to_s }
   s.source_files  = "VimeoNetworking/Sources/**/*.{h,m,swift}"
