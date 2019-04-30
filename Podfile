@@ -4,9 +4,9 @@ workspace 'VimeoNetworking'
 project 'VimeoNetworkingExample-iOS/VimeoNetworkingExample-iOS.xcodeproj'
 
 def shared_pods
-	pod 'AFNetworking', '3.1.0'
-	pod 'SwiftLint', '0.25.1'
-	pod 'VimeoNetworking', :path => '../VimeoNetworking'
+    pod 'AFNetworking', '3.1.0'
+    pod 'SwiftLint', '0.25.1'
+    pod 'VimeoNetworking', :path => '../VimeoNetworking'
 end
 
 target 'VimeoNetworkingExample-iOS' do

@@ -22,6 +22,7 @@
     "ios": "8.0",
     "tvos": "9.0"
   },
+  "swift_version": "4.2",
   "requires_arc": true,
   "source": {
     "git": "https://github.com/vimeo/VimeoNetworking.git",

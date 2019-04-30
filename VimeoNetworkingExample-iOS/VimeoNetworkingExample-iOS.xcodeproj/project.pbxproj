@@ -59,6 +59,8 @@
 		3CE06FA41ED5B49A007A1AFE /* VimeoSessionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE06FA21ED5B49A007A1AFE /* VimeoSessionManagerTests.swift */; };
 		3EA4C85D2098FFE7009F3D9B /* VIMUploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA4C85C2098FFE7009F3D9B /* VIMUploadTests.swift */; };
 		3EA4C85E2098FFE7009F3D9B /* VIMUploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA4C85C2098FFE7009F3D9B /* VIMUploadTests.swift */; };
+		5BAD88C02267D7B7007B401D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966F0EE81E09D55E0066DCF0 /* AppDelegate.swift */; };
+		5BAD88C12267D7BB007B401D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966F0EEA1E09D55E0066DCF0 /* ViewController.swift */; };
 		8E34023E1F67365A001544C4 /* VIMLiveQuotaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E34023D1F67365A001544C4 /* VIMLiveQuotaTests.swift */; };
 		8E3402401F673821001544C4 /* user_live.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E34023F1F673821001544C4 /* user_live.json */; };
 		8E49138D1FA786DA0061723A /* MockConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E49138C1FA786DA0061723A /* MockConstants.swift */; };
@@ -903,6 +905,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BAD88C12267D7BB007B401D /* ViewController.swift in Sources */,
+				5BAD88C02267D7B7007B401D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1025,7 +1029,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "VimeoNetworking-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1078,7 +1082,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "VimeoNetworking-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1089,7 +1093,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FC65466C3567E54B46169B9A /* Pods-VimeoNetworkingExample-iOS.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1099,7 +1102,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vimeo.VimeoNetworkingExample-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1107,7 +1109,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 128A8B3EE78B0F2F924E5E24 /* Pods-VimeoNetworkingExample-iOS.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1117,7 +1118,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vimeo.VimeoNetworkingExample-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1125,7 +1125,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7C94F08ECDA88F9FB4D6805A /* Pods-VimeoNetworkingExample-iOSTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "VimeoNetworkingExample-iOSTests/Info.plist";
@@ -1134,7 +1133,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1142,7 +1140,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 097D1643FEAE7486DB0CB7D6 /* Pods-VimeoNetworkingExample-iOSTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "VimeoNetworkingExample-iOSTests/Info.plist";
@@ -1150,7 +1147,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vimeo.VimeoNetworkingExample-iOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1158,7 +1154,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AAA8BDDF1F5FAC07D5EBE694 /* Pods-VimeoNetworkingExample-tvOS.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1169,7 +1164,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -1179,7 +1173,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DF211DD5EBB6830618D3328B /* Pods-VimeoNetworkingExample-tvOS.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1189,7 +1182,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "vimeo.VimeoNetworkingExample-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -1209,7 +1201,6 @@
 				SDKROOT = appletvos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Debug;
@@ -1226,7 +1217,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "vimeo.VimeoNetworkingExample-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				SWIFT_VERSION = 4.0;
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Release;
