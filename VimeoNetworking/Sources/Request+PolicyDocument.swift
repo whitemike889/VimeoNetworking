@@ -38,7 +38,7 @@ public extension Request {
      
      - returns: a new `Request`
      */
-    public static func getTermsOfServiceRequest() -> Request {
+    static func getTermsOfServiceRequest() -> Request {
         return Request(path: TermsOfServiceURI)
     }
 
@@ -47,7 +47,7 @@ public extension Request {
      
      - returns: a new `Request`
      */
-    public static func getPrivacyRequest() -> Request {
+    static func getPrivacyRequest() -> Request {
         return Request(path: PrivacyURI)
     }
 }

@@ -39,7 +39,7 @@ public extension Request {
      
      - returns: a new `Request`
      */
-    public static func getCinemaContentRequest() -> Request {
+    static func getCinemaContentRequest() -> Request {
         return Request(path: self.CinemaPath)
     }
 }

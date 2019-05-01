@@ -16,7 +16,7 @@ public extension Request {
      
      - returns: a new `Request`
      */
-    public static func postCommentRequest(forURI uri: String, text: String) -> Request {
+    static func postCommentRequest(forURI uri: String, text: String) -> Request {
         let parameters = ["text": text]
         
         return Request(method: .POST, path: uri, parameters: parameters)
