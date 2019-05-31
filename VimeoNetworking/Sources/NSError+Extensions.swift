@@ -36,12 +36,12 @@ public enum VimeoErrorKey: String {
 /// Convenience methods used to parse `NSError`s returned by Vimeo api responses
 @objc public extension NSError {
         /// Returns true if the error is a 503 Service Unavailable error
-    public var isServiceUnavailableError: Bool {
+    var isServiceUnavailableError: Bool {
         return self.statusCode == HTTPStatusCode.serviceUnavailable.rawValue
     }
     
         /// Returns true if the error is due to an invalid access token
-    public var isInvalidTokenError: Bool {
+    var isInvalidTokenError: Bool {
         if let urlResponse = self.userInfo[AFNetworkingOperationFailingURLResponseErrorKey] as? HTTPURLResponse, urlResponse.statusCode == HTTPStatusCode.unauthorized.rawValue {
             if let header = urlResponse.allHeaderFields["Www-Authenticate"] as? String, header == "Bearer error=\"invalid_token\"" {
                 return true
@@ -161,7 +161,7 @@ public enum VimeoErrorKey: String {
     }
     
         /// Returns the status code of the failing response, if available
-    @nonobjc public var statusCode: Int? {
+    @nonobjc var statusCode: Int? {
         if let response = self.userInfo[AFNetworkingOperationFailingURLResponseErrorKey] as? HTTPURLResponse {
             return response.statusCode
         }
@@ -170,7 +170,7 @@ public enum VimeoErrorKey: String {
     }
     
         /// Returns the api error code of the failing response, if available
-    @nonobjc public var vimeoServerErrorCode: Int? {
+    @nonobjc var vimeoServerErrorCode: Int? {
         if let errorCode = (self.userInfo[Constants.VimeoErrorCodeKeyLegacy] as? Int) {
             return errorCode
         }
@@ -189,7 +189,7 @@ public enum VimeoErrorKey: String {
     }
     
         /// Returns the invalid parameters of the failing response, if available
-    public var vimeoInvalidParametersErrorCodes: [Int] {
+    var vimeoInvalidParametersErrorCodes: [Int] {
         var errorCodes: [Int] = []
         
         if let json = self.errorResponseBodyJSON, let invalidParameters = json[Constants.VimeoInvalidParametersKey] as? [[String: Any]] {
@@ -204,7 +204,7 @@ public enum VimeoErrorKey: String {
     }
     
         /// Returns the api error JSON dictionary, if available
-    public var errorResponseBodyJSON: [String: Any]? {
+    var errorResponseBodyJSON: [String: Any]? {
         if let data = self.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] as? Data {
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
@@ -220,12 +220,12 @@ public enum VimeoErrorKey: String {
     }
     
         /// Returns the first error code from the api error JSON dictionary if it exists, otherwise returns NSNotFound
-    public var vimeoInvalidParametersFirstErrorCode: Int {
+    var vimeoInvalidParametersFirstErrorCode: Int {
         return self.vimeoInvalidParametersErrorCodes.first ?? NSNotFound
     }
     
         /// Returns the user message from the api error JSON dictionary if it exists
-    public var vimeoInvalidParametersFirstVimeoUserMessage: String? {
+    var vimeoInvalidParametersFirstVimeoUserMessage: String? {
         guard let json = self.errorResponseBodyJSON, let invalidParameters = json[Constants.VimeoInvalidParametersKey] as? [AnyObject] else {
             return nil
         }
@@ -234,7 +234,7 @@ public enum VimeoErrorKey: String {
     }
     
         /// Returns an underscore separated string of all the error codes in the the api error JSON dictionary if any exist, otherwise returns nil
-    public var vimeoInvalidParametersErrorCodesString: String? {
+    var vimeoInvalidParametersErrorCodesString: String? {
         let errorCodes = self.vimeoInvalidParametersErrorCodes
         
         guard errorCodes.count > 0 else {
@@ -251,7 +251,7 @@ public enum VimeoErrorKey: String {
     }
     
         /// Returns the "error" key from the api error JSON dictionary if it exists, otherwise returns nil
-    public var vimeoUserMessage: String? {
+    var vimeoUserMessage: String? {
         guard let json = self.errorResponseBodyJSON else {
             return nil
         }
@@ -260,7 +260,7 @@ public enum VimeoErrorKey: String {
     }
     
         /// Returns the "developer_message" key from the api error JSON dictionary if it exists, otherwise returns nil
-    public var vimeoDeveloperMessage: String? {
+    var vimeoDeveloperMessage: String? {
         guard let json = self.errorResponseBodyJSON else {
             return nil
         }

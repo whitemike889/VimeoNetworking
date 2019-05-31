@@ -44,7 +44,7 @@ public extension Request {
      
      - returns: a new `Request`
      */
-    public static func getChannelRequest(forChannelURI channelURI: String) -> Request {
+    static func getChannelRequest(forChannelURI channelURI: String) -> Request {
         return Request(path: channelURI)
     }
     
@@ -56,7 +56,7 @@ public extension Request {
      
      - returns: a new `Request`
      */
-    public static func queryChannels(withQuery query: String, refinements: VimeoClient.RequestParametersDictionary? = nil) -> Request {
+    static func queryChannels(withQuery query: String, refinements: VimeoClient.RequestParametersDictionary? = nil) -> Request {
         var parameters = refinements ?? [:]
         
         parameters[self.QueryKey] = query

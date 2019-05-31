@@ -48,7 +48,7 @@ public extension Request {
      
      - returns: a new `Request`
      */
-    public static func videoRequest(forVideoURI videoURI: String) -> Request {
+    static func videoRequest(forVideoURI videoURI: String) -> Request {
         return Request(path: videoURI)
     }
     
@@ -90,7 +90,7 @@ public extension Request {
      
      - returns: a new `Request`
      */
-    public static func queryVideos(withQuery query: String, refinements: VimeoClient.RequestParametersDictionary? = nil) -> Request {
+    static func queryVideos(withQuery query: String, refinements: VimeoClient.RequestParametersDictionary? = nil) -> Request {
         var parameters = refinements ?? [:]
         
         parameters[self.QueryKey] = query
@@ -108,7 +108,7 @@ public extension Request {
      
      - returns: a new `Request`
      */
-    public static func patchVideoRequest(withVideoURI videoURI: String, parameters: VimeoClient.RequestParametersDictionary) -> Request {
+    static func patchVideoRequest(withVideoURI videoURI: String, parameters: VimeoClient.RequestParametersDictionary) -> Request {
         return Request(method: .PATCH, path: videoURI, parameters: parameters)
     }
     
@@ -119,7 +119,7 @@ public extension Request {
      
      - returns: a new `Request`
      */
-    public static func deleteVideoRequest(forVideoURI videoURI: String) -> Request {
+    static func deleteVideoRequest(forVideoURI videoURI: String) -> Request {
         return Request(method: .DELETE, path: videoURI)
     }
 }

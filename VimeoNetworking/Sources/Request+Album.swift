@@ -35,7 +35,7 @@ public extension Request {
     ///
     /// - Parameter uri: The album's URI.
     /// - Returns: Returns a new `Request` for an individual album.
-    public static func albumRequest(for uri: String) -> Request {
+    static func albumRequest(for uri: String) -> Request {
         return Request(path: uri)
     }
 }

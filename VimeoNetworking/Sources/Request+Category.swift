@@ -42,7 +42,7 @@ public extension Request {
      
      - returns: a new `Request`
      */
-    public static func getCategoryRequest(forCategoryURI categoryURI: String) -> Request {
+    static func getCategoryRequest(forCategoryURI categoryURI: String) -> Request {
         return Request(path: categoryURI)
     }
     
@@ -51,7 +51,7 @@ public extension Request {
      
      - returns: a new `Request`
      */
-    public static func getCategoriesRequest() -> Request {
+    static func getCategoriesRequest() -> Request {
         return Request(path: self.CategoriesPath)
     }
 }

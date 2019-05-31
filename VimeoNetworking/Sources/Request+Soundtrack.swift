@@ -37,7 +37,7 @@ public extension Request {
      
      - returns: a constructed `Request`
      */
-    public static func getSoundtrackListRequest() -> Request {
+    static func getSoundtrackListRequest() -> Request {
         return self.getSoundtrackListRequest(forSoundtracksURI: self.SoundtracksURI)
     }
     
@@ -48,7 +48,7 @@ public extension Request {
      
      - returns: a constructed `Request`
      */
-    public static func getSoundtrackListRequest(forSoundtracksURI soundtracksURI: String) -> Request {
+    static func getSoundtrackListRequest(forSoundtracksURI soundtracksURI: String) -> Request {
         return Request(path: soundtracksURI)
     }
 }
