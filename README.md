@@ -10,6 +10,9 @@
 - tvOS (9.0+)
 
 ## Installing
+
+### Cocoapods
+
 To get started add the following to your Podfile:
 
 ```Ruby
@@ -18,6 +21,14 @@ use_frameworks!
 target 'YourTarget' do
     pod 'VimeoNetworking'
 end
+```
+
+### Carthage
+
+Add the following to your Cartfile:
+
+```
+github "vimeo/VimeoNetworking"
 ```
 
 You can optionally specify a version number, or point directly to our `develop` branch. Note that breaking changes may be introduced into `develop` at any time, but those changes will always be behind a major or minor release version number.
