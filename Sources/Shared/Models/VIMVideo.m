@@ -24,6 +24,7 @@
 //  THE SOFTWARE.
 //
 
+#import <VimeoNetworking/VimeoNetworking-Swift.h>
 #import "VIMVideo.h"
 #import "VIMObjectMapper.h"
 #import "VIMUser.h"
@@ -38,7 +39,6 @@
 #import "VIMCategory.h"
 #import "VIMVideoPlayRepresentation.h"
 #import "VIMVideoDRMFiles.h"
-#import <VimeoNetworking/VimeoNetworking-Swift.h>
 
 NSString *VIMContentRating_Language = @"language";
 NSString *VIMContentRating_Drugs = @"drugs";

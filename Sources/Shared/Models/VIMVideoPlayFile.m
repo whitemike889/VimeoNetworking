@@ -24,8 +24,8 @@
 //  THE SOFTWARE.
 //
 
-#import "VIMVideoPlayFile.h"
 #import <VimeoNetworking/VimeoNetworking-Swift.h>
+#import "VIMVideoPlayFile.h"
 
 @interface VIMVideoPlayFile()
 

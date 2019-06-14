@@ -24,6 +24,7 @@
 //  THE SOFTWARE.
 //
 
+#import <VimeoNetworking/VimeoNetworking-Swift.h>
 #import "VIMObjectMapper.h"
 #import "VIMUser.h"
 #import "VIMNotificationsConnection.h"
@@ -32,7 +33,6 @@
 #import "VIMPicture.h"
 #import "VIMPreference.h"
 #import "VIMUserBadge.h"
-#import <VimeoNetworking/VimeoNetworking-Swift.h>
 
 static NSString *const Basic = @"basic";
 static NSString *const Plus = @"plus";

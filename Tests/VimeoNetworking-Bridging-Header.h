@@ -27,6 +27,7 @@
 #ifndef VimeoNetworking_Bridging_Header_h
 #define VimeoNetworking_Bridging_Header_h
 
-#import "VimeoNetworking-Bridging-Header.h"
+@import AFNetworking;
+@import VimeoNetworking;
 
 #endif /* VimeoNetworking_Bridging_Header_h */

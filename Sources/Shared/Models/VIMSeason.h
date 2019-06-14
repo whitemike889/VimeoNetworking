@@ -6,7 +6,10 @@
 //
 //
 
-#import <VimeoNetworking/VimeoNetworking.h>
+#import "VIMModelObject.h"
+
+@class VIMConnection;
+@class VIMInteraction;
 
 @interface VIMSeason : VIMModelObject
 

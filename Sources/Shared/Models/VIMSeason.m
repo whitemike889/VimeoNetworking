@@ -7,6 +7,8 @@
 //
 
 #import "VIMSeason.h"
+#import "VIMConnection.h"
+#import "VIMInteraction.h"
 
 @interface VIMSeason ()
 

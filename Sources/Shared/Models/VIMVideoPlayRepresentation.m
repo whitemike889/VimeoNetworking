@@ -25,12 +25,12 @@
 //
 
 
+#import <VimeoNetworking/VimeoNetworking-Swift.h>
 #import "VIMVideoPlayRepresentation.h"
 #import "VIMVideoHLSFile.h"
 #import "VIMVideoDASHFile.h"
 #import "VIMVideoDRMFiles.h"
 #import "VIMVideoProgressiveFile.h"
-#import <VimeoNetworking/VimeoNetworking-Swift.h>
 
 @interface VIMVideoPlayRepresentation()
 

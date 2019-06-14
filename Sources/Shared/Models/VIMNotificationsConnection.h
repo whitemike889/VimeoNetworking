@@ -6,7 +6,7 @@
 //
 //
 
-#import <VimeoNetworking/VimeoNetworking.h>
+#import "VIMConnection.h"
 
 @interface VIMNotificationsConnection : VIMConnection
 
