@@ -15,6 +15,28 @@
 		3D9C433522746323000A6585 /* VimeoNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3D9C429022745894000A6585 /* VimeoNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4AD0BCD898399961B5790FFC /* Pods_VimeoNetworking_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BAD369BFCC3CEF589D35432 /* Pods_VimeoNetworking_iOSTests.framework */; };
 		4CB087F111E5E70DE3AE1224 /* Pods_VimeoNetworking_macOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4DF74D74981B74B36EB9125 /* Pods_VimeoNetworking_macOSTests.framework */; };
+		5B1AE5C822B5AA1400FE120E /* NSErrorExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF2B822B41C90007F2416 /* NSErrorExtensionTests.swift */; };
+		5B1AE5C922B5AA1400FE120E /* VIMLiveHeartbeatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF2BA22B41C90007F2416 /* VIMLiveHeartbeatTests.swift */; };
+		5B1AE5CA22B5AA1400FE120E /* FileTransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF2BB22B41C90007F2416 /* FileTransferTests.swift */; };
+		5B1AE5CB22B5AA1400FE120E /* GCSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF2BC22B41C90007F2416 /* GCSTests.swift */; };
+		5B1AE5CC22B5AA1400FE120E /* VimeoSessionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF2BD22B41C90007F2416 /* VimeoSessionManagerTests.swift */; };
+		5B1AE5CD22B5AA1400FE120E /* VIMLiveQuotaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF2BE22B41C90007F2416 /* VIMLiveQuotaTests.swift */; };
+		5B1AE5CE22B5AA1400FE120E /* VimeoClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF2BF22B41C90007F2416 /* VimeoClientTests.swift */; };
+		5B1AE5CF22B5AA1400FE120E /* ModelObjectValidationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF2C022B41C90007F2416 /* ModelObjectValidationTests.swift */; };
+		5B1AE5D022B5AA1400FE120E /* FakeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF2C122B41C90007F2416 /* FakeDataSource.swift */; };
+		5B1AE5D122B5AA1400FE120E /* UploadGCSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF2C222B41C90007F2416 /* UploadGCSTests.swift */; };
+		5B1AE5D222B5AA1400FE120E /* VIMLiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF2C322B41C90007F2416 /* VIMLiveTests.swift */; };
+		5B1AE5D322B5AA1500FE120E /* NSErrorExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF2B822B41C90007F2416 /* NSErrorExtensionTests.swift */; };
+		5B1AE5D422B5AA1500FE120E /* VIMLiveHeartbeatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF2BA22B41C90007F2416 /* VIMLiveHeartbeatTests.swift */; };
+		5B1AE5D522B5AA1500FE120E /* FileTransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF2BB22B41C90007F2416 /* FileTransferTests.swift */; };
+		5B1AE5D622B5AA1500FE120E /* GCSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF2BC22B41C90007F2416 /* GCSTests.swift */; };
+		5B1AE5D722B5AA1500FE120E /* VimeoSessionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF2BD22B41C90007F2416 /* VimeoSessionManagerTests.swift */; };
+		5B1AE5D822B5AA1500FE120E /* VIMLiveQuotaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF2BE22B41C90007F2416 /* VIMLiveQuotaTests.swift */; };
+		5B1AE5D922B5AA1500FE120E /* VimeoClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF2BF22B41C90007F2416 /* VimeoClientTests.swift */; };
+		5B1AE5DA22B5AA1500FE120E /* ModelObjectValidationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF2C022B41C90007F2416 /* ModelObjectValidationTests.swift */; };
+		5B1AE5DB22B5AA1500FE120E /* FakeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF2C122B41C90007F2416 /* FakeDataSource.swift */; };
+		5B1AE5DC22B5AA1500FE120E /* UploadGCSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF2C222B41C90007F2416 /* UploadGCSTests.swift */; };
+		5B1AE5DD22B5AA1500FE120E /* VIMLiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF2C322B41C90007F2416 /* VIMLiveTests.swift */; };
 		5B1DF0C322B409B5007F2416 /* digicert-sha2.cer in Resources */ = {isa = PBXBuildFile; fileRef = 5B1DF01C22B409B5007F2416 /* digicert-sha2.cer */; };
 		5B1DF0C422B409B5007F2416 /* digicert-sha2.cer in Resources */ = {isa = PBXBuildFile; fileRef = 5B1DF01C22B409B5007F2416 /* digicert-sha2.cer */; };
 		5B1DF2A022B409B5007F2416 /* Request+Trigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF0BE22B409B5007F2416 /* Request+Trigger.swift */; };
@@ -1129,6 +1151,17 @@
 		5B1DF2A422B41C90007F2416 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				5B1DF2B822B41C90007F2416 /* NSErrorExtensionTests.swift */,
+				5B1DF2BA22B41C90007F2416 /* VIMLiveHeartbeatTests.swift */,
+				5B1DF2BB22B41C90007F2416 /* FileTransferTests.swift */,
+				5B1DF2BC22B41C90007F2416 /* GCSTests.swift */,
+				5B1DF2BD22B41C90007F2416 /* VimeoSessionManagerTests.swift */,
+				5B1DF2BE22B41C90007F2416 /* VIMLiveQuotaTests.swift */,
+				5B1DF2BF22B41C90007F2416 /* VimeoClientTests.swift */,
+				5B1DF2C022B41C90007F2416 /* ModelObjectValidationTests.swift */,
+				5B1DF2C122B41C90007F2416 /* FakeDataSource.swift */,
+				5B1DF2C222B41C90007F2416 /* UploadGCSTests.swift */,
+				5B1DF2C322B41C90007F2416 /* VIMLiveTests.swift */,
 				5B1DF2B922B41C90007F2416 /* MockConstants.swift */,
 				5B1DF2A522B41C90007F2416 /* RequestTests.swift */,
 				5B1DF2A622B41C90007F2416 /* VIMCategory+Tests.swift */,
@@ -1154,17 +1187,6 @@
 		5B1DF2B622B41C90007F2416 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				5B1DF2B822B41C90007F2416 /* NSErrorExtensionTests.swift */,
-				5B1DF2BA22B41C90007F2416 /* VIMLiveHeartbeatTests.swift */,
-				5B1DF2BB22B41C90007F2416 /* FileTransferTests.swift */,
-				5B1DF2BC22B41C90007F2416 /* GCSTests.swift */,
-				5B1DF2BD22B41C90007F2416 /* VimeoSessionManagerTests.swift */,
-				5B1DF2BE22B41C90007F2416 /* VIMLiveQuotaTests.swift */,
-				5B1DF2BF22B41C90007F2416 /* VimeoClientTests.swift */,
-				5B1DF2C022B41C90007F2416 /* ModelObjectValidationTests.swift */,
-				5B1DF2C122B41C90007F2416 /* FakeDataSource.swift */,
-				5B1DF2C222B41C90007F2416 /* UploadGCSTests.swift */,
-				5B1DF2C322B41C90007F2416 /* VIMLiveTests.swift */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -2568,14 +2590,25 @@
 				5B1DF2E522B41C90007F2416 /* VIMUserTests.swift in Sources */,
 				5B1DF30022B41C90007F2416 /* ObjectMappingTestUtilities.swift in Sources */,
 				5B1DF30922B41C90007F2416 /* ScopeTests.swift in Sources */,
+				5B1AE5C822B5AA1400FE120E /* NSErrorExtensionTests.swift in Sources */,
 				5B1DF30F22B41C90007F2416 /* AlbumTests.swift in Sources */,
+				5B1AE5CC22B5AA1400FE120E /* VimeoSessionManagerTests.swift in Sources */,
+				5B1AE5C922B5AA1400FE120E /* VIMLiveHeartbeatTests.swift in Sources */,
+				5B1AE5CD22B5AA1400FE120E /* VIMLiveQuotaTests.swift in Sources */,
 				5B1DF2F422B41C90007F2416 /* VIMUserBadgeTests.swift in Sources */,
 				5B1DF2FD22B41C90007F2416 /* VIMVideoTests.swift in Sources */,
+				5B1AE5D222B5AA1400FE120E /* VIMLiveTests.swift in Sources */,
+				5B1AE5D022B5AA1400FE120E /* FakeDataSource.swift in Sources */,
 				5B1DF2FA22B41C90007F2416 /* Dictionary+ExtensionTests.swift in Sources */,
+				5B1AE5CB22B5AA1400FE120E /* GCSTests.swift in Sources */,
+				5B1AE5CF22B5AA1400FE120E /* ModelObjectValidationTests.swift in Sources */,
 				5B1DF30C22B41C90007F2416 /* VIMQuantityQuota+Tests.swift in Sources */,
 				5B1DF2E822B41C90007F2416 /* ExceptionCatcherTests.swift in Sources */,
 				5B1DF2EB22B41C90007F2416 /* VIMUploadQuota+Tests.swift in Sources */,
 				5B1DF30622B41C90007F2416 /* Request+CategoryTests.swift in Sources */,
+				5B1AE5CE22B5AA1400FE120E /* VimeoClientTests.swift in Sources */,
+				5B1AE5CA22B5AA1400FE120E /* FileTransferTests.swift in Sources */,
+				5B1AE5D122B5AA1400FE120E /* UploadGCSTests.swift in Sources */,
 				5B5EEF1D22B425C9005C66BE /* MockConstants.swift in Sources */,
 				5B1DF2F122B41C90007F2416 /* Request+ProgrammedContent.swift in Sources */,
 				5B1DF2DF22B41C90007F2416 /* RequestTests.swift in Sources */,
@@ -2593,14 +2626,25 @@
 				5B1DF2E622B41C90007F2416 /* VIMUserTests.swift in Sources */,
 				5B1DF30122B41C90007F2416 /* ObjectMappingTestUtilities.swift in Sources */,
 				5B1DF30A22B41C90007F2416 /* ScopeTests.swift in Sources */,
+				5B1AE5D322B5AA1500FE120E /* NSErrorExtensionTests.swift in Sources */,
 				5B1DF31022B41C90007F2416 /* AlbumTests.swift in Sources */,
+				5B1AE5D722B5AA1500FE120E /* VimeoSessionManagerTests.swift in Sources */,
+				5B1AE5D422B5AA1500FE120E /* VIMLiveHeartbeatTests.swift in Sources */,
+				5B1AE5D822B5AA1500FE120E /* VIMLiveQuotaTests.swift in Sources */,
 				5B1DF2F522B41C90007F2416 /* VIMUserBadgeTests.swift in Sources */,
 				5B1DF2FE22B41C90007F2416 /* VIMVideoTests.swift in Sources */,
+				5B1AE5DD22B5AA1500FE120E /* VIMLiveTests.swift in Sources */,
+				5B1AE5DB22B5AA1500FE120E /* FakeDataSource.swift in Sources */,
 				5B1DF2FB22B41C90007F2416 /* Dictionary+ExtensionTests.swift in Sources */,
+				5B1AE5D622B5AA1500FE120E /* GCSTests.swift in Sources */,
+				5B1AE5DA22B5AA1500FE120E /* ModelObjectValidationTests.swift in Sources */,
 				5B1DF30D22B41C90007F2416 /* VIMQuantityQuota+Tests.swift in Sources */,
 				5B1DF2E922B41C90007F2416 /* ExceptionCatcherTests.swift in Sources */,
 				5B1DF2EC22B41C90007F2416 /* VIMUploadQuota+Tests.swift in Sources */,
 				5B1DF30722B41C90007F2416 /* Request+CategoryTests.swift in Sources */,
+				5B1AE5D922B5AA1500FE120E /* VimeoClientTests.swift in Sources */,
+				5B1AE5D522B5AA1500FE120E /* FileTransferTests.swift in Sources */,
+				5B1AE5DC22B5AA1500FE120E /* UploadGCSTests.swift in Sources */,
 				5B5EEF1E22B425CA005C66BE /* MockConstants.swift in Sources */,
 				5B1DF2F222B41C90007F2416 /* Request+ProgrammedContent.swift in Sources */,
 				5B1DF2E022B41C90007F2416 /* RequestTests.swift in Sources */,
