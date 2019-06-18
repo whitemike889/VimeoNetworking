@@ -6,7 +6,7 @@
 //
 //
 
-import UIKit
+import UIKit.UIDevice
 
 extension Request {
     private static var TriggersURI: String { return "/triggers" }
