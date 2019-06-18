@@ -26,7 +26,7 @@
 
 @import Foundation;
 
-#if TARGET_OS_IPHONE || TARGET_OS_IOS
+#if TARGET_OS_IPHONE || TARGET_OS_TVOS
 @import UIKit;
 #elif TARGET_OS_MAC
 @import AppKit;
