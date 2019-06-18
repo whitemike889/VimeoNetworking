@@ -1,30 +1,39 @@
 use_frameworks!
 
 workspace 'VimeoNetworking'
-project 'VimeoNetworkingExample-iOS/VimeoNetworkingExample-iOS.xcodeproj'
+project 'VimeoNetworking.xcodeproj'
 
 def shared_pods
     pod 'AFNetworking', '3.1.0'
-    pod 'SwiftLint', '0.25.1'
-    pod 'VimeoNetworking', :path => './'
+    pod 'SwiftLint', '0.25.1'    
 end
 
-target 'VimeoNetworkingExample-iOS' do
-    platform :ios, '8.0'
+target 'VimeoNetworking-iOS' do
+    platform :ios, '9.0'
     shared_pods
 
-    target 'VimeoNetworkingExample-iOSTests' do
-    	inherit! :search_paths
+    target 'VimeoNetworking-iOSTests' do
+        inherit! :search_paths
         pod 'OHHTTPStubs/Swift', '6.0.0'
-	end
+    end
 end
 
-target 'VimeoNetworkingExample-tvOS' do
+target 'VimeoNetworking-tvOS' do
     platform :tvos, '9.0'
     shared_pods
 
-    target 'VimeoNetworkingExample-tvOSTests' do
-    	inherit! :search_paths
+    target 'VimeoNetworking-tvOSTests' do
+        inherit! :search_paths
         pod 'OHHTTPStubs/Swift', '6.0.0'
-	end
+    end
+end
+
+target 'VimeoNetworking-macOS' do
+    platform :macos, '10.11'
+    shared_pods
+
+    target 'VimeoNetworking-macOSTests' do
+        inherit! :search_paths
+        pod 'OHHTTPStubs/Swift', '6.0.0'
+    end
 end
