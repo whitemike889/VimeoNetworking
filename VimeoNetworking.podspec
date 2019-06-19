@@ -33,4 +33,15 @@ Pod::Spec.new do |s|
 
   s.dependency 'AFNetworking', '3.1.0'
 
+  s.test_spec 'Tests' do |test_spec|
+
+    test_spec.source_files            = "Tests/Shared/**/*.{h,m,swift}"
+    test_spec.ios.source_files        = "Tests/iOS/**/*.{h,m,swift}"
+    test_spec.tvos.source_files       = "Tests/tvOS/**/*.{h,m,swift}"
+    test_spec.osx.source_files        = "Tests/macOS/**/*.{h,m,swift}"
+    test_spec.resources               = "Tests/Fixtures/**/*.*"        
+    
+    test_spec.dependency 'OHHTTPStubs/Swift'
+  end  
+
 end
