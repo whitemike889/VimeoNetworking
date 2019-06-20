@@ -1,6 +1,0 @@
-framework module Pods_VimeoNetworking_iOSTests {
-  umbrella header "Pods-VimeoNetworking-iOSTests-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -13,7 +13,6 @@ target 'VimeoNetworking-iOS' do
     shared_pods
 
     target 'VimeoNetworking-iOSTests' do
-        inherit! :search_paths
         pod 'OHHTTPStubs/Swift', '6.0.0'
     end
 end
@@ -23,7 +22,6 @@ target 'VimeoNetworking-tvOS' do
     shared_pods
 
     target 'VimeoNetworking-tvOSTests' do
-        inherit! :search_paths
         pod 'OHHTTPStubs/Swift', '6.0.0'
     end
 end
@@ -33,7 +31,6 @@ target 'VimeoNetworking-macOS' do
     shared_pods
 
     target 'VimeoNetworking-macOSTests' do
-        inherit! :search_paths
         pod 'OHHTTPStubs/Swift', '6.0.0'
     end
 end

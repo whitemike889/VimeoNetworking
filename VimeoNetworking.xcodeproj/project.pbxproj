@@ -12,6 +12,7 @@
 		3D9C431622746198000A6585 /* VimeoNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D9C42C522745A07000A6585 /* VimeoNetworking.framework */; };
 		3D9C433422746323000A6585 /* VimeoNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D9C429022745894000A6585 /* VimeoNetworking.framework */; };
 		3D9C433522746323000A6585 /* VimeoNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3D9C429022745894000A6585 /* VimeoNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3FDC7726C3EFB23554D8DF64 /* Pods_VimeoNetworking_iOS_VimeoNetworking_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 158B988D424EB6C535458B0D /* Pods_VimeoNetworking_iOS_VimeoNetworking_iOSTests.framework */; };
 		5B1AE5C822B5AA1400FE120E /* NSErrorExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF2B822B41C90007F2416 /* NSErrorExtensionTests.swift */; };
 		5B1AE5C922B5AA1400FE120E /* VIMLiveHeartbeatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF2BA22B41C90007F2416 /* VIMLiveHeartbeatTests.swift */; };
 		5B1AE5CA22B5AA1400FE120E /* FileTransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF2BB22B41C90007F2416 /* FileTransferTests.swift */; };
@@ -662,10 +663,9 @@
 		5B5EF1E822B441A4005C66BE /* Request+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5EF00B22B441A3005C66BE /* Request+Notifications.swift */; };
 		6112CE4D14CBAE2830277237 /* Pods_VimeoNetworking_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8171CFD62581A7E01FA7F20A /* Pods_VimeoNetworking_macOS.framework */; };
 		6763FC6AC9229A327C0B02E5 /* Pods_VimeoNetworking_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CF820088079D151C032EF1F /* Pods_VimeoNetworking_iOS.framework */; };
-		79EA51AC3DEE47CC6F0B84CB /* Pods_VimeoNetworking_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 251CC0542C0A123E837BF8FB /* Pods_VimeoNetworking_iOSTests.framework */; };
-		7BAD248071222205E060D0D8 /* Pods_VimeoNetworking_macOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F01D916BB5FF6B2842E2BDEB /* Pods_VimeoNetworking_macOSTests.framework */; };
 		84E9397C26F15256BD29F3B2 /* Pods_VimeoNetworking_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A02775E0A3C18277E22F14E /* Pods_VimeoNetworking_tvOS.framework */; };
-		CD6733AEF1A2AB8F416F02AB /* Pods_VimeoNetworking_tvOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 812C7A2F86B275D959F4AC12 /* Pods_VimeoNetworking_tvOSTests.framework */; };
+		C106ABCE0093E69E63F6FFAE /* Pods_VimeoNetworking_tvOS_VimeoNetworking_tvOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E698E7C8405B282A29945AB /* Pods_VimeoNetworking_tvOS_VimeoNetworking_tvOSTests.framework */; };
+		C26CC970ECE5EC1C93DA867A /* Pods_VimeoNetworking_macOS_VimeoNetworking_macOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B16FD7A5F861DED3E10B4C /* Pods_VimeoNetworking_macOS_VimeoNetworking_macOSTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -715,7 +715,9 @@
 
 /* Begin PBXFileReference section */
 		031A8B176FB5D2CAC058EC9D /* Pods-VimeoNetworking-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-macOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-VimeoNetworking-macOS/Pods-VimeoNetworking-macOS.release.xcconfig"; sourceTree = "<group>"; };
-		251CC0542C0A123E837BF8FB /* Pods_VimeoNetworking_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimeoNetworking_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		158B988D424EB6C535458B0D /* Pods_VimeoNetworking_iOS_VimeoNetworking_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimeoNetworking_iOS_VimeoNetworking_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C2DA8F42F19ED990D683C9F /* Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests/Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1E698E7C8405B282A29945AB /* Pods_VimeoNetworking_tvOS_VimeoNetworking_tvOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimeoNetworking_tvOS_VimeoNetworking_tvOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D9C429022745894000A6585 /* VimeoNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VimeoNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D9C42A92274599D000A6585 /* VimeoNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VimeoNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D9C42C522745A07000A6585 /* VimeoNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VimeoNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -724,6 +726,7 @@
 		3D9C431122746198000A6585 /* VimeoNetworking-macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "VimeoNetworking-macOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D9C43212274629B000A6585 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41701DF6B1A49CDB08C6F7ED /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A0050D1260FEAB130E9788C /* Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests/Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		4A02775E0A3C18277E22F14E /* Pods_VimeoNetworking_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimeoNetworking_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C27423689A5D72227FB2398 /* Pods-VimeoNetworking-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-tvOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-VimeoNetworking-tvOS/Pods-VimeoNetworking-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		5B1DF01C22B409B5007F2416 /* digicert-sha2.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = "digicert-sha2.cer"; sourceTree = "<group>"; };
@@ -953,17 +956,20 @@
 		5CF820088079D151C032EF1F /* Pods_VimeoNetworking_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimeoNetworking_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6401328E3C54DF0172D5991E /* Pods-VimeoNetworking-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VimeoNetworking-iOSTests/Pods-VimeoNetworking-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		7A7B4CFD7BDD2099CFF8156B /* Pods-VimeoNetworking-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VimeoNetworking-tvOSTests/Pods-VimeoNetworking-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		812C7A2F86B275D959F4AC12 /* Pods_VimeoNetworking_tvOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimeoNetworking_tvOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8171CFD62581A7E01FA7F20A /* Pods_VimeoNetworking_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimeoNetworking_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		87E175291EC5A769641C2C79 /* Pods-VimeoNetworking-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VimeoNetworking-tvOS/Pods-VimeoNetworking-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		A07E591D0C1317BFB1D4B11B /* Pods-VimeoNetworking-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-macOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VimeoNetworking-macOS/Pods-VimeoNetworking-macOS.debug.xcconfig"; sourceTree = "<group>"; };
 		A90814A4F28BB5D6D220FCED /* Pods-VimeoNetworking-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VimeoNetworking-iOSTests/Pods-VimeoNetworking-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B4AB5C28C44629F38D8469DC /* Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests/Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		B7E6076D000644B313515D10 /* Pods-VimeoNetworking-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-VimeoNetworking-iOS/Pods-VimeoNetworking-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		BFA9E35CF9D1E9F3BBD4892D /* Pods-VimeoNetworking-macOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-macOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VimeoNetworking-macOSTests/Pods-VimeoNetworking-macOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D7EA5E1364221292793EFB06 /* Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests/Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DD74CE831D75ADBFB4328F50 /* Pods-VimeoNetworking-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VimeoNetworking-iOS/Pods-VimeoNetworking-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		E57001F6C24354B0BC819CCB /* Pods-VimeoNetworking-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VimeoNetworking-tvOSTests/Pods-VimeoNetworking-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		F01D916BB5FF6B2842E2BDEB /* Pods_VimeoNetworking_macOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimeoNetworking_macOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F11874EC064A7004C073EA2B /* Pods-VimeoNetworking-macOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-macOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VimeoNetworking-macOSTests/Pods-VimeoNetworking-macOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		F2BE435E228967EC5676AC93 /* Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests/Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F8B16FD7A5F861DED3E10B4C /* Pods_VimeoNetworking_macOS_VimeoNetworking_macOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimeoNetworking_macOS_VimeoNetworking_macOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA66DB41325C6064A8C6E242 /* Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests/Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -996,7 +1002,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D9C42F62274604A000A6585 /* VimeoNetworking.framework in Frameworks */,
-				79EA51AC3DEE47CC6F0B84CB /* Pods_VimeoNetworking_iOSTests.framework in Frameworks */,
+				3FDC7726C3EFB23554D8DF64 /* Pods_VimeoNetworking_iOS_VimeoNetworking_iOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1005,7 +1011,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D9C43062274611B000A6585 /* VimeoNetworking.framework in Frameworks */,
-				CD6733AEF1A2AB8F416F02AB /* Pods_VimeoNetworking_tvOSTests.framework in Frameworks */,
+				C106ABCE0093E69E63F6FFAE /* Pods_VimeoNetworking_tvOS_VimeoNetworking_tvOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1014,7 +1020,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D9C431622746198000A6585 /* VimeoNetworking.framework in Frameworks */,
-				7BAD248071222205E060D0D8 /* Pods_VimeoNetworking_macOSTests.framework in Frameworks */,
+				C26CC970ECE5EC1C93DA867A /* Pods_VimeoNetworking_macOS_VimeoNetworking_macOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1411,6 +1417,12 @@
 				4C27423689A5D72227FB2398 /* Pods-VimeoNetworking-tvOS.release.xcconfig */,
 				E57001F6C24354B0BC819CCB /* Pods-VimeoNetworking-tvOSTests.debug.xcconfig */,
 				7A7B4CFD7BDD2099CFF8156B /* Pods-VimeoNetworking-tvOSTests.release.xcconfig */,
+				D7EA5E1364221292793EFB06 /* Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests.debug.xcconfig */,
+				FA66DB41325C6064A8C6E242 /* Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests.release.xcconfig */,
+				1C2DA8F42F19ED990D683C9F /* Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests.debug.xcconfig */,
+				4A0050D1260FEAB130E9788C /* Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests.release.xcconfig */,
+				F2BE435E228967EC5676AC93 /* Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests.debug.xcconfig */,
+				B4AB5C28C44629F38D8469DC /* Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1420,11 +1432,11 @@
 			children = (
 				41701DF6B1A49CDB08C6F7ED /* Pods_Example.framework */,
 				5CF820088079D151C032EF1F /* Pods_VimeoNetworking_iOS.framework */,
-				251CC0542C0A123E837BF8FB /* Pods_VimeoNetworking_iOSTests.framework */,
 				8171CFD62581A7E01FA7F20A /* Pods_VimeoNetworking_macOS.framework */,
-				F01D916BB5FF6B2842E2BDEB /* Pods_VimeoNetworking_macOSTests.framework */,
 				4A02775E0A3C18277E22F14E /* Pods_VimeoNetworking_tvOS.framework */,
-				812C7A2F86B275D959F4AC12 /* Pods_VimeoNetworking_tvOSTests.framework */,
+				158B988D424EB6C535458B0D /* Pods_VimeoNetworking_iOS_VimeoNetworking_iOSTests.framework */,
+				F8B16FD7A5F861DED3E10B4C /* Pods_VimeoNetworking_macOS_VimeoNetworking_macOSTests.framework */,
+				1E698E7C8405B282A29945AB /* Pods_VimeoNetworking_tvOS_VimeoNetworking_tvOSTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1950,15 +1962,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VimeoNetworking-iOSTests/Pods-VimeoNetworking-iOSTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests/Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VimeoNetworking-iOSTests/Pods-VimeoNetworking-iOSTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests/Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VimeoNetworking-iOSTests/Pods-VimeoNetworking-iOSTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests/Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		28DE5F6E6BA51F0E33681CE8 /* [CP] Check Pods Manifest.lock */ = {
@@ -1976,7 +1988,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-VimeoNetworking-tvOSTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1989,15 +2001,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VimeoNetworking-tvOSTests/Pods-VimeoNetworking-tvOSTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests/Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VimeoNetworking-tvOSTests/Pods-VimeoNetworking-tvOSTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests/Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VimeoNetworking-tvOSTests/Pods-VimeoNetworking-tvOSTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests/Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		3B517E272E55DDA3C10C2038 /* [CP] Check Pods Manifest.lock */ = {
@@ -2104,15 +2116,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VimeoNetworking-macOSTests/Pods-VimeoNetworking-macOSTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests/Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VimeoNetworking-macOSTests/Pods-VimeoNetworking-macOSTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests/Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VimeoNetworking-macOSTests/Pods-VimeoNetworking-macOSTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests/Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FF04FB2C3956FE9D3F4D45E6 /* [CP] Check Pods Manifest.lock */ = {
@@ -2130,7 +2142,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-VimeoNetworking-macOSTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2152,7 +2164,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-VimeoNetworking-iOSTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -3007,7 +3019,7 @@
 		};
 		3D9C42FA2274604A000A6585 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A90814A4F28BB5D6D220FCED /* Pods-VimeoNetworking-iOSTests.debug.xcconfig */;
+			baseConfigurationReference = D7EA5E1364221292793EFB06 /* Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -3028,7 +3040,7 @@
 		};
 		3D9C42FB2274604A000A6585 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6401328E3C54DF0172D5991E /* Pods-VimeoNetworking-iOSTests.release.xcconfig */;
+			baseConfigurationReference = FA66DB41325C6064A8C6E242 /* Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -3049,7 +3061,7 @@
 		};
 		3D9C430A2274611B000A6585 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E57001F6C24354B0BC819CCB /* Pods-VimeoNetworking-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = F2BE435E228967EC5676AC93 /* Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -3071,7 +3083,7 @@
 		};
 		3D9C430B2274611B000A6585 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7A7B4CFD7BDD2099CFF8156B /* Pods-VimeoNetworking-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = B4AB5C28C44629F38D8469DC /* Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -3093,7 +3105,7 @@
 		};
 		3D9C431A22746198000A6585 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BFA9E35CF9D1E9F3BBD4892D /* Pods-VimeoNetworking-macOSTests.debug.xcconfig */;
+			baseConfigurationReference = 1C2DA8F42F19ED990D683C9F /* Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
@@ -3116,7 +3128,7 @@
 		};
 		3D9C431B22746198000A6585 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F11874EC064A7004C073EA2B /* Pods-VimeoNetworking-macOSTests.release.xcconfig */;
+			baseConfigurationReference = 4A0050D1260FEAB130E9788C /* Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
