@@ -29,11 +29,8 @@ jobs:
           command: bundle exec pod install
 
       - run: 
-          name: Build and run iOS tests
-          command: bundle exec fastlane ios test
-          environment:
-            SCAN_DEVICE: iPhone 8
-            SCAN_SCHEME: VimeoNetworking-iOS
+          name: Run pod linter
+          command: pod lib lint          
 
       - save_cache:
           paths:
