@@ -1,6 +1,0 @@
-framework module Pods_VimeoNetworking_tvOS_VimeoNetworking_tvOSTests {
-  umbrella header "Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests-umbrella.h"
-
-  export *
-  module * { export * }
-}
