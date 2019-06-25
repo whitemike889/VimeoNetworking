@@ -30,8 +30,11 @@ jobs:
 
       - run: 
           name: Run pod linter
-          command: pod lib lint          
+          command: bundle exec pod lib lint | bundle exec xcpretty
 
+      - run:
+          name: Carthage build with no skip current
+          command: carthage build --no-skip-current --no-use-binaries
       - save_cache:
           paths:
             - vendor/bundle
