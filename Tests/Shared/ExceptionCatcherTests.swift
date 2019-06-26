@@ -27,20 +27,15 @@
 import XCTest
 @testable import VimeoNetworking
 
-class ExceptionCatcherTests: XCTestCase
-{
-    func test_ExceptionCatcher_CatchesArchiverExceptions()
-    {
-        do
-        {
-            try ExceptionCatcher.doUnsafe
-            {
+class ExceptionCatcherTests: XCTestCase {
+    func test_ExceptionCatcher_CatchesArchiverExceptions() {
+        do {
+            try ExceptionCatcher.doUnsafe {
                 let exception = NSException(name: NSExceptionName.invalidArchiveOperationException, reason: "test exception", userInfo: nil)
                 exception.raise()
             }
         }
-        catch let error
-        {
+        catch let error {
             XCTAssertEqual(error.localizedDescription, "test exception")
             return
         }

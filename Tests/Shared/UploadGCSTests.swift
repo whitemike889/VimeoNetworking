@@ -28,10 +28,8 @@ import XCTest
 import OHHTTPStubs
 import VimeoNetworking
 
-class UploadGCSTests: XCTestCase
-{
-    override func setUp()
-    {
+class UploadGCSTests: XCTestCase {
+    override func setUp() {
         super.setUp()
         
         VimeoClient.configureSharedClient(withAppConfiguration: AppConfiguration(clientIdentifier: "{CLIENT_ID}",
@@ -41,8 +39,7 @@ class UploadGCSTests: XCTestCase
                                                                                  apiVersion: "3.3.10"), configureSessionManagerBlock: nil)
     }
     
-    func test_uploadGCSResponse_getsParsedIntoUploadObject()
-    {
+    func test_uploadGCSResponse_getsParsedIntoUploadObject() {
         let request = Request<VIMUpload>(path: "/videos/" + Constants.CensoredId)
         
         stub(condition: isPath("/videos/" + Constants.CensoredId)) { _ in
@@ -53,15 +50,13 @@ class UploadGCSTests: XCTestCase
         let expectation = self.expectation(description: "Network call expectation")
         
         _ = VimeoClient.sharedClient.request(request) { response in
-            switch response
-            {
+            switch response {
             case .success(let result):
                 let upload = result.model
                 
                 XCTAssertEqual(upload.uploadApproach, VIMUpload.UploadApproach(rawValue: "gcs"), "The upload approach should have been `gcs`.")
                 
-                guard let gcs = upload.gcs?.first else
-                {
+                guard let gcs = upload.gcs?.first else {
                     XCTFail("Failure: The GCS array must not be empty.")
                     
                     return
@@ -80,8 +75,7 @@ class UploadGCSTests: XCTestCase
         }
         
         self.waitForExpectations(timeout: 1.0) { error in
-            if let unWrappedError = error
-            {
+            if let unWrappedError = error {
                 XCTFail("\(unWrappedError)")
             }
         }

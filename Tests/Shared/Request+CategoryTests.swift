@@ -27,18 +27,15 @@
 import XCTest
 @testable import VimeoNetworking
 
-class Request_CategoryTests: XCTestCase
-{
-    func test_CategoryRequest_ValidateCategoriesListRequest()
-    {
+class Request_CategoryTests: XCTestCase {
+    func test_CategoryRequest_ValidateCategoriesListRequest() {
         let request = CategoryRequest.getCategoriesRequest()
         
         XCTAssertEqual(request.URI, "/categories")
         XCTAssertTrue(RequestComparisons.ValidateDefaults(request: request))
     }
     
-    func test_CategoryRequest_ValidateSingleCateogryRequest()
-    {
+    func test_CategoryRequest_ValidateSingleCateogryRequest() {
         let request = CategoryRequest.getCategoryRequest(forCategoryURI: "/animation")
         
         XCTAssertEqual(request.URI, "/animation")

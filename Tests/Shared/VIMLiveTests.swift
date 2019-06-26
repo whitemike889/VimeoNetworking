@@ -28,10 +28,8 @@ import XCTest
 import OHHTTPStubs
 import VimeoNetworking
 
-class VIMLiveTests: XCTestCase
-{
-    override func setUp()
-    {
+class VIMLiveTests: XCTestCase {
+    override func setUp() {
         super.setUp()
         
         VimeoClient.configureSharedClient(withAppConfiguration: AppConfiguration(clientIdentifier: "{CLIENT_ID}",
@@ -41,15 +39,13 @@ class VIMLiveTests: XCTestCase
                                                                                  apiVersion: "3.3.10"), configureSessionManagerBlock: nil)
     }
     
-    override func tearDown()
-    {
+    override func tearDown() {
         super.tearDown()
         
         OHHTTPStubs.removeAllStubs()
     }
     
-    private func assert(liveObject live: VIMLive?)
-    {
+    private func assert(liveObject live: VIMLive?) {
         XCTAssertNotNil(live)
         XCTAssertEqual(live?.link, MockLive.Link)
         XCTAssertEqual(live?.key, MockLive.Key)
@@ -59,15 +55,13 @@ class VIMLiveTests: XCTestCase
         XCTAssertEqual(live?.liveStreamingStatus, .streaming)
     }
     
-    private func assert(liveChatObject chat: VIMLiveChat?)
-    {
+    private func assert(liveChatObject chat: VIMLiveChat?) {
         XCTAssertNotNil(chat)
         XCTAssertEqual(chat?.roomId?.int64Value, MockLiveChat.RoomId)
         XCTAssertEqual(chat?.token, MockLiveChat.Token)
     }
     
-    private func assert(liveChatUserObject user: VIMLiveChatUser?)
-    {
+    private func assert(liveChatUserObject user: VIMLiveChatUser?) {
         XCTAssertNotNil(user)
         XCTAssertEqual(user?.account, AccountType.liveBusiness.rawValue)
         XCTAssertEqual(user?.id?.int64Value, MockLiveChatUser.Id)
@@ -79,8 +73,7 @@ class VIMLiveTests: XCTestCase
         XCTAssertEqual(user?.link, MockLiveChatUser.Link)
     }
     
-    func testParsingLiveObject()
-    {
+    func testParsingLiveObject() {
         let request = Request<VIMVideo>(path: "/videos/" + Constants.CensoredId)
         
         stub(condition: isPath("/videos/" + Constants.CensoredId)) { _ in
@@ -91,8 +84,7 @@ class VIMLiveTests: XCTestCase
         let expectation = self.expectation(description: "Network call expectation")
         
         _ = VimeoClient.sharedClient.request(request) { response in
-            switch response
-            {
+            switch response {
             case .success(let result):
                 let video = result.model
                 
@@ -108,8 +100,7 @@ class VIMLiveTests: XCTestCase
         }
         
         self.waitForExpectations(timeout: 1.0) { error in
-            if let unWrappedError = error
-            {
+            if let unWrappedError = error {
                 XCTFail("\(unWrappedError)")
             }
         }

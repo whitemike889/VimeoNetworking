@@ -28,15 +28,13 @@ import XCTest
 import OHHTTPStubs
 @testable import VimeoNetworking
 
-class VIMUserTests: XCTestCase
-{
+class VIMUserTests: XCTestCase {
     private struct TestConstants {
         static let UserUri = "/users/" + Constants.CensoredId
         static let MeUri = "/me"
     }
     
-    override func setUp()
-    {
+    override func setUp() {
         super.setUp()
         
         VimeoClient.configureSharedClient(withAppConfiguration: AppConfiguration(clientIdentifier: "{CLIENT_ID}",
@@ -46,15 +44,13 @@ class VIMUserTests: XCTestCase
                                                                                  apiVersion: "3.3.10"), configureSessionManagerBlock: nil)
     }
     
-    override func tearDown()
-    {
+    override func tearDown() {
         super.tearDown()
         
         OHHTTPStubs.removeAllStubs()
     }
     
-    private func stubResponse(for uri: String = TestConstants.UserUri, withFile fileName: String)
-    {
+    private func stubResponse(for uri: String = TestConstants.UserUri, withFile fileName: String) {
         stub(condition: isPath(uri)) { _ in
             let stubPath = OHPathForFile(fileName, type(of: self))
             return fixture(filePath: stubPath!, headers: ["Content-Type":"application/json"])
@@ -65,13 +61,11 @@ class VIMUserTests: XCTestCase
         return Request<VIMUser>(path: TestConstants.UserUri)
     }
     
-    private func checkAccountTypeAnalyticsIdentifier(for user: VIMUser, withExpectedType expectedType: VIMUserAccountType)
-    {
+    private func checkAccountTypeAnalyticsIdentifier(for user: VIMUser, withExpectedType expectedType: VIMUserAccountType) {
         XCTAssertEqual(user.accountType, expectedType)
         
         let analyticsIdentifier = user.accountTypeAnalyticsIdentifier()
-        switch expectedType
-        {
+        switch expectedType {
         case .basic:
             XCTAssertEqual(analyticsIdentifier, "basic")
         case .plus:
@@ -112,8 +106,7 @@ class VIMUserTests: XCTestCase
         self.wait(for: [expectation], timeout: 1.0)
     }
     
-    func testUserObjectReturningLiveProForAccountType()
-    {
+    func testUserObjectReturningLiveProForAccountType() {
         self.stubResponse(withFile: "user_live_pro.json")
         let request = self.userRequest()
         self.send(request: request, withDescription: "Expectation for Live Pro User Object") { user in
@@ -121,8 +114,7 @@ class VIMUserTests: XCTestCase
         }
     }
     
-    func testUserObjectReturningLiveBusinessForAccountType()
-    {
+    func testUserObjectReturningLiveBusinessForAccountType() {
         self.stubResponse(withFile: "user_live_business.json")
         let request = self.userRequest()
         self.send(request: request, withDescription: "Expectation for Live Business User Object") { user in
@@ -130,8 +122,7 @@ class VIMUserTests: XCTestCase
         }
     }
     
-    func testUserObjectReturningLivePremiumForAccountType()
-    {
+    func testUserObjectReturningLivePremiumForAccountType() {
         self.stubResponse(withFile: "user_live_premium.json")
         let request = self.userRequest()
         self.send(request: request, withDescription: "Expectation for Live Premium User Object") { user in
@@ -139,8 +130,7 @@ class VIMUserTests: XCTestCase
         }
     }
     
-    func testUserObjectReturningBasicForAccountType()
-    {
+    func testUserObjectReturningBasicForAccountType() {
         self.stubResponse(withFile: "user_basic.json")
         let request = self.userRequest()
         self.send(request: request, withDescription: "Expectation for Basic User Object") { user in
@@ -148,8 +138,7 @@ class VIMUserTests: XCTestCase
         }
     }
     
-    func testUserObjectReturningPlusForAccountType()
-    {
+    func testUserObjectReturningPlusForAccountType() {
         self.stubResponse(withFile: "user_plus.json")
         let request = self.userRequest()
         self.send(request: request, withDescription: "Expectation for Plus User Object") { user in
@@ -157,8 +146,7 @@ class VIMUserTests: XCTestCase
         }
     }
     
-    func testUserObjectReturningProForAccountType()
-    {
+    func testUserObjectReturningProForAccountType() {
         self.stubResponse(withFile: "user_pro.json")
         let request = self.userRequest()
         self.send(request: request, withDescription: "Expectation for Pro User Object") { user in
@@ -166,8 +154,7 @@ class VIMUserTests: XCTestCase
         }
     }
     
-    func testUserObjectReturningBusinessForAccountType()
-    {
+    func testUserObjectReturningBusinessForAccountType() {
         self.stubResponse(withFile: "user_business.json")
         let request = self.userRequest()
         self.send(request: request, withDescription: "Expectation for Business User Object") { user in
@@ -175,8 +162,7 @@ class VIMUserTests: XCTestCase
         }
     }
 
-    func testUserObjectReturningProUnlimitedForAccountType()
-    {
+    func testUserObjectReturningProUnlimitedForAccountType() {
         self.stubResponse(withFile: "user_pro_unlimited.json")
         let request = self.userRequest()
         self.send(request: request, withDescription: "Expectation for Pro Unlimited User Object") { user in
@@ -184,8 +170,7 @@ class VIMUserTests: XCTestCase
         }
     }
 
-    func testUserObjectReturningProducerForAccountType()
-    {
+    func testUserObjectReturningProducerForAccountType() {
         self.stubResponse(withFile: "user_producer.json")
         let request = self.userRequest()
         self.send(request: request, withDescription: "Expectation for Pro Unlimited User Object") { user in

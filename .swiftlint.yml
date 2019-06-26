@@ -28,7 +28,8 @@ whitelist_rules:
 
 # Paths to include during linting.
 included:
-  - ../VimeoNetworking/Sources
+  - Sources
+  - Tests
 
 # Paths to exclude during linting.
 excluded:

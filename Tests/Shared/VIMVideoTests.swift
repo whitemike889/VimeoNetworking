@@ -26,12 +26,10 @@
 import XCTest
 @testable import VimeoNetworking
 
-class VIMVideoTests: XCTestCase
-{
+class VIMVideoTests: XCTestCase {
     private var liveDictionary: [String: Any] = ["link": "vimeo.com", "key": "abcdefg", "activeTime": Date(), "endedTime": Date(), "archivedTime": Date()]
     
-    func test_isLive_returnsTrue_whenLiveObjectExists()
-    {
+    func test_isLive_returnsTrue_whenLiveObjectExists() {
         let testLiveObject = VIMLive(keyValueDictionary: liveDictionary)!
         let videoDictionary: [String: Any] = ["live": testLiveObject]
         let testVideoObject = VIMVideo(keyValueDictionary: videoDictionary)!
@@ -41,16 +39,14 @@ class VIMVideoTests: XCTestCase
         XCTAssertTrue(testVideoObject.isLive())
     }
     
-    func test_isLive_returnsFalse_whenLiveObjectDoesNotExist()
-    {
+    func test_isLive_returnsFalse_whenLiveObjectDoesNotExist() {
         let videoDictionary: [String: Any] = ["link": "vimeo.com"]
         let testVideoObject = VIMVideo(keyValueDictionary: videoDictionary)!
         XCTAssertNotNil(testVideoObject)
         XCTAssertFalse(testVideoObject.isLive())
     }
     
-    func test_isLiveEventInProgress_returnsTrue_whenEventIsInUnavailablePreBroadcastState()
-    {
+    func test_isLiveEventInProgress_returnsTrue_whenEventIsInUnavailablePreBroadcastState() {
         liveDictionary["status"] = "unavailable"
         let testLiveObject = VIMLive(keyValueDictionary: liveDictionary)!
         let videoDictionary: [String: Any] = ["live": testLiveObject]
@@ -61,8 +57,7 @@ class VIMVideoTests: XCTestCase
         XCTAssertTrue(testVideoObject.isLiveEventInProgress())
     }
     
-    func test_isLiveEventInProgress_returnsTrue_whenEventIsInPendingPreBroadcastState()
-    {
+    func test_isLiveEventInProgress_returnsTrue_whenEventIsInPendingPreBroadcastState() {
         liveDictionary["status"] = "pending"
         let testLiveObject = VIMLive(keyValueDictionary: liveDictionary)!
         let videoDictionary: [String: Any] = ["live": testLiveObject]
@@ -73,8 +68,7 @@ class VIMVideoTests: XCTestCase
         XCTAssertTrue(testVideoObject.isLiveEventInProgress())
     }
     
-    func test_isLiveEventInProgress_returnsTrue_whenEventIsInReadyPreBroadcastState()
-    {
+    func test_isLiveEventInProgress_returnsTrue_whenEventIsInReadyPreBroadcastState() {
         liveDictionary["status"] = "ready"
         let testLiveObject = VIMLive(keyValueDictionary: liveDictionary)!
         let videoDictionary: [String: Any] = ["live": testLiveObject]
@@ -85,8 +79,7 @@ class VIMVideoTests: XCTestCase
         XCTAssertTrue(testVideoObject.isLiveEventInProgress())
     }
     
-    func test_isLiveEventInProgress_returnsTrue_whenEventIsInMidBroadcastState()
-    {
+    func test_isLiveEventInProgress_returnsTrue_whenEventIsInMidBroadcastState() {
         liveDictionary["status"] = "streaming"
         let testLiveObject = VIMLive(keyValueDictionary: liveDictionary)!
         let videoDictionary: [String: Any] = ["live": testLiveObject]
@@ -97,8 +90,7 @@ class VIMVideoTests: XCTestCase
         XCTAssertTrue(testVideoObject.isLiveEventInProgress())
     }
     
-    func test_isLiveEventInProgress_returnsTrue_whenEventIsInArchivingState()
-    {
+    func test_isLiveEventInProgress_returnsTrue_whenEventIsInArchivingState() {
         liveDictionary["status"] = "archiving"
         let testLiveObject = VIMLive(keyValueDictionary: liveDictionary)!
         let videoDictionary: [String: Any] = ["live": testLiveObject]
@@ -109,8 +101,7 @@ class VIMVideoTests: XCTestCase
         XCTAssertTrue(testVideoObject.isLiveEventInProgress())
     }
     
-    func test_isLiveEventInProgress_returnsFalse_whenEventIsInPostBroadcastState()
-    {
+    func test_isLiveEventInProgress_returnsFalse_whenEventIsInPostBroadcastState() {
         liveDictionary["status"] = "done"
         let testLiveObject = VIMLive(keyValueDictionary: liveDictionary)!
         let videoDictionary: [String: Any] = ["live": testLiveObject]
@@ -121,8 +112,7 @@ class VIMVideoTests: XCTestCase
         XCTAssertFalse(testVideoObject.isLiveEventInProgress())
     }
     
-    func test_isPostBroadcast_returnsTrue_whenEventIsInDoneState()
-    {
+    func test_isPostBroadcast_returnsTrue_whenEventIsInDoneState() {
         liveDictionary["status"] = "done"
         let testLiveObject = VIMLive(keyValueDictionary: liveDictionary)!
         let videoDictionary: [String: Any] = ["live": testLiveObject]
@@ -135,8 +125,7 @@ class VIMVideoTests: XCTestCase
     
     // MARK: - Review Page
     
-    func test_video_has_review_page()
-    {
+    func test_video_has_review_page() {
         let reviewPageDictionary: [String: Any] = ["active": true, "link": "test/linkNotEmpty"]
         let reviewObject = (VIMReviewPage(keyValueDictionary: reviewPageDictionary))!
         let videoDictionary: [String: Any] = ["reviewPage": reviewObject]
@@ -147,8 +136,7 @@ class VIMVideoTests: XCTestCase
         XCTAssertTrue(testVideoObject.hasReviewPage())
     }
     
-    func test_video_hasnt_review_page()
-    {
+    func test_video_hasnt_review_page() {
         let reviewPageDictionary: [String: Any] = ["active": true, "link": ""]
         let reviewObject = (VIMReviewPage(keyValueDictionary: reviewPageDictionary))!
         let videoDictionary: [String: Any] = ["reviewPage": reviewObject]
@@ -157,8 +145,7 @@ class VIMVideoTests: XCTestCase
         XCTAssertFalse(testVideoObject.hasReviewPage())
     }
     
-    func test_video_hasnt_review_page_because_is_inactive()
-    {
+    func test_video_hasnt_review_page_because_is_inactive() {
         let reviewPageDictionary: [String: Any] = ["active": false, "link": "test/LinkExistButIsNotActive"]
         let reviewObject = (VIMReviewPage(keyValueDictionary: reviewPageDictionary))!
         let videoDictionary: [String: Any] = ["reviewPage": reviewObject]
@@ -170,8 +157,7 @@ class VIMVideoTests: XCTestCase
     // MARK: - Privacy
     // Note: Invalid values of `canDownload` will trigger an assertion failure.
     
-    func test_canDownloadFromDesktop_returnsTrue_whenCanDownloadIsOne()
-    {
+    func test_canDownloadFromDesktop_returnsTrue_whenCanDownloadIsOne() {
         let privacyDictionary: [String: Any] = ["canDownload": 1]
         let privacy = VIMPrivacy(keyValueDictionary: privacyDictionary)!
         let videoDictionary: [String: Any] = ["privacy": privacy as Any]
@@ -180,8 +166,7 @@ class VIMVideoTests: XCTestCase
         XCTAssertTrue(canDownload, "canDownloadFromDesktop unexpectedly returns false")
     }
     
-    func test_canDownloadFromDesktop_returnsFalse_whenCanDownloadIsZero()
-    {
+    func test_canDownloadFromDesktop_returnsFalse_whenCanDownloadIsZero() {
         let privacyDictionary: [String: Any] = ["canDownload": 0]
         let privacy = VIMPrivacy(keyValueDictionary: privacyDictionary)!
         let videoDictionary: [String: Any] = ["privacy": privacy as Any]
@@ -190,8 +175,7 @@ class VIMVideoTests: XCTestCase
         XCTAssertFalse(canDownload, "canDownloadFromDesktop unexpectedly returns true")
     }
     
-    func test_isStock_returnsTrue_whenPrivacyViewIsStock()
-    {
+    func test_isStock_returnsTrue_whenPrivacyViewIsStock() {
         let privacyDictionary: [String: Any] = ["view": "stock"]
         let privacy = VIMPrivacy(keyValueDictionary: privacyDictionary)!
         let videoDictionary: [String: Any] = ["privacy": privacy as Any]
@@ -199,8 +183,7 @@ class VIMVideoTests: XCTestCase
         XCTAssertTrue(testVideoObject.isStock(), "Test video object was stock but unexpectedly returned false.")
     }
     
-    func test_isStock_returnsFalse_whenPrivacyViewIsNotStock()
-    {
+    func test_isStock_returnsFalse_whenPrivacyViewIsNotStock() {
         let privacyDictionary: [String: Any] = ["view": "unlisted"]
         let privacy = VIMPrivacy(keyValueDictionary: privacyDictionary)!
         let videoDictionary: [String: Any] = ["privacy": privacy as Any]
@@ -208,8 +191,7 @@ class VIMVideoTests: XCTestCase
         XCTAssertFalse(testVideoObject.isStock(), "Test video object was not stock but unexpectedly returned true.")
     }
     
-    func test_isPrivate_returnsFalse_whenPrivacyViewIsStock()
-    {
+    func test_isPrivate_returnsFalse_whenPrivacyViewIsStock() {
         let privacyDictionary: [String: Any] = ["view": "stock"]
         let privacy = VIMPrivacy(keyValueDictionary: privacyDictionary)!
         let videoDictionary: [String: Any] = ["privacy": privacy as Any]

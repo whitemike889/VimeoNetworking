@@ -27,14 +27,11 @@
 import XCTest
 @testable import VimeoNetworking
 
-class RequestTests: XCTestCase
-{
+class RequestTests: XCTestCase {
     let retryPolicyTestClosure = { (policyToTest: RetryPolicy, comparePolicy: RetryPolicy) -> Bool in
-        switch policyToTest
-        {
+        switch policyToTest {
         case .singleAttempt:
-            switch comparePolicy
-            {
+            switch comparePolicy {
             case .singleAttempt:
                 return true
             default:
@@ -42,8 +39,7 @@ class RequestTests: XCTestCase
             }
         default:
             if case .multipleAttempts(let attemptCount, let initialDelay) = policyToTest,
-                case .multipleAttempts(let testValueCount, let testDelay) = comparePolicy
-            {
+                case .multipleAttempts(let testValueCount, let testDelay) = comparePolicy {
                 return attemptCount == testValueCount && initialDelay == testDelay
             }
             
@@ -51,8 +47,7 @@ class RequestTests: XCTestCase
         }
     }
     
-    func test_RetryPolicy_DefaultPolicyForMethodShouldReturnSingleAttempt()
-    {
+    func test_RetryPolicy_DefaultPolicyForMethodShouldReturnSingleAttempt() {
         var defaultPolicy = RetryPolicy.defaultPolicyForMethod(for: .GET)
         XCTAssertTrue(RequestComparisons.CompareRetryPolicies(defaultPolicy, .singleAttempt), "RetryPolicy.defaultPolicyForMethod should return singleAttempt for all methods")
         
@@ -69,13 +64,11 @@ class RequestTests: XCTestCase
         XCTAssertTrue(RequestComparisons.CompareRetryPolicies(defaultPolicy, .singleAttempt), "RetryPolicy.defaultPolicyForMethod should return singleAttempt for all methods")
     }
     
-    func test_RetryPolicy_TryThreeTimesConstHasCorrectValues()
-    {
+    func test_RetryPolicy_TryThreeTimesConstHasCorrectValues() {
         XCTAssertTrue(RequestComparisons.CompareRetryPolicies(RetryPolicy.TryThreeTimes, .multipleAttempts(attemptCount: 3, initialDelay: 2.0)), "TryThreeTimes const should be .multipleAttempts(3, 2.0), actually returned \(RetryPolicy.TryThreeTimes)")
     }
     
-    func test_Request_DefaultValues()
-    {
+    func test_Request_DefaultValues() {
         let testPath = "/test/path"
         let request = Request<VIMNullResponse>(path: testPath)
 
@@ -85,8 +78,7 @@ class RequestTests: XCTestCase
         XCTAssertTrue(RequestComparisons.ValidateDefaults(request: request))
     }
     
-    func test_Request_setValuesThroughConstructor()
-    {
+    func test_Request_setValuesThroughConstructor() {
         let testPath = "/test"
         let request = Request<VIMNullResponse>(method: .POST,
                                                path: testPath,
@@ -104,8 +96,7 @@ class RequestTests: XCTestCase
         XCTAssertTrue(RequestComparisons.CompareRetryPolicies(request.retryPolicy, .multipleAttempts(attemptCount: 3, initialDelay: 2.0)))
     }
     
-    func test_Request_AssociatedPageRequest()
-    {
+    func test_Request_AssociatedPageRequest() {
         let request = Request<VIMNullResponse>(path: "/test")
         let associatedRequest = request.associatedPageRequest(withNewPath: "/test?next_page=2")
         

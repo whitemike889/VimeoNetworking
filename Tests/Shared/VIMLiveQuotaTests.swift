@@ -28,10 +28,8 @@ import XCTest
 import VimeoNetworking
 import OHHTTPStubs
 
-class VIMLiveQuotaTests: XCTestCase
-{
-    override func setUp()
-    {
+class VIMLiveQuotaTests: XCTestCase {
+    override func setUp() {
         super.setUp()
         
         VimeoClient.configureSharedClient(withAppConfiguration: AppConfiguration(clientIdentifier: "{CLIENT_ID}",
@@ -41,15 +39,13 @@ class VIMLiveQuotaTests: XCTestCase
                                                                                  apiVersion: "3.3.12"), configureSessionManagerBlock: nil)
     }
     
-    override func tearDown()
-    {
+    override func tearDown() {
         super.tearDown()
         
         OHHTTPStubs.removeAllStubs()
     }
     
-    func testParsingLiveQuotaObject()
-    {
+    func testParsingLiveQuotaObject() {
         let request = Request<VIMUser>(path: "/users/" + Constants.CensoredId)
         
         stub(condition: isPath("/users/" + Constants.CensoredId)) { _ in
@@ -60,8 +56,7 @@ class VIMLiveQuotaTests: XCTestCase
         let expectation = self.expectation(description: "Network call expectation")
         
         _ = VimeoClient.sharedClient.request(request) { response in
-            switch response
-            {
+            switch response {
             case .success(let result):
                 let user = result.model
                 
@@ -82,8 +77,7 @@ class VIMLiveQuotaTests: XCTestCase
         }
         
         self.waitForExpectations(timeout: 1.0) { error in
-            if let unWrappedError = error
-            {
+            if let unWrappedError = error {
                 XCTFail("\(unWrappedError)")
             }
         }

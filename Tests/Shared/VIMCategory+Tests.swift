@@ -27,17 +27,14 @@
 import XCTest
 @testable import VimeoNetworking
 
-class VIMCategory_Tests: XCTestCase
-{
+class VIMCategory_Tests: XCTestCase {
     private var parsedCategory: VIMCategory?
     private var categoryJSONDict: VimeoClient.ResponseDictionary?
     
-    override func setUp()
-    {
+    override func setUp() {
         super.setUp()
         
-        guard let categoryJSONDict = ResponseUtilities.loadResponse(from: "categories-animation-response.json") else
-        {
+        guard let categoryJSONDict = ResponseUtilities.loadResponse(from: "categories-animation-response.json") else {
             self.parsedCategory = nil
             self.categoryJSONDict = nil
             return
@@ -47,8 +44,7 @@ class VIMCategory_Tests: XCTestCase
         self.parsedCategory = try! VIMObjectMapper.mapObject(responseDictionary: categoryJSONDict) as VIMCategory
     }
     
-    func test_VIMCategory_ValidateParsing()
-    {
+    func test_VIMCategory_ValidateParsing() {
         XCTAssertNotNil(self.parsedCategory)
         
         XCTAssertEqual(self.parsedCategory?.name, self.categoryJSONDict?["name"] as? String)
@@ -66,21 +62,18 @@ class VIMCategory_Tests: XCTestCase
         XCTAssertGreaterThan(self.parsedCategory?.subcategories?.count ?? 0, 0)
     }
     
-    func test_VIMCategory_IsFollowingReturnsTrue()
-    {
+    func test_VIMCategory_IsFollowingReturnsTrue() {
         XCTAssertNotNil(self.parsedCategory)
         XCTAssertTrue(self.parsedCategory?.isFollowing() ?? false)
     }
     
-    func test_VIMCategory_ParsedSubcategories()
-    {
+    func test_VIMCategory_ParsedSubcategories() {
         XCTAssertNotNil(self.parsedCategory?.subcategories)
         
         let subCategories = self.categoryJSONDict?["subcategories"] as? [Dictionary<String, String>]
         
         var i = 0
-        for subCategory in self.parsedCategory?.subcategories as! [VIMCategory]
-        {
+        for subCategory in self.parsedCategory?.subcategories as! [VIMCategory] {
             XCTAssertNotNil(subCategory.name)
             XCTAssertNotNil(subCategory.uri)
             XCTAssertNotNil(subCategory.link)
@@ -93,8 +86,7 @@ class VIMCategory_Tests: XCTestCase
         }
     }
 
-    func test_VIMCategory_ParsedPictureCollection()
-    {
+    func test_VIMCategory_ParsedPictureCollection() {
         XCTAssertNotNil(self.parsedCategory?.pictureCollection)
         
         let collectionObject = self.categoryJSONDict?["pictures"] as? Dictionary<String, Any>
@@ -103,8 +95,7 @@ class VIMCategory_Tests: XCTestCase
         XCTAssertEqual(self.parsedCategory?.pictureCollection?.uri, collectionObject?["uri"] as? String)
         
         var i = 0
-        for picture in self.parsedCategory?.pictureCollection?.pictures as! [VIMPicture]
-        {
+        for picture in self.parsedCategory?.pictureCollection?.pictures as! [VIMPicture] {
             XCTAssertNotNil(picture.link)
             XCTAssertNotNil(picture.width)
             XCTAssertNotNil(picture.height)
@@ -117,18 +108,15 @@ class VIMCategory_Tests: XCTestCase
         }
     }
     
-    func test_VIMCategory_ConnectionParsing()
-    {
+    func test_VIMCategory_ConnectionParsing() {
         XCTAssertNotNil(self.parsedCategory?.connection(withName: VIMConnectionNameGroups))
         XCTAssertNotNil(self.parsedCategory?.connection(withName: VIMConnectionNameChannels))
         XCTAssertNotNil(self.parsedCategory?.connection(withName: VIMConnectionNameVideos))
         XCTAssertNotNil(self.parsedCategory?.connection(withName: VIMConnectionNameUsers))
     }
     
-    func test_Performance_ParsingCategoryObject()
-    {
-        guard let categoryJSONDict = ResponseUtilities.loadResponse(from: "categories-animation-response.json") else
-        {
+    func test_Performance_ParsingCategoryObject() {
+        guard let categoryJSONDict = ResponseUtilities.loadResponse(from: "categories-animation-response.json") else {
             XCTFail("unable to load response data from file")
             return
         }

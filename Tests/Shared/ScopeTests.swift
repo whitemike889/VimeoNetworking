@@ -27,10 +27,8 @@
 import XCTest
 @testable import VimeoNetworking
 
-class ScopeTests: XCTestCase
-{
-    func test_Scope_CombineReturnsSpaceSeparatedList()
-    {
+class ScopeTests: XCTestCase {
+    func test_Scope_CombineReturnsSpaceSeparatedList() {
         XCTAssertEqual(Scope.combine([.Create, .Delete, .Edit, .Interact]), "create delete edit interact")
     }
 }

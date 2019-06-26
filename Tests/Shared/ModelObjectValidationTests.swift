@@ -27,100 +27,83 @@
 import XCTest
 @testable import VimeoNetworking
 
-class ModelObjectValidationTests: XCTestCase
-{
-    func testValidVideoPassesValidation()
-    {
+class ModelObjectValidationTests: XCTestCase {
+    func testValidVideoPassesValidation() {
         let video = VIMVideo()
         
         video.uri = "/videos/1234567"
         video.resourceKey = "1234567:abcdef"
         
-        do
-        {
+        do {
             try video.validateModel()
         }
-        catch let error as NSError
-        {
+        catch let error as NSError {
             XCTFail(error.localizedDescription)
         }
     }
     
-    func testVideoWithNilURIFailsValidation()
-    {
+    func testVideoWithNilURIFailsValidation() {
         let video = VIMVideo()
         
         video.uri = nil
         video.resourceKey = "1234567:abcdef"
         
-        do
-        {
+        do {
             try video.validateModel()
             
             XCTFail("Video with nil URI should have failed validation")
         }
-        catch let error as NSError
-        {
+        catch let error as NSError {
             XCTAssertEqual(error.code, VIMModelObjectValidationErrorCode)
         }
     }
     
-    func testVideoWithNilResourceKeyFailsValidation()
-    {
+    func testVideoWithNilResourceKeyFailsValidation() {
         let video = VIMVideo()
         
         video.uri = "/videos/1234567"
         video.resourceKey = nil
         
-        do
-        {
+        do {
             try video.validateModel()
             
             XCTFail("Video with nil resourceKey should have failed validation")
         }
-        catch let error as NSError
-        {
+        catch let error as NSError {
             XCTAssertEqual(error.code, VIMModelObjectValidationErrorCode)
         }
     }
     
-    func testValidUserPassesValidation()
-    {
+    func testValidUserPassesValidation() {
         let user = VIMUser()
         
         user.uri = "/users/1234567"
         
-        do
-        {
+        do {
             try user.validateModel()
         }
-        catch let error as NSError
-        {
+        catch let error as NSError {
             XCTFail(error.localizedDescription)
         }
     }
     
-    func testUserWithNilURIFailsValidation()
-    {
+    func testUserWithNilURIFailsValidation() {
         let user = VIMUser()
         
         user.uri = nil
         
-        do
-        {
+        do {
             try user.validateModel()
             
             XCTFail("User with nil URI should have failed validation")
         }
-        catch let error as NSError
-        {
+        catch let error as NSError {
             XCTAssertEqual(error.code, VIMModelObjectValidationErrorCode)
         }
     }
     
     // MARK - Helper Method For Cinema testing
-    func cinemaEndpointDataSource() -> FakeDataSource<VIMProgrammedContent>
-    {
+    func cinemaEndpointDataSource() -> FakeDataSource<VIMProgrammedContent> {
         let jsonFilePath = Bundle(for: type(of: self)).path(forResource: "programmed_cinema", ofType: "json")
         let jsonData = try? Data(contentsOf: URL(fileURLWithPath: jsonFilePath!))
         let jsonDict = try! JSONSerialization.jsonObject(with: jsonData!, options: JSONSerialization.ReadingOptions.allowFragments)
@@ -128,16 +111,14 @@ class ModelObjectValidationTests: XCTestCase
         return FakeDataSource<VIMProgrammedContent>(jsonData: jsonDict as! [String : Any], keyPath: "data")
     }
     
-    func testProgrammedContentMapped()
-    {
+    func testProgrammedContentMapped() {
         let fakeDS = self.cinemaEndpointDataSource()
      
         // If the JSON data was mapped correctly we should have 6 VIMProgrammedContent objects in our items array
         XCTAssertTrue(fakeDS.items!.count == 6)
     }
     
-    func testProgrammedContentObjectsPropertiesAreValid()
-    {
+    func testProgrammedContentObjectsPropertiesAreValid() {
         let fakeDS = self.cinemaEndpointDataSource()
         
         //The first item in our list should represent the Travel category
@@ -159,26 +140,21 @@ class ModelObjectValidationTests: XCTestCase
         XCTAssertTrue(documentary.content?.count == 5)
         
         //Every item in the list should be of type category and should contain 5 objects in it's content array
-        for programmedContent in fakeDS.items!
-        {
+        for programmedContent in fakeDS.items! {
             XCTAssertEqual(programmedContent.type, "category")
             XCTAssertTrue(programmedContent.content?.count == 5)
         }
     }
     
-    func testProgrammedContentObjectsContainVIMVideoObjects()
-    {
+    func testProgrammedContentObjectsContainVIMVideoObjects() {
         let fakeDS = self.cinemaEndpointDataSource()
-        guard let programmedContentItems = fakeDS.items else
-        {
+        guard let programmedContentItems = fakeDS.items else {
             XCTFail("Failed to parse data")
             return
         }
         
-        for programmedContent in programmedContentItems
-        {
-            for video in programmedContent.content!
-            {
+        for programmedContent in programmedContentItems {
+            for video in programmedContent.content! {
                 XCTAssertTrue(video is VIMVideo)
                 
                 let video = video as! VIMVideo
@@ -190,17 +166,14 @@ class ModelObjectValidationTests: XCTestCase
         }
     }
     
-    func testProgrammedContentObjectConnections()
-    {
+    func testProgrammedContentObjectConnections() {
         let fakeDS = self.cinemaEndpointDataSource()
-        guard let programmedContentItems = fakeDS.items else
-        {
+        guard let programmedContentItems = fakeDS.items else {
             XCTFail("Failed to parse data")
             return
         }
         
-        for programmedContent in programmedContentItems
-        {
+        for programmedContent in programmedContentItems {
             XCTAssertNotNil(programmedContent.connectionWithName(connectionName: VIMConnectionNameContents))
         }
     }

@@ -28,10 +28,8 @@ import XCTest
 import OHHTTPStubs
 import VimeoNetworking
 
-class Request_ProgrammedContent: XCTestCase
-{
-    override func setUp()
-    {
+class Request_ProgrammedContent: XCTestCase {
+    override func setUp() {
         super.setUp()
         
         VimeoClient.configureSharedClient(withAppConfiguration: AppConfiguration(clientIdentifier: "{CLIENT_ID}",
@@ -41,15 +39,13 @@ class Request_ProgrammedContent: XCTestCase
                                                                           apiVersion: "3.3.1"), configureSessionManagerBlock: nil)
     }
     
-    override func tearDown()
-    {
+    override func tearDown() {
         super.tearDown()
         
         OHHTTPStubs.removeAllStubs()
     }
     
-    func test_CinemaRequest_onSuccess_returnsCorrectData()
-    {
+    func test_CinemaRequest_onSuccess_returnsCorrectData() {
         let request = CinemaContentRequest.getCinemaContentRequest()
         
         stub(condition: isPath("/programmed/cinema")) { _ in
@@ -61,8 +57,7 @@ class Request_ProgrammedContent: XCTestCase
         let expectation = self.expectation(description: "Network call expectation")
         
         _ = VimeoClient.sharedClient.request(request) { response in
-            switch response
-            {
+            switch response {
             case .success(let result):
                 XCTAssertNotNil(result.model)
                 
@@ -70,8 +65,7 @@ class Request_ProgrammedContent: XCTestCase
                 XCTAssertEqual(cinemaContent.count, 6)
 
                 let cinemaNames = ["John Early's Picks", "Action Sports", "Eye Candy", "Documentary", "Comedy", "The Refugee Crisis"]
-                for i in 0 ..< cinemaNames.count
-                {
+                for i in 0 ..< cinemaNames.count {
                     XCTAssertEqual(cinemaNames[i], cinemaContent[i].name)
                     XCTAssertEqual(cinemaContent[i].content?.count, 5)
                 }
@@ -84,15 +78,13 @@ class Request_ProgrammedContent: XCTestCase
         }
         
         self.waitForExpectations(timeout: 1.0) { error in
-            if let unWrappedError = error
-            {
+            if let unWrappedError = error {
                 XCTFail("\(unWrappedError)")
             }
         }
     }
     
-    func test_CinemaRequest_onFailure_returnsError()
-    {
+    func test_CinemaRequest_onFailure_returnsError() {
         let request = CinemaContentRequest.getCinemaContentRequest()
         
         stub(condition: isPath("/programmed/cinema")) { _ in
@@ -116,8 +108,7 @@ class Request_ProgrammedContent: XCTestCase
         let expectation = self.expectation(description: "Network call expectation")
         
         _ = VimeoClient.sharedClient.request(request) { response in
-            switch response
-            {
+            switch response {
             case .success(_):
                 XCTFail("This test should not return a success")
                 
@@ -131,8 +122,7 @@ class Request_ProgrammedContent: XCTestCase
         }
         
         self.waitForExpectations(timeout: 1.0) { error in
-            if let unWrappedError = error
-            {
+            if let unWrappedError = error {
                 XCTFail("\(unWrappedError)")
             }
         }
