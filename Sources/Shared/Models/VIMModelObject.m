@@ -250,6 +250,15 @@ NSInteger const VIMModelObjectValidationErrorCode = 10101;
 
 @end
 
+
+// On 32 bit devices, BOOL is defined as char, whereas on other devices it is defined as bool.
+// This causes VIMModelObject to trip on true/false values passed by the API. 
+// When we call set(value, forKey:key) where the key type is a BOOL, the OS
+// automatically tries to call charValue on NSString (thinking it is a BOOL), 
+// which causes the app to crash with an unrecognized selector sent to instance message.
+// For more information on OBJC_BOOL_IS_CHAR see the Objective-C runtime header `objc.h`
+// For discussion, comments and proposed solutions see stackoverflow.com/a/32146513
+//
 #if defined(OBJC_BOOL_IS_CHAR)
 @implementation NSString (BoolIsChar32Bit)
 - (BOOL)charValue {
