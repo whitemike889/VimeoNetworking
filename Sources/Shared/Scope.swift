@@ -45,18 +45,20 @@
 ///         except that you can use the `/me` endpoint to refer to the currently logged-in user. Accessing `/me` with
 ///         an unauthenticated access token generates an error.
 public enum Scope: String, CaseIterable {
-    case Public = "public"
-    case Private = "private"
-    case Purchased = "purchased"
+
     case Create = "create"
-    case Edit = "edit"
     case Delete = "delete"
+    case Edit = "edit"
+    case Email = "email"
     case Interact = "interact"
-    case Upload = "upload"
-    case Stats = "stats"
+    case Private = "private"
     case PromoCodes = "promo_codes"
+    case Public = "public"
+    case Purchased = "purchased"
+    case Stats = "stats"
+    case Upload = "upload"
     case VideoFiles = "video_files"
-    
+
     /// Combines an array of scopes into a scope string as expected by the API.
     ///
     /// - Parameter scopes: An array of `Scope` values
