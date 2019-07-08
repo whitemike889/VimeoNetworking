@@ -174,6 +174,7 @@
 		5B1DF37B22B41C90007F2416 /* categories-animation-response.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B1DF2DD22B41C90007F2416 /* categories-animation-response.json */; };
 		5B1DF37C22B41C90007F2416 /* categories-animation-response.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B1DF2DD22B41C90007F2416 /* categories-animation-response.json */; };
 		5B1DF38B22B41F2B007F2416 /* digicert-sha2.cer in Resources */ = {isa = PBXBuildFile; fileRef = 5B1DF01C22B409B5007F2416 /* digicert-sha2.cer */; };
+		5B21352722D3DD6200C0C889 /* NSStringCharValueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B21352622D3DD6200C0C889 /* NSStringCharValueTests.m */; };
 		5B5EEF1D22B425C9005C66BE /* MockConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF2B922B41C90007F2416 /* MockConstants.swift */; };
 		5B5EEF1E22B425CA005C66BE /* MockConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DF2B922B41C90007F2416 /* MockConstants.swift */; };
 		5B5EEF5622B428DC005C66BE /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5EEF4C22B428DC005C66BE /* DetailViewController.swift */; };
@@ -781,6 +782,7 @@
 		5B1DF2DD22B41C90007F2416 /* categories-animation-response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "categories-animation-response.json"; sourceTree = "<group>"; };
 		5B1DF37E22B41D7B007F2416 /* VimeoNetworkingTests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = VimeoNetworkingTests.plist; sourceTree = "<group>"; };
 		5B1DF37F22B41D7B007F2416 /* VimeoNetworking.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = VimeoNetworking.plist; sourceTree = "<group>"; };
+		5B21352622D3DD6200C0C889 /* NSStringCharValueTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSStringCharValueTests.m; sourceTree = "<group>"; };
 		5B5EEF4C22B428DC005C66BE /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		5B5EEF4D22B428DC005C66BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5B5EEF4F22B428DC005C66BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -1187,6 +1189,7 @@
 		5B1DF2B622B41C90007F2416 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				5B21352622D3DD6200C0C889 /* NSStringCharValueTests.m */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -2558,6 +2561,7 @@
 				5B1DF30822B41C90007F2416 /* ScopeTests.swift in Sources */,
 				5B1DF32322B41C90007F2416 /* VimeoSessionManagerTests.swift in Sources */,
 				5B1DF31A22B41C90007F2416 /* VIMLiveHeartbeatTests.swift in Sources */,
+				5B21352722D3DD6200C0C889 /* NSStringCharValueTests.m in Sources */,
 				5B1DF32622B41C90007F2416 /* VIMLiveQuotaTests.swift in Sources */,
 				5B1DF30E22B41C90007F2416 /* AlbumTests.swift in Sources */,
 				5B1DF2F322B41C90007F2416 /* VIMUserBadgeTests.swift in Sources */,

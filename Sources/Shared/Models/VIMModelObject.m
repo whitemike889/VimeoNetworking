@@ -249,3 +249,11 @@ NSInteger const VIMModelObjectValidationErrorCode = 10101;
 }
 
 @end
+
+#if defined(OBJC_BOOL_IS_CHAR)
+@implementation NSString (BoolIsChar32Bit)
+- (BOOL)charValue {
+    return [self boolValue];
+}
+@end
+#endif
