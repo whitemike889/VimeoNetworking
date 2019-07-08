@@ -31,6 +31,22 @@
     XCTAssertTrue(respondsToSelector);
 }
 
+- (void)testCharValueIsTrue {
+    id trueString = @"true";
+    BOOL trueValue = [trueString charValue];
+    XCTAssertTrue(trueValue);
+}
+
+- (void)testCharValueIsFalse {
+    id falseString = @"false";
+    BOOL falseValue = [falseString charValue];
+    XCTAssertFalse(falseValue);
+    
+    falseString = @"other value";
+    falseValue = [falseString charValue];
+    XCTAssertFalse(falseValue);
+}
+
 #else
 
 - (void)testNSString_DOES_NOT_RespondsToCharValueOnOtherDevices {
