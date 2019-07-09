@@ -24,21 +24,13 @@ jobs:
           name: Install bundler dependencies
           command: bundle install --path vendor/bundle
 
-      - run: 
-          name: Install pods
-          command: bundle exec pod install
-
-      - run: 
-          name: Run pod linter
-          command: bundle exec pod lib lint | bundle exec xcpretty
-
       - run:
-          name: Carthage build with no skip current
-          command: carthage build --no-skip-current --no-use-binaries
-
-      - run:
-          name: Fastlane tests
+          name: Run tests
           command: bundle exec fastlane test
+
+      - run:
+          name: Carthage build
+          command: carthage build --no-skip-current --no-use-binaries
 
       - save_cache:
           paths:

@@ -1,0 +1,6 @@
+framework module Pods_VimeoNetworking_macOS {
+  umbrella header "Pods-VimeoNetworking-macOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

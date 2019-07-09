@@ -16,11 +16,6 @@ or alternatively using `brew cask install fastlane`
 
 # Available Actions
 ## iOS
-### ios build_example
-```
-fastlane ios build_example
-```
-buid the example project
 ### ios test
 ```
 fastlane ios test
