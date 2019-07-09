@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A7FC055AEFF9556FFE8F829 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9E421A0C039415A10550284 /* Pods_Example.framework */; };
 		3D9C42F62274604A000A6585 /* VimeoNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D9C429022745894000A6585 /* VimeoNetworking.framework */; };
 		3D9C43062274611B000A6585 /* VimeoNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D9C42A92274599D000A6585 /* VimeoNetworking.framework */; };
 		3D9C431622746198000A6585 /* VimeoNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D9C42C522745A07000A6585 /* VimeoNetworking.framework */; };
@@ -988,6 +989,7 @@
 		5B79216722C2B93B00FC1928 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OHHTTPStubs.framework; sourceTree = "<group>"; };
 		5B79216922C2B94400FC1928 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OHHTTPStubs.framework; sourceTree = "<group>"; };
 		A3D4536956BD9FAA823C9328 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
+		A9E421A0C039415A10550284 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D92ECBBF4607BB306FC2C456 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1047,6 +1049,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A7FC055AEFF9556FFE8F829 /* Pods_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1426,6 +1429,7 @@
 				5B79213F22C2A59B00FC1928 /* tvOS */,
 				5B79213C22C2A59300FC1928 /* Mac */,
 				5B79213922C2A58A00FC1928 /* iOS */,
+				A9E421A0C039415A10550284 /* Pods_Example.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
