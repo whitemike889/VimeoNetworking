@@ -35,9 +35,8 @@ jobs:
       - save_cache:
           paths:
             - vendor/bundle
-            - Carthage/Builds
           key: v1-gems-{{ checksum "Gemfile.lock" }}
-
+          
       - store_artifacts:
           path: output
 
