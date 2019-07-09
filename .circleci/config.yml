@@ -33,16 +33,17 @@ jobs:
           command: bundle exec pod lib lint | bundle exec xcpretty
 
       - run:
-          name: Danger
-          command: bundle exec fastlane run danger use_bundle_exec:false
-
-      - run:
           name: Carthage build with no skip current
           command: carthage build --no-skip-current --no-use-binaries
-          
+
+      - run:
+          name: Fastlane tests
+          command: bundle exec fastlane test
+
       - save_cache:
           paths:
             - vendor/bundle
+            - Carthage/Builds
           key: v1-gems-{{ checksum "Gemfile.lock" }}
 
       - store_artifacts:
