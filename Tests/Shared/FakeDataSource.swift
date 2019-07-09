@@ -27,34 +27,28 @@
 import Foundation
 @testable import VimeoNetworking
 
-class FakeDataSource<T: VIMMappable>
-{
+class FakeDataSource<T: VIMMappable> {
     private let mapper = VIMObjectMapper()
     
     var items: [T]?
     var error: NSError?
     
-    init(jsonData: [AnyHashable: Any], keyPath: String)
-    {                
+    init(jsonData: [AnyHashable: Any], keyPath: String) {
         mapper.addMappingClass(T.self, forKeypath: keyPath)
         
-        guard let mappedData = mapper.applyMapping(toJSON: jsonData) as? [AnyHashable: Any] else
-        {
+        guard let mappedData = mapper.applyMapping(toJSON: jsonData) as? [AnyHashable: Any] else {
             return
         }
         
-        if let objects = mappedData["data"] as? [T]
-        {
+        if let objects = mappedData["data"] as? [T] {
             self.items = objects
         }
-        else if let object = mappedData as? T
-        {
+        else if let object = mappedData as? T {
             self.items = [object]
         }
     }
 
-    static func loadJSONFile(jsonFileName: String, withExtension: String) -> [AnyHashable: Any]
-    {
+    static func loadJSONFile(jsonFileName: String, withExtension: String) -> [AnyHashable: Any] {
         let jsonFilePath = Bundle.main.path(forResource: jsonFileName, ofType: withExtension)
         let jsonData = try? Data(contentsOf: URL(fileURLWithPath: jsonFilePath!))
         let jsonDict = try! JSONSerialization.jsonObject(with: jsonData!, options: JSONSerialization.ReadingOptions.allowFragments)

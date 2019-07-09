@@ -27,10 +27,8 @@
 import XCTest
 @testable import VimeoNetworking
 
-class VIMQuantityQuota_Tests: XCTestCase
-{
-    func test_QuantityQuota_ValidDataReturnsCorrectValues()
-    {
+class VIMQuantityQuota_Tests: XCTestCase {
+    func test_QuantityQuota_ValidDataReturnsCorrectValues() {
         let json = ["hd" : 1, "sd" : 0]
         let quota = try! VIMObjectMapper.mapObject(responseDictionary: json) as VIMQuantityQuota
         
@@ -38,24 +36,21 @@ class VIMQuantityQuota_Tests: XCTestCase
         XCTAssertFalse(quota.canUploadSd)
     }
     
-    func test_QuantityQuota_NilValues_ReturnFalse()
-    {
+    func test_QuantityQuota_NilValues_ReturnFalse() {
         let quota = try! VIMObjectMapper.mapObject(responseDictionary: ["hd" : NSNull(), "sd" : NSNull()]) as VIMQuantityQuota
         
         XCTAssertFalse(quota.canUploadHd)
         XCTAssertFalse(quota.canUploadSd)
     }
     
-    func test_QuantityQuota_EmptyStrings_ReturnFalse()
-    {
+    func test_QuantityQuota_EmptyStrings_ReturnFalse() {
         let quota = try! VIMObjectMapper.mapObject(responseDictionary: ["hd" : "", "sd" : ""]) as VIMQuantityQuota
         
         XCTAssertFalse(quota.canUploadHd)
         XCTAssertFalse(quota.canUploadSd)
     }
     
-    func test_QuantityQuota_Dictionary_ReturnFalse()
-    {
+    func test_QuantityQuota_Dictionary_ReturnFalse() {
         let quota = try! VIMObjectMapper.mapObject(responseDictionary: ["hd" : NSDictionary(), "sd" : NSDictionary()]) as VIMQuantityQuota
         
         XCTAssertFalse(quota.canUploadHd)

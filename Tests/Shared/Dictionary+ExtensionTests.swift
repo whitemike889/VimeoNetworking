@@ -27,10 +27,8 @@
 import XCTest
 @testable import VimeoNetworking
 
-class Dictionary_ExtensionTests: XCTestCase
-{
-    func test_DictionaryExtension_AppendAddsNewItemsFromDictionary()
-    {
+class Dictionary_ExtensionTests: XCTestCase {
+    func test_DictionaryExtension_AppendAddsNewItemsFromDictionary() {
         let comparisonDict = ["testKey1" : "testValue1", "testKey2" : "testValue2", "testKey3" : "testValue3"]
         
         var dictionary = ["testKey1" : "testValue1"]

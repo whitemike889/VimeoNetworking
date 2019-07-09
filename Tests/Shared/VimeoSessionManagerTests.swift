@@ -29,10 +29,8 @@ import XCTest
 
 let TestVimeoBaseURL = URL(string: "https://api.vimeo.com")!
 
-class VimeoSessionManagerTests: XCTestCase
-{
-    func test_VimeoSessionManager_defaultBaseUrl()
-    {
+class VimeoSessionManagerTests: XCTestCase {
+    func test_VimeoSessionManager_defaultBaseUrl() {
         let configuration = AppConfiguration(clientIdentifier: "{TEST CLIENT ID}",
                                              clientSecret: "{TEST CLIENT SECRET}",
                                              scopes: [.Public, .Private, .Purchased, .Create, .Edit, .Delete, .Interact, .Upload],
@@ -43,8 +41,7 @@ class VimeoSessionManagerTests: XCTestCase
         XCTAssertEqual(sessionManager.baseURL, TestVimeoBaseURL)
     }
     
-    func test_VimeoSessionManager_canSetBaseUrl()
-    {
+    func test_VimeoSessionManager_canSetBaseUrl() {
         let testApiServer = URL(string: "https://test.api.vimeo.com")!
         let configuration = AppConfiguration(clientIdentifier: "{TEST CLIENT ID}",
                                              clientSecret: "{TEST CLIENT SECRET}",
@@ -57,8 +54,7 @@ class VimeoSessionManagerTests: XCTestCase
         XCTAssertEqual(sessionManager.baseURL, testApiServer)
     }
     
-    func test_VimeoSessionManager_canCreateTasksWithOverridenBaseUrl()
-    {
+    func test_VimeoSessionManager_canCreateTasksWithOverridenBaseUrl() {
         let testApiServer = URL(string: "https://test.api.vimeo.com")!
         let configuration = AppConfiguration(clientIdentifier: "{TEST CLIENT ID}",
                                              clientSecret: "{TEST CLIENT SECRET}",
@@ -88,8 +84,7 @@ class VimeoSessionManagerTests: XCTestCase
         XCTAssertEqual(task?.currentRequest?.url, testUrl)
     }
     
-    func test_VimeoSessionManager_canCreateTasksWithDefaultBaseUrl()
-    {
+    func test_VimeoSessionManager_canCreateTasksWithDefaultBaseUrl() {
         let configuration = AppConfiguration(clientIdentifier: "{TEST CLIENT ID}",
                                              clientSecret: "{TEST CLIENT SECRET}",
                                              scopes: [.Public, .Private, .Purchased, .Create, .Edit, .Delete, .Interact, .Upload],
@@ -117,8 +112,7 @@ class VimeoSessionManagerTests: XCTestCase
         XCTAssertEqual(task?.currentRequest?.url, testUrl)
     }
     
-    func test_VimeoSessionManager_handleClientDidAuthenticate_setsCorrectTokenOnRequestSerializer()
-    {
+    func test_VimeoSessionManager_handleClientDidAuthenticate_setsCorrectTokenOnRequestSerializer() {
         let configuration = AppConfiguration(clientIdentifier: "{TEST CLIENT ID}",
                                              clientSecret: "{TEST CLIENT SECRET}",
                                              scopes: [.Public, .Private, .Purchased, .Create, .Edit, .Delete, .Interact, .Upload],
@@ -132,8 +126,7 @@ class VimeoSessionManagerTests: XCTestCase
         
         sessionManager.clientDidAuthenticate(with: testAccount)
         
-        guard let requestSerializer = sessionManager.requestSerializer as? VimeoRequestSerializer else
-        {
+        guard let requestSerializer = sessionManager.requestSerializer as? VimeoRequestSerializer else {
             XCTFail("Incorrect request serializer")
             return
         }
@@ -141,8 +134,7 @@ class VimeoSessionManagerTests: XCTestCase
         XCTAssertEqual(requestSerializer.accessTokenProvider?(), testAccount.accessToken)
     }
     
-    func test_VimeoSessionManager_handleClientDidClearAccount_clearsTokenOnRequestSerializer()
-    {
+    func test_VimeoSessionManager_handleClientDidClearAccount_clearsTokenOnRequestSerializer() {
         let configuration = AppConfiguration(clientIdentifier: "{TEST CLIENT ID}",
                                              clientSecret: "{TEST CLIENT SECRET}",
                                              scopes: [.Public, .Private, .Purchased, .Create, .Edit, .Delete, .Interact, .Upload],
@@ -154,8 +146,7 @@ class VimeoSessionManagerTests: XCTestCase
         let testAccount = VIMAccount()
         testAccount.accessToken = "TestAccessToken"
         
-        guard let requestSerializer = sessionManager.requestSerializer as? VimeoRequestSerializer else
-        {
+        guard let requestSerializer = sessionManager.requestSerializer as? VimeoRequestSerializer else {
             XCTFail("Incorrect request serializer")
             return
         }

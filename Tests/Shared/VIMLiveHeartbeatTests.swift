@@ -28,10 +28,8 @@ import XCTest
 import OHHTTPStubs
 @testable import VimeoNetworking
 
-class VIMLiveHeartbeatTests: XCTestCase
-{
-    override func setUp()
-    {
+class VIMLiveHeartbeatTests: XCTestCase {
+    override func setUp() {
         super.setUp()
         
         VimeoClient.configureSharedClient(withAppConfiguration: AppConfiguration(clientIdentifier: "{CLIENT_ID}",
@@ -41,15 +39,13 @@ class VIMLiveHeartbeatTests: XCTestCase
                                                                                  apiVersion: "3.3.13"), configureSessionManagerBlock: nil)
     }
     
-    override func tearDown()
-    {
+    override func tearDown() {
         super.tearDown()
         
         OHHTTPStubs.removeAllStubs()
     }
     
-    func testParsingLiveHeartbeatObject()
-    {
+    func testParsingLiveHeartbeatObject() {
         let request = Request<VIMVideo>(path: "/videos/" + Constants.CensoredId)
         
         stub(condition: isPath("/videos/" + Constants.CensoredId)) { _ in
@@ -60,10 +56,9 @@ class VIMLiveHeartbeatTests: XCTestCase
         let expectation = self.expectation(description: "Network call expectation")
         
         _ = VimeoClient.sharedClient.request(request) { response in
-            switch response
-            {
+            switch response {
             case .success(let result):
-                let video = result.model                
+                let video = result.model
                 let liveHeartbeat = video.playRepresentation?.hlsFile?.heartbeat
                 
                 XCTAssertNotNil(liveHeartbeat)
@@ -77,8 +72,7 @@ class VIMLiveHeartbeatTests: XCTestCase
         }
         
         self.waitForExpectations(timeout: 1.0) { error in
-            if let unWrappedError = error
-            {
+            if let unWrappedError = error {
                 XCTFail("\(unWrappedError)")
             }
         }

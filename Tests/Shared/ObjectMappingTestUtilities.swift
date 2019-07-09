@@ -27,12 +27,9 @@
 import Foundation
 import VimeoNetworking
 
-class ResponseUtilities
-{
-    static func loadResponse(from fileName: String) -> VimeoClient.ResponseDictionary?
-    {
-        guard let fileUrl = Bundle(for: self).url(forResource: fileName, withExtension: nil) else
-        {
+class ResponseUtilities {
+    static func loadResponse(from fileName: String) -> VimeoClient.ResponseDictionary? {
+        guard let fileUrl = Bundle(for: self).url(forResource: fileName, withExtension: nil) else {
             return nil
         }
         

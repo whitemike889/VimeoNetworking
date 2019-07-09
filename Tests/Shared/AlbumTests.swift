@@ -115,8 +115,7 @@ class AlbumTests: XCTestCase {
         XCTAssertEqual(videosConnection?.total, 2, "The total number of videos in the connection do not much the expected number of 2.")
     }
     
-    func test_isPasswordProtected_returnsTrue_whenPrivacyViewIsPassword()
-    {
+    func test_isPasswordProtected_returnsTrue_whenPrivacyViewIsPassword() {
         let privacyDictionary: [String: Any] = ["view": "password"]
         let privacy = VIMPrivacy(keyValueDictionary: privacyDictionary)!
         let videoDictionary: [String: Any] = ["privacy": privacy as Any]
@@ -124,8 +123,7 @@ class AlbumTests: XCTestCase {
         XCTAssertTrue(testAlbum.isPasswordProtected(), "Test album should return as password protected.")
     }
     
-    func test_isPasswordProtected_returnsFalse_whenPrivacyViewIsEmbedOnly()
-    {
+    func test_isPasswordProtected_returnsFalse_whenPrivacyViewIsEmbedOnly() {
         let privacyDictionary: [String: Any] = ["view": "embed_only"]
         let privacy = VIMPrivacy(keyValueDictionary: privacyDictionary)!
         let videoDictionary: [String: Any] = ["privacy": privacy as Any]

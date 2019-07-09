@@ -28,4 +28,3 @@ fastlane/test_output
 
 # Exclude fastlane xcode log
 xcodebuild.log
-Pods/*

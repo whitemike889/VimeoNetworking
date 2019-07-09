@@ -27,21 +27,18 @@
 import XCTest
 @testable import VimeoNetworking
 
-class VimeoClientTests: XCTestCase
-{
+class VimeoClientTests: XCTestCase {
     let configuration = AppConfiguration(clientIdentifier: "{CLIENT ID}",
                                          clientSecret: "{CLIENT SECRET}",
                                          scopes: [.Public, .Private, .Purchased, .Create, .Edit, .Delete, .Interact, .Upload],
                                          keychainService: "com.vimeo.keychain_service",
                                          apiVersion: "3.3")
     
-    lazy var client: VimeoClient =
-    {
+    lazy var client: VimeoClient = {
         return VimeoClient(appConfiguration: self.configuration, configureSessionManagerBlock: nil)
     }()
     
-    func testInitialCurrentAccountNotificationUserInfo()
-    {
+    func testInitialCurrentAccountNotificationUserInfo() {
         let expectation = self.expectation(description: "Wait for initial account notification")
         let token: ObservationToken? = NetworkingNotification.authenticatedAccountDidChange.observe() { (notification: Notification) in
             XCTAssert(notification.object != nil)
@@ -60,8 +57,7 @@ class VimeoClientTests: XCTestCase
         NetworkingNotification.authenticatedAccountDidChange.removeObserver(target: self)
     }
     
-    func testSubsequentAccountNotificationUserInfo()
-    {
+    func testSubsequentAccountNotificationUserInfo() {
         let firstAccount = VIMAccount()
         let secondAccount = VIMAccount()
         

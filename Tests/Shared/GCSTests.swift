@@ -28,10 +28,8 @@ import XCTest
 import OHHTTPStubs
 import VimeoNetworking
 
-class GCSTests: XCTestCase
-{
-    override func setUp()
-    {
+class GCSTests: XCTestCase {
+    override func setUp() {
         super.setUp()
         
         VimeoClient.configureSharedClient(withAppConfiguration: AppConfiguration(clientIdentifier: "{CLIENT_ID}",
@@ -41,8 +39,7 @@ class GCSTests: XCTestCase
                                                                                  apiVersion: "3.3.10"), configureSessionManagerBlock: nil)
     }
     
-    func test_gcsResponse_getsParsedIntoGCSObject()
-    {
+    func test_gcsResponse_getsParsedIntoGCSObject() {
         let request = Request<GCS>(path: "/videos/" + Constants.CensoredId)
         
         stub(condition: isPath("/videos/" + Constants.CensoredId)) { _ in
@@ -53,8 +50,7 @@ class GCSTests: XCTestCase
         let expectation = self.expectation(description: "Network call expectation")
         
         _ = VimeoClient.sharedClient.request(request) { response in
-            switch response
-            {
+            switch response {
             case .success(let result):
                 let gcs = result.model
                 
@@ -75,8 +71,7 @@ class GCSTests: XCTestCase
         }
         
         self.waitForExpectations(timeout: 1.0) { error in
-            if let unWrappedError = error
-            {
+            if let unWrappedError = error {
                 XCTFail("\(unWrappedError)")
             }
         }

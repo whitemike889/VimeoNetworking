@@ -20,31 +20,11 @@ platform :ios do
     ensure_xcode_version(version: "10.2.1")
   end
 
-  desc "buid the example project"
-  lane :build_example do |options|
-    
-    # cant use gym: https://github.com/fastlane/fastlane/issues/1816
-    xcodebuild(
-      workspace: "VimeoNetworking.xcworkspace",
-      scheme: "VimeoNetworkingExample-iOS",
-      configuration: "Release",
-      build: true,
-      destination: "generic/platform=iOS",
-      build_settings: {
-        "CODE_SIGNING_REQUIRED" => "NO",
-        "CODE_SIGN_IDENTITY" => ""
-      },
-      buildlog_path: ".",
-      derived_data_path: "build/"
-    )
-
-  end
-
   desc "run tests"
   lane :test do |options|
     scan(
       workspace: "VimeoNetworking.xcworkspace",
-      scheme: "VimeoNetworkingExample-iOS",
+      scheme: "VimeoNetworking-iOS",
       configuration: "Debug",
       buildlog_path: ".",
       derived_data_path: "build/",
@@ -71,7 +51,7 @@ platform :ios do
     increment_version_number(
       bump_type: bump_type,
       version_number: version_number,
-      xcodeproj: "VimeoNetworkingExample-iOS/VimeoNetworkingExample-iOS.xcodeproj"
+      xcodeproj: "VimeoNetworking-iOS.xcodeproj"
     )
 
     version_bump_podspec(

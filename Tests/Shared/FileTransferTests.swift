@@ -59,8 +59,7 @@ class FileTransferTests: XCTestCase {
         let expectation = self.expectation(description: "Network call expectation")
         
         _ = VimeoClient.sharedClient.request(request) { response in
-            switch response
-            {
+            switch response {
             case .success(let result):
                 let video = result.model
                 
@@ -75,8 +74,7 @@ class FileTransferTests: XCTestCase {
         }
         
         self.waitForExpectations(timeout: 1.0) { error in
-            if let unWrappedError = error
-            {
+            if let unWrappedError = error {
                 XCTFail("\(unWrappedError)")
             }
         }

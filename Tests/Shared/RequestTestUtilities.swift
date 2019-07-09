@@ -27,14 +27,11 @@
 import Foundation
 @testable import VimeoNetworking
 
-class RequestComparisons
-{
+class RequestComparisons {
     static let CompareRetryPolicies = { (policyToTest: RetryPolicy, comparePolicy: RetryPolicy) -> Bool in
-        switch policyToTest
-        {
+        switch policyToTest {
         case .singleAttempt:
-            switch comparePolicy
-            {
+            switch comparePolicy {
             case .singleAttempt:
                 return true
             default:
@@ -42,8 +39,7 @@ class RequestComparisons
             }
         default:
             if case .multipleAttempts(let attemptCount, let initialDelay) = policyToTest,
-                case .multipleAttempts(let testValueCount, let testDelay) = comparePolicy
-            {
+                case .multipleAttempts(let testValueCount, let testDelay) = comparePolicy {
                 return attemptCount == testValueCount && initialDelay == testDelay
             }
             
@@ -51,8 +47,7 @@ class RequestComparisons
         }
     }
     
-    static func ValidateDefaults<ModelType>(request: Request<ModelType>) -> Bool
-    {
+    static func ValidateDefaults<ModelType>(request: Request<ModelType>) -> Bool {
         return request.method == .GET
             && request.parameters == nil
             && request.modelKeyPath == nil

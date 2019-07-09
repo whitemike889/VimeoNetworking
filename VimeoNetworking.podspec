@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
                               "Freddy Kellison-Linn" => "freddyk@vimeo.com>"}
 
   s.social_media_url        = "http://twitter.com/vimeo"
-  s.ios.deployment_target   = "8.0"
+  s.ios.deployment_target   = "10.3"
   s.tvos.deployment_target  = "9.0"
   s.osx.deployment_target   = "10.11"
   
@@ -32,5 +32,16 @@ Pod::Spec.new do |s|
   s.frameworks              = "Foundation"
 
   s.dependency 'AFNetworking', '3.1.0'
+
+  s.test_spec 'Tests' do |test_spec|
+
+    test_spec.source_files            = "Tests/Shared/**/*.{h,m,swift}"
+    test_spec.ios.source_files        = "Tests/iOS/**/*.{h,m,swift}"
+    test_spec.tvos.source_files       = "Tests/tvOS/**/*.{h,m,swift}"
+    test_spec.osx.source_files        = "Tests/macOS/**/*.{h,m,swift}"
+    test_spec.resources               = "Tests/Fixtures/**/*.*"        
+    
+    test_spec.dependency 'OHHTTPStubs/Swift', '8.0.0'
+  end  
 
 end

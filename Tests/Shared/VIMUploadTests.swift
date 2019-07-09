@@ -27,10 +27,8 @@
 import XCTest
 @testable import VimeoNetworking
 
-class VIMUploadTests: XCTestCase
-{
-    func test_didFinishMapping_createsUploadApproach()
-    {
+class VIMUploadTests: XCTestCase {
+    func test_didFinishMapping_createsUploadApproach() {
         var uploadDictionary: [String: Any] = ["approach": "streaming"]
         var uploadObject = VIMUpload(keyValueDictionary: uploadDictionary)!
         uploadObject.didFinishMapping()
@@ -52,8 +50,7 @@ class VIMUploadTests: XCTestCase
         XCTAssertTrue(uploadObject.uploadApproach == VIMUpload.UploadApproach.Tus, "VIMUpload did not correctly map raw value to Swift enum UploadApproach.")
     }
     
-    func test_didFinishMapping_createsUploadStatus()
-    {
+    func test_didFinishMapping_createsUploadStatus() {
         var uploadDictionary: [String: Any] = ["status": "complete"]
         var uploadObject = VIMUpload(keyValueDictionary: uploadDictionary)!
         uploadObject.didFinishMapping()

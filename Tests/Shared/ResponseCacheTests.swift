@@ -27,27 +27,23 @@
 import XCTest
 @testable import VimeoNetworking
 
-class ResponseCacheTests: XCTestCase
-{
+class ResponseCacheTests: XCTestCase {
     private let responseCache = ResponseCache(cacheDirectory: "com.vimeo.tests.Caches")
     
-    override func setUp()
-    {
+    override func setUp() {
         super.setUp()
         
         responseCache.clear()
     }
     
-    func test_ResponseCache_CanStoreAndRetrieveResponse()
-    {
+    func test_ResponseCache_CanStoreAndRetrieveResponse() {
         let request = Request<VIMCategory>(path: "/test/path")
         let categoryJSONDict = ResponseUtilities.loadResponse(from: "categories-animation-response.json")
         
         self.responseCache.setResponse(responseDictionary: categoryJSONDict!, forRequest: request)
         
         self.responseCache.response(forRequest: request) { result in
-            switch result
-            {
+            switch result {
             case .success(let responseDictionary):
                 XCTAssertNotNil(responseDictionary)
                 
@@ -57,8 +53,7 @@ class ResponseCacheTests: XCTestCase
         }
     }
     
-    func test_ResponseCache_CanRemoveResponseFromCache()
-    {
+    func test_ResponseCache_CanRemoveResponseFromCache() {
         let request1 = Request<VIMCategory>(path: "/test/path1")
         let request2 = Request<VIMCategory>(path: "/test/path2")
         
@@ -70,8 +65,7 @@ class ResponseCacheTests: XCTestCase
         self.responseCache.removeResponse(forKey: request1.cacheKey)
         
         self.responseCache.response(forRequest: request1) { result in
-            switch result
-            {
+            switch result {
             case .success(let responseDictionary):
                 XCTAssertNil(responseDictionary)
                 
@@ -81,8 +75,7 @@ class ResponseCacheTests: XCTestCase
         }
         
         self.responseCache.response(forRequest: request2) { result in
-            switch result
-            {
+            switch result {
             case .success(let responseDictionary):
                 XCTAssertNotNil(responseDictionary)
                 
@@ -92,8 +85,7 @@ class ResponseCacheTests: XCTestCase
         }
     }
  
-    func test_ResponseCache_clearRemovesAllEntries()
-    {
+    func test_ResponseCache_clearRemovesAllEntries() {
         let request1 = Request<VIMCategory>(path: "/test/path1")
         let request2 = Request<VIMCategory>(path: "/test/path2")
         
@@ -105,8 +97,7 @@ class ResponseCacheTests: XCTestCase
         self.responseCache.clear()
         
         self.responseCache.response(forRequest: request1) { result in
-            switch result
-            {
+            switch result {
             case .success(let responseDictionary):
                 XCTAssertNil(responseDictionary)
                 
@@ -116,8 +107,7 @@ class ResponseCacheTests: XCTestCase
         }
         
         self.responseCache.response(forRequest: request2) { result in
-            switch result
-            {
+            switch result {
             case .success(let responseDictionary):
                 XCTAssertNil(responseDictionary)
                 

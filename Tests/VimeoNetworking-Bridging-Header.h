@@ -24,10 +24,5 @@
 //  THE SOFTWARE.
 //
 
-#ifndef VimeoNetworking_Bridging_Header_h
-#define VimeoNetworking_Bridging_Header_h
-
 @import AFNetworking;
 @import VimeoNetworking;
-
-#endif /* VimeoNetworking_Bridging_Header_h */

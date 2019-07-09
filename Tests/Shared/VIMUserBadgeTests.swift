@@ -28,10 +28,8 @@ import XCTest
 import OHHTTPStubs
 @testable import VimeoNetworking
 
-class VIMUserBadgeTests: XCTestCase
-{
-    override func setUp()
-    {
+class VIMUserBadgeTests: XCTestCase {
+    override func setUp() {
         super.setUp()
         
         VimeoClient.configureSharedClient(withAppConfiguration: AppConfiguration(clientIdentifier: "{CLIENT_ID}",
@@ -42,28 +40,24 @@ class VIMUserBadgeTests: XCTestCase
                                                                                  configureSessionManagerBlock: nil)
     }
     
-    override func tearDown()
-    {
+    override func tearDown() {
         super.tearDown()
         
         OHHTTPStubs.removeAllStubs()
     }
     
-    private func stubResponse(withFile fileName: String)
-    {
+    private func stubResponse(withFile fileName: String) {
         stub(condition: isPath("/users/" + Constants.CensoredId)) { _ in
             let stubPath = OHPathForFile(fileName, type(of: self))
             return fixture(filePath: stubPath!, headers: ["Content-Type":"application/json"])
         }
     }
     
-    private func checkReturnedBadgeType(withExpectedType expectedType: VIMUserBadgeType, andExpectation expectation: XCTestExpectation)
-    {
+    private func checkReturnedBadgeType(withExpectedType expectedType: VIMUserBadgeType, andExpectation expectation: XCTestExpectation) {
         let request = Request<VIMUser>(path: "/users/" + Constants.CensoredId)
         
         _ = VimeoClient.sharedClient.request(request, completion: { (response) in
-            switch response
-            {
+            switch response {
             case .success(let result):
                 XCTAssertEqual(result.model.membership?.badge?.badgeType, expectedType)
                 
@@ -77,71 +71,61 @@ class VIMUserBadgeTests: XCTestCase
         self.wait(for: [expectation], timeout: 1.0)
     }
     
-    func testUserObjectReturningBasicBadge()
-    {
+    func testUserObjectReturningBasicBadge() {
         self.stubResponse(withFile: "user_basic.json")
         let expectation = self.expectation(description: "Expectation for Basic Badge")
         self.checkReturnedBadgeType(withExpectedType: .default, andExpectation: expectation)
     }
     
-    func testUserObjectReturningPlusBadge()
-    {
+    func testUserObjectReturningPlusBadge() {
         self.stubResponse(withFile: "user_plus.json")
         let expectation = self.expectation(description: "Expectation for Plus Badge")
         self.checkReturnedBadgeType(withExpectedType: .plus, andExpectation: expectation)
     }
     
-    func testUserObjectReturningProBadge()
-    {
+    func testUserObjectReturningProBadge() {
         self.stubResponse(withFile: "user_pro.json")
         let expectation = self.expectation(description: "Expectation for Pro Badge")
         self.checkReturnedBadgeType(withExpectedType: .pro, andExpectation: expectation)
     }
     
-    func testUserObjectReturningBusinessBadge()
-    {
+    func testUserObjectReturningBusinessBadge() {
         self.stubResponse(withFile: "user_business.json")
         let expectation = self.expectation(description: "Expectation for Business Badge")
         self.checkReturnedBadgeType(withExpectedType: .business, andExpectation: expectation)
     }
     
-    func testUserObjectReturningLiveBusinessBadge()
-    {
+    func testUserObjectReturningLiveBusinessBadge() {
         self.stubResponse(withFile: "user_live_business.json")
         let expectation = self.expectation(description: "Expectation for Live Business Badge")
         self.checkReturnedBadgeType(withExpectedType: .liveBusiness, andExpectation: expectation)
     }
     
-    func testUserObjectReturningLiveProBadge()
-    {
+    func testUserObjectReturningLiveProBadge() {
         self.stubResponse(withFile: "user_live_pro.json")
         let expectation = self.expectation(description: "Expectation for Live Pro Badge")
         self.checkReturnedBadgeType(withExpectedType: .livePro, andExpectation: expectation)
     }
     
-    func testUserObjectReturningStaffBadge()
-    {
+    func testUserObjectReturningStaffBadge() {
         self.stubResponse(withFile: "user_staff.json")
         let expectation = self.expectation(description: "Expectation for Staff Badge")
         self.checkReturnedBadgeType(withExpectedType: .staff, andExpectation: expectation)
     }
     
-    func testUserObjectReturningCurationBadge()
-    {
+    func testUserObjectReturningCurationBadge() {
         self.stubResponse(withFile: "user_curation.json")
         let expectation = self.expectation(description: "Expectation for Curation Badge")
         self.checkReturnedBadgeType(withExpectedType: .curation, andExpectation: expectation)
     }
     
-    func testUserObjectReturningSupportBadge()
-    {
+    func testUserObjectReturningSupportBadge() {
         self.stubResponse(withFile: "user_support.json")
         let expectation = self.expectation(description: "Expectation for Support Badge")
         self.checkReturnedBadgeType(withExpectedType: .support, andExpectation: expectation)
     }
     
-    func testUserObjectReturningAlumBadge()
-    {
+    func testUserObjectReturningAlumBadge() {
         self.stubResponse(withFile: "user_alum.json")
         let expectation = self.expectation(description: "Expectation for Alum Badge")
         self.checkReturnedBadgeType(withExpectedType: .alum, andExpectation: expectation)
