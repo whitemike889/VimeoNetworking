@@ -40,7 +40,6 @@ platform :ios do
     if is_ci? && !is_fork_pr
       danger(use_bundle_exec: false)
     end
-
   end
 
   desc "bumps the project and podspec version"
