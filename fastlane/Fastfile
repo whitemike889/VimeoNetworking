@@ -39,6 +39,8 @@ platform :ios do
     is_fork_pr = (ENV["CIRCLE_BRANCH"] =~ /pull\/[0-9]+/) != nil
     if is_ci? && !is_fork_pr
       danger(use_bundle_exec: false)
+    else 
+      UI.message "Skipping danger: is_ci? #{is_ci?}, is_fork_pr? #{is_fork_pr}"
     end
   end
 
