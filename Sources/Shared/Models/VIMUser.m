@@ -43,6 +43,7 @@ static NSString *const LiveBusiness = @"live_business";
 static NSString *const LivePremium = @"live_premium";
 static NSString *const ProUnlimited = @"pro_unlimited";
 static NSString *const Producer = @"producer";
+static NSString *const Enterprise = @"enterprise";
 
 @interface VIMUser ()
 
@@ -254,6 +255,10 @@ static NSString *const Producer = @"producer";
     {
         self.accountType = VIMUserAccountTypeProducer;
     }
+    else if ([self.membership.type isEqualToString:Enterprise])
+    {
+        self.accountType = VIMUserAccountTypeEnterprise;
+    }
 }
 
 - (void)parseEmails
@@ -326,6 +331,8 @@ static NSString *const Producer = @"producer";
             return ProUnlimited;
         case VIMUserAccountTypeProducer:
             return Producer;
+        case VIMUserAccountTypeEnterprise:
+            return Enterprise;
     }
 }
 
