@@ -33,15 +33,7 @@
 /// - plus: "Vimeo Plus" tier.
 /// - pro: "Vimeo PRO" tier.
 /// - proUnlimited: "Custom Live" tier.
-public enum AccountType: String {
-    case basic = "basic"
-    case business = "business"
-    case liveBusiness = "live_business"
-    case livePro = "live_pro"
-    case plus = "plus"
-    case pro = "pro"
-    case proUnlimited = "pro_unlimited"
-}
+public typealias AccountType = VIMUserAccountType
 
 /// An object representing the `user` field in a `chat` response.
 public class VIMLiveChatUser: VIMModelObject {
@@ -60,7 +52,7 @@ public class VIMLiveChatUser: VIMModelObject {
             return nil
         }
         
-        return AccountType(rawValue: accountValue)
+        return AccountType(string: accountValue)
     }
     
     /// The user's ID.
