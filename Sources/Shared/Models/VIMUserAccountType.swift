@@ -73,8 +73,6 @@ extension VIMUserAccountType: CustomStringConvertible {
             return .producer
         case .enterprise:
             return .enterprise
-        @unknown default:
-            return .unknown
         }
     }
     
@@ -91,7 +89,6 @@ private extension String {
     static let proUnlimited = "pro_unlimited"
     static let producer = "producer"
     static let enterprise = "enterprise"
-    static let unknown = "unknown"
 }
 
 // Objective-C convenience bridge

@@ -39,7 +39,7 @@ public class VIMLiveChatUser: VIMModelObject {
     public var accountType: VIMUserAccountType? {
         guard let accountValue = self.account else {
             return nil
-        }        
+        }
         return VIMUserAccountType(string: accountValue)
     }
     
