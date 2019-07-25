@@ -6,7 +6,7 @@ jobs:
       BUNDLE_PATH: vendor/bundle
       FL_OUTPUT_DIR: output
     macos:
-      xcode: "10.2.0"
+      xcode: "10.2.1"
     working_directory: ~/VimeoNetworking
     shell: /bin/bash --login -o pipefail
     
@@ -24,18 +24,19 @@ jobs:
           name: Install bundler dependencies
           command: bundle install --path vendor/bundle
 
-      - run: 
-          name: Build and run iOS tests
-          command: bundle exec fastlane ios test
-          environment:
-            SCAN_DEVICE: iPhone 8
-            SCAN_SCHEME: VimeoNetworkingExample-iOS
+      - run:
+          name: Run tests
+          command: bundle exec fastlane test
+
+      - run:
+          name: Carthage build
+          command: carthage build --no-skip-current --no-use-binaries
 
       - save_cache:
           paths:
             - vendor/bundle
           key: v1-gems-{{ checksum "Gemfile.lock" }}
-
+          
       - store_artifacts:
           path: output
 
