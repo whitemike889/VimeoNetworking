@@ -1,0 +1,25 @@
+name: VimeoNetworking
+targets:
+  VimeoNetworking:
+    type: framework
+    platform: iOS
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.vimeo.networking
+      INFOPLIST_FILE: Example/iOS/Info.plist
+    sources:
+      - path: Sources/Resources
+      - path: Sources/iOS
+      - path: Sources/Shared
+    scheme:
+      testTargets:
+        - VimeoNetworkingTests
+  
+  VimeoNetworkingTests:
+    dependencies:
+      - target: VimeoNetworking
+    type: bundle.unit-test
+    platform: iOS
+    sources: 
+      - path: Tests/Fixtures
+      - path: Tests/Shared
+      - path: Tests/iOS
