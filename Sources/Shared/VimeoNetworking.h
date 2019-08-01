@@ -76,3 +76,6 @@ FOUNDATION_EXPORT const unsigned char VimeoNetworkingVersionString[];
 #import <VimeoNetworking/VIMNotificationsConnection.h>
 #import <VimeoNetworking/VIMThumbnailUploadTicket.h>
 #import <VimeoNetworking/VIMCredit.h>
+#import <VimeoNetworking/VIMSeason.h>
+#import <VimeoNetworking/VIMVODConnection.h>
+#import <VimeoNetworking/VIMVideoDASHFile.h>
