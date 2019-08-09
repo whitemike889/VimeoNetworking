@@ -666,6 +666,17 @@
 		7E388B7DAAA730F67222354D /* Pods_VimeoNetworking_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE25EE618A23DD07A19E67F5 /* Pods_VimeoNetworking_iOS.framework */; };
 		9E6913F9D6917E929DA785FE /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48683A775227828528A4492B /* Pods_Example.framework */; };
 		C1E13A752650AE7CE4523125 /* Pods_VimeoNetworking_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D711BBD962E1ACC44FB5766 /* Pods_VimeoNetworking_macOS.framework */; };
+		E4FF888222FE09A900A8F646 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FF888122FE09A900A8F646 /* Folder.swift */; };
+		E4FF888322FE09B100A8F646 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FF888122FE09A900A8F646 /* Folder.swift */; };
+		E4FF888422FE09B100A8F646 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FF888122FE09A900A8F646 /* Folder.swift */; };
+		E4FF889022FE0D1100A8F646 /* InteractionsParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FF888922FE0D1100A8F646 /* InteractionsParsing.swift */; };
+		E4FF889122FE0D1100A8F646 /* InteractionsProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FF888A22FE0D1100A8F646 /* InteractionsProviding.swift */; };
+		E4FF889222FE0D1100A8F646 /* MetadataParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FF888B22FE0D1100A8F646 /* MetadataParsing.swift */; };
+		E4FF889322FE0D1100A8F646 /* MetadataKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FF888C22FE0D1100A8F646 /* MetadataKeys.swift */; };
+		E4FF889422FE0D1100A8F646 /* ConnectionsParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FF888E22FE0D1100A8F646 /* ConnectionsParsing.swift */; };
+		E4FF889522FE0D1100A8F646 /* ConnectionsProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FF888F22FE0D1100A8F646 /* ConnectionsProviding.swift */; };
+		E4FF889822FE1A7200A8F646 /* TeamMemberConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FF889622FE1A7100A8F646 /* TeamMemberConnection.swift */; };
+		E4FF889922FE1A7200A8F646 /* TeamMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FF889722FE1A7200A8F646 /* TeamMember.swift */; };
 		E8A4DC3A157A4EC2E3E381A3 /* Pods_VimeoNetworking_macOS_VimeoNetworking_macOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08D548BFE2CDF46B766FBA2C /* Pods_VimeoNetworking_macOS_VimeoNetworking_macOSTests.framework */; };
 		F820920C3AA9B92D02E54151 /* Pods_VimeoNetworking_iOS_VimeoNetworking_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD1AC32F3AD058C45C9F45D /* Pods_VimeoNetworking_iOS_VimeoNetworking_iOSTests.framework */; };
 /* End PBXBuildFile section */
@@ -975,6 +986,15 @@
 		D6E44B6596C579E904293430 /* Pods-VimeoNetworking-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-macOS.debug.xcconfig"; path = "Target Support Files/Pods-VimeoNetworking-macOS/Pods-VimeoNetworking-macOS.debug.xcconfig"; sourceTree = "<group>"; };
 		DD31923433419940A369ACD6 /* Pods-VimeoNetworking-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-tvOS.release.xcconfig"; path = "Target Support Files/Pods-VimeoNetworking-tvOS/Pods-VimeoNetworking-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		E0B57677D6389DD87D6579D9 /* Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests/Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E4FF888122FE09A900A8F646 /* Folder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
+		E4FF888922FE0D1100A8F646 /* InteractionsParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractionsParsing.swift; sourceTree = "<group>"; };
+		E4FF888A22FE0D1100A8F646 /* InteractionsProviding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractionsProviding.swift; sourceTree = "<group>"; };
+		E4FF888B22FE0D1100A8F646 /* MetadataParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetadataParsing.swift; sourceTree = "<group>"; };
+		E4FF888C22FE0D1100A8F646 /* MetadataKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetadataKeys.swift; sourceTree = "<group>"; };
+		E4FF888E22FE0D1100A8F646 /* ConnectionsParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionsParsing.swift; sourceTree = "<group>"; };
+		E4FF888F22FE0D1100A8F646 /* ConnectionsProviding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionsProviding.swift; sourceTree = "<group>"; };
+		E4FF889622FE1A7100A8F646 /* TeamMemberConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamMemberConnection.swift; sourceTree = "<group>"; };
+		E4FF889722FE1A7200A8F646 /* TeamMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamMember.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1377,12 +1397,15 @@
 				5B5EEFB122B441A3005C66BE /* VIMVODItem.m */,
 				5B5EEFAB22B441A3005C66BE /* Album.swift */,
 				5B5EEFEF22B441A3005C66BE /* FileTransfer.swift */,
+				E4FF888122FE09A900A8F646 /* Folder.swift */,
 				5B5EEFEB22B441A3005C66BE /* GCS.swift */,
 				5B5EEFF222B441A3005C66BE /* PinCodeInfo.swift */,
 				5B5EEF8822B441A3005C66BE /* PlayProgress.swift */,
 				5B5EEFD822B441A3005C66BE /* Spatial.swift */,
 				5B5EEFBE22B441A3005C66BE /* Subscription.swift */,
 				5B5EEF8322B441A3005C66BE /* SubscriptionCollection.swift */,
+				E4FF889722FE1A7200A8F646 /* TeamMember.swift */,
+				E4FF889622FE1A7100A8F646 /* TeamMemberConnection.swift */,
 				5B5EEFE722B441A3005C66BE /* UserMembership.swift */,
 				5B5EEFB922B441A3005C66BE /* UserSubscription.swift */,
 				5B5EEFAE22B441A3005C66BE /* UserSubscriptionRenewal.swift */,
@@ -1402,6 +1425,7 @@
 				5B5EEFAA22B441A3005C66BE /* VIMSpace.swift */,
 				5B5EEF8922B441A3005C66BE /* VIMUpload.swift */,
 				5B5EEFCF22B441A3005C66BE /* VIMUploadQuota.swift */,
+				E4FF888722FE0D1100A8F646 /* Metadata */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1472,6 +1496,35 @@
 				AAF4B182ABDE6458EC73CBED /* Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		E4FF888722FE0D1100A8F646 /* Metadata */ = {
+			isa = PBXGroup;
+			children = (
+				E4FF888822FE0D1100A8F646 /* Interactions */,
+				E4FF888B22FE0D1100A8F646 /* MetadataParsing.swift */,
+				E4FF888C22FE0D1100A8F646 /* MetadataKeys.swift */,
+				E4FF888D22FE0D1100A8F646 /* Connections */,
+			);
+			path = Metadata;
+			sourceTree = "<group>";
+		};
+		E4FF888822FE0D1100A8F646 /* Interactions */ = {
+			isa = PBXGroup;
+			children = (
+				E4FF888922FE0D1100A8F646 /* InteractionsParsing.swift */,
+				E4FF888A22FE0D1100A8F646 /* InteractionsProviding.swift */,
+			);
+			path = Interactions;
+			sourceTree = "<group>";
+		};
+		E4FF888D22FE0D1100A8F646 /* Connections */ = {
+			isa = PBXGroup;
+			children = (
+				E4FF888E22FE0D1100A8F646 /* ConnectionsParsing.swift */,
+				E4FF888F22FE0D1100A8F646 /* ConnectionsProviding.swift */,
+			);
+			path = Connections;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2274,13 +2327,16 @@
 				5B5EF19222B441A4005C66BE /* FileTransfer.swift in Sources */,
 				5B5EF03F22B441A3005C66BE /* VimeoSessionManager+Constructors.swift in Sources */,
 				5B5EF1CE22B441A4005C66BE /* Request+Channel.swift in Sources */,
+				E4FF889522FE0D1100A8F646 /* ConnectionsProviding.swift in Sources */,
 				5B5EF06322B441A3005C66BE /* VIMModelObject.m in Sources */,
 				5B5EF13E22B441A4005C66BE /* VIMAccount.m in Sources */,
 				5B5EF0D822B441A4005C66BE /* VIMVODItem.m in Sources */,
+				E4FF889922FE1A7200A8F646 /* TeamMember.swift in Sources */,
 				5B5EF10522B441A4005C66BE /* VIMVideoDRMFiles.m in Sources */,
 				5B5EF14722B441A4005C66BE /* VIMLive.swift in Sources */,
 				5B5EF1A122B441A4005C66BE /* ErrorCode.swift in Sources */,
 				5B5EF09022B441A3005C66BE /* VIMSeason.m in Sources */,
+				E4FF889822FE1A7200A8F646 /* TeamMemberConnection.swift in Sources */,
 				5B5EF0E122B441A4005C66BE /* VIMActivity.m in Sources */,
 				5B5EF1C822B441A4005C66BE /* Dictionary+Extension.swift in Sources */,
 				5B5EF16222B441A4005C66BE /* VIMObjectMapper.m in Sources */,
@@ -2295,6 +2351,8 @@
 				5B5EF14422B441A4005C66BE /* VIMPrivacy.m in Sources */,
 				5B5EF03622B441A3005C66BE /* Result.swift in Sources */,
 				5B5EF04522B441A3005C66BE /* Request+Configs.swift in Sources */,
+				E4FF889022FE0D1100A8F646 /* InteractionsParsing.swift in Sources */,
+				E4FF888222FE09A900A8F646 /* Folder.swift in Sources */,
 				5B5EF1BC22B441A4005C66BE /* Request.swift in Sources */,
 				5B5EF00F22B441A3005C66BE /* Mappable.swift in Sources */,
 				5B5EF13222B441A4005C66BE /* VIMUploadQuota.swift in Sources */,
@@ -2304,6 +2362,7 @@
 				5B5EF14122B441A4005C66BE /* VIMPolicyDocument.m in Sources */,
 				5B5EF18622B441A4005C66BE /* GCS.swift in Sources */,
 				5B5EF1C522B441A4005C66BE /* NSURLSessionConfiguration+Extensions.swift in Sources */,
+				E4FF889222FE0D1100A8F646 /* MetadataParsing.swift in Sources */,
 				5B5EF14D22B441A4005C66BE /* Spatial.swift in Sources */,
 				5B5EF13822B441A4005C66BE /* VIMLiveStreams.swift in Sources */,
 				5B5EF1DA22B441A4005C66BE /* Request+Video.swift in Sources */,
@@ -2315,10 +2374,12 @@
 				5B5EF15022B441A4005C66BE /* VIMTrigger.m in Sources */,
 				5B5EF09F22B441A4005C66BE /* VIMTag.m in Sources */,
 				5B5EF07822B441A3005C66BE /* VIMSizeQuota.swift in Sources */,
+				E4FF889322FE0D1100A8F646 /* MetadataKeys.swift in Sources */,
 				5B5EF1D722B441A4005C66BE /* AccountStore.swift in Sources */,
 				5B5EF1CB22B441A4005C66BE /* VimeoRequestSerializer.swift in Sources */,
 				5B5EF02422B441A3005C66BE /* Request+ProgrammedContent.swift in Sources */,
 				5B5EF1E622B441A4005C66BE /* Request+Notifications.swift in Sources */,
+				E4FF889422FE0D1100A8F646 /* ConnectionsParsing.swift in Sources */,
 				5B5EF01B22B441A3005C66BE /* ClosureTypes.swift in Sources */,
 				5B5EF12622B441A4005C66BE /* VIMVideoPlayFile.m in Sources */,
 				5B5EF10B22B441A4005C66BE /* VIMBadge.swift in Sources */,
@@ -2333,6 +2394,7 @@
 				5B5EF1AA22B441A4005C66BE /* ResponseCache.swift in Sources */,
 				5B5EF1E022B441A4005C66BE /* AuthenticationController.swift in Sources */,
 				5B5EF0C622B441A4005C66BE /* Album.swift in Sources */,
+				E4FF889122FE0D1100A8F646 /* InteractionsProviding.swift in Sources */,
 				5B5EF0F922B441A4005C66BE /* VIMPicture.m in Sources */,
 				5B5EF1D122B441A4005C66BE /* Request+Soundtrack.swift in Sources */,
 				5B5EF02A22B441A3005C66BE /* Request+Toggle.swift in Sources */,
@@ -2417,6 +2479,7 @@
 				5B5EF02E22B441A3005C66BE /* ExceptionCatcher+Swift.swift in Sources */,
 				5B5EF14522B441A4005C66BE /* VIMPrivacy.m in Sources */,
 				5B5EF03722B441A3005C66BE /* Result.swift in Sources */,
+				E4FF888322FE09B100A8F646 /* Folder.swift in Sources */,
 				5B5EF04622B441A3005C66BE /* Request+Configs.swift in Sources */,
 				5B5EF1BD22B441A4005C66BE /* Request.swift in Sources */,
 				5B5EF01022B441A3005C66BE /* Mappable.swift in Sources */,
@@ -2579,6 +2642,7 @@
 				5B5EF07D22B441A3005C66BE /* VIMUploadTicket.m in Sources */,
 				5B5EF1B822B441A4005C66BE /* Request+PolicyDocument.swift in Sources */,
 				5B5EF13A22B441A4005C66BE /* VIMLiveStreams.swift in Sources */,
+				E4FF888422FE09B100A8F646 /* Folder.swift in Sources */,
 				5B5EF07722B441A3005C66BE /* VIMCategory.m in Sources */,
 				5B5EF1D022B441A4005C66BE /* Request+Channel.swift in Sources */,
 				5B5EF0DD22B441A4005C66BE /* VIMLiveQuota.swift in Sources */,
