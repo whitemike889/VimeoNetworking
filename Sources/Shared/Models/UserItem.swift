@@ -28,7 +28,7 @@ import Foundation
 public class UserItem: VIMModelObject {
     
     /// The folder for the UserItem if one exists
-    @objc var folder: Project?
+    @objc var folder: Folder?
     
     /// The item type for the UserItem, mapped to a Swift-only enum
     var type: UserItemType?
