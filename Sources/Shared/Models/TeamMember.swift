@@ -25,8 +25,8 @@
 
 import Foundation
 
-public class TeamMember: VIMModelObject, ConnectionsProviding, ConnectionsParsing
-{
+public class TeamMember: VIMModelObject, ConnectionsProviding, ConnectionsParsing {
+    
     /// The created time for the project
     public private(set) var createdTime: NSDate?
     
@@ -72,29 +72,25 @@ public class TeamMember: VIMModelObject, ConnectionsProviding, ConnectionsParsin
     
     // MARK: - VIMModelObject overrides
     
-    public override func didFinishMapping()
-    {
-        if let metadata = metadata
-        {
+    public override func didFinishMapping() {
+        if let metadata = metadata {
             connections = parse(metadata)
         }
     }
     
-    public override func getObjectMapping() -> Any?
-    {
+    public override func getObjectMapping() -> Any? {
         return Mappings.membersByEncodingKeys
     }
     
-    public override func getClassForObjectKey(_ key: String!) -> AnyClass?
-    {
+    public override func getClassForObjectKey(_ key: String!) -> AnyClass? {
         return Mappings.classesByEncodingKeys[key]
     }
 }
 
-extension TeamMember
-{
-    struct Mappings
-    {
+extension TeamMember {
+    
+    struct Mappings {
+        
         static let membersByEncodingKeys = [
             "created_time": "createdTime",
             "has_folder_access": "hasFolderAccess",
@@ -113,41 +109,36 @@ extension TeamMember
 
 // MARK: - ConnectionsParsing
 
-extension TeamMember
-{
-    public enum ConnectionKeys: String, MetadataKeys
-    {
+extension TeamMember {
+    
+    public enum ConnectionKeys: String, MetadataKeys {
         case owner
     }
     
-    var connectionMapping: [TeamMember.ConnectionKeys: VIMConnection.Type]
-    {
+    var connectionMapping: [TeamMember.ConnectionKeys: VIMConnection.Type] {
         return [.owner: TeamMemberConnection.self]
     }
 }
 
 // MARK: - Nested Types
 
-extension TeamMember
-{
-    public enum PermissionLevel: String
-    {
+extension TeamMember {
+    
+    public enum PermissionLevel: String {
         case admin = "Admin"
         case contributor = "Contributor"
         case owner = "Owner"
         case uploader = "Uploader"
     }
     
-    public enum Role: String
-    {
+    public enum Role: String {
         case admin = "Admin"
         case contributor = "Contributor"
         case owner = "Owner"
         case uploader = "Uploader"
     }
     
-    public enum Status: String
-    {
+    public enum Status: String {
         case accepted
         case pending
     }

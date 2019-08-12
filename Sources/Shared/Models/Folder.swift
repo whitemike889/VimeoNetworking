@@ -78,6 +78,7 @@ public class Folder: VIMModelObject, ConnectionsProviding, ConnectionsParsing {
     // MARK: - VIMModelObject overrides
     
     public override func didFinishMapping() {
+        
         if let metadata = metadata {
             connections = parse(metadata)
         }
@@ -103,6 +104,7 @@ public class Folder: VIMModelObject, ConnectionsProviding, ConnectionsParsing {
 extension Folder {
     
     struct Mappings {
+        
         static let membersByEncodingKeys = [
             "created_time": "createdTime",
             "modified_time": "modifiedTime",
@@ -120,6 +122,7 @@ extension Folder {
 // MARK: - ConnectionsParsing
 
 extension Folder {
+    
     public enum ConnectionKeys: String, MetadataKeys {
         case videos
     }
@@ -132,6 +135,7 @@ extension Folder {
 // MARK: - Nested Types
 
 extension Folder {
+    
     public enum SlackLanguagePreference: String {
         case de = "de-DE"
         case en = "en"
