@@ -1,14 +1,32 @@
 //
 //  Folder.swift
-//  AFNetworking
+//  VimeoNetworking
 //
-//  Created by Song, Alexander on 12/12/18.
+//  Copyright © 2019 Vimeo. All rights reserved.
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
 //
 
 import Foundation
 
-public class Folder: VIMModelObject, ConnectionsProviding, ConnectionsParsing
-{
+public class Folder: VIMModelObject, ConnectionsProviding, ConnectionsParsing {
+    
     /// The created time for the Folder
     @objc dynamic public private(set) var createdTime: NSDate?
     
@@ -59,39 +77,32 @@ public class Folder: VIMModelObject, ConnectionsProviding, ConnectionsParsing
     
     // MARK: - VIMModelObject overrides
     
-    public override func didFinishMapping()
-    {
-        if let metadata = metadata
-        {
+    public override func didFinishMapping() {
+        if let metadata = metadata {
             connections = parse(metadata)
         }
         
-        if let slackLanguagePreferenceString = slackLanguagePreference
-        {
+        if let slackLanguagePreferenceString = slackLanguagePreference {
             languagePreference = SlackLanguagePreference(rawValue: slackLanguagePreferenceString)
         }
         
-        if let slackUserPreferences = slackUserPreferences
-        {
+        if let slackUserPreferences = slackUserPreferences {
             userPreferences = slackUserPreferences.compactMap { SlackUserPreferences(rawValue: $0) }
         }
     }
     
-    public override func getObjectMapping() -> Any
-    {
+    public override func getObjectMapping() -> Any {
         return Mappings.membersByEncodingKeys
     }
     
-    public override func getClassForObjectKey(_ key: String!) -> AnyClass?
-    {
+    public override func getClassForObjectKey(_ key: String!) -> AnyClass? {
         return Mappings.classesByEncodingKeys[key]
     }
 }
 
-extension Folder
-{
-    struct Mappings
-    {
+extension Folder {
+    
+    struct Mappings {
         static let membersByEncodingKeys = [
             "created_time": "createdTime",
             "modified_time": "modifiedTime",
@@ -108,25 +119,20 @@ extension Folder
 
 // MARK: - ConnectionsParsing
 
-extension Folder
-{
-    public enum ConnectionKeys: String, MetadataKeys
-    {
+extension Folder {
+    public enum ConnectionKeys: String, MetadataKeys {
         case videos
     }
     
-    var connectionMapping: [Folder.ConnectionKeys: VIMConnection.Type]
-    {
+    var connectionMapping: [Folder.ConnectionKeys: VIMConnection.Type] {
         return [:]
     }
 }
 
 // MARK: - Nested Types
 
-extension Folder
-{
-    public enum SlackLanguagePreference: String
-    {
+extension Folder {
+    public enum SlackLanguagePreference: String {
         case de = "de-DE"
         case en = "en"
         case es = "es"
@@ -136,8 +142,7 @@ extension Folder
         case pt = "pt-BR"
     }
     
-    public enum SlackUserPreferences: String
-    {
+    public enum SlackUserPreferences: String {
         case collectionChange = "COLLECTION_CHANGE"
         case privacyChange = "PRIVACY_CHANGE"
         case reviewPage = "REVIEW_PAGE"
