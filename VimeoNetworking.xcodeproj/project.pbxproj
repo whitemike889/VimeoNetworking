@@ -666,6 +666,14 @@
 		7E388B7DAAA730F67222354D /* Pods_VimeoNetworking_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE25EE618A23DD07A19E67F5 /* Pods_VimeoNetworking_iOS.framework */; };
 		9E6913F9D6917E929DA785FE /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48683A775227828528A4492B /* Pods_Example.framework */; };
 		C1E13A752650AE7CE4523125 /* Pods_VimeoNetworking_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D711BBD962E1ACC44FB5766 /* Pods_VimeoNetworking_macOS.framework */; };
+		E41C0F44230461AE000EAB25 /* ConnectionsProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FF888F22FE0D1100A8F646 /* ConnectionsProviding.swift */; };
+		E41C0F45230461AE000EAB25 /* ConnectionsProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FF888F22FE0D1100A8F646 /* ConnectionsProviding.swift */; };
+		E41C0F46230461BA000EAB25 /* ConnectionsParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FF888E22FE0D1100A8F646 /* ConnectionsParsing.swift */; };
+		E41C0F47230461BB000EAB25 /* ConnectionsParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FF888E22FE0D1100A8F646 /* ConnectionsParsing.swift */; };
+		E41C0F48230461C9000EAB25 /* MetadataParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FF888B22FE0D1100A8F646 /* MetadataParsing.swift */; };
+		E41C0F49230461C9000EAB25 /* MetadataParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FF888B22FE0D1100A8F646 /* MetadataParsing.swift */; };
+		E41C0F4A230461F7000EAB25 /* MetadataKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FF888C22FE0D1100A8F646 /* MetadataKeys.swift */; };
+		E41C0F4B230461F7000EAB25 /* MetadataKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FF888C22FE0D1100A8F646 /* MetadataKeys.swift */; };
 		E45DE44B2301EC3D006B4E39 /* UserItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45DE44A2301EC3D006B4E39 /* UserItem.swift */; };
 		E45DE44D2301ED3A006B4E39 /* Request+Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45DE44C2301ED3A006B4E39 /* Request+Root.swift */; };
 		E45DE44E2301ED41006B4E39 /* Request+Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45DE44C2301ED3A006B4E39 /* Request+Root.swift */; };
@@ -2452,6 +2460,7 @@
 				5B5EF07F22B441A3005C66BE /* VIMVideo+VOD.m in Sources */,
 				5B5EF0CD22B441A4005C66BE /* VIMVODConnection.m in Sources */,
 				5B5EF1A822B441A4005C66BE /* VimeoResponseSerializer.swift in Sources */,
+				E41C0F48230461C9000EAB25 /* MetadataParsing.swift in Sources */,
 				5B5EF01922B441A3005C66BE /* AppConfiguration.swift in Sources */,
 				5B5EF09422B441A3005C66BE /* VIMConnection.m in Sources */,
 				5B5EF06122B441A3005C66BE /* VIMUpload.swift in Sources */,
@@ -2479,6 +2488,7 @@
 				5B5EF1A222B441A4005C66BE /* ErrorCode.swift in Sources */,
 				5B5EF09122B441A3005C66BE /* VIMSeason.m in Sources */,
 				5B5EF0E222B441A4005C66BE /* VIMActivity.m in Sources */,
+				E41C0F44230461AE000EAB25 /* ConnectionsProviding.swift in Sources */,
 				5B5EF1C922B441A4005C66BE /* Dictionary+Extension.swift in Sources */,
 				5B3D4FE322DE24DD002D937B /* VIMUserAccountType.swift in Sources */,
 				5B5EF16322B441A4005C66BE /* VIMObjectMapper.m in Sources */,
@@ -2497,6 +2507,7 @@
 				5B5EF01022B441A3005C66BE /* Mappable.swift in Sources */,
 				5B5EF13322B441A4005C66BE /* VIMUploadQuota.swift in Sources */,
 				5B5EF1C322B441A4005C66BE /* Request+Cache.swift in Sources */,
+				E41C0F46230461BA000EAB25 /* ConnectionsParsing.swift in Sources */,
 				5B5EF16022B441A4005C66BE /* VIMVideoDASHFile.m in Sources */,
 				5B5EF0DC22B441A4005C66BE /* VIMLiveQuota.swift in Sources */,
 				5B5EF14222B441A4005C66BE /* VIMPolicyDocument.m in Sources */,
@@ -2509,6 +2520,7 @@
 				5B5EF1B122B441A4005C66BE /* Response.swift in Sources */,
 				5B5EF0F122B441A4005C66BE /* UserSubscription.swift in Sources */,
 				5B5EF0B522B441A4005C66BE /* VIMQuantityQuota.m in Sources */,
+				E41C0F4A230461F7000EAB25 /* MetadataKeys.swift in Sources */,
 				5B5EF17222B441A4005C66BE /* VIMComment.m in Sources */,
 				5B5EF15122B441A4005C66BE /* VIMTrigger.m in Sources */,
 				5B5EF0A022B441A4005C66BE /* VIMTag.m in Sources */,
@@ -2578,6 +2590,7 @@
 				5B5EF08022B441A3005C66BE /* VIMVideo+VOD.m in Sources */,
 				5B5EF0B622B441A4005C66BE /* VIMQuantityQuota.m in Sources */,
 				5B5EF10D22B441A4005C66BE /* VIMBadge.swift in Sources */,
+				E41C0F49230461C9000EAB25 /* MetadataParsing.swift in Sources */,
 				5B5EF19122B441A4005C66BE /* VIMVideoFairPlayFile.m in Sources */,
 				5B5EF01722B441A3005C66BE /* Scope.swift in Sources */,
 				5B5EF04122B441A3005C66BE /* VimeoSessionManager+Constructors.swift in Sources */,
@@ -2649,6 +2662,7 @@
 				5B5EF1AF22B441A4005C66BE /* VimeoSessionManager.swift in Sources */,
 				5B5EF10A22B441A4005C66BE /* VIMReviewPage.swift in Sources */,
 				5B5EF12522B441A4005C66BE /* VIMThumbnailUploadTicket.m in Sources */,
+				E41C0F4B230461F7000EAB25 /* MetadataKeys.swift in Sources */,
 				5B5EF06B22B441A3005C66BE /* UserSubscriptionTrial.swift in Sources */,
 				5B5EF02F22B441A3005C66BE /* ExceptionCatcher+Swift.swift in Sources */,
 				5B5EF07A22B441A3005C66BE /* VIMSizeQuota.swift in Sources */,
@@ -2659,6 +2673,7 @@
 				5B5EF13A22B441A4005C66BE /* VIMLiveStreams.swift in Sources */,
 				E4FF888422FE09B100A8F646 /* Folder.swift in Sources */,
 				5B5EF07722B441A3005C66BE /* VIMCategory.m in Sources */,
+				E41C0F45230461AE000EAB25 /* ConnectionsProviding.swift in Sources */,
 				5B5EF1D022B441A4005C66BE /* Request+Channel.swift in Sources */,
 				5B5EF0DD22B441A4005C66BE /* VIMLiveQuota.swift in Sources */,
 				5B5EF0CB22B441A4005C66BE /* VIMVideoPlayRepresentation.m in Sources */,
@@ -2689,6 +2704,7 @@
 				5B5EF08C22B441A3005C66BE /* VIMNotificationsConnection.m in Sources */,
 				5B5EF15222B441A4005C66BE /* VIMTrigger.m in Sources */,
 				5B5EF14322B441A4005C66BE /* VIMPolicyDocument.m in Sources */,
+				E41C0F47230461BB000EAB25 /* ConnectionsParsing.swift in Sources */,
 				5B3D4FE422DE24DD002D937B /* VIMUserAccountType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2994,10 +3010,10 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 35R365FS4Q;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -3028,10 +3044,10 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 35R365FS4Q;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
