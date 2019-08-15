@@ -73,6 +73,7 @@ public class TeamMember: VIMModelObject, ConnectionsProviding, ConnectionsParsin
     // MARK: - VIMModelObject overrides
     
     public override func didFinishMapping() {
+    
         if let metadata = metadata {
             connections = parse(metadata)
         }
