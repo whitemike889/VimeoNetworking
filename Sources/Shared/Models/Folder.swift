@@ -138,7 +138,7 @@ extension Folder {
     
     public enum SlackLanguagePreference: String {
         case de = "de-DE"
-        case en = "en"
+        case en
         case es = "es"
         case fr = "fr-FR"
         case ja = "ja-JP"
