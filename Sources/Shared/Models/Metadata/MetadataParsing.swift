@@ -66,6 +66,6 @@ extension MetadataParsing {
 }
 
 enum MetadataType: String {
-    case connections = "connections"
-    case interactions = "interactions"
+    case connections
+    case interactions
 }
