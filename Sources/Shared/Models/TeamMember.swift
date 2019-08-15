@@ -63,7 +63,7 @@ public class TeamMember: VIMModelObject, ConnectionsProviding, ConnectionsParsin
     /// The unique identifier you use to access the team membership resource
     public private(set) var uri: String?
     
-    /// The team member
+    /// The `VIMUser` associated with the team member
     public private(set) var user: VIMUser?
     
     // MARK: - ConnectionsProviding
