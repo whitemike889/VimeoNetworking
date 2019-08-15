@@ -1,5 +1,5 @@
 //
-//  Request+Root.swift
+//  Request+Folders.swift
 //  VimeoNetworking
 //
 //  Copyright © 2019 Vimeo. All rights reserved.
@@ -25,16 +25,13 @@
 
 import Foundation
 
-/// `Request` that returns an array of `UserItem` objects.
-public typealias RootRequest = Request<[UserItem]>
-
 public extension Request {
     
     /// Returns a new request to fetch an array of user items.
     ///
     /// - Parameter userURI: The user's URI.
     /// - Returns: Returns a new `Request` for an array of user items.
-    static func rootRequest(for userURI: String) -> Request {
+    static func folderRootRequest(for userURI: String) -> Request {
         
         let path = "\(userURI)/folders/root"
         
