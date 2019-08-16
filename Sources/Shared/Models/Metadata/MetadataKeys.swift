@@ -2,6 +2,7 @@
 //  MetadataKeys.swift
 //  VimeoNetworking
 //
+//  Created by Balatbat, Bryant on 7/30/18.
 //  Copyright © 2019 Vimeo. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy

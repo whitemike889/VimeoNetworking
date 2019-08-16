@@ -2,6 +2,7 @@
 //  InteractionsParsing.swift
 //  VimeoNetworking
 //
+//  Created by Balatbat, Bryant on 7/30/18.
 //  Copyright © 2019 Vimeo. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,13 +28,13 @@ import Foundation
 
 protocol InteractionsParsing: MetadataParsing {
     
-    /// An associatedtype that will need to be defined as an enum String
+    /// An `associatedtype` that will need to be defined as an enum `String`
     associatedtype InteractionsKeys: MetadataKeys where InteractionsKeys.RawValue == String
     
-    /// Given Metadata, parses it into a dictionary of InteractionKeys to VIMConnection
+    /// Given `Metadata`, parses it into a dictionary of `InteractionKeys` to `VIMConnection`
     ///
-    /// - Parameter metadata: Metadata to be parsed
-    /// - Returns: Dictionary that maps InteractionKeys to VIMConnection
+    /// - Parameter metadata: `Metadata` to be parsed
+    /// - Returns: `Dictionary` that maps `InteractionKeys` to `VIMConnection`
     func parse(_ metadata: Metadata) -> [InteractionsKeys: VIMConnection]
 }
 

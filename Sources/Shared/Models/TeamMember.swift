@@ -2,6 +2,7 @@
 //  TeamMember.swift
 //  VimeoNetworking
 //
+//  Created by Song, Alexander on 6/10/19.
 //  Copyright © 2019 Vimeo. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,43 +28,43 @@ import Foundation
 
 public class TeamMember: VIMModelObject, ConnectionsProviding, ConnectionsParsing {
     
-    /// The created time for the project
+    /// The created time for the `TeamMember`
     public private(set) var createdTime: NSDate?
     
-    /// The member's email
+    /// The `TeamMember`'s email
     public private(set) var email: String?
     
-    /// Determines whether the member has access to folder
+    /// Determines whether the `TeamMember` has access to folder
     public private(set) var hasFolderAccess: Bool?
     
     /// URL user must open to join team
     public private(set) var inviteUrl: String?
     
-    /// Time at which the invitee was accepted as member on team
+    /// Time at which the invitee was accepted as a `TeamMember`
     public private(set) var joinedTime: NSDate?
     
     /// The metadata containing associated connections
     internal var metadata: Metadata?
     
-    /// The time at which membershipwas last modified
+    /// The time at which membership was last modified
     public private(set) var modifiedTime: NSDate?
     
-    /// The member's permission level
+    /// The `TeamMember`'s permission level
     public private(set) var permissionLevel: String?
     
     /// The team membership resource key
     public private(set) var resourceKey: String?
     
-    /// The member's role
+    /// The `TeamMember`'s role
     public private(set) var role: String?
     
-    /// The status of the member's status
+    /// The status of the `TeamMember`'s status
     public private(set) var status: String?
     
     /// The unique identifier you use to access the team membership resource
     public private(set) var uri: String?
     
-    /// The `VIMUser` associated with the team member
+    /// The `VIMUser` associated with the `TeamMember`
     public private(set) var user: VIMUser?
     
     // MARK: - ConnectionsProviding
