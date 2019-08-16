@@ -1,8 +1,8 @@
 //
-//  ConnectionsProviding.swift
+//  Request+Folders.swift
 //  VimeoNetworking
 //
-//  Created by Balatbat, Bryant on 7/30/18.
+//  Created by Song, Alexander on 8/09/19.
 //  Copyright © 2019 Vimeo. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,11 +26,16 @@
 
 import Foundation
 
-protocol ConnectionsProviding {
+public extension Request {
     
-    /// An `associatedtype` that will need to be defined as an enum `String`
-    associatedtype ConnectionKeys: MetadataKeys where ConnectionKeys.RawValue == String
-    
-    /// `Dictionary` of connections keys and their respective `VIMConnection` subclasses.
-    var connections: [ConnectionKeys: VIMConnection] { get }
+    /// Returns a new request to fetch an array of user items.
+    ///
+    /// - Parameter userURI: The user's URI.
+    /// - Returns: Returns a new `Request` for an array of user items.
+    static func folderRootRequest(for userURI: String) -> Request {
+        
+        let path = "\(userURI)/folders/root"
+        
+        return Request(method: .GET, path: path)
+    }
 }
