@@ -2,6 +2,7 @@
 //  UserItem.swift
 //  VimeoNetworking
 //
+//  Created by Song, Alexander on 8/09/19.
 //  Copyright © 2019 Vimeo. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,13 +28,13 @@ import Foundation
 
 public class UserItem: VIMModelObject {
     
-    /// The folder for the UserItem if one exists
+    /// The `Folder` for the `UserItem` if one exists
     @objc var folder: Folder?
     
-    /// The item type for the UserItem, mapped to a Swift-only enum
+    /// The item type for the `UserItem`, mapped to a Swift-only enum
     var type: UserItemType?
     
-    /// The video of the UserItem if one exists
+    /// The video of the `UserItem` if one exists
     @objc var video: VIMVideo?
 }
 

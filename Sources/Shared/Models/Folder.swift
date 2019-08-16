@@ -2,6 +2,7 @@
 //  Folder.swift
 //  VimeoNetworking
 //
+//  Created by Song, Alexander on 8/09/19.
 //  Copyright © 2019 Vimeo. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,19 +28,19 @@ import Foundation
 
 public class Folder: VIMModelObject, ConnectionsProviding, ConnectionsParsing {
     
-    /// The created time for the Folder
+    /// The created time for the `Folder`
     @objc dynamic public private(set) var createdTime: NSDate?
     
-    /// The meta data for the Folder
+    /// The meta data for the `Folder`
     @objc dynamic internal var metadata: Metadata?
     
-    /// The modified time for the Folder
+    /// The modified time for the `Folder`
     @objc dynamic public private(set) var modifiedTime: NSDate?
     
-    /// The name for the Folder
+    /// The name for the `Folder`
     @objc dynamic public private(set) var name: String?
     
-    /// The resource key for the Folder
+    /// The resource key for the `Folder`
     @objc dynamic public private(set) var resourceKey: String?
     
     /// The Slack webhook ID
@@ -54,25 +55,25 @@ public class Folder: VIMModelObject, ConnectionsProviding, ConnectionsParsing {
     /// The user preferences for Slack notifications
     @objc public private(set) var slackUserPreferences: [String]?
     
-    /// The URI for the Folder
+    /// The URI for the `Folder`
     @objc dynamic public private(set) var uri: String?
     
-    /// The user that owns the Folder
+    /// The user that owns the `Folder`
     @objc dynamic public private(set) var user: VIMUser?
     
-    /// The connections associated with the Folder
+    /// The connections associated with the `Folder`
     public internal(set) var connections: [Folder.ConnectionKeys: VIMConnection] = [:]
     
-    /// The slack language preference for the Folder, mapped to a Swift-only enum
+    /// The slack language preference for the `Folder`, mapped to a Swift-only enum
     public private(set) var languagePreference: SlackLanguagePreference?
     
-    /// The slack user preferences for the Folder, mapped to a Swift-only enum
+    /// The slack user preferences for the `Folder`, mapped to a Swift-only enum
     public private(set) var userPreferences: [SlackUserPreferences]?
     
-    /// The created time for the Folder, converted to a Date type
+    /// The created time for the `Folder`, converted to a `Date` type
     @objc public private(set) var createdDate: Date?
     
-    /// The modified time for the Folder, converted to a Date type
+    /// The modified time for the `Folder`, converted to a `Date` type
     @objc public private(set) var modifiedDate: Date?
     
     // MARK: - VIMModelObject overrides

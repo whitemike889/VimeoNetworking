@@ -2,6 +2,7 @@
 //  MetadataParsing.swift
 //  VimeoNetworking
 //
+//  Created by Balatbat, Bryant on 7/30/18.
 //  Copyright © 2019 Vimeo. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -29,13 +30,13 @@ typealias Metadata = [AnyHashable: Any]
 
 protocol MetadataParsing {
     
-    /// Given Metadata, parses it into a dictionary of MetadataKeys to a VIMModelObject
+    /// Given `Metadata`, parses it into a dictionary of `MetadataKeys` to a `VIMModelObject`
     ///
     /// - Parameters:
-    ///   - metadata: Metadata to be parsed
-    ///   - type: The Metadata type
-    ///   - mapping: Mapping used to map Metadatakeys to a VIMModelObject
-    /// - Returns: Dictionary that maps Metadatakeys to a VIMModelObject
+    ///   - metadata: `Metadata` to be parsed
+    ///   - type: The `Metadata` type
+    ///   - mapping: Mapping used to map `Metadatakeys` to a `VIMModelObject`
+    /// - Returns: `Dictionary` that maps `Metadatakeys` to a `VIMModelObject`
     func parse<Keys: MetadataKeys, ModelType: VIMModelObject>(_ metadata: Metadata, type: MetadataType, mapping: [Keys: ModelType.Type]) -> [Keys: ModelType] where Keys.RawValue == String
 }
 

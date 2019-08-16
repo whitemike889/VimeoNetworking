@@ -2,6 +2,7 @@
 //  ConnectionsProviding.swift
 //  VimeoNetworking
 //
+//  Created by Balatbat, Bryant on 7/30/18.
 //  Copyright © 2019 Vimeo. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,9 +28,9 @@ import Foundation
 
 protocol ConnectionsProviding {
     
-    /// An associatedtype that will need to be defined as an enum String
+    /// An `associatedtype` that will need to be defined as an enum `String`
     associatedtype ConnectionKeys: MetadataKeys where ConnectionKeys.RawValue == String
     
-    /// Dictionary of connections keys and their respective VIMConnection subclasses.
+    /// `Dictionary` of connections keys and their respective `VIMConnection` subclasses.
     var connections: [ConnectionKeys: VIMConnection] { get }
 }
