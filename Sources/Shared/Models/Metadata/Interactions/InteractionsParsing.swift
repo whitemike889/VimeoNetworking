@@ -39,6 +39,7 @@ protocol InteractionsParsing: MetadataParsing {
 }
 
 extension InteractionsParsing {
+
     func parse(_ metadata: Metadata) -> [InteractionsKeys: VIMConnection] {
         return parse(metadata, type: .interactions)
     }
