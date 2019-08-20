@@ -26,6 +26,13 @@
 
 import Foundation
 
+public enum LiveQuotaStatus: String {
+    case available = "available"
+    case privateMode = "private_mode"
+    case streamLimit = "stream_limit"
+    case timeLimit = "time_limit"
+}
+
 /// An object that represents the `live_quota`
 /// field in a `user` response.
 public class VIMLiveQuota: VIMModelObject {
@@ -39,7 +46,19 @@ public class VIMLiveQuota: VIMModelObject {
     
     /// The `time` field in a `live_quota` response.
     @objc dynamic public private(set) var time: VIMLiveTime?
-    
+
+    /// The `status` field in a `live_quota` response.
+    @objc dynamic public private(set) var status: String?
+
+    /// The status of the live quota in `LiveQuotaStatus` enum.
+    public var liveQuotaStatus: LiveQuotaStatus? {
+        guard let status = self.status else {
+            return nil
+        }
+
+        return LiveQuotaStatus(rawValue: status)
+    }
+
     override public func getClassForObjectKey(_ key: String!) -> AnyClass? {
         if key == Constants.StreamsKey {
             return VIMLiveStreams.self
