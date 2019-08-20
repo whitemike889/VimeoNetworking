@@ -34,7 +34,7 @@ public class TeamMember: VIMModelObject, ConnectionsProviding, ConnectionsParsin
     /// The `TeamMember`'s email
     public private(set) var email: String?
     
-    /// Determines whether the `TeamMember` has access to folder
+    /// Determines whether the `TeamMember` has access to the `Folder`
     public private(set) var hasFolderAccess: Bool?
     
     /// URL user must open to join team

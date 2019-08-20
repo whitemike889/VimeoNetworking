@@ -29,25 +29,25 @@ import Foundation
 public class Folder: VIMModelObject, ConnectionsProviding, ConnectionsParsing {
     
     /// The created time for the `Folder`
-    @objc dynamic public private(set) var createdTime: NSDate?
+    @objc public private(set) var createdTime: NSDate?
     
     /// The meta data for the `Folder`
-    @objc dynamic internal var metadata: Metadata?
+    @objc internal var metadata: Metadata?
     
     /// The modified time for the `Folder`
-    @objc dynamic public private(set) var modifiedTime: NSDate?
+    @objc public private(set) var modifiedTime: NSDate?
     
     /// The name for the `Folder`
-    @objc dynamic public private(set) var name: String?
+    @objc public private(set) var name: String?
     
     /// The resource key for the `Folder`
-    @objc dynamic public private(set) var resourceKey: String?
+    @objc public private(set) var resourceKey: String?
     
     /// The Slack webhook ID
-    @objc dynamic public private(set) var slackIncomingWebhooksId: NSNumber?
+    @objc public private(set) var slackIncomingWebhooksId: NSNumber?
     
     /// The Slack integration channel
-    @objc dynamic public private(set) var slackIntegrationChannel: String?
+    @objc public private(set) var slackIntegrationChannel: String?
     
     /// The Slack language preference for notifications on channel
     @objc public private(set) var slackLanguagePreference: String?
@@ -56,18 +56,18 @@ public class Folder: VIMModelObject, ConnectionsProviding, ConnectionsParsing {
     @objc public private(set) var slackUserPreferences: [String]?
     
     /// The URI for the `Folder`
-    @objc dynamic public private(set) var uri: String?
+    @objc public private(set) var uri: String?
     
     /// The user that owns the `Folder`
-    @objc dynamic public private(set) var user: VIMUser?
+    @objc public private(set) var user: VIMUser?
     
     /// The connections associated with the `Folder`
     public internal(set) var connections: [Folder.ConnectionKeys: VIMConnection] = [:]
     
-    /// The slack language preference for the `Folder`, mapped to a Swift-only enum
+    /// The Slack language preference for the `Folder`, mapped to a Swift-only enum
     public private(set) var languagePreference: SlackLanguagePreference?
     
-    /// The slack user preferences for the `Folder`, mapped to a Swift-only enum
+    /// The Slack user preferences for the `Folder`, mapped to a Swift-only enum
     public private(set) var userPreferences: [SlackUserPreferences]?
     
     /// The created time for the `Folder`, converted to a `Date` type
