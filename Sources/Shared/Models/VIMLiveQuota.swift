@@ -26,7 +26,7 @@
 
 import Foundation
 
-public enum LiveQuotaStatus: String {
+public enum LiveQuotaStatus: String, CaseIterable {
     case available = "available"
     case privateMode = "private_mode"
     case streamLimit = "stream_limit"
@@ -52,11 +52,13 @@ public class VIMLiveQuota: VIMModelObject {
 
     /// The status of the live quota in `LiveQuotaStatus` enum.
     public var liveQuotaStatus: LiveQuotaStatus? {
-        guard let status = self.status else {
+        guard
+            let stringValue = self.status,
+            let quotaStatus = LiveQuotaStatus(rawValue: stringValue) else {
             return nil
         }
 
-        return LiveQuotaStatus(rawValue: status)
+        return quotaStatus
     }
 
     override public func getClassForObjectKey(_ key: String!) -> AnyClass? {
