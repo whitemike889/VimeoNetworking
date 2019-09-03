@@ -36,6 +36,9 @@ public class Folder: VIMModelObject, ConnectionsProviding, ConnectionsParsing {
     
     /// The modified time for the `Folder`
     @objc public private(set) var modifiedTime: NSDate?
+
+    /// The modified time by the user for the `Folder`
+    @objc public private(set) var lastUserActionEventDate: NSDate?
     
     /// The name for the `Folder`
     @objc public private(set) var name: String?
@@ -69,27 +72,21 @@ public class Folder: VIMModelObject, ConnectionsProviding, ConnectionsParsing {
     
     /// The Slack user preferences for the `Folder`, mapped to a Swift-only enum
     public private(set) var userPreferences: [SlackUserPreferences]?
-    
-    /// The created time for the `Folder`, converted to a `Date` type
-    @objc public private(set) var createdDate: Date?
-    
-    /// The modified time for the `Folder`, converted to a `Date` type
-    @objc public private(set) var modifiedDate: Date?
-    
+
     // MARK: - VIMModelObject overrides
     
     public override func didFinishMapping() {
         
-        if let metadata = metadata {
-            connections = parse(metadata)
+        if let metadata = self.metadata {
+            self.connections = self.parse(metadata)
         }
         
-        if let slackLanguagePreferenceString = slackLanguagePreference {
-            languagePreference = SlackLanguagePreference(rawValue: slackLanguagePreferenceString)
+        if let slackLanguagePreferenceString = self.slackLanguagePreference {
+            self.languagePreference = SlackLanguagePreference(rawValue: slackLanguagePreferenceString)
         }
         
-        if let slackUserPreferences = slackUserPreferences {
-            userPreferences = slackUserPreferences.compactMap { SlackUserPreferences(rawValue: $0) }
+        if let slackUserPreferences = self.slackUserPreferences {
+            self.userPreferences = slackUserPreferences.compactMap { SlackUserPreferences(rawValue: $0) }
         }
     }
     
@@ -109,6 +106,7 @@ extension Folder {
         static let membersByEncodingKeys = [
             "created_time": "createdTime",
             "modified_time": "modifiedTime",
+            "last_user_action_event_date": "lastUserActionEventDate",
             "resource_key": "resourceKey",
             "slack_incoming_webhooks_id": "slackIncomingWebhooksId",
             "slack_integration_channel": "slackIntegrationChannel"
