@@ -14,7 +14,9 @@ protocol URLRequestConvertible {
 }
 
 extension URLRequestConvertible {
-    public var urlRequest: URLRequest? { return try? asURLRequest() }
+    public var urlRequest: URLRequest? { 
+        return try? asURLRequest() 
+    }
 }
 
 extension URLRequest: URLRequestConvertible {
