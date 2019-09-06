@@ -25,12 +25,16 @@
 //
 
 import Foundation
-
 import AFNetworking
+
+private typealias SessionManagingDataTaskSuccess = ((URLSessionDataTask, Any?) -> Void)
+private typealias SessionManagingDataTaskFailure = ((URLSessionDataTask?, Error) -> Void)
+private typealias SessionManagingDataTaskProgress = (Progress) -> Void
 
 /** `VimeoSessionManager` handles networking and serialization for raw HTTP requests.  It is a direct subclass of `AFHTTPSessionManager` and it's designed to be used internally by `VimeoClient`.  For the majority of purposes, it would be better to use `VimeoClient` and a `Request` object to better encapsulate this logic, since the latter provides richer functionality overall.
  */
-final public class VimeoSessionManager: AFHTTPSessionManager {
+final public class VimeoSessionManager: AFHTTPSessionManager, SessionManaging {
+    
     // MARK: Initialization
     
     /**
@@ -42,7 +46,11 @@ final public class VimeoSessionManager: AFHTTPSessionManager {
      
      - returns: an initialized `VimeoSessionManager`
      */
-    required public init(baseUrl: URL, sessionConfiguration: URLSessionConfiguration, requestSerializer: VimeoRequestSerializer) {
+    required public init(
+        baseUrl: URL,
+        sessionConfiguration: URLSessionConfiguration,
+        requestSerializer: VimeoRequestSerializer
+    ) {
         super.init(baseURL: baseUrl, sessionConfiguration: sessionConfiguration)
         
         self.requestSerializer = requestSerializer
@@ -53,6 +61,45 @@ final public class VimeoSessionManager: AFHTTPSessionManager {
         fatalError("init(coder:) has not been implemented")
     }
     
+    public func invalidate() {
+        self.invalidateSessionCancelingTasks(false)
+    }
+    
+    public func request(
+        with endpoint: EndpointType,
+        then callback: @escaping (SessionManagingResponse<Any>) -> Void
+    ) -> Cancelable? {
+        let path = endpoint.uri
+        let parameters = endpoint.parameters
+        
+        let success: SessionManagingDataTaskSuccess = { dataTask, value in
+            let response = SessionManagingResponse(task: dataTask, value: value, error: nil)
+            callback(response)
+        }
+        
+        let failure: SessionManagingDataTaskFailure = { dataTask, error in
+            let response = SessionManagingResponse<Any>(task: dataTask, value: nil, error: error)
+            callback(response)
+        }
+        
+        switch endpoint.method {
+        case .get:
+            return self.get(path, parameters: parameters, progress: nil, success: success, failure: failure)
+        case .post:
+            return self.post(path, parameters: parameters, progress: nil, success: success, failure: failure)
+        case .put:
+            return self.put(path, parameters: parameters, success: success, failure: failure)
+        case .patch:
+            return self.patch(path, parameters: parameters, success: success, failure: failure)
+        case .delete:
+            return self.delete(path, parameters: parameters, success: success, failure: failure)
+        case .connect, .head, .options, .trace:
+            return nil
+        }                
+    }
+}
+
+extension VimeoSessionManager: AuthenticationListeningDelegate {
     // MARK: - Authentication
     
     /**
@@ -60,7 +107,7 @@ final public class VimeoSessionManager: AFHTTPSessionManager {
      
      - parameter account: the new account
      */
-    func clientDidAuthenticate(with account: VIMAccount) {
+    public func clientDidAuthenticate(with account: VIMAccount) {
         guard let requestSerializer = self.requestSerializer as? VimeoRequestSerializer
         else {
             return
@@ -75,12 +122,12 @@ final public class VimeoSessionManager: AFHTTPSessionManager {
     /**
      Called when a client is logged out and the current account should be cleared from the session manager
      */
-    func clientDidClearAccount() {
+    public func clientDidClearAccount() {
         guard let requestSerializer = self.requestSerializer as? VimeoRequestSerializer
             else {
             return
         }
         
         requestSerializer.accessTokenProvider = nil
-    }
+    }    
 }
