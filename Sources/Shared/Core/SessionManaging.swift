@@ -39,14 +39,30 @@ public protocol SessionManaging {
 }
 
 /// A protocol representing an endpoint to which requests can be sent to
-public protocol EndpointType {
-    var uri: String { get }
+public protocol EndpointType: URLRequestConvertible {
+    var path: String { get }
     var parameters: Any? { get }
     var method: HTTPMethod { get }
 }
 
 extension Request: EndpointType {
-    public var uri: String { return path }
+    public func asURLRequest() throws -> URLRequest {
+        guard let configuration = VimeoClient.sharedClient.configuration else {
+            throw VimeoNetworkingError.invalidConfiguration
+        }
+        let serializer = VimeoRequestSerializer(appConfiguration: configuration)
+        var error: NSError?
+        let request = serializer.request(
+            withMethod: method.rawValue,
+            urlString: path,
+            parameters: parameters,
+            error: &error
+        )
+        if let error = error {
+            throw error
+        }
+        return request as URLRequest
+    }
 }
 
 /// A protocol representing a type that can be canceled

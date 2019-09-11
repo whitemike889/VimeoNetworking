@@ -66,10 +66,23 @@ final public class VimeoSessionManager: AFHTTPSessionManager, SessionManaging {
     }
     
     public func request(
+        with urlConvertible: URLRequestConvertible,
+        then callback: @escaping (SessionManagingResponse<Any>) -> Void
+    ) -> Cancelable? {
+        do {
+            let request = try urlConvertible.asURLRequest()
+            return self.dataTask(with: request) { response, value, error in
+                
+            }
+        } catch {
+            return nil
+        }
+    }
+    public func request(
         with endpoint: EndpointType,
         then callback: @escaping (SessionManagingResponse<Any>) -> Void
     ) -> Cancelable? {
-        let path = endpoint.uri
+        let path = endpoint.path
         let parameters = endpoint.parameters
         
         let success: SessionManagingDataTaskSuccess = { dataTask, value in
@@ -95,7 +108,7 @@ final public class VimeoSessionManager: AFHTTPSessionManager, SessionManaging {
             return self.delete(path, parameters: parameters, success: success, failure: failure)
         case .connect, .head, .options, .trace:
             return nil
-        }                
+        }
     }
 }
 
@@ -129,5 +142,5 @@ extension VimeoSessionManager: AuthenticationListeningDelegate {
         }
         
         requestSerializer.accessTokenProvider = nil
-    }    
+    }
 }

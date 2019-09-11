@@ -9,6 +9,7 @@
 import Foundation
 
 enum VimeoNetworkingError: Error {
+    case invalidConfiguration
     case encodingFailed(EncodingFailedReason)
     
     enum EncodingFailedReason {
