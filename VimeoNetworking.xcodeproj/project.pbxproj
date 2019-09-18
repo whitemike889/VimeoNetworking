@@ -699,6 +699,8 @@
 		5B69E4E922DE2E29009E84B6 /* VIMUserAccountTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B69E4E522DE2E07009E84B6 /* VIMUserAccountTypeTests.swift */; };
 		5B69E4EA22DE2E29009E84B6 /* VIMUserAccountTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B69E4E522DE2E07009E84B6 /* VIMUserAccountTypeTests.swift */; };
 		5B69E4EB22DE2E2A009E84B6 /* VIMUserAccountTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B69E4E522DE2E07009E84B6 /* VIMUserAccountTypeTests.swift */; };
+		5BB30CAA2332D21A00EB314D /* ImageLoader+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB30CA92332D21A00EB314D /* ImageLoader+Cache.swift */; };
+		5BB30CAB2332D21A00EB314D /* ImageLoader+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB30CA92332D21A00EB314D /* ImageLoader+Cache.swift */; };
 		5BF72ACA2316F64800A0D2C8 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF72AC92316F64800A0D2C8 /* NetworkReachabilityManager.swift */; };
 		5BF72ACB2316F64800A0D2C8 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF72AC92316F64800A0D2C8 /* NetworkReachabilityManager.swift */; };
 		5BF72ACC2316F64800A0D2C8 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF72AC92316F64800A0D2C8 /* NetworkReachabilityManager.swift */; };
@@ -1014,6 +1016,7 @@
 		5B79214322C2B91400FC1928 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OHHTTPStubs.framework; sourceTree = "<group>"; };
 		5B79216722C2B93B00FC1928 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OHHTTPStubs.framework; sourceTree = "<group>"; };
 		5B79216922C2B94400FC1928 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OHHTTPStubs.framework; sourceTree = "<group>"; };
+		5BB30CA92332D21A00EB314D /* ImageLoader+Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageLoader+Cache.swift"; sourceTree = "<group>"; };
 		5BF72AC92316F64800A0D2C8 /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachabilityManager.swift; sourceTree = "<group>"; };
 		5D711BBD962E1ACC44FB5766 /* Pods_VimeoNetworking_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimeoNetworking_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		66B43D25318F400304BCF876 /* Pods_VimeoNetworking_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimeoNetworking_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1483,6 +1486,7 @@
 			isa = PBXGroup;
 			children = (
 				5B64313023318CD9004092AB /* Request+Trigger.swift */,
+				5BB30CA92332D21A00EB314D /* ImageLoader+Cache.swift */,
 			);
 			path = "iOS+tvOS";
 			sourceTree = "<group>";
@@ -2403,6 +2407,7 @@
 				5B6263B32321402B00B25462 /* SessionManaging.swift in Sources */,
 				5B5EF1D722B441A4005C66BE /* AccountStore.swift in Sources */,
 				5B5EF1CB22B441A4005C66BE /* VimeoRequestSerializer.swift in Sources */,
+				5BB30CAA2332D21A00EB314D /* ImageLoader+Cache.swift in Sources */,
 				5B5EF02422B441A3005C66BE /* Request+ProgrammedContent.swift in Sources */,
 				5B5EF1E622B441A4005C66BE /* Request+Notifications.swift in Sources */,
 				5B5EF01B22B441A3005C66BE /* ClosureTypes.swift in Sources */,
@@ -2534,6 +2539,7 @@
 				5B6263B42321402B00B25462 /* SessionManaging.swift in Sources */,
 				5B5EF07922B441A3005C66BE /* VIMSizeQuota.swift in Sources */,
 				5B5EF1D822B441A4005C66BE /* AccountStore.swift in Sources */,
+				5BB30CAB2332D21A00EB314D /* ImageLoader+Cache.swift in Sources */,
 				5B5EF1CC22B441A4005C66BE /* VimeoRequestSerializer.swift in Sources */,
 				5B5EF02522B441A3005C66BE /* Request+ProgrammedContent.swift in Sources */,
 				5B5EF1E722B441A4005C66BE /* Request+Notifications.swift in Sources */,
