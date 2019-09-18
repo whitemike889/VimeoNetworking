@@ -14,15 +14,29 @@ import AFNetworking
 // fact that we use their loading/caching UIKit extensions extensively throughout our source code
 extension UIImageView {
 
-    @objc public func setImage(
+    /// Asynchronously downloads an image from the specified URL request.
+    /// Any previous image request for the receiver will be cancelled.
+    /// If the image is cached locally, the image is returned immediately, otherwise the specified placeholder
+    /// image will be set immediately, and then the remote image will be returned once the request is finished.
+    ///
+    /// It is the responsibility of the closure to set the image of the image view before returning.
+    ///
+    /// - Parameters:
+    ///   - urlRequest: The URL request used for the image request.
+    ///   - placeholder: The image to be set initially, until the image request finishes. If `nil`, the image view
+    ///   will not change its image until the image request finishes.
+    ///   - callback: A closure to be executed when the image data task finishes. This closure has no return value and
+    ///   takes two arguments: the image created from the response data or the error object describing the
+    ///   network or parsing error that occurred.
+    @objc public func loadImage(
         with urlRequest: URLRequest,
         placeholder: UIImage? = nil,
-        then callback: ((UIImage?, Error?) -> Void)?) {
+        then callback: @escaping (UIImage?, Error?) -> Void) {
         self.setImageWith(
             urlRequest,
             placeholderImage: placeholder,
-            success: { callback?($2, nil) },
-            failure: { callback?(nil, $2) }
+            success: { callback($2, nil) },
+            failure: { callback(nil, $2) }
         )
     }
 }
