@@ -26,17 +26,18 @@ extension UIImageView {
     ///   - placeholder: The image to be set initially, until the image request finishes. If `nil`, the image view
     ///   will not change its image until the image request finishes.
     ///   - callback: A closure to be executed when the image data task finishes. This closure has no return value and
-    ///   takes two arguments: the image created from the response data or the error object describing the
-    ///   network or parsing error that occurred.
+    ///   takes three arguments: the image created from the response data or the error object describing the
+    ///   network or parsing error that occurred, as well as a boolean flag indicating whether the image was return
+    ///   from the local cache.
     @objc public func loadImage(
         with urlRequest: URLRequest,
         placeholder: UIImage? = nil,
-        then callback: @escaping (UIImage?, Error?) -> Void) {
+        then callback: @escaping (UIImage?, Error?, Bool) -> Void) {
         self.setImageWith(
             urlRequest,
             placeholderImage: placeholder,
-            success: { callback($2, nil) },
-            failure: { callback(nil, $2) }
+            success: { _, response, image in callback(image, nil, response == nil) },
+            failure: { _, _, error in callback(nil, error, false) }
         )
     }
 }
