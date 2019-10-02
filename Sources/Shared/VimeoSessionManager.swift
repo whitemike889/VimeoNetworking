@@ -102,6 +102,8 @@ final public class VimeoSessionManager: AFHTTPSessionManager, SessionManaging {
         case .delete:
             return self.delete(path, parameters: parameters, success: success, failure: failure)
         case .connect, .head, .options, .trace:
+            // TODO: These methods are currently unsupported and will be implemented as needed
+            assert(false, "Unsupported HTTP method used - implementation missing")
             return nil
         }
     }
