@@ -9,12 +9,20 @@
 import Foundation
 import AFNetworking
 
-/// The protocols declared in this file have been created to abstract our dependency
-/// on AFNetworking and the Vimeo subclasses that inherit from it,
-/// Specifically `VimeoSessionManager`, `VimeoRequestSerializer` and `VimeoResponseSerializer`
-/// The goal is to make it easier for these dependencies to be swapped out when needed.
+// The protocols declared in this file have been created to abstract our dependency
+// on AFNetworking and the Vimeo subclasses that inherit from it,
+// Specifically `VimeoSessionManager`, `VimeoRequestSerializer` and `VimeoResponseSerializer`
+// The goal is to make it easier for these dependencies to be swapped out when needed.
+
+
+/// A type that listens to and responds to authentication status changes
 public protocol AuthenticationListeningDelegate {
+
+    /// Called when authentication completes successfully
+    /// - Parameter account: the new authenticated account
     func clientDidAuthenticate(with account: VIMAccount)
+
+    /// Called when a client is logged out
     func clientDidClearAccount()
 }
 

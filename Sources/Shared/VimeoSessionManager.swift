@@ -109,8 +109,9 @@ final public class VimeoSessionManager: AFHTTPSessionManager, SessionManaging {
     }
 }
 
+// MARK: - Authentication
+
 extension VimeoSessionManager: AuthenticationListeningDelegate {
-    // MARK: - Authentication
 
     /**
      Called when authentication completes successfully to update the session manager with the new access token
