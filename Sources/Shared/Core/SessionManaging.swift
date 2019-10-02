@@ -42,7 +42,7 @@ public protocol SessionManaging {
     
 }
 
-/// A protocol representing an endpoint to which requests can be sent to
+/// A protocol representing an endpoint to which requests can be sent
 public protocol EndpointType {
     var uri: String { get }
     var parameters: Any? { get }
