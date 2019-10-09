@@ -35,6 +35,8 @@ extern NSString * const __nonnull VIMInteractionNameBuy;
 extern NSString * const __nonnull VIMInteractionNameRent;
 extern NSString * const __nonnull VIMInteractionNameSubscribe;
 extern NSString * const __nonnull VIMInteractionNamePurchase;
+extern NSString * const __nonnull VIMInteractionNameAlbum;
+extern NSString * const __nonnull VIMInteractionNameAddTo;
 
 typedef NS_ENUM(NSInteger, VIMInteractionStreamStatus) {
     VIMInteractionStreamStatusUnavailable = 0,      // user cannot purchase
@@ -48,8 +50,8 @@ typedef NS_ENUM(NSInteger, VIMInteractionStreamStatus) {
 @property (nonatomic, copy, nullable) NSString *uri;
 @property (nonatomic, strong, nullable) NSNumber *added;
 @property (nonatomic, strong, nullable) NSDate *addedTime;
-
 @property (nonatomic, strong, nullable) NSString *status;
+@property (nonatomic, strong, nullable) NSArray *options;
 
 # pragma mark - VOD related only
 @property (nonatomic, copy, nullable) NSString *link;
@@ -65,5 +67,10 @@ typedef NS_ENUM(NSInteger, VIMInteractionStreamStatus) {
  Returns true if buying, renting, or subscribing to the related content will be governed by DRM.
  */
 @property (nonatomic, assign, readonly) BOOL isForDRMProtectedContent;
+
+- (BOOL)canGet;
+- (BOOL)canPost;
+- (BOOL)canPatch;
+- (BOOL)canDelete;
 
 @end
