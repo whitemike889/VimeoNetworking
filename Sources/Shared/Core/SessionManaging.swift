@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import AFNetworking
 
 // The protocols declared in this file have been created to abstract our dependency
 // on AFNetworking and the Vimeo subclasses that inherit from it,

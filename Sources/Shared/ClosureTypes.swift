@@ -1,6 +1,5 @@
 //
 //  ClosureTypes.swift
-//  AFNetworking
 //
 //  Created by Lehrer, Nicole on 10/10/18.
 //

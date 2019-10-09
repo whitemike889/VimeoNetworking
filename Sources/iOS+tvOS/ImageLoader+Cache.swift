@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AFNetworking
 
 // TODO: This wrapper must be removed from the networking layer in favor of a more generic solution
 // The only reason this is currently here is due to our dependency on AFNetworking and the
