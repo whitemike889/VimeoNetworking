@@ -25,7 +25,6 @@
 //
 
 import Foundation
-import AFNetworking
 
 private typealias SessionManagingDataTaskSuccess = ((URLSessionDataTask, Any?) -> Void)
 private typealias SessionManagingDataTaskFailure = ((URLSessionDataTask?, Error) -> Void)
