@@ -28,19 +28,21 @@ import Foundation
 
 public typealias AuthenticationRequest = Request<VIMAccount>
 
-private let GrantTypeKey = "grant_type"
-private let ScopeKey = "scope"
+let GrantTypeKey = "grant_type"
+let ScopeKey = "scope"
+let TokenKey = "token"
+let MarketingOptIn = "marketing_opt_in"
+let AuthenticationPathUsers = "users"
+
 private let CodeKey = "code"
 private let RedirectURIKey = "redirect_uri"
 private let UsernameKey = "username"
 private let PasswordKey = "password"
 private let DisplayNameKey = "display_name"
 private let EmailKey = "email"
-private let TokenKey = "token"
 private let PinCodeKey = "user_code"
 private let DeviceCodeKey = "device_code"
 private let AccessTokenKey = "access_token"
-private let MarketingOptIn = "marketing_opt_in"
 
 private let GrantTypeClientCredentials = "client_credentials"
 private let GrantTypeAuthorizationCode = "authorization_code"
@@ -51,7 +53,6 @@ private let GrantTypePinCode = "device_grant"
 private let AuthenticationPathClientCredentials = "oauth/authorize/client"
 private let AuthenticationPathAccessToken = "oauth/authorize/password"
 private let AuthenticationPathAccessTokenVerify = "oauth/verify"
-private let AuthenticationPathUsers = "users"
 private let AuthenticationPathFacebookToken = "oauth/authorize/facebook"
 private let AuthenticationPathCodeGrant = "oauth/access_token"
 private let AuthenticationPathPinCode = "oauth/device"

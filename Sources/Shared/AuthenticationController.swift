@@ -303,6 +303,45 @@ final public class AuthenticationController {
     }
     
     /**
+     **(PRIVATE: Vimeo Use Only, will not work for third-party applications)**
+     Log in with a google token
+     
+     - parameter googleToken: `idToken` returned by the GoogleSignIn SDK
+     - parameter scopes: an array of `Scope` values representing permissions the app requests
+     - parameter completion: handler for authentication success or failure
+     */
+    public func googleLogIn(withToken googleToken: String, scopes: [Scope], completion: @escaping AuthenticationCompletion) {
+        let request = AuthenticationRequest.logInWithGoogleRequest(withToken: googleToken, scopes: scopes)
+        
+        self.authenticate(with: request, completion: completion)
+    }
+    
+    /**
+     **(PRIVATE: Vimeo Use Only, will not work for third-party applications)**
+     Join with a Google token
+     
+     - parameter googleToken: `idToken` returned by the GoogleSignIn SDK
+     - parameter marketingOptIn: flag indicating whether a user has opted in to receive marketing material
+     - parameter scopes: an array of `Scope` values representing permissions the app requests
+     - parameter completion: handler for authentication success or failure
+     */
+    public func googleJoin(
+        withToken googleToken: String,
+        marketingOptIn: Bool,
+        scopes: [Scope],
+        completion: @escaping AuthenticationCompletion
+        ) {
+        let marketingOptInBoolAsString = marketingOptIn ? APIStringConstants.True : APIStringConstants.False
+        let request = AuthenticationRequest.joinWithGoogleRequest(
+            withToken: googleToken,
+            marketingOptIn: marketingOptInBoolAsString,
+            scopes: scopes
+        )
+        
+        self.authenticate(with: request, completion: completion)
+    }
+    
+    /**
      **(PRIVATE: Vimeo Use Only)**
      Log in with an account response dictionary
      
