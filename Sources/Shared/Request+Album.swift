@@ -58,7 +58,7 @@ public extension Request {
         parameters[Key.privacy] = privacy
         password.map { parameters[Key.password] = $0 }
 
-        return Request(method: .POST, path: userURI + "/albums", parameters: parameters)
+        return Request(method: .post, path: userURI + "/albums", parameters: parameters)
     }
 
     /// Returns a new request for updating an exising album.
@@ -80,12 +80,12 @@ public extension Request {
         privacy.map { parameters[Key.privacy] = $0 }
         password.map { parameters[Key.password] = $0 }
 
-        return Request(method: .PATCH, path: albumURI, parameters: parameters)
+        return Request(method: .patch, path: albumURI, parameters: parameters)
     }
 
     /// Returns a new request to delete the album for the given URI.
     /// - Parameter albumURI: The album's URI.
     static func deleteAlbumRequest(for albumURI: String) -> Request {
-        return Request(method: .DELETE, path: albumURI)
+        return Request(method: .delete, path: albumURI)
     }
 }
