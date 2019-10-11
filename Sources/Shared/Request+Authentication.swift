@@ -36,7 +36,8 @@ private let UsernameKey = "username"
 private let PasswordKey = "password"
 private let DisplayNameKey = "display_name"
 private let EmailKey = "email"
-private let TokenKey = "token"
+private let FacebookTokenKey = "token"
+private let GoogleTokenKey = "id_token"
 private let PinCodeKey = "user_code"
 private let DeviceCodeKey = "device_code"
 private let AccessTokenKey = "access_token"
@@ -157,7 +158,7 @@ extension Request where ModelType: VIMAccount {
     static func logInFacebookRequest(withToken facebookToken: String, scopes: [Scope]) -> Request {
         let parameters = [GrantTypeKey: GrantTypeFacebook,
                           ScopeKey: Scope.combine(scopes),
-                          TokenKey: facebookToken]
+                          FacebookTokenKey: facebookToken]
         
         return Request(method: .POST, path: AuthenticationPathFacebookToken, parameters: parameters)
     }
@@ -174,7 +175,7 @@ extension Request where ModelType: VIMAccount {
         let marketingOptInBoolAsString = RawTypeConverter.string(from: marketingOptIn)
 
         let parameters = [ScopeKey: Scope.combine(scopes),
-                          TokenKey: facebookToken,
+                          FacebookTokenKey: facebookToken,
                           MarketingOptIn: marketingOptInBoolAsString]
         
         return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters)
@@ -190,7 +191,7 @@ extension Request where ModelType: VIMAccount {
         let parameters = [
             GrantTypeKey: GrantTypeGoogle,
             ScopeKey: Scope.combine(scopes),
-            TokenKey: googleToken
+            GoogleTokenKey: googleToken
         ]
         
         return Request(method: .POST, path: AuthenticationPathGoogleToken, parameters: parameters)
@@ -210,7 +211,7 @@ extension Request where ModelType: VIMAccount {
         
         let parameters = [
             ScopeKey: Scope.combine(scopes),
-            TokenKey: googleToken,
+            GoogleTokenKey: googleToken,
             MarketingOptIn: marketingOptInBoolAsString
         ]
         
