@@ -279,7 +279,7 @@ final public class AuthenticationController {
     
     /**
      **(PRIVATE: Vimeo Use Only, will not work for third-party applications)**
-     Log in with a facebook token
+     Log in with a Facebook token
      
      - parameter facebookToken: token from facebook SDK
      - parameter completion:    handler for authentication success or failure
@@ -292,7 +292,7 @@ final public class AuthenticationController {
     
     /**
      **(PRIVATE: Vimeo Use Only, will not work for third-party applications)**
-     Join with a facebook token
+     Join with a Facebook token
      
      - parameter facebookToken: token from facebook SDK
      - parameter completion:    handler for authentication success or failure
@@ -305,7 +305,7 @@ final public class AuthenticationController {
     
     /**
      **(PRIVATE: Vimeo Use Only, will not work for third-party applications)**
-     Log in with a google token
+     Log in with a Google token
      
      - parameter googleToken: `idToken` returned by the GoogleSignIn SDK
      - parameter scopes: an array of `Scope` values representing permissions the app requests
