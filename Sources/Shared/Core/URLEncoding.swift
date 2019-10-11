@@ -15,7 +15,7 @@ private extension String {
 }
 
 /// The dictionary of parameters for a given `URLRequest`.
-typealias Parameters = [String: Any]
+public typealias Parameters = [String: Any]
 
 /// The type used to create a URL encoded string of parameters to be appended to the request URL.
 /// For URL requests with a non-nil HTTP body, the content type is set to

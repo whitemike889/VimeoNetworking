@@ -8,11 +8,11 @@
 
 import Foundation
 
-// The protocols declared in this file have been created to abstract our dependency
-// on AFNetworking and the Vimeo subclasses that inherit from it,
-// Specifically `VimeoSessionManager`, `VimeoRequestSerializer` and `VimeoResponseSerializer`
-// The goal is to make it easier for these dependencies to be swapped out when needed.
+/// The types declared in this file have been created to help abstract our dependency
+/// on AFNetworking and the Vimeo subclasses that inherit from it,
+/// Specifically `VimeoSessionManager`, `VimeoRequestSerializer` and `VimeoResponseSerializer`
 
+public typealias JSON = Any
 
 /// A type that listens to and responds to authentication status changes
 public protocol AuthenticationListeningDelegate {
@@ -25,44 +25,67 @@ public protocol AuthenticationListeningDelegate {
     func clientDidClearAccount()
 }
 
-/// Wrapper for the response returned by the session manager
-public struct SessionManagingResponse<T> {
-    let task: URLSessionDataTask?
-    let value: T?
-    let error: Error?
-}
-
 public typealias SSLPinningMode = AFSSLPinningMode
 public typealias SecurityPolicy = AFSecurityPolicy
 
-/// A protocol describing the requirements of a SessionManaging type
+public struct SessionManagingResult<T> {
+    public let request: URLRequest?
+    public let response: URLResponse?
+    public let result: Result<T, Error>
+
+    init(request: URLRequest? = nil, response: URLResponse? = nil, result: Result<T, Error>) {
+        self.request = request
+        self.response = response
+        self.result = result
+    }
+}
+
+/// A type that can perform asynchronous requests from a
+/// URLRequestConvertible parameter and a response callback.
 public protocol SessionManaging {
     
-    /// Used to invalidate the session manager
-    func invalidate()
+    /// Used to invalidate the session manager, and optionally cancel any pending tasks
+    func invalidate(cancelingPendingTasks cancelPendingTasks: Bool)
     
-    /// Entrypoint for requests to be run by the session manager
+    /// The various methods below create asynchronous operations described by the
+    /// requestConvertible object, and return a corresponding task that can be used to identify and
+    /// control the lifecycle of the request.
+    /// The callback provided will be executed once the operation completes. It will include
+    /// the result object along with the originating request and corresponding response objects.
+
+    // Data request
     func request(
-        with endpoint: EndpointType,
-        then callback: @escaping (SessionManagingResponse<Any>) -> Void
-    ) -> Cancelable?
-    
-}
+        _ requestConvertible: URLRequestConvertible,
+        parameters: Any?,
+        then callback: @escaping (SessionManagingResult<Data>) -> Void
+    ) -> Task?
 
-/// A protocol representing an endpoint to which requests can be sent
-public protocol EndpointType {
-    var uri: String { get }
-    var parameters: Any? { get }
-    var method: HTTPMethod { get }
-}
+    // JSON request
+    func request(
+        _ requestConvertible: URLRequestConvertible,
+        parameters: Any?,
+        then callback: @escaping (SessionManagingResult<JSON>) -> Void
+    ) -> Task?
 
-extension Request: EndpointType {
-    public var uri: String { return path }
-}
+    // Decodable request
+    func request<T: Decodable>(
+        _ requestConvertible: URLRequestConvertible,
+        parameters: Any?,
+        then callback: @escaping (SessionManagingResult<T>) -> Void
+    ) -> Task?
 
-/// A protocol representing a type that can be canceled
-public protocol Cancelable {
-    func cancel()
-}
+    // Download request
+    func download(
+        _ requestConvertible: URLRequestConvertible,
+        destinationURL: URL?,
+        then callback: @escaping (SessionManagingResult<URL>) -> Void
+    ) -> Task?
 
-extension URLSessionDataTask: Cancelable {}
+    // Upload request
+    func upload(
+        _ requestConvertible: URLRequestConvertible,
+        sourceFile: URL,
+        then callback: @escaping (SessionManagingResult<JSON>) -> Void
+    ) -> Task?
+
+}

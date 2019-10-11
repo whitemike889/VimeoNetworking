@@ -8,10 +8,14 @@
 
 import Foundation
 
-enum VimeoNetworkingError: Error {
+public enum VimeoNetworkingError: Error {
     case encodingFailed(EncodingFailedReason)
+    case invalidURL
+    case requestError(Error)
+    case serializingError
+    case unknownError
     
-    enum EncodingFailedReason {
+    public enum EncodingFailedReason {
         case invalidParameters
         case missingURL
         case missingHTTPMethod
