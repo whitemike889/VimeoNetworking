@@ -48,12 +48,14 @@ private let GrantTypeClientCredentials = "client_credentials"
 private let GrantTypeAuthorizationCode = "authorization_code"
 private let GrantTypePassword = "password"
 private let GrantTypeFacebook = "facebook"
+private let GrantTypeGoogle = "google"
 private let GrantTypePinCode = "device_grant"
 
 private let AuthenticationPathClientCredentials = "oauth/authorize/client"
 private let AuthenticationPathAccessToken = "oauth/authorize/password"
 private let AuthenticationPathAccessTokenVerify = "oauth/verify"
 private let AuthenticationPathFacebookToken = "oauth/authorize/facebook"
+private let AuthenticationPathGoogleToken = "oauth/authorize/google"
 private let AuthenticationPathCodeGrant = "oauth/access_token"
 private let AuthenticationPathPinCode = "oauth/device"
 private let AuthenticationPathPinCodeAuthorize = "oauth/device/authorize"
@@ -131,12 +133,15 @@ extension Request where ModelType: VIMAccount {
      
      - returns: a new `Request`
      */
-    static func joinRequest(withName name: String, email: String, password: String, marketingOptIn: String, scopes: [Scope]) -> Request {
+    static func joinRequest(withName name: String, email: String, password: String, marketingOptIn: Bool, scopes: [Scope]) -> Request {
+        
+        let marketingOptInBoolAsString = RawTypeConverter.string(from: marketingOptIn)
+
         let parameters = [ScopeKey: Scope.combine(scopes),
                           DisplayNameKey: name,
                           EmailKey: email,
                           PasswordKey: password,
-                          MarketingOptIn: marketingOptIn]
+                          MarketingOptIn: marketingOptInBoolAsString]
         
         return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters)
     }
@@ -165,10 +170,49 @@ extension Request where ModelType: VIMAccount {
      
      - returns: a new `Request`
      */
-    static func joinFacebookRequest(withToken facebookToken: String, marketingOptIn: String, scopes: [Scope]) -> Request {
+    static func joinFacebookRequest(withToken facebookToken: String, marketingOptIn: Bool, scopes: [Scope]) -> Request {
+        let marketingOptInBoolAsString = RawTypeConverter.string(from: marketingOptIn)
+
         let parameters = [ScopeKey: Scope.combine(scopes),
                           TokenKey: facebookToken,
-                          MarketingOptIn: marketingOptIn]
+                          MarketingOptIn: marketingOptInBoolAsString]
+        
+        return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters)
+    }
+    
+    /// Constructs a `Request` for logging in with Google. For internal use only.
+    ///
+    /// - Parameters:
+    ///   - googleToken: `idToken` returned by the GoogleSignIn SDK
+    ///   - scopes: array of `Scope` values representing permissions for app requests
+    /// - Returns: new `Request`
+    public static func logInWithGoogleRequest(withToken googleToken: String, scopes: [Scope]) -> Request {
+        let parameters = [
+            GrantTypeKey: GrantTypeGoogle,
+            ScopeKey: Scope.combine(scopes),
+            TokenKey: googleToken
+        ]
+        
+        return Request(method: .POST, path: AuthenticationPathGoogleToken, parameters: parameters)
+    }
+    
+    /// Constructs a `Request` for joining with Google. For internal use only.
+    ///
+    /// - Parameters:
+    ///   - googleToken: `idToken` returned by the GoogleSignIn SDK
+    ///   - marketingOptIn: bool indicateing whether a user has opted-in to receive marketing material
+    ///   - scopes: array of `Scope` values representing permissions for app requests
+    /// - Returns: new `Request`
+    public static func joinWithGoogleRequest(withToken googleToken: String, marketingOptIn: Bool, scopes: [Scope])
+        -> Request
+    {
+        let marketingOptInBoolAsString = RawTypeConverter.string(from: marketingOptIn)
+        
+        let parameters = [
+            ScopeKey: Scope.combine(scopes),
+            TokenKey: googleToken,
+            MarketingOptIn: marketingOptInBoolAsString
+        ]
         
         return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters)
     }

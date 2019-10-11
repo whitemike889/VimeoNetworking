@@ -270,7 +270,8 @@ final public class AuthenticationController {
      - parameter password:   the new user's password
      - parameter completion: handler for authentication success or failure
      */
-    public func join(withName name: String, email: String, password: String, marketingOptIn: String, completion: @escaping AuthenticationCompletion) {
+    public func join(withName name: String, email: String, password: String, marketingOptIn: Bool, completion: @escaping AuthenticationCompletion) {
+        
         let request = AuthenticationRequest.joinRequest(withName: name, email: email, password: password, marketingOptIn: marketingOptIn, scopes: self.configuration.scopes)
         
         self.authenticate(with: request, completion: completion)
@@ -296,7 +297,7 @@ final public class AuthenticationController {
      - parameter facebookToken: token from facebook SDK
      - parameter completion:    handler for authentication success or failure
      */
-    public func facebookJoin(withToken facebookToken: String, marketingOptIn: String, completion: @escaping AuthenticationCompletion) {
+    public func facebookJoin(withToken facebookToken: String, marketingOptIn: Bool, completion: @escaping AuthenticationCompletion) {
         let request = AuthenticationRequest.joinFacebookRequest(withToken: facebookToken, marketingOptIn: marketingOptIn, scopes: self.configuration.scopes)
         
         self.authenticate(with: request, completion: completion)
@@ -321,7 +322,7 @@ final public class AuthenticationController {
      Join with a Google token
      
      - parameter googleToken: `idToken` returned by the GoogleSignIn SDK
-     - parameter marketingOptIn: flag indicating whether a user has opted in to receive marketing material
+     - parameter marketingOptIn: bool indicating whether a user has opted in to receive marketing material
      - parameter scopes: an array of `Scope` values representing permissions the app requests
      - parameter completion: handler for authentication success or failure
      */
@@ -331,10 +332,9 @@ final public class AuthenticationController {
         scopes: [Scope],
         completion: @escaping AuthenticationCompletion
         ) {
-        let marketingOptInBoolAsString = marketingOptIn ? APIStringConstants.True : APIStringConstants.False
         let request = AuthenticationRequest.joinWithGoogleRequest(
             withToken: googleToken,
-            marketingOptIn: marketingOptInBoolAsString,
+            marketingOptIn: marketingOptIn,
             scopes: scopes
         )
         
