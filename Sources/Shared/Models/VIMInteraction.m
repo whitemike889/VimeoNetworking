@@ -35,6 +35,8 @@ NSString * const VIMInteractionNameBuy = @"buy";
 NSString * const VIMInteractionNameRent = @"rent";
 NSString * const VIMInteractionNameSubscribe = @"subscribe";
 NSString * const VIMInteractionNamePurchase = @"purchase";
+NSString * const VIMInteractionNameAlbum = @"album";
+NSString * const VIMInteractionNameAddTo = @"add_to";
 
 @interface VIMInteraction()
 @property (nonatomic, copy, nullable) NSString *added_time;
@@ -49,36 +51,30 @@ NSString * const VIMInteractionNamePurchase = @"purchase";
 
 #pragma mark - VIMMappable
 
-- (void)didFinishMapping
-{
-    if ([self.added_time isKindOfClass:[NSString class]])
-    {
+- (void)didFinishMapping {
+    if ([self.added_time isKindOfClass:[NSString class]]) {
         self.addedTime = [[VIMModelObject dateFormatter] dateFromString:self.added_time];
     }
     
-    if ([self.expires_time isKindOfClass:[NSString class]])
-    {
+    if ([self.expires_time isKindOfClass:[NSString class]]) {
         self.expirationDate = [[VIMModelObject dateFormatter] dateFromString:self.expires_time];
     }
     
-    if ([self.purchase_time isKindOfClass:[NSString class]])
-    {
+    if ([self.purchase_time isKindOfClass:[NSString class]]) {
         self.purchaseDate = [[VIMModelObject dateFormatter] dateFromString:self.purchase_time];
     }
     
     self.isForDRMProtectedContent = self.drm;
     
     // Not every interaction has a stream status, only buy, rent, subscribe [NL] 05/22/16
-    if (self.stream != nil)
-    {
+    if (self.stream != nil) {
         [self setStreamStatus];
     }
 }
 
 #pragma mark - Parsing Helpers
 
-- (void)setStreamStatus
-{
+- (void)setStreamStatus {
     NSDictionary *statusDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                       [NSNumber numberWithInt:VIMInteractionStreamStatusPurchased], @"purchased",
                                       [NSNumber numberWithInt:VIMInteractionStreamStatusRestricted], @"restricted",
@@ -91,6 +87,22 @@ NSString * const VIMInteractionNamePurchase = @"purchase";
     NSAssert(number != nil, @"VOD video stream status not handled, unknown stream status");
     
     self.streamStatus = [number intValue];
+}
+
+- (BOOL)canGet {
+    return (self.options && [self.options containsObject:@"GET"]);
+}
+
+- (BOOL)canPost {
+    return (self.options && [self.options containsObject:@"POST"]);
+}
+
+- (BOOL)canPatch {
+    return (self.options && [self.options containsObject:@"PATCH"]);
+}
+
+- (BOOL)canDelete {
+    return (self.options && [self.options containsObject:@"DELETE"]);
 }
 
 @end
