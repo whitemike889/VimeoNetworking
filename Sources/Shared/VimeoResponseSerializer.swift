@@ -26,24 +26,49 @@
 
 import Foundation
 
-/** `VimeoResponseSerializer` is an `AFJSONResponseSerializer` that defines our accept header, as well as parses out some Vimeo-specific error information.
- */
-final public class VimeoResponseSerializer: AFJSONResponseSerializer {
+/// `VimeoResponseSerializer` defines our accept header, serializes responses
+///  and parses out some Vimeo-specific error information.
+final public class VimeoResponseSerializer {
+
     private struct Constants {
         static let ErrorDomain = "VimeoResponseSerializerErrorDomain"
     }
+
+    /// Getter and setter for acceptableContentTypes property on the underlying response serializer
+    public var acceptableContentTypes: Set<String>? {
+        get { return self.jsonResponseSerializer.acceptableContentTypes }
+        set { self.jsonResponseSerializer.acceptableContentTypes = newValue }
+    }
+
+    // The response serializer used to serialize data responses
+    private let jsonResponseSerializer: AFJSONResponseSerializer
+
+    init(jsonResponseSerializer: AFJSONResponseSerializer = AFJSONResponseSerializer()) {
+        self.jsonResponseSerializer = jsonResponseSerializer
+        self.jsonResponseSerializer.acceptableContentTypes = VimeoResponseSerializer.acceptableContentTypes()
+        self.jsonResponseSerializer.readingOptions = .allowFragments
+    }
+
+    /// Creates a response object decoded from the data associated with a specified response.
+    func responseObject(
+        for response: URLResponse?,
+        data: Data?
+    ) -> Result<JSON, Error> {
+        var error: NSError?
+        let value = self.jsonResponseSerializer.responseObject(
+            for: response,
+            data: data,
+            error: &error
+        )
+        if let error = error {
+            return .failure(error)
+        } else if let unwrappedValue = value {
+            return .success(unwrappedValue)
+        } else {
+            return .failure(VimeoNetworkingError.unknownError)
+        }
+    }
     
-    override init() {
-        super.init()
-
-        self.acceptableContentTypes = VimeoResponseSerializer.acceptableContentTypes()
-        self.readingOptions = .allowFragments
-    }
-
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-        
     // MARK: Public API
 
     /**
@@ -97,6 +122,8 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer {
         try self.checkStatusCodeValidity(response: response)
     }
 
+    // MARK: Private API
+
     /**
      Check that a download task response has a valid status code
      
@@ -104,7 +131,7 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer {
      
      - throws: an error if the status code is invalid
      */
-    public func checkStatusCodeValidity(response: URLResponse?) throws {
+    private func checkStatusCodeValidity(response: URLResponse?) throws {
         if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode < 200 || httpResponse.statusCode > 299 {
             let userInfo = [NSLocalizedDescriptionKey: "Invalid http status code for download task."]
             throw NSError(domain: Constants.ErrorDomain, code: 0, userInfo: userInfo)
@@ -120,7 +147,7 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer {
      
      - returns: downloaded data serialized into JSON dictionary
      */
-    public func dictionaryFromDownloadTaskResponse(url: URL?) throws -> [String: Any] {
+    private func dictionaryFromDownloadTaskResponse(url: URL?) throws -> [String: Any] {
         guard let url = url else {
             let userInfo = [NSLocalizedDescriptionKey: "Url for completed download task is nil."]
             throw NSError(domain: Constants.ErrorDomain, code: 0, userInfo: userInfo)
@@ -143,8 +170,6 @@ final public class VimeoResponseSerializer: AFJSONResponseSerializer {
         
         return dictionary!
     }
-    
-    // MARK: Private API
 
     private func errorInfo(fromResponse response: URLResponse?, responseObject: Any?) -> [String: Any]? {
         var errorInfo: [String: Any] = [:]
