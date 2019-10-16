@@ -40,7 +40,12 @@ final public class VimeoClient {
         /// The data task of the request
         public let task: Task?
 
-        /// Cancels the request
+        /// Resumes the request token task
+        public func resume() {
+            self.task?.resume()
+        }
+
+        /// Cancels the request token task
         public func cancel() {
             self.task?.cancel()
         }
@@ -137,12 +142,14 @@ final public class VimeoClient {
     ///
     /// - Parameters:
     ///   - request: `Request` object containing all the required URL and policy information
+    ///   - startImmediately: a boolean indicating whether or not the request should resume immediately
     ///   - completionQueue: dispatch queue on which to execute the completion closure
     ///   - completion: a closure executed one or more times, containing a `Result`
     ///
     /// - Returns: a `RequestToken` for the in-flight request
     public func request<ModelType>(
         _ request: Request<ModelType>,
+        startImmediately: Bool = true,
         completionQueue: DispatchQueue = .main,
         completion: @escaping ResultCompletion<Response<ModelType>, NSError>.T
     ) -> RequestToken {
@@ -153,14 +160,44 @@ final public class VimeoClient {
                 then: completion
             )
         } else {
-            return self.perform(
+            let requestToken = self.create(
                 request,
                 completionQueue: completionQueue,
                 then: completion
             )
+            if startImmediately { requestToken.resume() }
+            return requestToken
         }
     }
-    
+
+    /// Executes a `Request` encapsulated into an `EndpointType` and bound to a `Decodable` response.
+    ///
+    /// - Parameters:
+    ///   - endpoint: `EndpointType` object containing the information required to build a request
+    ///   - startImmediately: a boolean indicating whether or not the request should resume immediately
+    ///   - completionQueue: dispatch queue on which to execute the callback closure
+    ///   - callback: a closure executed once the request completes, containing a `Result` type
+    ///   for the specified decodable.
+    ///
+    /// - Returns: a `RequestToken` for the in-flight request
+    public func request<Model: Decodable>(
+        _ endpoint: EndpointType,
+        startImmediately: Bool = true,
+        completionQueue: DispatchQueue = .main,
+        then callback: @escaping (Result<Model, Error>) -> Void
+    ) -> RequestToken {
+        let task = self.sessionManager?.request(
+            endpoint,
+            parameters: nil,
+            then: { (sessionManagingResult: SessionManagingResult<Model>) in
+                completionQueue.async {
+                    callback(sessionManagingResult.result)
+                }
+            }
+        )
+        if startImmediately { task?.resume() }
+        return RequestToken(path: endpoint.path, task: task)
+    }
 
     /// Removes any cached responses for a given `Request`
     /// - Parameters:
@@ -179,7 +216,7 @@ extension VimeoClient {
 
     // MARK: - Private network request handling
 
-    private func perform<ModelType>(
+    private func create<ModelType>(
         _ request: Request<ModelType>,
         completionQueue: DispatchQueue,
         then callback: @escaping ResultCompletion<Response<ModelType>, NSError>.T
@@ -210,8 +247,7 @@ extension VimeoClient {
                 }
             }
         )
-        task?.resume()
-        
+
         guard let requestTask = task else {
             let description = "Session manager did not return a task"
             assertionFailure(description)
