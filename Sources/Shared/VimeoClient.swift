@@ -432,7 +432,12 @@ extension VimeoClient {
         completionQueue: DispatchQueue,
         completion: @escaping ResultCompletion<Response<ModelType>, NSError>.T
     ) {
-        guard error.code != NSURLErrorCancelled else { return }
+        guard error.code != NSURLErrorCancelled else {
+            // TODO: This error never gets propagated up the chain because we don't call the completion closure here.
+            // We need to investigate whether adding the callback here will cause any unforeseen side effects on calling
+            // sites before fixing it. [RDPA 10/16/2019]
+            return
+        }
 
         self.handleError(error, request: request, urlRequest: urlRequest)
         
