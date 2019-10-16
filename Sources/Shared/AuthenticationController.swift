@@ -182,11 +182,14 @@ final public class AuthenticationController {
         
         var error: NSError?
         let serializer = VimeoRequestSerializer(appConfiguration: self.configuration)
-        let urlRequest = serializer
-            .request(withMethod: .get, urlString: urlString, parameters: parameters, error: &error)
+        let urlRequest = serializer.request(
+            withMethod: .get,
+            urlString: urlString,
+            parameters: parameters,
+            error: &error
+        )
         
-        guard let url = urlRequest.url, error == nil
-        else {
+        guard let url = urlRequest.url, error == nil else {
             fatalError("Could not make code grant auth URL")
         }
         
