@@ -32,17 +32,3 @@ public let VimeoBaseURL = URL(string: "https://api.vimeo.com")!
 
  /// Default API version to use for requests
 internal let VimeoDefaultAPIVersionString = "3.4"
-
-/// Converts raw types to the representation expected by the Vimeo API
-public enum RawTypeConverter {
-    static let trueAsString = "true"
-    static let falseAsString = "false"
-    
-    /// Converts a Bool to the String format expected by API
-    ///
-    /// - Parameter bool: a Bool type
-    /// - Returns: the Bool as "false" or "true"
-    public static func string(from bool: Bool) -> String {
-        return bool ? trueAsString : falseAsString
-    }
-}

@@ -135,14 +135,11 @@ extension Request where ModelType: VIMAccount {
      - returns: a new `Request`
      */
     static func joinRequest(withName name: String, email: String, password: String, marketingOptIn: Bool, scopes: [Scope]) -> Request {
-        
-        let marketingOptInBoolAsString = RawTypeConverter.string(from: marketingOptIn)
-
-        let parameters = [ScopeKey: Scope.combine(scopes),
+        let parameters: [String: Any] = [ScopeKey: Scope.combine(scopes),
                           DisplayNameKey: name,
                           EmailKey: email,
                           PasswordKey: password,
-                          MarketingOptIn: marketingOptInBoolAsString]
+                          MarketingOptIn: marketingOptIn]
         
         return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters)
     }
@@ -172,11 +169,9 @@ extension Request where ModelType: VIMAccount {
      - returns: a new `Request`
      */
     static func joinFacebookRequest(withToken facebookToken: String, marketingOptIn: Bool, scopes: [Scope]) -> Request {
-        let marketingOptInBoolAsString = RawTypeConverter.string(from: marketingOptIn)
-
-        let parameters = [ScopeKey: Scope.combine(scopes),
+        let parameters: [String: Any] = [ScopeKey: Scope.combine(scopes),
                           FacebookTokenKey: facebookToken,
-                          MarketingOptIn: marketingOptInBoolAsString]
+                          MarketingOptIn: marketingOptIn]
         
         return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters)
     }
@@ -207,12 +202,10 @@ extension Request where ModelType: VIMAccount {
     public static func joinWithGoogleRequest(withToken googleToken: String, marketingOptIn: Bool, scopes: [Scope])
         -> Request
     {
-        let marketingOptInBoolAsString = RawTypeConverter.string(from: marketingOptIn)
-        
-        let parameters = [
+        let parameters: [String: Any] = [
             ScopeKey: Scope.combine(scopes),
             GoogleTokenKey: googleToken,
-            MarketingOptIn: marketingOptInBoolAsString
+            MarketingOptIn: marketingOptIn
         ]
         
         return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters)
