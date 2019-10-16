@@ -104,16 +104,14 @@ final public class VimeoRequestSerializer {
         withParameters parameters: Any?,
         error: NSErrorPointer
     ) -> URLRequest? {
-        if var request = jsonSerializer.request(
+        guard let request = jsonSerializer.request(
             bySerializingRequest: request,
             withParameters: parameters,
             error: error
-        ) {
-            request = self.requestConfiguringHeaders(fromRequest: request)
-            return request
+        ) else {
+            return nil
         }
-
-        return nil
+        return self.requestConfiguringHeaders(fromRequest: request)
     }
     
     // MARK: Header Helpers
@@ -159,10 +157,8 @@ final public class VimeoRequestSerializer {
     }
     
     private func requestModifyingUserAgentHeader(fromRequest request: URLRequest) -> URLRequest {
-        let infoDictionary = Bundle(for: type(of: self)).infoDictionary
-        guard let frameworkVersion = infoDictionary?["CFBundleShortVersionString"] as? String else {
+        guard let frameworkVersion = Bundle(for: type(of: self)).shortVersionString else {
             assertionFailure("Unable to get the framework version")
-            
             return request
         }
         
@@ -189,6 +185,13 @@ final public class VimeoRequestSerializer {
         request.setValue(modifiedUserAgent, forHTTPHeaderField: .userAgentKey)
         
         return request
+    }
+}
+
+
+private extension Bundle {
+    var shortVersionString: String? {
+        return infoDictionary?["CFBundleShortVersionString"] as? String
     }
 }
 
