@@ -196,7 +196,7 @@ private extension Bundle {
 }
 
 // MARK: - Private header keys
-private extension String  {
+private extension String {
     static let acceptHeaderKey = "Accept"
     static let authorizationHeaderKey = "Authorization"
     static let userAgentKey = "User-Agent"
