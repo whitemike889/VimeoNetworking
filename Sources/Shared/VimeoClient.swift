@@ -135,9 +135,42 @@ final public class VimeoClient {
         NetworkingNotification.authenticatedAccountDidChange.post(object: account,
                                                         userInfo: [UserInfoKey.previousAccount.rawValue as String : previousAccount ?? NSNull()])
     }
-    
-    // MARK: - Request
-    
+}
+
+// MARK: - Client configuration utility
+
+extension VimeoClient {
+
+    /// Configures a client instance and its associated session manager with the given configuration,
+    /// reachability manager and an optional configuration block.
+    /// - Parameter client: an inout `VimeoClient` instance to be configured
+    /// - Parameter appConfiguration: the `AppConfiguration` object to be used by the client and associated session manager
+    /// - Parameter reachabilityManager: the `ReachabilityManaging` instance to be used by the client and associated
+    /// session to determine network reachability status. If none is provided the default reachability manager is used
+    /// - Parameter configureSessionManagerBlock: An optional configuration block for the client's session manager
+    ///
+    /// Note that calling this method invalidates the `VimeoClient`'s existing session manager and creates
+    /// a new instance with the given configuration.
+    public static func configure(
+        _ client: inout VimeoClient,
+        appConfiguration: AppConfiguration,
+        reachabilityManager: ReachabilityManaging? = nil,
+        configureSessionManagerBlock: ConfigureSessionManagerBlock? = nil
+    ) {
+        let reachabilityManager = reachabilityManager ?? VimeoReachabilityProvider.reachabilityManager
+        client.configuration = appConfiguration
+        let defaultSessionManager = VimeoSessionManager.defaultSessionManager(
+            appConfiguration: appConfiguration,
+            configureSessionManagerBlock: configureSessionManagerBlock
+        )
+        client.sessionManager?.invalidate(cancelingPendingTasks: false)
+        client.sessionManager = defaultSessionManager
+        client.reachabilityManager = reachabilityManager
+    }
+}
+
+// MARK: - Request
+extension VimeoClient {
     /// Executes a `Request`
     ///
     /// - Parameters:
