@@ -35,6 +35,7 @@ extern NSString * __nonnull VIMPrivacy_Password;
 extern NSString * __nonnull VIMPrivacy_Unlisted;
 extern NSString * __nonnull VIMPrivacy_Disabled;
 extern NSString * __nonnull VIMPrivacy_Stock;
+extern NSString * __nonnull VIMPrivacy_EmbedOnly;
 
 @interface VIMPrivacy : VIMModelObject
 
@@ -45,5 +46,6 @@ extern NSString * __nonnull VIMPrivacy_Stock;
 @property (nonatomic, copy, nullable) NSString *embed;
 @property (nonatomic, copy, nullable) NSString *view;
 @property (nonatomic, copy, nullable) NSString *bypassToken;
+@property (nonatomic, copy, nullable) NSString *password;
 
 @end
