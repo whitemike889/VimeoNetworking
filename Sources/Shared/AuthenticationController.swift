@@ -265,10 +265,11 @@ final public class AuthenticationController {
      **(PRIVATE: Vimeo Use Only, will not work for third-party applications)**
      Join with a username, email, and password
      
-     - parameter name:       the new user's name
-     - parameter email:      the new user's email
-     - parameter password:   the new user's password
-     - parameter completion: handler for authentication success or failure
+     - parameter name:           the new user's name
+     - parameter email:          the new user's email
+     - parameter password:       the new user's password
+     - parameter marketingOptIn: a bool indicating whether a user has opted-in to receive marketing material
+     - parameter completion:     handler for authentication success or failure
      */
     public func join(withName name: String, email: String, password: String, marketingOptIn: Bool, completion: @escaping AuthenticationCompletion) {
         
@@ -295,7 +296,8 @@ final public class AuthenticationController {
      Join with a Facebook token
      
      - parameter facebookToken: token from facebook SDK
-     - parameter completion:    handler for authentication success or failure
+     - parameter marketingOptIn: a bool indicating whether a user has opted-in to receive marketing material
+     - parameter completion: handler for authentication success or failure
      */
     public func facebookJoin(withToken facebookToken: String, marketingOptIn: Bool, completion: @escaping AuthenticationCompletion) {
         let request = AuthenticationRequest.joinFacebookRequest(withToken: facebookToken, marketingOptIn: marketingOptIn, scopes: self.configuration.scopes)

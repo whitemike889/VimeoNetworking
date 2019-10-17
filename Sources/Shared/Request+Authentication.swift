@@ -28,44 +28,6 @@ import Foundation
 
 public typealias AuthenticationRequest = Request<VIMAccount>
 
-private let GrantTypeKey = "grant_type"
-private let ScopeKey = "scope"
-private let CodeKey = "code"
-private let RedirectURIKey = "redirect_uri"
-private let UsernameKey = "username"
-private let PasswordKey = "password"
-private let DisplayNameKey = "display_name"
-private let EmailKey = "email"
-private let FacebookTokenKey = "token"
-private let GoogleTokenKey = "id_token"
-private let PinCodeKey = "user_code"
-private let DeviceCodeKey = "device_code"
-private let AccessTokenKey = "access_token"
-private let MarketingOptIn = "marketing_opt_in"
-
-private let GrantTypeClientCredentials = "client_credentials"
-private let GrantTypeAuthorizationCode = "authorization_code"
-private let GrantTypePassword = "password"
-private let GrantTypeFacebook = "facebook"
-private let GrantTypeGoogle = "google"
-private let GrantTypePinCode = "device_grant"
-
-private let AuthenticationPathClientCredentials = "oauth/authorize/client"
-private let AuthenticationPathAccessToken = "oauth/authorize/password"
-private let AuthenticationPathAccessTokenVerify = "oauth/verify"
-private let AuthenticationPathUsers = "users"
-private let AuthenticationPathFacebookToken = "oauth/authorize/facebook"
-private let AuthenticationPathGoogleToken = "oauth/authorize/google"
-
-private let AuthenticationPathCodeGrant = "oauth/access_token"
-private let AuthenticationPathPinCode = "oauth/device"
-private let AuthenticationPathPinCodeAuthorize = "oauth/device/authorize"
-private let AuthenticationPathAppTokenExchange = "oauth/appexchange"
-
-// MARK: -
-
-private let AuthenticationPathTokens = "/tokens"
-
 extension Request where ModelType: VIMAccount {
     /**
      Construct a `Request` for client credentials grant authentication
@@ -127,10 +89,11 @@ extension Request where ModelType: VIMAccount {
     /**
      Construct a `Request` for joining with a name, email, and password (Vimeo internal use only)
      
-     - parameter name:     the new user name
-     - parameter email:    the new user email
-     - parameter password: the new user password
-     - parameter scopes:   an array of `Scope` values representing permissions your app requests
+     - parameter name:           the new user name
+     - parameter email:          the new user email
+     - parameter password:       the new user password
+     - parameter marketingOptIn: a bool indicating whether a user has opted-in to receive marketing material
+     - parameter scopes:         an array of `Scope` values representing permissions your app requests
      
      - returns: a new `Request`
      */
@@ -163,10 +126,10 @@ extension Request where ModelType: VIMAccount {
     /**
      Construct a `Request` for joining with Facebook (Vimeo internal use only)
      
-     - parameter facebookToken: the token returned by the Facebook SDK
-     - parameter scopes:        an array of `Scope` values representing permissions your app requests
-     
-     - returns: a new `Request`
+     - parameter facebookToken:  the token returned by the Facebook SDK
+     - parameter marketingOptIn: a bool indicating whether a user has opted-in to receive marketing material
+     - parameter scopes:         an array of `Scope` values representing permissions your app requests
+     - returns:                  a new `Request`
      */
     static func joinFacebookRequest(withToken facebookToken: String, marketingOptIn: Bool, scopes: [Scope]) -> Request {
         let parameters: [String: Any] = [ScopeKey: Scope.combine(scopes),
@@ -196,7 +159,7 @@ extension Request where ModelType: VIMAccount {
     ///
     /// - Parameters:
     ///   - googleToken: `idToken` returned by the GoogleSignIn SDK
-    ///   - marketingOptIn: bool indicateing whether a user has opted-in to receive marketing material
+    ///   - marketingOptIn: bool indicating whether a user has opted-in to receive marketing material
     ///   - scopes: array of `Scope` values representing permissions for app requests
     /// - Returns: new `Request`
     public static func joinWithGoogleRequest(withToken googleToken: String, marketingOptIn: Bool, scopes: [Scope])
@@ -283,3 +246,40 @@ extension Request where ModelType: PinCodeInfo {
         return Request(method: .POST, path: AuthenticationPathPinCode, parameters: parameters)
     }
 }
+
+// MARK: - Private Constants
+
+private let GrantTypeKey = "grant_type"
+private let ScopeKey = "scope"
+private let CodeKey = "code"
+private let RedirectURIKey = "redirect_uri"
+private let UsernameKey = "username"
+private let PasswordKey = "password"
+private let DisplayNameKey = "display_name"
+private let EmailKey = "email"
+private let FacebookTokenKey = "token"
+private let GoogleTokenKey = "id_token"
+private let PinCodeKey = "user_code"
+private let DeviceCodeKey = "device_code"
+private let AccessTokenKey = "access_token"
+private let MarketingOptIn = "marketing_opt_in"
+
+private let GrantTypeClientCredentials = "client_credentials"
+private let GrantTypeAuthorizationCode = "authorization_code"
+private let GrantTypePassword = "password"
+private let GrantTypeFacebook = "facebook"
+private let GrantTypeGoogle = "google"
+private let GrantTypePinCode = "device_grant"
+
+private let AuthenticationPathClientCredentials = "oauth/authorize/client"
+private let AuthenticationPathAccessToken = "oauth/authorize/password"
+private let AuthenticationPathAccessTokenVerify = "oauth/verify"
+private let AuthenticationPathUsers = "users"
+private let AuthenticationPathFacebookToken = "oauth/authorize/facebook"
+private let AuthenticationPathGoogleToken = "oauth/authorize/google"
+
+private let AuthenticationPathCodeGrant = "oauth/access_token"
+private let AuthenticationPathPinCode = "oauth/device"
+private let AuthenticationPathPinCodeAuthorize = "oauth/device/authorize"
+private let AuthenticationPathAppTokenExchange = "oauth/appexchange"
+private let AuthenticationPathTokens = "/tokens"
