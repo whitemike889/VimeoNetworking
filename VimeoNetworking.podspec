@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "VimeoNetworking"
-  s.version      = "3.4.0"
+  s.version      = "3.5.0"
   s.summary      = "A library for interacting with the Vimeo API."
   s.description  = "An iOS/tvOS library for interacting with the Vimeo API."
   s.homepage     = "https://github.com/vimeo/VimeoNetworking"
@@ -24,5 +24,4 @@ Pod::Spec.new do |s|
   s.source_files  = "VimeoNetworking/Sources/**/*.{h,m,swift}"
   s.resources = "VimeoNetworking/Resources/**/*.*"
 
-  s.dependency 'AFNetworking', '3.1.0'
 end
