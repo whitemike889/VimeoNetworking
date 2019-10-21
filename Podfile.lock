@@ -1,19 +1,4 @@
 PODS:
-  - AFNetworking (3.1.0):
-    - AFNetworking/NSURLSession (= 3.1.0)
-    - AFNetworking/Reachability (= 3.1.0)
-    - AFNetworking/Security (= 3.1.0)
-    - AFNetworking/Serialization (= 3.1.0)
-    - AFNetworking/UIKit (= 3.1.0)
-  - AFNetworking/NSURLSession (3.1.0):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.1.0)
-  - AFNetworking/Security (3.1.0)
-  - AFNetworking/Serialization (3.1.0)
-  - AFNetworking/UIKit (3.1.0):
-    - AFNetworking/NSURLSession
   - OHHTTPStubs/Core (6.0.0)
   - OHHTTPStubs/Default (6.0.0):
     - OHHTTPStubs/Core
@@ -28,18 +13,15 @@ PODS:
   - OHHTTPStubs/Swift (6.0.0):
     - OHHTTPStubs/Default
   - SwiftLint (0.25.1)
-  - VimeoNetworking (3.3.1):
-    - AFNetworking (= 3.1.0)
+  - VimeoNetworking (3.5.0)
 
 DEPENDENCIES:
-  - AFNetworking (= 3.1.0)
   - OHHTTPStubs/Swift (= 6.0.0)
   - SwiftLint (= 0.25.1)
   - VimeoNetworking (from `../VimeoNetworking`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - AFNetworking
     - OHHTTPStubs
     - SwiftLint
 
@@ -48,11 +30,10 @@ EXTERNAL SOURCES:
     :path: "../VimeoNetworking"
 
 SPEC CHECKSUMS:
-  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   OHHTTPStubs: 752f9b11fd810a15162d50f11c06ff94f8e012eb
   SwiftLint: ce933681be10c3266e82576dad676fa815a602e9
-  VimeoNetworking: 6c51314fe2ba1c5c0eb23a638daf46af8aa9df30
+  VimeoNetworking: bfc522d57327c83104612702358e0ef98d56b2c5
 
-PODFILE CHECKSUM: 15308d7273e1bf844b2ad8c456612b686e9c5b45
+PODFILE CHECKSUM: 79dce19978c185aab06de8c9515bc61dd64ff309
 
 COCOAPODS: 1.5.2
