@@ -143,7 +143,7 @@ extension VimeoClient {
 
     /// Configures a client instance and its associated session manager with the given configuration,
     /// reachability manager and an optional configuration block.
-    /// - Parameter client: an inout `VimeoClient` instance to be configured
+    /// - Parameter client: the `VimeoClient` instance to be configured
     /// - Parameter appConfiguration: the `AppConfiguration` object to be used by the client and associated session manager
     /// - Parameter reachabilityManager: the `ReachabilityManaging` instance to be used by the client and associated
     /// session to determine network reachability status. If none is provided the default reachability manager is used
@@ -152,7 +152,7 @@ extension VimeoClient {
     /// Note that calling this method invalidates the `VimeoClient`'s existing session manager and creates
     /// a new instance with the given configuration.
     public static func configure(
-        _ client: inout VimeoClient,
+        _ client: VimeoClient,
         appConfiguration: AppConfiguration,
         reachabilityManager: ReachabilityManaging? = nil,
         configureSessionManagerBlock: ConfigureSessionManagerBlock? = nil
