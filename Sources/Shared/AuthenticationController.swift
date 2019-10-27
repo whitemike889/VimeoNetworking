@@ -270,12 +270,14 @@ final public class AuthenticationController {
      **(PRIVATE: Vimeo Use Only, will not work for third-party applications)**
      Join with a username, email, and password
      
-     - parameter name:       the new user's name
-     - parameter email:      the new user's email
-     - parameter password:   the new user's password
-     - parameter completion: handler for authentication success or failure
+     - parameter name:           the new user's name
+     - parameter email:          the new user's email
+     - parameter password:       the new user's password
+     - parameter marketingOptIn: a bool indicating whether a user has opted-in to receive marketing material
+     - parameter completion:     handler for authentication success or failure
      */
-    public func join(withName name: String, email: String, password: String, marketingOptIn: String, completion: @escaping AuthenticationCompletion) {
+    public func join(withName name: String, email: String, password: String, marketingOptIn: Bool, completion: @escaping AuthenticationCompletion) {
+        
         let request = AuthenticationRequest.joinRequest(withName: name, email: email, password: password, marketingOptIn: marketingOptIn, scopes: self.configuration.scopes)
         
         self.authenticate(with: request, completion: completion)
@@ -283,7 +285,7 @@ final public class AuthenticationController {
     
     /**
      **(PRIVATE: Vimeo Use Only, will not work for third-party applications)**
-     Log in with a facebook token
+     Log in with a Facebook token
      
      - parameter facebookToken: token from facebook SDK
      - parameter completion:    handler for authentication success or failure
@@ -296,13 +298,52 @@ final public class AuthenticationController {
     
     /**
      **(PRIVATE: Vimeo Use Only, will not work for third-party applications)**
-     Join with a facebook token
+     Join with a Facebook token
      
      - parameter facebookToken: token from facebook SDK
-     - parameter completion:    handler for authentication success or failure
+     - parameter marketingOptIn: a bool indicating whether a user has opted-in to receive marketing material
+     - parameter completion: handler for authentication success or failure
      */
-    public func facebookJoin(withToken facebookToken: String, marketingOptIn: String, completion: @escaping AuthenticationCompletion) {
+    public func facebookJoin(withToken facebookToken: String, marketingOptIn: Bool, completion: @escaping AuthenticationCompletion) {
         let request = AuthenticationRequest.joinFacebookRequest(withToken: facebookToken, marketingOptIn: marketingOptIn, scopes: self.configuration.scopes)
+        
+        self.authenticate(with: request, completion: completion)
+    }
+    
+    /**
+     **(PRIVATE: Vimeo Use Only, will not work for third-party applications)**
+     Log in with a Google token
+     
+     - parameter googleToken: `idToken` returned by the GoogleSignIn SDK
+     - parameter scopes: an array of `Scope` values representing permissions the app requests
+     - parameter completion: handler for authentication success or failure
+     */
+    public func googleLogIn(withToken googleToken: String, scopes: [Scope], completion: @escaping AuthenticationCompletion) {
+        let request = AuthenticationRequest.logInWithGoogleRequest(withToken: googleToken, scopes: scopes)
+        
+        self.authenticate(with: request, completion: completion)
+    }
+    
+    /**
+     **(PRIVATE: Vimeo Use Only, will not work for third-party applications)**
+     Join with a Google token
+     
+     - parameter googleToken: `idToken` returned by the GoogleSignIn SDK
+     - parameter marketingOptIn: bool indicating whether a user has opted in to receive marketing material
+     - parameter scopes: an array of `Scope` values representing permissions the app requests
+     - parameter completion: handler for authentication success or failure
+     */
+    public func googleJoin(
+        withToken googleToken: String,
+        marketingOptIn: Bool,
+        scopes: [Scope],
+        completion: @escaping AuthenticationCompletion
+        ) {
+        let request = AuthenticationRequest.joinWithGoogleRequest(
+            withToken: googleToken,
+            marketingOptIn: marketingOptIn,
+            scopes: scopes
+        )
         
         self.authenticate(with: request, completion: completion)
     }
