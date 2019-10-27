@@ -152,7 +152,7 @@ extension Request where ModelType: VIMAccount {
             GoogleTokenKey: googleToken
         ]
         
-        return Request(method: .POST, path: AuthenticationPathGoogleToken, parameters: parameters)
+        return Request(method: .post, path: AuthenticationPathGoogleToken, parameters: parameters)
     }
     
     /// Constructs a `Request` for joining with Google. For internal use only.
@@ -163,15 +163,14 @@ extension Request where ModelType: VIMAccount {
     ///   - scopes: array of `Scope` values representing permissions for app requests
     /// - Returns: new `Request`
     public static func joinWithGoogleRequest(withToken googleToken: String, marketingOptIn: Bool, scopes: [Scope])
-        -> Request
-    {
+        -> Request {
         let parameters: [String: Any] = [
             ScopeKey: Scope.combine(scopes),
             GoogleTokenKey: googleToken,
             MarketingOptIn: marketingOptIn
         ]
         
-        return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters)
+        return Request(method: .post, path: AuthenticationPathUsers, parameters: parameters)
     }
     
     /**
