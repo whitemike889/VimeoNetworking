@@ -26,13 +26,8 @@
 
 import Foundation
 
-/// `VimeoResponseSerializer` defines our accept header, serializes responses
-///  and parses out some Vimeo-specific error information.
-final public class VimeoResponseSerializer {
-
-    private struct Constants {
-        static let ErrorDomain = "VimeoResponseSerializerErrorDomain"
-    }
+// `ResponseSerializer` is a base class for validating and decoding JSON responses.
+public class ResponseSerializer {
 
     /// Getter and setter for acceptableContentTypes property on the underlying response serializer
     public var acceptableContentTypes: Set<String>? {
@@ -45,12 +40,16 @@ final public class VimeoResponseSerializer {
 
     init(jsonResponseSerializer: AFJSONResponseSerializer = AFJSONResponseSerializer()) {
         self.jsonResponseSerializer = jsonResponseSerializer
-        self.jsonResponseSerializer.acceptableContentTypes = VimeoResponseSerializer.acceptableContentTypes()
-        self.jsonResponseSerializer.readingOptions = .allowFragments
+        self.jsonResponseSerializer.readingOptions = self.defaultReadingOptions
+        if let defaultTypes = self.defaultAcceptableContentTypes {
+            self.jsonResponseSerializer.acceptableContentTypes = defaultTypes
+        }
     }
 
+    // MARK: Public API
+
     /// Creates a response object decoded from the data associated with a specified response.
-    func responseObject(
+    public func responseObject(
         for response: URLResponse?,
         data: Data?
     ) -> Result<JSON, Error> {
@@ -68,7 +67,24 @@ final public class VimeoResponseSerializer {
             return .failure(VimeoNetworkingError.unknownError)
         }
     }
-    
+
+    public var defaultAcceptableContentTypes: Set<String>? {
+        return nil
+    }
+
+    public var defaultReadingOptions: JSONSerialization.ReadingOptions {
+        return JSONSerialization.ReadingOptions(rawValue: 0)
+    }
+}
+
+/// `VimeoResponseSerializer` defines our accept header, serializes responses
+///  and parses out some Vimeo-specific error information.
+final public class VimeoResponseSerializer: ResponseSerializer {
+
+    private struct Constants {
+        static let ErrorDomain = "VimeoResponseSerializerErrorDomain"
+    }
+
     // MARK: Public API
 
     /**
@@ -120,6 +136,43 @@ final public class VimeoResponseSerializer {
         }
 
         try self.checkStatusCodeValidity(response: response)
+    }
+
+    // MARK: Overrides
+
+    override public var defaultAcceptableContentTypes: Set<String>? {
+        return Set(
+            ["application/json",
+             "text/json",
+             "text/html",
+             "text/javascript",
+             "application/vnd.vimeo.video+json",
+             "application/vnd.vimeo.cover+json",
+             "application/vnd.vimeo.service+json",
+             "application/vnd.vimeo.comment+json",
+             "application/vnd.vimeo.user+json",
+             "application/vnd.vimeo.picture+json",
+             "application/vnd.vimeo.activity+json",
+             "application/vnd.vimeo.uploadticket+json",
+             "application/vnd.vimeo.error+json",
+             "application/vnd.vimeo.trigger+json",
+             "application/vnd.vimeo.category+json",
+             "application/vnd.vimeo.channel+json",
+             "application/vnd.vimeo.song+json",
+             "application/vnd.vimeo.ondemand.page+json",
+             "application/vnd.vimeo.ondemand.season+json",
+             "application/vnd.vimeo.programmed.cinema+json",
+             "application/vnd.vimeo.policydocument+json",
+             "application/vnd.vimeo.notification+json",
+             "application/vnd.vimeo.notification.subscriptions+json",
+             "application/vnd.vimeo.product+json",
+             "application/vnd.vimeo.stats+json",
+             "application/vnd.vimeo.album+json"]
+        )
+    }
+
+    override public var defaultReadingOptions: JSONSerialization.ReadingOptions {
+        return .allowFragments
     }
 
     // MARK: Private API
@@ -189,36 +242,5 @@ final public class VimeoResponseSerializer {
         }
         
         return errorInfo.count == 0 ? nil : errorInfo
-    }
-
-    private static func acceptableContentTypes() -> Set<String> {
-        return Set(
-            ["application/json",
-            "text/json",
-            "text/html",
-            "text/javascript",
-            "application/vnd.vimeo.video+json",
-            "application/vnd.vimeo.cover+json",
-            "application/vnd.vimeo.service+json",
-            "application/vnd.vimeo.comment+json",
-            "application/vnd.vimeo.user+json",
-            "application/vnd.vimeo.picture+json",
-            "application/vnd.vimeo.activity+json",
-            "application/vnd.vimeo.uploadticket+json",
-            "application/vnd.vimeo.error+json",
-            "application/vnd.vimeo.trigger+json",
-            "application/vnd.vimeo.category+json",
-            "application/vnd.vimeo.channel+json",
-            "application/vnd.vimeo.song+json",
-            "application/vnd.vimeo.ondemand.page+json",
-            "application/vnd.vimeo.ondemand.season+json",
-            "application/vnd.vimeo.programmed.cinema+json",
-            "application/vnd.vimeo.policydocument+json",
-            "application/vnd.vimeo.notification+json",
-            "application/vnd.vimeo.notification.subscriptions+json",
-            "application/vnd.vimeo.product+json",
-            "application/vnd.vimeo.stats+json",
-            "application/vnd.vimeo.album+json"]
-        )
     }
 }

@@ -26,10 +26,10 @@
 
 import Foundation
 
-/// `VimeoRequestSerializer` handles request serialization as well as adding Vimeo-specific authorization
-/// headers to outbound requests.
+/// `RequestSerializer` is a base class for requests serialization. It's interface provides override methods,
+/// which allow to configure headers for outbound requests.
 /// It can be initialized with either a dynamic `AccessTokenProvider` or a static `AppConfiguration`.
-final public class VimeoRequestSerializer {
+public class RequestSerializer {
     
     public typealias AccessTokenProvider = () -> String?
     
@@ -113,26 +113,14 @@ final public class VimeoRequestSerializer {
         }
         return self.requestConfiguringHeaders(fromRequest: request)
     }
-    
-    // MARK: Header Helpers
-    
-    private func configureDefaultHeaders(withAPIVersion apiVersion: String) {
-        self.jsonSerializer.setValue(
-            "application/vnd.vimeo.*+json; version=\(apiVersion)",
-            forHTTPHeaderField: .acceptHeaderKey
-        )
+
+    // MARK: - Protected(only for subclasses overrides)
+
+    public func acceptHeaderValue(withAPIVersion apiVersion: String) -> String? {
+        return nil
     }
 
-    private func requestConfiguringHeaders(fromRequest request: URLRequest) -> URLRequest {
-        var request = request
-        
-        request = self.requestAddingAuthorizationHeader(fromRequest: request)
-        request = self.requestModifyingUserAgentHeader(fromRequest: request)
-        
-        return request
-    }
-    
-    private func requestAddingAuthorizationHeader(fromRequest request: URLRequest) -> URLRequest {
+    public func requestAddingAuthorizationHeader(fromRequest request: URLRequest) -> URLRequest {
         var request = request
         
         if let token = self.accessTokenProvider?() {
@@ -155,35 +143,68 @@ final public class VimeoRequestSerializer {
         
         return request
     }
-    
-    private func requestModifyingUserAgentHeader(fromRequest request: URLRequest) -> URLRequest {
+
+    public func requestModifyingUserAgentHeader(fromRequest request: URLRequest) -> URLRequest {
+        return request
+    }
+
+    // MARK: - Private
+
+    private func configureDefaultHeaders(withAPIVersion apiVersion: String) {
+        guard let acceptHeader = self.acceptHeaderValue(withAPIVersion: apiVersion) else {
+            return
+        }
+
+        self.jsonSerializer.setValue(acceptHeader, forHTTPHeaderField: .acceptHeaderKey)
+    }
+
+    private func requestConfiguringHeaders(fromRequest request: URLRequest) -> URLRequest {
+        var request = request
+
+        request = self.requestAddingAuthorizationHeader(fromRequest: request)
+        request = self.requestModifyingUserAgentHeader(fromRequest: request)
+
+        return request
+    }
+}
+
+/// `VimeoRequestSerializer` handles request serialization as well as adds Vimeo-specific authorization
+/// headers for outbound requests.
+final public class VimeoRequestSerializer: RequestSerializer {
+
+    // Overrides
+    override public func acceptHeaderValue(withAPIVersion apiVersion: String) -> String? {
+        return "application/vnd.vimeo.*+json; version=\(apiVersion)"
+    }
+
+    override public func requestModifyingUserAgentHeader(fromRequest request: URLRequest) -> URLRequest {
         guard let frameworkVersion = Bundle(for: type(of: self)).shortVersionString else {
             assertionFailure("Unable to get the framework version")
             return request
         }
-        
+
         var request = request
-        
+
         let frameworkString = "VimeoNetworking/\(frameworkVersion)"
-        
+
         guard let existingUserAgent = request.value(forHTTPHeaderField: .userAgentKey) else {
             // DISCUSSION: AFNetworking doesn't set a User Agent for tvOS (look at the init method in AFHTTPRequestSerializer.m).
             // So, on tvOS the User Agent will only specify the framework. System information might be something we want to add
             // in the future if AFNetworking isn't providing it. [ghking] 6/19/17
-            
+
             #if !os(tvOS)
                 assertionFailure("An existing user agent was not found")
             #endif
-            
+
             request.setValue(frameworkString, forHTTPHeaderField: .userAgentKey)
 
             return request
         }
-        
+
         let modifiedUserAgent = "\(existingUserAgent) \(frameworkString)"
-        
+
         request.setValue(modifiedUserAgent, forHTTPHeaderField: .userAgentKey)
-        
+
         return request
     }
 }

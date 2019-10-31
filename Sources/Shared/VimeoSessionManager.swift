@@ -30,13 +30,10 @@ private typealias SessionManagingDataTaskSuccess<T> = ((URLSessionDataTask, T?) 
 private typealias SessionManagingDataTaskFailure = ((URLSessionDataTask?, Error) -> Void)
 private typealias SessionManagingDataTaskProgress = (Progress) -> Void
 
-/** `VimeoSessionManager` handles networking and serialization for raw HTTP requests.
+/** `SessionManager` handles networking and serialization for raw HTTP requests.
  Internally, it uses  an `AFHTTPSessionManager` instance to handle requests.
- This class was designed to be used internally by `VimeoClient`. For the majority of purposes,
- it would be better to use`VimeoClient` and a `Request` object to better encapsulate this logic,
- since the latter provides richer functionality overall.
  */
-final public class VimeoSessionManager: NSObject, SessionManaging {
+public class SessionManager: NSObject, SessionManaging {
 
     // MARK: - Public
 
@@ -52,11 +49,11 @@ final public class VimeoSessionManager: NSObject, SessionManaging {
         set { self.jsonResponseSerializer.acceptableContentTypes = newValue }
     }
 
-    /// The custom Vimeo request serializer that is used for serializing Data requests into JSON
-    public let jsonRequestSerializer: VimeoRequestSerializer
+    /// The custom request serializer that is used for serializing Data requests into JSON
+    public let jsonRequestSerializer: RequestSerializer
 
-    /// The custom Vimeo response serializer that is used for serializing Data responses into JSON
-    public lazy var jsonResponseSerializer = VimeoResponseSerializer()
+    /// The custom response serializer that is used for serializing Data responses into JSON
+    public let jsonResponseSerializer: ResponseSerializer
 
     // MARK: - Private
 
@@ -77,17 +74,19 @@ final public class VimeoSessionManager: NSObject, SessionManaging {
      - parameter sessionConfiguration: Object describing the URL session policies for this session manager
      - parameter requestSerializer:    Serializer to use for all requests handled by this session manager
 
-     - returns: an initialized `VimeoSessionManager`
+     - returns: an initialized `SessionManager`
      */
     required public init(
         baseUrl: URL,
         sessionConfiguration: URLSessionConfiguration,
-        requestSerializer: VimeoRequestSerializer
+        requestSerializer: RequestSerializer,
+        responseSerializer: ResponseSerializer
     ) {
         self.httpSessionManager = AFHTTPSessionManager(baseURL: baseUrl, sessionConfiguration: sessionConfiguration)
         self.httpSessionManager.requestSerializer = AFHTTPRequestSerializer()
         self.httpSessionManager.responseSerializer = AFHTTPResponseSerializer()
         self.jsonRequestSerializer = requestSerializer
+        self.jsonResponseSerializer = responseSerializer
     }
 
     required public init?(coder aDecoder: NSCoder) {
@@ -101,7 +100,7 @@ final public class VimeoSessionManager: NSObject, SessionManaging {
 
 // MARK: - Public request methods
 
-extension VimeoSessionManager {
+extension SessionManager {
 
     // MARK: - Data Request
 
@@ -320,7 +319,7 @@ extension VimeoSessionManager {
 
 // MARK: - Private request method helpers
 
-private extension VimeoSessionManager {
+private extension SessionManager {
 
     private func upload(
         _ requestConvertible: URLRequestConvertible,
@@ -352,7 +351,7 @@ private extension VimeoSessionManager {
 }
 
 // Wrapper extensions to hide internals of `httpSessionManager`
-extension VimeoSessionManager {
+extension SessionManager {
     public func task(forIdentifier identifier: Int) -> URLSessionTask? {
         return self.httpSessionManager.tasks
             .filter { $0.taskIdentifier == identifier }.first
@@ -405,7 +404,7 @@ extension VimeoSessionManager {
 
 // MARK: - Authentication
 
-extension VimeoSessionManager: AuthenticationListeningDelegate {
+extension SessionManager: AuthenticationListeningDelegate {
 
     /**
      Called when authentication completes successfully to update the session manager with the new access token
@@ -427,10 +426,61 @@ extension VimeoSessionManager: AuthenticationListeningDelegate {
     }
 }
 
+// `VimeoSessionManager` handles networking and serialization for Vimeo API requests.
+// This class was designed to be used internally by `VimeoClient`. For the majority of purposes,
+// it would be better to use`VimeoClient` and a `Request` object to better encapsulate this logic,
+// since the latter provides richer functionality overall.
+final public class VimeoSessionManager: SessionManager {
+
+    required public init(
+        baseUrl: URL,
+        sessionConfiguration: URLSessionConfiguration,
+        requestSerializer: RequestSerializer,
+        responseSerializer: ResponseSerializer
+    ) {
+        assert((requestSerializer as? VimeoRequestSerializer) != nil,
+               "VimeoSessionManager must be initialized with VimeoRequestSerializer.")
+        assert((responseSerializer as? VimeoResponseSerializer) != nil,
+               "VimeoSessionManager must be initialized with VimeoResponseSerializer.")
+        super.init(baseUrl: baseUrl,
+                   sessionConfiguration: sessionConfiguration,
+                   requestSerializer: requestSerializer,
+                   responseSerializer: responseSerializer)
+    }
+
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    convenience public init(
+        baseUrl: URL,
+        sessionConfiguration: URLSessionConfiguration,
+        requestSerializer: RequestSerializer
+    ) {
+        self.init(baseUrl: baseUrl,
+                  sessionConfiguration: sessionConfiguration,
+                  requestSerializer: requestSerializer,
+                  responseSerializer: VimeoResponseSerializer())
+    }
+}
+
+
+extension VimeoSessionManager {
+
+    public var vimeoRequestSerializer: VimeoRequestSerializer {
+        return jsonRequestSerializer as! VimeoRequestSerializer
+    }
+
+    public var vimeoResponseSerializer: VimeoResponseSerializer {
+        return jsonResponseSerializer as! VimeoResponseSerializer
+    }
+}
+
+
 private func process(
     _ response: URLResponse?,
     result: Result<Data, Error>,
-    with serializer: VimeoResponseSerializer
+    with serializer: ResponseSerializer
 ) -> Result<JSON, Error> {
     return result.flatMap { data -> Result<JSON, Error> in
         guard data.isEmpty == false else {
