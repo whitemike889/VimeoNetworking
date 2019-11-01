@@ -33,7 +33,7 @@ private typealias SessionManagingDataTaskProgress = (Progress) -> Void
 /** `SessionManager` handles networking and serialization for raw HTTP requests.
  Internally, it uses  an `AFHTTPSessionManager` instance to handle requests.
  */
-public class SessionManager: NSObject, SessionManaging {
+open class SessionManager: NSObject, SessionManaging {
 
     // MARK: - Public
 

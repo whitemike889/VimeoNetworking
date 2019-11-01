@@ -29,7 +29,7 @@ import Foundation
 /// `RequestSerializer` is a base class for requests serialization. It's interface provides override methods,
 /// which allow to configure headers for outbound requests.
 /// It can be initialized with either a dynamic `AccessTokenProvider` or a static `AppConfiguration`.
-public class RequestSerializer {
+open class RequestSerializer {
     
     public typealias AccessTokenProvider = () -> String?
     

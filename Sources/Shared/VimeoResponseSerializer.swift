@@ -27,7 +27,7 @@
 import Foundation
 
 // `ResponseSerializer` is a base class for validating and decoding JSON responses.
-public class ResponseSerializer {
+open class ResponseSerializer {
 
     /// Getter and setter for acceptableContentTypes property on the underlying response serializer
     public var acceptableContentTypes: Set<String>? {
