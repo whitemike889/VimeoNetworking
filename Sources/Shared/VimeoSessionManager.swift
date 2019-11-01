@@ -77,7 +77,7 @@ open class SessionManager: NSObject, SessionManaging {
      - returns: an initialized `SessionManager`
      */
     required public init(
-        baseUrl: URL,
+        baseUrl: URL?,
         sessionConfiguration: URLSessionConfiguration,
         requestSerializer: RequestSerializer,
         responseSerializer: ResponseSerializer
@@ -432,7 +432,7 @@ extension SessionManager: AuthenticationListeningDelegate {
 final public class VimeoSessionManager: SessionManager {
 
     required public init(
-        baseUrl: URL,
+        baseUrl: URL?,
         sessionConfiguration: URLSessionConfiguration,
         requestSerializer: RequestSerializer,
         responseSerializer: ResponseSerializer
@@ -452,7 +452,7 @@ final public class VimeoSessionManager: SessionManager {
     }
 
     convenience public init(
-        baseUrl: URL,
+        baseUrl: URL?,
         sessionConfiguration: URLSessionConfiguration,
         requestSerializer: RequestSerializer
     ) {
