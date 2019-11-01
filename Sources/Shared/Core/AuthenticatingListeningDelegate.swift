@@ -13,7 +13,7 @@ public protocol AuthenticationListeningDelegate {
 
     /// Called when authentication completes successfully
     /// - Parameter account: the new authenticated account
-    func clientDidAuthenticate(with account: VIMAccount)
+    func clientDidAuthenticate(with accessToken: String?)
 
     /// Called when a client is logged out
     func clientDidClearAccount()

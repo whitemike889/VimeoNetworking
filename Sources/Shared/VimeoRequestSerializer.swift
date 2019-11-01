@@ -54,7 +54,7 @@ open class RequestSerializer {
      
      - returns: an initialized `VimeoRequestSerializer`
      */
-    init(
+    public init(
         accessTokenProvider: @escaping AccessTokenProvider,
         apiVersion: String,
         jsonSerializer: AFJSONRequestSerializer = AFJSONRequestSerializer()
@@ -72,7 +72,7 @@ open class RequestSerializer {
      
      - returns: an initialized `VimeoRequestSerializer`
      */
-    init(appConfiguration: AppConfiguration) {
+    public init(appConfiguration: AppConfiguration) {
         self.accessTokenProvider = nil
         self.appConfiguration = appConfiguration
         self.jsonSerializer = AFJSONRequestSerializer()
@@ -116,11 +116,11 @@ open class RequestSerializer {
 
     // MARK: - Protected(only for subclasses overrides)
 
-    public func acceptHeaderValue(withAPIVersion apiVersion: String) -> String? {
+    open func acceptHeaderValue(withAPIVersion apiVersion: String) -> String? {
         return nil
     }
 
-    public func requestAddingAuthorizationHeader(fromRequest request: URLRequest) -> URLRequest {
+    open func requestAddingAuthorizationHeader(fromRequest request: URLRequest) -> URLRequest {
         var request = request
         
         if let token = self.accessTokenProvider?() {
@@ -144,7 +144,7 @@ open class RequestSerializer {
         return request
     }
 
-    public func requestModifyingUserAgentHeader(fromRequest request: URLRequest) -> URLRequest {
+    open func requestModifyingUserAgentHeader(fromRequest request: URLRequest) -> URLRequest {
         return request
     }
 

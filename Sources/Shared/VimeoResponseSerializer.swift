@@ -38,7 +38,7 @@ open class ResponseSerializer {
     // The response serializer used to serialize data responses
     private let jsonResponseSerializer: AFJSONResponseSerializer
 
-    init(jsonResponseSerializer: AFJSONResponseSerializer = AFJSONResponseSerializer()) {
+    public init(jsonResponseSerializer: AFJSONResponseSerializer = AFJSONResponseSerializer()) {
         self.jsonResponseSerializer = jsonResponseSerializer
         self.jsonResponseSerializer.readingOptions = self.defaultReadingOptions
         if let defaultTypes = self.defaultAcceptableContentTypes {
@@ -49,7 +49,7 @@ open class ResponseSerializer {
     // MARK: Public API
 
     /// Creates a response object decoded from the data associated with a specified response.
-    public func responseObject(
+    open func responseObject(
         for response: URLResponse?,
         data: Data?
     ) -> Result<JSON, Error> {
@@ -68,11 +68,11 @@ open class ResponseSerializer {
         }
     }
 
-    public var defaultAcceptableContentTypes: Set<String>? {
+    open var defaultAcceptableContentTypes: Set<String>? {
         return nil
     }
 
-    public var defaultReadingOptions: JSONSerialization.ReadingOptions {
+    open var defaultReadingOptions: JSONSerialization.ReadingOptions {
         return JSONSerialization.ReadingOptions(rawValue: 0)
     }
 }

@@ -411,8 +411,7 @@ extension SessionManager: AuthenticationListeningDelegate {
 
      - parameter account: the new account
      */
-    public func clientDidAuthenticate(with account: VIMAccount) {
-        let accessToken = account.accessToken
+    public func clientDidAuthenticate(with accessToken: String?) {
         jsonRequestSerializer.accessTokenProvider = {
             return accessToken
         }

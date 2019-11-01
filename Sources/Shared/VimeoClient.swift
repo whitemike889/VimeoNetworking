@@ -121,7 +121,7 @@ final public class VimeoClient {
     public internal(set) var currentAccount: VIMAccount? {
         didSet {
             if let authenticatedAccount = self.currentAccount {
-                self.sessionManager?.clientDidAuthenticate(with: authenticatedAccount)
+                self.sessionManager?.clientDidAuthenticate(with: authenticatedAccount.accessToken)
             }
             else {
                 self.sessionManager?.clientDidClearAccount()

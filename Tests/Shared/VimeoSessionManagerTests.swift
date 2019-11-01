@@ -124,7 +124,7 @@ class VimeoSessionManagerTests: XCTestCase {
         let testAccount = VIMAccount()
         testAccount.accessToken = "TestAccessToken"
         
-        sessionManager.clientDidAuthenticate(with: testAccount)
+        sessionManager.clientDidAuthenticate(with: testAccount.accessToken)
         
         let requestSerializer = sessionManager.jsonRequestSerializer
         
@@ -145,7 +145,7 @@ class VimeoSessionManagerTests: XCTestCase {
         
         let requestSerializer = sessionManager.jsonRequestSerializer
         
-        sessionManager.clientDidAuthenticate(with: testAccount)
+        sessionManager.clientDidAuthenticate(with: testAccount.accessToken)
         XCTAssertNotNil(requestSerializer.accessTokenProvider)
         
         sessionManager.clientDidClearAccount()
