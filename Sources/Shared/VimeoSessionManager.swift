@@ -121,7 +121,8 @@ extension SessionManager {
         then callback: @escaping (SessionManagingResult<Data>) -> Void
     ) -> Task? {
         do {
-            let request = try requestConvertible.asURLRequest()
+            let theRequest = try requestConvertible.asURLRequest()
+            let request = self.urlLRequestByAddingBaseUrl(request: theRequest)
             var maybeError: NSError?
             guard let serializedRequest = jsonRequestSerializer.request(
                 bySerializingRequest: request,
@@ -284,7 +285,8 @@ extension SessionManager {
         then callback: @escaping (SessionManagingResult<URL>) -> Void
     ) -> Task? {
         do {
-            let request = try requestConvertible.asURLRequest()
+            let theRequest = try requestConvertible.asURLRequest()
+            let request = self.urlLRequestByAddingBaseUrl(request: theRequest)
             return self.httpSessionManager.downloadTask(
                 with: request,
                 progress: nil,
@@ -326,7 +328,8 @@ private extension SessionManager {
         sourceFile sourceURL: URL,
         then callback: @escaping (SessionManagingResult<Data>) -> Void
     ) throws -> Task? {
-        let request = try requestConvertible.asURLRequest()
+        let theRequest = try requestConvertible.asURLRequest()
+        let request = self.urlLRequestByAddingBaseUrl(request: theRequest)
         return self.httpSessionManager.uploadTask(
             with: request,
             fromFile: sourceURL,
@@ -347,6 +350,18 @@ private extension SessionManager {
                 )
                 callback(sessionManagingResult)
         }
+    }
+
+    func urlLRequestByAddingBaseUrl(request: URLRequest) -> URLRequest {
+        guard let baseURL = httpSessionManager.baseURL,
+            let requestURLPath = request.url?.absoluteString,
+            let relativeURL = URL(string: requestURLPath, relativeTo: baseURL),
+            let mutableRequest = (request as NSURLRequest).mutableCopy() as? NSMutableURLRequest else {
+            return request
+        }
+
+        mutableRequest.url = relativeURL
+        return mutableRequest as URLRequest
     }
 }
 
