@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C0EFF55237353E50060C936 /* ConnectedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0EFF54237353E50060C936 /* ConnectedApp.swift */; };
+		0C0EFF56237353E50060C936 /* ConnectedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0EFF54237353E50060C936 /* ConnectedApp.swift */; };
+		0C0EFF57237353E50060C936 /* ConnectedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0EFF54237353E50060C936 /* ConnectedApp.swift */; };
 		0C5F05BF232BFC1F00E2D5AD /* BatchOperable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5F05BE232BFC1F00E2D5AD /* BatchOperable.swift */; };
 		0C5F05C0232BFC1F00E2D5AD /* BatchOperable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5F05BE232BFC1F00E2D5AD /* BatchOperable.swift */; };
 		0C5F05C1232BFC1F00E2D5AD /* BatchOperable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5F05BE232BFC1F00E2D5AD /* BatchOperable.swift */; };
@@ -776,6 +779,7 @@
 
 /* Begin PBXFileReference section */
 		08D548BFE2CDF46B766FBA2C /* Pods_VimeoNetworking_macOS_VimeoNetworking_macOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimeoNetworking_macOS_VimeoNetworking_macOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C0EFF54237353E50060C936 /* ConnectedApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedApp.swift; sourceTree = "<group>"; };
 		0C5F05BE232BFC1F00E2D5AD /* BatchOperable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatchOperable.swift; sourceTree = "<group>"; };
 		0FBE6D7B6190E83B694CAE2B /* Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests.debug.xcconfig"; path = "Target Support Files/Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests/Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		13342C84A232F50251268E8E /* Pods-VimeoNetworking-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-iOS.release.xcconfig"; path = "Target Support Files/Pods-VimeoNetworking-iOS/Pods-VimeoNetworking-iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -1444,6 +1448,7 @@
 				5B5EEFAD22B441A3005C66BE /* VIMVODConnection.m */,
 				5B5EEFB122B441A3005C66BE /* VIMVODItem.m */,
 				5B5EEFAB22B441A3005C66BE /* Album.swift */,
+				0C0EFF54237353E50060C936 /* ConnectedApp.swift */,
 				5B5EEFEF22B441A3005C66BE /* FileTransfer.swift */,
 				5B5EEFEB22B441A3005C66BE /* GCS.swift */,
 				5B5EEFF222B441A3005C66BE /* PinCodeInfo.swift */,
@@ -2503,6 +2508,7 @@
 				5B5EF07522B441A3005C66BE /* VIMCategory.m in Sources */,
 				5B5EF0DE22B441A4005C66BE /* VIMInteraction.m in Sources */,
 				5B5EF1AD22B441A4005C66BE /* VimeoSessionManager.swift in Sources */,
+				0C0EFF55237353E50060C936 /* ConnectedApp.swift in Sources */,
 				5B5EF1D422B441A4005C66BE /* Request+Comment.swift in Sources */,
 				5B5EF0AE22B441A4005C66BE /* VIMVideoUtils.m in Sources */,
 				5B5EF04222B441A3005C66BE /* VimeoClient.swift in Sources */,
@@ -2635,6 +2641,7 @@
 				5B5EF07622B441A3005C66BE /* VIMCategory.m in Sources */,
 				5B5EF0DF22B441A4005C66BE /* VIMInteraction.m in Sources */,
 				5B5EF1AE22B441A4005C66BE /* VimeoSessionManager.swift in Sources */,
+				0C0EFF56237353E50060C936 /* ConnectedApp.swift in Sources */,
 				5B5EF1D522B441A4005C66BE /* Request+Comment.swift in Sources */,
 				5B5EF0AF22B441A4005C66BE /* VIMVideoUtils.m in Sources */,
 				5B5EF04322B441A3005C66BE /* VimeoClient.swift in Sources */,
@@ -2724,6 +2731,7 @@
 				5B5EF10722B441A4005C66BE /* VIMVideoDRMFiles.m in Sources */,
 				5B5EF0D122B441A4005C66BE /* UserSubscriptionRenewal.swift in Sources */,
 				5BD765EA234D35A900821AF7 /* AFNetworkReachabilityManager.m in Sources */,
+				0C0EFF57237353E50060C936 /* ConnectedApp.swift in Sources */,
 				5B5EF01122B441A3005C66BE /* Mappable.swift in Sources */,
 				5B5EF1A322B441A4005C66BE /* ErrorCode.swift in Sources */,
 				5B5EF1D322B441A4005C66BE /* Request+Soundtrack.swift in Sources */,
