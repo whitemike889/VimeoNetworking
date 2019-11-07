@@ -77,11 +77,11 @@ class ConnectedAppTests: XCTestCase {
 
     func test_connectedApp_returnsPublishCategories_fromInputPublishOptionItems() {
         let artDict: [String: Any] = [
-            "id": 12345,
+            "identifier": 12345,
             "name": "art"
         ]
         let vacationDict: [String: Any] = [
-            "id": 67890,
+            "identifier": 67890,
             "name": "vacation"
         ]
 
@@ -96,6 +96,8 @@ class ConnectedAppTests: XCTestCase {
         XCTAssertNotNil(connectedApp.publishCategories)
         XCTAssertEqual(connectedApp.publishCategories?.count, 2)
         XCTAssertEqual(connectedApp.publishCategories![0].name, "art")
+        XCTAssertEqual(connectedApp.publishCategories![0].identifier, 12345)
         XCTAssertEqual(connectedApp.publishCategories![1].name, "vacation")
+        XCTAssertEqual(connectedApp.publishCategories![1].identifier, 67890)
     }
 }

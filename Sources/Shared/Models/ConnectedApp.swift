@@ -44,7 +44,7 @@ import Foundation
 @objc public class PublishOptionItem: VIMModelObject {
 
     /// The ID of the publish item.
-    @objc public var identifier: String?
+    @objc public var identifier: NSNumber?
 
     /// The name or display name of the publich item, i.e.: "art", "family", "vacation" etc.
     @objc public var name: String?
