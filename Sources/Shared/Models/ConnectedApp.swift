@@ -2,7 +2,7 @@
 //  ConnectedApp.swift
 //  VimeoNetworking
 //
-//  Created on 11/06/2019.
+//  Created on 11/6/19.
 //  Copyright (c) Vimeo (https://vimeo.com)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
