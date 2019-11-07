@@ -75,7 +75,7 @@ class ConnectedAppTests: XCTestCase {
         XCTAssertEqual(connectedApp.type, .none)
     }
 
-    func test_connectedApp_returnsPublishCategories_fromInputPublishOptionItems() {
+    func test_connectedApp_returnsExpectedPublishCategories_fromInputPublishOptionItems() {
         let artDict: [String: Any] = [
             "identifier": 12345,
             "name": "art"
