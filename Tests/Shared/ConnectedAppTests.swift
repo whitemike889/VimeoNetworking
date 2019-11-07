@@ -38,6 +38,16 @@ class ConnectedAppTests: XCTestCase {
         XCTAssertTrue(connectedApp.isDataAccessExpired)
     }
 
+    func test_isDataAccessExpired_returnsFalse_whenTypeIsFacebook_andDataAccessIsNotExpired() {
+        let json: [String: Any] = [
+            "type": "facebook",
+            "data_access_is_expired": false
+        ]
+        let connectedApp = try! VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
+        XCTAssertEqual(connectedApp.type, .facebook)
+        XCTAssertFalse(connectedApp.isDataAccessExpired)
+    }
+
     func test_isDataAccessExpired_returnsFalse_whenTypeIsNotFacebook() {
         let json: [String: Any] = [
             "type": "youtube",
@@ -49,11 +59,43 @@ class ConnectedAppTests: XCTestCase {
         XCTAssertFalse(connectedApp.isDataAccessExpired)
     }
 
-    func test_type_returnsNone_whenTypeDataIsMalformed() {
+    func test_isDataAccessExpired_returnsTrue_whenDataAccessIsExpired_isMissingFromResponse() {
+        let json: [String: Any] = [
+            "type": "facebook"
+        ]
+        let connectedApp = try! VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
+        XCTAssertTrue(connectedApp.isDataAccessExpired)
+    }
+
+    func test_type_returnsNone_whenTypeUnexpected() {
         let json: [String: Any] = [
             "type": "friendster"
         ]
         let connectedApp = try! VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
         XCTAssertEqual(connectedApp.type, .none)
+    }
+
+    func test_connectedApp_returnsPublishCategories_fromInputPublishOptionItems() {
+        let artDict: [String: Any] = [
+            "id": 12345,
+            "name": "art"
+        ]
+        let vacationDict: [String: Any] = [
+            "id": 67890,
+            "name": "vacation"
+        ]
+
+        let art = PublishOptionItem(keyValueDictionary: artDict)
+        let vacation = PublishOptionItem(keyValueDictionary: vacationDict)
+
+        let connectedAppDict: [String: Any] = [
+            "publishCategories": [art, vacation] as Any
+        ]
+        let connectedApp = ConnectedApp(keyValueDictionary: connectedAppDict)!
+
+        XCTAssertNotNil(connectedApp.publishCategories)
+        XCTAssertEqual(connectedApp.publishCategories?.count, 2)
+        XCTAssertEqual(connectedApp.publishCategories![0].name, "art")
+        XCTAssertEqual(connectedApp.publishCategories![1].name, "vacation")
     }
 }
