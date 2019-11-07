@@ -64,7 +64,7 @@ import Foundation
     /// - Note: Facebook only. Will always return false if the `ConnectedAppType` is not `.facebook`.
     @objc public lazy var isDataAccessExpired: Bool = {
         guard self.type == .facebook else { return false }
-        return self.dataAccessIsExpired?.intValue == 1
+        return self.dataAccessIsExpired?.intValue != 0
     }()
 
     /// The list of remaining scopes on this connected app that the user needs for a particular Vimeo feature.
