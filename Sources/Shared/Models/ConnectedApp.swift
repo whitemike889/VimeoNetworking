@@ -40,6 +40,24 @@ import Foundation
     case none
 }
 
+/// A category that can be sent when publishing to a social media platform.
+@objc public class PublishOptionItem: VIMModelObject {
+
+    /// The ID of the publish item.
+    @objc public var identifier: String?
+
+    /// The name or display name of the publich item, i.e.: "art", "family", "vacation" etc.
+    @objc public var name: String?
+
+    // MARK: - Overrides
+
+    public override func getObjectMapping() -> Any? {
+        return [
+            String.Key.identifier: String.Value.identifier,
+        ]
+    }
+}
+
 /// A `ConnectedApp` represents a connection to a social media platform. Some activities, like simultaneously live
 /// stream to multiple destinations, or publishing across platforms, require requesting specific scopes. The scopes
 /// required will always be returned in the `neededScopes` array.
@@ -74,6 +92,10 @@ import Foundation
     /// - Note: Facebook and LinkedIn only.
     @objc public var pages: [String]?
 
+    /// The list of third party categories that can be selected when publishing to a social media platform.
+    /// - Note: Facebook and YouTube only.
+    @objc public var publishCategories: [PublishOptionItem]?
+
     /// The unique identifier for the user on this connected app.
     @objc public var thirdPartyUserID: String?
 
@@ -107,10 +129,20 @@ import Foundation
 
     // MARK: - Overrides
 
+    public override func getClassForObjectKey(_ key: String?) -> AnyClass? {
+        switch key {
+        case String.Key.publishCategories:
+            return PublishOptionItem.self
+        default:
+            return nil
+        }
+    }
+
     public override func getObjectMapping() -> Any? {
         return [
             String.Key.addDate: String.Value.addDate,
             String.Key.dataAccessIsExpired: String.Value.dataAccessIsExpired,
+            String.Key.publishCategories: String.Value.publishCategories,
             String.Key.thirdPartyUserID: String.Value.thirdPartyUserID,
             String.Key.thirdPartyUserDisplayName: String.Value.thirdPartyUserDisplayName,
             String.Key.type: String.Value.type
@@ -137,6 +169,8 @@ private extension String {
     struct Key {
         static let addDate = "add_date"
         static let dataAccessIsExpired = "data_access_is_expired"
+        static let identifier = "id"
+        static let publishCategories = "publish_Categories"
         static let thirdPartyUserID = "third_party_user_id"
         static let thirdPartyUserDisplayName = "third_party_user_display_name"
         static let type = "type"
@@ -145,6 +179,8 @@ private extension String {
     struct Value {
         static let addDate = "addDateString"
         static let dataAccessIsExpired = "dataAccessIsExpired"
+        static let identifier = "identifier"
+        static let publishCategories = "publishCategories"
         static let thirdPartyUserID = "thirdPartyUserID"
         static let thirdPartyUserDisplayName = "thirdPartyUserDisplayName"
         static let type = "typeString"
