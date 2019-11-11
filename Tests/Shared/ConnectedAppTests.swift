@@ -91,7 +91,7 @@ class ConnectedAppTests: XCTestCase {
         XCTAssertEqual(connectedApp.type?.stringValue, "twitter")
     }
 
-    func test_connectedAppType_returnsExpectedStringValue_forLinekdInAppType() {
+    func test_connectedAppType_returnsExpectedStringValue_forLinkedInAppType() {
         let json: [String: Any] = [
             "type": "linkedin"
         ]
