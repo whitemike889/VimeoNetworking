@@ -9,6 +9,12 @@
 import Foundation
 @testable import VimeoNetworking
 
+
+/// Factory method to create VimeoClient instances used in unit testing
+/// - Parameters:
+///   - reachabilityManager: The optional ReachabilityManaging instance to be used by the client
+///   - sessionManager: The Network session manager associated with the client
+///   - appConfiguration: the configuration to be used when setting up the client and session manager
 func makeVimeoClient(
     reachabilityManager: ReachabilityManaging? = VimeoReachabilityProvider.reachabilityManager,
     sessionManager: SessionManaging & AuthenticationListeningDelegate = VimeoSessionManager.fake,
