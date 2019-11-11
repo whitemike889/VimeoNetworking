@@ -37,6 +37,10 @@ NSString * const VIMInteractionNameSubscribe = @"subscribe";
 NSString * const VIMInteractionNamePurchase = @"purchase";
 NSString * const VIMInteractionNameAlbum = @"album";
 NSString * const VIMInteractionNameAddTo = @"add_to";
+NSString * const VIMInteractionConnectedAppFacebook = @"facebook_connected_app";
+NSString * const VIMInteractionConnectedAppYouTube = @"youtube_connected_app";
+NSString * const VIMInteractionConnectedAppLinkedIn = @"linkedin_connected_app";
+NSString * const VIMInteractionConnectedAppTwitter = @"twitter_connected_app";
 
 @interface VIMInteraction()
 @property (nonatomic, copy, nullable) NSString *added_time;
