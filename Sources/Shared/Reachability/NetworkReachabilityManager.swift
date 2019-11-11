@@ -74,7 +74,7 @@ internal class NetworkReachabilityManager: ReachabilityManaging {
     private let reachability: SCNetworkReachability
     
     /// Storage for the previous status.
-    /// TODO: Ensure read/write access to this is synchronized [RDPA, 08/29/2019]
+    private let previousStatusLock = Mutex()
     private var previousStatus: NetworkReachabilityStatus?
     
     // MARK: - Initialization
@@ -163,7 +163,9 @@ internal class NetworkReachabilityManager: ReachabilityManaging {
     func stopListening() {
         SCNetworkReachabilitySetCallback(reachability, nil, nil)
         SCNetworkReachabilitySetDispatchQueue(reachability, nil)
+        previousStatusLock.lock()
         previousStatus = nil
+        previousStatusLock.unlock()
         listenerQueue = nil
         listener = nil
     }
@@ -177,10 +179,30 @@ internal class NetworkReachabilityManager: ReachabilityManaging {
     /// - Parameter flags: `SCNetworkReachabilityFlags` to use to calculate the status.
     private func notifyListener(_ flags: SCNetworkReachabilityFlags) {
         let newStatus = NetworkReachabilityStatus(flags)
-        guard previousStatus != newStatus else { return }
-        previousStatus = newStatus
-        listenerQueue?.async {
+        guard self.previousStatus != newStatus else { return }
+        previousStatusLock.lock()
+        self.previousStatus = newStatus
+        previousStatusLock.unlock()
+        self.listenerQueue?.async {
             self.listener?(newStatus)
         }
+    }
+}
+
+/// The mutex class ensures explicit, atomic access via its lock() and unlock() methods
+/// It is used to ensure thread safety when mutating `previousStatus` on the Reachability Manager
+private final class Mutex {
+    private var mutex: pthread_mutex_t = {
+        var mutex = pthread_mutex_t()
+        pthread_mutex_init(&mutex, nil)
+        return mutex
+    }()
+
+    func lock() {
+        pthread_mutex_lock(&mutex)
+    }
+
+    func unlock() {
+        pthread_mutex_unlock(&mutex)
     }
 }
