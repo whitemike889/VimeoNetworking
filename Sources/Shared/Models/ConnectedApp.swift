@@ -28,7 +28,6 @@
 /// - linkedin: Represents a connection to LinkedIn.
 /// - twitter: Represents a connection to Twitter.
 /// - youtube: Represents a connection to YouTube.
-/// - none: Represents an unsupported platform or a malformed response.
 @objc public enum ConnectedAppType: Int {
     case facebook
     case linkedin
