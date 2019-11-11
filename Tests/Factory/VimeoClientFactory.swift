@@ -37,8 +37,8 @@ private extension VimeoSessionManager {
 private extension AppConfiguration {
     static let fake: AppConfiguration = {
         return AppConfiguration(
-            clientIdentifier: "{CLIENT_ID}",
-            clientSecret: "{CLIENT_SECRET}",
+            clientIdentifier: "FAKE_CLIENT_ID",
+            clientSecret: "FAKE_CLIENT_SECRET",
             scopes: [.Public, .Private, .Purchased, .Create, .Edit, .Delete, .Interact, .Upload],
             keychainService: "com.vimeo.keychain_service",
             apiVersion: "3.3.13"
