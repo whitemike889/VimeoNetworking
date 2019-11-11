@@ -48,7 +48,7 @@ public extension Request {
         case .facebook:
             tokenKey = .accessToken
         case .twitter:
-            tokenKey = .accesTokenSecret
+            tokenKey = .accessTokenSecret
         case .linkedin, .youtube:
             tokenKey = .authCode
         }
@@ -74,7 +74,7 @@ private extension String {
     static let accessToken = "access_token"
 
     /// Token request parameter key for Twitter.
-    static let accesTokenSecret = "access_token_secret"
+    static let accessTokenSecret = "access_token_secret"
 
     /// Token request parameter key for LinkedIn and YouTube.
     static let authCode = "auth_code"
