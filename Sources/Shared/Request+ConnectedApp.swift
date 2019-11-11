@@ -2,7 +2,7 @@
 //  Request+ConnectedApp.swift
 //  VimeoNetworking
 //
-//  Copyright © 2018 Vimeo. All rights reserved.
+//  Copyright © 2019 Vimeo. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,8 +24,58 @@
 //
 
 public extension Request {
+
+    /// Returns a fetch request of all connected apps for the authenticated user.
     static func connectedApps() -> Request {
-        let uri = "me/connected_apps"
-        return Request(path: uri)
+        return Request(path: .connectedAppsURI)
     }
+
+    /// Returns a fetch request for a single connected app.
+    /// - Parameter appType: The `ConnectedAppType` to fetch data for.
+    static func connectedApp(_ appType: ConnectedAppType) -> Request {
+        return Request(path: .connectedAppsURI + appType.stringValue)
+    }
+
+    /// /// Returns a PUT request for connecting the provided app type to the current authenticated user's account.
+    /// - Parameters:
+    ///   - appType: The app platform for which the connection will be established.
+    ///   - token: An authentication token from the provided platfrom, used to establish the connection.
+    static func connect(to appType: ConnectedAppType, with token: String) -> Request {
+        let uri: String = .connectedAppsURI + appType.stringValue
+
+        var tokenKey: String
+        switch appType {
+        case .facebook:
+            tokenKey = .accessToken
+        case .twitter:
+            tokenKey = .accesTokenSecret
+        case .linkedin, .youtube:
+            tokenKey = .authCode
+        }
+
+        let parameters = [tokenKey: token]
+
+        return Request(method: .PUT, path: uri, parameters: parameters)
+    }
+
+    /// Returns a request to delete the connection to the specified app.
+    /// - Parameter appType: The `ConnectedAppType` to disassociate from the authenticated user.
+    static func deleteConnectedApp(_ appType: ConnectedAppType) -> Request {
+        let uri: String = .connectedAppsURI + appType.stringValue
+        return Request(method: .DELETE, path: uri)
+    }
+}
+
+private extension String {
+    static let appType = "app_type"
+    static let connectedAppsURI = "me/connected_apps/"
+
+    /// Token request parameter key for Facebook.
+    static let accessToken = "access_token"
+
+    /// Token request parameter key for Twitter.
+    static let accesTokenSecret = "access_token_secret"
+
+    /// Token request parameter key for LinkedIn and YouTube.
+    static let authCode = "auth_code"
 }
