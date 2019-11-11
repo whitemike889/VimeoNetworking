@@ -60,7 +60,6 @@ typedef NS_ENUM(NSInteger, VIMInteractionStreamStatus) {
 @property (nonatomic, strong, nullable) NSArray *options;
 
 #pragma mark - Connected Apps
-
 /**
  For connected app interactions this indicates whether the app is connected. A value of 0 or `nil` means no
  connected has been established, or an existing one has expired.
