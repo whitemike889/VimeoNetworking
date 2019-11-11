@@ -23,7 +23,7 @@ extension Request: EndpointType {
             throw VimeoNetworkingError.invalidURL
         }
         var urlRequest = URLRequest(url: url)
-        headers?.forEach { field, value in
+        self.headers?.forEach { field, value in
             urlRequest.setValue(value, forHTTPHeaderField: field)
         }
         urlRequest.httpMethod = method.rawValue
