@@ -21,7 +21,7 @@ class NetworkReachabilityStatusTests: XCTestCase {
     }
         
     // Note: `isWWAN` is unavailable on macOS
-    #if os(iOS) || os(tvOS) || os(watchOS)
+    #if os(iOS) || os(tvOS)
     func test_Initializer_StatusIsReachableThroughCellular_WhenInitializedWithIsWWANFlag() {
         // When initialized with a `reachable` and `isWWAN` flags
         let status = NetworkReachabilityStatus([.reachable, .isWWAN])
