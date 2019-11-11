@@ -36,7 +36,7 @@ public extension Request {
         return Request(path: .connectedAppsURI + appType.stringValue)
     }
 
-    /// /// Returns a PUT request for connecting the provided app type to the current authenticated user's account.
+    /// Returns a PUT request for connecting the provided app type to the current authenticated user's account.
     /// - Parameters:
     ///   - appType: The app platform for which the connection will be established.
     ///   - token: An authentication token from the provided platfrom, used to establish the connection.
