@@ -2,8 +2,7 @@
 //  ConnectedAppTests.swift
 //  VimeoNetworking
 //
-//  Created by Vimeo on 11/7/19.
-//  Copyright (c) Vimeo (https://vimeo.com)
+//  Copyright © 2019 Vimeo. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
