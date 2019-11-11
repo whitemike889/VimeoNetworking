@@ -49,7 +49,7 @@
     @objc public var simulcast: [String]?
 
     // MARK: - Overrides
-    
+
     public override func getObjectMapping() -> Any? {
         return [
             String.Key.publishToSocial: String.Value.publishToSocial
