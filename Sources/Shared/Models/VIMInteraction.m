@@ -76,6 +76,12 @@ NSString * const VIMInteractionConnectedAppTwitter = @"twitter_connected_app";
     }
 }
 
+- (NSDictionary *)getObjectMapping
+{
+    return @{
+        @"all_scopes": @"allScopes"
+    };
+}
 #pragma mark - Parsing Helpers
 
 - (void)setStreamStatus {
