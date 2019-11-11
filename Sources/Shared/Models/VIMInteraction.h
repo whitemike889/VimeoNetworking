@@ -60,14 +60,24 @@ typedef NS_ENUM(NSInteger, VIMInteractionStreamStatus) {
 @property (nonatomic, strong, nullable) NSArray *options;
 
 #pragma mark - Connected Apps
+
+/**
+ For connected app interactions this indicates whether the app is connected. A value of 0 or `nil` means no
+ connected has been established, or an existing one has expired.
+*/
 @property (nonatomic, strong, nullable) NSNumber *isConnected;
+
+/**
+ An object that returns the necessary scopes for interacting with features like publishing to social platforms
+ or simulcasting a live stream.
+*/
 @property (nonatomic, strong, nullable) ConnectedAppScopes *allScopes;
 
 # pragma mark - DRM
 /**
  Indicates whether this VIMInteraction (to buy, rent, or subscribe) relates to content that is protected by DRM.
  Returns true if buying, renting, or subscribing to the related content will be governed by DRM.
- */
+*/
 @property (nonatomic, assign, readonly) BOOL isForDRMProtectedContent;
 
 # pragma mark - VOD

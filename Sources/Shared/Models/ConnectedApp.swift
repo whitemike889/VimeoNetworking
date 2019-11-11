@@ -38,11 +38,18 @@
     case none
 }
 
+///  An object that encapsulates the scopes necessary for interacting with features like publishing to social platforms
+///  or simulcasting a live stream.
 @objc public class ConnectedAppScopes: VIMModelObject {
+
+    /// All scopes required for publishing to a specific social media platform.
     @objc public var publishToSocial: [String]?
+
+    /// All scopes required for simulcasting to a specific social media platform.
     @objc public var simulcast: [String]?
 
     // MARK: - Overrides
+    
     public override func getObjectMapping() -> Any? {
         return [
             String.Key.publishToSocial: String.Value.publishToSocial
