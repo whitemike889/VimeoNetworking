@@ -72,7 +72,7 @@ class ConnectedAppTests: XCTestCase {
             "type": "friendster"
         ]
         let connectedApp = try! VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
-        XCTAssertEqual(connectedApp.type, .none)
+        XCTAssertNil(connectedApp.type)
     }
 
     func test_connectedApp_returnsExpectedPublishCategories_fromInputPublishOptionItems() {
