@@ -94,6 +94,9 @@ final public class VimeoSessionManager: NSObject, SessionManaging {
         fatalError("init(coder:) has not been implemented")
     }
 
+
+    /// Invalidates the managed session, optionally canceling pending tasks.
+    /// - Parameter cancelPendingTasks: Whether or not to cancel pending tasks.
     public func invalidate(cancelingPendingTasks cancelPendingTasks: Bool) {
         self.httpSessionManager.invalidateSessionCancelingTasks(cancelPendingTasks)
     }
