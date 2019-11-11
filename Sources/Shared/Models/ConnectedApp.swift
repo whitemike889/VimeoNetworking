@@ -2,8 +2,7 @@
 //  ConnectedApp.swift
 //  VimeoNetworking
 //
-//  Created on 11/6/19.
-//  Copyright (c) Vimeo (https://vimeo.com)
+//  Copyright © 2019 Vimeo. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -35,7 +34,19 @@
     case linkedin
     case twitter
     case youtube
-    case none
+
+    public var stringValue: String {
+        switch self {
+        case .facebook:
+            return String.facebook
+        case .linkedin:
+            return String.linkedin
+        case .twitter:
+            return String.twitter
+        case .youtube:
+            return String.youtube
+        }
+    }
 }
 
 ///  An object that encapsulates the scopes necessary for interacting with features like publishing to social platforms
@@ -124,9 +135,9 @@
     ///         Using `type` is preferred.
     @objc public var typeString: String?
 
-    /// the type of the connected app.
-    /// - Note: A returned value of `.none` indicates an unsupported `ConnectedAppType`, or a malformed response.
-    @objc public var type: ConnectedAppType {
+    /// The type of the connected app.
+    /// - Note: A returned value of `nil` indicates an unsupported `ConnectedAppType`, or a malformed response.
+    public var type: ConnectedAppType? {
         switch self.typeString {
         case String.facebook:
             return .facebook
@@ -137,7 +148,7 @@
         case String.youtube:
             return .youtube
         default:
-            return .none
+            return nil
         }
     }
 
