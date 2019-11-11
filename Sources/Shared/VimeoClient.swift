@@ -66,8 +66,7 @@ final public class VimeoClient {
     // MARK: -
     
     /// Session manager handles the http session data tasks and request/response serialization
-    public typealias SessionManagingAuthenticationListening = SessionManaging & AuthenticationListeningDelegate
-    private var sessionManager: SessionManagingAuthenticationListening? = nil
+    private var sessionManager: SessionManaging? = nil
     
     /// response cache handles all memory and disk caching of response dictionaries
     private let responseCache = ResponseCache()
@@ -99,7 +98,7 @@ final public class VimeoClient {
     public init(
         appConfiguration: AppConfiguration? = nil,
         reachabilityManager: ReachabilityManaging? = nil,
-        sessionManager: SessionManagingAuthenticationListening? = nil
+        sessionManager: SessionManaging? = nil
     ) {
         let reachabilityManager = reachabilityManager ?? VimeoReachabilityProvider.reachabilityManager
         self.reachabilityManager = reachabilityManager

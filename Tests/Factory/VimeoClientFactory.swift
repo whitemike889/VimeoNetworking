@@ -17,7 +17,7 @@ import Foundation
 ///   - appConfiguration: the configuration to be used when setting up the client and session manager
 func makeVimeoClient(
     reachabilityManager: ReachabilityManaging? = VimeoReachabilityProvider.reachabilityManager,
-    sessionManager: SessionManaging & AuthenticationListeningDelegate = VimeoSessionManager.fake,
+    sessionManager: SessionManaging = VimeoSessionManager.fake,
     appConfiguration: AppConfiguration = .fake
 ) -> VimeoClient {
     return VimeoClient(

@@ -22,7 +22,7 @@ public struct SessionManagingResult<T> {
 
 /// A type that can perform asynchronous requests from a
 /// URLRequestConvertible parameter and a response callback.
-public protocol SessionManaging {
+public protocol SessionManaging: AuthenticationListener {
     
     /// Used to invalidate the session manager, and optionally cancel any pending tasks
     func invalidate(cancelingPendingTasks cancelPendingTasks: Bool)

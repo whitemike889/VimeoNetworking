@@ -408,7 +408,7 @@ extension VimeoSessionManager {
 
 // MARK: - Authentication
 
-extension VimeoSessionManager: AuthenticationListeningDelegate {
+extension VimeoSessionManager: AuthenticationListener {
 
     /**
      Called when authentication completes successfully to update the session manager with the new access token

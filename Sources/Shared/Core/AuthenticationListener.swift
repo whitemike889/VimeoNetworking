@@ -1,5 +1,5 @@
 //
-//  AuthenticatingListeningDelegate.swift
+//  AuthenticationListener.swift
 //  VimeoNetworking
 //
 //  Created by Rogerio de Paula Assis on 10/16/19.
@@ -9,7 +9,7 @@
 import Foundation
 
 /// A type that listens to and responds to authentication status changes
-public protocol AuthenticationListeningDelegate {
+public protocol AuthenticationListener {
 
     /// Called when authentication completes successfully
     /// - Parameter account: the new authenticated account
