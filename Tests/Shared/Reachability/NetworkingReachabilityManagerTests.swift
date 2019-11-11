@@ -106,7 +106,7 @@ class NetworkingReachabilityManagerTests: XCTestCase {
         XCTAssertNil(manager)
     }
 
-    func testThatAddressManagerCanBeDeinitialized() {
+    func testThatDefaultManagerCanBeDeinitialized() {
         // Given
         var manager: NetworkReachabilityManager? = NetworkReachabilityManager()
 
