@@ -42,7 +42,7 @@ final public class VimeoRequestSerializer {
     private let appConfiguration: AppConfiguration?
 
     // Internal JSON serializer
-    private let jsonSerializer: AFJSONRequestSerializer
+    private let jsonSerializer: AFJSONRequestSerializer = AFJSONRequestSerializer()
 
     // MARK: - Initialization
     
@@ -56,12 +56,10 @@ final public class VimeoRequestSerializer {
      */
     init(
         accessTokenProvider: @escaping AccessTokenProvider,
-        apiVersion: String,
-        jsonSerializer: AFJSONRequestSerializer = AFJSONRequestSerializer()
+        apiVersion: String
     ) {
         self.accessTokenProvider = accessTokenProvider
         self.appConfiguration = nil
-        self.jsonSerializer = jsonSerializer
         self.configureDefaultHeaders(withAPIVersion: apiVersion)
     }
     
@@ -75,7 +73,6 @@ final public class VimeoRequestSerializer {
     init(appConfiguration: AppConfiguration) {
         self.accessTokenProvider = nil
         self.appConfiguration = appConfiguration
-        self.jsonSerializer = AFJSONRequestSerializer()
         
         self.configureDefaultHeaders(withAPIVersion: appConfiguration.apiVersion)
     }
