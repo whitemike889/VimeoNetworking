@@ -40,11 +40,11 @@ final public class VimeoResponseSerializer {
         set { self.jsonResponseSerializer.acceptableContentTypes = newValue }
     }
 
-    // The response serializer used to serialize data responses
-    private let jsonResponseSerializer: AFJSONResponseSerializer
+    /// The private response serializer used to serialize data responses
+    private let jsonResponseSerializer = AFJSONResponseSerializer()
 
-    init(jsonResponseSerializer: AFJSONResponseSerializer = AFJSONResponseSerializer()) {
-        self.jsonResponseSerializer = jsonResponseSerializer
+    /// `VimeoResponseSerializer` is responsible for validating and decoding JSON responses.
+    init() {
         self.jsonResponseSerializer.acceptableContentTypes = VimeoResponseSerializer.acceptableContentTypes()
         self.jsonResponseSerializer.readingOptions = .allowFragments
     }
