@@ -67,12 +67,45 @@ class ConnectedAppTests: XCTestCase {
         XCTAssertTrue(connectedApp.isDataAccessExpired)
     }
 
-    func test_type_returnsNone_whenTypeUnexpected() {
+    func test_connectedAppType_returnsExpectedStringValue_forFacebookAppType() {
+        let json: [String: Any] = [
+            "type": "facebook"
+        ]
+        let connectedApp = try! VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
+        XCTAssertEqual(connectedApp.type?.stringValue, "facebook")
+    }
+
+    func test_connectedAppType_returnsExpectedStringValue_forYouTubeAppType() {
+        let json: [String: Any] = [
+            "type": "youtube"
+        ]
+        let connectedApp = try! VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
+        XCTAssertEqual(connectedApp.type?.stringValue, "youtube")
+    }
+
+    func test_connectedAppType_returnsExpectedStringValue_forTwitterAppType() {
+        let json: [String: Any] = [
+            "type": "twitter"
+        ]
+        let connectedApp = try! VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
+        XCTAssertEqual(connectedApp.type?.stringValue, "twitter")
+    }
+
+    func test_connectedAppType_returnsExpectedStringValue_forLinekdInAppType() {
+        let json: [String: Any] = [
+            "type": "linkedin"
+        ]
+        let connectedApp = try! VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
+        XCTAssertEqual(connectedApp.type?.stringValue, "linkedin")
+    }
+
+    func test_connectedAppType_returnsNone_whenTypeUnexpected() {
         let json: [String: Any] = [
             "type": "friendster"
         ]
         let connectedApp = try! VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
         XCTAssertNil(connectedApp.type)
+        XCTAssertNil(connectedApp.type?.stringValue)
     }
 
     func test_connectedApp_returnsExpectedPublishCategories_fromInputPublishOptionItems() {
