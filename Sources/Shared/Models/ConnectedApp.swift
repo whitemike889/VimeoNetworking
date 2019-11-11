@@ -24,8 +24,6 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
-
 /// An enumeration of the supported connected app types.
 /// - facebook: Represents a connection to Facebook.
 /// - linkedin: Represents a connection to LinkedIn.
@@ -38,6 +36,18 @@ import Foundation
     case twitter
     case youtube
     case none
+}
+
+@objc public class ConnectedAppScopes: VIMModelObject {
+    @objc public var publishToSocial: [String]?
+    @objc public var simulcast: [String]?
+
+    // MARK: - Overrides
+    public override func getObjectMapping() -> Any? {
+        return [
+            String.Key.publishToSocial: String.Value.publishToSocial
+        ]
+    }
 }
 
 /// A category that can be sent when publishing to a social media platform.
@@ -171,6 +181,7 @@ private extension String {
         static let dataAccessIsExpired = "data_access_is_expired"
         static let identifier = "id"
         static let publishCategories = "publish_Categories"
+        static let publishToSocial = "publish_to_social"
         static let thirdPartyUserID = "third_party_user_id"
         static let thirdPartyUserDisplayName = "third_party_user_display_name"
         static let type = "type"
@@ -181,6 +192,7 @@ private extension String {
         static let dataAccessIsExpired = "dataAccessIsExpired"
         static let identifier = "identifier"
         static let publishCategories = "publishCategories"
+        static let publishToSocial = "publishToSocial"
         static let thirdPartyUserID = "thirdPartyUserID"
         static let thirdPartyUserDisplayName = "thirdPartyUserDisplayName"
         static let type = "typeString"
