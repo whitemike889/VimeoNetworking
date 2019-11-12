@@ -1922,12 +1922,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3D9C429822745894000A6585 /* Build configuration list for PBXNativeTarget "VimeoNetworking-iOS" */;
 			buildPhases = (
+				3D9C42CE22745AEA000A6585 /* Run SwiftLint */,
 				7509B26913E38132CA5A9774 /* [CP] Check Pods Manifest.lock */,
 				3D9C428B22745894000A6585 /* Headers */,
 				3D9C428C22745894000A6585 /* Sources */,
 				3D9C428D22745894000A6585 /* Frameworks */,
 				3D9C428E22745894000A6585 /* Resources */,
-				3D9C42CE22745AEA000A6585 /* Run SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -2277,7 +2277,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "#!/bin/bash\ngit diff --diff-filter=d --name-only HEAD | grep -e '\\(.*\\).swift$' | while read line; do\n    \"${PODS_ROOT}/SwiftLint/swiftlint\" lint \"${line}\";\ndone\n";
 		};
 		3D9C42CF22745AF5000A6585 /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
