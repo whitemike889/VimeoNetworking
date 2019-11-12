@@ -55,7 +55,7 @@ final public class VimeoRequestSerializer {
      - returns: an initialized `VimeoRequestSerializer`
      */
     init(
-        accessTokenProvider: @escaping @autoclosure AccessTokenProvider,
+        accessTokenProvider: @escaping AccessTokenProvider,
         apiVersion: String
     ) {
         self.accessTokenProvider = accessTokenProvider
