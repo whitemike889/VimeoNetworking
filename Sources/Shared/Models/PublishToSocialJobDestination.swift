@@ -23,6 +23,23 @@
 //  THE SOFTWARE.
 //
 
+@objc public enum PublishToSocialDestinationStatus: Int {
+    case error
+    case finished
+    case inProgress
+
+    public var stringVlaue: String {
+        switch self {
+        case .error:
+            return String.error
+        case .finished:
+            return String.finished
+        case .inProgress:
+            return String.inProgress
+        }
+    }
+}
+
 @objc public class PublishToSocialJobDestination: VIMModelObject {
     @objc public var status: String?
     @objc public var thirdPartyPostURL: String?
@@ -36,15 +53,22 @@
     }
 }
 
+@objc public class PublishToSocialDestinations: VIMModelObject {
+    @objc public var facebook: PublishToSocialJobDestination?
+    @objc public var youtube: PublishToSocialJobDestination?
+    @objc public var linkedin: PublishToSocialJobDestination?
+    @objc public var twitter: PublishToSocialJobDestination?
+}
+
 @objc public class PublishToSocialJob: VIMModelObject {
     @objc public var firstPublishDateString: String?
     @objc public var firstPublishDate: Date?
-    @objc public var destinations: PublishToSocialJobDestination?
+    @objc public var destinations: PublishToSocialDestinations?
 
     public override func getClassForObjectKey(_ key: String?) -> AnyClass? {
         switch key {
         case String.Key.destinations:
-            return PublishToSocialJobDestination.self
+            return PublishToSocialDestinations.self
         default:
             return nil
         }
@@ -70,4 +94,8 @@ private extension String {
         static let thirdPartyPostURL = "thirdPartyPostURL"
         static let thirdPartyPostID = "thirdPartyPostID"
     }
+
+    static let error = "ERROR"
+    static let finished = "FINISHED"
+    static let inProgress = "IN_PROGRESS"
 }
