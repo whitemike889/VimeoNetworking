@@ -739,6 +739,9 @@
 		5BE14356232C30870076B497 /* Request+Trigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE14355232C30870076B497 /* Request+Trigger.swift */; };
 		5BE14357232C30870076B497 /* Request+Trigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE14355232C30870076B497 /* Request+Trigger.swift */; };
 		7E388B7DAAA730F67222354D /* Pods_VimeoNetworking_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE25EE618A23DD07A19E67F5 /* Pods_VimeoNetworking_iOS.framework */; };
+		96428AE8237CE714002DCB05 /* PublishToSocialJobDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96428AE7237CE714002DCB05 /* PublishToSocialJobDestination.swift */; };
+		96428AE9237CE714002DCB05 /* PublishToSocialJobDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96428AE7237CE714002DCB05 /* PublishToSocialJobDestination.swift */; };
+		96428AEA237CE714002DCB05 /* PublishToSocialJobDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96428AE7237CE714002DCB05 /* PublishToSocialJobDestination.swift */; };
 		9E6913F9D6917E929DA785FE /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48683A775227828528A4492B /* Pods_Example.framework */; };
 		C1E13A752650AE7CE4523125 /* Pods_VimeoNetworking_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D711BBD962E1ACC44FB5766 /* Pods_VimeoNetworking_macOS.framework */; };
 		E8A4DC3A157A4EC2E3E381A3 /* Pods_VimeoNetworking_macOS_VimeoNetworking_macOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08D548BFE2CDF46B766FBA2C /* Pods_VimeoNetworking_macOS_VimeoNetworking_macOSTests.framework */; };
@@ -1068,6 +1071,7 @@
 		5D711BBD962E1ACC44FB5766 /* Pods_VimeoNetworking_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimeoNetworking_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		66B43D25318F400304BCF876 /* Pods_VimeoNetworking_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimeoNetworking_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67088A918F7944230D5981E8 /* Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests.release.xcconfig"; path = "Target Support Files/Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests/Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		96428AE7237CE714002DCB05 /* PublishToSocialJobDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishToSocialJobDestination.swift; sourceTree = "<group>"; };
 		9A43FE2FE567DA3949D86886 /* Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests.release.xcconfig"; path = "Target Support Files/Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests/Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		A288BD846C787BA2C279B283 /* Pods-VimeoNetworking-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-iOS.debug.xcconfig"; path = "Target Support Files/Pods-VimeoNetworking-iOS/Pods-VimeoNetworking-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		A3438E0F44DD71015EE99A4B /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -1469,6 +1473,7 @@
 				5B5EEFB122B441A3005C66BE /* VIMVODItem.m */,
 				5B5EEFAB22B441A3005C66BE /* Album.swift */,
 				0C0EFF54237353E50060C936 /* ConnectedApp.swift */,
+				96428AE7237CE714002DCB05 /* PublishToSocialJobDestination.swift */,
 				5B5EEFEF22B441A3005C66BE /* FileTransfer.swift */,
 				5B5EEFEB22B441A3005C66BE /* GCS.swift */,
 				5B5EEFF222B441A3005C66BE /* PinCodeInfo.swift */,
@@ -2436,6 +2441,7 @@
 				5B5EF17D22B441A4005C66BE /* VIMRecommendation.m in Sources */,
 				5B5EF03022B441A3005C66BE /* VimeoReachability.swift in Sources */,
 				5B5EF0C022B441A4005C66BE /* VIMCredit.m in Sources */,
+				96428AE8237CE714002DCB05 /* PublishToSocialJobDestination.swift in Sources */,
 				5BD765CA234D35A900821AF7 /* AFImageDownloader.m in Sources */,
 				0C7237DC2379B82B00E8531F /* Request+ConnectedApp.swift in Sources */,
 				5B5EF04822B441A3005C66BE /* String+Parameters.swift in Sources */,
@@ -2570,6 +2576,7 @@
 				5B5EF08E22B441A3005C66BE /* VIMVideoFile.m in Sources */,
 				5B5EF17E22B441A4005C66BE /* VIMRecommendation.m in Sources */,
 				5B5EF03122B441A3005C66BE /* VimeoReachability.swift in Sources */,
+				96428AE9237CE714002DCB05 /* PublishToSocialJobDestination.swift in Sources */,
 				5BD765CB234D35A900821AF7 /* AFImageDownloader.m in Sources */,
 				0C7237DD2379B82B00E8531F /* Request+ConnectedApp.swift in Sources */,
 				5B5EF0C122B441A4005C66BE /* VIMCredit.m in Sources */,
@@ -2796,6 +2803,7 @@
 				5B5EF16122B441A4005C66BE /* VIMVideoDASHFile.m in Sources */,
 				5B5EF1E822B441A4005C66BE /* Request+Notifications.swift in Sources */,
 				5B5EF05C22B441A3005C66BE /* VIMGroup.m in Sources */,
+				96428AEA237CE714002DCB05 /* PublishToSocialJobDestination.swift in Sources */,
 				5B5EF0CE22B441A4005C66BE /* VIMVODConnection.m in Sources */,
 				5B5EF1D922B441A4005C66BE /* AccountStore.swift in Sources */,
 				5B5EF02622B441A3005C66BE /* Request+ProgrammedContent.swift in Sources */,
