@@ -40,7 +40,7 @@ extension Request where ModelType: VIMAccount {
         let parameters = [GrantTypeKey: GrantTypeClientCredentials,
                           ScopeKey: Scope.combine(scopes)]
         
-        return Request(method: .POST, path: AuthenticationPathClientCredentials, parameters: parameters)
+        return Request(method: .post, path: AuthenticationPathClientCredentials, parameters: parameters)
     }
     
     /**
@@ -56,7 +56,7 @@ extension Request where ModelType: VIMAccount {
                           CodeKey: code,
                           RedirectURIKey: redirectURI]
         
-        return Request(method: .POST, path: AuthenticationPathCodeGrant, parameters: parameters)
+        return Request(method: .post, path: AuthenticationPathCodeGrant, parameters: parameters)
     }
     
     /**
@@ -74,7 +74,7 @@ extension Request where ModelType: VIMAccount {
                           UsernameKey: email,
                           PasswordKey: password]
         
-        return Request(method: .POST, path: AuthenticationPathAccessToken, parameters: parameters)
+        return Request(method: .post, path: AuthenticationPathAccessToken, parameters: parameters)
     }
     
     /**
@@ -83,7 +83,7 @@ extension Request where ModelType: VIMAccount {
      - returns: a new `Request`
      */
     static func verifyAccessTokenRequest() -> Request {
-        return Request(method: .GET, path: AuthenticationPathAccessTokenVerify)
+        return Request(method: .get, path: AuthenticationPathAccessTokenVerify)
     }
     
     /**
@@ -104,7 +104,7 @@ extension Request where ModelType: VIMAccount {
                           PasswordKey: password,
                           MarketingOptIn: marketingOptIn]
         
-        return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters)
+        return Request(method: .post, path: AuthenticationPathUsers, parameters: parameters)
     }
     
     /**
@@ -120,7 +120,7 @@ extension Request where ModelType: VIMAccount {
                           ScopeKey: Scope.combine(scopes),
                           FacebookTokenKey: facebookToken]
         
-        return Request(method: .POST, path: AuthenticationPathFacebookToken, parameters: parameters)
+        return Request(method: .post, path: AuthenticationPathFacebookToken, parameters: parameters)
     }
     
     /**
@@ -136,7 +136,7 @@ extension Request where ModelType: VIMAccount {
                           FacebookTokenKey: facebookToken,
                           MarketingOptIn: marketingOptIn]
         
-        return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters)
+        return Request(method: .post, path: AuthenticationPathUsers, parameters: parameters)
     }
     
     /// Constructs a `Request` for logging in with Google. For internal use only.
@@ -152,7 +152,7 @@ extension Request where ModelType: VIMAccount {
             GoogleTokenKey: googleToken
         ]
         
-        return Request(method: .POST, path: AuthenticationPathGoogleToken, parameters: parameters)
+        return Request(method: .post, path: AuthenticationPathGoogleToken, parameters: parameters)
     }
     
     /// Constructs a `Request` for joining with Google. For internal use only.
@@ -163,15 +163,14 @@ extension Request where ModelType: VIMAccount {
     ///   - scopes: array of `Scope` values representing permissions for app requests
     /// - Returns: new `Request`
     public static func joinWithGoogleRequest(withToken googleToken: String, marketingOptIn: Bool, scopes: [Scope])
-        -> Request
-    {
+        -> Request {
         let parameters: [String: Any] = [
             ScopeKey: Scope.combine(scopes),
             GoogleTokenKey: googleToken,
             MarketingOptIn: marketingOptIn
         ]
         
-        return Request(method: .POST, path: AuthenticationPathUsers, parameters: parameters)
+        return Request(method: .post, path: AuthenticationPathUsers, parameters: parameters)
     }
     
     /**
@@ -186,7 +185,7 @@ extension Request where ModelType: VIMAccount {
         let parameters = [PinCodeKey: userCode,
                           DeviceCodeKey: deviceCode]
         
-        return Request(method: .POST, path: AuthenticationPathPinCodeAuthorize, parameters: parameters)
+        return Request(method: .post, path: AuthenticationPathPinCodeAuthorize, parameters: parameters)
     }
     
     /**
@@ -199,7 +198,7 @@ extension Request where ModelType: VIMAccount {
     static func appTokenExchangeRequest(withAccessToken accessToken: String) -> Request {
         let parameters = [AccessTokenKey: accessToken]
         
-        return Request(method: .POST, path: AuthenticationPathAppTokenExchange, parameters: parameters)
+        return Request(method: .post, path: AuthenticationPathAppTokenExchange, parameters: parameters)
     }
 }
 
@@ -210,7 +209,7 @@ extension Request where ModelType: VIMNullResponse {
      - returns: a new `Request`
      */
     public static func deleteTokensRequest() -> Request {
-        return Request(method: .DELETE, path: AuthenticationPathTokens, retryPolicy: .TryThreeTimes)
+        return Request(method: .delete, path: AuthenticationPathTokens, retryPolicy: .TryThreeTimes)
     }
     
     /**
@@ -223,7 +222,7 @@ extension Request where ModelType: VIMNullResponse {
     public static func resetPasswordRequest(withEmail email: String) -> Request {
         let path = "/users/\(email)/password/reset"
         
-        return Request(method: .POST, path: path)
+        return Request(method: .post, path: path)
     }
 }
 
@@ -243,7 +242,7 @@ extension Request where ModelType: PinCodeInfo {
         let parameters = [GrantTypeKey: GrantTypePinCode,
                           ScopeKey: Scope.combine(scopes)]
         
-        return Request(method: .POST, path: AuthenticationPathPinCode, parameters: parameters)
+        return Request(method: .post, path: AuthenticationPathPinCode, parameters: parameters)
     }
 }
 

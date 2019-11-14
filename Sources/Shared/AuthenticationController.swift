@@ -181,10 +181,15 @@ final public class AuthenticationController {
         let urlString = self.configuration.baseUrl.appendingPathComponent(Constants.CodeGrantAuthorizationPath).absoluteString
         
         var error: NSError?
-        let urlRequest = VimeoRequestSerializer(appConfiguration: self.configuration).request(withMethod: VimeoClient.Method.GET.rawValue, urlString: urlString, parameters: parameters, error: &error)
+        let serializer = VimeoRequestSerializer(appConfiguration: self.configuration)
+        let urlRequest = serializer.request(
+            withMethod: .get,
+            urlString: urlString,
+            parameters: parameters,
+            error: &error
+        )
         
-        guard let url = urlRequest.url, error == nil
-        else {
+        guard let url = urlRequest.url, error == nil else {
             fatalError("Could not make code grant auth URL")
         }
         

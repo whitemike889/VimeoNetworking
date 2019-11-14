@@ -24,7 +24,7 @@
 //
 
 /// Conforming objects are capable of being added to, or removed from, a containing object in a single request.
-/// For example, adding multiple videos to an album, or removing a video from multiple albums at once. 
+/// For example, adding multiple videos to an album, or removing a video from multiple albums at once.
 public protocol BatchOperable: Hashable {
     /// An identifier for the item.
     var uri: String? { get }
