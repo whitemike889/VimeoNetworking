@@ -1,5 +1,5 @@
 //
-//  PublishToSocialJobConnection.swift
+//  PublishJobConnection.swift
 //  VimeoNetworking
 //
 //  Created by Jason Hawkins on 11/14/19.
