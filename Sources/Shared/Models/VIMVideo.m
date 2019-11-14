@@ -73,14 +73,15 @@ NSString *VIMContentRating_Safe = @"safe";
 
 #pragma mark - VIMMappable
 
-- (NSDictionary *)getObjectMapping
-{
-    return @{@"description": @"videoDescription",
-             @"pictures": @"pictureCollection",
-             @"play": @"playRepresentation",
-             @"review_page": @"reviewPage",
-             @"file_transfer": @"fileTransfer"
-             };
+- (NSDictionary *)getObjectMapping {
+    return @{
+        @"description": @"videoDescription",
+        @"pictures": @"pictureCollection",
+        @"play": @"playRepresentation",
+        @"review_page": @"reviewPage",
+        @"file_transfer": @"fileTransfer"
+        @"publish_to_social_job": @"publishToSocialJob"
+    };
 }
 
 - (Class)getClassForCollectionKey:(NSString *)key
