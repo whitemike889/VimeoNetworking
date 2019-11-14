@@ -1,5 +1,5 @@
 //
-//  PublishToSocialJobDestination.swift
+//  PublishJobDestination.swift
 //  VimeoNetworking
 //
 //  Copyright © 2019 Vimeo. All rights reserved.
@@ -23,7 +23,7 @@
 //  THE SOFTWARE.
 //
 
-@objc public enum PublishToSocialDestinationStatus: Int {
+@objc public enum PublishDestinationStatus: Int {
     case error
     case finished
     case inProgress
@@ -40,59 +40,50 @@
     }
 }
 
-@objc public class PublishToSocialJobDestination: VIMModelObject {
-    @objc public var status: String?
+@objc public class PublishJobDestination: VIMModelObject {
+    @objc public var statusString: String?
+    public var status: PublishDestinationStatus? {
+        switch self.statusString {
+        case String.error:
+            return .error
+        case String.finished:
+            return .finished
+        case String.inProgress:
+            return .inProgress
+        default:
+            return nil
+        }
+    }
     @objc public var thirdPartyPostURL: String?
     @objc public var thirdPartyPostID: String?
 
     public override func getObjectMapping() -> Any? {
         return [
             String.Key.thirdPartyPostURL: String.Value.thirdPartyPostURL,
-            String.Key.thirdPartyPostID: String.Value.thirdPartyPostID
+            String.Key.thirdPartyPostID: String.Value.thirdPartyPostID,
+            String.Key.status: String.Value.status
         ]
     }
 }
 
-@objc public class PublishToSocialDestinations: VIMModelObject {
-    @objc public var facebook: PublishToSocialJobDestination?
-    @objc public var youtube: PublishToSocialJobDestination?
-    @objc public var linkedin: PublishToSocialJobDestination?
-    @objc public var twitter: PublishToSocialJobDestination?
-}
-
-@objc public class PublishToSocialJob: VIMModelObject {
-    @objc public var firstPublishDateString: String?
-    @objc public var firstPublishDate: Date?
-    @objc public var destinations: PublishToSocialDestinations?
-
-    public override func getClassForObjectKey(_ key: String?) -> AnyClass? {
-        switch key {
-        case String.Key.destinations:
-            return PublishToSocialDestinations.self
-        default:
-            return nil
-        }
-    }
-
-    public override func getObjectMapping() -> Any? {
-        return [
-            String.Key.firstPublishDate: String.Value.firstPublishDate
-        ]
-    }
+@objc public class PublishDestinations: VIMModelObject {
+    @objc public var facebook: PublishJobDestination?
+    @objc public var youtube: PublishJobDestination?
+    @objc public var linkedin: PublishJobDestination?
+    @objc public var twitter: PublishJobDestination?
 }
 
 private extension String {
     struct Key {
-        static let destinations = "destinations"
-        static let firstPublishDate = "first_publish_date"
         static let thirdPartyPostURL = "third_party_post_url"
         static let thirdPartyPostID = "third_party_post_id"
+        static let status = "status"
     }
 
     struct Value {
-        static let firstPublishDate = "firstPublishDateString"
         static let thirdPartyPostURL = "thirdPartyPostURL"
         static let thirdPartyPostID = "thirdPartyPostID"
+        static let status = "statusString"
     }
 
     static let error = "ERROR"
