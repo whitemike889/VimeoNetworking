@@ -17,12 +17,12 @@ default_platform :ios
 
 platform :ios do
   before_all do
-    ensure_xcode_version(version: "10.2.0")
+    ensure_xcode_version(version: "10.2.1")
   end
 
   desc "buid the example project"
   lane :build_example do |options|
-    
+
     # cant use gym: https://github.com/fastlane/fastlane/issues/1816
     xcodebuild(
       workspace: "VimeoNetworking.xcworkspace",
@@ -60,12 +60,12 @@ platform :ios do
   end
 
   desc "bumps the project and podspec version"
-  lane :version_bump do |options|    
+  lane :version_bump do |options|
 
     bump_type = options[:bump_type]
     version_number = options[:version_number]
     if bump_type.nil? && version_number.nil?
-      UI.user_error!("version_bump requires you to provide a bump_type [patch|minor|major] or specific version_number. Please try again.") 
+      UI.user_error!("version_bump requires you to provide a bump_type [patch|minor|major] or specific version_number. Please try again.")
     end
 
     increment_version_number(
@@ -82,11 +82,11 @@ platform :ios do
 
 
   after_all do |lane|
-    
+
   end
 
   error do |lane, exception|
-    
+
   end
 end
 
