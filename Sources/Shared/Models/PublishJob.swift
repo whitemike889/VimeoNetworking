@@ -37,10 +37,26 @@
         }
     }
 
+    // MARK: - Overrides
+
     public override func getObjectMapping() -> Any? {
         return [
             String.Key.firstPublishDate: String.Value.firstPublishDate
         ]
+    }
+
+    public override func didFinishMapping() {
+        self.firstPublishDate = self.formatDate(from: self.firstPublishDateString)
+    }
+
+    // MARK: - Private
+
+    private func formatDate(from dateString: String?) -> Date? {
+        guard let dateString = dateString,
+            let date = VIMModelObject.dateFormatter().date(from: dateString) else {
+                return nil
+        }
+        return date
     }
 }
 
