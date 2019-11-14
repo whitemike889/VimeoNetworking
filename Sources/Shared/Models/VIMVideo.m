@@ -159,6 +159,11 @@ NSString *VIMContentRating_Safe = @"safe";
     {
         return [FileTransfer class];
     }
+
+    if ([key isEqualToString:@"app"])
+    {
+        return [App class];
+    }
     
     return nil;
 }
