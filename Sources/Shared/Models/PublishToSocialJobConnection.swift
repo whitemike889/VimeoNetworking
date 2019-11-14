@@ -13,16 +13,33 @@
     @objc public var twitter: [String]?
 }
 
-@objc public class PublishJobConstraints: VIMModelObject {
+@objc public class PublishConstraints: VIMModelObject {
     @objc public var duration: NSNumber?
     @objc public var size: NSNumber?
 }
 
+@objc public class PublishJobConstraints: VIMModelObject {
+    @objc public var faceebok: PublishConstraints?
+    @objc public var youtube: PublishConstraints?
+    @objc public var linkedin: PublishConstraints?
+    @objc public var twitter: PublishConstraints?
+
+    public override func getClassForObjectKey(_ key: String?) -> AnyClass? {
+        switch key {
+        case String.Key.facebook,
+             String.Key.youtube,
+             String.Key.linkedin,
+             String.Key.twitter:
+            return PublishConstraints.self
+        default:
+            return nil
+        }
+    }
+}
+
 @objc public class PublishJobConnection: VIMConnection {
     @objc public var publishBlockers: PublishJobBlockers?
-    @objc public var publishConstraints: [PublishJobConstraints]?
-    // options
-    // uri
+    @objc public var publishConstraints: PublishJobConstraints?
 
     public override func getClassForObjectKey(_ key: String?) -> AnyClass? {
         switch key {
@@ -52,5 +69,9 @@ private extension String {
     struct Key {
         static let publishBlockers = "publish_blockers"
         static let publishConstraints = "publish_constraints"
+        static let facebook = "facebook"
+        static let youtube = "youtube"
+        static let linkedin = "linkedin"
+        static let twitter = "twitter"
     }
 }
