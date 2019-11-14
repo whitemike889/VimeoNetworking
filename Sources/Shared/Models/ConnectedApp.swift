@@ -187,7 +187,6 @@
             let date = VIMModelObject.dateFormatter().date(from: dateString) else {
                 return nil
         }
-
         return date
     }
 }
