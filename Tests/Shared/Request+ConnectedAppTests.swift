@@ -55,53 +55,53 @@ class Request_ConnectedAppTests: XCTestCase {
 
     func test_connectToFacebookRequest_returnsRequest_withExpectedTokenParameterKey() {
         let request = Request<ConnectedApp>.connect(to: .facebook, with: "a1b2c3")
-        XCTAssertEqual(request.method, .PUT)
+        XCTAssertEqual(request.method, .put)
         XCTAssertEqual(request.path, "me/connected_apps/facebook")
         XCTAssertEqual(request.parameters as! [String: String], ["access_token":"a1b2c3"])
     }
 
     func test_connectToTwitterRequest_returnsRequest_withExpectedTokenParameterKey() {
         let request = Request<ConnectedApp>.connect(to: .twitter, with: "a1b2c3")
-        XCTAssertEqual(request.method, .PUT)
+        XCTAssertEqual(request.method, .put)
         XCTAssertEqual(request.path, "me/connected_apps/twitter")
         XCTAssertEqual(request.parameters as! [String: String], ["access_token_secret":"a1b2c3"])
     }
 
     func test_connectToYouTubeRequest_returnsRequest_withExpectedTokenParameterKey() {
         let request = Request<ConnectedApp>.connect(to: .youtube, with: "a1b2c3")
-        XCTAssertEqual(request.method, .PUT)
+        XCTAssertEqual(request.method, .put)
         XCTAssertEqual(request.path, "me/connected_apps/youtube")
         XCTAssertEqual(request.parameters as! [String: String], ["auth_code":"a1b2c3"])
     }
 
     func test_connectToLinkedInRequest_returnsRequest_withExpectedTokenParameterKey() {
         let request = Request<ConnectedApp>.connect(to: .linkedin, with: "a1b2c3")
-        XCTAssertEqual(request.method, .PUT)
+        XCTAssertEqual(request.method, .put)
         XCTAssertEqual(request.path, "me/connected_apps/linkedin")
         XCTAssertEqual(request.parameters as! [String: String], ["auth_code":"a1b2c3"])
     }
 
     func test_deleteConnectedApp_returnsExpectedHTTPMethod_andURI_forFacebook() {
         let request = Request<ConnectedApp>.deleteConnectedApp(.facebook)
-        XCTAssertEqual(request.method, .DELETE)
+        XCTAssertEqual(request.method, .delete)
         XCTAssertEqual(request.path, "me/connected_apps/facebook")
     }
 
     func test_deleteConnectedApp_returnsExpectedHTTPMethod_andURI_forTwitter() {
         let request = Request<ConnectedApp>.deleteConnectedApp(.twitter)
-        XCTAssertEqual(request.method, .DELETE)
+        XCTAssertEqual(request.method, .delete)
         XCTAssertEqual(request.path, "me/connected_apps/twitter")
     }
 
     func test_deleteConnectedApp_returnsExpectedHTTPMethod_andURI_forYouTube() {
         let request = Request<ConnectedApp>.deleteConnectedApp(.youtube)
-        XCTAssertEqual(request.method, .DELETE)
+        XCTAssertEqual(request.method, .delete)
         XCTAssertEqual(request.path, "me/connected_apps/youtube")
     }
 
     func test_deleteConnectedApp_returnsExpectedHTTPMethod_andURI_forLinkedIn() {
         let request = Request<ConnectedApp>.deleteConnectedApp(.linkedin)
-        XCTAssertEqual(request.method, .DELETE)
+        XCTAssertEqual(request.method, .delete)
         XCTAssertEqual(request.path, "me/connected_apps/linkedin")
     }
 }

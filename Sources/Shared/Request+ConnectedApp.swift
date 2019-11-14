@@ -55,14 +55,14 @@ public extension Request {
 
         let parameters = [tokenKey: token]
 
-        return Request(method: .PUT, path: uri, parameters: parameters)
+        return Request(method: .put, path: uri, parameters: parameters)
     }
 
     /// Returns a request to delete the connection to the specified app.
     /// - Parameter appType: The `ConnectedAppType` to disassociate from the authenticated user.
     static func deleteConnectedApp(_ appType: ConnectedAppType) -> Request {
         let uri: String = .connectedAppsURI + appType.stringValue
-        return Request(method: .DELETE, path: uri)
+        return Request(method: .delete, path: uri)
     }
 }
 
