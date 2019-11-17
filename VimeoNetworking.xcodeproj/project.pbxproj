@@ -1918,8 +1918,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3D9C429822745894000A6585 /* Build configuration list for PBXNativeTarget "VimeoNetworking-iOS" */;
 			buildPhases = (
-				3D9C42CE22745AEA000A6585 /* Run SwiftLint */,
 				7509B26913E38132CA5A9774 /* [CP] Check Pods Manifest.lock */,
+				3D9C42CE22745AEA000A6585 /* Run SwiftLint */,
 				3D9C428B22745894000A6585 /* Headers */,
 				3D9C428C22745894000A6585 /* Sources */,
 				3D9C428D22745894000A6585 /* Frameworks */,
