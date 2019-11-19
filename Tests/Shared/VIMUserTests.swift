@@ -36,12 +36,6 @@ class VIMUserTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        
-        VimeoClient.configureSharedClient(withAppConfiguration: AppConfiguration(clientIdentifier: "{CLIENT_ID}",
-                                                                                 clientSecret: "{CLIENT_SECRET}",
-                                                                                 scopes: [.Public, .Private, .Purchased, .Create, .Edit, .Delete, .Interact, .Upload],
-                                                                                 keychainService: "com.vimeo.keychain_service",
-                                                                                 apiVersion: "3.3.10"), configureSessionManagerBlock: nil)
     }
     
     override func tearDown() {
@@ -93,8 +87,8 @@ class VIMUserTests: XCTestCase {
     
     private func send(request: Request<VIMUser>, withDescription: String, validationClosure: @escaping ((VIMUser?) -> Void)) {
         let expectation = self.expectation(description: withDescription)
-        
-        _ = VimeoClient.sharedClient.request(request, completion: { response in
+        let client = makeVimeoClient()
+        _ = client.request(request, completion: { response in
             switch response {
             case .success(let result):
                 validationClosure(result.model)
