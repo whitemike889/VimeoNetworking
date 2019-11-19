@@ -36,7 +36,7 @@ public extension Request {
         return Request(path: .connectedAppsURI + appType.stringValue)
     }
 
-    /// Returns a PUT request for connecting the provided app type to the current authenticated user's account.
+    /// Returns a `put` request for connecting the provided app type to the current authenticated user's account.
     /// - Parameters:
     ///   - appType: The app platform for which the connection will be established.
     ///   - token: An authentication token from the provided platfrom, used to establish the connection.
@@ -58,7 +58,7 @@ public extension Request {
         return Request(method: .put, path: uri, parameters: parameters)
     }
 
-    /// Returns a request to delete the connection to the specified app.
+    /// Returns a request to `delete` the connection to the specified app.
     /// - Parameter appType: The `ConnectedAppType` to disassociate from the authenticated user.
     static func deleteConnectedApp(_ appType: ConnectedAppType) -> Request {
         let uri: String = .connectedAppsURI + appType.stringValue
