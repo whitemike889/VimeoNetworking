@@ -23,12 +23,17 @@
 //  THE SOFTWARE.
 //
 
-@objc public enum PublishDestinationStatus: Int {
+/// The status of the upload or post for the given platform.
+/// - error: There was an error when trying to upload the video or create the post.
+/// - finished: The upload and post were successfully completed.
+/// - inProgress: The upload or post creation process is currently underway.
+@objc public enum PublishStatus: Int {
     case error
     case finished
     case inProgress
 
-    public var stringVlaue: String {
+    /// Returns a string value for the given case.
+    public var stringValue: String {
         switch self {
         case .error:
             return String.error
@@ -41,8 +46,13 @@
 }
 
 @objc public class PublishJobDestination: VIMModelObject {
+    /// The status of the upload/post on the specified platform as a `String`.
+    /// - Note: This property is available to provide interoperability with Objective-C codebases.
+    ///         Using `status` is preferred.
     @objc public var statusString: String?
-    public var status: PublishDestinationStatus? {
+
+    /// The status of the upload/post on the specified platform.
+    public var status: PublishStatus? {
         switch self.statusString {
         case String.error:
             return .error
@@ -54,8 +64,13 @@
             return nil
         }
     }
+    /// The URL of the upload/post on the specified platform.
     @objc public var thirdPartyPostURL: String?
+
+    /// The ID of the upload/post on the specified platform.
     @objc public var thirdPartyPostID: String?
+
+    // MARK: - Overrides
 
     public override func getObjectMapping() -> Any? {
         return [
@@ -66,10 +81,19 @@
     }
 }
 
+/// An object that encapsulates data related to all of the supported platforms destinations.
 @objc public class PublishDestinations: VIMModelObject {
+
+    /// Information about the upload/post on Facebook.
     @objc public var facebook: PublishJobDestination?
+
+    /// Information about the upload/post on YouTube.
     @objc public var youtube: PublishJobDestination?
+
+    /// Information about the upload/post on LinkedIn.
     @objc public var linkedin: PublishJobDestination?
+
+    /// Information about the upload/post on Twitter.
     @objc public var twitter: PublishJobDestination?
 }
 

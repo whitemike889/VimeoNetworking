@@ -23,10 +23,21 @@
 //  THE SOFTWARE.
 //
 
+/// Encapsulates the data related to all of the supported publishing platforms and the date of first publish.
 @objc public class PublishJob: VIMModelObject {
+
+    /// The time in ISO 8601 format when the user first published this upload/post.
+    /// - Note: This property is available to provide interoperability with Objective-C codebases.
+    ///         Using `firstPublishDate` is preferred.
     @objc public var firstPublishDateString: String?
+
+    /// The time as a `Date` when the user first published this upload/post.
     @objc public var firstPublishDate: Date?
+
+    /// The status of the upload/post on each of the supported platforms.
     @objc public var destinations: PublishDestinations?
+
+    // MARK: - Overrides
 
     public override func getClassForObjectKey(_ key: String?) -> AnyClass? {
         switch key {
@@ -36,8 +47,6 @@
             return nil
         }
     }
-
-    // MARK: - Overrides
 
     public override func getObjectMapping() -> Any? {
         return [
