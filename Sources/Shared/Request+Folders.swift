@@ -36,6 +36,6 @@ public extension Request {
         
         let path = "\(userURI)/folders/root"
         
-        return Request(method: .GET, path: path)
+        return Request(method: .get, path: path)
     }
 }
