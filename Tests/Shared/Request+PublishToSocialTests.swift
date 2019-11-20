@@ -72,7 +72,16 @@ class Request_PublishToSocialTests: XCTestCase {
     }
 
     func test_publishPostRequest_forFacebookPost_returnsRequest_withExpectedParameters() {
-        let socialMediaPosts = SocialMediaPosts(facebook: facebookPost)
+        // Note that once the build machine on CircleCI is updated to Xcode 11 and Swift 5.1, default values for
+        // memberwise initializers will be respected.
+        // let socialMediaPosts = SocialMediaPosts(facebook: facebookPost)
+        let socialMediaPosts = SocialMediaPosts(
+            facebook: facebookPost,
+            linkedIn: nil,
+            twitter: nil,
+            youTube: nil
+        )
+
         let request = Request<PublishJob>.publishPosts(socialMediaPosts, for: "12345")
 
         XCTAssertNotNil(request.parameters)
@@ -98,7 +107,15 @@ class Request_PublishToSocialTests: XCTestCase {
     }
 
     func test_publishPostRequest_forLinkedInPost_returnsRequest_withExpectedParameters() {
-        let socialMediaPosts = SocialMediaPosts(linkedIn: linkedInPost)
+        // Note that once the build machine on CircleCI is updated to Xcode 11 and Swift 5.1, default values for
+        // memberwise initializers will be respected.
+        // let socialMediaPosts = SocialMediaPosts(linkedIn: linkedInPost)
+        let socialMediaPosts = SocialMediaPosts(
+            facebook: nil,
+            linkedIn: linkedInPost,
+            twitter: nil,
+            youTube: nil
+        )
         let request = Request<PublishJob>.publishPosts(socialMediaPosts, for: "56789")
 
         XCTAssertNotNil(request.parameters)
@@ -119,7 +136,15 @@ class Request_PublishToSocialTests: XCTestCase {
     }
 
     func test_publishPostRequest_forTwitterPost_returnsRequest_withExpectedParameters() {
-        let socialMediaPosts = SocialMediaPosts(twitter: twitterPost)
+        // Note that once the build machine on CircleCI is updated to Xcode 11 and Swift 5.1, default values for
+        // memberwise initializers will be respected.
+        // let socialMediaPosts = SocialMediaPosts(twitter: twitterPost)
+        let socialMediaPosts = SocialMediaPosts(
+            facebook: nil,
+            linkedIn: nil,
+            twitter: twitterPost,
+            youTube: nil
+        )
         let request = Request<PublishJob>.publishPosts(socialMediaPosts, for: "56789")
 
         XCTAssertNotNil(request.parameters)
@@ -138,7 +163,15 @@ class Request_PublishToSocialTests: XCTestCase {
     }
 
     func test_publishPostRequest_forYouTubePost_returnsRequest_withExpectedParameters() {
-        let socialMediaPosts = SocialMediaPosts(youTube: youTubePost)
+        // Note that once the build machine on CircleCI is updated to Xcode 11 and Swift 5.1, default values for
+        // memberwise initializers will be respected.
+        // let socialMediaPosts = SocialMediaPosts(youTube: youTubePost)
+        let socialMediaPosts = SocialMediaPosts(
+            facebook: nil,
+            linkedIn: nil,
+            twitter: nil,
+            youTube: youTubePost
+        )
         let request = Request<PublishJob>.publishPosts(socialMediaPosts, for: "34567")
 
         XCTAssertNotNil(request.parameters)
