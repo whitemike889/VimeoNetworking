@@ -88,28 +88,28 @@ public struct PublishToYouTubePost {
     /// The description of the video as it will appear on YouTube.
     public let description: String
 
-    /// A list of tags for the video on YouTube.
-    public let tags: [String]? = nil
+    /// A list of tags for the video on YouTube. May be nil.
+    public let tags: [String]?
 
     /// The privacy option for this video on YouTube.
     public let privacy: Privacy
 
-    /// The YouTube category identifier to which this video falls into.
-    public let categoryID: Int? = nil
+    /// The YouTube category identifier to which this video falls into. May be nil.
+    public let categoryID: Int?
 }
 
 /// A structure encapsulating publishing data for each of the supported social media platforms.
 public struct SocialMediaPosts {
 
     /// A single post to Facebook.
-    public var facebook: PublishToFacebookPost?
+    public var facebook: PublishToFacebookPost? = nil
 
     /// A single post to LinkedIn.
-    public var linkedIn: PublishToLinkedInPost?
+    public var linkedIn: PublishToLinkedInPost? = nil
 
     /// A single post to Twitter.
-    public var twitter: PublishToTwitterPost?
+    public var twitter: PublishToTwitterPost? = nil
 
     /// A single post to YouTube.
-    public var youTube: PublishToYouTubePost?
+    public var youTube: PublishToYouTubePost? = nil
 }
