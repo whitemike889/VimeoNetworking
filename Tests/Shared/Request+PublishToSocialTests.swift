@@ -159,4 +159,37 @@ class Request_PublishToSocialTests: XCTestCase {
         XCTAssertEqual(youtubeParameters["privacy"], youTubePost.privacy.rawValue)
         XCTAssertEqual(youtubeParameters["category_id"], youTubePost.categoryID)
     }
+
+    func test_publishPostRequests_forAllPlatformPosts_returnsRequest_withNonNillPostParameters() {
+        let socialMediaPosts = SocialMediaPosts(
+            facebook: facebookPost,
+            linkedIn: linkedInPost,
+            twitter: twitterPost,
+            youTube: youTubePost
+        )
+
+        let request = Request<PublishJob>.publishPosts(socialMediaPosts, for: "89012")
+
+        XCTAssertNotNil(request.parameters)
+        XCTAssertEqual(request.method, .put)
+        XCTAssertEqual(request.path, "/videos/89012/publish_to_social")
+
+        let parameters = request.parameters as! [String: Any]
+
+        XCTAssertNotNil(parameters["facebook"])
+        XCTAssertNotNil(parameters["linkedin"])
+        XCTAssertNotNil(parameters["twitter"])
+        XCTAssertNotNil(parameters["youtube"])
+    }
+
+    func test_socialMediaPosts_mayBeAddedAfterInstantiation() {
+        var socialMediaPosts = SocialMediaPosts()
+        socialMediaPosts.facebook = facebookPost
+        socialMediaPosts.twitter = twitterPost
+
+        XCTAssertNotNil(socialMediaPosts.facebook)
+        XCTAssertNotNil(socialMediaPosts.twitter)
+        XCTAssertNil(socialMediaPosts.linkedIn)
+        XCTAssertNil(socialMediaPosts.youTube)
+    }
 }
