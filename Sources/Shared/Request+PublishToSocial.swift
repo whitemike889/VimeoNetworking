@@ -1,5 +1,5 @@
 //
-//  Request+PublishJob.swift
+//  Request+PublishToSocial.swift
 //  VimeoNetworking
 //
 //  Copyright © 2019 Vimeo. All rights reserved.
