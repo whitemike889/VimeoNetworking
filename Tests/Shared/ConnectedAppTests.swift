@@ -123,13 +123,13 @@ class ConnectedAppTests: XCTestCase {
         let connectedAppDict: [String: Any] = [
             "publishCategories": [art, vacation] as Any
         ]
-        let connectedApp = ConnectedApp(keyValueDictionary: connectedAppDict)!
+        let connectedApp = try XCTUnwrap(ConnectedApp(keyValueDictionary: connectedAppDict))
 
         XCTAssertNotNil(connectedApp.publishCategories)
         XCTAssertEqual(connectedApp.publishCategories?.count, 2)
-        XCTAssertEqual(connectedApp.publishCategories![0].name, "art")
-        XCTAssertEqual(connectedApp.publishCategories![0].identifier, 12345)
-        XCTAssertEqual(connectedApp.publishCategories![1].name, "vacation")
-        XCTAssertEqual(connectedApp.publishCategories![1].identifier, 67890)
+        XCTAssertEqual(try XCTUnwrap(connectedApp.publishCategories)[0].name, "art")
+        XCTAssertEqual(try XCTUnwrap(connectedApp.publishCategories)[0].identifier, 12345)
+        XCTAssertEqual(try XCTUnwrap(connectedApp.publishCategories)[1].name, "vacation")
+        XCTAssertEqual(try XCTUnwrap(connectedApp.publishCategories)[1].identifier, 67890)
     }
 }
