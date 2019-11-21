@@ -27,13 +27,13 @@ import XCTest
 @testable import VimeoNetworking
 
 class PublishJobTests: XCTestCase {
-    func test_publishJob_parsesAsExpected() {
+    func test_publishJob_parsesAsExpected() throws {
         let json: [String: Any] = [
             "first_publish_date": "2015-12-17T21:32:44+00:00",
             "destinations": ""
         ]
 
-        let publishJob = try! VIMObjectMapper.mapObject(responseDictionary: json) as PublishJob
+        let publishJob = try VIMObjectMapper.mapObject(responseDictionary: json) as PublishJob
         XCTAssertNotNil(publishJob.firstPublishDateString)
         XCTAssertNotNil(publishJob.firstPublishDate)
     }
