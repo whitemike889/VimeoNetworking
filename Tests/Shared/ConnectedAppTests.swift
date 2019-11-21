@@ -27,87 +27,87 @@ import XCTest
 @testable import VimeoNetworking
 
 class ConnectedAppTests: XCTestCase {
-    func test_isDataAccessExpired_returnsTrue_whenTypeIsFacebook_andDataAccessIsExpired() {
+    func test_isDataAccessExpired_returnsTrue_whenTypeIsFacebook_andDataAccessIsExpired() throws {
         let json: [String: Any] = [
             "type": "facebook",
             "data_access_is_expired": true
         ]
-        let connectedApp = try! VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
+        let connectedApp = try VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
         XCTAssertEqual(connectedApp.type, .facebook)
         XCTAssertTrue(connectedApp.isDataAccessExpired)
     }
 
-    func test_isDataAccessExpired_returnsFalse_whenTypeIsFacebook_andDataAccessIsNotExpired() {
+    func test_isDataAccessExpired_returnsFalse_whenTypeIsFacebook_andDataAccessIsNotExpired() throws {
         let json: [String: Any] = [
             "type": "facebook",
             "data_access_is_expired": false
         ]
-        let connectedApp = try! VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
+        let connectedApp = try VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
         XCTAssertEqual(connectedApp.type, .facebook)
         XCTAssertFalse(connectedApp.isDataAccessExpired)
     }
 
-    func test_isDataAccessExpired_returnsFalse_whenTypeIsNotFacebook() {
+    func test_isDataAccessExpired_returnsFalse_whenTypeIsNotFacebook() throws {
         let json: [String: Any] = [
             "type": "youtube",
             "data_access_is_expired": true
         ]
-        let connectedApp = try! VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
+        let connectedApp = try VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
         XCTAssertNotEqual(connectedApp.type, .facebook)
         XCTAssertEqual(connectedApp.type, .youtube)
         XCTAssertFalse(connectedApp.isDataAccessExpired)
     }
 
-    func test_isDataAccessExpired_returnsTrue_whenDataAccessIsExpired_isMissingFromResponse() {
+    func test_isDataAccessExpired_returnsTrue_whenDataAccessIsExpired_isMissingFromResponse() throws {
         let json: [String: Any] = [
             "type": "facebook"
         ]
-        let connectedApp = try! VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
+        let connectedApp = try VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
         XCTAssertTrue(connectedApp.isDataAccessExpired)
     }
 
-    func test_connectedAppType_returnsExpectedStringValue_forFacebookAppType() {
+    func test_connectedAppType_returnsExpectedStringValue_forFacebookAppType() throws {
         let json: [String: Any] = [
             "type": "facebook"
         ]
-        let connectedApp = try! VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
+        let connectedApp = try VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
         XCTAssertEqual(connectedApp.type?.stringValue, "facebook")
     }
 
-    func test_connectedAppType_returnsExpectedStringValue_forYouTubeAppType() {
+    func test_connectedAppType_returnsExpectedStringValue_forYouTubeAppType() throws {
         let json: [String: Any] = [
             "type": "youtube"
         ]
-        let connectedApp = try! VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
+        let connectedApp = try VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
         XCTAssertEqual(connectedApp.type?.stringValue, "youtube")
     }
 
-    func test_connectedAppType_returnsExpectedStringValue_forTwitterAppType() {
+    func test_connectedAppType_returnsExpectedStringValue_forTwitterAppType() throws {
         let json: [String: Any] = [
             "type": "twitter"
         ]
-        let connectedApp = try! VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
+        let connectedApp = try VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
         XCTAssertEqual(connectedApp.type?.stringValue, "twitter")
     }
 
-    func test_connectedAppType_returnsExpectedStringValue_forLinkedInAppType() {
+    func test_connectedAppType_returnsExpectedStringValue_forLinkedInAppType() throws {
         let json: [String: Any] = [
             "type": "linkedin"
         ]
-        let connectedApp = try! VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
+        let connectedApp = try VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
         XCTAssertEqual(connectedApp.type?.stringValue, "linkedin")
     }
 
-    func test_connectedAppType_returnsNil_whenTypeIsUnexpected() {
+    func test_connectedAppType_returnsNil_whenTypeIsUnexpected() throws {
         let json: [String: Any] = [
             "type": "friendster"
         ]
-        let connectedApp = try! VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
+        let connectedApp = try VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
         XCTAssertNil(connectedApp.type)
         XCTAssertNil(connectedApp.type?.stringValue)
     }
 
-    func test_connectedApp_returnsExpectedPublishCategories_fromInputPublishOptionItems() {
+    func test_connectedApp_returnsExpectedPublishCategories_fromInputPublishOptionItems() throws {
         let artDict: [String: Any] = [
             "identifier": 12345,
             "name": "art"
