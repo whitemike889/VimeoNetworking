@@ -71,7 +71,7 @@ class Request_PublishToSocialTests: XCTestCase {
         XCTAssertEqual(request.URI, "/videos/12345/publish_to_social")
     }
 
-    func test_publishPostRequest_forFacebookPost_returnsRequest_withExpectedParameters() {
+    func test_publishPostRequest_forFacebookPost_returnsRequest_withExpectedParameters() throws {
         let socialMediaPosts = SocialMediaPosts(facebook: facebookPost)
         let request = Request<PublishJob>.publishPosts(socialMediaPosts, for: "12345")
 
@@ -79,14 +79,14 @@ class Request_PublishToSocialTests: XCTestCase {
         XCTAssertEqual(request.method, .put)
         XCTAssertEqual(request.path, "/videos/12345/publish_to_social")
 
-        let parameters = request.parameters as! [String: Any]
+        let parameters = try XCTUnwrap(request.parameters as? [String: Any])
 
         XCTAssertNil(parameters["youtube"])
         XCTAssertNil(parameters["linkedin"])
         XCTAssertNil(parameters["twitter"])
         XCTAssertNotNil(parameters["facebook"])
 
-        let facebookParameters = parameters["facebook"] as! [String: AnyHashable]
+        let facebookParameters = try XCTUnwrap(parameters["facebook"] as? [String: AnyHashable])
         XCTAssertEqual(facebookParameters["title"], facebookPost.title)
         XCTAssertEqual(facebookParameters["description"], facebookPost.description)
         XCTAssertEqual(facebookParameters["page_id"], facebookPost.pageID)
@@ -97,7 +97,7 @@ class Request_PublishToSocialTests: XCTestCase {
         XCTAssertEqual(facebookParameters["allow_social_actions"], facebookPost.allowSocialActions)
     }
 
-    func test_publishPostRequest_forLinkedInPost_returnsRequest_withExpectedParameters() {
+    func test_publishPostRequest_forLinkedInPost_returnsRequest_withExpectedParameters() throws {
         let socialMediaPosts = SocialMediaPosts(linkedIn: linkedInPost)
         let request = Request<PublishJob>.publishPosts(socialMediaPosts, for: "56789")
 
@@ -105,20 +105,20 @@ class Request_PublishToSocialTests: XCTestCase {
         XCTAssertEqual(request.method, .put)
         XCTAssertEqual(request.path, "/videos/56789/publish_to_social")
 
-        let parameters = request.parameters as! [String: Any]
+        let parameters = try XCTUnwrap(request.parameters as? [String: Any])
 
         XCTAssertNil(parameters["facebook"])
         XCTAssertNil(parameters["twitter"])
         XCTAssertNil(parameters["youtube"])
         XCTAssertNotNil(parameters["linkedin"])
 
-        let linkedInParameters = parameters["linkedin"] as! [String: AnyHashable]
+        let linkedInParameters = try XCTUnwrap(parameters["linkedin"] as? [String: AnyHashable])
         XCTAssertEqual(linkedInParameters["page_id"], linkedInPost.pageID)
         XCTAssertEqual(linkedInParameters["title"], linkedInPost.title)
         XCTAssertEqual(linkedInParameters["description"], linkedInPost.description)
     }
 
-    func test_publishPostRequest_forTwitterPost_returnsRequest_withExpectedParameters() {
+    func test_publishPostRequest_forTwitterPost_returnsRequest_withExpectedParameters() throws {
         let socialMediaPosts = SocialMediaPosts(twitter: twitterPost)
         let request = Request<PublishJob>.publishPosts(socialMediaPosts, for: "56789")
 
@@ -126,18 +126,18 @@ class Request_PublishToSocialTests: XCTestCase {
         XCTAssertEqual(request.method, .put)
         XCTAssertEqual(request.path, "/videos/56789/publish_to_social")
 
-        let parameters = request.parameters as! [String: Any]
+        let parameters = try XCTUnwrap(request.parameters as? [String: Any])
 
         XCTAssertNil(parameters["facebook"])
         XCTAssertNil(parameters["linkedin"])
         XCTAssertNil(parameters["youtube"])
         XCTAssertNotNil(parameters["twitter"])
 
-        let twitterParameters = parameters["twitter"] as! [String: AnyHashable]
+        let twitterParameters = try XCTUnwrap(parameters["twitter"] as? [String: AnyHashable])
         XCTAssertEqual(twitterParameters["tweet"], twitterPost.tweet)
     }
 
-    func test_publishPostRequest_forYouTubePost_returnsRequest_withExpectedParameters() {
+    func test_publishPostRequest_forYouTubePost_returnsRequest_withExpectedParameters() throws {
         let socialMediaPosts = SocialMediaPosts(youTube: youTubePost)
         let request = Request<PublishJob>.publishPosts(socialMediaPosts, for: "34567")
 
@@ -145,14 +145,14 @@ class Request_PublishToSocialTests: XCTestCase {
         XCTAssertEqual(request.method, .put)
         XCTAssertEqual(request.path, "/videos/34567/publish_to_social")
 
-        let parameters = request.parameters as! [String: Any]
+        let parameters = try XCTUnwrap(request.parameters as? [String: Any])
 
         XCTAssertNil(parameters["facebook"])
         XCTAssertNil(parameters["linkedin"])
         XCTAssertNil(parameters["twitter"])
         XCTAssertNotNil(parameters["youtube"])
 
-        let youtubeParameters = parameters["youtube"] as! [String: AnyHashable]
+        let youtubeParameters = try XCTUnwrap(parameters["youtube"] as? [String: AnyHashable])
         XCTAssertEqual(youtubeParameters["title"], youTubePost.title)
         XCTAssertEqual(youtubeParameters["description"], youTubePost.description)
         XCTAssertEqual(youtubeParameters["tags"], ["test", "tags"])
@@ -160,7 +160,7 @@ class Request_PublishToSocialTests: XCTestCase {
         XCTAssertEqual(youtubeParameters["category_id"], youTubePost.categoryID)
     }
 
-    func test_publishPostRequests_forAllPlatformPosts_returnsRequest_withNonNillPostParameters() {
+    func test_publishPostRequests_forAllPlatformPosts_returnsRequest_withNonNillPostParameters() throws {
         let socialMediaPosts = SocialMediaPosts(
             facebook: facebookPost,
             linkedIn: linkedInPost,
@@ -174,7 +174,7 @@ class Request_PublishToSocialTests: XCTestCase {
         XCTAssertEqual(request.method, .put)
         XCTAssertEqual(request.path, "/videos/89012/publish_to_social")
 
-        let parameters = request.parameters as! [String: Any]
+        let parameters = try XCTUnwrap(request.parameters as? [String: Any])
 
         XCTAssertNotNil(parameters["facebook"])
         XCTAssertNotNil(parameters["linkedin"])
