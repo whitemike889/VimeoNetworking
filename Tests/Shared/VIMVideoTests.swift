@@ -209,8 +209,8 @@ class VIMVideoTests: XCTestCase {
         ]
 
         let video = try! VIMObjectMapper.mapObject(responseDictionary: json) as VIMVideo
-        XCTAssertNotNil(video.originApp)
-        XCTAssertEqual(video.originApp!.name, "Cameo")
-        XCTAssertEqual(video.originApp!.uri, "apps/123")
+        XCTAssertNotNil(video.clientApp)
+        XCTAssertEqual(video.clientApp!.name, "Cameo")
+        XCTAssertEqual(video.clientApp!.uri, "apps/123")
     }
 }
