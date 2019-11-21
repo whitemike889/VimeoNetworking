@@ -24,11 +24,12 @@
 //
 
 /// The app from which an item, like a video, was originally uploaded, i.e.: iMovie, Vimeo for macOS, Cameo, etc.
-@objc public class App: VIMModelObject {
+@objcMembers
+public class APIClientApp: VIMModelObject {
 
     /// The name of the app.
-    @objc public var name: String?
+    public var name: String?
 
     /// A URI which may serve as a unique identifier for the app.
-    @objc public var uri: String?
+    public var uri: String?
 }

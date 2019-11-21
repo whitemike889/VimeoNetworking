@@ -162,7 +162,7 @@ NSString *VIMContentRating_Safe = @"safe";
 
     if ([key isEqualToString:@"app"])
     {
-        return [App class];
+        return [APIClientApp class];
     }
     
     return nil;
