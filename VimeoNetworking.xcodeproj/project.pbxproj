@@ -802,7 +802,7 @@
 		5BF72ACB2316F64800A0D2C8 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF72AC92316F64800A0D2C8 /* NetworkReachabilityManager.swift */; };
 		5BF72ACC2316F64800A0D2C8 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF72AC92316F64800A0D2C8 /* NetworkReachabilityManager.swift */; };
 		7E388B7DAAA730F67222354D /* Pods_VimeoNetworking_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE25EE618A23DD07A19E67F5 /* Pods_VimeoNetworking_iOS.framework */; };
-		872D17282385999E00B5ABC7 /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5EEF7122B441A3005C66BE /* Typealiases.swift */; };
+		872D17282385999E00B5ABC7 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		96428AE8237CE714002DCB05 /* PublishJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96428AE7237CE714002DCB05 /* PublishJob.swift */; };
 		96428AE9237CE714002DCB05 /* PublishJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96428AE7237CE714002DCB05 /* PublishJob.swift */; };
 		96428AEA237CE714002DCB05 /* PublishJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96428AE7237CE714002DCB05 /* PublishJob.swift */; };
@@ -1633,9 +1633,9 @@
 				5B5EEFF222B441A3005C66BE /* PinCodeInfo.swift */,
 				5B5EEF8822B441A3005C66BE /* PlayProgress.swift */,
 				96428AE7237CE714002DCB05 /* PublishJob.swift */,
-				0C836B5423847C1D0048E3A4 /* SocialMediaPosts.swift */,
 				0CA6359B237E0B2800D376DE /* PublishJobDestination.swift */,
 				96428AEB237D19CF002DCB05 /* PublishJobConnection.swift */,
+				0C836B5423847C1D0048E3A4 /* SocialMediaPosts.swift */,
 				5B5EEFD822B441A3005C66BE /* Spatial.swift */,
 				5B5EEFBE22B441A3005C66BE /* Subscription.swift */,
 				5B5EEF8322B441A3005C66BE /* SubscriptionCollection.swift */,
@@ -2641,7 +2641,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				872D17282385999E00B5ABC7 /* Typealiases.swift in Sources */,
+				872D17282385999E00B5ABC7 /* (null) in Sources */,
 				5B5EF0C322B441A4005C66BE /* VIMSpace.swift in Sources */,
 				5B5EF07E22B441A3005C66BE /* VIMVideo+VOD.m in Sources */,
 				5B5EF0CC22B441A4005C66BE /* VIMVODConnection.m in Sources */,
@@ -2996,7 +2996,6 @@
 				5B5EF1A622B441A4005C66BE /* VIMObjectMapper+Generic.swift in Sources */,
 				5B21352E22D4382300C0C889 /* VimeoResponseSerializer.swift in Sources */,
 				0C836B5323846CD00048E3A4 /* Request+PublishToSocial.swift in Sources */,
-				5B5EF01D22B441A3005C66BE /* Typealiases.swift in Sources */,
 				5B5EF17C22B441A4005C66BE /* UserMembership.swift in Sources */,
 				5B5EF09822B441A4005C66BE /* VIMVideoProgressiveFile.m in Sources */,
 				5B7192492385EB4F009E4CFD /* Typealiases.swift in Sources */,
