@@ -82,19 +82,20 @@
 }
 
 /// An object that encapsulates data related to all of the supported platforms destinations.
-@objc public class PublishDestinations: VIMModelObject {
+@objcMembers
+public class PublishDestinations: VIMModelObject {
 
     /// Information about the upload/post on Facebook.
-    @objc public var facebook: PublishJobDestination?
+    public var facebook: PublishJobDestination?
 
     /// Information about the upload/post on YouTube.
-    @objc public var youtube: PublishJobDestination?
+    public var youtube: PublishJobDestination?
 
     /// Information about the upload/post on LinkedIn.
-    @objc public var linkedin: PublishJobDestination?
+    public var linkedin: PublishJobDestination?
 
     /// Information about the upload/post on Twitter.
-    @objc public var twitter: PublishJobDestination?
+    public var twitter: PublishJobDestination?
 }
 
 private extension String {

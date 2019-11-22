@@ -50,13 +50,14 @@
 
 ///  An object that encapsulates the scopes necessary for interacting with features like publishing to social platforms
 ///  or simulcasting a live stream.
-@objc public class ConnectedAppScopes: VIMModelObject {
+@objcMembers
+public class ConnectedAppScopes: VIMModelObject {
 
     /// All scopes required for publishing to a specific social media platform.
-    @objc public var publishToSocial: [String]?
+    public var publishToSocial: [String]?
 
     /// All scopes required for simulcasting to a specific social media platform.
-    @objc public var simulcast: [String]?
+    public var simulcast: [String]?
 
     // MARK: - Overrides
 
@@ -68,13 +69,14 @@
 }
 
 /// A category that can be sent when publishing to a social media platform.
-@objc public class PublishOptionItem: VIMModelObject {
+@objcMembers
+public class PublishOptionItem: VIMModelObject {
 
     /// The ID of the publish item.
-    @objc public var identifier: NSNumber?
+    public var identifier: NSNumber?
 
     /// The name or display name of the publich item, i.e.: "art", "family", "vacation" etc.
-    @objc public var name: String?
+    public var name: String?
 
     // MARK: - Overrides
 

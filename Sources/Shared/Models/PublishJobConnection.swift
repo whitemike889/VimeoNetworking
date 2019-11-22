@@ -23,23 +23,43 @@
 //  THE SOFTWARE.
 //
 
-@objc public class PublishJobBlockers: VIMModelObject {
-    @objc public var facebook: [String]?
-    @objc public var youtube: [String]?
-    @objc public var linkedin: [String]?
-    @objc public var twitter: [String]?
+@objcMembers
+public class PublishJobConnection: VIMConnection {
+    public var publishBlockers: PublishJobBlockers?
+    public var publishConstraints: PublishJobConstraints?
+
+    public override func getClassForObjectKey(_ key: String?) -> AnyClass? {
+        switch key {
+        case String.Key.publishBlockers:
+            return PublishJobBlockers.self
+        case String.Key.publishConstraints:
+            return PublishJobConstraints.self
+        default:
+            return nil
+        }
+    }
 }
 
-@objc public class PublishConstraints: VIMModelObject {
-    @objc public var duration: NSNumber?
-    @objc public var size: NSNumber?
+@objcMembers
+public class PublishJobBlockers: VIMModelObject {
+    public var facebook: [String]?
+    public var youtube: [String]?
+    public var linkedin: [String]?
+    public var twitter: [String]?
 }
 
-@objc public class PublishJobConstraints: VIMModelObject {
-    @objc public var faceebok: PublishConstraints?
-    @objc public var youtube: PublishConstraints?
-    @objc public var linkedin: PublishConstraints?
-    @objc public var twitter: PublishConstraints?
+@objcMembers
+public class PublishConstraints: VIMModelObject {
+    public var duration: NSNumber?
+    public var size: NSNumber?
+}
+
+@objcMembers
+public class PublishJobConstraints: VIMModelObject {
+    public var faceebok: PublishConstraints?
+    public var youtube: PublishConstraints?
+    public var linkedin: PublishConstraints?
+    public var twitter: PublishConstraints?
 
     public override func getClassForObjectKey(_ key: String?) -> AnyClass? {
         switch key {
@@ -48,22 +68,6 @@
              String.Key.linkedin,
              String.Key.twitter:
             return PublishConstraints.self
-        default:
-            return nil
-        }
-    }
-}
-
-@objc public class PublishJobConnection: VIMConnection {
-    @objc public var publishBlockers: PublishJobBlockers?
-    @objc public var publishConstraints: PublishJobConstraints?
-
-    public override func getClassForObjectKey(_ key: String?) -> AnyClass? {
-        switch key {
-        case String.Key.publishBlockers:
-            return PublishJobBlockers.self
-        case String.Key.publishConstraints:
-            return PublishJobConstraints.self
         default:
             return nil
         }
