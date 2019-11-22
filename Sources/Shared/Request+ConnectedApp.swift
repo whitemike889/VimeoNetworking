@@ -68,7 +68,7 @@ public extension Request {
 
 private extension String {
     static let appType = "app_type"
-    static let connectedAppsURI = "me/connected_apps/"
+    static let connectedAppsURI = "/me/connected_apps/"
 
     /// Token request parameter key for Facebook.
     static let accessToken = "access_token"
