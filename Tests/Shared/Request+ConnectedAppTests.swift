@@ -53,32 +53,32 @@ class Request_ConnectedAppTests: XCTestCase {
         XCTAssertEqual(request.path, "me/connected_apps/linkedin")
     }
 
-    func test_connectToFacebookRequest_returnsRequest_withExpectedTokenParameterKey() {
+    func test_connectToFacebookRequest_returnsRequest_withExpectedTokenParameterKey() throws {
         let request = Request<ConnectedApp>.connect(to: .facebook, with: "a1b2c3")
         XCTAssertEqual(request.method, .put)
         XCTAssertEqual(request.path, "me/connected_apps/facebook")
-        XCTAssertEqual(request.parameters as! [String: String], ["access_token":"a1b2c3"])
+        XCTAssertEqual(try XCTUnwrap(request.parameters) as? [String: String], ["access_token":"a1b2c3"])
     }
 
-    func test_connectToTwitterRequest_returnsRequest_withExpectedTokenParameterKey() {
+    func test_connectToTwitterRequest_returnsRequest_withExpectedTokenParameterKey() throws {
         let request = Request<ConnectedApp>.connect(to: .twitter, with: "a1b2c3")
         XCTAssertEqual(request.method, .put)
         XCTAssertEqual(request.path, "me/connected_apps/twitter")
-        XCTAssertEqual(request.parameters as! [String: String], ["access_token_secret":"a1b2c3"])
+        XCTAssertEqual(try XCTUnwrap(request.parameters) as? [String: String], ["access_token_secret":"a1b2c3"])
     }
 
-    func test_connectToYouTubeRequest_returnsRequest_withExpectedTokenParameterKey() {
+    func test_connectToYouTubeRequest_returnsRequest_withExpectedTokenParameterKey() throws {
         let request = Request<ConnectedApp>.connect(to: .youtube, with: "a1b2c3")
         XCTAssertEqual(request.method, .put)
         XCTAssertEqual(request.path, "me/connected_apps/youtube")
-        XCTAssertEqual(request.parameters as! [String: String], ["auth_code":"a1b2c3"])
+        XCTAssertEqual(try XCTUnwrap(request.parameters) as? [String: String], ["auth_code":"a1b2c3"])
     }
 
-    func test_connectToLinkedInRequest_returnsRequest_withExpectedTokenParameterKey() {
+    func test_connectToLinkedInRequest_returnsRequest_withExpectedTokenParameterKey() throws {
         let request = Request<ConnectedApp>.connect(to: .linkedin, with: "a1b2c3")
         XCTAssertEqual(request.method, .put)
         XCTAssertEqual(request.path, "me/connected_apps/linkedin")
-        XCTAssertEqual(request.parameters as! [String: String], ["auth_code":"a1b2c3"])
+        XCTAssertEqual(try XCTUnwrap(request.parameters) as? [String: String], ["auth_code":"a1b2c3"])
     }
 
     func test_deleteConnectedApp_returnsExpectedHTTPMethod_andURI_forFacebook() {
