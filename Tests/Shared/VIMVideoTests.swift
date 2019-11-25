@@ -198,4 +198,19 @@ class VIMVideoTests: XCTestCase {
         let testVideoObject = VIMVideo(keyValueDictionary: videoDictionary)!
         XCTAssertFalse(testVideoObject.isPrivate(), "Test video object is stock and should not return as private.")
     }
+
+    func test_videoAppProperty_isParsedAsExpected() throws {
+        let json: [String: Any] = [
+            "name": "Test Video",
+            "uri": "/videos/12345",
+            "status": "available",
+            "resource_key": "a1b2c3d4",
+            "app": ["name": "Cameo", "uri": "apps/123"] as Any
+        ]
+
+        let video = try VIMObjectMapper.mapObject(responseDictionary: json) as VIMVideo
+        XCTAssertNotNil(video.sourceClientApp)
+        XCTAssertEqual(try XCTUnwrap(video.sourceClientApp).name, "Cameo")
+        XCTAssertEqual(try XCTUnwrap(video.sourceClientApp).uri, "apps/123")
+    }
 }
