@@ -80,7 +80,7 @@ NSString *VIMContentRating_Safe = @"safe";
         @"play": @"playRepresentation",
         @"review_page": @"reviewPage",
         @"file_transfer": @"fileTransfer",
-        @"app": @"sourceClientApp"
+        @"publish_to_social_job": @"publishToSocialJob"
     };
 }
 
@@ -158,6 +158,11 @@ NSString *VIMContentRating_Safe = @"safe";
     if ([key isEqualToString:@"file_transfer"])
     {
         return [FileTransfer class];
+    }
+
+    if ([key isEqualToString:@"publish_to_social_job"])
+    {
+        return [PublishJobConnection class];
     }
 
     if ([key isEqualToString:@"app"])
