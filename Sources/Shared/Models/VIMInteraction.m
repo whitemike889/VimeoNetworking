@@ -37,6 +37,10 @@ NSString * const VIMInteractionNameSubscribe = @"subscribe";
 NSString * const VIMInteractionNamePurchase = @"purchase";
 NSString * const VIMInteractionNameAlbum = @"album";
 NSString * const VIMInteractionNameAddTo = @"add_to";
+NSString * const VIMInteractionConnectedAppFacebook = @"facebook_connected_app";
+NSString * const VIMInteractionConnectedAppYouTube = @"youtube_connected_app";
+NSString * const VIMInteractionConnectedAppLinkedIn = @"linkedin_connected_app";
+NSString * const VIMInteractionConnectedAppTwitter = @"twitter_connected_app";
 
 @interface VIMInteraction()
 @property (nonatomic, copy, nullable) NSString *added_time;
@@ -55,23 +59,29 @@ NSString * const VIMInteractionNameAddTo = @"add_to";
     if ([self.added_time isKindOfClass:[NSString class]]) {
         self.addedTime = [[VIMModelObject dateFormatter] dateFromString:self.added_time];
     }
-    
+
     if ([self.expires_time isKindOfClass:[NSString class]]) {
         self.expirationDate = [[VIMModelObject dateFormatter] dateFromString:self.expires_time];
     }
-    
+
     if ([self.purchase_time isKindOfClass:[NSString class]]) {
         self.purchaseDate = [[VIMModelObject dateFormatter] dateFromString:self.purchase_time];
     }
-    
+
     self.isForDRMProtectedContent = self.drm;
-    
+
     // Not every interaction has a stream status, only buy, rent, subscribe [NL] 05/22/16
     if (self.stream != nil) {
         [self setStreamStatus];
     }
 }
 
+- (NSDictionary *)getObjectMapping
+{
+    return @{
+        @"all_scopes": @"allScopes"
+    };
+}
 #pragma mark - Parsing Helpers
 
 - (void)setStreamStatus {
@@ -81,11 +91,11 @@ NSString * const VIMInteractionNameAddTo = @"add_to";
                                       [NSNumber numberWithInt:VIMInteractionStreamStatusAvailable], @"available",
                                       [NSNumber numberWithInt:VIMInteractionStreamStatusUnavailable], @"unavailable",
                                       nil];
-    
+
     NSNumber *number = [statusDictionary objectForKey:self.stream];
-    
+
     NSAssert(number != nil, @"VOD video stream status not handled, unknown stream status");
-    
+
     self.streamStatus = [number intValue];
 }
 
