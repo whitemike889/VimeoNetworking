@@ -1,0 +1,13 @@
+{
+    "add_date": "0000-00-00 00:00:00",
+    "data_access_is_expired": false,
+    "needed_scopes": {
+        "publish_to_social": []
+    },
+    "pages": [],
+    "publish_categories": [],
+    "third_party_user_id": "489581120",
+    "third_party_user_display_name": "jh",
+    "type": "twitter",
+    "uri": "/me/connected_apps/twitter"
+}
