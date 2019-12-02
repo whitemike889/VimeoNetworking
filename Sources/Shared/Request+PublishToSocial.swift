@@ -30,7 +30,7 @@ public extension Request {
         let publishToSocialPath = String.videosURI + "/\(videoID)" + String.publishToSocialURI
         return Request(path: publishToSocialPath)
     }
-    
+
     /// Returns a `put` request for publishing `SocialMediaPosts` for the given video ID.
     /// - Note: Post data should be validated prior to creating the publish request. Posts that fail server-side
     ///         validation will produce an error for that platform.
@@ -40,7 +40,7 @@ public extension Request {
     static func publishPosts(_ posts: SocialMediaPosts, for videoID: String) -> Request {
         let publishToSocialPath = String.videosURI + "/\(videoID)" + String.publishToSocialURI
         var parameters = [String: Any]()
-        
+
         posts.facebook.map {
             var post = [String: Any]()
             post[String.Key.title] = $0.title
@@ -53,7 +53,7 @@ public extension Request {
             post[String.Key.allowSocialActions] = $0.allowSocialActions
             parameters[String.Key.facebook] = post
         }
-        
+
         posts.linkedIn.map {
             var post = [String: Any]()
             post[String.Key.pageID] = $0.pageID
@@ -61,13 +61,13 @@ public extension Request {
             post[String.Key.description] = $0.description
             parameters[String.Key.linkedin] = post
         }
-        
+
         posts.twitter.map {
             var post = [String: String]()
             post[String.Key.tweet] = $0.tweet
             parameters[String.Key.twitter] = post
         }
-        
+
         posts.youTube.map {
             var post = [String: Any]()
             post[String.Key.title] = $0.title
@@ -77,7 +77,7 @@ public extension Request {
             $0.tags.map { (tags) in  post[String.Key.tags] = tags }
             parameters[String.Key.youtube] = post
         }
-        
+
         return Request(method: .put, path: publishToSocialPath, parameters: parameters)
     }
 }
@@ -85,7 +85,7 @@ public extension Request {
 private extension String {
     static let videosURI = "/videos"
     static let publishToSocialURI = "/publish_to_social"
-    
+
     struct Key {
         static let facebook = "facebook"
         static let linkedin = "linkedin"
