@@ -778,7 +778,8 @@
 		5BF72ACB2316F64800A0D2C8 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF72AC92316F64800A0D2C8 /* NetworkReachabilityManager.swift */; };
 		5BF72ACC2316F64800A0D2C8 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF72AC92316F64800A0D2C8 /* NetworkReachabilityManager.swift */; };
 		7E388B7DAAA730F67222354D /* Pods_VimeoNetworking_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE25EE618A23DD07A19E67F5 /* Pods_VimeoNetworking_iOS.framework */; };
-		872D17282385999E00B5ABC7 /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5EEF7122B441A3005C66BE /* Typealiases.swift */; };
+		7FDACABA23A01170000C12B3 /* VideoTranscodeStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDACAB923A01170000C12B3 /* VideoTranscodeStatusTests.swift */; };
+		7FDACABC23A0135C000C12B3 /* VideoTranscodeStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDACABB23A0135C000C12B3 /* VideoTranscodeStatus.swift */; };
 		9E6913F9D6917E929DA785FE /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48683A775227828528A4492B /* Pods_Example.framework */; };
 		C1E13A752650AE7CE4523125 /* Pods_VimeoNetworking_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D711BBD962E1ACC44FB5766 /* Pods_VimeoNetworking_macOS.framework */; };
 		E41C0F44230461AE000EAB25 /* ConnectionsProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FF888F22FE0D1100A8F646 /* ConnectionsProviding.swift */; };
@@ -1146,6 +1147,8 @@
 		5D711BBD962E1ACC44FB5766 /* Pods_VimeoNetworking_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimeoNetworking_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		66B43D25318F400304BCF876 /* Pods_VimeoNetworking_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimeoNetworking_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67088A918F7944230D5981E8 /* Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests.release.xcconfig"; path = "Target Support Files/Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests/Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		7FDACAB923A01170000C12B3 /* VideoTranscodeStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTranscodeStatusTests.swift; sourceTree = "<group>"; };
+		7FDACABB23A0135C000C12B3 /* VideoTranscodeStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTranscodeStatus.swift; sourceTree = "<group>"; };
 		9A43FE2FE567DA3949D86886 /* Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests.release.xcconfig"; path = "Target Support Files/Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests/Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		A288BD846C787BA2C279B283 /* Pods-VimeoNetworking-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-iOS.debug.xcconfig"; path = "Target Support Files/Pods-VimeoNetworking-iOS/Pods-VimeoNetworking-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		A3438E0F44DD71015EE99A4B /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -1335,6 +1338,7 @@
 				5B1DF2B322B41C90007F2416 /* ScopeTests.swift */,
 				5B1DF2B422B41C90007F2416 /* VIMQuantityQuota+Tests.swift */,
 				5B1DF2B522B41C90007F2416 /* AlbumTests.swift */,
+				7FDACAB923A01170000C12B3 /* VideoTranscodeStatusTests.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -1591,6 +1595,7 @@
 				5B5EEFB922B441A3005C66BE /* UserSubscription.swift */,
 				5B5EEFAE22B441A3005C66BE /* UserSubscriptionRenewal.swift */,
 				5B5EEF8C22B441A3005C66BE /* UserSubscriptionTrial.swift */,
+				7FDACABB23A0135C000C12B3 /* VideoTranscodeStatus.swift */,
 				5B5EEFC222B441A3005C66BE /* VIMBadge.swift */,
 				5B5EEFD622B441A3005C66BE /* VIMLive.swift */,
 				5B5EEFBA22B441A3005C66BE /* VIMLiveChat.swift */,
@@ -2583,7 +2588,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				872D17282385999E00B5ABC7 /* Typealiases.swift in Sources */,
 				5B5EF0C322B441A4005C66BE /* VIMSpace.swift in Sources */,
 				5B5EF07E22B441A3005C66BE /* VIMVideo+VOD.m in Sources */,
 				5B5EF0CC22B441A4005C66BE /* VIMVODConnection.m in Sources */,
@@ -2610,6 +2614,7 @@
 				5B5EF19222B441A4005C66BE /* FileTransfer.swift in Sources */,
 				5B5EF03F22B441A3005C66BE /* VimeoSessionManager+Constructors.swift in Sources */,
 				5B5EF1CE22B441A4005C66BE /* Request+Channel.swift in Sources */,
+				7FDACABC23A0135C000C12B3 /* VideoTranscodeStatus.swift in Sources */,
 				E4FF889522FE0D1100A8F646 /* ConnectionsProviding.swift in Sources */,
 				5B5EF06322B441A3005C66BE /* VIMModelObject.m in Sources */,
 				5B5EF13E22B441A4005C66BE /* VIMAccount.m in Sources */,
@@ -3065,6 +3070,7 @@
 				5B1DF32F22B41C90007F2416 /* FakeDataSource.swift in Sources */,
 				5B1DF2FC22B41C90007F2416 /* VIMVideoTests.swift in Sources */,
 				5B1DF32022B41C90007F2416 /* GCSTests.swift in Sources */,
+				7FDACABA23A01170000C12B3 /* VideoTranscodeStatusTests.swift in Sources */,
 				5B1DF32C22B41C90007F2416 /* ModelObjectValidationTests.swift in Sources */,
 				5B1DF2F922B41C90007F2416 /* Dictionary+ExtensionTests.swift in Sources */,
 				5B1DF30B22B41C90007F2416 /* VIMQuantityQuota+Tests.swift in Sources */,
