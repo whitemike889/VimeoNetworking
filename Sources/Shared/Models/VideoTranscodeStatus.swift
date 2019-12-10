@@ -29,34 +29,50 @@ import Foundation
 /// Representation of a video's transcoding status
 public struct VideoTranscodeStatus: Decodable {
     
-    /// State of transcoding
+    /// Current state of transcoding
     var state: TranscodeState
     
-    /// Percent completed
+    /// Percentage of transcoding completed
     var progress: Int
     
     /// Time in seconds remaining until completion
     var timeLeft: Int
     
-    /// State of the transcoding process
+    /// Current state of the transcoding process
     ///
-    /// - active: transcoding is in progress
-    /// - failed: transcoding has failed
-    /// - finishing: transcoding is finishing
-    /// - pending:
-    /// - ready:
-    /// - retrieved:
-    /// - standby: Awaiting for transcode
-    /// - starting: Transcode is starting
+    /// - `active` - Transcoding is active and ongoing
+    /// - `blocked` - Transcoding can't proceed
+    /// - `exceeds_quota` - Transcoding can't proceed because the file size of the transcoded video would exceed the user's weekly quota
+    /// - `exceeds_total_cap` - Transcoding can't proceed because the file size of the transcoded video would exceed the user's storage cap
+    /// - `failed` - Transcoding has failed
+    /// - `finishing` - Transcoding is in the completion stage
+    /// - `internal_error` - Transcoding can't proceed because of an internal error
+    /// - `invalid_file` - Transcoding can't proceed, because the file is invalid
+    /// - `pending` - Transcoding hasn't started yet
+    /// - `ready` - Transcoding is ready to start
+    /// - `retrieved` - Transcoding is finished
+    /// - `standby` - Transcoding is standing by
+    /// - `starting` - Transcoding is in the initialization stage
+    /// - `unknown` - The transcoding status is unknown
+    /// - `upload_complete` - The video has uploaded, but transcoding hasn't started yet
+    /// - `upload_incomplete` - The video upload was incomplete
     public enum TranscodeState: String, Decodable {
         case active
+        case blocked
+        case exceedsQuota = "exceeds_quota"
+        case exceedsTotalCap = "exceeds_total_cap"
         case failed
         case finishing
+        case internalError = "internal_error"
+        case invalidFile = "invalid_file"
         case pending
         case ready
         case retrieved
         case standby
         case starting
+        case unknown
+        case uploadComplete = "upload_complete"
+        case uploadIncomplete = "upload_incomplete"
     }
     
     public init(from decoder: Decoder) throws {
