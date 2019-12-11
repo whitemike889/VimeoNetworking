@@ -36,7 +36,7 @@ public struct VideoTranscodeStatus: Decodable {
     var progress: Int
     
     /// Time in seconds remaining until completion
-    var timeLeft: Int
+    var timeLeft: TimeInterval
     
     /// Current state of the transcoding process
     ///
