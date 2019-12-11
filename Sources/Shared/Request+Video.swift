@@ -116,18 +116,6 @@ public extension Request {
     static func deleteVideoRequest(forVideoURI videoURI: String) -> Request {
         return Request(method: .delete, path: videoURI)
     }
-    
-    
-    /**
-     Create a `Request` to get a video's transcoding status
-     
-     - parameter videoURI: the URI of the video
-     
-     - returns: a new `Request`
-     */
-    static func videoStatusRequest(forVideoURI videoURI: String) -> Request {
-        return Request(path: videoURI + .statusPathComponent)
-    }
 }
 
 private extension String {
@@ -138,5 +126,4 @@ private extension String {
     // Paths
     static let selectedUsersPrivacyPath = "/privacy/users"
     static let videosPath = "/videos"
-    static let statusPathComponent = "/status"
 }
