@@ -778,6 +778,7 @@
 		5BF72ACB2316F64800A0D2C8 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF72AC92316F64800A0D2C8 /* NetworkReachabilityManager.swift */; };
 		5BF72ACC2316F64800A0D2C8 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF72AC92316F64800A0D2C8 /* NetworkReachabilityManager.swift */; };
 		7E388B7DAAA730F67222354D /* Pods_VimeoNetworking_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE25EE618A23DD07A19E67F5 /* Pods_VimeoNetworking_iOS.framework */; };
+		7F5E3F1C23A078F0005701C0 /* TranscodeStatusEndpointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5E3F1B23A078F0005701C0 /* TranscodeStatusEndpointType.swift */; };
 		7FDACABA23A01170000C12B3 /* VideoTranscodeStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDACAB923A01170000C12B3 /* VideoTranscodeStatusTests.swift */; };
 		7FDACABC23A0135C000C12B3 /* VideoTranscodeStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDACABB23A0135C000C12B3 /* VideoTranscodeStatus.swift */; };
 		9E6913F9D6917E929DA785FE /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48683A775227828528A4492B /* Pods_Example.framework */; };
@@ -1147,6 +1148,7 @@
 		5D711BBD962E1ACC44FB5766 /* Pods_VimeoNetworking_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimeoNetworking_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		66B43D25318F400304BCF876 /* Pods_VimeoNetworking_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimeoNetworking_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67088A918F7944230D5981E8 /* Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests.release.xcconfig"; path = "Target Support Files/Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests/Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		7F5E3F1B23A078F0005701C0 /* TranscodeStatusEndpointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscodeStatusEndpointType.swift; sourceTree = "<group>"; };
 		7FDACAB923A01170000C12B3 /* VideoTranscodeStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTranscodeStatusTests.swift; sourceTree = "<group>"; };
 		7FDACABB23A0135C000C12B3 /* VideoTranscodeStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTranscodeStatus.swift; sourceTree = "<group>"; };
 		9A43FE2FE567DA3949D86886 /* Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests.release.xcconfig"; path = "Target Support Files/Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests/Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1484,6 +1486,7 @@
 				5B5EEFF822B441A3005C66BE /* VimeoSessionManager.swift */,
 				5B5EEF7D22B441A3005C66BE /* VimeoSessionManager+Constructors.swift */,
 				5B5EEFF522B441A3005C66BE /* VIMObjectMapper+Generic.swift */,
+				7F5E3F1A23A078A9005701C0 /* EndpointTypes */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -1749,6 +1752,14 @@
 				5BD765AD234D35A900821AF7 /* AFURLSessionManager.m */,
 			);
 			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		7F5E3F1A23A078A9005701C0 /* EndpointTypes */ = {
+			isa = PBXGroup;
+			children = (
+				7F5E3F1B23A078F0005701C0 /* TranscodeStatusEndpointType.swift */,
+			);
+			path = EndpointTypes;
 			sourceTree = "<group>";
 		};
 		8AE2647F20CE4FFA2EC6AF34 /* Pods */ = {
@@ -2734,6 +2745,7 @@
 				5B5EF03322B441A3005C66BE /* NetworkingNotification.swift in Sources */,
 				5B5EF08122B441A3005C66BE /* VIMVideo.m in Sources */,
 				5B62636123203B0700B25462 /* URLRequestConvertible.swift in Sources */,
+				7F5E3F1C23A078F0005701C0 /* TranscodeStatusEndpointType.swift in Sources */,
 				5B62638A2320603200B25462 /* HTTPMethod.swift in Sources */,
 				5B5EF05A22B441A3005C66BE /* VIMGroup.m in Sources */,
 				5B5EF01522B441A3005C66BE /* Scope.swift in Sources */,
