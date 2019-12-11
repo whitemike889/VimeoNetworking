@@ -71,6 +71,6 @@ private extension String {
     /// Token request parameter key for Twitter.
     static let accessTokenSecret = "access_token_secret"
 
-    /// Token request parameter key for LinkedIn and YouTube.
+    /// Token request parameter key for Facebook, LinkedIn, and YouTube.
     static let authCode = "auth_code"
 }
