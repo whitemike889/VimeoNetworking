@@ -57,7 +57,7 @@ class Request_ConnectedAppTests: XCTestCase {
         let request = Request<ConnectedApp>.connect(to: .facebook, with: "a1b2c3")
         XCTAssertEqual(request.method, .put)
         XCTAssertEqual(request.path, "/me/connected_apps/facebook")
-        XCTAssertEqual(try XCTUnwrap(request.parameters) as? [String: String], ["access_token":"a1b2c3"])
+        XCTAssertEqual(try XCTUnwrap(request.parameters) as? [String: String], ["auth_code":"a1b2c3"])
     }
     
     func test_connectToTwitterRequest_returnsRequest_withExpectedTokenParameterKey() throws {
