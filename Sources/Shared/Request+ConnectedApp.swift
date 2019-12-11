@@ -45,11 +45,9 @@ public extension Request {
 
         var tokenKey: String
         switch appType {
-        case .facebook:
-            tokenKey = .accessToken
         case .twitter:
             tokenKey = .accessTokenSecret
-        case .linkedin, .youtube:
+        case .facebook, .linkedin, .youtube:
             tokenKey = .authCode
         }
 
@@ -69,9 +67,6 @@ public extension Request {
 private extension String {
     static let appType = "app_type"
     static let connectedAppsURI = "/me/connected_apps/"
-
-    /// Token request parameter key for Facebook.
-    static let accessToken = "access_token"
 
     /// Token request parameter key for Twitter.
     static let accessTokenSecret = "access_token_secret"
