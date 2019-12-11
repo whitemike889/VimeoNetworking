@@ -1,5 +1,5 @@
 //
-//  TranscodeStatusEndpointType.swift
+//  TranscodeStatusEndpoint.swift
 //  VimeoNetworking-iOS
 //
 //  Created by Nicole Lehrer on 12/10/19.
@@ -27,23 +27,21 @@
 import Foundation
 
 /// Encapsulates all information required to fetch a video's transcode status
-public struct TranscodeStatusEndpointType: EndpointType {
+public struct TranscodeStatusEndpoint: EndpointType {
     public let headers: HTTPHeaders? = nil
     public let parameters: Any? = nil
     public let method = HTTPMethod.get
     public let path: String
-    private let videoURI: String
     private let statusPathComponent = "/status"
     
-    /// Initializer for creating a TranscodeStatusEndpointType
+    /// Initializer for creating a TranscodeStatusEndpoint
     /// - Parameter videoURI: the URI of the video
     public init(videoURI: String) {
-        self.videoURI = videoURI
         self.path = videoURI + statusPathComponent
     }
     
     /// Provides a configured request for fetching a video's transcode status
     public func asURLRequest() throws -> URLRequest {
-        return URLRequest(url: self.baseURL.appendingPathComponent(path))
+        return URLRequest(url: self.baseURL.appendingPathComponent(self.path))
     }
 }

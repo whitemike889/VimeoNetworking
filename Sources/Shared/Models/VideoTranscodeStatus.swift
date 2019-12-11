@@ -36,7 +36,7 @@ public struct VideoTranscodeStatus: Decodable {
     var progress: Int
     
     /// Time in seconds remaining until completion
-    var timeLeft: Double
+    var timeLeft: Int
     
     /// Current state of the transcoding process
     ///
@@ -73,13 +73,6 @@ public struct VideoTranscodeStatus: Decodable {
         case unknown
         case uploadComplete = "upload_complete"
         case uploadIncomplete = "upload_incomplete"
-    }
-    
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.state = try container.decode(TranscodeState.self, forKey: .state)
-        self.progress = try container.decode(Int.self, forKey: .progress)
-        self.timeLeft = try container.decode(Double.self, forKey: .timeLeft)
     }
     
     private enum CodingKeys: String, CodingKey {
