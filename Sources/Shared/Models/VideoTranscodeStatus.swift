@@ -36,7 +36,7 @@ public struct VideoTranscodeStatus: Decodable {
     var progress: Int
     
     /// Time in seconds remaining until completion
-    var timeLeft: Int
+    var timeLeft: Double
     
     /// Current state of the transcoding process
     ///
@@ -79,7 +79,7 @@ public struct VideoTranscodeStatus: Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.state = try container.decode(TranscodeState.self, forKey: .state)
         self.progress = try container.decode(Int.self, forKey: .progress)
-        self.timeLeft = try container.decode(Int.self, forKey: .timeLeft)
+        self.timeLeft = try container.decode(Double.self, forKey: .timeLeft)
     }
     
     private enum CodingKeys: String, CodingKey {
