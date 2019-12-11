@@ -44,6 +44,6 @@ public struct TranscodeStatusEndpointType: EndpointType {
     
     /// Provides a configured request for fetching a video's transcode status
     public func asURLRequest() throws -> URLRequest {
-        return URLRequest(url: baseURL.appendingPathComponent(path))
+        return URLRequest(url: self.baseURL.appendingPathComponent(path))
     }
 }

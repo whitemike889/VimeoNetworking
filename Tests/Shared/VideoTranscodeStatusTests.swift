@@ -15,7 +15,7 @@ class VideoTranscodeStatusTests: XCTestCase {
     {"state": "active", "progress": 50, "time_left": 5}
     """.utf8)
     
-    let mockWithInvalidStatus = Data("""
+    let mockWithInvalidState = Data("""
     {"state": "bogusState", "progress": 50, "time_left": 5}
     """.utf8)
     
@@ -43,7 +43,7 @@ class VideoTranscodeStatusTests: XCTestCase {
     
     func testCustomDecoder_returnsDataCorruptedError_onInvalidStatus_asEmptyValue() {
         do {
-            let _ = try JSONDecoder().decode(VideoTranscodeStatus.self, from: mockWithInvalidStatus)
+            let _ = try JSONDecoder().decode(VideoTranscodeStatus.self, from: mockWithInvalidState)
             XCTFail("Custom decoding should have failed")
         }
         catch let DecodingError.dataCorrupted(context) {

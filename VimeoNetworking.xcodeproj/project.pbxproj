@@ -779,6 +779,8 @@
 		5BF72ACC2316F64800A0D2C8 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF72AC92316F64800A0D2C8 /* NetworkReachabilityManager.swift */; };
 		7E388B7DAAA730F67222354D /* Pods_VimeoNetworking_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE25EE618A23DD07A19E67F5 /* Pods_VimeoNetworking_iOS.framework */; };
 		7F5E3F1C23A078F0005701C0 /* TranscodeStatusEndpointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5E3F1B23A078F0005701C0 /* TranscodeStatusEndpointType.swift */; };
+		7FCB1D8923A0AB5000D2C85D /* TranscodeStatusEndpointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5E3F1B23A078F0005701C0 /* TranscodeStatusEndpointType.swift */; };
+		7FCB1D8A23A0AB5100D2C85D /* TranscodeStatusEndpointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5E3F1B23A078F0005701C0 /* TranscodeStatusEndpointType.swift */; };
 		7FDACABA23A01170000C12B3 /* VideoTranscodeStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDACAB923A01170000C12B3 /* VideoTranscodeStatusTests.swift */; };
 		7FDACABC23A0135C000C12B3 /* VideoTranscodeStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDACABB23A0135C000C12B3 /* VideoTranscodeStatus.swift */; };
 		9E6913F9D6917E929DA785FE /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48683A775227828528A4492B /* Pods_Example.framework */; };
@@ -2875,6 +2877,7 @@
 				5B5EF09722B441A4005C66BE /* VIMVideoProgressiveFile.m in Sources */,
 				5B5EF07C22B441A3005C66BE /* VIMUploadTicket.m in Sources */,
 				5B5EF10022B441A4005C66BE /* Subscription.swift in Sources */,
+				7FCB1D8923A0AB5000D2C85D /* TranscodeStatusEndpointType.swift in Sources */,
 				5B5EF1BA22B441A4005C66BE /* KeychainStore.swift in Sources */,
 				5B5EF0A322B441A4005C66BE /* VIMLiveHeartbeat.swift in Sources */,
 				5B5EF03A22B441A3005C66BE /* Request+Authentication.swift in Sources */,
@@ -3037,6 +3040,7 @@
 				5B5EF05C22B441A3005C66BE /* VIMGroup.m in Sources */,
 				5B5EF0CE22B441A4005C66BE /* VIMVODConnection.m in Sources */,
 				5B5EF1D922B441A4005C66BE /* AccountStore.swift in Sources */,
+				7FCB1D8A23A0AB5100D2C85D /* TranscodeStatusEndpointType.swift in Sources */,
 				5B5EF02622B441A3005C66BE /* Request+ProgrammedContent.swift in Sources */,
 				5BD765E4234D35A900821AF7 /* AFURLSessionManager.m in Sources */,
 				5B5EF18E22B441A4005C66BE /* VIMVideoHLSFile.m in Sources */,
