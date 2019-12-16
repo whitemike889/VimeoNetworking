@@ -73,7 +73,7 @@ public class ConnectedAppScopes: VIMModelObject {
 public class PublishOptionItem: VIMModelObject {
 
     /// The ID of the publish item.
-    public var identifier: NSNumber?
+    public var identifier: String?
 
     /// The name or display name of the publich item, i.e.: "art", "family", "vacation" etc.
     public var name: String?
