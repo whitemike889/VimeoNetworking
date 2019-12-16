@@ -4,7 +4,12 @@
     "needed_scopes": {
         "publish_to_social": []
     },
-    "pages": [],
+    "pages": [
+        {
+            "id": "123456789",
+            "name": "My Favorite Videos"
+        }
+    ],
     "publish_categories": [
         {
             "id": "",
