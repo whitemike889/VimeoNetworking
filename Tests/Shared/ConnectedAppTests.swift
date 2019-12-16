@@ -132,4 +132,99 @@ class ConnectedAppTests: XCTestCase {
         XCTAssertEqual(try XCTUnwrap(connectedApp.publishCategories)[1].name, "vacation")
         XCTAssertEqual(try XCTUnwrap(connectedApp.publishCategories)[1].identifier, 67890)
     }
+
+    func test_connectedAppsArray_parsedCorrectly_fromJSONFixture() throws {
+        guard let jsonDictionary = ResponseUtilities.loadResponse(
+            from: "connected-app.json"
+        ) else {
+            XCTFail()
+            return
+        }
+
+        let connectedApps = try XCTUnwrap(
+            VIMObjectMapper.mapObject(
+                responseDictionary: jsonDictionary,
+                modelKeyPath: "data"
+            ) as [ConnectedApp]
+        )
+
+        XCTAssertNotNil(connectedApps)
+        XCTAssertTrue(connectedApps.count == 2)
+
+        let facebookApp = connectedApps[0]
+        XCTAssertNotNil(facebookApp)
+        XCTAssertEqual(facebookApp.type, .facebook)
+        XCTAssertEqual(facebookApp.typeString, "facebook")
+        XCTAssertEqual(facebookApp.thirdPartyUserID, "123456789")
+        XCTAssertEqual(facebookApp.thirdPartyUserDisplayName, "Dr. Vimeo")
+        XCTAssertEqual(facebookApp.uri, "/me/connected_apps/facebook")
+        XCTAssertTrue(facebookApp.pages?.count == 0)
+        XCTAssertTrue(facebookApp.neededScopes?.publishToSocial?.count == 0)
+        XCTAssertEqual(facebookApp.publishCategories?.count, 19)
+        XCTAssertFalse(try XCTUnwrap(facebookApp.dataAccessIsExpired?.boolValue))
+
+        let youtubeApp = connectedApps[1]
+        XCTAssertNotNil(youtubeApp)
+        XCTAssertEqual(youtubeApp.type, .youtube)
+        XCTAssertEqual(youtubeApp.typeString, "youtube")
+        XCTAssertEqual(youtubeApp.thirdPartyUserID, "123456789")
+        XCTAssertEqual(youtubeApp.thirdPartyUserDisplayName, "Dr. Vimeo")
+        XCTAssertEqual(youtubeApp.uri, "/me/connected_apps/youtube")
+        XCTAssertTrue(youtubeApp.pages?.count == 0)
+        XCTAssertTrue(youtubeApp.neededScopes?.publishToSocial?.count == 0)
+        XCTAssertEqual(youtubeApp.publishCategories?.count, 15)
+        XCTAssertFalse(try XCTUnwrap(youtubeApp.dataAccessIsExpired?.boolValue))
+    }
+
+    func test_facebookConnectedApp_parsesCorrectly_fromJSONFixture() throws {
+        guard let json = ResponseUtilities.loadResponse(
+            from: "connected-app-facebook.json"
+        ) else {
+            XCTFail()
+            return
+        }
+
+        let facebookApp = try XCTUnwrap(
+            VIMObjectMapper.mapObject(
+                responseDictionary: json
+            ) as ConnectedApp
+        )
+
+        XCTAssertNotNil(facebookApp)
+        XCTAssertEqual(facebookApp.type, .facebook)
+        XCTAssertEqual(facebookApp.typeString, "facebook")
+        XCTAssertEqual(facebookApp.thirdPartyUserID, "123456789")
+        XCTAssertEqual(facebookApp.thirdPartyUserDisplayName, "Dr. Vimeo")
+        XCTAssertEqual(facebookApp.uri, "/me/connected_apps/facebook")
+        XCTAssertTrue(facebookApp.pages?.count == 0)
+        XCTAssertTrue(facebookApp.neededScopes?.publishToSocial?.count == 0)
+        XCTAssertEqual(facebookApp.publishCategories?.count, 19)
+        XCTAssertFalse(try XCTUnwrap(facebookApp.dataAccessIsExpired?.boolValue))
+    }
+
+    func test_youtubeConnectedApp_parsesCorrectly_fromJSONFixture() throws {
+        guard let json = ResponseUtilities.loadResponse(
+            from: "connected-app-youtube.json"
+        ) else {
+            XCTFail()
+            return
+        }
+
+        let youtubeApp = try XCTUnwrap(
+            VIMObjectMapper.mapObject(
+                responseDictionary: json
+            ) as ConnectedApp
+        )
+
+        XCTAssertNotNil(youtubeApp)
+        XCTAssertEqual(youtubeApp.type, .youtube)
+        XCTAssertEqual(youtubeApp.typeString, "youtube")
+        XCTAssertEqual(youtubeApp.thirdPartyUserID, "123456789")
+        XCTAssertEqual(youtubeApp.thirdPartyUserDisplayName, "Dr. Vimeo")
+        XCTAssertEqual(youtubeApp.uri, "/me/connected_apps/youtube")
+        XCTAssertTrue(youtubeApp.pages?.count == 0)
+        XCTAssertTrue(youtubeApp.neededScopes?.publishToSocial?.count == 0)
+        XCTAssertEqual(youtubeApp.publishCategories?.count, 15)
+        XCTAssertFalse(try XCTUnwrap(youtubeApp.dataAccessIsExpired?.boolValue))
+    }
 }
