@@ -109,11 +109,11 @@ class ConnectedAppTests: XCTestCase {
     
     func test_connectedApp_returnsExpectedPublishCategories_fromInputPublishOptionItems() throws {
         let artDict: [String: Any] = [
-            "identifier": 12345,
+            "identifier": "ART",
             "name": "art"
         ]
         let vacationDict: [String: Any] = [
-            "identifier": 67890,
+            "identifier": "TRAVEL",
             "name": "vacation"
         ]
         
@@ -128,9 +128,9 @@ class ConnectedAppTests: XCTestCase {
         XCTAssertNotNil(connectedApp.publishCategories)
         XCTAssertEqual(connectedApp.publishCategories?.count, 2)
         XCTAssertEqual(try XCTUnwrap(connectedApp.publishCategories)[0].name, "art")
-        XCTAssertEqual(try XCTUnwrap(connectedApp.publishCategories)[0].identifier, 12345)
+        XCTAssertEqual(try XCTUnwrap(connectedApp.publishCategories)[0].identifier, "ART")
         XCTAssertEqual(try XCTUnwrap(connectedApp.publishCategories)[1].name, "vacation")
-        XCTAssertEqual(try XCTUnwrap(connectedApp.publishCategories)[1].identifier, 67890)
+        XCTAssertEqual(try XCTUnwrap(connectedApp.publishCategories)[1].identifier, "TRAVEL")
     }
 
     func test_connectedAppsArray_parsedCorrectly_fromJSONFixture() throws {
@@ -199,6 +199,14 @@ class ConnectedAppTests: XCTestCase {
         XCTAssertTrue(facebookApp.pages?.count == 0)
         XCTAssertTrue(facebookApp.neededScopes?.publishToSocial?.count == 0)
         XCTAssertEqual(facebookApp.publishCategories?.count, 19)
+        XCTAssertEqual(facebookApp.publishCategories?[0].identifier, "")
+        XCTAssertEqual(facebookApp.publishCategories?[0].name, "None")
+        XCTAssertEqual(facebookApp.publishCategories?[1].identifier, "BEAUTY_FASHION")
+        XCTAssertEqual(facebookApp.publishCategories?[1].name, "Beauty and fashion")
+        XCTAssertEqual(facebookApp.publishCategories?[14].identifier, "SCIENCE")
+        XCTAssertEqual(facebookApp.publishCategories?[14].name, "Science")
+        XCTAssertEqual(facebookApp.publishCategories?[18].identifier, "OTHER")
+        XCTAssertEqual(facebookApp.publishCategories?[18].name, "Other")
         XCTAssertFalse(try XCTUnwrap(facebookApp.dataAccessIsExpired?.boolValue))
     }
 
@@ -225,6 +233,14 @@ class ConnectedAppTests: XCTestCase {
         XCTAssertTrue(youtubeApp.pages?.count == 0)
         XCTAssertTrue(youtubeApp.neededScopes?.publishToSocial?.count == 0)
         XCTAssertEqual(youtubeApp.publishCategories?.count, 15)
+        XCTAssertEqual(youtubeApp.publishCategories?[0].identifier, "2")
+        XCTAssertEqual(youtubeApp.publishCategories?[0].name, "Autos & Vehicles")
+        XCTAssertEqual(youtubeApp.publishCategories?[4].identifier, "1")
+        XCTAssertEqual(youtubeApp.publishCategories?[4].name, "Film & Animation")
+        XCTAssertEqual(youtubeApp.publishCategories?[10].identifier, "22")
+        XCTAssertEqual(youtubeApp.publishCategories?[10].name, "People & Blogs")
+        XCTAssertEqual(youtubeApp.publishCategories?[14].identifier, "19")
+        XCTAssertEqual(youtubeApp.publishCategories?[14].name, "Travel & Events")
         XCTAssertFalse(try XCTUnwrap(youtubeApp.dataAccessIsExpired?.boolValue))
     }
 }
