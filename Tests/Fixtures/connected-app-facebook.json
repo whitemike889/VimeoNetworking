@@ -1,0 +1,90 @@
+{
+    "add_date": "2019-12-16T16:29:47+00:00",
+    "data_access_is_expired": false,
+    "needed_scopes": {
+        "publish_to_social": []
+    },
+    "pages": [],
+    "publish_categories": [
+        {
+            "id": "",
+            "name": "None"
+        },
+        {
+            "id": "BEAUTY_FASHION",
+            "name": "Beauty and fashion"
+        },
+        {
+            "id": "BUSINESS",
+            "name": "Business"
+        },
+        {
+            "id": "CARS_TRUCKS",
+            "name": "Cars and trucks"
+        },
+        {
+            "id": "COMEDY",
+            "name": "Comedy"
+        },
+        {
+            "id": "CUTE_ANIMALS",
+            "name": "Cute animals"
+        },
+        {
+            "id": "ENTERTAINMENT",
+            "name": "Entertainment"
+        },
+        {
+            "id": "FAMILY",
+            "name": "Family"
+        },
+        {
+            "id": "FOOD_HEALTH",
+            "name": "Food and health"
+        },
+        {
+            "id": "HOME",
+            "name": "Home"
+        },
+        {
+            "id": "LIFESTYLE",
+            "name": "Lifestyle"
+        },
+        {
+            "id": "MUSIC",
+            "name": "Music"
+        },
+        {
+            "id": "NEWS",
+            "name": "News"
+        },
+        {
+            "id": "POLITICS",
+            "name": "Politics"
+        },
+        {
+            "id": "SCIENCE",
+            "name": "Science"
+        },
+        {
+            "id": "SPORTS",
+            "name": "Sports"
+        },
+        {
+            "id": "TECHNOLOGY",
+            "name": "Technology"
+        },
+        {
+            "id": "VIDEO_GAMING",
+            "name": "Video gaming"
+        },
+        {
+            "id": "OTHER",
+            "name": "Other"
+        }
+    ],
+    "third_party_user_id": "123456789",
+    "third_party_user_display_name": "Dr. Vimeo",
+    "type": "facebook",
+    "uri": "/me/connected_apps/facebook"
+}
