@@ -119,7 +119,7 @@ public class PublishOptionItem: VIMModelObject {
 
     /// The list of third party pages associated with the user's account.
     /// - Note: Facebook and LinkedIn only.
-    @objc public var pages: [String]?
+    @objc public var pages: [PublishOptionItem]?
 
     /// The list of third party categories that can be selected when publishing to a social media platform.
     /// - Note: Facebook and YouTube only.
@@ -182,6 +182,8 @@ public class PublishOptionItem: VIMModelObject {
         switch key {
         case String.Key.publishCategories:
             return PublishOptionItem.self
+        case String.Key.pages:
+            return PublishOptionItem.self
         default:
             return nil
         }
@@ -208,6 +210,7 @@ private extension String {
         static let dataAccessIsExpired = "data_access_is_expired"
         static let identifier = "id"
         static let neededScopes = "needed_scopes"
+        static let pages = "pages"
         static let publishCategories = "publish_categories"
         static let publishToSocial = "publish_to_social"
         static let thirdPartyUserID = "third_party_user_id"
