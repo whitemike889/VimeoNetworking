@@ -115,7 +115,7 @@ public class PublishOptionItem: VIMModelObject {
     }()
 
     /// The list of remaining scopes on this connected app that the user needs for a particular Vimeo feature.
-    @objc public var neededScopes: [String]?
+    @objc public var neededScopes: ConnectedAppScopes?
 
     /// The list of third party pages associated with the user's account.
     /// - Note: Facebook and LinkedIn only.
@@ -160,8 +160,8 @@ public class PublishOptionItem: VIMModelObject {
 
     public override func getClassForObjectKey(_ key: String?) -> AnyClass? {
         switch key {
-        case String.Key.publishCategories:
-            return PublishOptionItem.self
+        case String.Key.neededScopes:
+            return ConnectedAppScopes.self
         default:
             return nil
         }
@@ -176,6 +176,15 @@ public class PublishOptionItem: VIMModelObject {
             String.Key.thirdPartyUserDisplayName: String.Value.thirdPartyUserDisplayName,
             String.Key.type: String.Value.type
         ]
+    }
+
+    public override func getClassForCollectionKey(_ key: String?) -> AnyClass? {
+        switch key {
+        case String.Key.publishCategories:
+            return PublishOptionItem.self
+        default:
+            return nil
+        }
     }
 
     public override func didFinishMapping() {
@@ -198,7 +207,8 @@ private extension String {
         static let addDate = "add_date"
         static let dataAccessIsExpired = "data_access_is_expired"
         static let identifier = "id"
-        static let publishCategories = "publish_Categories"
+        static let neededScopes = "needed_scopes"
+        static let publishCategories = "publish_categories"
         static let publishToSocial = "publish_to_social"
         static let thirdPartyUserID = "third_party_user_id"
         static let thirdPartyUserDisplayName = "third_party_user_display_name"
@@ -209,6 +219,7 @@ private extension String {
         static let addDate = "addDateString"
         static let dataAccessIsExpired = "dataAccessIsExpired"
         static let identifier = "identifier"
+        static let neededScopes = "neededScopes"
         static let publishCategories = "publishCategories"
         static let publishToSocial = "publishToSocial"
         static let thirdPartyUserID = "thirdPartyUserID"
