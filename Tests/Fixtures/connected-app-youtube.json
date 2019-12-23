@@ -1,0 +1,74 @@
+{
+    "add_date": "2019-12-16T16:23:04+00:00",
+    "data_access_is_expired": false,
+    "needed_scopes": {
+        "publish_to_social": []
+    },
+    "pages": [],
+    "publish_categories": [
+        {
+            "id": "2",
+            "name": "Autos & Vehicles"
+        },
+        {
+            "id": "23",
+            "name": "Comedy"
+        },
+        {
+            "id": "27",
+            "name": "Education"
+        },
+        {
+            "id": "24",
+            "name": "Entertainment"
+        },
+        {
+            "id": "1",
+            "name": "Film & Animation"
+        },
+        {
+            "id": "20",
+            "name": "Gaming"
+        },
+        {
+            "id": "26",
+            "name": "Howto & Style"
+        },
+        {
+            "id": "10",
+            "name": "Music"
+        },
+        {
+            "id": "25",
+            "name": "News & Politics"
+        },
+        {
+            "id": "29",
+            "name": "Nonprofits & Activism"
+        },
+        {
+            "id": "22",
+            "name": "People & Blogs"
+        },
+        {
+            "id": "15",
+            "name": "Pets & Animals"
+        },
+        {
+            "id": "28",
+            "name": "Science & Technology"
+        },
+        {
+            "id": "17",
+            "name": "Sports"
+        },
+        {
+            "id": "19",
+            "name": "Travel & Events"
+        }
+    ],
+    "third_party_user_id": "123456789",
+    "third_party_user_display_name": "Dr. Vimeo",
+    "type": "youtube",
+    "uri": "/me/connected_apps/youtube"
+}

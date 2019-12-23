@@ -19,15 +19,21 @@
 		0CD15AD62395911500523569 /* ConnectedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD15AD52395911500523569 /* ConnectedApp.swift */; };
 		0CD15AD72395911500523569 /* ConnectedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD15AD52395911500523569 /* ConnectedApp.swift */; };
 		0CD15AD82395911500523569 /* ConnectedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD15AD52395911500523569 /* ConnectedApp.swift */; };
-		0CD15ADA2395921E00523569 /* connected-app.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CD15AD92395921E00523569 /* connected-app.json */; };
-		0CD15ADB2395921E00523569 /* connected-app.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CD15AD92395921E00523569 /* connected-app.json */; };
-		0CD15ADC2395921E00523569 /* connected-app.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CD15AD92395921E00523569 /* connected-app.json */; };
 		0CD15ADE2395925200523569 /* ConnectedAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD15ADD2395925200523569 /* ConnectedAppTests.swift */; };
 		0CD15ADF2395925200523569 /* ConnectedAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD15ADD2395925200523569 /* ConnectedAppTests.swift */; };
 		0CD15AE02395925200523569 /* ConnectedAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD15ADD2395925200523569 /* ConnectedAppTests.swift */; };
 		0CD15AE2239593C200523569 /* Request+ConnectedAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD15AE1239593C100523569 /* Request+ConnectedAppTests.swift */; };
 		0CD15AE3239593C200523569 /* Request+ConnectedAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD15AE1239593C100523569 /* Request+ConnectedAppTests.swift */; };
 		0CD15AE4239593C200523569 /* Request+ConnectedAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD15AE1239593C100523569 /* Request+ConnectedAppTests.swift */; };
+		0CE4CE0C23A7E928000C03C5 /* connected-app.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CD15AD92395921E00523569 /* connected-app.json */; };
+		0CE4CE0D23A7E929000C03C5 /* connected-app.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CD15AD92395921E00523569 /* connected-app.json */; };
+		0CE4CE0E23A7E929000C03C5 /* connected-app.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CD15AD92395921E00523569 /* connected-app.json */; };
+		0CE4CE1023A7EC9C000C03C5 /* connected-app-youtube.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CE4CE0F23A7EC9C000C03C5 /* connected-app-youtube.json */; };
+		0CE4CE1123A7EC9C000C03C5 /* connected-app-youtube.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CE4CE0F23A7EC9C000C03C5 /* connected-app-youtube.json */; };
+		0CE4CE1223A7EC9C000C03C5 /* connected-app-youtube.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CE4CE0F23A7EC9C000C03C5 /* connected-app-youtube.json */; };
+		0CE4CE1423A7F2B8000C03C5 /* connected-app-facebook.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CE4CE1323A7F2B8000C03C5 /* connected-app-facebook.json */; };
+		0CE4CE1523A7F2B8000C03C5 /* connected-app-facebook.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CE4CE1323A7F2B8000C03C5 /* connected-app-facebook.json */; };
+		0CE4CE1623A7F2B8000C03C5 /* connected-app-facebook.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CE4CE1323A7F2B8000C03C5 /* connected-app-facebook.json */; };
 		2FCC188BC3EE850980E4C7D5 /* Pods_VimeoNetworking_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66B43D25318F400304BCF876 /* Pods_VimeoNetworking_tvOS.framework */; };
 		380EAFA5457E1203D06D0884 /* Pods_VimeoNetworking_tvOS_VimeoNetworking_tvOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35E501631A49C6E81266C735 /* Pods_VimeoNetworking_tvOS_VimeoNetworking_tvOSTests.framework */; };
 		5B109097237BA75400280A48 /* ImageLoader+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B109096237BA75400280A48 /* ImageLoader+Cache.swift */; };
@@ -882,6 +888,8 @@
 		0CD15AD92395921E00523569 /* connected-app.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "connected-app.json"; sourceTree = "<group>"; };
 		0CD15ADD2395925200523569 /* ConnectedAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedAppTests.swift; sourceTree = "<group>"; };
 		0CD15AE1239593C100523569 /* Request+ConnectedAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Request+ConnectedAppTests.swift"; sourceTree = "<group>"; };
+		0CE4CE0F23A7EC9C000C03C5 /* connected-app-youtube.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "connected-app-youtube.json"; sourceTree = "<group>"; };
+		0CE4CE1323A7F2B8000C03C5 /* connected-app-facebook.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "connected-app-facebook.json"; sourceTree = "<group>"; };
 		0FBE6D7B6190E83B694CAE2B /* Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests.debug.xcconfig"; path = "Target Support Files/Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests/Pods-VimeoNetworking-macOS-VimeoNetworking-macOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		13342C84A232F50251268E8E /* Pods-VimeoNetworking-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-iOS.release.xcconfig"; path = "Target Support Files/Pods-VimeoNetworking-iOS/Pods-VimeoNetworking-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		198CFAD8E5A5FDB0E5455551 /* Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests.debug.xcconfig"; path = "Target Support Files/Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests/Pods-VimeoNetworking-iOS-VimeoNetworking-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1385,6 +1393,8 @@
 				5B1DF2C822B41C90007F2416 /* cinema-success-response.json */,
 				5B1DF2C922B41C90007F2416 /* clip.json */,
 				0CD15AD92395921E00523569 /* connected-app.json */,
+				0CE4CE0F23A7EC9C000C03C5 /* connected-app-youtube.json */,
+				0CE4CE1323A7F2B8000C03C5 /* connected-app-facebook.json */,
 				5B1DF2CA22B41C90007F2416 /* gcs.json */,
 				5B1DF2CB22B41C90007F2416 /* clip_live.json */,
 				5B1DF2DC22B41C90007F2416 /* album-response.json */,
@@ -2238,7 +2248,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B1DF0C322B409B5007F2416 /* digicert-sha2.cer in Resources */,
-				0CD15ADA2395921E00523569 /* connected-app.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2247,7 +2256,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B1DF0C422B409B5007F2416 /* digicert-sha2.cer in Resources */,
-				0CD15ADB2395921E00523569 /* connected-app.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2256,7 +2264,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B1DF38B22B41F2B007F2416 /* digicert-sha2.cer in Resources */,
-				0CD15ADC2395921E00523569 /* connected-app.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2271,6 +2278,7 @@
 				5B1DF37A22B41C90007F2416 /* categories-animation-response.json in Resources */,
 				5B1DF36522B41C90007F2416 /* user_plus.json in Resources */,
 				5B1DF34D22B41C90007F2416 /* user_live_business.json in Resources */,
+				0CE4CE1023A7EC9C000C03C5 /* connected-app-youtube.json in Resources */,
 				5B1DF35C22B41C90007F2416 /* user_basic.json in Resources */,
 				5B1DF34A22B41C90007F2416 /* user_alum.json in Resources */,
 				5B1DF33B22B41C90007F2416 /* upload_gcs.json in Resources */,
@@ -2283,10 +2291,12 @@
 				5B1DF37422B41C90007F2416 /* user_live.json in Resources */,
 				5B1DF37722B41C90007F2416 /* album-response.json in Resources */,
 				5B1DF35922B41C90007F2416 /* user_curation.json in Resources */,
+				0CE4CE0C23A7E928000C03C5 /* connected-app.json in Resources */,
 				5B1DF34422B41C90007F2416 /* gcs.json in Resources */,
 				5B1DF37122B41C90007F2416 /* user_staff.json in Resources */,
 				5B1DF36822B41C90007F2416 /* user_pro_unlimited.json in Resources */,
 				5B1DF34722B41C90007F2416 /* clip_live.json in Resources */,
+				0CE4CE1423A7F2B8000C03C5 /* connected-app-facebook.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2301,6 +2311,7 @@
 				5B1DF37B22B41C90007F2416 /* categories-animation-response.json in Resources */,
 				5B1DF36622B41C90007F2416 /* user_plus.json in Resources */,
 				5B1DF34E22B41C90007F2416 /* user_live_business.json in Resources */,
+				0CE4CE1123A7EC9C000C03C5 /* connected-app-youtube.json in Resources */,
 				5B1DF35D22B41C90007F2416 /* user_basic.json in Resources */,
 				5B1DF34B22B41C90007F2416 /* user_alum.json in Resources */,
 				5B1DF33C22B41C90007F2416 /* upload_gcs.json in Resources */,
@@ -2313,10 +2324,12 @@
 				5B1DF37522B41C90007F2416 /* user_live.json in Resources */,
 				5B1DF37822B41C90007F2416 /* album-response.json in Resources */,
 				5B1DF35A22B41C90007F2416 /* user_curation.json in Resources */,
+				0CE4CE0D23A7E929000C03C5 /* connected-app.json in Resources */,
 				5B1DF34522B41C90007F2416 /* gcs.json in Resources */,
 				5B1DF37222B41C90007F2416 /* user_staff.json in Resources */,
 				5B1DF36922B41C90007F2416 /* user_pro_unlimited.json in Resources */,
 				5B1DF34822B41C90007F2416 /* clip_live.json in Resources */,
+				0CE4CE1523A7F2B8000C03C5 /* connected-app-facebook.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2331,6 +2344,7 @@
 				5B1DF37C22B41C90007F2416 /* categories-animation-response.json in Resources */,
 				5B1DF36722B41C90007F2416 /* user_plus.json in Resources */,
 				5B1DF34F22B41C90007F2416 /* user_live_business.json in Resources */,
+				0CE4CE1223A7EC9C000C03C5 /* connected-app-youtube.json in Resources */,
 				5B1DF35E22B41C90007F2416 /* user_basic.json in Resources */,
 				5B1DF34C22B41C90007F2416 /* user_alum.json in Resources */,
 				5B1DF33D22B41C90007F2416 /* upload_gcs.json in Resources */,
@@ -2343,10 +2357,12 @@
 				5B1DF37622B41C90007F2416 /* user_live.json in Resources */,
 				5B1DF37922B41C90007F2416 /* album-response.json in Resources */,
 				5B1DF35B22B41C90007F2416 /* user_curation.json in Resources */,
+				0CE4CE0E23A7E929000C03C5 /* connected-app.json in Resources */,
 				5B1DF34622B41C90007F2416 /* gcs.json in Resources */,
 				5B1DF37322B41C90007F2416 /* user_staff.json in Resources */,
 				5B1DF36A22B41C90007F2416 /* user_pro_unlimited.json in Resources */,
 				5B1DF34922B41C90007F2416 /* clip_live.json in Resources */,
+				0CE4CE1623A7F2B8000C03C5 /* connected-app-facebook.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
