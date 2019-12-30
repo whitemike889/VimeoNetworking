@@ -25,6 +25,7 @@
 //
 
 import Foundation
+import Model
 
 public typealias AuthenticationRequest = Request<VIMAccount>
 

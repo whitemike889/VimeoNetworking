@@ -25,6 +25,7 @@
 //
 
 import Foundation
+import Model
 
 private typealias SessionManagingDataTaskSuccess<T> = ((URLSessionDataTask, T?) -> Void)
 private typealias SessionManagingDataTaskFailure = ((URLSessionDataTask?, Error) -> Void)

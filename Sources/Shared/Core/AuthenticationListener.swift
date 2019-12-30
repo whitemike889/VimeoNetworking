@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Model
 
 /// A type that listens to and responds to authentication status changes
 public protocol AuthenticationListener {

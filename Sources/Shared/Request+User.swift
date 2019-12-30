@@ -25,6 +25,7 @@
 //
 
 import Foundation
+import Model
 
 /// `Request` that returns a single `VIMUser`
 public typealias UserRequest = Request<VIMUser>

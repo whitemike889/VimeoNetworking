@@ -25,6 +25,7 @@
 //
 
 import Foundation
+import Model
 
 /// Describes how a request should handle retrying after failure
 public enum RetryPolicy {

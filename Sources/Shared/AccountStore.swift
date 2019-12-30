@@ -25,6 +25,7 @@
 //
 
 import Foundation
+import Model
 
 /// `AccountStore` handles saving and loading authenticated accounts securely using the keychain
 final class AccountStore {

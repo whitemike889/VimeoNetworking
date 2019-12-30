@@ -25,6 +25,7 @@
 //
 
 import Foundation
+import Model
 
 /// `Request` returning an array of `VIMVideo`
 public typealias CinemaContentRequest = Request<[VIMProgrammedContent]>

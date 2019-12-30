@@ -25,6 +25,7 @@
 //
 
 import Foundation
+import Model
 
 /// `Request` returning a single `VIMVideo`
 public typealias VideoRequest = Request<VIMVideo>

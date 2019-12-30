@@ -25,6 +25,7 @@
 //
 
 import Foundation
+import Model
 
 /**
  *  `Response` represents a successful result returned by `VimeoClient` in fulfillment of a `Request`.

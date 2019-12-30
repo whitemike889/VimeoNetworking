@@ -25,6 +25,7 @@
 //
 
 import Foundation
+import Model
 
 /// `VimeoClient` handles a rich assortment of functionality focused around interacting with the Vimeo API.  A client object tracks an authenticated account, handles the low-level execution of requests through a session manager with caching functionality, presents a high-level `Request` and `Response` interface, and notifies of globally relevant events and errors through `Notification`s
 /// To start using a client, first instantiate an `AuthenticationController` to load a stored account or authenticate a new one.  Next, create `Request` instances and pass them into the `request` function, which returns `Response`s on success.

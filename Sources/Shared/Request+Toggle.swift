@@ -25,6 +25,7 @@
 //
 
 import Foundation
+import Model
 
 /// `Request` that returns no object on success
 public typealias ToggleRequest = Request<VIMNullResponse>

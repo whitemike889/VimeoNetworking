@@ -6,6 +6,8 @@
 //
 //
 
+import Model
+
 public extension Request {
     private static var Path: String { return "/me/notifications/subscriptions" }
 

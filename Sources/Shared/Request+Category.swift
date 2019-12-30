@@ -25,6 +25,7 @@
 //
 
 import Foundation
+import Model
 
 /// `Request` that returns a single `VIMCategory`
 public typealias CategoryRequest = Request<VIMCategory>

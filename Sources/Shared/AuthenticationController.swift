@@ -25,6 +25,7 @@
 //
 
 import Foundation
+import Model
 
 /**
  `AuthenticationController` is used to authenticate a `VimeoClient` instance, either by loading an account stored in the system keychain, or by interacting with the Vimeo API to authenticate a new account.  The two publicly accessible authentication methods are client credentials grant and code grant.

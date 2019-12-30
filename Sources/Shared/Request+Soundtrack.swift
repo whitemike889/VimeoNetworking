@@ -25,6 +25,7 @@
 //
 
 import Foundation
+import Model
 
 /// Request that returns an array of `VIMSoundtrack` objects
 public typealias SoundtrackListRequest = Request<[VIMSoundtrack]>

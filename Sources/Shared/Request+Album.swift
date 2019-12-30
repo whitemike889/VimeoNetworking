@@ -23,6 +23,8 @@
 //  THE SOFTWARE.
 //
 
+import Model
+
 fileprivate enum Key {
     static let name = "name"
     static let description = "description"
