@@ -24,7 +24,7 @@
 //  THE SOFTWARE.
 //
 
-#import <VimeoNetworking/VimeoNetworking-Swift.h>
+#import <Model/Model-Swift.h>
 #import "VIMVideo.h"
 #import "VIMObjectMapper.h"
 #import "VIMUser.h"

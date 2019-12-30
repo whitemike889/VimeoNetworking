@@ -88,6 +88,8 @@ extension Array: MappableResponse where Element: VIMModelObject {
  */
 public class VIMNullResponse: MappableResponse {
     
+    public init() {}
+    
     public static var mappingClass: AnyClass {
         return self
     }

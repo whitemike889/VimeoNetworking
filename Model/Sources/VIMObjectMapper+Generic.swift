@@ -39,8 +39,8 @@ extension VIMObjectMapper {
 
      - returns: A deserialized object of type `ModelType`
      */
-    static func mapObject<ModelType: MappableResponse>(
-        responseDictionary: VimeoClient.ResponseDictionary,
+    public static func mapObject<ModelType: MappableResponse>(
+        responseDictionary: [String: Any],
         modelKeyPath: String? = nil
     ) throws -> ModelType {
         
@@ -55,7 +55,7 @@ extension VIMObjectMapper {
 
         var modelObjectOrNil: ModelType? = (mappedObject as? ModelType)
         modelObjectOrNil = modelObjectOrNil ?? findMappedObject(
-            in: (mappedObject as? VimeoClient.ResponseDictionary),
+            in: (mappedObject as? [String: Any]),
             using: modelKeyPath.components(separatedBy: ".")
         )
 
@@ -66,7 +66,7 @@ extension VIMObjectMapper {
 
             let error = NSError(
                 domain: self.ErrorDomain,
-                code: LocalErrorCode.mappingFailed.rawValue,
+                code: 9011,
                 userInfo: [NSLocalizedDescriptionKey: description]
             )
 
@@ -83,7 +83,7 @@ extension VIMObjectMapper {
 private extension VIMObjectMapper {
     
     static func findMappedObject<MappedObject: MappableResponse>(
-        in responseDictionary: VimeoClient.ResponseDictionary?,
+        in responseDictionary: [String: Any]?,
         using keyPaths: [String]
     ) -> MappedObject? {
         
@@ -96,7 +96,7 @@ private extension VIMObjectMapper {
         let keyPath = keyPaths.removeFirst()
         let nested: Any? = responseDictionary?[keyPath]
 
-        guard let nestedResponseDictionary = nested as? VimeoClient.ResponseDictionary else {
+        guard let nestedResponseDictionary = nested as? [String: Any] else {
             return nested as? MappedObject
         }
 

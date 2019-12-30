@@ -25,7 +25,7 @@
 //
 
 
-#import <VimeoNetworking/VimeoNetworking-Swift.h>
+#import <Model/Model-Swift.h>
 #import "VIMVideoPlayRepresentation.h"
 #import "VIMVideoHLSFile.h"
 #import "VIMVideoDASHFile.h"
