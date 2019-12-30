@@ -24,8 +24,15 @@
 //  THE SOFTWARE.
 //
 
+public struct Account: Codable {
+    var accessToken: String?
+    func isAuthenticatedWithUser() -> Bool { return true }
+    var user: User?
+}
+
+public struct User: Codable {}
+
 import Foundation
-import Model
 
 private typealias SessionManagingDataTaskSuccess<T> = ((URLSessionDataTask, T?) -> Void)
 private typealias SessionManagingDataTaskFailure = ((URLSessionDataTask?, Error) -> Void)
@@ -416,7 +423,7 @@ extension VimeoSessionManager: AuthenticationListener {
 
      - parameter account: the new account
      */
-    public func clientDidAuthenticate(with account: VIMAccount) {
+    public func clientDidAuthenticate(with account: Account) {
         let accessToken = account.accessToken
         jsonRequestSerializer.accessTokenProvider = {
             return accessToken

@@ -25,7 +25,6 @@
 //
 
 import Foundation
-import Model
 
 /**
  `AuthenticationController` is used to authenticate a `VimeoClient` instance, either by loading an account stored in the system keychain, or by interacting with the Vimeo API to authenticate a new account.  The two publicly accessible authentication methods are client credentials grant and code grant.
@@ -54,7 +53,7 @@ final public class AuthenticationController {
     private static let PinCodeRequestInterval: TimeInterval = 5
     
         /// Completion closure type for authentication requests
-    public typealias AuthenticationCompletion = ResultCompletion<VIMAccount, NSError>.T
+    public typealias AuthenticationCompletion = ResultCompletion<Account, NSError>.T
     
         /// State is tracked for the code grant request/response cycle, to avoid interception
     static let state = ProcessInfo.processInfo.globallyUniqueString
@@ -90,11 +89,11 @@ final public class AuthenticationController {
     
     // MARK: - Public Saved Accounts
     
-    public func loadClientCredentialsAccount() throws -> VIMAccount? {
+    public func loadClientCredentialsAccount() throws -> Account? {
         return try self.loadAccount(accountType: .clientCredentials)
     }
 
-    public func loadUserAccount() throws -> VIMAccount? {
+    public func loadUserAccount() throws -> Account? {
         return try self.loadAccount(accountType: .user)
     }
     
@@ -106,7 +105,7 @@ final public class AuthenticationController {
      
      - returns: an account, if found
      */
-    public func loadSavedAccount() throws -> VIMAccount? {
+    public func loadSavedAccount() throws -> Account? {
         var loadedAccount = try self.loadUserAccount()
         
         if loadedAccount == nil {
@@ -122,7 +121,7 @@ final public class AuthenticationController {
         return loadedAccount
     }
     
-    public func saveAccount(account: VIMAccount) throws {
+    public func saveAccount(account: Account) throws {
         let accountType: AccountStore.AccountType = (account.user != nil) ? .user : .clientCredentials
         
         try self.accountStore.save(account, ofType: accountType)
@@ -130,7 +129,7 @@ final public class AuthenticationController {
     
     // MARK: - Private Saved Accounts
     
-    private func loadAccount(accountType: AccountStore.AccountType) throws -> VIMAccount? {
+    private func loadAccount(accountType: AccountStore.AccountType) throws -> Account? {
         let loadedAccount = try self.accountStore.loadAccount(ofType: accountType)
         
         if let loadedAccount = loadedAccount {
@@ -357,14 +356,12 @@ final public class AuthenticationController {
      - parameter completion:                handler for authentication success or failure
      */
     public func authenticate(withResponse accountResponseDictionary: VimeoClient.ResponseDictionary, completion: AuthenticationCompletion) {
-        let result: Result<Response<VIMAccount>, NSError>
+        let result: Result<Account, NSError>
         
         do {
-            let account: VIMAccount = try VIMObjectMapper.mapObject(responseDictionary: accountResponseDictionary)
-            
-            let response = Response(model: account, json: accountResponseDictionary)
-            
-            result = Result.success(response)
+            let data = try JSONSerialization.data(withJSONObject: accountResponseDictionary, options: [])
+            let account = try JSONDecoder().decode(Account.self, from: data)
+            result = Result.success(account)
         }
         catch let error as NSError {
             result = Result.failure(error)
@@ -502,7 +499,7 @@ final public class AuthenticationController {
             return
         }
         
-        let deleteTokensRequest = Request<VIMNullResponse>.deleteTokensRequest()
+        let deleteTokensRequest = Request.deleteTokensRequest()
         let _ = self.client.request(deleteTokensRequest) { (result) in
             switch result {
             case .success:
@@ -536,16 +533,15 @@ final public class AuthenticationController {
     // MARK: - Private
     
     private func authenticate(with client: VimeoClient, request: AuthenticationRequest, completion: @escaping AuthenticationCompletion) {
-        let _ = client.request(request) { result in
-            
-            let handledResult = self.handleAuthenticationResult(result)
-            
+        _ = client.request(request, then: { (result: Result<Account, Error>) in
+            let mappedResult = result.mapError { $0 as NSError }
+            let handledResult = self.handleAuthenticationResult(mappedResult)
             completion(handledResult)
-        }
+        })
     }
     
-    private func handleAuthenticationResult(_ result: Result<Response<VIMAccount>, NSError>) -> Result<VIMAccount, NSError> {
-        guard case .success(let accountResponse) = result
+    private func handleAuthenticationResult(_ result: Result<Account, NSError>) -> Result<Account, NSError> {
+        guard case .success(let account) = result
         else {
             let resultError: NSError
             if case .failure(let error) = result {
@@ -562,13 +558,8 @@ final public class AuthenticationController {
             return .failure(resultError)
         }
         
-        let account = accountResponse.model
-        
-        if let userJSON = accountResponse.json["user"] as? VimeoClient.ResponseDictionary {
-            account.userJSON = userJSON
-        }
-        
         do {
+            
             try self.setClientAccount(with: account, shouldClearCache: true)
             
             let accountType: AccountStore.AccountType = (account.user != nil) ? .user : .clientCredentials
@@ -582,7 +573,7 @@ final public class AuthenticationController {
         return .success(account)
     }
     
-    private func setClientAccount(with account: VIMAccount?, shouldClearCache: Bool = false) throws {
+    private func setClientAccount(with account: Account?, shouldClearCache: Bool = false) throws {
         // Account can be nil (to log out) but if it's non-nil, it needs an access token or it's malformed [RH]
         guard account == nil || account?.accessToken != nil
         else {

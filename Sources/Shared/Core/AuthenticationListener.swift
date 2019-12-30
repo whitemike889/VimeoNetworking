@@ -7,14 +7,13 @@
 //
 
 import Foundation
-import Model
 
 /// A type that listens to and responds to authentication status changes
 public protocol AuthenticationListener {
 
     /// Called when authentication completes successfully
     /// - Parameter account: the new authenticated account
-    func clientDidAuthenticate(with account: VIMAccount)
+    func clientDidAuthenticate(with account: Account)
 
     /// Called when a client is logged out
     func clientDidClearAccount()

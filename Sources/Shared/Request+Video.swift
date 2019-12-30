@@ -25,13 +25,6 @@
 //
 
 import Foundation
-import Model
-
-/// `Request` returning a single `VIMVideo`
-public typealias VideoRequest = Request<VIMVideo>
-
-/// `Request` returning an array of `VIMVideo`
-public typealias VideoListRequest = Request<[VIMVideo]>
 
 public extension Request {
     // MARK: -

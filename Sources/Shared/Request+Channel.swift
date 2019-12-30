@@ -25,13 +25,6 @@
 //
 
 import Foundation
-import Model
-
-/// `Request` that returns a single `VIMChannel`
-public typealias ChannelRequest = Request<VIMChannel>
-
-/// `Request` that returns an array of `VIMChannel`
-public typealias ChannelListRequest = Request<[VIMChannel]>
 
 public extension Request {
     private static var QueryKey: String { return "query" }

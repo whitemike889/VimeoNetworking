@@ -25,13 +25,6 @@
 //
 
 import Foundation
-import Model
-
-/// `Request` that returns a single `VIMUser`
-public typealias UserRequest = Request<VIMUser>
-
-/// `Request` that returns an array of `VIMUser`
-public typealias UserListRequest = Request<[VIMUser]>
 
 public extension Request {
     private static var MeUserURI: String { return "/me" }

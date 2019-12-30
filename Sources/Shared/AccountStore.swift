@@ -25,7 +25,6 @@
 //
 
 import Foundation
-import Model
 
 /// `AccountStore` handles saving and loading authenticated accounts securely using the keychain
 final class AccountStore {
@@ -83,12 +82,8 @@ final class AccountStore {
      
      - throws: an error if the data could not be saved
      */
-    func save(_ account: VIMAccount, ofType type: AccountType) throws {
-        let data = NSMutableData()
-        let archiver = NSKeyedArchiver(forWritingWith: data)
-        archiver.encode(account)
-        archiver.finishEncoding()
-        
+    func save(_ account: Account, ofType type: AccountType) throws {
+        let data = try JSONEncoder().encode(account) as NSData
         try self.keychainStore.set(data: data, forKey: type.keychainKey())
     }
     
@@ -101,32 +96,13 @@ final class AccountStore {
      
      - returns: an account of the specified type, if one was found
      */
-    func loadAccount(ofType type: AccountType) throws -> VIMAccount? {
+    func loadAccount(ofType type: AccountType) throws -> Account? {
         do {
             guard let data = try self.keychainStore.data(for: type.keychainKey())
             else {
                 return nil
             }
-            
-            let unarchiver = NSKeyedUnarchiver(forReadingWith: data)
-            var decodedAccount: VIMAccount? = nil
-            try ExceptionCatcher.doUnsafe {
-                decodedAccount = unarchiver.decodeObject() as? VIMAccount
-            }
-            
-            guard let account = decodedAccount
-            else {
-                let description = "Received corrupted VIMAccount data from keychain"
-                let error = NSError(domain: Constants.ErrorDomain, code: LocalErrorCode.accountCorrupted.rawValue, userInfo: [NSLocalizedDescriptionKey: description])
-                
-                throw error
-            }
-            
-            if let userJSON = account.userJSON as? [String: Any] {
-                try account.user = VIMObjectMapper.mapObject(responseDictionary: userJSON) as VIMUser
-            }
-            
-            return account
+            return try JSONDecoder().decode(Account.self, from: data)
         }
         catch let error {
             _ = try? self.removeAccount(ofType: type)

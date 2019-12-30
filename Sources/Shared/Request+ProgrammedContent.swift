@@ -25,10 +25,6 @@
 //
 
 import Foundation
-import Model
-
-/// `Request` returning an array of `VIMVideo`
-public typealias CinemaContentRequest = Request<[VIMProgrammedContent]>
 
 public extension Request {
     private static var CinemaPath: String { return "/programmed/cinema" }

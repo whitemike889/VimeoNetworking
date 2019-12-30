@@ -25,10 +25,6 @@
 //
 
 import Foundation
-import Model
-
-/// `Request` returning a single `VIMPolicyDocument`
-public typealias PolicyDocumentRequest = Request<VIMPolicyDocument>
 
 public extension Request {
     private static var TermsOfServiceURI: String { return "/documents/termsofservice" }

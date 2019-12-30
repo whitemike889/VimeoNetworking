@@ -427,7 +427,6 @@
 		7FDACABA23A01170000C12B3 /* TranscodeStatusEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDACAB923A01170000C12B3 /* TranscodeStatusEndpointTests.swift */; };
 		9E6913F9D6917E929DA785FE /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48683A775227828528A4492B /* Pods_Example.framework */; };
 		9FBDB39C23B8051A00D0AF18 /* Model.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FBDB39323B8051A00D0AF18 /* Model.framework */; };
-		9FBDB3A123B8051A00D0AF18 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBDB3A023B8051A00D0AF18 /* ModelTests.swift */; };
 		9FBDB3A323B8051A00D0AF18 /* Model.h in Headers */ = {isa = PBXBuildFile; fileRef = 9FBDB39523B8051A00D0AF18 /* Model.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9FBDB53323B805CD00D0AF18 /* VIMPictureCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FBDB4B223B805CD00D0AF18 /* VIMPictureCollection.m */; };
 		9FBDB53423B805CD00D0AF18 /* SubscriptionCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBDB4B323B805CD00D0AF18 /* SubscriptionCollection.swift */; };
@@ -561,6 +560,9 @@
 		9FBDB5B723B8080800D0AF18 /* Model.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FBDB39323B8051A00D0AF18 /* Model.framework */; };
 		9FBDB5B823B8080800D0AF18 /* Model.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9FBDB39323B8051A00D0AF18 /* Model.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9FBDB5BC23B97A4600D0AF18 /* BatchOperable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5F05BE232BFC1F00E2D5AD /* BatchOperable.swift */; };
+		9FBDB5BE23B988A200D0AF18 /* VimeoClient+Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBDB5BD23B988A200D0AF18 /* VimeoClient+Deprecated.swift */; };
+		9FBDB5BF23B988A200D0AF18 /* VimeoClient+Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBDB5BD23B988A200D0AF18 /* VimeoClient+Deprecated.swift */; };
+		9FBDB5C023B988A200D0AF18 /* VimeoClient+Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBDB5BD23B988A200D0AF18 /* VimeoClient+Deprecated.swift */; };
 		C1E13A752650AE7CE4523125 /* Pods_VimeoNetworking_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D711BBD962E1ACC44FB5766 /* Pods_VimeoNetworking_macOS.framework */; };
 		E45DE44D2301ED3A006B4E39 /* Request+Folders.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45DE44C2301ED3A006B4E39 /* Request+Folders.swift */; };
 		E45DE44E2301ED41006B4E39 /* Request+Folders.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45DE44C2301ED3A006B4E39 /* Request+Folders.swift */; };
@@ -819,7 +821,6 @@
 		9FBDB39523B8051A00D0AF18 /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		9FBDB39623B8051A00D0AF18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9FBDB39B23B8051A00D0AF18 /* ModelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ModelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9FBDB3A023B8051A00D0AF18 /* ModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
 		9FBDB3A223B8051A00D0AF18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9FBDB4B223B805CD00D0AF18 /* VIMPictureCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIMPictureCollection.m; sourceTree = "<group>"; };
 		9FBDB4B323B805CD00D0AF18 /* SubscriptionCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionCollection.swift; sourceTree = "<group>"; };
@@ -950,6 +951,7 @@
 		9FBDB5B123B806A100D0AF18 /* VIMObjectMapper+Generic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VIMObjectMapper+Generic.swift"; sourceTree = "<group>"; };
 		9FBDB5B323B806C900D0AF18 /* Mappable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mappable.swift; sourceTree = "<group>"; };
 		9FBDB5B523B807AE00D0AF18 /* APIClientApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClientApp.swift; sourceTree = "<group>"; };
+		9FBDB5BD23B988A200D0AF18 /* VimeoClient+Deprecated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VimeoClient+Deprecated.swift"; sourceTree = "<group>"; };
 		A288BD846C787BA2C279B283 /* Pods-VimeoNetworking-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-iOS.debug.xcconfig"; path = "Target Support Files/Pods-VimeoNetworking-iOS/Pods-VimeoNetworking-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		A3438E0F44DD71015EE99A4B /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		AAF4B182ABDE6458EC73CBED /* Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests/Pods-VimeoNetworking-tvOS-VimeoNetworking-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1284,6 +1286,7 @@
 				5B5EEF6F22B441A3005C66BE /* Scope.swift */,
 				5B5EEF8022B441A3005C66BE /* String+Parameters.swift */,
 				5B5EEF7E22B441A3005C66BE /* VimeoClient.swift */,
+				9FBDB5BD23B988A200D0AF18 /* VimeoClient+Deprecated.swift */,
 				5B5EEF7322B441A3005C66BE /* VimeoNetworking.h */,
 				5B5EF00222B441A3005C66BE /* VimeoRequestSerializer.swift */,
 				5B5EEFF622B441A3005C66BE /* VimeoResponseSerializer.swift */,
@@ -1471,7 +1474,6 @@
 		9FBDB39F23B8051A00D0AF18 /* ModelTests */ = {
 			isa = PBXGroup;
 			children = (
-				9FBDB3A023B8051A00D0AF18 /* ModelTests.swift */,
 				9FBDB3A223B8051A00D0AF18 /* Info.plist */,
 			);
 			path = ModelTests;
@@ -2469,6 +2471,7 @@
 				5B5EF03322B441A3005C66BE /* NetworkingNotification.swift in Sources */,
 				5B62636123203B0700B25462 /* URLRequestConvertible.swift in Sources */,
 				7F5E3F1C23A078F0005701C0 /* TranscodeStatusEndpoint.swift in Sources */,
+				9FBDB5BE23B988A200D0AF18 /* VimeoClient+Deprecated.swift in Sources */,
 				5B62638A2320603200B25462 /* HTTPMethod.swift in Sources */,
 				5B5EF01522B441A3005C66BE /* Scope.swift in Sources */,
 			);
@@ -2542,6 +2545,7 @@
 				5BD765E9234D35A900821AF7 /* AFNetworkReachabilityManager.m in Sources */,
 				5B5EF03422B441A3005C66BE /* NetworkingNotification.swift in Sources */,
 				5B62636223203B0B00B25462 /* URLRequestConvertible.swift in Sources */,
+				9FBDB5BF23B988A200D0AF18 /* VimeoClient+Deprecated.swift in Sources */,
 				5B62638B2320603200B25462 /* HTTPMethod.swift in Sources */,
 				5B5EF01622B441A3005C66BE /* Scope.swift in Sources */,
 			);
@@ -2607,6 +2611,7 @@
 				5B5EF1E222B441A4005C66BE /* AuthenticationController.swift in Sources */,
 				5B5EF1DC22B441A4005C66BE /* Request+Video.swift in Sources */,
 				5B5EF1E822B441A4005C66BE /* Request+Notifications.swift in Sources */,
+				9FBDB5C023B988A200D0AF18 /* VimeoClient+Deprecated.swift in Sources */,
 				5B5EF1D922B441A4005C66BE /* AccountStore.swift in Sources */,
 				7FCB1D8A23A0AB5100D2C85D /* TranscodeStatusEndpoint.swift in Sources */,
 				5B5EF02622B441A3005C66BE /* Request+ProgrammedContent.swift in Sources */,
@@ -2854,7 +2859,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9FBDB3A123B8051A00D0AF18 /* ModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

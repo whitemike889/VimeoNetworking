@@ -6,11 +6,7 @@
 //
 //
 
-import Model
-
 public extension Request {
-    /// `Request` that returns a single `VIMPicture`
-    typealias PictureRequest = Request<VIMPicture>
     
     /**
      Create a `Request` to create a picture for a user

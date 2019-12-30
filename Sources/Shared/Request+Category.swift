@@ -25,13 +25,6 @@
 //
 
 import Foundation
-import Model
-
-/// `Request` that returns a single `VIMCategory`
-public typealias CategoryRequest = Request<VIMCategory>
-
-/// `Request` that returns an array of `VIMCategory`
-public typealias CategoryListRequest = Request<[VIMCategory]>
 
 public extension Request {
     private static var CategoriesPath: String { return "/categories" }
