@@ -77,7 +77,7 @@ public class PublishOptionItem: VIMModelObject {
     /// The ID of the publish item.
     public private(set) var identifier: String?
 
-    /// The name or display name of the publich item, i.e.: "art", "family", "vacation" etc.
+    /// The name or display name of the publish item, i.e.: "art", "family", "vacation" etc.
     public private(set) var name: String?
 
     // MARK: - Overrides
