@@ -88,6 +88,7 @@
             "name": "Other"
         }
     ],
+    "resource_key": "aad6013ccbbbee2ab3c37ab3ae1eaeca32432eb0",
     "third_party_user_id": "123456789",
     "third_party_user_display_name": "Dr. Vimeo",
     "type": "facebook",
