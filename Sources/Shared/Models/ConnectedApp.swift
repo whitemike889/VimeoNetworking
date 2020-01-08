@@ -33,8 +33,10 @@
     case linkedin
     case twitter
     case youtube
+}
 
-    public var stringValue: String {
+extension ConnectedAppType: CustomStringConvertible {
+    public var description: String {
         switch self {
         case .facebook:
             return String.facebook
