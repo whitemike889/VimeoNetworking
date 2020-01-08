@@ -27,21 +27,25 @@
 import XCTest
 @testable import VimeoNetworking
 
-let TestVimeoBaseURL = URL(string: "https://api.vimeo.com")!
 
 class VimeoSessionManagerTests: XCTestCase {
     func test_VimeoSessionManager_defaultBaseUrl() {
+        // Given a default base URL and configuration that doesn't specify a custom URL
+        let testVimeoBaseURL = URL(string: "https://api.vimeo.com")!
+        VimeoSessionManager.baseURL = testVimeoBaseURL
         let configuration = AppConfiguration(clientIdentifier: "{TEST CLIENT ID}",
                                              clientSecret: "{TEST CLIENT SECRET}",
                                              scopes: [.Public, .Private, .Purchased, .Create, .Edit, .Delete, .Interact, .Upload],
                                              keychainService: "com.vimeo.keychain_service",
                                              apiVersion: "3.3")
-    
+        // When I create a new session manager
         let sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: configuration, configureSessionManagerBlock: nil)
-        XCTAssertEqual(sessionManager.httpSessionManager.baseURL, TestVimeoBaseURL)
+        // Then it should use the default base URL
+        XCTAssertEqual(sessionManager.httpSessionManager.baseURL, testVimeoBaseURL)
     }
     
     func test_VimeoSessionManager_canSetBaseUrl() {
+        // Given a configuration that specifies a base URL
         let testApiServer = URL(string: "https://test.api.vimeo.com")!
         let configuration = AppConfiguration(clientIdentifier: "{TEST CLIENT ID}",
                                              clientSecret: "{TEST CLIENT SECRET}",
@@ -49,12 +53,14 @@ class VimeoSessionManagerTests: XCTestCase {
                                              keychainService: "com.vimeo.keychain_service",
                                              apiVersion: "3.3",
                                              baseUrl: testApiServer)
-        
+        // When I create a new session manager
         let sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: configuration, configureSessionManagerBlock: nil)
+        // Then it should use the URL specified by the configuration object
         XCTAssertEqual(sessionManager.httpSessionManager.baseURL, testApiServer)
     }
     
     func test_VimeoSessionManager_canCreateTasksWithOverridenBaseUrl() {
+        // Given a configuration that specifies a base URL
         let testApiServer = URL(string: "https://test.api.vimeo.com")!
         let configuration = AppConfiguration(clientIdentifier: "{TEST CLIENT ID}",
                                              clientSecret: "{TEST CLIENT SECRET}",
@@ -62,12 +68,14 @@ class VimeoSessionManagerTests: XCTestCase {
                                              keychainService: "com.vimeo.keychain_service",
                                              apiVersion: "3.3",
                                              baseUrl: testApiServer)
-        
+
+        // When I create a new session manager
         let sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: configuration, configureSessionManagerBlock: nil)
         
         let testPath = "/test/api/endpoint"
         let testUrl = testApiServer.appendingPathComponent(testPath)
-        
+
+        // Then the tasks created should use the base URL specified by the configuration object
         var task = sessionManager.httpSessionManager.get(testPath, parameters: nil, progress: nil, success: nil, failure: nil)
         XCTAssertEqual(task?.currentRequest?.url, testUrl)
         
@@ -85,17 +93,22 @@ class VimeoSessionManagerTests: XCTestCase {
     }
     
     func test_VimeoSessionManager_canCreateTasksWithDefaultBaseUrl() {
+        // Given a default base URL and configuration that doesn't specify a custom URL
+        let testVimeoBaseURL = URL(string: "https://api.vimeo.com")!
+        VimeoSessionManager.baseURL = testVimeoBaseURL
         let configuration = AppConfiguration(clientIdentifier: "{TEST CLIENT ID}",
                                              clientSecret: "{TEST CLIENT SECRET}",
                                              scopes: [.Public, .Private, .Purchased, .Create, .Edit, .Delete, .Interact, .Upload],
                                              keychainService: "com.vimeo.keychain_service",
                                              apiVersion: "3.3")
-        
+
+        // When I create a new session manager
         let sessionManager = VimeoSessionManager.defaultSessionManager(appConfiguration: configuration, configureSessionManagerBlock: nil)
         
         let testPath = "/test/api/endpoint"
-        let testUrl = TestVimeoBaseURL.appendingPathComponent(testPath)
-        
+        let testUrl = testVimeoBaseURL.appendingPathComponent(testPath)
+
+        // Then the tasks created should use the default base URL
         var task = sessionManager.httpSessionManager.get(testPath, parameters: nil, progress: nil, success: nil, failure: nil)
         XCTAssertEqual(task?.currentRequest?.url, testUrl)
         

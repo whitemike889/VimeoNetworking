@@ -56,7 +56,7 @@ public struct AppConfiguration {
         self.scopes = scopes
         self.keychainService = keychainService
         self.keychainAccessGroup = keychainAccessGroup
-        self.apiVersion = apiVersion ?? VimeoDefaultAPIVersionString
-        self.baseUrl = baseUrl ?? VimeoBaseURL
+        self.apiVersion = apiVersion ?? VimeoSessionManager.apiVersion
+        self.baseUrl = baseUrl ?? VimeoSessionManager.baseURL
     }
 }
