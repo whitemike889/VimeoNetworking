@@ -23,7 +23,7 @@
 //  THE SOFTWARE.
 //
 
-public extension Request {
+public extension Request where ModelType: ConnectedApp {
 
     /// Returns a fetch request of all connected apps for the authenticated user.
     static func connectedApps() -> Request {
