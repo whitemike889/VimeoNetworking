@@ -43,9 +43,6 @@ final public class VimeoSessionManager: NSObject, SessionManaging {
     /// Base URL for the Vimeo API
     public internal(set) static var baseURL = URL(string: "https://api.vimeo.com")!
 
-     /// Default API version to use for requests
-    public private(set) static var apiVersion = "3.4"
-
     /// Getter and setter for the securityPolicy property on AFHTTPSessionManager
     @objc public var securityPolicy: SecurityPolicy {
         get { return self.httpSessionManager.securityPolicy }

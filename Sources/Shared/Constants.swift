@@ -29,4 +29,4 @@ import Foundation
 public var VimeoBaseURL: URL { return VimeoSessionManager.baseURL }
 
  /// Default API version to use for requests
-internal let VimeoDefaultAPIVersionString = "3.4"
+internal let VimeoDefaultAPIVersionString: String = "3.4"
