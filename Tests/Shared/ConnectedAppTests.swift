@@ -249,4 +249,28 @@ class ConnectedAppTests: XCTestCase {
         XCTAssertEqual(youtubeApp.resourceKey, "670aaebbb3231ce4a2eacae303ead3caecb2b31b")
         XCTAssertFalse(try XCTUnwrap(youtubeApp.isDataAccessExpired))
     }
+
+    func test_isConnectedToApp_returnsTrue_whenIsConnectedIsTrue() throws {
+        let json: [String: Any] = [
+            "options": ["GET"],
+            "uri": "/me/connected_apps/facebook",
+            "is_connected": "true",
+            "all_scopes": ["Publish", "Profile"]
+        ]
+
+        let interaction = try VIMObjectMapper.mapObject(responseDictionary: json) as VIMInteraction
+        XCTAssertTrue(interaction.isConnectedToApp())
+    }
+
+    func test_isConnectedToApp_returnsFalse_whenIsConnectedIsFalse() throws {
+        let json: [String: Any] = [
+            "options": ["GET"],
+            "uri": "/me/connected_apps/facebook",
+            "is_connected": "false",
+            "all_scopes": ["Publish", "Profile"]
+        ]
+
+        let interaction = try VIMObjectMapper.mapObject(responseDictionary: json) as VIMInteraction
+        XCTAssertFalse(interaction.isConnectedToApp())
+    }
 }
