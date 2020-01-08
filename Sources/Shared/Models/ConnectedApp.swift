@@ -56,10 +56,10 @@ extension ConnectedAppType: CustomStringConvertible {
 public class ConnectedAppScopes: VIMModelObject {
 
     /// All scopes required for publishing to a specific social media platform.
-    public var publishToSocial: [String]?
+    public private(set) var publishToSocial: [String]?
 
     /// All scopes required for simulcasting to a specific social media platform.
-    public var simulcast: [String]?
+    public private(set) var simulcast: [String]?
 
     // MARK: - Overrides
 
@@ -75,10 +75,10 @@ public class ConnectedAppScopes: VIMModelObject {
 public class PublishOptionItem: VIMModelObject {
 
     /// The ID of the publish item.
-    public var identifier: String?
+    public private(set) var identifier: String?
 
     /// The name or display name of the publich item, i.e.: "art", "family", "vacation" etc.
-    public var name: String?
+    public private(set) var name: String?
 
     // MARK: - Overrides
 
@@ -99,15 +99,15 @@ public class PublishOptionItem: VIMModelObject {
     /// The date when the user established this connected app, as a String.
     /// - Note: This property is available to provide interoperability with Objective-C codebases.
     ///         Using `addDate` is preferred.
-    @objc public var addDateString: String?
+    @objc public private(set) var addDateString: String?
 
     /// The date when the user established this connected app.
-    @objc public var addDate: Date?
+    @objc public private(set) var addDate: Date?
 
     /// Facebook only. A value of 1 maps to expired data access. A value of 0 maps to having data access.
     /// - Note: This property is available to provide interoperability with Objective-C codebases.
     ///         Using `isDataAccessExpired` is preferred.
-    @objc public var dataAccessIsExpired: NSNumber?
+    @objc public private(set) var dataAccessIsExpired: NSNumber?
 
     /// Returns whether the user's data access has expired.
     /// - Note: Facebook only. Will always return false if the `ConnectedAppType` is not `.facebook`.
@@ -117,29 +117,29 @@ public class PublishOptionItem: VIMModelObject {
     }()
 
     /// The list of remaining scopes on this connected app that the user needs for a particular Vimeo feature.
-    @objc public var neededScopes: ConnectedAppScopes?
+    @objc public private(set) var neededScopes: ConnectedAppScopes?
 
     /// The list of third party pages associated with the user's account.
     /// - Note: Facebook and LinkedIn only.
-    @objc public var pages: [PublishOptionItem]?
+    @objc public private(set) var pages: [PublishOptionItem]?
 
     /// The list of third party categories that can be selected when publishing to a social media platform.
     /// - Note: Facebook and YouTube only.
-    @objc public var publishCategories: [PublishOptionItem]?
+    @objc public private(set) var publishCategories: [PublishOptionItem]?
 
     /// The resource key string of the connected app.
     @objc public private(set) var resourceKey: String?
 
     /// The unique identifier for the user on this connected app.
-    @objc public var thirdPartyUserID: String?
+    @objc public private(set) var thirdPartyUserID: String?
 
     /// The user's display name on this connected app.
-    @objc public var thirdPartyUserDisplayName: String?
+    @objc public private(set) var thirdPartyUserDisplayName: String?
 
     /// The type of the connected app, as a String.
     /// - Note: This property is available to provide interoperability with Objective-C codebases.
     ///         Using `type` is preferred.
-    @objc public var typeString: String?
+    @objc public private(set) var typeString: String?
 
     /// The type of the connected app.
     /// - Note: A returned value of `nil` indicates an unsupported `ConnectedAppType`, or a malformed response.
@@ -159,7 +159,7 @@ public class PublishOptionItem: VIMModelObject {
     }
 
     /// The API URI of this connected app.
-    @objc public var uri: String?
+    @objc public private(set) var uri: String?
 
     // MARK: - Overrides
 
