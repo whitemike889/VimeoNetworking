@@ -71,7 +71,7 @@ class ConnectedAppTests: XCTestCase {
             "type": "facebook"
         ]
         let connectedApp = try VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
-        XCTAssertEqual(connectedApp.type?.stringValue, "facebook")
+        XCTAssertEqual(connectedApp.type?.description, "facebook")
     }
     
     func test_connectedAppType_returnsExpectedStringValue_forYouTubeAppType() throws {
@@ -79,7 +79,7 @@ class ConnectedAppTests: XCTestCase {
             "type": "youtube"
         ]
         let connectedApp = try VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
-        XCTAssertEqual(connectedApp.type?.stringValue, "youtube")
+        XCTAssertEqual(connectedApp.type?.description, "youtube")
     }
     
     func test_connectedAppType_returnsExpectedStringValue_forTwitterAppType() throws {
@@ -87,7 +87,7 @@ class ConnectedAppTests: XCTestCase {
             "type": "twitter"
         ]
         let connectedApp = try VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
-        XCTAssertEqual(connectedApp.type?.stringValue, "twitter")
+        XCTAssertEqual(connectedApp.type?.description, "twitter")
     }
     
     func test_connectedAppType_returnsExpectedStringValue_forLinkedInAppType() throws {
@@ -95,7 +95,7 @@ class ConnectedAppTests: XCTestCase {
             "type": "linkedin"
         ]
         let connectedApp = try VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
-        XCTAssertEqual(connectedApp.type?.stringValue, "linkedin")
+        XCTAssertEqual(connectedApp.type?.description, "linkedin")
     }
     
     func test_connectedAppType_returnsNil_whenTypeIsUnexpected() throws {
@@ -104,7 +104,7 @@ class ConnectedAppTests: XCTestCase {
         ]
         let connectedApp = try VIMObjectMapper.mapObject(responseDictionary: json) as ConnectedApp
         XCTAssertNil(connectedApp.type)
-        XCTAssertNil(connectedApp.type?.stringValue)
+        XCTAssertNil(connectedApp.type?.description)
     }
     
     func test_connectedApp_returnsExpectedPublishCategories_fromInputPublishOptionItems() throws {
