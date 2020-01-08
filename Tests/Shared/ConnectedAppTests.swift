@@ -161,6 +161,7 @@ class ConnectedAppTests: XCTestCase {
         XCTAssertTrue(facebookApp.pages?.count == 0)
         XCTAssertTrue(facebookApp.neededScopes?.publishToSocial?.count == 0)
         XCTAssertEqual(facebookApp.publishCategories?.count, 19)
+        XCTAssertEqual(facebookApp.resourceKey, "aad6013ccbbbee2ab3c37ab3ae1eaeca32432eb0")
         XCTAssertFalse(try XCTUnwrap(facebookApp.dataAccessIsExpired?.boolValue))
 
         let youtubeApp = connectedApps[1]
@@ -173,6 +174,7 @@ class ConnectedAppTests: XCTestCase {
         XCTAssertTrue(youtubeApp.pages?.count == 0)
         XCTAssertTrue(youtubeApp.neededScopes?.publishToSocial?.count == 0)
         XCTAssertEqual(youtubeApp.publishCategories?.count, 15)
+        XCTAssertEqual(youtubeApp.resourceKey, "670aaebbb3231ce4a2eacae303ead3caecb2b31b")
         XCTAssertFalse(try XCTUnwrap(youtubeApp.dataAccessIsExpired?.boolValue))
     }
 
@@ -209,6 +211,7 @@ class ConnectedAppTests: XCTestCase {
         XCTAssertEqual(facebookApp.publishCategories?[14].name, "Science")
         XCTAssertEqual(facebookApp.publishCategories?[18].identifier, "OTHER")
         XCTAssertEqual(facebookApp.publishCategories?[18].name, "Other")
+        XCTAssertEqual(facebookApp.resourceKey, "aad6013ccbbbee2ab3c37ab3ae1eaeca32432eb0")
         XCTAssertFalse(try XCTUnwrap(facebookApp.dataAccessIsExpired?.boolValue))
     }
 
@@ -243,6 +246,7 @@ class ConnectedAppTests: XCTestCase {
         XCTAssertEqual(youtubeApp.publishCategories?[10].name, "People & Blogs")
         XCTAssertEqual(youtubeApp.publishCategories?[14].identifier, "19")
         XCTAssertEqual(youtubeApp.publishCategories?[14].name, "Travel & Events")
+        XCTAssertEqual(youtubeApp.resourceKey, "670aaebbb3231ce4a2eacae303ead3caecb2b31b")
         XCTAssertFalse(try XCTUnwrap(youtubeApp.dataAccessIsExpired?.boolValue))
     }
 }
