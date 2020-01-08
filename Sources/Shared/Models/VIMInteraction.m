@@ -43,6 +43,7 @@ NSString * const VIMInteractionConnectedAppLinkedIn = @"linkedin_connected_app";
 NSString * const VIMInteractionConnectedAppTwitter = @"twitter_connected_app";
 
 @interface VIMInteraction()
+@property (nonatomic, assign) BOOL isConnected;
 @property (nonatomic, copy, nullable) NSString *added_time;
 @property (nonatomic, copy, nullable) NSString *expires_time;
 @property (nonatomic, copy, nullable) NSString *purchase_time;
@@ -79,7 +80,8 @@ NSString * const VIMInteractionConnectedAppTwitter = @"twitter_connected_app";
 - (NSDictionary *)getObjectMapping
 {
     return @{
-        @"all_scopes": @"allScopes"
+        @"all_scopes": @"allScopes",
+        @"is_connected": @"isConnected"
     };
 }
 #pragma mark - Parsing Helpers
@@ -97,6 +99,10 @@ NSString * const VIMInteractionConnectedAppTwitter = @"twitter_connected_app";
     NSAssert(number != nil, @"VOD video stream status not handled, unknown stream status");
 
     self.streamStatus = [number intValue];
+}
+
+- (BOOL)isConnectedToApp {
+    return self.isConnected == TRUE;
 }
 
 - (BOOL)canGet {
