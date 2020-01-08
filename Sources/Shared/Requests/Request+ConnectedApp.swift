@@ -33,7 +33,7 @@ public extension Request {
     /// Returns a fetch request for a single connected app.
     /// - Parameter appType: The `ConnectedAppType` to fetch data for.
     static func connectedApp(_ appType: ConnectedAppType) -> Request {
-        return Request(path: .connectedAppsURI + appType.stringValue)
+        return Request(path: .connectedAppsURI + appType.description)
     }
 
     /// Returns a `put` request for connecting the provided app type to the current authenticated user's account.
@@ -41,7 +41,7 @@ public extension Request {
     ///   - appType: The app platform for which the connection will be established.
     ///   - token: An authentication token from the provided platfrom, used to establish the connection.
     static func connect(to appType: ConnectedAppType, with token: String) -> Request {
-        let uri: String = .connectedAppsURI + appType.stringValue
+        let uri: String = .connectedAppsURI + appType.description
 
         var tokenKey: String
         switch appType {
@@ -59,7 +59,7 @@ public extension Request {
     /// Returns a request to `delete` the connection to the specified app.
     /// - Parameter appType: The `ConnectedAppType` to disassociate from the authenticated user.
     static func deleteConnectedApp(_ appType: ConnectedAppType) -> Request {
-        let uri: String = .connectedAppsURI + appType.stringValue
+        let uri: String = .connectedAppsURI + appType.description
         return Request(method: .delete, path: uri)
     }
 }
