@@ -110,4 +110,16 @@ class RequestTests: XCTestCase {
         let params = associatedRequest.parameters as! VimeoClient.RequestParametersDictionary
         XCTAssertEqual(params["next_page"] as! String, "2")
     }
+
+    func test_Request_usesSpecifiedBaseURL() {
+        var expectedURL = URL(string: "https://api.vimeo.com")!
+        VimeoSessionManager.baseURL = expectedURL
+        let request = Request<VIMNullResponse>(path: "/test")
+        XCTAssertEqual(request.baseURL, expectedURL)
+
+        expectedURL = URL(string: "https://custom.api.vimeo.com")!
+        VimeoSessionManager.baseURL = expectedURL
+        XCTAssertEqual(request.baseURL, expectedURL)
+
+    }
 }
