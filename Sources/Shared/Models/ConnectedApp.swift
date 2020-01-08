@@ -125,6 +125,9 @@ public class PublishOptionItem: VIMModelObject {
     /// - Note: Facebook and YouTube only.
     @objc public var publishCategories: [PublishOptionItem]?
 
+    /// The resource key string of the connected app.
+    @objc public private(set) var resourceKey: String?
+
     /// The unique identifier for the user on this connected app.
     @objc public var thirdPartyUserID: String?
 
@@ -213,6 +216,7 @@ private extension String {
         static let pages = "pages"
         static let publishCategories = "publish_categories"
         static let publishToSocial = "publish_to_social"
+        static let resourceKey = "resource_key"
         static let thirdPartyUserID = "third_party_user_id"
         static let thirdPartyUserDisplayName = "third_party_user_display_name"
         static let type = "type"
@@ -225,6 +229,7 @@ private extension String {
         static let neededScopes = "neededScopes"
         static let publishCategories = "publishCategories"
         static let publishToSocial = "publishToSocial"
+        static let resourceKey = "resourceKey"
         static let thirdPartyUserID = "thirdPartyUserID"
         static let thirdPartyUserDisplayName = "thirdPartyUserDisplayName"
         static let type = "typeString"
