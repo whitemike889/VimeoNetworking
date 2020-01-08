@@ -105,9 +105,8 @@ public class PublishOptionItem: VIMModelObject {
     @objc public private(set) var addDate: Date?
 
     /// Facebook only. A value of 1 maps to expired data access. A value of 0 maps to having data access.
-    /// - Note: This property is available to provide interoperability with Objective-C codebases.
-    ///         Using `isDataAccessExpired` is preferred.
-    @objc public private(set) var dataAccessIsExpired: NSNumber?
+    /// - Note: This is a private property. Use `isDataAccessExpired` instead.
+    @objc private var dataAccessIsExpired: NSNumber?
 
     /// Returns whether the user's data access has expired.
     /// - Note: Facebook only. Will always return false if the `ConnectedAppType` is not `.facebook`.

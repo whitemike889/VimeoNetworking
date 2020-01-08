@@ -162,7 +162,7 @@ class ConnectedAppTests: XCTestCase {
         XCTAssertTrue(facebookApp.neededScopes?.publishToSocial?.count == 0)
         XCTAssertEqual(facebookApp.publishCategories?.count, 19)
         XCTAssertEqual(facebookApp.resourceKey, "aad6013ccbbbee2ab3c37ab3ae1eaeca32432eb0")
-        XCTAssertFalse(try XCTUnwrap(facebookApp.dataAccessIsExpired?.boolValue))
+        XCTAssertFalse(try XCTUnwrap(facebookApp.isDataAccessExpired))
 
         let youtubeApp = connectedApps[1]
         XCTAssertNotNil(youtubeApp)
@@ -175,7 +175,7 @@ class ConnectedAppTests: XCTestCase {
         XCTAssertTrue(youtubeApp.neededScopes?.publishToSocial?.count == 0)
         XCTAssertEqual(youtubeApp.publishCategories?.count, 15)
         XCTAssertEqual(youtubeApp.resourceKey, "670aaebbb3231ce4a2eacae303ead3caecb2b31b")
-        XCTAssertFalse(try XCTUnwrap(youtubeApp.dataAccessIsExpired?.boolValue))
+        XCTAssertFalse(try XCTUnwrap(youtubeApp.isDataAccessExpired))
     }
 
     func test_facebookConnectedApp_parsesCorrectly_fromJSONFixture() throws {
@@ -212,7 +212,7 @@ class ConnectedAppTests: XCTestCase {
         XCTAssertEqual(facebookApp.publishCategories?[18].identifier, "OTHER")
         XCTAssertEqual(facebookApp.publishCategories?[18].name, "Other")
         XCTAssertEqual(facebookApp.resourceKey, "aad6013ccbbbee2ab3c37ab3ae1eaeca32432eb0")
-        XCTAssertFalse(try XCTUnwrap(facebookApp.dataAccessIsExpired?.boolValue))
+        XCTAssertFalse(try XCTUnwrap(facebookApp.isDataAccessExpired))
     }
 
     func test_youtubeConnectedApp_parsesCorrectly_fromJSONFixture() throws {
@@ -247,6 +247,6 @@ class ConnectedAppTests: XCTestCase {
         XCTAssertEqual(youtubeApp.publishCategories?[14].identifier, "19")
         XCTAssertEqual(youtubeApp.publishCategories?[14].name, "Travel & Events")
         XCTAssertEqual(youtubeApp.resourceKey, "670aaebbb3231ce4a2eacae303ead3caecb2b31b")
-        XCTAssertFalse(try XCTUnwrap(youtubeApp.dataAccessIsExpired?.boolValue))
+        XCTAssertFalse(try XCTUnwrap(youtubeApp.isDataAccessExpired))
     }
 }
