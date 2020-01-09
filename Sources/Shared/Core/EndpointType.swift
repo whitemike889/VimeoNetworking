@@ -30,5 +30,5 @@ public protocol EndpointType: URLRequestConvertible {
 }
 
 extension EndpointType {
-    var baseURL: URL { return VimeoBaseURL }
+    var baseURL: URL { return VimeoSessionManager.baseURL }
 }

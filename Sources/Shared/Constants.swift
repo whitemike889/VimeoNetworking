@@ -26,9 +26,7 @@
 
 import Foundation
 
-// TODO: Revert this constant's scope. [VN] (05/16/2018)
-/// Base URL for the Vimeo API
-public let VimeoBaseURL = URL(string: "https://api.vimeo.com")!
+public var VimeoBaseURL: URL { return VimeoSessionManager.baseURL }
 
  /// Default API version to use for requests
 internal let VimeoDefaultAPIVersionString = "3.4"
