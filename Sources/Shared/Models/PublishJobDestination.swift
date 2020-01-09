@@ -31,9 +31,10 @@
     case error
     case finished
     case inProgress
-    
-    /// Returns a string value for the given case.
-    public var stringValue: String {
+}
+
+extension PublishStatus: CustomStringConvertible {
+    public var description: String {
         switch self {
         case .error:
             return String.error
@@ -96,22 +97,38 @@ public class PublishDestinations: VIMModelObject {
     
     /// Information about the upload/post on Twitter.
     public var twitter: PublishJobDestination?
+
+    public override func getClassForObjectKey(_ key: String?) -> AnyClass? {
+        switch key {
+        case String.Key.facebook,
+             String.Key.linkedin,
+             String.Key.twitter,
+             String.Key.youtube:
+            return PublishJobDestination.self
+        default:
+            return nil
+        }
+    }
 }
 
 private extension String {
     struct Key {
+        static let facebook = "facebook"
+        static let linkedin = "linkedin"
+        static let twitter = "twitter"
+        static let youtube = "youtube"
         static let thirdPartyPostURL = "third_party_post_url"
         static let thirdPartyPostID = "third_party_post_id"
         static let status = "status"
     }
     
     struct Value {
+        static let status = "statusString"
         static let thirdPartyPostURL = "thirdPartyPostURL"
         static let thirdPartyPostID = "thirdPartyPostID"
-        static let status = "statusString"
     }
     
-    static let error = "ERROR"
-    static let finished = "FINISHED"
-    static let inProgress = "IN_PROGRESS"
+    static let error = "error"
+    static let finished = "finished"
+    static let inProgress = "in_progress"
 }
