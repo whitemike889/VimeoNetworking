@@ -30,11 +30,39 @@ class PublishJobTests: XCTestCase {
     func test_publishJob_parsesAsExpected() throws {
         let json: [String: Any] = [
             "first_publish_date": "2015-12-17T21:32:44+00:00",
-            "destinations": ""
+            "destinations": "",
+            "resource_key": "3ebd4a2becabbee30ca2baae3a23cebca1137063"
         ]
 
         let publishJob = try VIMObjectMapper.mapObject(responseDictionary: json) as PublishJob
-        XCTAssertNotNil(publishJob.firstPublishDateString)
         XCTAssertNotNil(publishJob.firstPublishDate)
+        XCTAssertNotNil(publishJob.resourceKey)
+        XCTAssertEqual(publishJob.resourceKey, "3ebd4a2becabbee30ca2baae3a23cebca1137063")
+    }
+
+    func test_firstPublishDate_isFormattedCorrectly() throws {
+        let json: [String: Any] = [
+            "first_publish_date": "2015-12-17T21:32:44+00:00",
+            "destinations": "",
+            "resource_key": "3ebd4a2becabbee30ca2baae3a23cebca1137063"
+        ]
+
+        let publishJob = try VIMObjectMapper.mapObject(responseDictionary: json) as PublishJob
+
+        var calendar = Calendar.current
+        TimeZone(secondsFromGMT: 0).map { calendar.timeZone = $0 }
+        let year = try calendar.component(.year, from: XCTUnwrap(publishJob.firstPublishDate))
+        let month = try calendar.component(.month, from: XCTUnwrap(publishJob.firstPublishDate))
+        let day = try calendar.component(.day, from: XCTUnwrap(publishJob.firstPublishDate))
+        let hour = try calendar.component(.hour, from: XCTUnwrap(publishJob.firstPublishDate))
+        let minute = try calendar.component(.minute, from: XCTUnwrap(publishJob.firstPublishDate))
+        let second = try calendar.component(.second, from: XCTUnwrap(publishJob.firstPublishDate))
+
+        XCTAssertEqual(year, 2015)
+        XCTAssertEqual(month, 12)
+        XCTAssertEqual(day, 17)
+        XCTAssertEqual(hour, 21)
+        XCTAssertEqual(minute, 32)
+        XCTAssertEqual(second, 44)
     }
 }
