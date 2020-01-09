@@ -30,13 +30,16 @@ public class PublishJob: VIMModelObject {
     /// The time in ISO 8601 format when the user first published this upload/post.
     /// - Note: This property is available to provide interoperability with Objective-C codebases.
     ///         Using `firstPublishDate` is preferred.
-    public var firstPublishDateString: String?
+    public private(set) var firstPublishDateString: String?
     
     /// The time as a `Date` when the user first published this upload/post.
-    public var firstPublishDate: Date?
+    public private(set) var firstPublishDate: Date?
     
     /// The status of the upload/post on each of the supported platforms.
-    public var destinations: PublishDestinations?
+    public private(set) var destinations: PublishDestinations?
+
+    /// The resource key of the publish to social job.
+    public private(set) var resourceKey: String?
     
     // MARK: - Overrides
     
@@ -51,7 +54,8 @@ public class PublishJob: VIMModelObject {
     
     public override func getObjectMapping() -> Any? {
         return [
-            String.Key.firstPublishDate: String.Value.firstPublishDate
+            String.Key.firstPublishDate: String.Value.firstPublishDate,
+            String.Key.resourceKey: String.Value.resourceKey
         ]
     }
     
@@ -74,9 +78,11 @@ private extension String {
     struct Key {
         static let destinations = "destinations"
         static let firstPublishDate = "first_publish_date"
+        static let resourceKey = "resource_key"
     }
     
     struct Value {
         static let firstPublishDate = "firstPublishDateString"
+        static let resourceKey = "resourceKey"
     }
 }
