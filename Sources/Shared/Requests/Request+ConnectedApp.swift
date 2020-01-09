@@ -23,13 +23,14 @@
 //  THE SOFTWARE.
 //
 
-public extension Request where ModelType: ConnectedApp {
-
+public extension Request where ModelType == [ConnectedApp] {
     /// Returns a fetch request of all connected apps for the authenticated user.
     static func connectedApps() -> Request {
         return Request(path: .connectedAppsURI)
     }
+}
 
+public extension Request where ModelType: ConnectedApp {
     /// Returns a fetch request for a single connected app.
     /// - Parameter appType: The `ConnectedAppType` to fetch data for.
     static func connectedApp(_ appType: ConnectedAppType) -> Request {
@@ -55,7 +56,9 @@ public extension Request where ModelType: ConnectedApp {
 
         return Request(method: .put, path: uri, parameters: parameters)
     }
+}
 
+public extension Request where ModelType: VIMNullResponse {
     /// Returns a request to `delete` the connection to the specified app.
     /// - Parameter appType: The `ConnectedAppType` to disassociate from the authenticated user.
     static func deleteConnectedApp(_ appType: ConnectedAppType) -> Request {

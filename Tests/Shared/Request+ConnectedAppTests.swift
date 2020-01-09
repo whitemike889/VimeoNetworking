@@ -31,26 +31,31 @@ class Request_ConnectedAppTests: XCTestCase {
     func test_connectedAppsRequest_returnsRequest_withExpectedURI() {
         let request = Request.connectedApps()
         XCTAssertEqual(request.path, "/me/connected_apps/")
+        XCTAssertTrue(type(of: request) == Request<[ConnectedApp]>.self)
     }
     
     func test_connectedApp_returnsExpectedURI_forFacebook() {
         let request = Request.connectedApp(.facebook)
         XCTAssertEqual(request.path, "/me/connected_apps/facebook")
+        XCTAssertTrue(type(of: request) == Request<ConnectedApp>.self)
     }
     
     func test_connectedApp_returnsExpectedURI_forTwitter() {
         let request = Request.connectedApp(.twitter)
         XCTAssertEqual(request.path, "/me/connected_apps/twitter")
+        XCTAssertTrue(type(of: request) == Request<ConnectedApp>.self)
     }
     
     func test_connectedApp_returnsExpectedURI_forYouTube() {
         let request = Request.connectedApp(.youtube)
         XCTAssertEqual(request.path, "/me/connected_apps/youtube")
+        XCTAssertTrue(type(of: request) == Request<ConnectedApp>.self)
     }
     
     func test_connectedApp_returnsExpectedURI_forLinkedIn() {
         let request = Request.connectedApp(.linkedin)
         XCTAssertEqual(request.path, "/me/connected_apps/linkedin")
+        XCTAssertTrue(type(of: request) == Request<ConnectedApp>.self)
     }
     
     func test_connectToFacebookRequest_returnsRequest_withExpectedTokenParameterKey() throws {
@@ -58,6 +63,7 @@ class Request_ConnectedAppTests: XCTestCase {
         XCTAssertEqual(request.method, .put)
         XCTAssertEqual(request.path, "/me/connected_apps/facebook")
         XCTAssertEqual(try XCTUnwrap(request.parameters) as? [String: String], ["auth_code":"a1b2c3"])
+        XCTAssertTrue(type(of: request) == Request<ConnectedApp>.self)
     }
     
     func test_connectToTwitterRequest_returnsRequest_withExpectedTokenParameterKey() throws {
@@ -65,6 +71,7 @@ class Request_ConnectedAppTests: XCTestCase {
         XCTAssertEqual(request.method, .put)
         XCTAssertEqual(request.path, "/me/connected_apps/twitter")
         XCTAssertEqual(try XCTUnwrap(request.parameters) as? [String: String], ["access_token_secret":"a1b2c3"])
+        XCTAssertTrue(type(of: request) == Request<ConnectedApp>.self)
     }
     
     func test_connectToYouTubeRequest_returnsRequest_withExpectedTokenParameterKey() throws {
@@ -72,6 +79,7 @@ class Request_ConnectedAppTests: XCTestCase {
         XCTAssertEqual(request.method, .put)
         XCTAssertEqual(request.path, "/me/connected_apps/youtube")
         XCTAssertEqual(try XCTUnwrap(request.parameters) as? [String: String], ["auth_code":"a1b2c3"])
+        XCTAssertTrue(type(of: request) == Request<ConnectedApp>.self)
     }
     
     func test_connectToLinkedInRequest_returnsRequest_withExpectedTokenParameterKey() throws {
@@ -79,29 +87,34 @@ class Request_ConnectedAppTests: XCTestCase {
         XCTAssertEqual(request.method, .put)
         XCTAssertEqual(request.path, "/me/connected_apps/linkedin")
         XCTAssertEqual(try XCTUnwrap(request.parameters) as? [String: String], ["auth_code":"a1b2c3"])
+        XCTAssertTrue(type(of: request) == Request<ConnectedApp>.self)
     }
     
     func test_deleteConnectedApp_returnsExpectedHTTPMethod_andURI_forFacebook() {
         let request = Request.deleteConnectedApp(.facebook)
         XCTAssertEqual(request.method, .delete)
         XCTAssertEqual(request.path, "/me/connected_apps/facebook")
+        XCTAssertTrue(type(of: request) == Request<VIMNullResponse>.self)
     }
-    
+
     func test_deleteConnectedApp_returnsExpectedHTTPMethod_andURI_forTwitter() {
         let request = Request.deleteConnectedApp(.twitter)
         XCTAssertEqual(request.method, .delete)
         XCTAssertEqual(request.path, "/me/connected_apps/twitter")
+        XCTAssertTrue(type(of: request) == Request<VIMNullResponse>.self)
     }
-    
+
     func test_deleteConnectedApp_returnsExpectedHTTPMethod_andURI_forYouTube() {
         let request = Request.deleteConnectedApp(.youtube)
         XCTAssertEqual(request.method, .delete)
         XCTAssertEqual(request.path, "/me/connected_apps/youtube")
+        XCTAssertTrue(type(of: request) == Request<VIMNullResponse>.self)
     }
-    
+
     func test_deleteConnectedApp_returnsExpectedHTTPMethod_andURI_forLinkedIn() {
         let request = Request.deleteConnectedApp(.linkedin)
         XCTAssertEqual(request.method, .delete)
         XCTAssertEqual(request.path, "/me/connected_apps/linkedin")
+        XCTAssertTrue(type(of: request) == Request<VIMNullResponse>.self)
     }
 }
