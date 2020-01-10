@@ -27,6 +27,7 @@
 public class PublishJobConnection: VIMConnection {
     public private(set) var publishBlockers: PublishJobBlockers?
     public private(set) var publishConstraints: PublishJobConstraints?
+    public private(set) var publishDestinations: PublishDestinations?
     
     public override func getClassForObjectKey(_ key: String?) -> AnyClass? {
         switch key {
@@ -34,6 +35,8 @@ public class PublishJobConnection: VIMConnection {
             return PublishJobBlockers.self
         case String.Key.publishConstraints:
             return PublishJobConstraints.self
+        case String.Key.publishDestinations:
+            return PublishDestinations.self
         default:
             return nil
         }
@@ -90,6 +93,7 @@ private extension String {
     struct Key {
         static let publishBlockers = "publish_blockers"
         static let publishConstraints = "publish_constraints"
+        static let publishDestinations = "publish_destinations"
         static let facebook = "facebook"
         static let youtube = "youtube"
         static let linkedin = "linkedin"
