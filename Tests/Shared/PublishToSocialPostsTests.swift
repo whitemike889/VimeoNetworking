@@ -79,6 +79,10 @@ class PublishToSocialPostsTests: XCTestCase {
         )
 
         var posts = SocialMediaPosts(youTube: youTubePost)
+
+        XCTAssertNil(posts.facebook)
+        XCTAssertNil(posts.linkedIn)
+        XCTAssertNil(posts.twitter)
         XCTAssertNotNil(posts.youTube)
         XCTAssertEqual(posts.youTube?.title, "How to Publish Everywhere With a Single Click")
         XCTAssertEqual(posts.youTube?.description, "Learn everything you need to know right here.")
@@ -86,10 +90,6 @@ class PublishToSocialPostsTests: XCTestCase {
         XCTAssertEqual(posts.youTube?.tags, ["Vimeo", "Publish", "Educational"])
         XCTAssertEqual(posts.youTube?.privacy, .public)
         XCTAssertEqual(posts.youTube?.categoryID, 987)
-
-        XCTAssertNil(posts.facebook)
-        XCTAssertNil(posts.linkedIn)
-        XCTAssertNil(posts.twitter)
 
         let twitterPost = PublishToTwitterPost(tweet: "Test tweet.")
         posts.twitter = twitterPost
