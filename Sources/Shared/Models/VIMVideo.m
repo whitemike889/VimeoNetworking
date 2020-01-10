@@ -81,7 +81,7 @@ NSString *VIMContentRating_Safe = @"safe";
         @"review_page": @"reviewPage",
         @"file_transfer": @"fileTransfer",
         @"app": @"sourceClientApp",
-        @"publish_to_social_job": @"publishToSocialJob"
+        @"publish_to_social": @"publishToSocialJob"
     };
 }
 
