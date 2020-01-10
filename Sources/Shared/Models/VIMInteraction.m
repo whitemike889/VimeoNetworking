@@ -102,7 +102,7 @@ NSString * const VIMInteractionConnectedAppTwitter = @"twitter_connected_app";
 }
 
 - (BOOL)isConnectedToApp {
-    return self.isConnected == TRUE;
+    return self.isConnected == YES;
 }
 
 - (BOOL)canGet {
