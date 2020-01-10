@@ -1,9 +1,9 @@
 //
-//  VIMPictureCollection.h
-//  VimeoNetworking
+//  TranscodeStatusEndpoint.swift
+//  VimeoNetworking-iOS
 //
-//  Created by Whitcomb, Andrew on 9/4/14.
-//  Copyright (c) 2014-2015 Vimeo (https://vimeo.com)
+//  Created by Nicole Lehrer on 12/10/19.
+//  Copyright © 2019 Vimeo. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,17 +24,24 @@
 //  THE SOFTWARE.
 //
 
-#import "VIMModelObject.h"
+import Foundation
 
-@class VIMPicture;
-
-@interface VIMPictureCollection : VIMModelObject
-
-@property (strong, nonatomic, nullable) NSString *uri;
-@property (strong, nonatomic, nullable) NSArray *pictures;
-@property (nonatomic, readonly) BOOL isActive;
-
-- (nullable VIMPicture *)pictureForHeight:(float)height;
-- (nullable VIMPicture *)pictureForWidth:(float)width;
-
-@end
+/// Encapsulates all information required to fetch a video's transcode status
+public struct TranscodeStatusEndpoint: EndpointType {
+    public let headers: HTTPHeaders? = nil
+    public let parameters: Any? = nil
+    public let method = HTTPMethod.get
+    public let path: String
+    private let statusPathComponent = "/status"
+    
+    /// Initializer for creating a TranscodeStatusEndpoint
+    /// - Parameter videoURI: the URI of the video
+    public init(videoURI: String) {
+        self.path = videoURI + statusPathComponent
+    }
+    
+    /// Provides a configured request for fetching a video's transcode status
+    public func asURLRequest() throws -> URLRequest {
+        return URLRequest(url: self.baseURL.appendingPathComponent(self.path))
+    }
+}

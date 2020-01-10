@@ -26,6 +26,8 @@
 
 #import "VIMModelObject.h"
 
+@class ConnectedAppScopes;
+
 // Interaction names
 
 extern NSString * const __nonnull VIMInteractionNameWatchLater;
@@ -37,6 +39,10 @@ extern NSString * const __nonnull VIMInteractionNameSubscribe;
 extern NSString * const __nonnull VIMInteractionNamePurchase;
 extern NSString * const __nonnull VIMInteractionNameAlbum;
 extern NSString * const __nonnull VIMInteractionNameAddTo;
+extern NSString * const __nonnull VIMInteractionConnectedAppFacebook;
+extern NSString * const __nonnull VIMInteractionConnectedAppYouTube;
+extern NSString * const __nonnull VIMInteractionConnectedAppLinkedIn;
+extern NSString * const __nonnull VIMInteractionConnectedAppTwitter;
 
 typedef NS_ENUM(NSInteger, VIMInteractionStreamStatus) {
     VIMInteractionStreamStatusUnavailable = 0,      // user cannot purchase
@@ -53,20 +59,31 @@ typedef NS_ENUM(NSInteger, VIMInteractionStreamStatus) {
 @property (nonatomic, strong, nullable) NSString *status;
 @property (nonatomic, strong, nullable) NSArray *options;
 
-# pragma mark - VOD related only
-@property (nonatomic, copy, nullable) NSString *link;
-@property (nonatomic, copy, nullable) NSString *download;
-@property (nonatomic, strong, nullable) NSDate *expirationDate;
-@property (nonatomic, strong, nullable) NSDate *purchaseDate;
-@property (nonatomic, assign) VIMInteractionStreamStatus streamStatus;
+#pragma mark - Connected Apps
+/**
+ For connected app interactions this indicates whether the the user is already connected to the platform.
+ */
+- (BOOL)isConnectedToApp;
+
+/**
+ An object that returns the necessary scopes for interacting with features like publishing to social platforms
+ or simulcasting a live stream.
+ */
+@property (nonatomic, strong, nullable) ConnectedAppScopes *allScopes;
 
 # pragma mark - DRM
-
 /**
  Indicates whether this VIMInteraction (to buy, rent, or subscribe) relates to content that is protected by DRM.
  Returns true if buying, renting, or subscribing to the related content will be governed by DRM.
  */
 @property (nonatomic, assign, readonly) BOOL isForDRMProtectedContent;
+
+# pragma mark - VOD
+@property (nonatomic, copy, nullable) NSString *link;
+@property (nonatomic, copy, nullable) NSString *download;
+@property (nonatomic, strong, nullable) NSDate *expirationDate;
+@property (nonatomic, strong, nullable) NSDate *purchaseDate;
+@property (nonatomic, assign) VIMInteractionStreamStatus streamStatus;
 
 - (BOOL)canGet;
 - (BOOL)canPost;
