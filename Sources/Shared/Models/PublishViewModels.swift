@@ -49,6 +49,26 @@ public struct PublishToFacebookPost {
 
     /// Whether or not to allow social actions on the post on Facebook.
     public let allowSocialActions: Bool
+
+    public init(
+        title: String,
+        description: String,
+        pageID: Int,
+        categoryID: Int,
+        allowEmbedding: Bool,
+        shouldAppearOnNewsFeed: Bool,
+        isSecretVideo: Bool,
+        allowSocialActions: Bool
+    ) {
+        self.title = title
+        self.description = description
+        self.pageID = pageID
+        self.categoryID = categoryID
+        self.allowEmbedding = allowEmbedding
+        self.shouldAppearOnNewsFeed = shouldAppearOnNewsFeed
+        self.isSecretVideo = isSecretVideo
+        self.allowSocialActions = allowSocialActions
+    }
 }
 
 /// A structure representing a single post to LinkedIn.
@@ -62,6 +82,16 @@ public struct PublishToLinkedInPost {
 
     /// The description of the post as it will appear on LinkedIn.
     public let description: String
+
+    public init(
+        pageID: Int,
+        title: String,
+        description: String
+    ) {
+        self.pageID = pageID
+        self.title = title
+        self.description = description
+    }
 }
 
 /// A structure representing a single tweet on Twitter.
@@ -69,6 +99,10 @@ public struct PublishToTwitterPost {
 
     /// The contents of the tweet as it will appear on Twitter.
     public let tweet: String
+
+    public init(tweet: String) {
+        self.tweet = tweet
+    }
 }
 
 /// A structure representing a single post to YouTube.
@@ -96,6 +130,20 @@ public struct PublishToYouTubePost {
 
     /// The YouTube category identifier to which this video falls into. May be nil.
     public let categoryID: Int?
+
+    public init(
+        title: String,
+        description: String,
+        tags: [String]?,
+        privacy: Privacy,
+        categoryID: Int?
+    ) {
+        self.title = title
+        self.description = description
+        self.tags = tags
+        self.privacy = privacy
+        self.categoryID = categoryID
+    }
 }
 
 /// A structure encapsulating publishing data for each of the supported social media platforms.
@@ -112,4 +160,16 @@ public struct SocialMediaPosts {
 
     /// A single post to YouTube.
     public var youTube: PublishToYouTubePost? = nil
+
+    public init(
+        facebook: PublishToFacebookPost? = nil,
+        linkedIn: PublishToLinkedInPost? = nil,
+        twitter: PublishToTwitterPost? = nil,
+        youTube: PublishToYouTubePost? = nil
+    ) {
+        self.facebook = facebook
+        self.linkedIn = linkedIn
+        self.twitter = twitter
+        self.youTube = youTube
+    }
 }
