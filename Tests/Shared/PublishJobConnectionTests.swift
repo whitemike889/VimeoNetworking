@@ -24,8 +24,74 @@
 //
 
 import XCTest
+@testable import VimeoNetworking
 
 class PublishJobConnectionTests: XCTestCase {
 
+    private var json: [String: Any] {
+        let blockers: [String: Any] = [
+            "facebook": ["SIZE", "DURATION", "FB_NO_PAGES"],
+            "youtube": ["SIZE", "DURATION"],
+            "linkedin": ["SIZE", "DURATION", "LI_NO_ORGANIZATIONS"],
+            "twitter": ["SIZE", "DURATION"]
+        ]
 
+        let facebookConstraint: [String: Any] = [
+            "duration": 14400,
+            "size": 10
+        ]
+
+        let constraints: [String: Any] = [
+            "facebook": facebookConstraint as Any
+        ]
+
+        let youtubeDestination: [String: Any] = [
+            "status": "finished",
+            "third_party_post_url": "https://www.youtube.com/watch?v=i72F_nPdLoz",
+            "third_party_post_id": "i72F_nPdLoz"
+        ]
+
+        let destinations: [String: Any] = [
+            "youtube": youtubeDestination as Any
+        ]
+
+        let connection: [String: Any] = [
+            "publish_blockers": blockers as Any,
+            "publish_constraints": constraints as Any,
+            "publish_destinations": destinations as Any,
+            "options": ["GET", "PUT"],
+            "uri": ""
+        ]
+
+        return connection
+    }
+
+    func test_publishBlockers_areParsedAsExpected() throws {
+        let connection = try VIMObjectMapper.mapObject(responseDictionary: json) as PublishJobConnection
+
+        XCTAssertEqual(connection.publishBlockers?.facebook, ["SIZE", "DURATION", "FB_NO_PAGES"])
+        XCTAssertEqual(connection.publishBlockers?.twitter, ["SIZE", "DURATION"])
+        XCTAssertEqual(connection.publishBlockers?.linkedin, ["SIZE", "DURATION", "LI_NO_ORGANIZATIONS"])
+        XCTAssertEqual(connection.publishBlockers?.youtube, ["SIZE", "DURATION"])
+    }
+
+    func test_publishConstraints_areParsedAsExpected() throws {
+        let connection = try VIMObjectMapper.mapObject(responseDictionary: json) as PublishJobConnection
+
+        XCTAssertEqual(connection.publishConstraints?.facebook?.duration, 14400)
+        XCTAssertEqual(connection.publishConstraints?.facebook?.size, 10)
+    }
+
+    func test_publishDestinations_areParsedAsExpected() throws {
+        let connection = try VIMObjectMapper.mapObject(responseDictionary: json) as PublishJobConnection
+
+        XCTAssertNotNil(connection.publishDestinations?.youtube)
+        XCTAssertEqual(connection.publishDestinations?.youtube?.status, .finished)
+        XCTAssertEqual(connection.publishDestinations?.youtube?.status?.description, "finished")
+        XCTAssertEqual(connection.publishDestinations?.youtube?.thirdPartyPostID, "i72F_nPdLoz")
+        XCTAssertEqual(
+            connection.publishDestinations?.youtube?.thirdPartyPostURL,
+            "https://www.youtube.com/watch?v=i72F_nPdLoz"
+        )
+    }
 }
