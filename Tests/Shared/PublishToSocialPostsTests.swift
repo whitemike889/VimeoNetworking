@@ -7,27 +7,97 @@
 //
 
 import XCTest
+import VimeoNetworking
 
 class PublishToSocialPostsTests: XCTestCase {
+    func test_publishToFacebookPost_canBeCreatedSuccessfully() {
+        let facebookPost = PublishToFacebookPost(
+            title: "Hello",
+            description: "This is only a test",
+            pageID: 12345,
+            categoryID: 3,
+            allowEmbedding: true,
+            shouldAppearOnNewsFeed: true,
+            isSecretVideo: false,
+            allowSocialActions: true
+        )
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        XCTAssertEqual(facebookPost.title, "Hello")
+        XCTAssertEqual(facebookPost.description, "This is only a test")
+        XCTAssertEqual(facebookPost.pageID, 12345)
+        XCTAssertEqual(facebookPost.categoryID, 3)
+        XCTAssertTrue(facebookPost.allowEmbedding)
+        XCTAssertTrue(facebookPost.shouldAppearOnNewsFeed)
+        XCTAssertFalse(facebookPost.isSecretVideo)
+        XCTAssertTrue(facebookPost.allowSocialActions)
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func test_publishToLinkedInPost_canBeCreatedSuccessfull() {
+        let linkedInPost = PublishToLinkedInPost(
+            pageID: 1234,
+            title: "Important Information",
+            description: "You are facing the wrong way."
+        )
+
+        XCTAssertEqual(linkedInPost.pageID, 1234)
+        XCTAssertEqual(linkedInPost.title, "Important Information")
+        XCTAssertEqual(linkedInPost.description, "You are facing the wrong way.")
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func test_publishToTwitterPost_canBeCreatedSuccessfully() {
+        let twitterPost = PublishToTwitterPost(
+            tweet: "just salad walk for lunch holla"
+        )
+
+        XCTAssertEqual(twitterPost.tweet, "just salad walk for lunch holla")
     }
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func test_publishToYouTubePost_canBeCreateSuccessfully() {
+        let youTubePost = PublishToYouTubePost(
+            title: "How to Publish Everywhere With a Single Click",
+            description: "Learn everything you need to know right here.",
+            tags: ["Vimeo", "Publish", "Educational"],
+            privacy: .public,
+            categoryID: 987
+        )
+
+        XCTAssertEqual(youTubePost.title, "How to Publish Everywhere With a Single Click")
+        XCTAssertEqual(youTubePost.description, "Learn everything you need to know right here.")
+        XCTAssertEqual(youTubePost.tags?.count, 3)
+        XCTAssertEqual(youTubePost.tags, ["Vimeo", "Publish", "Educational"])
+        XCTAssertEqual(youTubePost.privacy, .public)
+        XCTAssertEqual(youTubePost.categoryID, 987)
     }
 
+    func test_socailMediaPostsObject_canBeCreatedSuccessfully() {
+        let youTubePost = PublishToYouTubePost(
+            title: "How to Publish Everywhere With a Single Click",
+            description: "Learn everything you need to know right here.",
+            tags: ["Vimeo", "Publish", "Educational"],
+            privacy: .public,
+            categoryID: 987
+        )
+
+        var posts = SocialMediaPosts(youTube: youTubePost)
+        XCTAssertNotNil(posts.youTube)
+        XCTAssertEqual(posts.youTube?.title, "How to Publish Everywhere With a Single Click")
+        XCTAssertEqual(posts.youTube?.description, "Learn everything you need to know right here.")
+        XCTAssertEqual(posts.youTube?.tags?.count, 3)
+        XCTAssertEqual(posts.youTube?.tags, ["Vimeo", "Publish", "Educational"])
+        XCTAssertEqual(posts.youTube?.privacy, .public)
+        XCTAssertEqual(posts.youTube?.categoryID, 987)
+
+        XCTAssertNil(posts.facebook)
+        XCTAssertNil(posts.linkedIn)
+        XCTAssertNil(posts.twitter)
+
+        let twitterPost = PublishToTwitterPost(tweet: "Test tweet.")
+        posts.twitter = twitterPost
+
+        XCTAssertNotNil(posts.twitter)
+        XCTAssertNotNil(posts.youTube)
+        XCTAssertNil(posts.linkedIn)
+        XCTAssertNil(posts.facebook)
+        XCTAssertEqual(posts.twitter?.tweet, "Test tweet.")
+    }
 }
