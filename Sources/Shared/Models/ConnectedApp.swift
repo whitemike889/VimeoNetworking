@@ -50,6 +50,25 @@ extension ConnectedAppType: CustomStringConvertible {
     }
 }
 
+extension ConnectedAppType: RawRepresentable {
+    public typealias RawValue = String
+    public var rawValue: RawValue { return String(describing: self) }
+    public init?(rawValue: Self.RawValue) {
+        switch rawValue {
+        case String.facebook:
+            self = .facebook
+        case String.linkedin:
+            self = .linkedin
+        case String.twitter:
+            self = .twitter
+        case String.youtube:
+            self = .youtube
+        default:
+            return nil
+        }
+    }
+}
+
 ///  An object that encapsulates the scopes necessary for interacting with features like publishing to social platforms
 ///  or simulcasting a live stream.
 @objcMembers
@@ -144,18 +163,7 @@ public class ConnectedApp: VIMModelObject {
     /// The type of the connected app.
     /// - Note: A returned value of `nil` indicates an unsupported `ConnectedAppType`, or a malformed response.
     @nonobjc public var type: ConnectedAppType? {
-        switch self.typeString {
-        case String.facebook:
-            return .facebook
-        case String.linkedin:
-            return .linkedin
-        case String.twitter:
-            return .twitter
-        case String.youtube:
-            return .youtube
-        default:
-            return nil
-        }
+        typeString.map { ConnectedAppType.init(rawValue: $0) } ?? nil
     }
 
     /// The API URI of this connected app.
