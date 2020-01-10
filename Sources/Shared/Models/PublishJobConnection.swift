@@ -25,8 +25,8 @@
 
 @objcMembers
 public class PublishJobConnection: VIMConnection {
-    public var publishBlockers: PublishJobBlockers?
-    public var publishConstraints: PublishJobConstraints?
+    public private(set) var publishBlockers: PublishJobBlockers?
+    public private(set) var publishConstraints: PublishJobConstraints?
     
     public override func getClassForObjectKey(_ key: String?) -> AnyClass? {
         switch key {
@@ -42,24 +42,24 @@ public class PublishJobConnection: VIMConnection {
 
 @objcMembers
 public class PublishJobBlockers: VIMModelObject {
-    public var facebook: [String]?
-    public var youtube: [String]?
-    public var linkedin: [String]?
-    public var twitter: [String]?
+    public private(set) var facebook: [String]?
+    public private(set) var youtube: [String]?
+    public private(set) var linkedin: [String]?
+    public private(set) var twitter: [String]?
 }
 
 @objcMembers
 public class PublishConstraints: VIMModelObject {
-    public var duration: NSNumber?
-    public var size: NSNumber?
+    public private(set) var duration: NSNumber?
+    public private(set) var size: NSNumber?
 }
 
 @objcMembers
 public class PublishJobConstraints: VIMModelObject {
-    public var faceebok: PublishConstraints?
-    public var youtube: PublishConstraints?
-    public var linkedin: PublishConstraints?
-    public var twitter: PublishConstraints?
+    public private(set) var facebook: PublishConstraints?
+    public private(set) var youtube: PublishConstraints?
+    public private(set) var linkedin: PublishConstraints?
+    public private(set) var twitter: PublishConstraints?
     
     public override func getClassForObjectKey(_ key: String?) -> AnyClass? {
         switch key {
