@@ -33,7 +33,7 @@ class Request_PublishToSocialTests: XCTestCase {
             title: "Test Facebook post",
             description: "Test Facebook description",
             destination: 1234,
-            categoryID: 5678,
+            categoryID: "Astronomy",
             allowEmbedding: true,
             shouldAppearOnNewsFeed: true,
             isSecretVideo: false,
@@ -59,7 +59,7 @@ class Request_PublishToSocialTests: XCTestCase {
             description: "Test YouTube description",
             tags: ["test", "tags"],
             privacy: .public,
-            categoryID: 6789
+            categoryID: "Beauty"
         )
     }
 

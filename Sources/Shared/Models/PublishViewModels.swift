@@ -36,7 +36,7 @@ public struct PublishToFacebookPost {
     public let destination: Int
 
     /// The Facebook cateogry of the video.
-    public let categoryID: Int
+    public let categoryID: String
 
     /// Whether or not this Facbeook post should be embeddable.
     public let allowEmbedding: Bool
@@ -54,7 +54,7 @@ public struct PublishToFacebookPost {
         title: String,
         description: String,
         destination: Int,
-        categoryID: Int,
+        categoryID: String,
         allowEmbedding: Bool,
         shouldAppearOnNewsFeed: Bool,
         isSecretVideo: Bool,
@@ -128,15 +128,15 @@ public struct PublishToYouTubePost {
     /// The privacy option for this video on YouTube.
     public let privacy: Privacy
 
-    /// The YouTube category identifier to which this video falls into. May be nil.
-    public let categoryID: Int?
+    /// The YouTube category identifier which this video falls into. May be nil.
+    public let categoryID: String?
 
     public init(
         title: String,
         description: String,
         tags: [String]?,
         privacy: Privacy,
-        categoryID: Int?
+        categoryID: String?
     ) {
         self.title = title
         self.description = description

@@ -15,7 +15,7 @@ class PublishToSocialPostsTests: XCTestCase {
             title: "Hello",
             description: "This is only a test",
             destination: 12345,
-            categoryID: 3,
+            categoryID: "Fashion",
             allowEmbedding: true,
             shouldAppearOnNewsFeed: true,
             isSecretVideo: false,
@@ -25,7 +25,7 @@ class PublishToSocialPostsTests: XCTestCase {
         XCTAssertEqual(facebookPost.title, "Hello")
         XCTAssertEqual(facebookPost.description, "This is only a test")
         XCTAssertEqual(facebookPost.destination, 12345)
-        XCTAssertEqual(facebookPost.categoryID, 3)
+        XCTAssertEqual(facebookPost.categoryID, "Fashion")
         XCTAssertTrue(facebookPost.allowEmbedding)
         XCTAssertTrue(facebookPost.shouldAppearOnNewsFeed)
         XCTAssertFalse(facebookPost.isSecretVideo)
@@ -58,7 +58,7 @@ class PublishToSocialPostsTests: XCTestCase {
             description: "Learn everything you need to know right here.",
             tags: ["Vimeo", "Publish", "Educational"],
             privacy: .public,
-            categoryID: 987
+            categoryID: "Space"
         )
 
         XCTAssertEqual(youTubePost.title, "How to Publish Everywhere With a Single Click")
@@ -66,7 +66,7 @@ class PublishToSocialPostsTests: XCTestCase {
         XCTAssertEqual(youTubePost.tags?.count, 3)
         XCTAssertEqual(youTubePost.tags, ["Vimeo", "Publish", "Educational"])
         XCTAssertEqual(youTubePost.privacy, .public)
-        XCTAssertEqual(youTubePost.categoryID, 987)
+        XCTAssertEqual(youTubePost.categoryID, "Space")
     }
 
     func test_socailMediaPostsObject_canBeCreatedSuccessfully() {
@@ -75,7 +75,7 @@ class PublishToSocialPostsTests: XCTestCase {
             description: "Learn everything you need to know right here.",
             tags: ["Vimeo", "Publish", "Educational"],
             privacy: .public,
-            categoryID: 987
+            categoryID: "Geology"
         )
 
         var posts = SocialMediaPosts(youTube: youTubePost)
@@ -89,7 +89,7 @@ class PublishToSocialPostsTests: XCTestCase {
         XCTAssertEqual(posts.youTube?.tags?.count, 3)
         XCTAssertEqual(posts.youTube?.tags, ["Vimeo", "Publish", "Educational"])
         XCTAssertEqual(posts.youTube?.privacy, .public)
-        XCTAssertEqual(posts.youTube?.categoryID, 987)
+        XCTAssertEqual(posts.youTube?.categoryID, "Geology")
 
         let twitterPost = PublishToTwitterPost(tweet: "Test tweet.")
         posts.twitter = twitterPost
