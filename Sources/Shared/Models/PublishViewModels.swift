@@ -32,8 +32,8 @@ public struct PublishToFacebookPost {
     /// The description of the post as it will appear on Facebook.
     public let description: String
 
-    /// The identifier of the page being posted to on Facebook.
-    public let pageID: Int
+    /// The identifier of the Facebook page being posted to.
+    public let destination: Int
 
     /// The Facebook cateogry of the video.
     public let categoryID: Int
@@ -53,7 +53,7 @@ public struct PublishToFacebookPost {
     public init(
         title: String,
         description: String,
-        pageID: Int,
+        destination: Int,
         categoryID: Int,
         allowEmbedding: Bool,
         shouldAppearOnNewsFeed: Bool,
@@ -62,7 +62,7 @@ public struct PublishToFacebookPost {
     ) {
         self.title = title
         self.description = description
-        self.pageID = pageID
+        self.destination = destination
         self.categoryID = categoryID
         self.allowEmbedding = allowEmbedding
         self.shouldAppearOnNewsFeed = shouldAppearOnNewsFeed

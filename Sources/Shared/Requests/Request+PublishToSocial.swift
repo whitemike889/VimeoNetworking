@@ -45,7 +45,7 @@ public extension Request {
             var post = [String: Any]()
             post[String.Key.title] = $0.title
             post[String.Key.description] = $0.description
-            post[String.Key.pageID] = $0.pageID
+            post[String.Key.destination] = $0.destination
             post[String.Key.categoryID] = $0.categoryID
             post[String.Key.allowEmbedding] = $0.allowEmbedding
             post[String.Key.shouldAppearOnNewsFeed] = $0.shouldAppearOnNewsFeed
@@ -93,6 +93,7 @@ private extension String {
         static let youtube = "youtube"
         static let title = "title"
         static let description = "description"
+        static let destination = "destination"
         static let pageID = "page_id"
         static let categoryID = "category_id"
         static let allowEmbedding = "allow_embedding"
