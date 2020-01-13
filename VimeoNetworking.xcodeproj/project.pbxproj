@@ -25,9 +25,9 @@
 		0CD6C67C23C8E22C00E66CF7 /* PublishJobConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67823C8E22B00E66CF7 /* PublishJobConnection.swift */; };
 		0CD6C67D23C8E22C00E66CF7 /* PublishJobConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67823C8E22B00E66CF7 /* PublishJobConnection.swift */; };
 		0CD6C67E23C8E22C00E66CF7 /* PublishJobConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67823C8E22B00E66CF7 /* PublishJobConnection.swift */; };
-		0CD6C67F23C8E22C00E66CF7 /* PublishJobDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67923C8E22C00E66CF7 /* PublishJobDestination.swift */; };
-		0CD6C68023C8E22C00E66CF7 /* PublishJobDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67923C8E22C00E66CF7 /* PublishJobDestination.swift */; };
-		0CD6C68123C8E22C00E66CF7 /* PublishJobDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67923C8E22C00E66CF7 /* PublishJobDestination.swift */; };
+		0CD6C67F23C8E22C00E66CF7 /* PublishDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67923C8E22C00E66CF7 /* PublishDestination.swift */; };
+		0CD6C68023C8E22C00E66CF7 /* PublishDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67923C8E22C00E66CF7 /* PublishDestination.swift */; };
+		0CD6C68123C8E22C00E66CF7 /* PublishDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67923C8E22C00E66CF7 /* PublishDestination.swift */; };
 		0CD6C68223C8E22C00E66CF7 /* PublishJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67A23C8E22C00E66CF7 /* PublishJob.swift */; };
 		0CD6C68323C8E22C00E66CF7 /* PublishJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67A23C8E22C00E66CF7 /* PublishJob.swift */; };
 		0CD6C68423C8E22C00E66CF7 /* PublishJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67A23C8E22C00E66CF7 /* PublishJob.swift */; };
@@ -924,7 +924,7 @@
 		0CD15ADD2395925200523569 /* ConnectedAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedAppTests.swift; sourceTree = "<group>"; };
 		0CD15AE1239593C100523569 /* Request+ConnectedAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Request+ConnectedAppTests.swift"; sourceTree = "<group>"; };
 		0CD6C67823C8E22B00E66CF7 /* PublishJobConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishJobConnection.swift; sourceTree = "<group>"; };
-		0CD6C67923C8E22C00E66CF7 /* PublishJobDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishJobDestination.swift; sourceTree = "<group>"; };
+		0CD6C67923C8E22C00E66CF7 /* PublishDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishDestination.swift; sourceTree = "<group>"; };
 		0CD6C67A23C8E22C00E66CF7 /* PublishJob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishJob.swift; sourceTree = "<group>"; };
 		0CD6C67B23C8E22C00E66CF7 /* PublishViewModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishViewModels.swift; sourceTree = "<group>"; };
 		0CD6C68823C8E28800E66CF7 /* Request+PublishToSocial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Request+PublishToSocial.swift"; sourceTree = "<group>"; };
@@ -1662,7 +1662,7 @@
 				5B5EEF8822B441A3005C66BE /* PlayProgress.swift */,
 				0CD6C67A23C8E22C00E66CF7 /* PublishJob.swift */,
 				0CD6C67823C8E22B00E66CF7 /* PublishJobConnection.swift */,
-				0CD6C67923C8E22C00E66CF7 /* PublishJobDestination.swift */,
+				0CD6C67923C8E22C00E66CF7 /* PublishDestination.swift */,
 				0CD6C67B23C8E22C00E66CF7 /* PublishViewModels.swift */,
 				5B5EEFD822B441A3005C66BE /* Spatial.swift */,
 				5B5EEFBE22B441A3005C66BE /* Subscription.swift */,
@@ -2762,7 +2762,7 @@
 				5B5EF09022B441A3005C66BE /* VIMSeason.m in Sources */,
 				0CF39F8523C3A1440059D8DA /* Request+User.swift in Sources */,
 				0CD6C68523C8E22C00E66CF7 /* PublishViewModels.swift in Sources */,
-				0CD6C67F23C8E22C00E66CF7 /* PublishJobDestination.swift in Sources */,
+				0CD6C67F23C8E22C00E66CF7 /* PublishDestination.swift in Sources */,
 				E4FF889822FE1A7200A8F646 /* TeamMemberConnection.swift in Sources */,
 				5B5EF0E122B441A4005C66BE /* VIMActivity.m in Sources */,
 				5B5EF1C822B441A4005C66BE /* Dictionary+Extension.swift in Sources */,
@@ -2935,7 +2935,7 @@
 				5B5EF0E222B441A4005C66BE /* VIMActivity.m in Sources */,
 				E41C0F44230461AE000EAB25 /* ConnectionsProviding.swift in Sources */,
 				5B5EF1C922B441A4005C66BE /* Dictionary+Extension.swift in Sources */,
-				0CD6C68023C8E22C00E66CF7 /* PublishJobDestination.swift in Sources */,
+				0CD6C68023C8E22C00E66CF7 /* PublishDestination.swift in Sources */,
 				0CF39F7123C3A1440059D8DA /* Request+Notifications.swift in Sources */,
 				5B3D4FE322DE24DD002D937B /* VIMUserAccountType.swift in Sources */,
 				5B5EF16322B441A4005C66BE /* VIMObjectMapper.m in Sources */,
@@ -3152,7 +3152,7 @@
 				5B5EF02F22B441A3005C66BE /* ExceptionCatcher+Swift.swift in Sources */,
 				5BD765ED234D35A900821AF7 /* AFSecurityPolicy.m in Sources */,
 				5B5EF07A22B441A3005C66BE /* VIMSizeQuota.swift in Sources */,
-				0CD6C68123C8E22C00E66CF7 /* PublishJobDestination.swift in Sources */,
+				0CD6C68123C8E22C00E66CF7 /* PublishDestination.swift in Sources */,
 				5B5EF14922B441A4005C66BE /* VIMLive.swift in Sources */,
 				5B62638C2320603200B25462 /* HTTPMethod.swift in Sources */,
 				0CD6C68723C8E22C00E66CF7 /* PublishViewModels.swift in Sources */,

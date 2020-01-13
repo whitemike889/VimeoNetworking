@@ -46,7 +46,7 @@ extension PublishStatus: CustomStringConvertible {
     }
 }
 
-@objc public class PublishJobDestination: VIMModelObject {
+@objc public class PublishDestination: VIMModelObject {
     /// The status of the upload/post on the specified platform as a `String`.
     /// - Note: This property is available to provide interoperability with Objective-C codebases.
     ///         Using `status` is preferred.
@@ -87,16 +87,16 @@ extension PublishStatus: CustomStringConvertible {
 public class PublishDestinations: VIMModelObject {
     
     /// Information about the upload/post on Facebook.
-    public var facebook: PublishJobDestination?
+    public var facebook: PublishDestination?
     
     /// Information about the upload/post on YouTube.
-    public var youtube: PublishJobDestination?
+    public var youtube: PublishDestination?
     
     /// Information about the upload/post on LinkedIn.
-    public var linkedin: PublishJobDestination?
+    public var linkedin: PublishDestination?
     
     /// Information about the upload/post on Twitter.
-    public var twitter: PublishJobDestination?
+    public var twitter: PublishDestination?
 
     public override func getClassForObjectKey(_ key: String?) -> AnyClass? {
         switch key {
@@ -104,7 +104,7 @@ public class PublishDestinations: VIMModelObject {
              String.Key.linkedin,
              String.Key.twitter,
              String.Key.youtube:
-            return PublishJobDestination.self
+            return PublishDestination.self
         default:
             return nil
         }

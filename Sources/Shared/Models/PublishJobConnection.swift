@@ -27,7 +27,7 @@
 public class PublishJobConnection: VIMConnection {
     public private(set) var publishBlockers: PublishJobBlockers?
     public private(set) var publishConstraints: PublishJobConstraints?
-    public private(set) var publishDestinations: PublishDestinations?
+    public private(set) var publishDestinations: PublishJobDestinations?
     
     public override func getClassForObjectKey(_ key: String?) -> AnyClass? {
         switch key {
@@ -36,7 +36,7 @@ public class PublishJobConnection: VIMConnection {
         case String.Key.publishConstraints:
             return PublishJobConstraints.self
         case String.Key.publishDestinations:
-            return PublishDestinations.self
+            return PublishJobDestinations.self
         default:
             return nil
         }
@@ -52,18 +52,12 @@ public class PublishJobBlockers: VIMModelObject {
 }
 
 @objcMembers
-public class PublishConstraints: VIMModelObject {
-    public private(set) var duration: NSNumber?
-    public private(set) var size: NSNumber?
-}
-
-@objcMembers
 public class PublishJobConstraints: VIMModelObject {
     public private(set) var facebook: PublishConstraints?
     public private(set) var youtube: PublishConstraints?
     public private(set) var linkedin: PublishConstraints?
     public private(set) var twitter: PublishConstraints?
-    
+
     public override func getClassForObjectKey(_ key: String?) -> AnyClass? {
         switch key {
         case String.Key.facebook,
@@ -77,19 +71,46 @@ public class PublishJobConstraints: VIMModelObject {
     }
 }
 
+@objcMembers
+public class PublishJobDestinations: VIMModelObject {
+    public private(set) var publishedToFacebook: NSNumber?
+    public private(set) var publishedToLinkedIn: NSNumber?
+    public private(set) var publishedToTwitter: NSNumber?
+    public private(set) var publishedToYouTube: NSNumber?
+
+    @nonobjc public lazy var facebook: Bool = {
+        return self.publishedToFacebook?.boolValue == true
+    }()
+
+    @nonobjc public lazy var linkedin: Bool = {
+        return self.publishedToLinkedIn?.boolValue == true
+    }()
+
+    @nonobjc public lazy var twitter: Bool = {
+        return self.publishedToTwitter?.boolValue == true
+    }()
+
+    @nonobjc public lazy var youtube: Bool = {
+        return self.publishedToYouTube?.boolValue == true
+    }()
+
+    public override func getObjectMapping() -> Any! {
+        return [
+            String.Key.facebook: String.Value.facebook,
+            String.Key.linkedin: String.Value.linkedin,
+            String.Key.twitter: String.Value.twitter,
+            String.Key.youtube: String.Value.youtube
+        ]
+    }
+}
+
+@objcMembers
+public class PublishConstraints: VIMModelObject {
+    public private(set) var duration: NSNumber?
+    public private(set) var size: NSNumber?
+}
+
 private extension String {
-    struct Blockers {
-        static let size = "SIZE"
-        static let duration = "DURATION"
-        static let facebookNoPages = "FP_NO_PAGES"
-        static let linkedInNoOrganizations = "LI_NO_ORGANIZATIONS"
-    }
-    
-    struct Constraints {
-        static let size = "size"
-        static let duration = "duration"
-    }
-    
     struct Key {
         static let publishBlockers = "publish_blockers"
         static let publishConstraints = "publish_constraints"
@@ -98,5 +119,24 @@ private extension String {
         static let youtube = "youtube"
         static let linkedin = "linkedin"
         static let twitter = "twitter"
+    }
+
+    struct Value {
+        static let facebook = "publishedToFacebook"
+        static let linkedin = "publishedToLinkedIn"
+        static let twitter = "publishedToTwitter"
+        static let youtube = "publishedToYouTube"
+    }
+
+    struct Blockers {
+        static let size = "SIZE"
+        static let duration = "DURATION"
+        static let facebookNoPages = "FP_NO_PAGES"
+        static let linkedInNoOrganizations = "LI_NO_ORGANIZATIONS"
+    }
+
+    struct Constraints {
+        static let size = "size"
+        static let duration = "duration"
     }
 }
