@@ -23,7 +23,7 @@
 //  THE SOFTWARE.
 //
 
-/// Encapsulates the data related to all of the supported publishing platforms and the date of first publish.
+/// Encapsulates the data related to all of the supported publishing platforms, and the date of first publish.
 @objcMembers
 public class PublishJob: VIMModelObject {
     
