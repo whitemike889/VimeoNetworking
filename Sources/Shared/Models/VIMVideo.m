@@ -161,11 +161,6 @@ NSString *VIMContentRating_Safe = @"safe";
         return [FileTransfer class];
     }
 
-    if ([key isEqualToString:@"publish_to_social"])
-    {
-        return [PublishJobConnection class];
-    }
-
     if ([key isEqualToString:@"app"])
     {
         return [APIClientApp class];
