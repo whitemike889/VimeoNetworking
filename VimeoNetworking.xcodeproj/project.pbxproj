@@ -1449,19 +1449,19 @@
 			isa = PBXGroup;
 			children = (
 				5B1DF2CC22B41C90007F2416 /* User */,
-				5B1DF2C622B41C90007F2416 /* programmed_cinema.json */,
-				5B1DF2C722B41C90007F2416 /* upload_gcs.json */,
-				5B1DF2C822B41C90007F2416 /* cinema-success-response.json */,
-				5B1DF2C922B41C90007F2416 /* clip.json */,
-				0CD15AD92395921E00523569 /* connected-app.json */,
-				0CE4CE0F23A7EC9C000C03C5 /* connected-app-youtube.json */,
-				0C37EFE423CD0A0900A631D8 /* publish-to-social-connection.json */,
-				0C37EFE823CD1E6100A631D8 /* publish-to-social-response.json */,
-				0CE4CE1323A7F2B8000C03C5 /* connected-app-facebook.json */,
-				5B1DF2CA22B41C90007F2416 /* gcs.json */,
-				5B1DF2CB22B41C90007F2416 /* clip_live.json */,
 				5B1DF2DC22B41C90007F2416 /* album-response.json */,
 				5B1DF2DD22B41C90007F2416 /* categories-animation-response.json */,
+				5B1DF2C822B41C90007F2416 /* cinema-success-response.json */,
+				5B1DF2CB22B41C90007F2416 /* clip_live.json */,
+				5B1DF2C922B41C90007F2416 /* clip.json */,
+				0CE4CE1323A7F2B8000C03C5 /* connected-app-facebook.json */,
+				0CE4CE0F23A7EC9C000C03C5 /* connected-app-youtube.json */,
+				0CD15AD92395921E00523569 /* connected-app.json */,
+				5B1DF2CA22B41C90007F2416 /* gcs.json */,
+				5B1DF2C622B41C90007F2416 /* programmed_cinema.json */,
+				0C37EFE423CD0A0900A631D8 /* publish-to-social-connection.json */,
+				0C37EFE823CD1E6100A631D8 /* publish-to-social-response.json */,
+				5B1DF2C722B41C90007F2416 /* upload_gcs.json */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
