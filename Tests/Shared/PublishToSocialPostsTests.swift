@@ -14,7 +14,7 @@ class PublishToSocialPostsTests: XCTestCase {
         let facebookPost = PublishToFacebookPost(
             title: "Hello",
             description: "This is only a test",
-            pageID: 12345,
+            destination: 12345,
             categoryID: 3,
             allowEmbedding: true,
             shouldAppearOnNewsFeed: true,
@@ -24,7 +24,7 @@ class PublishToSocialPostsTests: XCTestCase {
 
         XCTAssertEqual(facebookPost.title, "Hello")
         XCTAssertEqual(facebookPost.description, "This is only a test")
-        XCTAssertEqual(facebookPost.pageID, 12345)
+        XCTAssertEqual(facebookPost.destination, 12345)
         XCTAssertEqual(facebookPost.categoryID, 3)
         XCTAssertTrue(facebookPost.allowEmbedding)
         XCTAssertTrue(facebookPost.shouldAppearOnNewsFeed)

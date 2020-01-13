@@ -32,7 +32,7 @@ class Request_PublishToSocialTests: XCTestCase {
         return PublishToFacebookPost(
             title: "Test Facebook post",
             description: "Test Facebook description",
-            pageID: 1234,
+            destination: 1234,
             categoryID: 5678,
             allowEmbedding: true,
             shouldAppearOnNewsFeed: true,
@@ -89,7 +89,7 @@ class Request_PublishToSocialTests: XCTestCase {
         let facebookParameters = try XCTUnwrap(parameters["facebook"] as? [String: AnyHashable])
         XCTAssertEqual(facebookParameters["title"], facebookPost.title)
         XCTAssertEqual(facebookParameters["description"], facebookPost.description)
-        XCTAssertEqual(facebookParameters["page_id"], facebookPost.pageID)
+        XCTAssertEqual(facebookParameters["destination"], facebookPost.destination)
         XCTAssertEqual(facebookParameters["category_id"], facebookPost.categoryID)
         XCTAssertEqual(facebookParameters["allow_embedding"], facebookPost.allowEmbedding)
         XCTAssertEqual(facebookParameters["should_appear_on_news_feed"], facebookPost.shouldAppearOnNewsFeed)
