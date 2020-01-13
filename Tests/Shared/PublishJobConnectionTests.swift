@@ -45,14 +45,11 @@ class PublishJobConnectionTests: XCTestCase {
             "facebook": facebookConstraint as Any
         ]
 
-        let youtubeDestination: [String: Any] = [
-            "status": "finished",
-            "third_party_post_url": "https://www.youtube.com/watch?v=i72F_nPdLoz",
-            "third_party_post_id": "i72F_nPdLoz"
-        ]
-
         let destinations: [String: Any] = [
-            "youtube": youtubeDestination as Any
+            "facebook": true,
+            "linkedin": false,
+            "twitter": true,
+            "youtube": false
         ]
 
         let connection: [String: Any] = [
@@ -85,13 +82,24 @@ class PublishJobConnectionTests: XCTestCase {
     func test_publishDestinations_areParsedAsExpected() throws {
         let connection = try VIMObjectMapper.mapObject(responseDictionary: json) as PublishJobConnection
 
-        XCTAssertNotNil(connection.publishDestinations?.youtube)
-        XCTAssertEqual(connection.publishDestinations?.youtube?.status, .finished)
-        XCTAssertEqual(connection.publishDestinations?.youtube?.status?.description, "finished")
-        XCTAssertEqual(connection.publishDestinations?.youtube?.thirdPartyPostID, "i72F_nPdLoz")
-        XCTAssertEqual(
-            connection.publishDestinations?.youtube?.thirdPartyPostURL,
-            "https://www.youtube.com/watch?v=i72F_nPdLoz"
-        )
+        XCTAssertTrue(try XCTUnwrap(connection.publishDestinations?.facebook))
+        XCTAssertFalse(try XCTUnwrap(connection.publishDestinations?.linkedin))
+        XCTAssertTrue(try XCTUnwrap(connection.publishDestinations?.twitter))
+        XCTAssertFalse(try XCTUnwrap(connection.publishDestinations?.youtube))
+    }
+
+    func test_publishedDestinations_handleBadOrMissingValues() throws {
+        let json: [String: Any] = [
+            "facebook": false,
+            "linkedin": true,
+            "youtube": "published"
+        ]
+
+        let destinations = try VIMObjectMapper.mapObject(responseDictionary: json) as PublishJobDestinations
+
+        XCTAssertFalse(destinations.facebook)
+        XCTAssertTrue(destinations.linkedin)
+        XCTAssertFalse(destinations.youtube)
+        XCTAssertFalse(destinations.twitter)
     }
 }
