@@ -87,7 +87,10 @@ class PublishJobTests: XCTestCase {
         XCTAssertNotNil(publishJob.destinations?.youtube)
         XCTAssertEqual(publishJob.destinations?.youtube?.status, .finished)
         XCTAssertEqual(publishJob.destinations?.youtube?.status?.description, "finished")
-        XCTAssertEqual(publishJob.destinations?.youtube?.thirdPartyPostURL, "https://www.youtube.com/watch?v=i72F_nPdLoz")
+        XCTAssertEqual(
+            publishJob.destinations?.youtube?.thirdPartyPostURL,
+            "https://www.youtube.com/watch?v=i72F_nPdLoz"
+        )
         XCTAssertEqual(publishJob.destinations?.youtube?.thirdPartyPostID, "i72F_nPdLoz")
     }
 }
