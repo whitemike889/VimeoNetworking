@@ -53,6 +53,15 @@ class PublishJobConnectionTests: XCTestCase {
 
         XCTAssertEqual(connection.publishConstraints?.facebook?.duration, 14400)
         XCTAssertEqual(connection.publishConstraints?.facebook?.size, 10737418240)
+
+        XCTAssertEqual(connection.publishConstraints?.linkedin?.duration, 600)
+        XCTAssertEqual(connection.publishConstraints?.linkedin?.size, 5368709120)
+
+        XCTAssertEqual(connection.publishConstraints?.twitter?.duration, 140)
+        XCTAssertEqual(connection.publishConstraints?.twitter?.size, 536870912)
+
+        XCTAssertEqual(connection.publishConstraints?.youtube?.duration, 43200)
+        XCTAssertEqual(connection.publishConstraints?.youtube?.size, 137438953472)
     }
 
     func test_publishDestinations_areParsedAsExpected() throws {
