@@ -87,4 +87,21 @@ class PublishJobConnectionTests: XCTestCase {
         XCTAssertFalse(destinations.youtube)
         XCTAssertFalse(destinations.twitter)
     }
+
+    func test_publishJobConnection_isParsesAsExpected_fromVideoObject() throws {
+        guard let json = ResponseUtilities.loadResponse(
+            from: "video-with-connection.json"
+        ) else {
+            XCTFail()
+            return
+        }
+
+        let video = try VIMObjectMapper.mapObject(responseDictionary: json) as VIMVideo
+        let publishConnection = video.publishJobConnection
+
+        XCTAssertNotNil(publishConnection)
+        XCTAssertTrue(type(of: publishConnection) == PublishJobConnection?.self)
+        XCTAssertEqual(publishConnection?.publishConstraints?.facebook?.duration, 14400)
+        XCTAssertEqual(publishConnection?.publishConstraints?.facebook?.size, 10737418240)
+    }
 }

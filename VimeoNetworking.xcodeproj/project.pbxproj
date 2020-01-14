@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C10EA3623CE27F00040ECAC /* video-with-connection.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C10EA3523CE27F00040ECAC /* video-with-connection.json */; };
+		0C10EA3723CE27F00040ECAC /* video-with-connection.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C10EA3523CE27F00040ECAC /* video-with-connection.json */; };
+		0C10EA3823CE27F00040ECAC /* video-with-connection.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C10EA3523CE27F00040ECAC /* video-with-connection.json */; };
 		0C37EFE523CD0A0900A631D8 /* publish-to-social-connection.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C37EFE423CD0A0900A631D8 /* publish-to-social-connection.json */; };
 		0C37EFE623CD0A0900A631D8 /* publish-to-social-connection.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C37EFE423CD0A0900A631D8 /* publish-to-social-connection.json */; };
 		0C37EFE723CD0A0900A631D8 /* publish-to-social-connection.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C37EFE423CD0A0900A631D8 /* publish-to-social-connection.json */; };
@@ -923,6 +926,7 @@
 
 /* Begin PBXFileReference section */
 		08D548BFE2CDF46B766FBA2C /* Pods_VimeoNetworking_macOS_VimeoNetworking_macOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimeoNetworking_macOS_VimeoNetworking_macOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C10EA3523CE27F00040ECAC /* video-with-connection.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "video-with-connection.json"; sourceTree = "<group>"; };
 		0C37EFE423CD0A0900A631D8 /* publish-to-social-connection.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "publish-to-social-connection.json"; sourceTree = "<group>"; };
 		0C37EFE823CD1E6100A631D8 /* publish-to-social-response.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "publish-to-social-response.json"; sourceTree = "<group>"; };
 		0C5F05BE232BFC1F00E2D5AD /* BatchOperable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatchOperable.swift; sourceTree = "<group>"; };
@@ -1462,6 +1466,7 @@
 				0C37EFE423CD0A0900A631D8 /* publish-to-social-connection.json */,
 				0C37EFE823CD1E6100A631D8 /* publish-to-social-response.json */,
 				5B1DF2C722B41C90007F2416 /* upload_gcs.json */,
+				0C10EA3523CE27F00040ECAC /* video-with-connection.json */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -2362,6 +2367,7 @@
 				0C37EFE923CD1E6100A631D8 /* publish-to-social-response.json in Resources */,
 				5B1DF35322B41C90007F2416 /* user_live_pro.json in Resources */,
 				5B1DF34122B41C90007F2416 /* clip.json in Resources */,
+				0C10EA3623CE27F00040ECAC /* video-with-connection.json in Resources */,
 				5B1DF37A22B41C90007F2416 /* categories-animation-response.json in Resources */,
 				5B1DF36522B41C90007F2416 /* user_plus.json in Resources */,
 				5B1DF34D22B41C90007F2416 /* user_live_business.json in Resources */,
@@ -2397,6 +2403,7 @@
 				0C37EFEA23CD1E6100A631D8 /* publish-to-social-response.json in Resources */,
 				5B1DF35422B41C90007F2416 /* user_live_pro.json in Resources */,
 				5B1DF34222B41C90007F2416 /* clip.json in Resources */,
+				0C10EA3723CE27F00040ECAC /* video-with-connection.json in Resources */,
 				5B1DF37B22B41C90007F2416 /* categories-animation-response.json in Resources */,
 				5B1DF36622B41C90007F2416 /* user_plus.json in Resources */,
 				5B1DF34E22B41C90007F2416 /* user_live_business.json in Resources */,
@@ -2432,6 +2439,7 @@
 				0C37EFEB23CD1E6100A631D8 /* publish-to-social-response.json in Resources */,
 				5B1DF35522B41C90007F2416 /* user_live_pro.json in Resources */,
 				5B1DF34322B41C90007F2416 /* clip.json in Resources */,
+				0C10EA3823CE27F00040ECAC /* video-with-connection.json in Resources */,
 				5B1DF37C22B41C90007F2416 /* categories-animation-response.json in Resources */,
 				5B1DF36722B41C90007F2416 /* user_plus.json in Resources */,
 				5B1DF34F22B41C90007F2416 /* user_live_business.json in Resources */,
