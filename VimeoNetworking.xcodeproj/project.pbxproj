@@ -40,9 +40,9 @@
 		0CD6C68223C8E22C00E66CF7 /* PublishJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67A23C8E22C00E66CF7 /* PublishJob.swift */; };
 		0CD6C68323C8E22C00E66CF7 /* PublishJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67A23C8E22C00E66CF7 /* PublishJob.swift */; };
 		0CD6C68423C8E22C00E66CF7 /* PublishJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67A23C8E22C00E66CF7 /* PublishJob.swift */; };
-		0CD6C68523C8E22C00E66CF7 /* PublishViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67B23C8E22C00E66CF7 /* PublishViewModels.swift */; };
-		0CD6C68623C8E22C00E66CF7 /* PublishViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67B23C8E22C00E66CF7 /* PublishViewModels.swift */; };
-		0CD6C68723C8E22C00E66CF7 /* PublishViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67B23C8E22C00E66CF7 /* PublishViewModels.swift */; };
+		0CD6C68523C8E22C00E66CF7 /* SocialMediaPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67B23C8E22C00E66CF7 /* SocialMediaPosts.swift */; };
+		0CD6C68623C8E22C00E66CF7 /* SocialMediaPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67B23C8E22C00E66CF7 /* SocialMediaPosts.swift */; };
+		0CD6C68723C8E22C00E66CF7 /* SocialMediaPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67B23C8E22C00E66CF7 /* SocialMediaPosts.swift */; };
 		0CD6C68923C8E28800E66CF7 /* Request+PublishToSocial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C68823C8E28800E66CF7 /* Request+PublishToSocial.swift */; };
 		0CD6C68A23C8E28800E66CF7 /* Request+PublishToSocial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C68823C8E28800E66CF7 /* Request+PublishToSocial.swift */; };
 		0CD6C68B23C8E28800E66CF7 /* Request+PublishToSocial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C68823C8E28800E66CF7 /* Request+PublishToSocial.swift */; };
@@ -938,7 +938,7 @@
 		0CD6C67823C8E22B00E66CF7 /* PublishJobConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishJobConnection.swift; sourceTree = "<group>"; };
 		0CD6C67923C8E22C00E66CF7 /* PublishDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishDestination.swift; sourceTree = "<group>"; };
 		0CD6C67A23C8E22C00E66CF7 /* PublishJob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishJob.swift; sourceTree = "<group>"; };
-		0CD6C67B23C8E22C00E66CF7 /* PublishViewModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishViewModels.swift; sourceTree = "<group>"; };
+		0CD6C67B23C8E22C00E66CF7 /* SocialMediaPosts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialMediaPosts.swift; sourceTree = "<group>"; };
 		0CD6C68823C8E28800E66CF7 /* Request+PublishToSocial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Request+PublishToSocial.swift"; sourceTree = "<group>"; };
 		0CD6C68C23C8E2D500E66CF7 /* Request+PublishToSocialTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Request+PublishToSocialTests.swift"; sourceTree = "<group>"; };
 		0CD6C69023C8E2E400E66CF7 /* PublishJobConnectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishJobConnectionTests.swift; sourceTree = "<group>"; };
@@ -1678,7 +1678,7 @@
 				0CD6C67A23C8E22C00E66CF7 /* PublishJob.swift */,
 				0CD6C67823C8E22B00E66CF7 /* PublishJobConnection.swift */,
 				0CD6C67923C8E22C00E66CF7 /* PublishDestination.swift */,
-				0CD6C67B23C8E22C00E66CF7 /* PublishViewModels.swift */,
+				0CD6C67B23C8E22C00E66CF7 /* SocialMediaPosts.swift */,
 				5B5EEFD822B441A3005C66BE /* Spatial.swift */,
 				5B5EEFBE22B441A3005C66BE /* Subscription.swift */,
 				5B5EEF8322B441A3005C66BE /* SubscriptionCollection.swift */,
@@ -2785,7 +2785,7 @@
 				5B5EF1A122B441A4005C66BE /* ErrorCode.swift in Sources */,
 				5B5EF09022B441A3005C66BE /* VIMSeason.m in Sources */,
 				0CF39F8523C3A1440059D8DA /* Request+User.swift in Sources */,
-				0CD6C68523C8E22C00E66CF7 /* PublishViewModels.swift in Sources */,
+				0CD6C68523C8E22C00E66CF7 /* SocialMediaPosts.swift in Sources */,
 				0CD6C67F23C8E22C00E66CF7 /* PublishDestination.swift in Sources */,
 				E4FF889822FE1A7200A8F646 /* TeamMemberConnection.swift in Sources */,
 				5B5EF0E122B441A4005C66BE /* VIMActivity.m in Sources */,
@@ -2938,7 +2938,7 @@
 				5B5EF0C122B441A4005C66BE /* VIMCredit.m in Sources */,
 				5B5EF04922B441A3005C66BE /* String+Parameters.swift in Sources */,
 				5B5EF12422B441A4005C66BE /* VIMThumbnailUploadTicket.m in Sources */,
-				0CD6C68623C8E22C00E66CF7 /* PublishViewModels.swift in Sources */,
+				0CD6C68623C8E22C00E66CF7 /* SocialMediaPosts.swift in Sources */,
 				0CD15AD72395911500523569 /* ConnectedApp.swift in Sources */,
 				5B5EF19322B441A4005C66BE /* FileTransfer.swift in Sources */,
 				5B5EF04022B441A3005C66BE /* VimeoSessionManager+Constructors.swift in Sources */,
@@ -3179,7 +3179,7 @@
 				0CD6C68123C8E22C00E66CF7 /* PublishDestination.swift in Sources */,
 				5B5EF14922B441A4005C66BE /* VIMLive.swift in Sources */,
 				5B62638C2320603200B25462 /* HTTPMethod.swift in Sources */,
-				0CD6C68723C8E22C00E66CF7 /* PublishViewModels.swift in Sources */,
+				0CD6C68723C8E22C00E66CF7 /* SocialMediaPosts.swift in Sources */,
 				5B5EF0C522B441A4005C66BE /* VIMSpace.swift in Sources */,
 				5BEE3A1F23466F920003FD81 /* Task.swift in Sources */,
 				5B5EF07D22B441A3005C66BE /* VIMUploadTicket.m in Sources */,
