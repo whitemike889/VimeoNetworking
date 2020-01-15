@@ -66,14 +66,14 @@ class Request_PublishToSocialTests: XCTestCase {
     // MARK: - Tests
 
     func test_fetchPublishJobRequest_returnsExpectedMethod_andURI() {
-        let request = Request<PublishJob>.fetchPublishJob(for: "12345")
+        let request = Request.fetchPublishJob(for: "12345")
         XCTAssertEqual(request.method, .get)
         XCTAssertEqual(request.URI, "/videos/12345/publish_to_social")
     }
 
     func test_publishPostRequest_forFacebookPost_returnsRequest_withExpectedParameters() throws {
         let socialMediaPosts = SocialMediaPosts(facebook: facebookPost)
-        let request = Request<PublishJob>.publishPosts(socialMediaPosts, for: "12345")
+        let request = Request.publishPosts(socialMediaPosts, for: "12345")
 
         XCTAssertNotNil(request.parameters)
         XCTAssertEqual(request.method, .put)
@@ -99,7 +99,7 @@ class Request_PublishToSocialTests: XCTestCase {
 
     func test_publishPostRequest_forLinkedInPost_returnsRequest_withExpectedParameters() throws {
         let socialMediaPosts = SocialMediaPosts(linkedIn: linkedInPost)
-        let request = Request<PublishJob>.publishPosts(socialMediaPosts, for: "56789")
+        let request = Request.publishPosts(socialMediaPosts, for: "56789")
 
         XCTAssertNotNil(request.parameters)
         XCTAssertEqual(request.method, .put)
@@ -120,7 +120,7 @@ class Request_PublishToSocialTests: XCTestCase {
 
     func test_publishPostRequest_forTwitterPost_returnsRequest_withExpectedParameters() throws {
         let socialMediaPosts = SocialMediaPosts(twitter: twitterPost)
-        let request = Request<PublishJob>.publishPosts(socialMediaPosts, for: "56789")
+        let request = Request.publishPosts(socialMediaPosts, for: "56789")
 
         XCTAssertNotNil(request.parameters)
         XCTAssertEqual(request.method, .put)
@@ -139,7 +139,7 @@ class Request_PublishToSocialTests: XCTestCase {
 
     func test_publishPostRequest_forYouTubePost_returnsRequest_withExpectedParameters() throws {
         let socialMediaPosts = SocialMediaPosts(youTube: youTubePost)
-        let request = Request<PublishJob>.publishPosts(socialMediaPosts, for: "34567")
+        let request = Request.publishPosts(socialMediaPosts, for: "34567")
 
         XCTAssertNotNil(request.parameters)
         XCTAssertEqual(request.method, .put)
@@ -168,7 +168,7 @@ class Request_PublishToSocialTests: XCTestCase {
             youTube: youTubePost
         )
 
-        let request = Request<PublishJob>.publishPosts(socialMediaPosts, for: "89012")
+        let request = Request.publishPosts(socialMediaPosts, for: "89012")
 
         XCTAssertNotNil(request.parameters)
         XCTAssertEqual(request.method, .put)

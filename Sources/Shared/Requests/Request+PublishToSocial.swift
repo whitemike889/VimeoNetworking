@@ -23,7 +23,7 @@
 //  THE SOFTWARE.
 //
 
-public extension Request {
+public extension Request where ModelType == PublishJob {
     /// Returns a request for fetching the `PublishJob` for a specified video ID.
     /// - Parameter videoID: The identifier for the video to be published.
     static func fetchPublishJob(for videoID: String) -> Request {
