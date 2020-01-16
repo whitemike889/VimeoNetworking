@@ -76,7 +76,7 @@ public class PublishDestination: VIMModelObject {
     public private(set) var thirdPartyViewCount: NSNumber?
 
     /// The number of likes (or equivalent) this post has, as reported by the third party platform.
-    public private(set) ar thirdPartyLikeCount: NSNumber?
+    public private(set) var thirdPartyLikeCount: NSNumber?
 
     /// The number of comments this post has, as reported by the third party platform.
     public private(set) var thirdPartyCommentCount: NSNumber?
