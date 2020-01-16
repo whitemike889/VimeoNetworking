@@ -4,7 +4,10 @@
         "facebook": {
             "status": "finished",
             "third_party_post_url": "https://facebook.com/150285126584258/videos/2452706093602193/",
-            "third_party_post_id": "2370929360645821"
+            "third_party_post_id": "2370929360645821",
+            "third_party_view_count": 150,
+            "third_party_like_count": 2,
+            "third_party_comment_count": 1
         }
     },
     "resource_key": "43ccd2e018c0fc54feedf7fd19e018c0fc2897de"

@@ -43,6 +43,7 @@ class PublishJobTests: XCTestCase {
         let publishJob = try VIMObjectMapper.mapObject(responseDictionary: json) as PublishJob
         XCTAssertNotNil(publishJob.firstPublishDate)
         XCTAssertNotNil(publishJob.resourceKey)
+        XCTAssertNotNil(publishJob.destinations)
         XCTAssertEqual(publishJob.resourceKey, "43ccd2e018c0fc54feedf7fd19e018c0fc2897de")
     }
 
@@ -71,6 +72,9 @@ class PublishJobTests: XCTestCase {
         XCTAssertNotNil(publishJob.destinations?.facebook)
         XCTAssertEqual(publishJob.destinations?.facebook?.status, .finished)
         XCTAssertEqual(publishJob.destinations?.facebook?.status?.description, "finished")
+        XCTAssertEqual(publishJob.destinations?.facebook?.thirdPartyViewCount, 150)
+        XCTAssertEqual(publishJob.destinations?.facebook?.thirdPartyLikeCount, 2)
+        XCTAssertEqual(publishJob.destinations?.facebook?.thirdPartyCommentCount, 1)
         XCTAssertEqual(
             publishJob.destinations?.facebook?.thirdPartyPostURL,
             "https://facebook.com/150285126584258/videos/2452706093602193/"

@@ -46,14 +46,15 @@ extension PublishStatus: CustomStringConvertible {
     }
 }
 
-@objc public class PublishDestination: VIMModelObject {
+@objcMembers
+public class PublishDestination: VIMModelObject {
     /// The status of the post on the specified platform as a `String`.
     /// - Note: This property is available to provide interoperability with Objective-C codebases.
     ///         Using `status` is preferred.
-    @objc public var statusString: String?
+    public var statusString: String?
     
     /// The status of the post for a given platform.
-    public var status: PublishStatus? {
+    @nonobjc public var status: PublishStatus? {
         switch self.statusString {
         case String.error:
             return .error
@@ -66,10 +67,19 @@ extension PublishStatus: CustomStringConvertible {
         }
     }
     /// The URL of the post on a given platform.
-    @objc public var thirdPartyPostURL: String?
+    public var thirdPartyPostURL: String?
     
     /// The ID of the post on a given platform.
-    @objc public var thirdPartyPostID: String?
+    public var thirdPartyPostID: String?
+
+    /// The number of views this post has, as reported by the third party platform.
+    public var thirdPartyViewCount: NSNumber?
+
+    /// The number of likes (or equivalent) this post has, as reported by the third party platform.
+    public var thirdPartyLikeCount: NSNumber?
+
+    /// The number of comments this post has, as reported by the third party platform.
+    public var thirdPartyCommentCount: NSNumber?
     
     // MARK: - Overrides
     
@@ -77,6 +87,9 @@ extension PublishStatus: CustomStringConvertible {
         return [
             String.Key.thirdPartyPostURL: String.Value.thirdPartyPostURL,
             String.Key.thirdPartyPostID: String.Value.thirdPartyPostID,
+            String.Key.thirdPartyViewCount: String.Value.thirdPartyViewCount,
+            String.Key.thirdPartyLikeCount: String.Value.thirdPartyLikeCount,
+            String.Key.thirdPartyCommentCount: String.Value.thirdPartyCommentCount,
             String.Key.status: String.Value.status
         ]
     }
@@ -119,6 +132,9 @@ private extension String {
         static let youtube = "youtube"
         static let thirdPartyPostURL = "third_party_post_url"
         static let thirdPartyPostID = "third_party_post_id"
+        static let thirdPartyViewCount = "third_party_view_count"
+        static let thirdPartyLikeCount = "third_party_like_count"
+        static let thirdPartyCommentCount = "third_party_comment_count"
         static let status = "status"
     }
     
@@ -126,6 +142,9 @@ private extension String {
         static let status = "statusString"
         static let thirdPartyPostURL = "thirdPartyPostURL"
         static let thirdPartyPostID = "thirdPartyPostID"
+        static let thirdPartyViewCount = "thirdPartyViewCount"
+        static let thirdPartyLikeCount = "thirdPartyLikeCount"
+        static let thirdPartyCommentCount = "thirdPartyCommentCount"
     }
     
     static let error = "error"
