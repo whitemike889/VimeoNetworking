@@ -23,22 +23,22 @@
 //  THE SOFTWARE.
 //
 
-/// Encapsulates the data related to all of the supported publishing platforms, and the date of first publish.
+/// Data related to all supported publishing platforms, including date of first publish and a unique resource key.
 @objcMembers
 public class PublishJob: VIMModelObject {
     
-    /// The time in ISO 8601 format when the user first published this upload/post.
+    /// The time in ISO 8601 format when the user first published this post.
     /// - Note: This property is available to provide interoperability with Objective-C codebases.
     ///         Using `firstPublishDate` is preferred.
     public private(set) var firstPublishDateString: String?
     
-    /// The time as a `Date` when the user first published this upload/post.
+    /// The time as a `Date` when the user first published this post.
     public private(set) var firstPublishDate: Date?
     
-    /// The status of the upload/post on each of the supported platforms.
+    /// The status of the post on each of the supported platforms.
     public private(set) var destinations: PublishDestinations?
 
-    /// The resource key of the publish to social job.
+    /// The unique identifier for this publish job.
     public private(set) var resourceKey: String?
     
     // MARK: - Overrides

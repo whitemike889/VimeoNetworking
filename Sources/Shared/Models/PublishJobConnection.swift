@@ -23,19 +23,19 @@
 //  THE SOFTWARE.
 //
 
-/// Encapsulates information related to publishing to multiple platforms for this video connection.
+/// A 1VIMConnection1 subclass that includes additional data related to publishing to multiple social media platforms.
 @objcMembers
 public class PublishJobConnection: VIMConnection {
 
-    /// Reasons for which this video cannot be published for each platform.
+    /// Reasons for which this video cannot be published, split by platform.
     /// - Note: Values will return as `nil` unless a blocker is present.
     public private(set) var publishBlockers: PublishJobBlockers?
 
-    /// Reasons for which this video cannot be published for each platform.
+    /// Parameters describing maximum values for a video post, split by platfrom.
     /// - Note: Constraints vary by platform and are hard coded server-side.
     public private(set) var publishConstraints: PublishJobConstraints?
 
-    /// Information on which social networks the related video was published to.
+    /// Whether or not a post has been published, split by platform.
     public private(set) var publishDestinations: PublishJobDestinations?
     
     public override func getClassForObjectKey(_ key: String?) -> AnyClass? {
@@ -52,7 +52,7 @@ public class PublishJobConnection: VIMConnection {
     }
 }
 
-/// Reasons for which this video cannot be published for each platform.
+/// Reasons for which this video cannot be published, split by platform.
 @objcMembers
 public class PublishJobBlockers: VIMModelObject {
 
@@ -69,7 +69,7 @@ public class PublishJobBlockers: VIMModelObject {
     public private(set) var twitter: [String]?
 }
 
-/// Reasons for which this video cannot be published for each platform.
+/// Parameters describing maximum values for a video post, split by platfrom.
 /// - Note: Constraints vary by platform and are hard coded server-side.
 @objcMembers
 public class PublishJobConstraints: VIMModelObject {
@@ -99,7 +99,7 @@ public class PublishJobConstraints: VIMModelObject {
     }
 }
 
-/// Information on which social networks the related video was published to.
+/// Whether or not a post has been published, split by platform.
 @objcMembers
 public class PublishJobDestinations: VIMModelObject {
 
@@ -153,14 +153,14 @@ public class PublishJobDestinations: VIMModelObject {
     }
 }
 
-/// Encapsulates constraints that will prevent publishing to a social media platform.
+/// Parameters describing maximum values for a video post on a social media platform.
 @objcMembers
 public class PublishConstraints: VIMModelObject {
 
     /// The maximum time in seconds for a video to be uploaded to a platform.
     public private(set) var duration: NSNumber?
 
-    /// The maximum file size in gigabytes for a video to be uploaded to a platform.
+    /// The maximum file size in bytes for a video to be uploaded to a platform.
     public private(set) var size: NSNumber?
 }
 

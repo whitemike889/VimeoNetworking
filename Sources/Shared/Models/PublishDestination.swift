@@ -24,9 +24,9 @@
 //
 
 /// The status of the upload or post for the given platform.
-/// - error: There was an error when trying to upload the video or create the post.
-/// - finished: The upload and post were successfully completed.
-/// - inProgress: The upload or post creation process is currently underway.
+/// - error: There was an error trying to upload the video or create the post.
+/// - finished: The post was successfully published.
+/// - inProgress: The post creation process is currently underway.
 @objc public enum PublishStatus: Int {
     case error
     case finished
@@ -47,12 +47,12 @@ extension PublishStatus: CustomStringConvertible {
 }
 
 @objc public class PublishDestination: VIMModelObject {
-    /// The status of the upload/post on the specified platform as a `String`.
+    /// The status of the post on the specified platform as a `String`.
     /// - Note: This property is available to provide interoperability with Objective-C codebases.
     ///         Using `status` is preferred.
     @objc public var statusString: String?
     
-    /// The status of the upload/post on the specified platform.
+    /// The status of the post for a given platform.
     public var status: PublishStatus? {
         switch self.statusString {
         case String.error:
@@ -65,10 +65,10 @@ extension PublishStatus: CustomStringConvertible {
             return nil
         }
     }
-    /// The URL of the upload/post on the specified platform.
+    /// The URL of the post on a given platform.
     @objc public var thirdPartyPostURL: String?
     
-    /// The ID of the upload/post on the specified platform.
+    /// The ID of the post on a given platform.
     @objc public var thirdPartyPostID: String?
     
     // MARK: - Overrides
@@ -82,20 +82,20 @@ extension PublishStatus: CustomStringConvertible {
     }
 }
 
-/// An object that encapsulates data related to all of the supported platforms destinations.
+/// Encapsulates data related to all supported platform destinations.
 @objcMembers
 public class PublishDestinations: VIMModelObject {
     
-    /// Information about the upload/post on Facebook.
+    /// Information about a post on Facebook.
     public var facebook: PublishDestination?
     
-    /// Information about the upload/post on YouTube.
+    /// Information about a post on YouTube.
     public var youtube: PublishDestination?
     
-    /// Information about the upload/post on LinkedIn.
+    /// Information about a post on LinkedIn.
     public var linkedin: PublishDestination?
     
-    /// Information about the upload/post on Twitter.
+    /// Information about a post on Twitter.
     public var twitter: PublishDestination?
 
     public override func getClassForObjectKey(_ key: String?) -> AnyClass? {
