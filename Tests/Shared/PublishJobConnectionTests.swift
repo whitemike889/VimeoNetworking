@@ -42,9 +42,9 @@ class PublishJobConnectionTests: XCTestCase {
     func test_publishBlockers_areParsedAsExpected() throws {
         let connection = try VIMObjectMapper.mapObject(responseDictionary: json) as PublishJobConnection
 
-        XCTAssertEqual(connection.publishBlockers?.facebook, ["SIZE", "DURATION", "FB_NO_PAGES"])
+        XCTAssertEqual(connection.publishBlockers?.facebook, ["size", "duration", "fb_no_pages"])
         XCTAssertNil(connection.publishBlockers?.twitter)
-        XCTAssertEqual(connection.publishBlockers?.linkedin, ["SIZE", "DURATION", "LI_NO_ORGANIZATIONS"])
+        XCTAssertEqual(connection.publishBlockers?.linkedin, ["size", "duration", "li_no_organizations"])
         XCTAssertNil(connection.publishBlockers?.youtube)
     }
 

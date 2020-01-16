@@ -5,9 +5,9 @@
         "PUT"
     ],
     "publish_blockers": {
-        "facebook": ["SIZE", "DURATION", "FB_NO_PAGES"],
+        "facebook": ["size", "duration", "fb_no_pages"],
         "youtube": null,
-        "linkedin": ["SIZE", "DURATION", "LI_NO_ORGANIZATIONS"],
+        "linkedin": ["size", "duration", "li_no_organizations"],
         "twitter": null
     },
     "publish_constraints": {

@@ -183,10 +183,10 @@ private extension String {
     }
 
     struct Blockers {
-        static let size = "SIZE"
-        static let duration = "DURATION"
-        static let facebookNoPages = "FP_NO_PAGES"
-        static let linkedInNoOrganizations = "LI_NO_ORGANIZATIONS"
+        static let size = "size"
+        static let duration = "duration"
+        static let facebookNoPages = "fb_no_pages"
+        static let linkedInNoOrganizations = "li_no_organizations"
     }
 
     struct Constraints {
