@@ -51,7 +51,7 @@ public class PublishDestination: VIMModelObject {
     /// The status of the post on the specified platform as a `String`.
     /// - Note: This property is available to provide interoperability with Objective-C codebases.
     ///         Using `status` is preferred.
-    public var statusString: String?
+    public private(set) var statusString: String?
     
     /// The status of the post for a given platform.
     @nonobjc public var status: PublishStatus? {
@@ -67,19 +67,19 @@ public class PublishDestination: VIMModelObject {
         }
     }
     /// The URL of the post on a given platform.
-    public var thirdPartyPostURL: String?
+    public private(set) var thirdPartyPostURL: String?
     
     /// The ID of the post on a given platform.
-    public var thirdPartyPostID: String?
+    public private(set) var thirdPartyPostID: String?
 
     /// The number of views this post has, as reported by the third party platform.
-    public var thirdPartyViewCount: NSNumber?
+    public private(set) var thirdPartyViewCount: NSNumber?
 
     /// The number of likes (or equivalent) this post has, as reported by the third party platform.
-    public var thirdPartyLikeCount: NSNumber?
+    public private(set) ar thirdPartyLikeCount: NSNumber?
 
     /// The number of comments this post has, as reported by the third party platform.
-    public var thirdPartyCommentCount: NSNumber?
+    public private(set) var thirdPartyCommentCount: NSNumber?
     
     // MARK: - Overrides
     
@@ -100,16 +100,16 @@ public class PublishDestination: VIMModelObject {
 public class PublishDestinations: VIMModelObject {
     
     /// Information about a post on Facebook.
-    public var facebook: PublishDestination?
+    public private(set) var facebook: PublishDestination?
     
     /// Information about a post on YouTube.
-    public var youtube: PublishDestination?
+    public private(set) var youtube: PublishDestination?
     
     /// Information about a post on LinkedIn.
-    public var linkedin: PublishDestination?
+    public private(set) var linkedin: PublishDestination?
     
     /// Information about a post on Twitter.
-    public var twitter: PublishDestination?
+    public private(set) var twitter: PublishDestination?
 
     public override func getClassForObjectKey(_ key: String?) -> AnyClass? {
         switch key {
