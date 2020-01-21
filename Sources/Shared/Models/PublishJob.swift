@@ -27,10 +27,7 @@
 @objcMembers
 public class PublishJob: VIMModelObject {
     
-    /// The time in ISO 8601 format when the user first published this post.
-    /// - Note: This property is available to provide interoperability with Objective-C codebases.
-    ///         Using `firstPublishDate` is preferred.
-    public private(set) var firstPublishDateString: String?
+    internal private(set) var firstPublishDateString: String?
     
     /// The time as a `Date` when the user first published this post.
     public private(set) var firstPublishDate: Date?
