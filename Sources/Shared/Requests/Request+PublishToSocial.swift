@@ -42,39 +42,44 @@ public extension Request where ModelType == PublishJob {
         var parameters = [String: Any]()
 
         posts.facebook.map {
-            var post = [String: Any]()
-            post[String.Key.title] = $0.title
-            post[String.Key.description] = $0.description
-            post[String.Key.destination] = $0.destination
-            post[String.Key.categoryID] = $0.categoryID
-            post[String.Key.allowEmbedding] = $0.allowEmbedding
-            post[String.Key.shouldAppearOnNewsFeed] = $0.shouldAppearOnNewsFeed
-            post[String.Key.isSecretVideo] = $0.isSecretVideo
-            post[String.Key.allowSocialActions] = $0.allowSocialActions
+            var post: [String: Any] = [
+                String.Key.title: $0.title,
+                String.Key.description: $0.description,
+                String.Key.destination: $0.destination,
+                String.Key.allowEmbedding: $0.allowEmbedding,
+                String.Key.shouldAppearOnNewsFeed: $0.shouldAppearOnNewsFeed,
+                String.Key.isSecretVideo: $0.isSecretVideo,
+                String.Key.allowSocialActions: $0.allowSocialActions
+            ]
+            
+            $0.categoryID.map { (categoryID) in post[String.Key.categoryID] = categoryID }
             parameters[.facebook] = post
         }
 
         posts.linkedIn.map {
-            var post = [String: Any]()
-            post[String.Key.pageID] = $0.pageID
-            post[String.Key.title] = $0.title
-            post[String.Key.description] = $0.description
-            parameters[.linkedin] = post
+            parameters[.linkedin] = [
+                String.Key.pageID: $0.pageID,
+                String.Key.title: $0.title,
+                String.Key.description: $0.description,
+            ]
         }
 
         posts.twitter.map {
-            var post = [String: String]()
-            post[String.Key.tweet] = $0.tweet
-            parameters[.twitter] = post
+            parameters[.twitter] = [
+                String.Key.tweet: $0.tweet
+            ]
         }
 
         posts.youTube.map {
-            var post = [String: Any]()
-            post[String.Key.title] = $0.title
-            post[String.Key.description] = $0.description
-            post[String.Key.privacy] = $0.privacy.rawValue
-            post[String.Key.categoryID] = $0.categoryID
-            $0.tags.map { (tags) in  post[String.Key.tags] = tags }
+            var post: [String: Any] = [
+                String.Key.title: $0.title,
+                String.Key.privacy: $0.privacy.rawValue,
+                String.Key.categoryID: $0.categoryID
+            ]
+
+            $0.description.map { (description) in post[String.Key.description] = description }
+            $0.tags.map { (tags) in post[String.Key.tags] = tags }
+
             parameters[.youtube] = post
         }
 
