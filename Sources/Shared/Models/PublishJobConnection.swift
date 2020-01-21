@@ -82,10 +82,10 @@ public class PublishJobBlockers: VIMModelObject {
 
     public override func getObjectMapping() -> Any! {
         return [
-            String.Key.facebook: String.Value.facebookBlockers,
-            String.Key.linkedin: String.Value.linkedInBlockers,
-            String.Key.twitter: String.Value.twitterBlockers,
-            String.Key.youtube: String.Value.youtubeBlockers
+            String.facebook: String.Value.facebookBlockers,
+            String.linkedin: String.Value.linkedInBlockers,
+            String.twitter: String.Value.twitterBlockers,
+            String.youtube: String.Value.youtubeBlockers
         ]
     }
 }
@@ -109,10 +109,10 @@ public class PublishJobConstraints: VIMModelObject {
 
     public override func getClassForObjectKey(_ key: String?) -> AnyClass? {
         switch key {
-        case String.Key.facebook,
-             String.Key.youtube,
-             String.Key.linkedin,
-             String.Key.twitter:
+        case String.facebook,
+             String.youtube,
+             String.linkedin,
+             String.twitter:
             return PublishConstraints.self
         default:
             return nil
@@ -151,10 +151,10 @@ public class PublishJobDestinations: VIMModelObject {
 
     public override func getObjectMapping() -> Any! {
         return [
-            String.Key.facebook: String.Value.publishedToFacebook,
-            String.Key.linkedin: String.Value.publishedToLinkedIn,
-            String.Key.twitter: String.Value.publishedToTwitter,
-            String.Key.youtube: String.Value.publishedToYouTube
+            String.facebook: String.Value.publishedToFacebook,
+            String.linkedin: String.Value.publishedToLinkedIn,
+            String.twitter: String.Value.publishedToTwitter,
+            String.youtube: String.Value.publishedToYouTube
         ]
     }
 }
@@ -217,10 +217,6 @@ private extension String {
         static let publishBlockers = "publish_blockers"
         static let publishConstraints = "publish_constraints"
         static let publishDestinations = "publish_destinations"
-        static let facebook = "facebook"
-        static let youtube = "youtube"
-        static let linkedin = "linkedin"
-        static let twitter = "twitter"
     }
 
     struct Value {

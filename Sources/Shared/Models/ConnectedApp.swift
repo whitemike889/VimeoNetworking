@@ -217,6 +217,13 @@ public class ConnectedApp: VIMModelObject {
     }
 }
 
+public extension String {
+    static let facebook = "facebook"
+    static let linkedin = "linkedin"
+    static let twitter = "twitter"
+    static let youtube = "youtube"
+}
+
 private extension String {
     struct Key {
         static let addDate = "add_date"
@@ -244,9 +251,4 @@ private extension String {
         static let thirdPartyUserDisplayName = "thirdPartyUserDisplayName"
         static let type = "typeString"
     }
-
-    static let facebook = "facebook"
-    static let linkedin = "linkedin"
-    static let twitter = "twitter"
-    static let youtube = "youtube"
 }

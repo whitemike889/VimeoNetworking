@@ -51,7 +51,7 @@ public extension Request where ModelType == PublishJob {
             post[String.Key.shouldAppearOnNewsFeed] = $0.shouldAppearOnNewsFeed
             post[String.Key.isSecretVideo] = $0.isSecretVideo
             post[String.Key.allowSocialActions] = $0.allowSocialActions
-            parameters[String.Key.facebook] = post
+            parameters[.facebook] = post
         }
 
         posts.linkedIn.map {
@@ -59,13 +59,13 @@ public extension Request where ModelType == PublishJob {
             post[String.Key.pageID] = $0.pageID
             post[String.Key.title] = $0.title
             post[String.Key.description] = $0.description
-            parameters[String.Key.linkedin] = post
+            parameters[.linkedin] = post
         }
 
         posts.twitter.map {
             var post = [String: String]()
             post[String.Key.tweet] = $0.tweet
-            parameters[String.Key.twitter] = post
+            parameters[.twitter] = post
         }
 
         posts.youTube.map {
@@ -75,7 +75,7 @@ public extension Request where ModelType == PublishJob {
             post[String.Key.privacy] = $0.privacy.rawValue
             post[String.Key.categoryID] = $0.categoryID
             $0.tags.map { (tags) in  post[String.Key.tags] = tags }
-            parameters[String.Key.youtube] = post
+            parameters[.youtube] = post
         }
 
         return Request(method: .put, path: publishToSocialPath, parameters: parameters)
@@ -87,10 +87,6 @@ private extension String {
     static let publishToSocialURI = "/publish_to_social"
 
     struct Key {
-        static let facebook = "facebook"
-        static let linkedin = "linkedin"
-        static let twitter = "twitter"
-        static let youtube = "youtube"
         static let title = "title"
         static let description = "description"
         static let destination = "destination"

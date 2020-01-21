@@ -37,11 +37,11 @@ extension PublishStatus: CustomStringConvertible {
     public var description: String {
         switch self {
         case .error:
-            return String.error
+            return .error
         case .finished:
-            return String.finished
+            return .finished
         case .inProgress:
-            return String.inProgress
+            return .inProgress
         }
     }
 }
@@ -113,10 +113,10 @@ public class PublishDestinations: VIMModelObject {
 
     public override func getClassForObjectKey(_ key: String?) -> AnyClass? {
         switch key {
-        case String.Key.facebook,
-             String.Key.linkedin,
-             String.Key.twitter,
-             String.Key.youtube:
+        case String.facebook,
+             String.linkedin,
+             String.twitter,
+             String.youtube:
             return PublishDestination.self
         default:
             return nil
@@ -126,10 +126,6 @@ public class PublishDestinations: VIMModelObject {
 
 private extension String {
     struct Key {
-        static let facebook = "facebook"
-        static let linkedin = "linkedin"
-        static let twitter = "twitter"
-        static let youtube = "youtube"
         static let thirdPartyPostURL = "third_party_post_url"
         static let thirdPartyPostID = "third_party_post_id"
         static let thirdPartyViewCount = "third_party_view_count"
