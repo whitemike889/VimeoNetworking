@@ -23,7 +23,7 @@
 //  THE SOFTWARE.
 //
 
-/// A 1VIMConnection1 subclass that includes additional data related to publishing to multiple social media platforms.
+/// A `VIMConnection` subclass that includes additional data related to publishing to multiple social media platforms.
 @objcMembers
 public class PublishJobConnection: VIMConnection {
 
@@ -56,16 +56,16 @@ public class PublishJobConnection: VIMConnection {
 @objcMembers
 public class PublishJobBlockers: VIMModelObject {
 
-    /// Current blockers that will prevent posting to Facebook. If `nil` publishign is not blocked for this platform.
+    /// Current blockers that will prevent posting to Facebook. If `nil`, publishing is not blocked for this platform.
     public private(set) var facebook: [String]?
 
-    /// Current blockers that will prevent posting to YouTube. If `nil` publishing is not blocked for this platform.
+    /// Current blockers that will prevent posting to YouTube. If `nil`, publishing is not blocked for this platform.
     public private(set) var youtube: [String]?
 
-    /// Current blockers that will prevent posting to LinkedIn. If `nil` publishing is not blocked for this platform.
+    /// Current blockers that will prevent posting to LinkedIn. If `nil`, publishing is not blocked for this platform.
     public private(set) var linkedin: [String]?
 
-    /// Current blockers that will prevent posting to Twitter. If `nil` publishing is not blocked for this platform.
+    /// Current blockers that will prevent posting to Twitter. If `nil`, publishing is not blocked for this platform.
     public private(set) var twitter: [String]?
 }
 

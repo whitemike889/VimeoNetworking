@@ -35,7 +35,7 @@ public struct PublishToFacebookPost {
     /// The identifier of the Facebook page being posted to.
     public let destination: Int
 
-    /// The Facebook cateogry of the video.
+    /// The Facebook category of the video.
     public let categoryID: String
 
     /// Whether or not this Facbeook post should be embeddable.
