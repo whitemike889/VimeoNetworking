@@ -55,18 +55,39 @@ public class PublishJobConnection: VIMConnection {
 /// Reasons for which this video cannot be published, split by platform.
 @objcMembers
 public class PublishJobBlockers: VIMModelObject {
+    internal private(set) var facebookBlockers: [String]?
+    internal private(set) var linkedInBlockers: [String]?
+    internal private(set) var twitterBlockers: [String]?
+    internal private(set) var youtubeBlockers: [String]?
 
     /// Current blockers that will prevent posting to Facebook. If `nil`, publishing is not blocked for this platform.
-    public private(set) var facebook: [String]?
-
-    /// Current blockers that will prevent posting to YouTube. If `nil`, publishing is not blocked for this platform.
-    public private(set) var youtube: [String]?
+    public lazy var facebook: FacebookBlockers? = {
+        return FacebookBlockers(blockers: self.facebookBlockers)
+    }()
 
     /// Current blockers that will prevent posting to LinkedIn. If `nil`, publishing is not blocked for this platform.
-    public private(set) var linkedin: [String]?
+    public lazy var linkedin: LinkedInBockers? = {
+        return LinkedInBockers(blockers: self.linkedInBlockers)
+    }()
 
     /// Current blockers that will prevent posting to Twitter. If `nil`, publishing is not blocked for this platform.
-    public private(set) var twitter: [String]?
+    public lazy var twitter: PublishBlockers? = {
+        return PublishBlockers(blockers: self.twitterBlockers)
+    }()
+
+    /// Current blockers that will prevent posting to YouTube. If `nil`, publishing is not blocked for this platform.
+    public lazy var youtube: PublishBlockers? = {
+        return PublishBlockers(blockers: self.youtubeBlockers)
+    }()
+
+    public override func getObjectMapping() -> Any! {
+        return [
+            String.Key.facebook: String.Value.facebookBlockers,
+            String.Key.linkedin: String.Value.linkedInBlockers,
+            String.Key.twitter: String.Value.twitterBlockers,
+            String.Key.youtube: String.Value.youtubeBlockers
+        ]
+    }
 }
 
 /// Parameters describing maximum values for a video post, split by platfrom.
@@ -130,12 +151,54 @@ public class PublishJobDestinations: VIMModelObject {
 
     public override func getObjectMapping() -> Any! {
         return [
-            String.Key.facebook: String.Value.facebook,
-            String.Key.linkedin: String.Value.linkedin,
-            String.Key.twitter: String.Value.twitter,
-            String.Key.youtube: String.Value.youtube
+            String.Key.facebook: String.Value.publishedToFacebook,
+            String.Key.linkedin: String.Value.publishedToLinkedIn,
+            String.Key.twitter: String.Value.publishedToTwitter,
+            String.Key.youtube: String.Value.publishedToYouTube
         ]
     }
+}
+
+/// Reasons for which a video cannot be published.
+public class PublishBlockers: VIMModelObject {
+    internal private(set) var blockers: [String]?
+
+    init?(blockers: [String]?) {
+        self.blockers = blockers
+        super.init()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    /// The file size of the video is too large for the platform.
+    public lazy var size: Bool = {
+        return self.blockers?.contains(String.Blockers.size) ?? false
+    }()
+
+    /// The duration of the video is too long for the platform.
+    public lazy var duration: Bool = {
+        return self.blockers?.contains(String.Blockers.duration) ?? false
+    }()
+}
+
+/// Reasons for which a video cannot be published, specific to Facebook.
+public class FacebookBlockers: PublishBlockers {
+
+    /// The connected Facebook account has no pages. Publishing requires at least one Facebook page.
+    public lazy var noPages: Bool = {
+        return self.blockers?.contains(String.Blockers.facebookNoPages) ?? false
+    }()
+}
+
+/// Reasons for which a video cannot be published, specific to LinkedIn.
+public class LinkedInBockers: PublishBlockers {
+
+    /// The connected LinkedIn account has no organizations. Pubishing requires at least one LinkedIn organization.
+    public lazy var noOrganizations: Bool = {
+        return self.blockers?.contains(String.Blockers.linkedInNoOrganizations) ?? false
+    }()
 }
 
 /// Parameters describing maximum values for a video post on a social media platform.
@@ -161,10 +224,14 @@ private extension String {
     }
 
     struct Value {
-        static let facebook = "publishedToFacebook"
-        static let linkedin = "publishedToLinkedIn"
-        static let twitter = "publishedToTwitter"
-        static let youtube = "publishedToYouTube"
+        static let publishedToFacebook = "publishedToFacebook"
+        static let publishedToLinkedIn = "publishedToLinkedIn"
+        static let publishedToTwitter = "publishedToTwitter"
+        static let publishedToYouTube = "publishedToYouTube"
+        static let facebookBlockers = "facebookBlockers"
+        static let linkedInBlockers = "linkedInBlockers"
+        static let twitterBlockers = "twitterBlockers"
+        static let youtubeBlockers = "youtubeBlockers"
     }
 
     struct Blockers {

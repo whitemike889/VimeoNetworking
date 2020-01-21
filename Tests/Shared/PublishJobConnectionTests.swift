@@ -42,10 +42,19 @@ class PublishJobConnectionTests: XCTestCase {
     func test_publishBlockers_areParsedAsExpected() throws {
         let connection = try VIMObjectMapper.mapObject(responseDictionary: json) as PublishJobConnection
 
-        XCTAssertEqual(connection.publishBlockers?.facebook, ["size", "duration", "fb_no_pages"])
-        XCTAssertNil(connection.publishBlockers?.twitter)
-        XCTAssertEqual(connection.publishBlockers?.linkedin, ["size", "duration", "li_no_organizations"])
-        XCTAssertNil(connection.publishBlockers?.youtube)
+        XCTAssertTrue(try XCTUnwrap(connection.publishBlockers?.facebook?.size))
+        XCTAssertTrue(try XCTUnwrap(connection.publishBlockers?.facebook?.duration))
+        XCTAssertTrue(try XCTUnwrap(connection.publishBlockers?.facebook?.noPages))
+
+        XCTAssertFalse(try XCTUnwrap(connection.publishBlockers?.twitter?.size))
+        XCTAssertFalse(try XCTUnwrap(connection.publishBlockers?.twitter?.duration))
+
+        XCTAssertTrue(try XCTUnwrap(connection.publishBlockers?.linkedin?.size))
+        XCTAssertTrue(try XCTUnwrap(connection.publishBlockers?.linkedin?.duration))
+        XCTAssertTrue(try XCTUnwrap(connection.publishBlockers?.linkedin?.noOrganizations))
+
+        XCTAssertFalse(try XCTUnwrap(connection.publishBlockers?.youtube?.size))
+        XCTAssertFalse(try XCTUnwrap(connection.publishBlockers?.youtube?.duration))
     }
 
     func test_publishConstraints_areParsedAsExpected() throws {
