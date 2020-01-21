@@ -103,25 +103,10 @@ public class PublishJobConstraints: VIMModelObject {
 @objcMembers
 public class PublishJobDestinations: VIMModelObject {
 
-    /// Whether the video was ever published to Facebook.
-    /// - Note: This property is available to provide interoperability with Objective-C codebases.
-    ///         Using `facebook` is preferred.
-    public private(set) var publishedToFacebook: NSNumber?
-
-    /// Whether the video was ever published to LinkedIn.
-    /// - Note: This property is available to provide interoperability with Objective-C codebases.
-    ///         Using `linkedin` is preferred.
-    public private(set) var publishedToLinkedIn: NSNumber?
-
-    /// Whether the video was ever published to Twitter.
-    /// - Note: This property is available to provide interoperability with Objective-C codebases.
-    ///         Using `twitter` is preferred.
-    public private(set) var publishedToTwitter: NSNumber?
-
-    /// Whether the video was ever published to YouTube.
-    /// - Note: This property is available to provide interoperability with Objective-C codebases.
-    ///         Using `youtube` is preferred.
-    public private(set) var publishedToYouTube: NSNumber?
+    internal private(set) var publishedToFacebook: NSNumber?
+    internal private(set) var publishedToLinkedIn: NSNumber?
+    internal private(set) var publishedToTwitter: NSNumber?
+    internal private(set) var publishedToYouTube: NSNumber?
 
     /// Whether the video was ever published to Facebook.
     @nonobjc public lazy var facebook: Bool = {
