@@ -101,6 +101,7 @@ class PublishJobConnectionTests: XCTestCase {
 
         XCTAssertNotNil(publishConnection)
         XCTAssertTrue(type(of: publishConnection) == PublishJobConnection?.self)
+        XCTAssertEqual(publishConnection?.uri, "/videos/277485394/publish_to_social")
         XCTAssertEqual(publishConnection?.publishConstraints?.facebook?.duration, 14400)
         XCTAssertEqual(publishConnection?.publishConstraints?.facebook?.size, 10737418240)
     }
