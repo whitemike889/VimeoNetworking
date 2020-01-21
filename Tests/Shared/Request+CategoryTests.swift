@@ -35,7 +35,7 @@ class Request_CategoryTests: XCTestCase {
         XCTAssertTrue(RequestComparisons.ValidateDefaults(request: request))
     }
     
-    func test_CategoryRequest_ValidateSingleCateogryRequest() {
+    func test_CategoryRequest_ValidateSingleCategoryRequest() {
         let request = CategoryRequest.getCategoryRequest(forCategoryURI: "/animation")
         
         XCTAssertEqual(request.URI, "/animation")
