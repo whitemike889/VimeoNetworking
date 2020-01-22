@@ -86,7 +86,7 @@ class PublishToSocialPostsTests: XCTestCase {
         XCTAssertEqual(youTubePost.categoryID, "Space")
     }
 
-    func test_socailMediaPostsObject_canBeCreatedSuccessfully() {
+    func test_socialMediaPostsObject_canBeCreatedSuccessfully() {
         let youTubePost = PublishToYouTubePost(
             title: "How to Publish Everywhere With a Single Click",
             description: "Learn everything you need to know right here.",
