@@ -80,7 +80,8 @@ NSString *VIMContentRating_Safe = @"safe";
         @"play": @"playRepresentation",
         @"review_page": @"reviewPage",
         @"file_transfer": @"fileTransfer",
-        @"app": @"sourceClientApp"
+        @"app": @"sourceClientApp",
+        @"publish_to_social": @"publishJobConnection"
     };
 }
 
@@ -164,6 +165,11 @@ NSString *VIMContentRating_Safe = @"safe";
     {
         return [APIClientApp class];
     }
+
+    if ([key isEqualToString:@"publish_to_social"])
+    {
+        return [PublishJobConnection class];
+    }
     
     return nil;
 }
@@ -180,6 +186,7 @@ NSString *VIMContentRating_Safe = @"safe";
 
     [self parseConnections];
     [self parseInteractions];
+    [self parsePublishJobConnection];
     [self formatCreatedTime];
     [self formatReleaseTime];
     [self formatModifiedTime];
@@ -278,13 +285,23 @@ NSString *VIMContentRating_Safe = @"safe";
                 VIMConnection *connection = [[VIMConnection alloc] initWithKeyValueDictionary:value];
                 if([connection respondsToSelector:@selector(didFinishMapping)])
                     [connection didFinishMapping];
-                
+
                 [connections setObject:connection forKey:key];
             }
         }
     }
     
     self.connections = connections;
+}
+
+- (void)parsePublishJobConnection
+{
+    NSDictionary *dictionary = [[self.metadata valueForKey:@"connections"] valueForKey:@"publish_to_social"];
+    if (dictionary != nil) {
+        VIMObjectMapper *mapper = [[VIMObjectMapper alloc] init];
+        [mapper addMappingClass: [PublishJobConnection class] forKeypath:@""];
+        self.publishJobConnection = [mapper applyMappingToJSON:dictionary];
+    }
 }
 
 - (void)parseInteractions

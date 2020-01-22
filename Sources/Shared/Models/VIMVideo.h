@@ -41,6 +41,7 @@
 @class VIMUpload;
 @class FileTransfer;
 @class APIClientApp;
+@class PublishJobConnection;
 
 extern NSString * __nonnull VIMContentRating_Language;
 extern NSString * __nonnull VIMContentRating_Drugs;
@@ -96,6 +97,7 @@ typedef NS_ENUM(NSUInteger, VIMVideoProcessingStatus) {
 @property (nonatomic, strong, nullable) VIMUpload *upload;
 @property (nonatomic, strong, nullable) FileTransfer *fileTransfer;
 @property (nonatomic, strong, nullable) APIClientApp *sourceClientApp;
+@property (nonatomic, strong, nullable) PublishJobConnection *publishJobConnection;
 
 @property (nonatomic, assign) VIMVideoProcessingStatus videoStatus;
 

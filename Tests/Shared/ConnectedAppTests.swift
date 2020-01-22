@@ -250,7 +250,7 @@ class ConnectedAppTests: XCTestCase {
         XCTAssertFalse(try XCTUnwrap(youtubeApp.isDataAccessExpired))
     }
 
-    func test_isConnectedToApp_returnsTrue_whenIsConnectedIsTrue() throws {
+    func test_interactionIsConnectedToApp_returnsTrue_whenIsConnectedIsTrue() throws {
         let json: [String: Any] = [
             "options": ["GET"],
             "uri": "/me/connected_apps/facebook",
@@ -262,7 +262,7 @@ class ConnectedAppTests: XCTestCase {
         XCTAssertTrue(interaction.isConnectedToApp())
     }
 
-    func test_isConnectedToApp_returnsFalse_whenIsConnectedIsFalse() throws {
+    func test_interactionIsConnectedToApp_returnsFalse_whenIsConnectedIsFalse() throws {
         let json: [String: Any] = [
             "options": ["GET"],
             "uri": "/me/connected_apps/facebook",

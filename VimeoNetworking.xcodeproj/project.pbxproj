@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C10EA3623CE27F00040ECAC /* video-with-publish-to-social-connection.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C10EA3523CE27F00040ECAC /* video-with-publish-to-social-connection.json */; };
+		0C10EA3723CE27F00040ECAC /* video-with-publish-to-social-connection.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C10EA3523CE27F00040ECAC /* video-with-publish-to-social-connection.json */; };
+		0C10EA3823CE27F00040ECAC /* video-with-publish-to-social-connection.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C10EA3523CE27F00040ECAC /* video-with-publish-to-social-connection.json */; };
+		0C37EFE523CD0A0900A631D8 /* publish-to-social-connection.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C37EFE423CD0A0900A631D8 /* publish-to-social-connection.json */; };
+		0C37EFE623CD0A0900A631D8 /* publish-to-social-connection.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C37EFE423CD0A0900A631D8 /* publish-to-social-connection.json */; };
+		0C37EFE723CD0A0900A631D8 /* publish-to-social-connection.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C37EFE423CD0A0900A631D8 /* publish-to-social-connection.json */; };
+		0C37EFE923CD1E6100A631D8 /* publish-to-social-response.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C37EFE823CD1E6100A631D8 /* publish-to-social-response.json */; };
+		0C37EFEA23CD1E6100A631D8 /* publish-to-social-response.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C37EFE823CD1E6100A631D8 /* publish-to-social-response.json */; };
+		0C37EFEB23CD1E6100A631D8 /* publish-to-social-response.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C37EFE823CD1E6100A631D8 /* publish-to-social-response.json */; };
 		0C5F05BF232BFC1F00E2D5AD /* BatchOperable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5F05BE232BFC1F00E2D5AD /* BatchOperable.swift */; };
 		0C5F05C0232BFC1F00E2D5AD /* BatchOperable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5F05BE232BFC1F00E2D5AD /* BatchOperable.swift */; };
 		0C5F05C1232BFC1F00E2D5AD /* BatchOperable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5F05BE232BFC1F00E2D5AD /* BatchOperable.swift */; };
@@ -22,6 +31,33 @@
 		0CD15AE2239593C200523569 /* Request+ConnectedAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD15AE1239593C100523569 /* Request+ConnectedAppTests.swift */; };
 		0CD15AE3239593C200523569 /* Request+ConnectedAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD15AE1239593C100523569 /* Request+ConnectedAppTests.swift */; };
 		0CD15AE4239593C200523569 /* Request+ConnectedAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD15AE1239593C100523569 /* Request+ConnectedAppTests.swift */; };
+		0CD6C67C23C8E22C00E66CF7 /* PublishJobConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67823C8E22B00E66CF7 /* PublishJobConnection.swift */; };
+		0CD6C67D23C8E22C00E66CF7 /* PublishJobConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67823C8E22B00E66CF7 /* PublishJobConnection.swift */; };
+		0CD6C67E23C8E22C00E66CF7 /* PublishJobConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67823C8E22B00E66CF7 /* PublishJobConnection.swift */; };
+		0CD6C67F23C8E22C00E66CF7 /* PublishDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67923C8E22C00E66CF7 /* PublishDestination.swift */; };
+		0CD6C68023C8E22C00E66CF7 /* PublishDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67923C8E22C00E66CF7 /* PublishDestination.swift */; };
+		0CD6C68123C8E22C00E66CF7 /* PublishDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67923C8E22C00E66CF7 /* PublishDestination.swift */; };
+		0CD6C68223C8E22C00E66CF7 /* PublishJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67A23C8E22C00E66CF7 /* PublishJob.swift */; };
+		0CD6C68323C8E22C00E66CF7 /* PublishJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67A23C8E22C00E66CF7 /* PublishJob.swift */; };
+		0CD6C68423C8E22C00E66CF7 /* PublishJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67A23C8E22C00E66CF7 /* PublishJob.swift */; };
+		0CD6C68523C8E22C00E66CF7 /* SocialMediaPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67B23C8E22C00E66CF7 /* SocialMediaPosts.swift */; };
+		0CD6C68623C8E22C00E66CF7 /* SocialMediaPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67B23C8E22C00E66CF7 /* SocialMediaPosts.swift */; };
+		0CD6C68723C8E22C00E66CF7 /* SocialMediaPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C67B23C8E22C00E66CF7 /* SocialMediaPosts.swift */; };
+		0CD6C68923C8E28800E66CF7 /* Request+PublishToSocial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C68823C8E28800E66CF7 /* Request+PublishToSocial.swift */; };
+		0CD6C68A23C8E28800E66CF7 /* Request+PublishToSocial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C68823C8E28800E66CF7 /* Request+PublishToSocial.swift */; };
+		0CD6C68B23C8E28800E66CF7 /* Request+PublishToSocial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C68823C8E28800E66CF7 /* Request+PublishToSocial.swift */; };
+		0CD6C69A23C8E32300E66CF7 /* Request+PublishToSocialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C68C23C8E2D500E66CF7 /* Request+PublishToSocialTests.swift */; };
+		0CD6C6A023C8E32F00E66CF7 /* PublishJobConnectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C69023C8E2E400E66CF7 /* PublishJobConnectionTests.swift */; };
+		0CD6C6A123C8E32F00E66CF7 /* PublishJobTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C69423C8E2F900E66CF7 /* PublishJobTests.swift */; };
+		0CD6C6A223C8E32F00E66CF7 /* Request+PublishToSocialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C68C23C8E2D500E66CF7 /* Request+PublishToSocialTests.swift */; };
+		0CD6C6A523C8E33000E66CF7 /* PublishJobConnectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C69023C8E2E400E66CF7 /* PublishJobConnectionTests.swift */; };
+		0CD6C6A623C8E33000E66CF7 /* PublishJobTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C69423C8E2F900E66CF7 /* PublishJobTests.swift */; };
+		0CD6C6A723C8E33000E66CF7 /* Request+PublishToSocialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C68C23C8E2D500E66CF7 /* Request+PublishToSocialTests.swift */; };
+		0CD6C6A823C8E33100E66CF7 /* PublishJobConnectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C69023C8E2E400E66CF7 /* PublishJobConnectionTests.swift */; };
+		0CD6C6A923C8E33100E66CF7 /* PublishJobTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C69423C8E2F900E66CF7 /* PublishJobTests.swift */; };
+		0CD6C6AB23C8E5CB00E66CF7 /* PublishToSocialPostsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C6AA23C8E5CB00E66CF7 /* PublishToSocialPostsTests.swift */; };
+		0CD6C6AC23C8E5CB00E66CF7 /* PublishToSocialPostsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C6AA23C8E5CB00E66CF7 /* PublishToSocialPostsTests.swift */; };
+		0CD6C6AD23C8E5CB00E66CF7 /* PublishToSocialPostsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C6AA23C8E5CB00E66CF7 /* PublishToSocialPostsTests.swift */; };
 		0CE4CE0C23A7E928000C03C5 /* connected-app.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CD15AD92395921E00523569 /* connected-app.json */; };
 		0CE4CE0D23A7E929000C03C5 /* connected-app.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CD15AD92395921E00523569 /* connected-app.json */; };
 		0CE4CE0E23A7E929000C03C5 /* connected-app.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CD15AD92395921E00523569 /* connected-app.json */; };
@@ -890,12 +926,24 @@
 
 /* Begin PBXFileReference section */
 		08D548BFE2CDF46B766FBA2C /* Pods_VimeoNetworking_macOS_VimeoNetworking_macOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VimeoNetworking_macOS_VimeoNetworking_macOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C10EA3523CE27F00040ECAC /* video-with-publish-to-social-connection.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "video-with-publish-to-social-connection.json"; sourceTree = "<group>"; };
+		0C37EFE423CD0A0900A631D8 /* publish-to-social-connection.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "publish-to-social-connection.json"; sourceTree = "<group>"; };
+		0C37EFE823CD1E6100A631D8 /* publish-to-social-response.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "publish-to-social-response.json"; sourceTree = "<group>"; };
 		0C5F05BE232BFC1F00E2D5AD /* BatchOperable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatchOperable.swift; sourceTree = "<group>"; };
 		0CA63597237DF55900D376DE /* APIClientApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientApp.swift; sourceTree = "<group>"; };
 		0CD15AD52395911500523569 /* ConnectedApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedApp.swift; sourceTree = "<group>"; };
 		0CD15AD92395921E00523569 /* connected-app.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "connected-app.json"; sourceTree = "<group>"; };
 		0CD15ADD2395925200523569 /* ConnectedAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedAppTests.swift; sourceTree = "<group>"; };
 		0CD15AE1239593C100523569 /* Request+ConnectedAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Request+ConnectedAppTests.swift"; sourceTree = "<group>"; };
+		0CD6C67823C8E22B00E66CF7 /* PublishJobConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishJobConnection.swift; sourceTree = "<group>"; };
+		0CD6C67923C8E22C00E66CF7 /* PublishDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishDestination.swift; sourceTree = "<group>"; };
+		0CD6C67A23C8E22C00E66CF7 /* PublishJob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishJob.swift; sourceTree = "<group>"; };
+		0CD6C67B23C8E22C00E66CF7 /* SocialMediaPosts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialMediaPosts.swift; sourceTree = "<group>"; };
+		0CD6C68823C8E28800E66CF7 /* Request+PublishToSocial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Request+PublishToSocial.swift"; sourceTree = "<group>"; };
+		0CD6C68C23C8E2D500E66CF7 /* Request+PublishToSocialTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Request+PublishToSocialTests.swift"; sourceTree = "<group>"; };
+		0CD6C69023C8E2E400E66CF7 /* PublishJobConnectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishJobConnectionTests.swift; sourceTree = "<group>"; };
+		0CD6C69423C8E2F900E66CF7 /* PublishJobTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishJobTests.swift; sourceTree = "<group>"; };
+		0CD6C6AA23C8E5CB00E66CF7 /* PublishToSocialPostsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishToSocialPostsTests.swift; sourceTree = "<group>"; };
 		0CE4CE0F23A7EC9C000C03C5 /* connected-app-youtube.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "connected-app-youtube.json"; sourceTree = "<group>"; };
 		0CE4CE1323A7F2B8000C03C5 /* connected-app-facebook.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "connected-app-facebook.json"; sourceTree = "<group>"; };
 		0CF39F5623C3A1420059D8DA /* Request+Apple.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Request+Apple.swift"; sourceTree = "<group>"; };
@@ -1353,35 +1401,39 @@
 				5B7192192385E500009E4CFD /* Factory */,
 				5B6263992320605700B25462 /* Core */,
 				5B20D1002317300E00CA3028 /* Reachability */,
-				5B1DF2B822B41C90007F2416 /* NSErrorExtensionTests.swift */,
-				5B1DF2BA22B41C90007F2416 /* VIMLiveHeartbeatTests.swift */,
+				5B1DF2AE22B41C90007F2416 /* Dictionary+ExtensionTests.swift */,
+				5B1DF2A822B41C90007F2416 /* ExceptionCatcherTests.swift */,
 				5B1DF2BB22B41C90007F2416 /* FileTransferTests.swift */,
 				5B1DF2BC22B41C90007F2416 /* GCSTests.swift */,
-				5B1DF2BD22B41C90007F2416 /* VimeoSessionManagerTests.swift */,
-				5B1DF2BE22B41C90007F2416 /* VIMLiveQuotaTests.swift */,
-				5B1DF2BF22B41C90007F2416 /* VimeoClientTests.swift */,
 				0CD15ADD2395925200523569 /* ConnectedAppTests.swift */,
-				5B1DF2C022B41C90007F2416 /* ModelObjectValidationTests.swift */,
 				5B1DF2C122B41C90007F2416 /* FakeDataSource.swift */,
-				5B1DF2C222B41C90007F2416 /* UploadGCSTests.swift */,
-				5B1DF2C322B41C90007F2416 /* VIMLiveTests.swift */,
 				5B1DF2B922B41C90007F2416 /* MockConstants.swift */,
+				5B1DF2C022B41C90007F2416 /* ModelObjectValidationTests.swift */,
+				5B1DF2B822B41C90007F2416 /* NSErrorExtensionTests.swift */,
+				5B1DF2AB22B41C90007F2416 /* Request+ProgrammedContent.swift */,
 				5B1DF2A522B41C90007F2416 /* RequestTests.swift */,
+				5B1DF2AD22B41C90007F2416 /* RequestTestUtilities.swift */,
+				5B1DF2C222B41C90007F2416 /* UploadGCSTests.swift */,
 				5B1DF2A622B41C90007F2416 /* VIMCategory+Tests.swift */,
-				5B1DF2A722B41C90007F2416 /* VIMUserTests.swift */,
-				5B69E4E522DE2E07009E84B6 /* VIMUserAccountTypeTests.swift */,
-				5B1DF2A822B41C90007F2416 /* ExceptionCatcherTests.swift */,
+				5B1DF2BF22B41C90007F2416 /* VimeoClientTests.swift */,
+				5B1DF2BD22B41C90007F2416 /* VimeoSessionManagerTests.swift */,
+				5B1DF2BA22B41C90007F2416 /* VIMLiveHeartbeatTests.swift */,
+				5B1DF2BE22B41C90007F2416 /* VIMLiveQuotaTests.swift */,
+				5B1DF2C322B41C90007F2416 /* VIMLiveTests.swift */,
 				5B1DF2A922B41C90007F2416 /* VIMUploadQuota+Tests.swift */,
 				5B1DF2AA22B41C90007F2416 /* VIMUploadTests.swift */,
-				5B1DF2AB22B41C90007F2416 /* Request+ProgrammedContent.swift */,
+				5B69E4E522DE2E07009E84B6 /* VIMUserAccountTypeTests.swift */,
 				5B1DF2AC22B41C90007F2416 /* VIMUserBadgeTests.swift */,
-				5B1DF2AD22B41C90007F2416 /* RequestTestUtilities.swift */,
-				5B1DF2AE22B41C90007F2416 /* Dictionary+ExtensionTests.swift */,
+				5B1DF2A722B41C90007F2416 /* VIMUserTests.swift */,
 				5B1DF2AF22B41C90007F2416 /* VIMVideoTests.swift */,
 				5B1DF2B022B41C90007F2416 /* ObjectMappingTestUtilities.swift */,
+				0CD6C69023C8E2E400E66CF7 /* PublishJobConnectionTests.swift */,
+				0CD6C6AA23C8E5CB00E66CF7 /* PublishToSocialPostsTests.swift */,
+				0CD6C69423C8E2F900E66CF7 /* PublishJobTests.swift */,
 				5B1DF2B122B41C90007F2416 /* ResponseCacheTests.swift */,
 				5B1DF2B222B41C90007F2416 /* Request+CategoryTests.swift */,
 				0CD15AE1239593C100523569 /* Request+ConnectedAppTests.swift */,
+				0CD6C68C23C8E2D500E66CF7 /* Request+PublishToSocialTests.swift */,
 				5B1DF2B322B41C90007F2416 /* ScopeTests.swift */,
 				5B1DF2B422B41C90007F2416 /* VIMQuantityQuota+Tests.swift */,
 				5B1DF2B522B41C90007F2416 /* AlbumTests.swift */,
@@ -1401,17 +1453,20 @@
 			isa = PBXGroup;
 			children = (
 				5B1DF2CC22B41C90007F2416 /* User */,
-				5B1DF2C622B41C90007F2416 /* programmed_cinema.json */,
-				5B1DF2C722B41C90007F2416 /* upload_gcs.json */,
-				5B1DF2C822B41C90007F2416 /* cinema-success-response.json */,
-				5B1DF2C922B41C90007F2416 /* clip.json */,
-				0CD15AD92395921E00523569 /* connected-app.json */,
-				0CE4CE0F23A7EC9C000C03C5 /* connected-app-youtube.json */,
-				0CE4CE1323A7F2B8000C03C5 /* connected-app-facebook.json */,
-				5B1DF2CA22B41C90007F2416 /* gcs.json */,
-				5B1DF2CB22B41C90007F2416 /* clip_live.json */,
 				5B1DF2DC22B41C90007F2416 /* album-response.json */,
 				5B1DF2DD22B41C90007F2416 /* categories-animation-response.json */,
+				5B1DF2C822B41C90007F2416 /* cinema-success-response.json */,
+				5B1DF2CB22B41C90007F2416 /* clip_live.json */,
+				5B1DF2C922B41C90007F2416 /* clip.json */,
+				0CE4CE1323A7F2B8000C03C5 /* connected-app-facebook.json */,
+				0CE4CE0F23A7EC9C000C03C5 /* connected-app-youtube.json */,
+				0CD15AD92395921E00523569 /* connected-app.json */,
+				5B1DF2CA22B41C90007F2416 /* gcs.json */,
+				5B1DF2C622B41C90007F2416 /* programmed_cinema.json */,
+				0C37EFE423CD0A0900A631D8 /* publish-to-social-connection.json */,
+				0C37EFE823CD1E6100A631D8 /* publish-to-social-response.json */,
+				5B1DF2C722B41C90007F2416 /* upload_gcs.json */,
+				0C10EA3523CE27F00040ECAC /* video-with-publish-to-social-connection.json */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -1620,6 +1675,10 @@
 				5B5EEFEB22B441A3005C66BE /* GCS.swift */,
 				5B5EEFF222B441A3005C66BE /* PinCodeInfo.swift */,
 				5B5EEF8822B441A3005C66BE /* PlayProgress.swift */,
+				0CD6C67A23C8E22C00E66CF7 /* PublishJob.swift */,
+				0CD6C67823C8E22B00E66CF7 /* PublishJobConnection.swift */,
+				0CD6C67923C8E22C00E66CF7 /* PublishDestination.swift */,
+				0CD6C67B23C8E22C00E66CF7 /* SocialMediaPosts.swift */,
 				5B5EEFD822B441A3005C66BE /* Spatial.swift */,
 				5B5EEFBE22B441A3005C66BE /* Subscription.swift */,
 				5B5EEF8322B441A3005C66BE /* SubscriptionCollection.swift */,
@@ -1706,6 +1765,7 @@
 				0CF39F5723C3A1420059D8DA /* Request+Picture.swift */,
 				0CF39F5923C3A1430059D8DA /* Request+PolicyDocument.swift */,
 				0CF39F6323C3A1440059D8DA /* Request+ProgrammedContent.swift */,
+				0CD6C68823C8E28800E66CF7 /* Request+PublishToSocial.swift */,
 				0CF39F5A23C3A1430059D8DA /* Request+Soundtrack.swift */,
 				0CF39F5D23C3A1430059D8DA /* Request+Toggle.swift */,
 				0CF39F5F23C3A1430059D8DA /* Request+User.swift */,
@@ -2304,8 +2364,10 @@
 			files = (
 				5B1DF36E22B41C90007F2416 /* user_support.json in Resources */,
 				5B1DF33822B41C90007F2416 /* programmed_cinema.json in Resources */,
+				0C37EFE923CD1E6100A631D8 /* publish-to-social-response.json in Resources */,
 				5B1DF35322B41C90007F2416 /* user_live_pro.json in Resources */,
 				5B1DF34122B41C90007F2416 /* clip.json in Resources */,
+				0C10EA3623CE27F00040ECAC /* video-with-publish-to-social-connection.json in Resources */,
 				5B1DF37A22B41C90007F2416 /* categories-animation-response.json in Resources */,
 				5B1DF36522B41C90007F2416 /* user_plus.json in Resources */,
 				5B1DF34D22B41C90007F2416 /* user_live_business.json in Resources */,
@@ -2321,6 +2383,7 @@
 				5B1DF33E22B41C90007F2416 /* cinema-success-response.json in Resources */,
 				5B1DF37422B41C90007F2416 /* user_live.json in Resources */,
 				5B1DF37722B41C90007F2416 /* album-response.json in Resources */,
+				0C37EFE523CD0A0900A631D8 /* publish-to-social-connection.json in Resources */,
 				5B1DF35922B41C90007F2416 /* user_curation.json in Resources */,
 				0CE4CE0C23A7E928000C03C5 /* connected-app.json in Resources */,
 				5B1DF34422B41C90007F2416 /* gcs.json in Resources */,
@@ -2337,8 +2400,10 @@
 			files = (
 				5B1DF36F22B41C90007F2416 /* user_support.json in Resources */,
 				5B1DF33922B41C90007F2416 /* programmed_cinema.json in Resources */,
+				0C37EFEA23CD1E6100A631D8 /* publish-to-social-response.json in Resources */,
 				5B1DF35422B41C90007F2416 /* user_live_pro.json in Resources */,
 				5B1DF34222B41C90007F2416 /* clip.json in Resources */,
+				0C10EA3723CE27F00040ECAC /* video-with-publish-to-social-connection.json in Resources */,
 				5B1DF37B22B41C90007F2416 /* categories-animation-response.json in Resources */,
 				5B1DF36622B41C90007F2416 /* user_plus.json in Resources */,
 				5B1DF34E22B41C90007F2416 /* user_live_business.json in Resources */,
@@ -2354,6 +2419,7 @@
 				5B1DF33F22B41C90007F2416 /* cinema-success-response.json in Resources */,
 				5B1DF37522B41C90007F2416 /* user_live.json in Resources */,
 				5B1DF37822B41C90007F2416 /* album-response.json in Resources */,
+				0C37EFE623CD0A0900A631D8 /* publish-to-social-connection.json in Resources */,
 				5B1DF35A22B41C90007F2416 /* user_curation.json in Resources */,
 				0CE4CE0D23A7E929000C03C5 /* connected-app.json in Resources */,
 				5B1DF34522B41C90007F2416 /* gcs.json in Resources */,
@@ -2370,8 +2436,10 @@
 			files = (
 				5B1DF37022B41C90007F2416 /* user_support.json in Resources */,
 				5B1DF33A22B41C90007F2416 /* programmed_cinema.json in Resources */,
+				0C37EFEB23CD1E6100A631D8 /* publish-to-social-response.json in Resources */,
 				5B1DF35522B41C90007F2416 /* user_live_pro.json in Resources */,
 				5B1DF34322B41C90007F2416 /* clip.json in Resources */,
+				0C10EA3823CE27F00040ECAC /* video-with-publish-to-social-connection.json in Resources */,
 				5B1DF37C22B41C90007F2416 /* categories-animation-response.json in Resources */,
 				5B1DF36722B41C90007F2416 /* user_plus.json in Resources */,
 				5B1DF34F22B41C90007F2416 /* user_live_business.json in Resources */,
@@ -2387,6 +2455,7 @@
 				5B1DF34022B41C90007F2416 /* cinema-success-response.json in Resources */,
 				5B1DF37622B41C90007F2416 /* user_live.json in Resources */,
 				5B1DF37922B41C90007F2416 /* album-response.json in Resources */,
+				0C37EFE723CD0A0900A631D8 /* publish-to-social-connection.json in Resources */,
 				5B1DF35B22B41C90007F2416 /* user_curation.json in Resources */,
 				0CE4CE0E23A7E929000C03C5 /* connected-app.json in Resources */,
 				5B1DF34622B41C90007F2416 /* gcs.json in Resources */,
@@ -2716,6 +2785,8 @@
 				5B5EF1A122B441A4005C66BE /* ErrorCode.swift in Sources */,
 				5B5EF09022B441A3005C66BE /* VIMSeason.m in Sources */,
 				0CF39F8523C3A1440059D8DA /* Request+User.swift in Sources */,
+				0CD6C68523C8E22C00E66CF7 /* SocialMediaPosts.swift in Sources */,
+				0CD6C67F23C8E22C00E66CF7 /* PublishDestination.swift in Sources */,
 				E4FF889822FE1A7200A8F646 /* TeamMemberConnection.swift in Sources */,
 				5B5EF0E122B441A4005C66BE /* VIMActivity.m in Sources */,
 				5B5EF1C822B441A4005C66BE /* Dictionary+Extension.swift in Sources */,
@@ -2726,7 +2797,9 @@
 				0CF39FA723C3A18E0059D8DA /* Request+ConnectedApp.swift in Sources */,
 				5BD765C4234D35A900821AF7 /* UIImageView+AFNetworking.m in Sources */,
 				5B5EF19B22B441A4005C66BE /* PinCodeInfo.swift in Sources */,
+				0CD6C68923C8E28800E66CF7 /* Request+PublishToSocial.swift in Sources */,
 				5B5EF02722B441A3005C66BE /* Objc_ExceptionCatcher.m in Sources */,
+				0CD6C67C23C8E22C00E66CF7 /* PublishJobConnection.swift in Sources */,
 				5B5EF16B22B441A4005C66BE /* VIMLiveChatUser.swift in Sources */,
 				0CF39F8B23C3A1440059D8DA /* Request+Folders.swift in Sources */,
 				5B62638D2320603200B25462 /* JSONEncoding.swift in Sources */,
@@ -2809,6 +2882,7 @@
 				5B5EF16822B441A4005C66BE /* VIMAppeal.m in Sources */,
 				5BD765EB234D35A900821AF7 /* AFSecurityPolicy.m in Sources */,
 				5B5EF00C22B441A3005C66BE /* Constants.swift in Sources */,
+				0CD6C68223C8E22C00E66CF7 /* PublishJob.swift in Sources */,
 				5BEE3A212346757F0003FD81 /* Request+EndpointType.swift in Sources */,
 				5B5EF1A422B441A4005C66BE /* VIMObjectMapper+Generic.swift in Sources */,
 				0CF39FA023C3A1440059D8DA /* Request.swift in Sources */,
@@ -2864,6 +2938,7 @@
 				5B5EF0C122B441A4005C66BE /* VIMCredit.m in Sources */,
 				5B5EF04922B441A3005C66BE /* String+Parameters.swift in Sources */,
 				5B5EF12422B441A4005C66BE /* VIMThumbnailUploadTicket.m in Sources */,
+				0CD6C68623C8E22C00E66CF7 /* SocialMediaPosts.swift in Sources */,
 				0CD15AD72395911500523569 /* ConnectedApp.swift in Sources */,
 				5B5EF19322B441A4005C66BE /* FileTransfer.swift in Sources */,
 				5B5EF04022B441A3005C66BE /* VimeoSessionManager+Constructors.swift in Sources */,
@@ -2878,11 +2953,13 @@
 				0CF39F9223C3A1440059D8DA /* Request+ProgrammedContent.swift in Sources */,
 				5B5EF10622B441A4005C66BE /* VIMVideoDRMFiles.m in Sources */,
 				5B5EF14822B441A4005C66BE /* VIMLive.swift in Sources */,
+				0CD6C67D23C8E22C00E66CF7 /* PublishJobConnection.swift in Sources */,
 				5B5EF1A222B441A4005C66BE /* ErrorCode.swift in Sources */,
 				5B5EF09122B441A3005C66BE /* VIMSeason.m in Sources */,
 				5B5EF0E222B441A4005C66BE /* VIMActivity.m in Sources */,
 				E41C0F44230461AE000EAB25 /* ConnectionsProviding.swift in Sources */,
 				5B5EF1C922B441A4005C66BE /* Dictionary+Extension.swift in Sources */,
+				0CD6C68023C8E22C00E66CF7 /* PublishDestination.swift in Sources */,
 				0CF39F7123C3A1440059D8DA /* Request+Notifications.swift in Sources */,
 				5B3D4FE322DE24DD002D937B /* VIMUserAccountType.swift in Sources */,
 				5B5EF16322B441A4005C66BE /* VIMObjectMapper.m in Sources */,
@@ -2946,6 +3023,7 @@
 				5B5EF1E122B441A4005C66BE /* AuthenticationController.swift in Sources */,
 				5B5EF0C722B441A4005C66BE /* Album.swift in Sources */,
 				5BF72ACB2316F64800A0D2C8 /* NetworkReachabilityManager.swift in Sources */,
+				0CD6C68323C8E22C00E66CF7 /* PublishJob.swift in Sources */,
 				5B5EF0FA22B441A4005C66BE /* VIMPicture.m in Sources */,
 				5BD765DD234D35A900821AF7 /* AFHTTPSessionManager.m in Sources */,
 				5B5EF15422B441A4005C66BE /* VIMUserBadge.m in Sources */,
@@ -2964,6 +3042,7 @@
 				5B5EF0A322B441A4005C66BE /* VIMLiveHeartbeat.swift in Sources */,
 				0CF39F8623C3A1440059D8DA /* Request+User.swift in Sources */,
 				5B5EF16922B441A4005C66BE /* VIMAppeal.m in Sources */,
+				0CD6C68A23C8E28800E66CF7 /* Request+PublishToSocial.swift in Sources */,
 				5BD765EC234D35A900821AF7 /* AFSecurityPolicy.m in Sources */,
 				5B5EF00D22B441A3005C66BE /* Constants.swift in Sources */,
 				5BEE3A222346757F0003FD81 /* Request+EndpointType.swift in Sources */,
@@ -3000,6 +3079,7 @@
 				5B5EF16422B441A4005C66BE /* VIMObjectMapper.m in Sources */,
 				5B5EF08022B441A3005C66BE /* VIMVideo+VOD.m in Sources */,
 				5B5EF0B622B441A4005C66BE /* VIMQuantityQuota.m in Sources */,
+				0CD6C68423C8E22C00E66CF7 /* PublishJob.swift in Sources */,
 				5B5EF10D22B441A4005C66BE /* VIMBadge.swift in Sources */,
 				E41C0F49230461C9000EAB25 /* MetadataParsing.swift in Sources */,
 				5B5EF19122B441A4005C66BE /* VIMVideoFairPlayFile.m in Sources */,
@@ -3048,6 +3128,7 @@
 				5B5EF19D22B441A4005C66BE /* PinCodeInfo.swift in Sources */,
 				5BD765E7234D35A900821AF7 /* AFURLRequestSerialization.m in Sources */,
 				5B5EF0E022B441A4005C66BE /* VIMInteraction.m in Sources */,
+				0CD6C68B23C8E28800E66CF7 /* Request+PublishToSocial.swift in Sources */,
 				5B5EF03522B441A3005C66BE /* NetworkingNotification.swift in Sources */,
 				5B5EF02922B441A3005C66BE /* Objc_ExceptionCatcher.m in Sources */,
 				5B5EF16722B441A4005C66BE /* VIMPreference.m in Sources */,
@@ -3095,8 +3176,10 @@
 				5B5EF02F22B441A3005C66BE /* ExceptionCatcher+Swift.swift in Sources */,
 				5BD765ED234D35A900821AF7 /* AFSecurityPolicy.m in Sources */,
 				5B5EF07A22B441A3005C66BE /* VIMSizeQuota.swift in Sources */,
+				0CD6C68123C8E22C00E66CF7 /* PublishDestination.swift in Sources */,
 				5B5EF14922B441A4005C66BE /* VIMLive.swift in Sources */,
 				5B62638C2320603200B25462 /* HTTPMethod.swift in Sources */,
+				0CD6C68723C8E22C00E66CF7 /* SocialMediaPosts.swift in Sources */,
 				5B5EF0C522B441A4005C66BE /* VIMSpace.swift in Sources */,
 				5BEE3A1F23466F920003FD81 /* Task.swift in Sources */,
 				5B5EF07D22B441A3005C66BE /* VIMUploadTicket.m in Sources */,
@@ -3104,6 +3187,7 @@
 				5B5EF13A22B441A4005C66BE /* VIMLiveStreams.swift in Sources */,
 				E4FF888422FE09B100A8F646 /* Folder.swift in Sources */,
 				5B5EF07722B441A3005C66BE /* VIMCategory.m in Sources */,
+				0CD6C67E23C8E22C00E66CF7 /* PublishJobConnection.swift in Sources */,
 				E41C0F45230461AE000EAB25 /* ConnectionsProviding.swift in Sources */,
 				5B5EF0DD22B441A4005C66BE /* VIMLiveQuota.swift in Sources */,
 				0CD15AD82395911500523569 /* ConnectedApp.swift in Sources */,
@@ -3157,6 +3241,7 @@
 				5B1DF2F622B41C90007F2416 /* RequestTestUtilities.swift in Sources */,
 				5B1DF31422B41C90007F2416 /* NSErrorExtensionTests.swift in Sources */,
 				5B1DF30222B41C90007F2416 /* ResponseCacheTests.swift in Sources */,
+				0CD6C6AB23C8E5CB00E66CF7 /* PublishToSocialPostsTests.swift in Sources */,
 				5B1DF31722B41C90007F2416 /* MockConstants.swift in Sources */,
 				5B1DF2E122B41C90007F2416 /* VIMCategory+Tests.swift in Sources */,
 				5B1DF2ED22B41C90007F2416 /* VIMUploadTests.swift in Sources */,
@@ -3165,6 +3250,7 @@
 				5B1DF2E422B41C90007F2416 /* VIMUserTests.swift in Sources */,
 				5B1DF2FF22B41C90007F2416 /* ObjectMappingTestUtilities.swift in Sources */,
 				0CD15ADE2395925200523569 /* ConnectedAppTests.swift in Sources */,
+				0CD6C6A223C8E32F00E66CF7 /* Request+PublishToSocialTests.swift in Sources */,
 				5B1DF30822B41C90007F2416 /* ScopeTests.swift in Sources */,
 				5B1DF32322B41C90007F2416 /* VimeoSessionManagerTests.swift in Sources */,
 				5B1DF31A22B41C90007F2416 /* VIMLiveHeartbeatTests.swift in Sources */,
@@ -3186,6 +3272,7 @@
 				5B1DF31D22B41C90007F2416 /* FileTransferTests.swift in Sources */,
 				5B1DF33222B41C90007F2416 /* UploadGCSTests.swift in Sources */,
 				5B8BA2652388295A0093523B /* Request+AppleTests.swift in Sources */,
+				0CD6C6A123C8E32F00E66CF7 /* PublishJobTests.swift in Sources */,
 				5B1DF30522B41C90007F2416 /* Request+CategoryTests.swift in Sources */,
 				5B20D1022317303200CA3028 /* NetworkReachabilityStatusTests.swift in Sources */,
 				5B62639C2320605700B25462 /* URLEncodingTests.swift in Sources */,
@@ -3193,6 +3280,7 @@
 				5B20D10B231850D100CA3028 /* NetworkingReachabilityManagerTests.swift in Sources */,
 				5B1DF2F022B41C90007F2416 /* Request+ProgrammedContent.swift in Sources */,
 				5B1DF2DE22B41C90007F2416 /* RequestTests.swift in Sources */,
+				0CD6C6A023C8E32F00E66CF7 /* PublishJobConnectionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3215,6 +3303,7 @@
 				5B1AE5CC22B5AA1400FE120E /* VimeoSessionManagerTests.swift in Sources */,
 				5B1AE5C922B5AA1400FE120E /* VIMLiveHeartbeatTests.swift in Sources */,
 				5B1AE5CD22B5AA1400FE120E /* VIMLiveQuotaTests.swift in Sources */,
+				0CD6C6AC23C8E5CB00E66CF7 /* PublishToSocialPostsTests.swift in Sources */,
 				5B1DF2F422B41C90007F2416 /* VIMUserBadgeTests.swift in Sources */,
 				5B1DF2FD22B41C90007F2416 /* VIMVideoTests.swift in Sources */,
 				5B1AE5D222B5AA1400FE120E /* VIMLiveTests.swift in Sources */,
@@ -3223,16 +3312,19 @@
 				5B1AE5CB22B5AA1400FE120E /* GCSTests.swift in Sources */,
 				5B1AE5CF22B5AA1400FE120E /* ModelObjectValidationTests.swift in Sources */,
 				5B1DF30C22B41C90007F2416 /* VIMQuantityQuota+Tests.swift in Sources */,
+				0CD6C6A723C8E33000E66CF7 /* Request+PublishToSocialTests.swift in Sources */,
 				5B1DF2E822B41C90007F2416 /* ExceptionCatcherTests.swift in Sources */,
 				5B1DF2EB22B41C90007F2416 /* VIMUploadQuota+Tests.swift in Sources */,
 				5B71921F2385E511009E4CFD /* VimeoClientFactory.swift in Sources */,
 				5B1DF30622B41C90007F2416 /* Request+CategoryTests.swift in Sources */,
 				5B1AE5CE22B5AA1400FE120E /* VimeoClientTests.swift in Sources */,
 				5B1AE5CA22B5AA1400FE120E /* FileTransferTests.swift in Sources */,
+				0CD6C6A623C8E33000E66CF7 /* PublishJobTests.swift in Sources */,
 				5B1AE5D122B5AA1400FE120E /* UploadGCSTests.swift in Sources */,
 				5B8BA2662388295A0093523B /* Request+AppleTests.swift in Sources */,
 				5B5EEF1D22B425C9005C66BE /* MockConstants.swift in Sources */,
 				5B20D1032317303200CA3028 /* NetworkReachabilityStatusTests.swift in Sources */,
+				0CD6C6A523C8E33000E66CF7 /* PublishJobConnectionTests.swift in Sources */,
 				5B62639D2320605700B25462 /* URLEncodingTests.swift in Sources */,
 				5B69E4EA22DE2E29009E84B6 /* VIMUserAccountTypeTests.swift in Sources */,
 				5B20D10C231850D100CA3028 /* NetworkingReachabilityManagerTests.swift in Sources */,
@@ -3260,6 +3352,7 @@
 				5B1AE5D722B5AA1500FE120E /* VimeoSessionManagerTests.swift in Sources */,
 				5B1AE5D422B5AA1500FE120E /* VIMLiveHeartbeatTests.swift in Sources */,
 				5B1AE5D822B5AA1500FE120E /* VIMLiveQuotaTests.swift in Sources */,
+				0CD6C6AD23C8E5CB00E66CF7 /* PublishToSocialPostsTests.swift in Sources */,
 				5B1DF2F522B41C90007F2416 /* VIMUserBadgeTests.swift in Sources */,
 				5B1DF2FE22B41C90007F2416 /* VIMVideoTests.swift in Sources */,
 				5B1AE5DD22B5AA1500FE120E /* VIMLiveTests.swift in Sources */,
@@ -3271,11 +3364,13 @@
 				5B1DF2E922B41C90007F2416 /* ExceptionCatcherTests.swift in Sources */,
 				5B1DF2EC22B41C90007F2416 /* VIMUploadQuota+Tests.swift in Sources */,
 				5B7192202385E512009E4CFD /* VimeoClientFactory.swift in Sources */,
+				0CD6C69A23C8E32300E66CF7 /* Request+PublishToSocialTests.swift in Sources */,
 				5B1DF30722B41C90007F2416 /* Request+CategoryTests.swift in Sources */,
 				5B1AE5D922B5AA1500FE120E /* VimeoClientTests.swift in Sources */,
 				5B1AE5D522B5AA1500FE120E /* FileTransferTests.swift in Sources */,
 				5B1AE5DC22B5AA1500FE120E /* UploadGCSTests.swift in Sources */,
 				5B8BA2672388295A0093523B /* Request+AppleTests.swift in Sources */,
+				0CD6C6A923C8E33100E66CF7 /* PublishJobTests.swift in Sources */,
 				5B5EEF1E22B425CA005C66BE /* MockConstants.swift in Sources */,
 				5B20D1042317303200CA3028 /* NetworkReachabilityStatusTests.swift in Sources */,
 				5B62639E2320605700B25462 /* URLEncodingTests.swift in Sources */,
@@ -3283,6 +3378,7 @@
 				5B20D10D231850D100CA3028 /* NetworkingReachabilityManagerTests.swift in Sources */,
 				5B1DF2F222B41C90007F2416 /* Request+ProgrammedContent.swift in Sources */,
 				5B1DF2E022B41C90007F2416 /* RequestTests.swift in Sources */,
+				0CD6C6A823C8E33100E66CF7 /* PublishJobConnectionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

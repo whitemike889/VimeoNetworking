@@ -67,6 +67,7 @@ extern NSString *const __nonnull VIMConnectionNameNotifications;
 extern NSString *const __nonnull VIMConnectionNameBlockUser;
 extern NSString *const __nonnull VIMConnectionNameLiveStats;
 extern NSString *const __nonnull VIMConnectionNameUploadAttempt;
+extern NSString *const __nonnull VIMConnectionNamePublishToSocial;
 
 @interface VIMConnection : VIMModelObject
 
