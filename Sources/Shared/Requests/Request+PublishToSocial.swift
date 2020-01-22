@@ -89,7 +89,7 @@ public extension Request where ModelType == PublishJob {
     }
 
     private static func path(for videoURI: String) -> String {
-        videoURI + String.publishToSocialURI
+        videoURI + .publishToSocialURI
     }
 }
 
