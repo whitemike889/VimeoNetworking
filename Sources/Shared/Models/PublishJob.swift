@@ -42,7 +42,7 @@ public class PublishJob: VIMModelObject {
     
     public override func getClassForObjectKey(_ key: String?) -> AnyClass? {
         switch key {
-        case Constants.Key.destinations:
+        case String.destinations:
             return PublishDestinations.self
         default:
             return nil
@@ -51,8 +51,8 @@ public class PublishJob: VIMModelObject {
     
     public override func getObjectMapping() -> Any? {
         return [
-            Constants.Key.firstPublishDate: Constants.Value.firstPublishDate,
-            Constants.Key.resourceKey: Constants.Value.resourceKey
+            Constants.firstPublishDate.0: Constants.firstPublishDate.1,
+            Constants.resourceKey.0: Constants.resourceKey.1
         ]
     }
     
@@ -71,15 +71,11 @@ public class PublishJob: VIMModelObject {
     }
 }
 
+private extension String {
+    static let destinations = "destinations"
+}
+
 private struct Constants {
-    struct Key {
-        static let destinations = "destinations"
-        static let firstPublishDate = "first_publish_date"
-        static let resourceKey = "resource_key"
-    }
-    
-    struct Value {
-        static let firstPublishDate = "firstPublishDateString"
-        static let resourceKey = "resourceKey"
-    }
+    static let firstPublishDate = (key: "first_publish_date", value: "firstPublishDateString")
+    static let resourceKey = (key: "resource_key", value: "resourceKey")
 }

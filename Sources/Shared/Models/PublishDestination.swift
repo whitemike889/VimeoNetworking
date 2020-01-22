@@ -82,12 +82,12 @@ public class PublishDestination: VIMModelObject {
     
     public override func getObjectMapping() -> Any? {
         return [
-            Constants.Key.thirdPartyPostURL: Constants.Value.thirdPartyPostURL,
-            Constants.Key.thirdPartyPostID: Constants.Value.thirdPartyPostID,
-            Constants.Key.thirdPartyViewCount: Constants.Value.thirdPartyViewCount,
-            Constants.Key.thirdPartyLikeCount: Constants.Value.thirdPartyLikeCount,
-            Constants.Key.thirdPartyCommentCount: Constants.Value.thirdPartyCommentCount,
-            Constants.Key.status: Constants.Value.status
+            Constants.thirdPartyPostURL.0: Constants.thirdPartyPostURL.1,
+            Constants.thirdPartyPostID.0: Constants.thirdPartyPostID.1,
+            Constants.thirdPartyViewCount.0: Constants.thirdPartyViewCount.1,
+            Constants.thirdPartyLikeCount.0: Constants.thirdPartyLikeCount.1,
+            Constants.thirdPartyCommentCount.0: Constants.thirdPartyCommentCount.1,
+            Constants.status.0: Constants.status.1
         ]
     }
 }
@@ -128,21 +128,10 @@ private extension String {
 }
 
 private struct Constants {
-    struct Key {
-        static let status = "status"
-        static let thirdPartyPostURL = "third_party_post_url"
-        static let thirdPartyPostID = "third_party_post_id"
-        static let thirdPartyViewCount = "third_party_view_count"
-        static let thirdPartyLikeCount = "third_party_like_count"
-        static let thirdPartyCommentCount = "third_party_comment_count"
-    }
-    
-    struct Value {
-        static let status = "statusString"
-        static let thirdPartyPostURL = "thirdPartyPostURL"
-        static let thirdPartyPostID = "thirdPartyPostID"
-        static let thirdPartyViewCount = "thirdPartyViewCount"
-        static let thirdPartyLikeCount = "thirdPartyLikeCount"
-        static let thirdPartyCommentCount = "thirdPartyCommentCount"
-    }
+    static let status = (key: "status", value: "statusString")
+    static let thirdPartyPostURL = (key: "third_party_post_url", value: "thirdPartyPostURL")
+    static let thirdPartyPostID = (key: "third_party_post_id", value: "thirdPartyPostID")
+    static let thirdPartyViewCount = (key: "third_party_view_count", value: "thirdPartyViewCount")
+    static let thirdPartyLikeCount = (key: "third_party_like_count", value: "thirdPartyLikeCount")
+    static let thirdPartyCommentCount = (key: "third_party_comment_count", value: "thirdPartyCommentCount")
 }

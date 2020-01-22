@@ -40,11 +40,11 @@ public class PublishJobConnection: VIMConnection {
     
     public override func getClassForObjectKey(_ key: String?) -> AnyClass? {
         switch key {
-        case Constants.Key.publishBlockers:
+        case String.publishBlockers:
             return PublishJobBlockers.self
-        case Constants.Key.publishConstraints:
+        case String.publishConstraints:
             return PublishJobConstraints.self
-        case Constants.Key.publishDestinations:
+        case String.publishDestinations:
             return PublishJobDestinations.self
         default:
             return nil
@@ -82,10 +82,10 @@ public class PublishJobBlockers: VIMModelObject {
 
     public override func getObjectMapping() -> Any! {
         return [
-            String.facebook: Constants.Value.facebookBlockers,
-            String.linkedin: Constants.Value.linkedInBlockers,
-            String.twitter: Constants.Value.twitterBlockers,
-            String.youtube: Constants.Value.youtubeBlockers
+            String.facebook: String.facebookBlockers,
+            String.linkedin: String.linkedInBlockers,
+            String.twitter: String.twitterBlockers,
+            String.youtube: String.youtubeBlockers
         ]
     }
 }
@@ -151,10 +151,10 @@ public class PublishJobDestinations: VIMModelObject {
 
     public override func getObjectMapping() -> Any! {
         return [
-            String.facebook: Constants.Value.publishedToFacebook,
-            String.linkedin: Constants.Value.publishedToLinkedIn,
-            String.twitter: Constants.Value.publishedToTwitter,
-            String.youtube: Constants.Value.publishedToYouTube
+            String.facebook: String.publishedToFacebook,
+            String.linkedin: String.publishedToLinkedIn,
+            String.twitter: String.publishedToTwitter,
+            String.youtube: String.publishedToYouTube
         ]
     }
 }
@@ -217,23 +217,15 @@ private extension String {
     static let duration = "duration"
     static let facebookNoPages = "fb_no_pages"
     static let linkedInNoOrganizations = "li_no_organizations"
-}
-
-private struct Constants {
-    struct Key {
-        static let publishBlockers = "publish_blockers"
-        static let publishConstraints = "publish_constraints"
-        static let publishDestinations = "publish_destinations"
-    }
-
-    struct Value {
-        static let publishedToFacebook = "publishedToFacebook"
-        static let publishedToLinkedIn = "publishedToLinkedIn"
-        static let publishedToTwitter = "publishedToTwitter"
-        static let publishedToYouTube = "publishedToYouTube"
-        static let facebookBlockers = "facebookBlockers"
-        static let linkedInBlockers = "linkedInBlockers"
-        static let twitterBlockers = "twitterBlockers"
-        static let youtubeBlockers = "youtubeBlockers"
-    }
+    static let publishBlockers = "publish_blockers"
+    static let publishConstraints = "publish_constraints"
+    static let publishDestinations = "publish_destinations"
+    static let publishedToFacebook = "publishedToFacebook"
+    static let publishedToLinkedIn = "publishedToLinkedIn"
+    static let publishedToTwitter = "publishedToTwitter"
+    static let publishedToYouTube = "publishedToYouTube"
+    static let facebookBlockers = "facebookBlockers"
+    static let linkedInBlockers = "linkedInBlockers"
+    static let twitterBlockers = "twitterBlockers"
+    static let youtubeBlockers = "youtubeBlockers"
 }
