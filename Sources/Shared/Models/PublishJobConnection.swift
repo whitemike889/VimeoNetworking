@@ -40,11 +40,11 @@ public class PublishJobConnection: VIMConnection {
     
     public override func getClassForObjectKey(_ key: String?) -> AnyClass? {
         switch key {
-        case String.Key.publishBlockers:
+        case Constants.Key.publishBlockers:
             return PublishJobBlockers.self
-        case String.Key.publishConstraints:
+        case Constants.Key.publishConstraints:
             return PublishJobConstraints.self
-        case String.Key.publishDestinations:
+        case Constants.Key.publishDestinations:
             return PublishJobDestinations.self
         default:
             return nil
@@ -82,10 +82,10 @@ public class PublishJobBlockers: VIMModelObject {
 
     public override func getObjectMapping() -> Any! {
         return [
-            String.facebook: String.Value.facebookBlockers,
-            String.linkedin: String.Value.linkedInBlockers,
-            String.twitter: String.Value.twitterBlockers,
-            String.youtube: String.Value.youtubeBlockers
+            String.facebook: Constants.Value.facebookBlockers,
+            String.linkedin: Constants.Value.linkedInBlockers,
+            String.twitter: Constants.Value.twitterBlockers,
+            String.youtube: Constants.Value.youtubeBlockers
         ]
     }
 }
@@ -151,10 +151,10 @@ public class PublishJobDestinations: VIMModelObject {
 
     public override func getObjectMapping() -> Any! {
         return [
-            String.facebook: String.Value.publishedToFacebook,
-            String.linkedin: String.Value.publishedToLinkedIn,
-            String.twitter: String.Value.publishedToTwitter,
-            String.youtube: String.Value.publishedToYouTube
+            String.facebook: Constants.Value.publishedToFacebook,
+            String.linkedin: Constants.Value.publishedToLinkedIn,
+            String.twitter: Constants.Value.publishedToTwitter,
+            String.youtube: Constants.Value.publishedToYouTube
         ]
     }
 }
@@ -174,12 +174,12 @@ public class PublishBlockers: VIMModelObject {
 
     /// The file size of the video is too large for the platform.
     public lazy var size: Bool = {
-        return self.blockers?.contains(String.Blockers.size) ?? false
+        return self.blockers?.contains(.size) ?? false
     }()
 
     /// The duration of the video is too long for the platform.
     public lazy var duration: Bool = {
-        return self.blockers?.contains(String.Blockers.duration) ?? false
+        return self.blockers?.contains(.duration) ?? false
     }()
 }
 
@@ -188,7 +188,7 @@ public class FacebookBlockers: PublishBlockers {
 
     /// The connected Facebook account has no pages. Publishing requires at least one Facebook page.
     public lazy var noPages: Bool = {
-        return self.blockers?.contains(String.Blockers.facebookNoPages) ?? false
+        return self.blockers?.contains(.facebookNoPages) ?? false
     }()
 }
 
@@ -197,7 +197,7 @@ public class LinkedInBockers: PublishBlockers {
 
     /// The connected LinkedIn account has no organizations. Pubishing requires at least one LinkedIn organization.
     public lazy var noOrganizations: Bool = {
-        return self.blockers?.contains(String.Blockers.linkedInNoOrganizations) ?? false
+        return self.blockers?.contains(.linkedInNoOrganizations) ?? false
     }()
 }
 
@@ -213,6 +213,13 @@ public class PublishConstraints: VIMModelObject {
 }
 
 private extension String {
+    static let size = "size"
+    static let duration = "duration"
+    static let facebookNoPages = "fb_no_pages"
+    static let linkedInNoOrganizations = "li_no_organizations"
+}
+
+private struct Constants {
     struct Key {
         static let publishBlockers = "publish_blockers"
         static let publishConstraints = "publish_constraints"
@@ -228,17 +235,5 @@ private extension String {
         static let linkedInBlockers = "linkedInBlockers"
         static let twitterBlockers = "twitterBlockers"
         static let youtubeBlockers = "youtubeBlockers"
-    }
-
-    struct Blockers {
-        static let size = "size"
-        static let duration = "duration"
-        static let facebookNoPages = "fb_no_pages"
-        static let linkedInNoOrganizations = "li_no_organizations"
-    }
-
-    struct Constraints {
-        static let size = "size"
-        static let duration = "duration"
     }
 }

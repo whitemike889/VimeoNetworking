@@ -85,12 +85,12 @@ public class PublishDestination: VIMModelObject {
     
     public override func getObjectMapping() -> Any? {
         return [
-            String.Key.thirdPartyPostURL: String.Value.thirdPartyPostURL,
-            String.Key.thirdPartyPostID: String.Value.thirdPartyPostID,
-            String.Key.thirdPartyViewCount: String.Value.thirdPartyViewCount,
-            String.Key.thirdPartyLikeCount: String.Value.thirdPartyLikeCount,
-            String.Key.thirdPartyCommentCount: String.Value.thirdPartyCommentCount,
-            String.Key.status: String.Value.status
+            Constants.Key.thirdPartyPostURL: Constants.Value.thirdPartyPostURL,
+            Constants.Key.thirdPartyPostID: Constants.Value.thirdPartyPostID,
+            Constants.Key.thirdPartyViewCount: Constants.Value.thirdPartyViewCount,
+            Constants.Key.thirdPartyLikeCount: Constants.Value.thirdPartyLikeCount,
+            Constants.Key.thirdPartyCommentCount: Constants.Value.thirdPartyCommentCount,
+            Constants.Key.status: Constants.Value.status
         ]
     }
 }
@@ -125,13 +125,19 @@ public class PublishDestinations: VIMModelObject {
 }
 
 private extension String {
+    static let error = "error"
+    static let finished = "finished"
+    static let inProgress = "in_progress"
+}
+
+private struct Constants {
     struct Key {
+        static let status = "status"
         static let thirdPartyPostURL = "third_party_post_url"
         static let thirdPartyPostID = "third_party_post_id"
         static let thirdPartyViewCount = "third_party_view_count"
         static let thirdPartyLikeCount = "third_party_like_count"
         static let thirdPartyCommentCount = "third_party_comment_count"
-        static let status = "status"
     }
     
     struct Value {
@@ -142,8 +148,4 @@ private extension String {
         static let thirdPartyLikeCount = "thirdPartyLikeCount"
         static let thirdPartyCommentCount = "thirdPartyCommentCount"
     }
-    
-    static let error = "error"
-    static let finished = "finished"
-    static let inProgress = "in_progress"
 }

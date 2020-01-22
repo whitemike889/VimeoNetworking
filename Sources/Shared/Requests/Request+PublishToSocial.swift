@@ -43,42 +43,42 @@ public extension Request where ModelType == PublishJob {
 
         posts.facebook.map {
             var post: [String: Any] = [
-                String.Key.title: $0.title,
-                String.Key.description: $0.description,
-                String.Key.destination: $0.destination,
-                String.Key.allowEmbedding: $0.allowEmbedding,
-                String.Key.shouldAppearOnNewsFeed: $0.shouldAppearOnNewsFeed,
-                String.Key.isSecretVideo: $0.isSecretVideo,
-                String.Key.allowSocialActions: $0.allowSocialActions
+                .title: $0.title,
+                .description: $0.description,
+                .destination: $0.destination,
+                .allowEmbedding: $0.allowEmbedding,
+                .shouldAppearOnNewsFeed: $0.shouldAppearOnNewsFeed,
+                .isSecretVideo: $0.isSecretVideo,
+                .allowSocialActions: $0.allowSocialActions
             ]
             
-            $0.categoryID.map { (categoryID) in post[String.Key.categoryID] = categoryID }
+            $0.categoryID.map { (categoryID) in post[.categoryID] = categoryID }
             parameters[.facebook] = post
         }
 
         posts.linkedIn.map {
             parameters[.linkedin] = [
-                String.Key.pageID: $0.pageID,
-                String.Key.title: $0.title,
-                String.Key.description: $0.description,
+                String.pageID: $0.pageID,
+                String.title: $0.title,
+                String.description: $0.description,
             ]
         }
 
         posts.twitter.map {
             parameters[.twitter] = [
-                String.Key.tweet: $0.tweet
+                String.tweet: $0.tweet
             ]
         }
 
         posts.youTube.map {
             var post: [String: Any] = [
-                String.Key.title: $0.title,
-                String.Key.privacy: $0.privacy.rawValue,
-                String.Key.categoryID: $0.categoryID
+                .title: $0.title,
+                .privacy: $0.privacy.rawValue,
+                .categoryID: $0.categoryID
             ]
 
-            $0.description.map { (description) in post[String.Key.description] = description }
-            $0.tags.map { (tags) in post[String.Key.tags] = tags }
+            $0.description.map { (description) in post[.description] = description }
+            $0.tags.map { (tags) in post[.tags] = tags }
 
             parameters[.youtube] = post
         }
@@ -93,19 +93,16 @@ public extension Request where ModelType == PublishJob {
 
 private extension String {
     static let publishToSocialURI = "/publish_to_social"
-
-    struct Key {
-        static let title = "title"
-        static let description = "description"
-        static let destination = "destination"
-        static let pageID = "page_id"
-        static let categoryID = "category_id"
-        static let allowEmbedding = "allow_embedding"
-        static let shouldAppearOnNewsFeed = "should_appear_on_news_feed"
-        static let isSecretVideo = "is_secret_video"
-        static let allowSocialActions = "allow_social_actions"
-        static let tweet = "tweet"
-        static let tags = "tags"
-        static let privacy = "privacy"
-    }
+    static let title = "title"
+    static let description = "description"
+    static let destination = "destination"
+    static let pageID = "page_id"
+    static let categoryID = "category_id"
+    static let allowEmbedding = "allow_embedding"
+    static let shouldAppearOnNewsFeed = "should_appear_on_news_feed"
+    static let isSecretVideo = "is_secret_video"
+    static let allowSocialActions = "allow_social_actions"
+    static let tweet = "tweet"
+    static let tags = "tags"
+    static let privacy = "privacy"
 }

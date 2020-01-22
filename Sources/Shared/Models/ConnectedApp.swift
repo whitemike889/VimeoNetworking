@@ -84,7 +84,7 @@ public class ConnectedAppScopes: VIMModelObject {
 
     public override func getObjectMapping() -> Any? {
         return [
-            String.Key.publishToSocial: String.Value.publishToSocial
+            Constants.Key.publishToSocial: Constants.Value.publishToSocial
         ]
     }
 }
@@ -103,7 +103,7 @@ public class PublishOptionItem: VIMModelObject {
 
     public override func getObjectMapping() -> Any? {
         return [
-            String.Key.identifier: String.Value.identifier,
+            Constants.Key.identifier: Constants.Value.identifier,
         ]
     }
 }
@@ -173,7 +173,7 @@ public class ConnectedApp: VIMModelObject {
 
     public override func getClassForObjectKey(_ key: String?) -> AnyClass? {
         switch key {
-        case String.Key.neededScopes:
+        case Constants.Key.neededScopes:
             return ConnectedAppScopes.self
         default:
             return nil
@@ -182,20 +182,20 @@ public class ConnectedApp: VIMModelObject {
 
     public override func getObjectMapping() -> Any? {
         return [
-            String.Key.addDate: String.Value.addDate,
-            String.Key.dataAccessIsExpired: String.Value.dataAccessIsExpired,
-            String.Key.publishCategories: String.Value.publishCategories,
-            String.Key.thirdPartyUserID: String.Value.thirdPartyUserID,
-            String.Key.thirdPartyUserDisplayName: String.Value.thirdPartyUserDisplayName,
-            String.Key.type: String.Value.type
+            Constants.Key.addDate: Constants.Value.addDate,
+            Constants.Key.dataAccessIsExpired: Constants.Value.dataAccessIsExpired,
+            Constants.Key.publishCategories: Constants.Value.publishCategories,
+            Constants.Key.thirdPartyUserID: Constants.Value.thirdPartyUserID,
+            Constants.Key.thirdPartyUserDisplayName: Constants.Value.thirdPartyUserDisplayName,
+            Constants.Key.type: Constants.Value.type
         ]
     }
 
     public override func getClassForCollectionKey(_ key: String?) -> AnyClass? {
         switch key {
-        case String.Key.publishCategories:
+        case Constants.Key.publishCategories:
             return PublishOptionItem.self
-        case String.Key.pages:
+        case Constants.Key.pages:
             return PublishOptionItem.self
         default:
             return nil
@@ -224,7 +224,7 @@ public extension String {
     static let youtube = "youtube"
 }
 
-private extension String {
+private struct Constants {
     struct Key {
         static let addDate = "add_date"
         static let dataAccessIsExpired = "data_access_is_expired"
