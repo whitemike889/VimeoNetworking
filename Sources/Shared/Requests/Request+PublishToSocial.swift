@@ -59,7 +59,7 @@ public extension Request where ModelType == PublishJob {
         posts.linkedIn.map {
             var post: [String: Any] = [
                 .pageID: $0.pageID,
-                .title: $0.title,
+                .title: $0.title
             ]
 
             $0.description.map { (description) in post[.description] = description }
