@@ -57,11 +57,13 @@ public extension Request where ModelType == PublishJob {
         }
 
         posts.linkedIn.map {
-            parameters[.linkedin] = [
-                String.pageID: $0.pageID,
-                String.title: $0.title,
-                String.description: $0.description,
+            var post: [String: Any] = [
+                .pageID: $0.pageID,
+                .title: $0.title,
             ]
+
+            $0.description.map { (description) in post[.description] = description }
+            parameters[.linkedin] = post
         }
 
         posts.twitter.map {
