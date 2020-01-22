@@ -48,10 +48,7 @@ extension PublishStatus: CustomStringConvertible {
 
 @objcMembers
 public class PublishDestination: VIMModelObject {
-    /// The status of the post on the specified platform as a `String`.
-    /// - Note: This property is available to provide interoperability with Objective-C codebases.
-    ///         Using `status` is preferred.
-    public private(set) var statusString: String?
+    internal private(set) var statusString: String?
     
     /// The status of the post for a given platform.
     @nonobjc public var status: PublishStatus? {
