@@ -99,7 +99,7 @@ class PublishJobConnectionTests: XCTestCase {
 
     func test_publishJobConnection_isParsesAsExpected_fromVideoObject() throws {
         guard let json = ResponseUtilities.loadResponse(
-            from: "video-with-connection.json"
+            from: "video-with-publish-to-social-connection.json"
         ) else {
             XCTFail()
             return
