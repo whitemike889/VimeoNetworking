@@ -27,7 +27,7 @@ public extension Request where ModelType == PublishJob {
     /// Returns a request for fetching the `PublishJob` for a specified video ID.
     /// - Parameter videoURI: The URI for the video to be published.
     static func fetchPublishJob(for videoURI: String) -> Request {
-        let publishToSocialPath = Request.uri(for: videoURI)
+        let publishToSocialPath = Request.path(for: videoURI)
         return Request(path: publishToSocialPath)
     }
 
@@ -38,7 +38,7 @@ public extension Request where ModelType == PublishJob {
     ///   - posts: A structure containing all of the data necessary to publish to multiple platforms simultaneously.
     ///   - videoURI: The URI for the video to be published.
     static func publishPosts(_ posts: SocialMediaPosts, for videoURI: String) -> Request {
-        let publishToSocialPath = Request.uri(for: videoURI)
+        let publishToSocialPath = Request.path(for: videoURI)
         var parameters = [String: Any]()
 
         posts.facebook.map {
@@ -86,7 +86,7 @@ public extension Request where ModelType == PublishJob {
         return Request(method: .put, path: publishToSocialPath, parameters: parameters)
     }
 
-    private static func uri(for videoURI: String) -> String {
+    private static func path(for videoURI: String) -> String {
         videoURI + String.publishToSocialURI
     }
 }
