@@ -54,7 +54,7 @@ public struct PublishToFacebookPost {
         title: String,
         description: String,
         destination: Int,
-        categoryID: String?,
+        categoryID: String? = nil,
         allowEmbedding: Bool,
         shouldAppearOnNewsFeed: Bool,
         isSecretVideo: Bool,
@@ -81,12 +81,12 @@ public struct PublishToLinkedInPost {
     public let title: String
 
     /// The description of the post as it will appear on LinkedIn.
-    public let description: String
+    public let description: String?
 
     public init(
         pageID: Int,
         title: String,
-        description: String
+        description: String? = nil
     ) {
         self.pageID = pageID
         self.title = title
@@ -133,8 +133,8 @@ public struct PublishToYouTubePost {
 
     public init(
         title: String,
-        description: String?,
-        tags: [String]?,
+        description: String? = nil,
+        tags: [String]? = nil,
         privacy: Privacy,
         categoryID: String
     ) {
