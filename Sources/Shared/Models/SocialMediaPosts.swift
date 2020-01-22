@@ -35,7 +35,7 @@ public struct PublishToFacebookPost {
     /// The identifier of the Facebook page being posted to.
     public let destination: Int
 
-    /// The Facebook category of the video.
+    /// The Facebook category of the video. May be `nil`.
     public let categoryID: String?
 
     /// Whether or not this Facbeook post should be embeddable.
@@ -80,7 +80,7 @@ public struct PublishToLinkedInPost {
     /// The title of the post as it will appear on LinkedIn.
     public let title: String
 
-    /// The description of the post as it will appear on LinkedIn.
+    /// The description of the post as it will appear on LinkedIn. May be `nil`.
     public let description: String?
 
     public init(
@@ -119,16 +119,16 @@ public struct PublishToYouTubePost {
     /// The title of the video as it will appear on YouTube.
     public let title: String
 
-    /// The description of the video as it will appear on YouTube.
+    /// The description of the video as it will appear on YouTube. May be `nil`.
     public let description: String?
 
-    /// A list of tags for the video on YouTube. May be nil.
+    /// A list of tags for the video on YouTube. May be `nil`.
     public let tags: [String]?
 
     /// The privacy option for this video on YouTube.
     public let privacy: Privacy
 
-    /// The YouTube category identifier which this video falls into. May be nil.
+    /// The YouTube category identifier which this video falls into.
     public let categoryID: String
 
     public init(
