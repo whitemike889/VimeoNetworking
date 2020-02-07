@@ -83,4 +83,12 @@ NSString *const VIMConnectionNamePublishToSocial = @"publish_to_social";
     return (self.options && [self.options containsObject:@"POST"]);
 }
 
+- (void)didFinishMapping
+{
+    if (self.total != nil && [self.total isKindOfClass: [NSNumber class]] == NO) {
+        NSAssert(false, @"Error: Detected instance where `connection.total` is unexpectedly not an `NSNumber`.");
+        self.total = @0;
+    }
+}
+
 @end

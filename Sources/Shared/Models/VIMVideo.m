@@ -541,7 +541,7 @@ NSString *VIMContentRating_Safe = @"safe";
 - (NSInteger)commentsCount
 {
     VIMConnection *commentsConnection = [self connectionWithName:VIMConnectionNameComments];
-    
+
     return (self.canViewComments ? commentsConnection.total.intValue : 0);
 }
 
