@@ -55,6 +55,7 @@ typedef NS_ENUM(NSInteger, VIMUserAccountType);
 @property (nonatomic, copy, nullable) NSString *link;
 @property (nonatomic, copy, nullable) NSString *location;
 @property (nonatomic, copy, nullable) NSString *name;
+@property (nonatomic, copy, nullable) NSString *email;
 @property (nonatomic, strong, nullable) VIMPictureCollection *pictureCollection;
 @property (nonatomic, strong, nullable) id stats;
 @property (nonatomic, copy, nullable) NSString *uri;
