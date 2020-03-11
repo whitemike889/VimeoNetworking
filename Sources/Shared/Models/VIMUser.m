@@ -40,7 +40,6 @@
 @property (nonatomic, strong) NSDictionary *connections;
 @property (nonatomic, strong) NSDictionary *interactions;
 @property (nonatomic, strong, nullable) NSArray *emails;
-@property (nonatomic, copy, nullable) NSString *email;
 
 @property (nonatomic, assign, readwrite) VIMUserAccountType accountType;
 
@@ -218,11 +217,7 @@
 - (void)parseEmails
 {
     NSMutableArray *parsedEmails = [[NSMutableArray alloc] init];
-
-    if (self.email) {
-        [parsedEmails addObject:self.email];
-    }
-
+    
     for (NSDictionary *email in self.emails)
     {
         NSString *emailString = email[@"email"];
